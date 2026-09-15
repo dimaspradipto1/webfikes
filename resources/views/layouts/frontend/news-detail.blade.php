@@ -5,14 +5,32 @@
 @section('meta_keywords', 'berita fikes, fikes uis, ' . ($news->category ?? 'artikel kesehatan'))
 @section('meta_author', $news->user?->name ?? 'Admin FIKES')
 
+@php
+  $ogImage = !empty($news->thumbnail) ? asset('storage/' . $news->thumbnail) : asset('assets/img/logouis.png');
+  $ogWidth = '1200';
+  $ogHeight = '630';
+  $ogType = 'image/jpeg';
+  if (!empty($news->thumbnail)) {
+      $localThumbPath = storage_path('app/public/' . $news->thumbnail);
+      if (file_exists($localThumbPath)) {
+          $imgInfo = @getimagesize($localThumbPath);
+          if ($imgInfo) {
+              $ogWidth = (string) $imgInfo[0];
+              $ogHeight = (string) $imgInfo[1];
+              $ogType = $imgInfo['mime'] ?? 'image/jpeg';
+          }
+      }
+  }
+@endphp
+
 {{-- Open Graph & Social Share Preview Meta Data --}}
 @section('og_type', 'article')
 @section('og_title', $news->title)
 @section('og_description', Str::limit($news->description ?? strip_tags($news->content), 160))
-@section('og_image', !empty($news->thumbnail) ? asset('storage/' . $news->thumbnail) : asset('assets/img/logouis.png'))
-@section('og_image_width', '1200')
-@section('og_image_height', '630')
-@section('og_image_type', 'image/jpeg')
+@section('og_image', $ogImage)
+@section('og_image_width', $ogWidth)
+@section('og_image_height', $ogHeight)
+@section('og_image_type', $ogType)
 
 @push('styles')
 <style>
