@@ -25,6 +25,9 @@
   <meta property="og:description" content="@yield('og_description', View::yieldContent('meta_description', 'Portal Resmi Fakultas Ilmu Kesehatan (FIKES) — Pusat Pendidikan Kesehatan, Layanan Laboratorium, Informasi Akademik, dan Riset Terpadu.'))">
   <meta property="og:image" content="@yield('og_image', asset('assets/img/logouis.png'))">
   <meta property="og:image:secure_url" content="@yield('og_image', asset('assets/img/logouis.png'))">
+  <meta property="og:image:width" content="@yield('og_image_width', '1200')">
+  <meta property="og:image:height" content="@yield('og_image_height', '630')">
+  <meta property="og:image:type" content="@yield('og_image_type', 'image/jpeg')">
   <meta property="og:site_name" content="FIKES — Fakultas Ilmu Kesehatan">
 
   <!-- Twitter / X Cards -->

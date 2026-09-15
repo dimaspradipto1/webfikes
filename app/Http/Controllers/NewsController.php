@@ -8,6 +8,7 @@ use App\Models\News;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class NewsController extends Controller
@@ -26,7 +27,7 @@ class NewsController extends Controller
     {
         $thumbnailPath = null;
         if ($request->hasFile('thumbnail')) {
-            $thumbnailPath = $request->file('thumbnail')->store('news', 'public');
+            $thumbnailPath = $this->processThumbnail($request->file('thumbnail'));
         }
 
         $galleryPaths = [];
@@ -74,7 +75,7 @@ class NewsController extends Controller
             if ($news->thumbnail && Storage::disk('public')->exists($news->thumbnail)) {
                 Storage::disk('public')->delete($news->thumbnail);
             }
-            $thumbnailPath = $request->file('thumbnail')->store('news', 'public');
+            $thumbnailPath = $this->processThumbnail($request->file('thumbnail'));
         }
 
         $currentGallery = is_array($news->gallery) ? $news->gallery : [];
@@ -164,5 +165,56 @@ class NewsController extends Controller
         }
 
         return response()->json(['error' => 'Gagal mengunggah gambar'], 400);
+    }
+
+    /**
+     * Kompresi dan optimasi thumbnail berita (Maks 1200px lebar, <300KB)
+     * agar preview WhatsApp dan medsos tampil kartu besar (Large Banner di atas).
+     */
+    private function processThumbnail($file): string
+    {
+        $filename = 'news/' . Str::random(40) . '.jpg';
+        $fullTarget = storage_path('app/public/' . $filename);
+
+        if (!is_dir(dirname($fullTarget))) {
+            mkdir(dirname($fullTarget), 0755, true);
+        }
+
+        if (extension_loaded('gd')) {
+            $srcPath = $file->getRealPath();
+            $info = @getimagesize($srcPath);
+
+            if ($info && in_array($info['mime'], ['image/jpeg', 'image/png', 'image/webp'])) {
+                $origW = $info[0];
+                $origH = $info[1];
+
+                $srcImg = match ($info['mime']) {
+                    'image/jpeg' => @imagecreatefromjpeg($srcPath),
+                    'image/png'  => @imagecreatefrompng($srcPath),
+                    'image/webp' => @imagecreatefromwebp($srcPath),
+                    default      => null,
+                };
+
+                if ($srcImg) {
+                    // Maksimal lebar 1200px (standar OpenGraph 1200x630)
+                    $targetW = min(1200, $origW);
+                    $targetH = (int) round(($origH / $origW) * $targetW);
+
+                    $dstImg = imagecreatetruecolor($targetW, $targetH);
+                    $white = imagecolorallocate($dstImg, 255, 255, 255);
+                    imagefill($dstImg, 0, 0, $white);
+
+                    imagecopyresampled($dstImg, $srcImg, 0, 0, 0, 0, $targetW, $targetH, $origW, $origH);
+                    imagejpeg($dstImg, $fullTarget, 82);
+
+                    imagedestroy($srcImg);
+                    imagedestroy($dstImg);
+
+                    return $filename;
+                }
+            }
+        }
+
+        return $file->store('news', 'public');
     }
 }

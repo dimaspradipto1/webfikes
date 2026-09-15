@@ -10,6 +10,9 @@
 @section('og_title', $news->title)
 @section('og_description', Str::limit($news->description ?? strip_tags($news->content), 160))
 @section('og_image', !empty($news->thumbnail) ? asset('storage/' . $news->thumbnail) : asset('assets/img/logouis.png'))
+@section('og_image_width', '1200')
+@section('og_image_height', '630')
+@section('og_image_type', 'image/jpeg')
 
 @push('styles')
 <style>
