@@ -13,6 +13,10 @@ class TenagaPendidikSeeder extends Seeder
      */
     public function run(): void
     {
+        if (Layanan::count() === 0) {
+            $this->call(LayananSeeder::class);
+        }
+
         $prodis = Layanan::orderBy('urutan')->get();
 
         // Cari prodi berdasarkan kata kunci
@@ -25,7 +29,7 @@ class TenagaPendidikSeeder extends Seeder
                 'nama'        => 'Dosen Bidang K3',
                 'bidang'      => 'Spesialis Ergonomi & SMK3',
                 'keterangan'  => 'Ahli K3 Umum & Auditor ISO 45001 Kemnaker RI.',
-                'layanan_id'  => $prodiK3?->id ?? 2,
+                'layanan_id'  => $prodiK3?->id ?? null,
                 'icon'        => 'bi-person-fill',
                 'tombol_teks' => 'Lihat Dosen K3',
                 'urutan'      => 1,
@@ -35,7 +39,7 @@ class TenagaPendidikSeeder extends Seeder
                 'nama'        => 'Dosen Higiene Industri',
                 'bidang'      => 'Toksikologi & Bahaya Fisik',
                 'keterangan'  => 'Pengalaman 15+ tahun di industri manufaktur & galangan.',
-                'layanan_id'  => $prodiKesmas?->id ?? 1,
+                'layanan_id'  => $prodiKesmas?->id ?? null,
                 'icon'        => 'bi-person-fill',
                 'tombol_teks' => 'Lihat Dosen Kesmas',
                 'urutan'      => 2,
@@ -45,7 +49,7 @@ class TenagaPendidikSeeder extends Seeder
                 'nama'        => 'Dosen Kesehatan Lingkungan',
                 'bidang'      => 'AMDAL & Pengolahan Limbah B3',
                 'keterangan'  => 'Konsultan AMDAL bersertifikasi & Penilai KLHK.',
-                'layanan_id'  => $prodiKesling?->id ?? 3,
+                'layanan_id'  => $prodiKesling?->id ?? null,
                 'icon'        => 'bi-person-fill',
                 'tombol_teks' => 'Lihat Dosen Kesling',
                 'urutan'      => 3,
