@@ -109,13 +109,13 @@ class AkademikController extends Controller
             'link_url'     => ['nullable', 'string', 'max:500'],
             'file_nama'    => ['nullable', 'string', 'max:255'],
             'file_dokumen' => ['nullable', 'file', 'mimes:pdf,doc,docx,xls,xlsx,zip,rar', 'max:20480'], // max 20MB
-            'gambar'       => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:3072'],
+            'gambar'       => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
             'is_active'    => ['nullable', 'boolean'],
         ], [
             'file_dokumen.mimes' => 'Format file yang diperbolehkan: PDF, DOC, DOCX, XLS, XLSX, ZIP, RAR.',
             'file_dokumen.max'   => 'Ukuran file dokumen maksimal 20MB.',
             'gambar.image'       => 'File banner/gambar harus berupa gambar.',
-            'gambar.max'         => 'Ukuran gambar maksimal 3MB.',
+            'gambar.max'         => 'Ukuran gambar maksimal 2 MB.',
         ]);
 
         $validated['is_active'] = $request->has('is_active');

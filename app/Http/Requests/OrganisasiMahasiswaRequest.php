@@ -25,7 +25,7 @@ class OrganisasiMahasiswaRequest extends FormRequest
             'pembina'          => ['nullable', 'string', 'max:150'],
             'periode'          => ['nullable', 'string', 'max:50'],
             'logo'             => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg', 'max:2048'],
-            'foto_kegiatan'    => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
+            'foto_kegiatan'    => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
             'instagram'        => ['nullable', 'string', 'max:255'],
             'email'            => ['nullable', 'string', 'email', 'max:100'],
             'link_pendaftaran' => ['nullable', 'string', 'max:255'],
@@ -40,7 +40,9 @@ class OrganisasiMahasiswaRequest extends FormRequest
             'nama_organisasi.required' => 'Nama organisasi wajib diisi.',
             'kategori.required'        => 'Kategori organisasi wajib dipilih.',
             'logo.image'               => 'Logo harus berupa berkas gambar.',
+            'logo.max'                 => 'Ukuran berkas logo maksimal 2 MB.',
             'foto_kegiatan.image'      => 'Foto kegiatan harus berupa berkas gambar.',
+            'foto_kegiatan.max'        => 'Ukuran berkas foto kegiatan maksimal 2 MB.',
         ];
     }
 }

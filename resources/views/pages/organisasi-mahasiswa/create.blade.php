@@ -86,7 +86,7 @@
                 <div class="col-md-6">
                     <label for="foto_kegiatan" class="form-label fw-semibold text-dark">Foto Dokumentasi / Banner Kegiatan</label>
                     <input type="file" name="foto_kegiatan" id="foto_kegiatan" class="form-control @error('foto_kegiatan') is-invalid @enderror" accept="image/*">
-                    <small class="text-muted">Format: JPG, PNG, WEBP (Maks. 4MB). Foto bersama pengurus / kegiatan unggulan.</small>
+                    <small class="text-muted">Format: JPG, PNG, WEBP (Maks. 2MB). Foto bersama pengurus / kegiatan unggulan.</small>
                     @error('foto_kegiatan')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

@@ -21,13 +21,13 @@ class NewsRequest extends FormRequest
             'category'    => ['required', 'string', 'max:100'],
             'is_featured' => ['nullable', 'boolean'],
             'gallery'     => ['nullable', 'array'],
-            'gallery.*'   => ['image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:5120'],
+            'gallery.*'   => ['image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'],
         ];
 
         if ($this->isMethod('POST')) {
-            $rules['thumbnail'] = ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:5120'];
+            $rules['thumbnail'] = ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'];
         } else {
-            $rules['thumbnail'] = ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:5120'];
+            $rules['thumbnail'] = ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'];
         }
 
         return $rules;
@@ -46,10 +46,10 @@ class NewsRequest extends FormRequest
             'thumbnail.required'   => 'Thumbnail utama wajib diunggah.',
             'thumbnail.image'      => 'File thumbnail harus berupa gambar.',
             'thumbnail.mimes'      => 'Format gambar harus jpeg, png, jpg, gif, svg, atau webp.',
-            'thumbnail.max'        => 'Ukuran thumbnail maksimal 5 MB.',
+            'thumbnail.max'        => 'Ukuran thumbnail maksimal 2 MB.',
             'gallery.*.image'      => 'Setiap file galeri harus berupa gambar.',
             'gallery.*.mimes'      => 'Format gambar galeri harus jpeg, png, jpg, gif, svg, atau webp.',
-            'gallery.*.max'        => 'Ukuran setiap gambar galeri maksimal 5 MB.',
+            'gallery.*.max'        => 'Ukuran setiap gambar galeri maksimal 2 MB.',
         ];
     }
 }

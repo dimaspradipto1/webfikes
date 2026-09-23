@@ -23,7 +23,7 @@ class PrestasiRequest extends FormRequest
             'penyelenggara'  => ['nullable', 'string', 'max:255'],
             'tahun'          => ['nullable', 'string', 'max:10'],
             'deskripsi'      => ['nullable', 'string'],
-            'foto'           => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:3072'],
+            'foto'           => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
             'is_active'      => ['nullable'],
             'urutan'         => ['nullable', 'integer'],
         ];
@@ -34,11 +34,11 @@ class PrestasiRequest extends FormRequest
         return [
             'judul_prestasi.required' => 'Judul Prestasi / Nama Kejuaraan wajib diisi.',
             'nama_mahasiswa.required' => 'Nama Mahasiswa / Tim peraih prestasi wajib diisi.',
-            'tingkat.required'        => 'Tingkatan kejuaraan wajib dipilih.',
-            'tingkat.in'              => 'Tingkatan kejuaraan tidak valid.',
-            'foto.image'              => 'File harus berupa gambar.',
-            'foto.mimes'              => 'Format foto yang diperbolehkan: JPEG, PNG, JPG, WEBP.',
-            'foto.max'                => 'Ukuran foto maksimal 3MB.',
+            'tingkat.required' => 'Tingkatan kejuaraan wajib dipilih.',
+            'tingkat.in'     => 'Tingkatan kejuaraan tidak valid.',
+            'foto.image'     => 'File harus berupa gambar.',
+            'foto.mimes'     => 'Format foto yang diperbolehkan: JPEG, PNG, JPG, WEBP.',
+            'foto.max'       => 'Ukuran foto maksimal 2 MB.',
         ];
     }
 }

@@ -286,6 +286,11 @@
                             file_picker_types: 'image',
                             images_upload_handler: function (blobInfo, progress) {
                                 return new Promise((resolve, reject) => {
+                                    if (blobInfo.blob().size > 2 * 1024 * 1024) {
+                                        reject('Ukuran file gambar maksimal 2 MB.');
+                                        return;
+                                    }
+
                                     const xhr = new XMLHttpRequest();
                                     xhr.withCredentials = false;
                                     xhr.open('POST', '{{ route("news.upload-image") }}');
@@ -334,6 +339,20 @@
                                     const file = e.target.files[0];
                                     if (!file) return;
 
+                                    if (file.size > 2 * 1024 * 1024) {
+                                        if (typeof Swal !== 'undefined') {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Ukuran Gambar Terlalu Besar',
+                                                text: 'Ukuran file gambar "' + file.name + '" melebihi batas maksimal 2 MB.',
+                                                confirmButtonColor: '#823ca2'
+                                            });
+                                        } else {
+                                            alert('Ukuran file gambar maksimal 2 MB.');
+                                        }
+                                        return;
+                                    }
+
                                     const reader = new FileReader();
                                     reader.addEventListener('load', () => {
                                         const id = 'blobid' + (new Date()).getTime();
@@ -359,6 +378,52 @@
         $(document).on('submit', 'form', function () {
             if (typeof tinymce !== 'undefined') {
                 tinymce.triggerSave();
+            }
+        });
+
+        // Validasi client-side global: Maksimal 2 MB untuk upload file gambar di semua form
+        $(document).on('change', 'input[type="file"]', function () {
+            const files = this.files;
+            if (!files || files.length === 0) return;
+
+            const acceptAttr = (this.getAttribute('accept') || '').toLowerCase();
+            const isImageInput = acceptAttr.includes('image') || acceptAttr.includes('png') || acceptAttr.includes('jpg') || acceptAttr.includes('jpeg') || acceptAttr.includes('webp') || acceptAttr.includes('svg');
+            const maxBytes = 2 * 1024 * 1024; // 2 MB
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const isImageFile = (file.type && file.type.startsWith('image/')) || /\.(jpe?g|png|webp|svg|gif)$/i.test(file.name);
+
+                if ((isImageInput || isImageFile) && file.size > maxBytes) {
+                    const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+                    if (typeof Swal !== 'undefined') {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Ukuran File Terlalu Besar',
+                            html: `File <strong>${file.name}</strong> berukuran <strong>${fileSizeMB} MB</strong>.<br>Maksimal ukuran file gambar yang diperbolehkan adalah <strong>2 MB</strong>.`,
+                            confirmButtonColor: '#823ca2',
+                            customClass: {
+                                popup: 'rounded-4 shadow-lg border-0',
+                                confirmButton: 'px-4 py-2 rounded-3 fw-semibold'
+                            }
+                        });
+                    } else {
+                        alert(`File "${file.name}" berukuran ${fileSizeMB} MB. Maksimal ukuran gambar adalah 2 MB.`);
+                    }
+
+                    // Reset input file
+                    $(this).val('');
+
+                    // Reset preview jika ada di halaman
+                    const $form = $(this).closest('form');
+                    $form.find('#previewWrap').addClass('d-none');
+                    $form.find('#previewImg').attr('src', '');
+                    $form.find('#previewDim').text('');
+                    $form.find('#logoPreviewWrap').addClass('d-none');
+                    $form.find('#currentLogoPreview').addClass('d-none');
+
+                    break;
+                }
             }
         });
     </script>
