@@ -381,7 +381,7 @@
     border: 1.5px solid var(--border-light, #e2e5e9);
     border-radius: 50px;
     padding: 6px 18px;
-    width: 250px;
+    width: 270px;
     max-width: 100%;
     box-shadow: var(--shadow-sm);
     transition: all 0.25s ease;
@@ -397,10 +397,24 @@
     font-size: 13px;
     color: #374151;
     width: 100%;
-    padding-right: 8px;
+    padding-right: 6px;
   }
   .news-search-pill input::placeholder {
     color: #9ca3af;
+  }
+  .news-search-pill .news-search-clear {
+    border: none;
+    background: transparent;
+    color: #9ca3af;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0 6px 0 0;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+  }
+  .news-search-pill .news-search-clear:hover {
+    color: #ef4444;
   }
   .news-search-pill button {
     border: none;
@@ -411,6 +425,15 @@
     padding: 0;
     display: flex;
     align-items: center;
+    justify-content: center;
+  }
+  .news-grid-container {
+    transition: opacity 0.25s ease;
+    min-height: 200px;
+  }
+  .news-grid-container.is-loading {
+    opacity: 0.55;
+    pointer-events: none;
   }
 
   /* News Mini Item Grid */
@@ -1870,55 +1893,35 @@
             <i class="bi bi-newspaper fs-2" style="color: var(--fikes-purple, #823ca2);"></i>
             <h2 class="section-heading-fikes mb-0">Berita</h2>
           </div>
-          <form action="{{ route('homepage.news') }}" method="GET" class="news-search-pill">
-            <input type="text" name="q" placeholder="Cari Berita Lainnya.." autocomplete="off">
-            <button type="submit" aria-label="Cari Berita">
-              <i class="bi bi-search"></i>
+          <form action="{{ route('homepage') }}#berita" method="GET" class="news-search-pill" id="homepageNewsSearchForm">
+            <input type="text"
+                   name="q"
+                   id="homepageNewsSearchInput"
+                   value="{{ $search ?? request('q', '') }}"
+                   placeholder="Cari Berita Lainnya.."
+                   autocomplete="off">
+            <button type="button"
+                    id="homepageNewsSearchClear"
+                    class="news-search-clear {{ empty($search) && !request('q') ? 'd-none' : '' }}"
+                    aria-label="Hapus Pencarian"
+                    title="Hapus Pencarian">
+              <i class="bi bi-x-circle-fill"></i>
+            </button>
+            <button type="submit" id="homepageNewsSearchBtn" aria-label="Cari Berita">
+              <i class="bi bi-search" id="homepageNewsSearchIcon"></i>
+              <span class="spinner-border spinner-border-sm d-none" id="homepageNewsSearchSpinner" role="status" aria-hidden="true" style="width: 14px; height: 14px; border-width: 2px;"></span>
             </button>
           </form>
         </div>
 
-        {{-- Grid Daftar Berita (2 Kolom) --}}
-        <div class="row g-3">
-          @if(isset($latestNews) && $latestNews->count() > 0)
-            @foreach($latestNews as $news)
-              <div class="col-sm-6">
-                <a href="{{ route('homepage.news.detail', $news->slug ?? $news->id) }}" class="news-mini-item">
-                  <div class="news-mini-img-wrap">
-                    @if(!empty($news->thumbnail))
-                      <img src="{{ asset('storage/' . $news->thumbnail) }}" alt="{{ $news->title }}" class="news-mini-img">
-                    @else
-                      <div class="news-mini-fallback">
-                        <i class="bi bi-newspaper"></i>
-                      </div>
-                    @endif
-                  </div>
-                  <div class="news-mini-content">
-                    <h6 class="news-mini-title">{{ $news->title }}</h6>
-                    <div class="news-mini-meta">
-                      {{ $news->created_at ? $news->created_at->format('d F Y // H:i') : '-' }}
-                    </div>
-                  </div>
-                </a>
-              </div>
-            @endforeach
-          @else
-            <div class="col-12 text-muted py-4 text-center">
-              <p>Belum ada berita yang diterbitkan.</p>
-            </div>
-          @endif
+        {{-- Container Grid Berita (Mendukung Live Search AJAX & Server-side Filter) --}}
+        <div id="homepageNewsGridContainer" class="news-grid-container position-relative">
+          @include('layouts.frontend.partials.homepage-news-grid', ['latestNews' => $latestNews, 'search' => $search ?? request('q', '')])
         </div>
-
-        {{-- Pagination Berita --}}
-        @if(isset($latestNews) && method_exists($latestNews, 'hasPages') && $latestNews->hasPages())
-          <div class="d-flex justify-content-center mt-4 pt-2">
-            {{ $latestNews->fragment('berita')->links('pagination::bootstrap-5') }}
-          </div>
-        @endif
 
         {{-- Tombol Lihat Berita Lainnya --}}
         <div class="text-center mt-3 pt-2">
-          <a href="{{ route('homepage.news') }}" class="btn-fikes-pill">
+          <a href="{{ route('homepage.news') }}{{ !empty($search) ? '?q=' . urlencode($search) : '' }}" class="btn-fikes-pill" id="btnSeeAllNews">
             Lihat Berita Lainnya
           </a>
         </div>
@@ -2234,6 +2237,142 @@
         }
       });
     }
+
+    // ── Live Search Berita Homepage ─────────────────────────────────────────
+    const searchInput = document.getElementById('homepageNewsSearchInput');
+    const searchForm  = document.getElementById('homepageNewsSearchForm');
+    const clearBtn    = document.getElementById('homepageNewsSearchClear');
+    const searchIcon  = document.getElementById('homepageNewsSearchIcon');
+    const searchSpin  = document.getElementById('homepageNewsSearchSpinner');
+    const gridContainer = document.getElementById('homepageNewsGridContainer');
+    const seeAllBtn   = document.getElementById('btnSeeAllNews');
+
+    let searchDebounceTimer = null;
+    let searchAbortController = null;
+
+    function performNewsSearch(query, customUrl = null) {
+      if (searchSpin) searchSpin.classList.remove('d-none');
+      if (searchIcon) searchIcon.classList.add('d-none');
+      if (gridContainer) gridContainer.classList.add('is-loading');
+
+      if (searchAbortController) {
+        searchAbortController.abort();
+      }
+      searchAbortController = new AbortController();
+
+      const url = customUrl || `{{ route('homepage') }}?q=${encodeURIComponent(query)}&page_berita=1`;
+
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'application/json'
+        },
+        signal: searchAbortController.signal
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.json();
+      })
+      .then(data => {
+        if (gridContainer && data.html) {
+          gridContainer.innerHTML = data.html;
+        }
+
+        // Update link "Lihat Berita Lainnya"
+        if (seeAllBtn) {
+          if (query && query.trim() !== '') {
+            seeAllBtn.href = `{{ route('homepage.news') }}?q=${encodeURIComponent(query)}`;
+          } else {
+            seeAllBtn.href = `{{ route('homepage.news') }}`;
+          }
+        }
+
+        // Update URL query string tanpa reload halaman
+        const newUrl = query && query.trim() !== ''
+          ? `{{ route('homepage') }}?q=${encodeURIComponent(query)}#berita`
+          : `{{ route('homepage') }}#berita`;
+        window.history.replaceState({ q: query }, '', newUrl);
+      })
+      .catch(err => {
+        if (err.name !== 'AbortError') {
+          console.error('Error saat mencari berita:', err);
+        }
+      })
+      .finally(() => {
+        if (searchSpin) searchSpin.classList.add('d-none');
+        if (searchIcon) searchIcon.classList.remove('d-none');
+        if (gridContainer) gridContainer.classList.remove('is-loading');
+      });
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', function () {
+        const val = this.value;
+        if (clearBtn) {
+          if (val.trim().length > 0) {
+            clearBtn.classList.remove('d-none');
+          } else {
+            clearBtn.classList.add('d-none');
+          }
+        }
+
+        clearTimeout(searchDebounceTimer);
+        searchDebounceTimer = setTimeout(() => {
+          performNewsSearch(val.trim());
+        }, 300);
+      });
+    }
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function () {
+        if (searchInput) {
+          searchInput.value = '';
+          searchInput.focus();
+        }
+        clearBtn.classList.add('d-none');
+        performNewsSearch('');
+      });
+    }
+
+    if (searchForm) {
+      searchForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        clearTimeout(searchDebounceTimer);
+        const val = searchInput ? searchInput.value.trim() : '';
+        performNewsSearch(val);
+      });
+    }
+
+    // Event delegation untuk tombol reset dan navigasi pagination AJAX
+    document.addEventListener('click', function (e) {
+      const resetBtn = e.target.closest('#btnResetNewsSearch') || e.target.closest('#btnResetNewsSearchFallback');
+      if (resetBtn) {
+        e.preventDefault();
+        if (searchInput) {
+          searchInput.value = '';
+          searchInput.focus();
+        }
+        if (clearBtn) clearBtn.classList.add('d-none');
+        performNewsSearch('');
+        return;
+      }
+
+      const paginationLink = e.target.closest('#homepageNewsPaginationWrap a');
+      if (paginationLink && gridContainer && gridContainer.contains(paginationLink)) {
+        e.preventDefault();
+        const pageHref = paginationLink.getAttribute('href');
+        if (pageHref) {
+          const currentQuery = searchInput ? searchInput.value.trim() : '';
+          performNewsSearch(currentQuery, pageHref);
+
+          const beritaSec = document.getElementById('berita');
+          if (beritaSec) {
+            beritaSec.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }
+    });
   });
 </script>
 @endpush

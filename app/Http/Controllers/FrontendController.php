@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
-    public function homepage()
+    public function homepage(\Illuminate\Http\Request $request)
     {
         $banners          = \App\Models\Banner::where('aktif', true)->orderBy('urutan')->get();
         $features         = \App\Models\Feature::orderBy('urutan')->get();
@@ -18,7 +18,28 @@ class FrontendController extends Controller
         $visiMisis        = \App\Models\VisiMisi::orderBy('urutan')->get()->groupBy('tipe');
         $nilaiPerusahaans = \App\Models\NilaiPerusahaan::orderBy('urutan')->get();
         $testimonials     = \App\Models\Testimonial::where('aktif', true)->orderByDesc('id')->get();
-        $latestNews       = \App\Models\News::where('status', 'published')->latest()->paginate(10, ['*'], 'page_berita')->withQueryString();
+
+        $search           = trim($request->query('q') ?? $request->query('search') ?? '');
+        $newsQuery        = \App\Models\News::where('status', 'published');
+        if (!empty($search)) {
+            $newsQuery->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%")
+                  ->orWhere('content', 'like', "%{$search}%")
+                  ->orWhere('category', 'like', "%{$search}%");
+            });
+        }
+        $latestNews       = $newsQuery->latest()->paginate(10, ['*'], 'page_berita')->withQueryString();
+
+        if ($request->ajax()) {
+            $html = view('layouts.frontend.partials.homepage-news-grid', compact('latestNews', 'search'))->render();
+            return response()->json([
+                'html'       => $html,
+                'count'      => $latestNews->total(),
+                'hasPages'   => $latestNews->hasPages(),
+            ]);
+        }
+
         $announcements    = \App\Models\News::where('status', 'published')
                                 ->where(function ($q) {
                                     $q->where('category', 'like', '%Pengumuman%')
@@ -62,6 +83,7 @@ class FrontendController extends Controller
             'nilaiPerusahaans',
             'testimonials',
             'latestNews',
+            'search',
             'announcements',
             'faqs',
             'galleries',
