@@ -23,7 +23,21 @@ class AboutController extends Controller
 
     public function store(AboutRequest $request): RedirectResponse
     {
-        About::create($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('video_file')) {
+            $data['video_file'] = $request->file('video_file')->store('about-videos', 'public');
+        }
+
+        if (!empty($data['video_url'])) {
+            $raw = trim($data['video_url']);
+            if (preg_match('/<iframe.*?src=["\']([^"\']+)["\']/i', $raw, $frameMatch)) {
+                $raw = $frameMatch[1];
+            }
+            $data['video_url'] = $raw;
+        }
+
+        About::create($data);
 
         return redirect()
             ->route('about.index')
@@ -37,7 +51,32 @@ class AboutController extends Controller
 
     public function update(AboutRequest $request, About $about): RedirectResponse
     {
-        $about->update($request->validated());
+        $data = $request->validated();
+
+        // Hapus video file jika diminta
+        if ($request->boolean('delete_video_file')) {
+            if ($about->video_file && Storage::disk('public')->exists($about->video_file)) {
+                Storage::disk('public')->delete($about->video_file);
+            }
+            $data['video_file'] = null;
+        }
+
+        if ($request->hasFile('video_file')) {
+            if ($about->video_file && Storage::disk('public')->exists($about->video_file)) {
+                Storage::disk('public')->delete($about->video_file);
+            }
+            $data['video_file'] = $request->file('video_file')->store('about-videos', 'public');
+        }
+
+        if (!empty($data['video_url'])) {
+            $raw = trim($data['video_url']);
+            if (preg_match('/<iframe.*?src=["\']([^"\']+)["\']/i', $raw, $frameMatch)) {
+                $raw = $frameMatch[1];
+            }
+            $data['video_url'] = $raw;
+        }
+
+        $about->update($data);
 
         return redirect()
             ->route('about.index')
@@ -46,6 +85,10 @@ class AboutController extends Controller
 
     public function destroy(About $about): RedirectResponse
     {
+        if ($about->video_file && Storage::disk('public')->exists($about->video_file)) {
+            Storage::disk('public')->delete($about->video_file);
+        }
+
         $about->delete();
 
         return redirect()

@@ -67,10 +67,10 @@
           @if($isAdmin)
           <!-- 3. Profil (Sesuai Urutan & Dropdown Header) -->
           <li class="nav-item">
-            <a class="nav-link {{ Route::is('about.*') || Route::is('visimisi.*') || Route::is('sambutan-dekan.*') || Route::is('struktur-organisasi.*') || Route::is('milestone.*') ? '' : 'collapsed' }}" data-bs-target="#profil-nav" data-bs-toggle="collapse" href="#">
+            <a class="nav-link {{ Route::is('about.*') || Route::is('visimisi.*') || Route::is('sambutan-dekan.*') || Route::is('sambutan-rektor.*') || Route::is('struktur-organisasi.*') || Route::is('milestone.*') ? '' : 'collapsed' }}" data-bs-target="#profil-nav" data-bs-toggle="collapse" href="#">
               <i class="bi bi-building"></i><span>Profil</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="profil-nav" class="nav-content collapse {{ Route::is('about.*') || Route::is('visimisi.*') || Route::is('sambutan-dekan.*') || Route::is('struktur-organisasi.*') || Route::is('milestone.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+            <ul id="profil-nav" class="nav-content collapse {{ Route::is('about.*') || Route::is('visimisi.*') || Route::is('sambutan-dekan.*') || Route::is('sambutan-rektor.*') || Route::is('struktur-organisasi.*') || Route::is('milestone.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
               <li>
                 <a href="{{ route('about.index') }}" class="{{ Route::is('about.*') ? 'active' : '' }}">
                   <i class="bi bi-circle"></i><span>Tentang UIS</span>
@@ -82,7 +82,7 @@
                 </a>
               </li>
               <li>
-                <a href="{{ route('sambutan-dekan.index') }}" class="{{ Route::is('sambutan-dekan.*') ? 'active' : '' }}">
+                <a href="{{ route('sambutan-rektor.index') }}" class="{{ Route::is('sambutan-dekan.*') || Route::is('sambutan-rektor.*') ? 'active' : '' }}">
                   <i class="bi bi-circle"></i><span>Sambutan Rektor</span>
                 </a>
               </li>

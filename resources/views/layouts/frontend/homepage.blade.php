@@ -1030,74 +1030,129 @@
 
 
 <!-- ═══════════════════════════════════════════════
-     3. PROFIL SINGKAT Universitas Ibnu Sina & SAMBUTAN DEKAN
+     3. PROFIL SINGKAT Universitas Ibnu Sina & SAMBUTAN REKTOR
 ═══════════════════════════════════════════════ -->
 <section class="section-bg-white py-5" id="profil-singkat">
   <div class="container py-2">
-    <div class="row g-5 align-items-center">
-      <div class="col-lg-6" data-aos="fade-right">
-        <div class="section-label">Profil Universitas</div>
+    <!-- Header Section Full -->
+    <div class="row justify-content-center text-center mb-4" data-aos="fade-up">
+      <div class="col-12">
+        <div class="section-label mx-auto">Profil Universitas</div>
         <h2 class="section-title">
           {{ $about->judul_profil ?? 'Kampusnya Profesional Muda — Universitas Ibnu Sina' }}
         </h2>
-        <div class="divider-line"></div>
-        <div class="section-desc mb-4" style="text-align: justify; line-height: 1.8;">
-          {!! $about->deskripsi_profil_1 ?? 'Universitas Ibnu Sina (UIS) Batam menyelenggarakan pendidikan tinggi multidisiplin unggulan melalui Fakultas Teknik (Sains & Teknologi), Fakultas Ekonomi dan Bisnis (FEB), Fakultas Ilmu Kesehatan (FIKES), dan Program Pascasarjana (Magister) yang adaptif terhadap era Society 5.0.' !!}
-        </div>
+        <div class="divider-line centered"></div>
+      </div>
+    </div>
 
-        @if(!empty($about?->deskripsi_profil_2))
-          <div class="section-desc mb-4" style="text-align: justify; line-height: 1.8;">
-            {!! $about->deskripsi_profil_2 !!}
+    <!-- 1. VIDEO PROFIL DI ATAS (FULL WIDTH) -->
+    @if($about?->hasVideo())
+      <div class="row mb-5" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-12">
+          <div class="position-relative rounded-4 overflow-hidden shadow-lg border w-100" style="border-color: #e2e8f0; background: #000;">
+            @if($about->video_file)
+              <video controls class="w-100 d-block" style="max-height: 540px; object-fit: contain;">
+                <source src="{{ asset('storage/' . $about->video_file) }}">
+                Browser Anda tidak mendukung tag video.
+              </video>
+            @elseif($about->youtube_embed_url)
+              <div class="ratio ratio-16x9">
+                <iframe 
+                  src="{{ $about->youtube_embed_url }}" 
+                  title="Video Profil Universitas Ibnu Sina" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  referrerpolicy="strict-origin-when-cross-origin" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            @endif
           </div>
-        @endif
+          @if($about->youtube_watch_url)
+            <div class="d-flex justify-content-end align-items-center gap-2 mt-2 px-1">
+              <span class="text-muted small">Video bermasalah saat diputar?</span>
+              <a href="{{ $about->youtube_watch_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm text-white fw-semibold d-inline-flex align-items-center gap-1" style="background-color: #046B26; font-size: 12.5px; border-radius: 6px; padding: 4px 12px;">
+                <i class="bi bi-youtube text-warning"></i> Buka Langsung di YouTube <i class="bi bi-box-arrow-up-right ms-1" style="font-size: 10px;"></i>
+              </a>
+            </div>
+          @endif
+        </div>
+      </div>
+    @endif
 
-        <ul class="check-list mb-4">
-          <li>
-            <div class="check-icon"><i class="bi bi-check2"></i></div>
-            <span>Kurikulum berbasis OBE & terintegrasi sertifikasi kompetensi industri dan jiwa entrepreneur</span>
-          </li>
-          <li>
-            <div class="check-icon"><i class="bi bi-check2"></i></div>
-            <span>Laboratorium komputer AI, studio industri, logistik maritim, dan K3 lingkungan terpadu</span>
-          </li>
-          <li>
-            <div class="check-icon"><i class="bi bi-check2"></i></div>
-            <span>Dosen berkualifikasi Doktor (S3) & praktisi berpengalaman di kawasan industri Batam & internasional</span>
-          </li>
-        </ul>
+    <!-- 2. DESKRIPSI PARAGRAF DI BAWAH (FULL WIDTH 100%) -->
+    <div class="row mb-5" data-aos="fade-up" data-aos-delay="200">
+      <div class="col-12">
+        <div class="w-100 p-4 p-md-5 rounded-4 shadow-sm" style="width: 100% !important; max-width: 100% !important; text-align: justify; font-size: 17px; line-height: 2.0; color: #2d3748; background: #f8faf9; border-left: 6px solid var(--uis-green, #046B26); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
+          {!! $about->deskripsi_profil_1 ?? 'Universitas Ibnu Sina (UIS) Batam merupakan perguruan tinggi swasta terkemuka di Provinsi Kepulauan Riau yang lahir dari perpaduan keunggulan akademik Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES) di bawah naungan Yayasan Pendidikan Ibnu Sina Batam (YAPISNA). Berlokasi strategis di kawasan industri dan perdagangan internasional Kota Batam, UIS mengelola tiga fakultas unggulan: Fakultas Teknik (Sains & Teknologi), Fakultas Ekonomi dan Bisnis (FEB), serta Fakultas Ilmu Kesehatan (FIKES), beserta Program Pascasarjana (Magister). UIS bertekad mencetak lulusan profesional muda yang inovatif, berdaya saing global, berjiwa entrepreneur, dan berakhlak mulia berlandaskan Iman dan Taqwa (Imtaq).' !!}
+        </div>
+      </div>
+    </div>
 
+    <!-- 3. PILAR KEUNGGULAN (3 CARD HORIZONTAL & TOMBOL CTA) -->
+    <div class="row g-3 justify-content-center mb-5" data-aos="fade-up" data-aos-delay="250">
+      <div class="col-md-4">
+        <div class="p-3 rounded-3 h-100" style="background:#f8faf9; border:1px solid #e2e8f0;">
+          <div class="d-flex align-items-center gap-2 mb-2 text-success fw-bold">
+            <i class="bi bi-award-fill fs-5" style="color:var(--uis-green);"></i>
+            <span>Kurikulum OBE</span>
+          </div>
+          <p class="small text-muted mb-0">Terintegrasi sertifikasi kompetensi industri dan pembinaan jiwa wirausaha muda.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 rounded-3 h-100" style="background:#f8faf9; border:1px solid #e2e8f0;">
+          <div class="d-flex align-items-center gap-2 mb-2 text-success fw-bold">
+            <i class="bi bi-cpu-fill fs-5" style="color:var(--uis-green);"></i>
+            <span>Lab Terpadu & AI</span>
+          </div>
+          <p class="small text-muted mb-0">Laboratorium komputasi cerdas, studio logistik industri, dan pengujian K3 modern.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 rounded-3 h-100" style="background:#f8faf9; border:1px solid #e2e8f0;">
+          <div class="d-flex align-items-center gap-2 mb-2 text-success fw-bold">
+            <i class="bi bi-people-fill fs-5" style="color:var(--uis-green);"></i>
+            <span>Dosen Doktor & Praktisi</span>
+          </div>
+          <p class="small text-muted mb-0">Dibimbing pakar berkualifikasi S3 serta praktisi industri multinasional kawasan Batam.</p>
+        </div>
+      </div>
+      <div class="col-12 text-center mt-3">
         <a href="{{ route('homepage.tentang') }}" class="btn-primary-hero">
           <i class="bi bi-info-circle"></i>
           Profil Lengkap Universitas Ibnu Sina
         </a>
       </div>
+    </div>
 
-      <!-- Sambutan Rektor Card -->
-      <div class="col-lg-6" data-aos="fade-left">
-        <div class="p-4 p-md-5 rounded-4 shadow-sm" style="background: var(--surface-light); border: 1.5px solid var(--border-light);">
-          <div class="d-flex align-items-center gap-3 mb-4">
-            @if(!empty($sambutanDekan?->foto_dekan))
-              <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="{{ $sambutanDekan->nama_dekan ?? 'Dekan Universitas Ibnu Sina' }}" class="rounded-circle shadow-sm" style="width: 72px; height: 72px; object-fit: cover; border: 3px solid var(--uis-purple); flex-shrink:0;">
-            @else
-              <div style="width: 68px; height: 68px; border-radius: 50%; background: #046B26; color: white; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0; border: 3px solid var(--uis-orange);">
-                <i class="bi bi-person-badge-fill"></i>
-              </div>
-            @endif
-            <div>
-              <h5 class="fw-bold mb-1 text-dark">{{ $sambutanDekan->nama_dekan ?? 'Assoc. Prof. Dr. Ir. Larisang, S.T., M.T., IPU., ASEAN Eng.' }}</h5>
-              <span class="text-muted small fw-semibold">{{ $sambutanDekan->jabatan_dekan ?? 'Rektor Universitas Ibnu Sina (UIS) Batam' }}</span>
+    <!-- 4. SAMBUTAN REKTOR CARD (FULL HORIZONTAL BANNER) -->
+    <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="300">
+      <div class="col-12">
+        <div class="p-4 rounded-4 shadow-sm" style="background: var(--surface-light); border: 1.5px solid var(--border-light);">
+          <div class="row align-items-center g-4">
+            <div class="col-md-auto text-center text-md-start">
+              @if(!empty($sambutanDekan?->foto_dekan))
+                <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="{{ $sambutanDekan->nama_dekan ?? 'Rektor Universitas Ibnu Sina' }}" class="rounded-circle shadow-sm" style="width: 85px; height: 85px; object-fit: cover; object-position: top center; border: 3px solid var(--uis-green); display:inline-block;">
+              @else
+                <div style="width: 85px; height: 85px; border-radius: 50%; background: #046B26; color: white; display:inline-flex; align-items:center; justify-content:center; font-size:36px; border: 3px solid var(--uis-yellow);">
+                  <i class="bi bi-person-badge-fill"></i>
+                </div>
+              @endif
             </div>
-          </div>
-
-          <blockquote class="text-muted mb-4" style="font-style: italic; line-height: 1.8; text-align: justify; font-size: 14.5px;">
-            "{{ strip_tags($sambutanDekan->kutipan_singkat ?? ($sambutanDekan->sambutan_dekan ?? 'Selamat datang di Universitas Ibnu Sina (UIS) Batam — Kampusnya Profesional Muda. Kami bertekad membentuk generasi intelektual yang unggul, inovatif, berjiwa entrepreneur, dan berkarakter Imtaq yang siap memimpin industri di kancah nasional maupun global.')) }}"
-          </blockquote>
-
-          <div class="d-flex align-items-center justify-content-between pt-3 border-top">
-            <span class="fw-bold" style="color: var(--uis-green);">{{ $sambutanDekan->nama_dekan ?? 'Rektor Universitas Ibnu Sina' }}</span>
-            <a href="{{ route('homepage.sambutan-dekan') }}" class="badge text-decoration-none" style="background: var(--uis-yellow); color: #046B26; font-weight: 800; padding: 6px 12px;">
-              Baca Sambutan <i class="bi bi-arrow-right ms-1"></i>
-            </a>
+            <div class="col-md">
+              <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+                <div>
+                  <h5 class="fw-bold mb-0 text-dark">{{ $sambutanDekan->nama_dekan ?? 'Assoc. Prof. Dr. Ir. Larisang, S.T., M.T., IPU., ASEAN Eng.' }}</h5>
+                  <span class="text-muted small fw-semibold">{{ $sambutanDekan->jabatan_dekan ?? 'Rektor Universitas Ibnu Sina (UIS) Batam' }}</span>
+                </div>
+                <a href="{{ route('homepage.sambutan-rektor') }}" class="badge text-decoration-none" style="background: var(--uis-yellow); color: #046B26; font-weight: 800; padding: 7px 14px; font-size: 13px;">
+                  Baca Sambutan Rektor <i class="bi bi-arrow-right ms-1"></i>
+                </a>
+              </div>
+              <blockquote class="text-muted mb-0" style="font-style: italic; line-height: 1.7; text-align: justify; font-size: 14px;">
+                "{{ strip_tags($sambutanDekan->kutipan_singkat ?? ($sambutanDekan->sambutan_dekan ?? 'Selamat datang di Universitas Ibnu Sina (UIS) Batam — Kampusnya Profesional Muda. Kami bertekad membentuk generasi intelektual yang unggul, inovatif, berjiwa entrepreneur, dan berkarakter Imtaq yang siap memimpin industri di kancah nasional maupun global.')) }}"
+              </blockquote>
+            </div>
           </div>
         </div>
       </div>

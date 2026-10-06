@@ -95,23 +95,55 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════
-     PROFIL FAKULTAS
+     PROFIL UNIVERSITAS (FULL WIDTH & VIDEO)
 ═══════════════════════════════════════════════ -->
-<section class="section-bg-white">
+<section class="section-bg-white py-5">
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-11 col-xl-10" data-aos="fade-up" data-aos-duration="800">
-        <div class="section-label">Profil Universitas</div>
-        <h2 class="section-title">{!! $about->judul_profil ?? 'Kampusnya Profesional Muda — <em>Universitas Ibnu Sina</em>' !!}</h2>
-        <div class="divider-line"></div>
-        <div class="section-desc mb-4" style="text-align: justify; font-size: 16px; line-height: 1.85;">
-          {!! $about->deskripsi_profil_1 ?? 'Universitas Ibnu Sina (UIS) Batam berdedikasi menyelenggarakan pendidikan tinggi multidisiplin berkualitas di bidang Teknik, Ekonomi & Bisnis, Ilmu Kesehatan, dan Pascasarjana dengan kurikulum modern yang berorientasi pada capaian kompetensi, riset inovatif, dan kemitraan industri global.' !!}
+    <div class="row">
+      <div class="col-12" data-aos="fade-up" data-aos-duration="800">
+        <!-- Header Profil -->
+        <div class="text-center mb-4">
+          <div class="section-label mx-auto">Profil Universitas</div>
+          <h2 class="section-title">{!! $about->judul_profil ?? 'Kampusnya Profesional Muda — <em>Universitas Ibnu Sina</em>' !!}</h2>
+          <div class="divider-line centered"></div>
         </div>
-        @if($about?->deskripsi_profil_2)
-        <div class="section-desc mb-4" style="text-align: justify; font-size: 16px; line-height: 1.85;">
-          {!! $about->deskripsi_profil_2 !!}
-        </div>
+
+        {{-- 1. VIDEO PROFIL DI ATAS (FULL WIDTH) --}}
+        @if($about?->hasVideo())
+          <div class="w-100 mb-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="position-relative rounded-4 overflow-hidden shadow-lg border w-100" style="border-color: #e2e8f0; background: #000;">
+              @if($about->video_file)
+                <video controls class="w-100 d-block" style="max-height: 560px; object-fit: contain;">
+                  <source src="{{ asset('storage/' . $about->video_file) }}">
+                  Browser Anda tidak mendukung tag video.
+                </video>
+              @elseif($about->youtube_embed_url)
+                <div class="ratio ratio-16x9">
+                  <iframe 
+                    src="{{ $about->youtube_embed_url }}" 
+                    title="Video Profil Universitas Ibnu Sina" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen>
+                  </iframe>
+                </div>
+              @endif
+            </div>
+            @if($about->youtube_watch_url)
+              <div class="d-flex justify-content-end align-items-center gap-2 mt-2 px-1">
+                <span class="text-muted small">Video bermasalah saat diputar?</span>
+                <a href="{{ $about->youtube_watch_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm text-white fw-semibold d-inline-flex align-items-center gap-1" style="background-color: #046B26; font-size: 12.5px; border-radius: 6px; padding: 4px 12px;">
+                  <i class="bi bi-youtube text-warning"></i> Buka Langsung di YouTube <i class="bi bi-box-arrow-up-right ms-1" style="font-size: 10px;"></i>
+                </a>
+              </div>
+            @endif
+          </div>
         @endif
+
+        {{-- 2. DESKRIPSI PARAGRAF DI BAWAH (FULL WIDTH 100%) --}}
+        <div class="w-100 p-4 p-md-5 rounded-4 shadow-sm mb-4" style="width: 100% !important; max-width: 100% !important; text-align: justify; font-size: 17px; line-height: 2.0; color: #2d3748; background: #f8faf9; border-left: 6px solid var(--uis-green, #046B26); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;" data-aos="fade-up" data-aos-delay="200">
+          {!! $about->deskripsi_profil_1 ?? 'Universitas Ibnu Sina (UIS) Batam merupakan perguruan tinggi swasta terkemuka di Provinsi Kepulauan Riau yang lahir dari perpaduan keunggulan akademik Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES) di bawah naungan Yayasan Pendidikan Ibnu Sina Batam (YAPISNA). Berlokasi strategis di kawasan industri dan perdagangan internasional Kota Batam, UIS mengelola tiga fakultas unggulan: Fakultas Teknik (Sains & Teknologi), Fakultas Ekonomi dan Bisnis (FEB), serta Fakultas Ilmu Kesehatan (FIKES), beserta Program Pascasarjana (Magister). UIS bertekad mencetak lulusan profesional muda yang inovatif, berdaya saing global, berjiwa entrepreneur, dan berakhlak mulia berlandaskan Iman dan Taqwa (Imtaq).' !!}
+        </div>
       </div>
     </div>
   </div>
@@ -174,7 +206,7 @@
       </div>
 
       <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-        <a href="{{ route('homepage.sambutan-dekan') }}" class="text-decoration-none">
+        <a href="{{ route('homepage.sambutan-rektor') }}" class="text-decoration-none">
           <div class="p-4 rounded-4 text-center border h-100 shadow-sm bg-white hover-lift" style="transition: all 0.3s ease;">
             <div class="p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="background: var(--uis-yellow-light); color: var(--uis-green); width: 60px; height: 60px; font-size: 24px;">
               <i class="bi bi-person-badge"></i>

@@ -1,60 +1,63 @@
 @extends('layouts.frontend.template')
 
 @section('title', 'Sambutan Rektor — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Sambutan resmi Dekan Universitas Ibnu Sina (UIS) Universitas Ibnu Sina.')
-@section('meta_keywords', 'sambutan dekan uis, dekan universitas ibnu sina, pimpinan universitas ibnu sina')
+@section('meta_description', 'Sambutan resmi Rektor Universitas Ibnu Sina (UIS) Batam — Kampusnya Profesional Muda.')
+@section('meta_keywords', 'sambutan rektor uis, rektor universitas ibnu sina, pimpinan universitas ibnu sina, uis batam')
 
 @push('styles')
 <style>
-  .dekan-hero {
+  .rektor-hero {
     position: relative;
-    background: var(--obsidian-dark);
+    background: #046B26;
     padding: 70px 0 50px;
-    border-bottom: 2px solid var(--uis-purple);
+    border-bottom: 3px solid #FED802;
   }
-  .dekan-hero-title {
+  .rektor-hero-title {
     font-size: 38px;
     font-weight: 800;
-    color: var(--white);
+    color: #ffffff;
     margin-bottom: 8px;
   }
-  .dekan-hero-title em {
+  .rektor-hero-title em {
     font-style: normal;
-    color: var(--uis-orange);
+    color: #FED802;
   }
   .breadcrumb-custom {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-size: 13.5px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.75);
   }
-  .breadcrumb-custom a { color: rgba(255, 255, 255, 0.85); text-decoration: none; }
-  .breadcrumb-custom a:hover { color: var(--uis-orange); }
-  .breadcrumb-custom .active { color: var(--uis-orange); font-weight: 600; }
+  .breadcrumb-custom a { color: rgba(255, 255, 255, 0.9); text-decoration: none; }
+  .breadcrumb-custom a:hover { color: #FED802; }
+  .breadcrumb-custom .active { color: #FED802; font-weight: 600; }
 
-  /* Dekan Card */
-  .dekan-portrait-box {
-    background: var(--white);
-    border: 1px solid var(--border-light);
+  /* Rektor Card */
+  .rektor-portrait-box {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     border-radius: 24px;
     padding: 28px;
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     text-align: center;
     position: sticky;
     top: 90px;
   }
-  .dekan-portrait-img {
+  .rektor-portrait-img {
     width: 100%;
-    max-width: 280px;
-    height: 340px;
-    object-fit: cover;
+    max-width: 290px;
+    height: auto;
+    max-height: 420px;
+    object-fit: contain;
     border-radius: 18px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow-sm);
-    border: 3px solid var(--uis-purple-light);
+    margin: 0 auto 20px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    border: 3px solid #046B26;
+    background: #f8faf9;
+    display: block;
   }
-  .dekan-avatar-fallback {
+  .rektor-avatar-fallback {
     width: 100%;
     max-width: 280px;
     height: 340px;
@@ -67,34 +70,39 @@
     align-items: center;
     justify-content: center;
     font-size: 80px;
+    border: 3px solid #FED802;
   }
-  .dekan-name-title {
+  .rektor-name-title {
     font-size: 20px;
     font-weight: 800;
-    color: var(--text-main);
+    color: #1a202c;
     line-height: 1.3;
     margin-bottom: 6px;
   }
-  .dekan-role-badge {
+  .rektor-role-badge {
     display: inline-block;
-    background: var(--uis-purple-light);
-    color: var(--uis-purple);
+    background: #eef8f1;
+    color: #046B26;
+    border: 1px solid #cce8d5;
     font-size: 13px;
     font-weight: 700;
     padding: 5px 16px;
     border-radius: 50px;
     margin-bottom: 15px;
   }
-  .dekan-quote-callout {
-    background: var(--uis-purple-light);
-    border-left: 4px solid var(--uis-purple);
+  .rektor-quote-callout {
+    background: #f8faf9;
+    border-left: 5px solid #046B26;
     border-radius: 0 16px 16px 0;
     padding: 20px 24px;
     font-style: italic;
-    color: #3b284c;
+    color: #2d3748;
     font-size: 15.5px;
     line-height: 1.8;
     margin-bottom: 28px;
+    border-top: 1px solid #edf2f7;
+    border-right: 1px solid #edf2f7;
+    border-bottom: 1px solid #edf2f7;
   }
   .sambutan-content-body {
     font-size: 15.5px;
@@ -113,11 +121,11 @@
 <!-- ═══════════════════════════════════════════════
      HERO BANNER
 ═══════════════════════════════════════════════ -->
-<div class="dekan-hero">
+<div class="rektor-hero">
   <div class="container">
     <div data-aos="fade-up">
-      <h1 class="dekan-hero-title">
-        Sambutan <em>Dekan</em>
+      <h1 class="rektor-hero-title">
+        Sambutan <em>Rektor</em>
       </h1>
       <div class="breadcrumb-custom">
         <a href="{{ route('homepage') }}"><i class="bi bi-house-fill me-1"></i>Beranda</a>
@@ -131,31 +139,31 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════
-     SAMBUTAN DEKAN CONTENT
+     SAMBUTAN REKTOR CONTENT
 ═══════════════════════════════════════════════ -->
 <section class="section-bg-white py-5">
   <div class="container py-3">
     <div class="row g-5">
 
-      {{-- Left Column: Dekan Portrait --}}
+      {{-- Left Column: Rektor Portrait --}}
       <div class="col-lg-4" data-aos="fade-right">
-        <div class="dekan-portrait-box">
+        <div class="rektor-portrait-box">
           @if(!empty($sambutanDekan?->foto_dekan))
-            <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="{{ $sambutanDekan->nama_dekan ?? 'Dekan Universitas Ibnu Sina' }}" class="dekan-portrait-img">
+            <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="{{ $sambutanDekan->nama_dekan ?? 'Rektor Universitas Ibnu Sina' }}" class="rektor-portrait-img">
           @else
-            <div class="dekan-avatar-fallback">
-              <i class="bi bi-person-circle"></i>
-              <span style="font-size: 14px; font-weight: 600; margin-top: 10px;">Foto Dekan</span>
+            <div class="rektor-avatar-fallback">
+              <i class="bi bi-person-badge"></i>
+              <span style="font-size: 14px; font-weight: 600; margin-top: 10px;">Foto Rektor</span>
             </div>
           @endif
 
-          <h3 class="dekan-name-title">{{ $sambutanDekan->nama_dekan ?? 'Pimpinan Pimpinan Universitas Ibnu Sina' }}</h3>
-          <span class="dekan-role-badge">
-            <i class="bi bi-award-fill me-1"></i> {{ $sambutanDekan->jabatan_dekan ?? 'Dekan Universitas Ibnu Sina' }}
+          <h3 class="rektor-name-title">{{ $sambutanDekan->nama_dekan ?? 'Assoc. Prof. Dr. Ir. Larisang, S.T., M.T., IPU., ASEAN Eng.' }}</h3>
+          <span class="rektor-role-badge">
+            <i class="bi bi-award-fill me-1"></i> {{ $sambutanDekan->jabatan_dekan ?? 'Rektor Universitas Ibnu Sina (UIS) Batam' }}
           </span>
 
           <div class="pt-3 border-top mt-3 text-muted small text-start">
-            <div class="mb-2"><i class="bi bi-mortarboard me-2 text-primary"></i> Universitas Ibnu Sina (UIS) Batam</div>
+            <div class="mb-2"><i class="bi bi-mortarboard me-2" style="color: #046B26;"></i> Universitas Ibnu Sina (UIS) Batam</div>
             <div><i class="bi bi-geo-alt me-2 text-danger"></i> Kampus Utama Universitas Ibnu Sina</div>
           </div>
         </div>
@@ -169,9 +177,9 @@
         </h2>
 
         {{-- Kutipan Singkat --}}
-        <div class="dekan-quote-callout">
-          <i class="bi bi-quote fs-3 d-block mb-1" style="color: var(--uis-green);"></i>
-          "{{ strip_tags($sambutanDekan->kutipan_singkat ?? ($sambutanDekan->sambutan_dekan ?? 'Selamat datang di Universitas Ibnu Sina (UIS) Batam — Kampusnya Profesional Muda. Kami bertekad membentuk generasi intelektual yang unggul, inovatif, berjiwa entrepreneur, dan berkarakter Imtaq yang siap berkontribusi nyata bagi kemajuan industri dan bangsa di era global.')) }}"
+        <div class="rektor-quote-callout">
+          <i class="bi bi-quote fs-3 d-block mb-1" style="color: #046B26;"></i>
+          "{{ strip_tags($sambutanDekan->kutipan_singkat ?? ($sambutanDekan->sambutan_dekan ?? 'Selamat datang di Universitas Ibnu Sina (UIS) Batam — Kampusnya Profesional Muda. Kami bertekad membentuk generasi intelektual yang unggul, inovatif, berjiwa entrepreneur, dan berkarakter Imtaq yang siap memimpin industri di kancah nasional maupun global.')) }}"
         </div>
 
         {{-- Isi Lengkap Sambutan --}}
@@ -207,7 +215,7 @@
           <a href="{{ route('homepage.layanan') }}" class="btn-primary-hero" style="font-size: 13.5px; padding: 10px 22px;">
             <i class="bi bi-grid-fill me-1"></i> Program Studi Kami
           </a>
-          <a href="{{ route('homepage.kontak') }}" class="btn-outline-hero" style="font-size: 13.5px; padding: 10px 22px; color: var(--uis-purple); border-color: var(--uis-purple);">
+          <a href="{{ route('homepage.kontak') }}" class="btn-outline-hero" style="font-size: 13.5px; padding: 10px 22px; color: #046B26; border-color: #046B26;">
             <i class="bi bi-envelope me-1"></i> Hubungi Pimpinan
           </a>
         </div>

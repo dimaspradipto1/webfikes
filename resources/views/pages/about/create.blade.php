@@ -38,9 +38,9 @@
                 <form action="{{ route('about.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    <!-- SECTION 1: PROFIL FAKULTAS -->
-                    <div class="border-bottom pb-3 mb-4">
-                        <h6 class="fw-bold text-primary mb-3"><i class="bi bi-building me-2"></i>1. Profil Fakultas</h6>
+                    <!-- SECTION 1: PROFIL UNIVERSITAS & VIDEO -->
+                    <div class="border-bottom pb-4 mb-4">
+                        <h6 class="fw-bold text-primary mb-3"><i class="bi bi-building me-2"></i>1. Profil Universitas & Video Profil</h6>
                         
                         <div class="mb-3">
                             <label for="judul_profil" class="form-label fw-semibold">Judul Profil Universitas</label>
@@ -50,20 +50,44 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="deskripsi_profil_1" class="form-label fw-semibold">Deskripsi Profil Paragraf 1</label>
-                            <textarea id="deskripsi_profil_1" name="deskripsi_profil_1" rows="3" class="form-control @error('deskripsi_profil_1') is-invalid @enderror" placeholder="Paragraf pertama untuk deskripsi profil fakultas">{{ old('deskripsi_profil_1') }}</textarea>
+                        <div class="mb-4">
+                            <label for="deskripsi_profil_1" class="form-label fw-semibold">Deskripsi Profil Universitas</label>
+                            <textarea id="deskripsi_profil_1" name="deskripsi_profil_1" rows="6" class="form-control tinymce-editor @error('deskripsi_profil_1') is-invalid @enderror" placeholder="Tuliskan deskripsi profil resmi Universitas Ibnu Sina">{{ old('deskripsi_profil_1') }}</textarea>
                             @error('deskripsi_profil_1')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                            <div class="form-text text-muted">Deskripsi profil universitas dalam satu narasi utuh yang ditampilkan di beranda dan halaman tentang.</div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="deskripsi_profil_2" class="form-label fw-semibold">Deskripsi Profil Paragraf 2</label>
-                            <textarea id="deskripsi_profil_2" name="deskripsi_profil_2" rows="3" class="form-control @error('deskripsi_profil_2') is-invalid @enderror" placeholder="Paragraf kedua untuk deskripsi profil fakultas (opsional)">{{ old('deskripsi_profil_2') }}</textarea>
-                            @error('deskripsi_profil_2')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                        <!-- VIDEO PROFIL SECTION -->
+                        <div class="card bg-light border-0 p-3 rounded-3 mt-3">
+                            <h6 class="fw-bold text-dark mb-3">
+                                <i class="bi bi-camera-video-fill me-2 text-danger"></i>Video Profil Universitas
+                            </h6>
+                            <div class="row g-3">
+                                <div class="col-md-7">
+                                    <label for="video_url" class="form-label fw-semibold small">Link Video (YouTube / External URL)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-white"><i class="bi bi-link-45deg"></i></span>
+                                        <input type="text" id="video_url" name="video_url" class="form-control @error('video_url') is-invalid @enderror" value="{{ old('video_url') }}" placeholder="Tempel link (Salin) atau kode sematan (Sematkan) dari YouTube">
+                                    </div>
+                                    @error('video_url')
+                                        <div class="text-danger small mt-1">{{ $message }}</div>
+                                    @enderror
+                                    <div class="form-text small text-muted">
+                                        <i class="bi bi-info-circle me-1 text-success"></i>Bisa pakai link <strong>Salin</strong> (<code>https://youtu.be/...</code>) maupun kode <strong>Sematkan</strong> (<code>&lt;iframe...&gt;</code>). Sistem otomatis merapikannya.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5">
+                                    <label for="video_file" class="form-label fw-semibold small">Atau Upload File Video (MP4 / WebM)</label>
+                                    <input type="file" id="video_file" name="video_file" class="form-control @error('video_file') is-invalid @enderror" accept="video/mp4,video/webm,video/ogg">
+                                    @error('video_file')
+                                        <div class="text-danger small mt-1">{{ $message }}</div>
+                                    @enderror
+                                    <div class="form-text small">Maksimal 50 MB (format MP4/WebM).</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -220,3 +244,25 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const videoInput = document.getElementById('video_url');
+        if (videoInput) {
+            function cleanInput() {
+                let val = videoInput.value.trim();
+                // Jika user mem-paste seluruh tag <iframe>
+                const match = val.match(/<iframe.*?src=["']([^"']+)["']/i);
+                if (match && match[1]) {
+                    videoInput.value = match[1];
+                }
+            }
+            videoInput.addEventListener('input', cleanInput);
+            videoInput.addEventListener('paste', function () {
+                setTimeout(cleanInput, 50);
+            });
+        }
+    });
+</script>
+@endpush

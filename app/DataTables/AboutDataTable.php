@@ -113,7 +113,7 @@ class AboutDataTable extends DataTable
                 ->title('Judul Profil'),
 
             Column::make('deskripsi_profil_1')
-                ->title('Deskripsi Profil (P1)'),
+                ->title('Deskripsi Profil'),
 
             Column::make('visi')
                 ->title('Visi'),
