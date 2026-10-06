@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Dashboard Portal — Fakultas Ilmu Kesehatan (FIKES)</title>
+    <title>Dashboard Portal — Universitas Ibnu Sina (UIS)</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -39,19 +39,19 @@
 
     <style>
         :root {
-            --fikes-purple: #823ca2;
-            --fikes-purple-dark: #672985;
-            --fikes-orange: #ff9c00;
-            --fikes-orange-dark: #e08800;
+            --uis-purple: #046B26;
+            --uis-purple-dark: #03521d;
+            --uis-orange: #FED802;
+            --uis-orange-dark: #e5c302;
         }
-        /* Header — Solid Purple #823ca2 */
+        /* Header — Solid Purple #046B26 */
         .header {
-            background-color: #823ca2 !important;
-            border-bottom: 2.5px solid #ff9c00 !important;
+            background-color: #046B26 !important;
+            border-bottom: 2.5px solid #FED802 !important;
             box-shadow: 0 2px 14px rgba(0, 0, 0, 0.16) !important;
         }
         .header .logo span {
-            color: #ff9c00 !important;
+            color: #FED802 !important;
             font-weight: 800;
             letter-spacing: 0.5px;
         }
@@ -59,7 +59,7 @@
             color: #ffffff !important;
         }
         .header .toggle-sidebar-btn:hover {
-            color: #ff9c00 !important;
+            color: #FED802 !important;
         }
         .header .nav-profile {
             color: #ffffff !important;
@@ -69,76 +69,76 @@
             font-weight: 700;
         }
         .header .nav-profile:hover span {
-            color: #ff9c00 !important;
+            color: #FED802 !important;
         }
         .header .nav-icon {
             color: #ffffff !important;
         }
         .header .nav-icon:hover {
-            color: #ff9c00 !important;
+            color: #FED802 !important;
         }
         .sidebar-nav .nav-link {
-            background: #fdfaff;
-            color: #823ca2;
+            background: #f8fcf9;
+            color: #046B26;
         }
         .sidebar-nav .nav-link:not(.collapsed) {
-            background: #f3e8f8;
-            color: #823ca2;
+            background: #eaf6ee;
+            color: #046B26;
         }
         .sidebar-nav .nav-link:not(.collapsed) i {
-            color: #823ca2;
+            color: #046B26;
         }
         .sidebar-nav .nav-content a.active {
-            color: #823ca2;
+            color: #046B26;
             font-weight: 700;
         }
         .sidebar-nav .nav-content a.active i {
-            background-color: #ff9c00;
+            background-color: #FED802;
         }
         .sidebar-nav .nav-link:hover {
-            color: #ff9c00;
-            background: #fcf6ff;
+            color: #FED802;
+            background: #f8fcf9;
         }
         .sidebar-nav .nav-link:hover i {
-            color: #ff9c00;
+            color: #FED802;
         }
         .btn-primary {
-            background-color: #823ca2 !important;
-            border-color: #823ca2 !important;
+            background-color: #046B26 !important;
+            border-color: #046B26 !important;
         }
         .btn-primary:hover, .btn-primary:focus {
-            background-color: #672985 !important;
-            border-color: #672985 !important;
+            background-color: #03521d !important;
+            border-color: #03521d !important;
         }
         .btn-outline-primary {
-            color: #823ca2 !important;
-            border-color: #823ca2 !important;
+            color: #046B26 !important;
+            border-color: #046B26 !important;
         }
         .btn-outline-primary:hover {
-            background-color: #823ca2 !important;
+            background-color: #046B26 !important;
             color: #fff !important;
         }
         .btn-warning {
-            background-color: #ff9c00 !important;
-            border-color: #ff9c00 !important;
+            background-color: #FED802 !important;
+            border-color: #FED802 !important;
             color: #fff !important;
         }
         .btn-warning:hover {
-            background-color: #e08800 !important;
-            border-color: #e08800 !important;
+            background-color: #e5c302 !important;
+            border-color: #e5c302 !important;
             color: #fff !important;
         }
         .pagetitle h1 {
-            color: #823ca2;
+            color: #046B26;
         }
         .card-title {
-            color: #823ca2;
+            color: #046B26;
         }
         .back-to-top {
-            background: #823ca2;
+            background: #046B26;
         }
         .back-to-top:hover {
-            background: #ff9c00;
+            background: #FED802;
         }
     </style>
 </head>
@@ -199,7 +199,7 @@
                 text: 'Apakah Anda yakin ingin keluar dari sistem?',
                 icon: 'question',
                 showCancelButton: true,
-                confirmButtonColor: '#823ca2',
+                confirmButtonColor: '#046B26',
                 cancelButtonColor: '#6c757d',
                 confirmButtonText: '<i class="bi bi-box-arrow-right me-1"></i> Ya, Keluar',
                 cancelButtonText: 'Batal',
@@ -345,7 +345,7 @@
                                                 icon: 'error',
                                                 title: 'Ukuran Gambar Terlalu Besar',
                                                 text: 'Ukuran file gambar "' + file.name + '" melebihi batas maksimal 2 MB.',
-                                                confirmButtonColor: '#823ca2'
+                                                confirmButtonColor: '#046B26'
                                             });
                                         } else {
                                             alert('Ukuran file gambar maksimal 2 MB.');
@@ -401,7 +401,7 @@
                             icon: 'error',
                             title: 'Ukuran File Terlalu Besar',
                             html: `File <strong>${file.name}</strong> berukuran <strong>${fileSizeMB} MB</strong>.<br>Maksimal ukuran file gambar yang diperbolehkan adalah <strong>2 MB</strong>.`,
-                            confirmButtonColor: '#823ca2',
+                            confirmButtonColor: '#046B26',
                             customClass: {
                                 popup: 'rounded-4 shadow-lg border-0',
                                 confirmButton: 'px-4 py-2 rounded-3 fw-semibold'

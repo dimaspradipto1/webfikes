@@ -1,18 +1,18 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Organisasi & Kegiatan Mahasiswa — Fakultas Ilmu Kesehatan Universitas Ibnu Sina')
-@section('meta_description', 'Daftar Lembaga, Organisasi Mahasiswa (BEM, HIMA, UKM, Komunitas), serta wadah kreativitas dan kegiatan mahasiswa FIKES Universitas Ibnu Sina.')
+@section('title', 'Organisasi & Kegiatan Mahasiswa — Universitas Ibnu Sina')
+@section('meta_description', 'Daftar Lembaga, Organisasi Mahasiswa (BEM, HIMA, UKM, Komunitas), serta wadah kreativitas dan kegiatan mahasiswa UIS Universitas Ibnu Sina.')
 
 @push('styles')
 <style>
   :root {
-    --fikes-purple: #823ca2;
-    --fikes-purple-dark: #591e73;
-    --fikes-orange: #ff9c00;
+    --uis-purple: #046B26;
+    --uis-purple-dark: #023814;
+    --uis-orange: #FED802;
   }
 
   .ormawa-hero {
-    background: linear-gradient(135deg, #190a24 0%, #3b1154 50%, #823ca2 100%);
+    background: #032e12;
     padding: 70px 0 50px;
     position: relative;
     overflow: hidden;
@@ -25,7 +25,7 @@
     right: -10%;
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(255, 156, 0, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+    background: transparent;
     border-radius: 50%;
     pointer-events: none;
   }
@@ -58,22 +58,22 @@
     display: inline-block;
   }
   .category-pill:hover {
-    border-color: var(--fikes-purple);
-    color: var(--fikes-purple);
-    background: rgba(130, 60, 162, 0.05);
+    border-color: var(--uis-purple);
+    color: var(--uis-purple);
+    background: rgba(4, 107, 38, 0.05);
   }
   .category-pill.active {
-    background: var(--fikes-purple);
+    background: var(--uis-purple);
     color: #fff !important;
-    border-color: var(--fikes-purple);
-    box-shadow: 0 4px 14px rgba(130, 60, 162, 0.3);
+    border-color: var(--uis-purple);
+    box-shadow: 0 4px 14px rgba(4, 107, 38, 0.3);
   }
 
   /* Card Ormawa */
   .ormawa-card {
     background: #ffffff;
     border-radius: 16px;
-    border: 1px solid #ede4f2;
+    border: 1px solid #d8e8dc;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     display: flex;
@@ -83,12 +83,12 @@
   }
   .ormawa-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(130, 60, 162, 0.12);
+    box-shadow: 0 12px 30px rgba(4, 107, 38, 0.12);
     border-color: #c9a4dc;
   }
 
   .ormawa-card-header {
-    background: linear-gradient(135deg, rgba(130, 60, 162, 0.08) 0%, rgba(255, 156, 0, 0.06) 100%);
+    background: rgba(4, 107, 38, 0.06);
     padding: 24px 20px 16px;
     position: relative;
     text-align: center;
@@ -105,7 +105,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 12px;
-    border: 2px solid #ecd8f5;
+    border: 2px solid #d4edd9;
   }
   .ormawa-logo-img {
     max-width: 100%;
@@ -120,7 +120,7 @@
     border-radius: 20px;
     font-size: 11.5px;
     font-weight: 700;
-    background: #823ca2;
+    background: #046B26;
     color: #ffffff;
     letter-spacing: 0.3px;
   }
@@ -145,7 +145,7 @@
     transition: color 0.2s;
   }
   .ormawa-title a:hover {
-    color: var(--fikes-purple);
+    color: var(--uis-purple);
   }
 
   .ormawa-leader-box {
@@ -153,7 +153,7 @@
     border-radius: 10px;
     padding: 10px 14px;
     font-size: 12.5px;
-    border-left: 3px solid var(--fikes-purple);
+    border-left: 3px solid var(--uis-purple);
     margin-bottom: 14px;
   }
 
@@ -179,7 +179,7 @@
   }
 
   .btn-ormawa-detail {
-    background: linear-gradient(135deg, #823ca2 0%, #591e73 100%);
+    background: #046B26;
     color: #ffffff;
     font-size: 13px;
     font-weight: 600;
@@ -193,21 +193,21 @@
     border: none;
   }
   .btn-ormawa-detail:hover {
-    background: linear-gradient(135deg, #ff9c00 0%, #e08500 100%);
+    background: #FED802;
     color: #ffffff;
-    box-shadow: 0 4px 12px rgba(255, 156, 0, 0.35);
+    box-shadow: 0 4px 12px rgba(254, 216, 2, 0.35);
   }
 
   /* Pagination */
   .page-link {
-    color: var(--fikes-purple);
+    color: var(--uis-purple);
     border-radius: 8px !important;
     margin: 0 3px;
     border: 1px solid #e0d0e8;
   }
   .page-item.active .page-link {
-    background-color: var(--fikes-purple);
-    border-color: var(--fikes-purple);
+    background-color: var(--uis-purple);
+    border-color: var(--uis-purple);
     color: #fff;
   }
 </style>
@@ -221,13 +221,13 @@
       <div class="col-lg-8" data-aos="fade-up">
         <div class="ormawa-hero-badge">
           <i class="bi bi-people-fill"></i>
-          <span>Kemahasiswaan FIKES UIS</span>
+          <span>Kemahasiswaan Universitas Ibnu Sina</span>
         </div>
         <h1 class="fw-bold mb-3 text-white" style="font-size: clamp(26px, 3.5vw, 42px); line-height: 1.2;">
           Organisasi & Kegiatan Mahasiswa
         </h1>
         <p class="text-white-50 mb-0" style="font-size: 16px; max-width: 650px;">
-          Wadah pengembangan potensi, kepemimpinan, riset keilmuan, kreativitas, serta kepedulian sosial mahasiswa Fakultas Ilmu Kesehatan Universitas Ibnu Sina.
+          Wadah pengembangan potensi, kepemimpinan, riset keilmuan, kreativitas, serta kepedulian sosial mahasiswa Universitas Ibnu Sina.
         </p>
       </div>
       <div class="col-lg-4 text-lg-end mt-4 mt-lg-0" data-aos="fade-left">
@@ -273,7 +273,7 @@
             @endif
             <div class="input-group">
               <input type="text" name="q" class="form-control" placeholder="Cari nama organisasi, ketua..." value="{{ $search }}" style="border-radius: 50px 0 0 50px; border-color: #e0d0e8; padding-left: 18px; font-size: 13.5px;">
-              <button class="btn btn-primary px-4" type="submit" style="background: var(--fikes-purple); border-color: var(--fikes-purple); border-radius: 0 50px 50px 0;">
+              <button class="btn btn-primary px-4" type="submit" style="background: var(--uis-purple); border-color: var(--uis-purple); border-radius: 0 50px 50px 0;">
                 <i class="bi bi-search"></i>
               </button>
             </div>
@@ -312,7 +312,7 @@
                   @if(!empty($item->logo))
                     <img src="{{ asset('storage/' . $item->logo) }}" alt="{{ $item->nama_organisasi }}" class="ormawa-logo-img">
                   @else
-                    <div class="w-100 h-100 rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="background: linear-gradient(135deg, #823ca2 0%, #190a24 100%); font-size: 18px;">
+                    <div class="w-100 h-100 rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="background: #032e12; font-size: 18px;">
                       {{ strtoupper(substr($item->singkatan ?: $item->nama_organisasi, 0, 2)) }}
                     </div>
                   @endif
@@ -349,7 +349,7 @@
                 </div>
 
                 <div class="ormawa-desc">
-                  {{ strip_tags($item->deskripsi ?: ($item->visi ?: 'Lembaga kemahasiswaan Fakultas Ilmu Kesehatan Universitas Ibnu Sina.')) }}
+                  {{ strip_tags($item->deskripsi ?: ($item->visi ?: 'Lembaga kemahasiswaan Universitas Ibnu Sina.')) }}
                 </div>
               </div>
 
@@ -393,7 +393,7 @@
         <i class="bi bi-people text-muted" style="font-size: 50px;"></i>
         <h5 class="fw-bold mt-3 text-dark">Data Organisasi Tidak Ditemukan</h5>
         <p class="text-muted mb-3">Silakan gunakan kata kunci lain atau pilih kategori yang tersedia.</p>
-        <a href="{{ route('homepage.organisasi') }}" class="btn btn-primary btn-sm px-4" style="background: var(--fikes-purple); border-color: var(--fikes-purple);">
+        <a href="{{ route('homepage.organisasi') }}" class="btn btn-primary btn-sm px-4" style="background: var(--uis-purple); border-color: var(--uis-purple);">
           Lihat Semua Organisasi
         </a>
       </div>

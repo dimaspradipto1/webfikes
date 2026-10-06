@@ -55,7 +55,7 @@
                             <input type="text" id="judul" name="judul"
                                    class="form-control @error('judul') is-invalid @enderror"
                                    value="{{ old('judul') }}"
-                                   placeholder="Contoh: S2 Kesehatan Masyarakat">
+                                   placeholder="Contoh: S1 Teknik Informatika / S1 Manajemen">
                             @error('judul')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -71,7 +71,7 @@
                                class="form-control @error('link') is-invalid @enderror"
                                value="{{ old('link') }}"
                                placeholder="Contoh: https://kesmas.uis.ac.id atau https://...">
-                        <div class="form-text">Jika diisi, klik pada menu dropdown Program Studi di navbar akan langsung membuka tautan ini. Jika dikosongkan, akan membuka halaman detail prodi di website FIKES.</div>
+                        <div class="form-text">Jika diisi, klik pada menu dropdown Program Studi di navbar akan langsung membuka tautan ini. Jika dikosongkan, akan membuka halaman detail prodi di website UIS.</div>
                         @error('link')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

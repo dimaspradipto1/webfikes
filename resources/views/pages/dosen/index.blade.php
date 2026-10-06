@@ -31,7 +31,7 @@
 <div class="card shadow-sm mb-4">
     <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2 py-3">
         <h5 class="mb-0 fw-semibold text-dark">
-            <i class="bi bi-person-workspace me-2 text-primary"></i>Daftar Dosen Pengajar FIKES
+            <i class="bi bi-person-workspace me-2 text-primary"></i>Daftar Dosen Pengajar UIS
         </h5>
         <div class="d-flex flex-wrap align-items-center gap-2">
             {{-- Tombol Hapus Terpilih --}}
@@ -91,7 +91,7 @@
 <div class="modal fade" id="importExcelModal" tabindex="-1" aria-labelledby="importExcelModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg rounded-4">
-            <div class="modal-header text-white" style="background: linear-gradient(135deg, #823ca2 0%, #190a24 100%);">
+            <div class="modal-header text-white" style="background: #032e12;">
                 <h5 class="modal-title fw-bold" id="importExcelModalLabel">
                     <i class="bi bi-file-earmark-excel me-2 text-warning"></i>Import Data Dosen dari Excel
                 </h5>

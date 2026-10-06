@@ -19,7 +19,53 @@
           @endphp
 
           @if($isAdmin)
-          <!-- 2. Profil (Sesuai Urutan & Dropdown Header) -->
+          <!-- 2. Konten Beranda / Landing Page -->
+          <li class="nav-item">
+              <a class="nav-link {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || Route::is('feature.*') || Route::is('sarana.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') ? '' : 'collapsed' }}" data-bs-target="#beranda-nav" data-bs-toggle="collapse" href="#">
+                  <i class="bi bi-layout-text-window-reverse"></i><span>Konten Beranda</span><i class="bi bi-chevron-down ms-auto"></i>
+              </a>
+              <ul id="beranda-nav" class="nav-content collapse {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || Route::is('feature.*') || Route::is('sarana.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+                  <li>
+                      <a href="{{ route('banner.index') }}" class="{{ Route::is('banner.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Banner Hero</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('layanan-terkait.index') }}" class="{{ Route::is('layanan-terkait.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Layanan Terkait</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('faculty-stat.index') }}" class="{{ Route::is('faculty-stat.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Statistik Universitas</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('feature.index') }}" class="{{ Route::is('feature.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Keunggulan Universitas</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('sarana.index') }}" class="{{ Route::is('sarana.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Sarana Kampus</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('tridharma.index') }}" class="{{ Route::is('tridharma.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Tri Dharma</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('pmb-setting.index') }}" class="{{ Route::is('pmb-setting.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Banner PMB & Pendaftaran</span>
+                      </a>
+                  </li>
+              </ul>
+          </li>
+          @endif
+
+          @if($isAdmin)
+          <!-- 3. Profil (Sesuai Urutan & Dropdown Header) -->
           <li class="nav-item">
             <a class="nav-link {{ Route::is('about.*') || Route::is('visimisi.*') || Route::is('sambutan-dekan.*') || Route::is('struktur-organisasi.*') || Route::is('milestone.*') ? '' : 'collapsed' }}" data-bs-target="#profil-nav" data-bs-toggle="collapse" href="#">
               <i class="bi bi-building"></i><span>Profil</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -27,7 +73,7 @@
             <ul id="profil-nav" class="nav-content collapse {{ Route::is('about.*') || Route::is('visimisi.*') || Route::is('sambutan-dekan.*') || Route::is('struktur-organisasi.*') || Route::is('milestone.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
               <li>
                 <a href="{{ route('about.index') }}" class="{{ Route::is('about.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Tentang FIKES</span>
+                  <i class="bi bi-circle"></i><span>Tentang UIS</span>
                 </a>
               </li>
               <li>
@@ -37,7 +83,7 @@
               </li>
               <li>
                 <a href="{{ route('sambutan-dekan.index') }}" class="{{ Route::is('sambutan-dekan.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Sambutan Dekan</span>
+                  <i class="bi bi-circle"></i><span>Sambutan Rektor</span>
                 </a>
               </li>
               <li>
@@ -47,7 +93,7 @@
               </li>
               <li>
                 <a href="{{ route('milestone.index') }}" class="{{ Route::is('milestone.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Sejarah Fakultas</span>
+                  <i class="bi bi-circle"></i><span>Sejarah Universitas</span>
                 </a>
               </li>
             </ul>
@@ -86,13 +132,6 @@
           <li class="nav-item">
             <a class="nav-link {{ Route::is('layanan.*') ? '' : 'collapsed' }}" href="{{ route('layanan.index') }}">
               <i class="bi bi-mortarboard"></i><span>Program Studi</span>
-            </a>
-          </li>
-
-          <!-- 4b. Dosen / Tenaga Pengajar -->
-          <li class="nav-item">
-            <a class="nav-link {{ Route::is('dosen.*') ? '' : 'collapsed' }}" href="{{ route('dosen.index') }}">
-              <i class="bi bi-person-workspace"></i><span>Dosen / Tenaga Pengajar</span>
             </a>
           </li>
 
@@ -187,55 +226,6 @@
                   <i class="bi bi-telephone"></i>
                   <span>Kontak</span>
               </a>
-          </li>
-
-          <!-- Pengaturan Konten Beranda / Landing Page -->
-          <li class="nav-item">
-              <a class="nav-link {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || Route::is('feature.*') || Route::is('sarana.*') || Route::is('tridharma.*') || Route::is('tenaga-pendidik.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') ? '' : 'collapsed' }}" data-bs-target="#beranda-nav" data-bs-toggle="collapse" href="#">
-                  <i class="bi bi-layout-text-window-reverse"></i><span>Konten Beranda</span><i class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="beranda-nav" class="nav-content collapse {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || Route::is('feature.*') || Route::is('sarana.*') || Route::is('tridharma.*') || Route::is('tenaga-pendidik.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="{{ route('banner.index') }}" class="{{ Route::is('banner.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Banner Hero</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('layanan-terkait.index') }}" class="{{ Route::is('layanan-terkait.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Layanan Terkait</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('faculty-stat.index') }}" class="{{ Route::is('faculty-stat.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Statistik Fakultas</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('feature.index') }}" class="{{ Route::is('feature.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Keunggulan Fakultas</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('sarana.index') }}" class="{{ Route::is('sarana.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Sarana Kampus</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('tridharma.index') }}" class="{{ Route::is('tridharma.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Tri Dharma</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('tenaga-pendidik.index') }}" class="{{ Route::is('tenaga-pendidik.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Tenaga Pendidik</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('pmb-setting.index') }}" class="{{ Route::is('pmb-setting.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Banner PMB & Pendaftaran</span>
-                      </a>
-                  </li>
-              </ul>
           </li>
           @endif
 

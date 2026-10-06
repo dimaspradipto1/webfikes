@@ -13,9 +13,9 @@ class SambutanDekanController extends Controller
     public function index(): View
     {
         $sambutanDekan = SambutanDekan::firstOrCreate([], [
-            'nama_dekan'      => 'Dr. Apt. H. Dekan FIKES, M.Kes',
-            'jabatan_dekan'   => 'Dekan Fakultas Ilmu Kesehatan UIS',
-            'kutipan_singkat' => 'Selamat datang di Fakultas Ilmu Kesehatan Universitas Ibnu Sina. Kami bertekad membentuk generasi tenaga kesehatan yang tidak hanya unggul secara akademis dan terampil dalam praktik industri, namun juga memiliki integritas moral dan etika luhur dalam mengabdi kepada bangsa.',
+            'nama_dekan'      => 'Assoc. Prof. Dr. Ir. Larisang, S.T., M.T., IPU., ASEAN Eng.',
+            'jabatan_dekan'   => 'Rektor Universitas Ibnu Sina (UIS) Batam',
+            'kutipan_singkat' => 'Selamat datang di Universitas Ibnu Sina (UIS) Batam — Kampusnya Profesional Muda. Kami bertekad membentuk generasi intelektual yang unggul, berjiwa entrepreneur, dan berkarakter Imtaq yang siap memimpin industri di kancah nasional maupun global.',
         ]);
 
         return view('pages.sambutan-dekan.index', compact('sambutanDekan'));

@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Tanya Jawab (FAQ) — Fakultas Ilmu Kesehatan (FIKES)')
-@section('meta_description', 'Temukan jawaban cepat atas pertanyaan seputar program studi, penerimaan mahasiswa baru, fasilitas laboratorium, dan akreditasi FIKES.')
-@section('meta_keywords', 'faq fikes, tanya jawab fakultas ilmu kesehatan, pendaftaran mahasiswa kesehatan, akreditasi fikes')
+@section('title', 'Tanya Jawab (FAQ) — Universitas Ibnu Sina (UIS)')
+@section('meta_description', 'Temukan jawaban cepat atas pertanyaan seputar fakultas, program studi, PMB, fasilitas kampus, dan akreditasi UIS Batam.')
+@section('meta_keywords', 'faq uis, tanya jawab universitas ibnu sina, pmb uis batam, pendaftaran mahasiswa baru, akreditasi uis batam')
 
 @push('styles')
 <style>
@@ -10,7 +10,7 @@
     position: relative;
     background: var(--obsidian-dark);
     padding: 70px 0 50px;
-    border-bottom: 2px solid var(--fikes-purple);
+    border-bottom: 2px solid var(--uis-purple);
   }
   .faq-hero-title {
     font-size: 38px;
@@ -20,7 +20,7 @@
   }
   .faq-hero-title em {
     font-style: normal;
-    color: var(--fikes-orange);
+    color: var(--uis-orange);
   }
   .accordion-item {
     border: 1px solid var(--border-light) !important;
@@ -38,8 +38,8 @@
     background: var(--white);
   }
   .accordion-button:not(.collapsed) {
-    background: var(--fikes-purple-light);
-    color: var(--fikes-purple);
+    background: var(--uis-purple-light);
+    color: var(--uis-purple);
     box-shadow: none;
   }
   .accordion-body {
@@ -74,7 +74,7 @@
       <div class="breadcrumb-custom">
         <a href="{{ route('homepage') }}" class="text-white-50"><i class="bi bi-house-fill me-1"></i>Beranda</a>
         <span class="mx-2 text-white-50">/</span>
-        <span style="color: var(--fikes-orange); font-weight: 600;">FAQ</span>
+        <span style="color: var(--uis-orange); font-weight: 600;">FAQ</span>
       </div>
     </div>
   </div>
@@ -91,7 +91,7 @@
       <h2 class="section-title">Pertanyaan yang Sering <em>Diajukan</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Kumpulan jawaban informatif seputar proses akademik, persyaratan seleksi masuk, fasilitas, dan kemitraan di FIKES.
+        Kumpulan jawaban informatif seputar proses akademik, persyaratan seleksi masuk, fasilitas, dan kemitraan di UIS.
       </p>
     </div>
 
@@ -103,7 +103,7 @@
               <div class="accordion-item shadow-sm">
                 <h2 class="accordion-header" id="heading{{ $faq->id ?? $index }}">
                   <button class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $faq->id ?? $index }}" aria-expanded="{{ $index === 0 ? 'true' : 'false' }}">
-                    <i class="bi bi-question-circle-fill me-2" style="color: var(--fikes-purple);"></i>
+                    <i class="bi bi-question-circle-fill me-2" style="color: var(--uis-purple);"></i>
                     {{ $faq->question ?? $faq->pertanyaan }}
                   </button>
                 </h2>

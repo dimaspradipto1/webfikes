@@ -37,7 +37,7 @@ class FacultyStatController extends Controller
             'image'           => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'jumlah_prodi'    => ['required', 'integer', 'min:0'],
             'total_mahasiswa' => ['required', 'integer', 'min:0'],
-            'total_dosen'     => ['required', 'integer', 'min:0'],
+            'total_dosen'     => ['nullable', 'integer', 'min:0'],
             'total_alumni'    => ['required', 'integer', 'min:0'],
             'is_active'       => ['nullable', 'boolean'],
         ], [
@@ -46,7 +46,6 @@ class FacultyStatController extends Controller
             'image.max'                => 'Ukuran gambar maksimal 2MB.',
             'jumlah_prodi.required'    => 'Jumlah Program Studi wajib diisi.',
             'total_mahasiswa.required' => 'Total Mahasiswa wajib diisi.',
-            'total_dosen.required'     => 'Total Dosen wajib diisi.',
             'total_alumni.required'    => 'Total Alumni wajib diisi.',
         ]);
 
@@ -54,7 +53,7 @@ class FacultyStatController extends Controller
             'title'           => $validated['title'],
             'jumlah_prodi'    => $validated['jumlah_prodi'],
             'total_mahasiswa' => $validated['total_mahasiswa'],
-            'total_dosen'     => $validated['total_dosen'],
+            'total_dosen'     => $validated['total_dosen'] ?? 0,
             'total_alumni'    => $validated['total_alumni'],
             'is_active'       => $request->has('is_active') ? true : false,
         ];
@@ -88,7 +87,7 @@ class FacultyStatController extends Controller
             'image'           => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'jumlah_prodi'    => ['required', 'integer', 'min:0'],
             'total_mahasiswa' => ['required', 'integer', 'min:0'],
-            'total_dosen'     => ['required', 'integer', 'min:0'],
+            'total_dosen'     => ['nullable', 'integer', 'min:0'],
             'total_alumni'    => ['required', 'integer', 'min:0'],
             'is_active'       => ['nullable', 'boolean'],
         ], [
@@ -97,7 +96,6 @@ class FacultyStatController extends Controller
             'image.max'                => 'Ukuran gambar maksimal 2MB.',
             'jumlah_prodi.required'    => 'Jumlah Program Studi wajib diisi.',
             'total_mahasiswa.required' => 'Total Mahasiswa wajib diisi.',
-            'total_dosen.required'     => 'Total Dosen wajib diisi.',
             'total_alumni.required'    => 'Total Alumni wajib diisi.',
         ]);
 
@@ -105,7 +103,7 @@ class FacultyStatController extends Controller
             'title'           => $validated['title'],
             'jumlah_prodi'    => $validated['jumlah_prodi'],
             'total_mahasiswa' => $validated['total_mahasiswa'],
-            'total_dosen'     => $validated['total_dosen'],
+            'total_dosen'     => $validated['total_dosen'] ?? 0,
             'total_alumni'    => $validated['total_alumni'],
             'is_active'       => $request->has('is_active') ? true : false,
         ];

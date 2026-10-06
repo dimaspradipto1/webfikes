@@ -1,6 +1,6 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($gallery->judul ?? 'Dokumentasi Visual') . ' — Galeri FIKES UIS')
+@section('title', ($gallery->judul ?? 'Dokumentasi Visual') . ' — Galeri Universitas Ibnu Sina')
 @section('meta_description', Str::limit(strip_tags($gallery->deskripsi ?? $gallery->judul), 160))
 
 @push('styles')
@@ -8,7 +8,7 @@
   .detail-hero {
     background: var(--obsidian-dark);
     padding: 60px 0 40px;
-    border-bottom: 2px solid var(--fikes-purple);
+    border-bottom: 2px solid var(--uis-purple);
   }
   .galeri-img-main {
     width: 100%;
@@ -75,7 +75,7 @@
     transition: color 0.2s;
   }
   .other-galeri-item:hover .other-galeri-title {
-    color: var(--fikes-purple);
+    color: var(--uis-purple);
   }
 </style>
 @endpush
@@ -92,7 +92,7 @@
       </ol>
     </nav>
     <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
-      <span class="badge px-3 py-2 rounded-pill font-weight-bold" style="background: var(--fikes-purple); color: white; font-size: 12px;">
+      <span class="badge px-3 py-2 rounded-pill font-weight-bold" style="background: var(--uis-purple); color: white; font-size: 12px;">
         <i class="bi bi-camera-fill me-1"></i>Dokumentasi Visual
       </span>
       <span class="badge bg-light text-dark px-3 py-2 rounded-pill fw-bold" style="font-size: 12px;">
@@ -100,7 +100,7 @@
       </span>
     </div>
     <h1 class="fw-bold mb-0 text-white" style="font-size: 32px; line-height: 1.4;">
-      {{ $gallery->judul ?? 'Dokumentasi Kegiatan FIKES UIS' }}
+      {{ $gallery->judul ?? 'Dokumentasi Kegiatan Universitas Ibnu Sina' }}
     </h1>
   </div>
 </div>
@@ -115,22 +115,22 @@
         <!-- Foto Dokumentasi Utama -->
         @if(!empty($gallery->url))
           <div class="mb-4 text-center position-relative">
-            <img src="{{ asset('storage/' . $gallery->url) }}" alt="{{ $gallery->judul ?? 'Dokumentasi FIKES' }}" class="galeri-img-main img-fluid">
+            <img src="{{ asset('storage/' . $gallery->url) }}" alt="{{ $gallery->judul ?? 'Dokumentasi UIS' }}" class="galeri-img-main img-fluid">
             <a href="{{ asset('storage/' . $gallery->url) }}" target="_blank" class="btn btn-sm btn-dark position-absolute bottom-0 end-0 m-3 opacity-75 hover-opacity-100 rounded-pill px-3 shadow" style="font-size: 12px;">
               <i class="bi bi-arrows-fullscreen me-1"></i> Buka Ukuran Penuh
             </a>
           </div>
         @else
-          <div class="p-5 rounded-4 text-center text-white mb-4" style="background: linear-gradient(135deg, #823ca2 0%, #4a1563 100%);">
-            <i class="bi bi-camera-fill" style="font-size: 64px; color: #ffd166;"></i>
-            <h4 class="fw-bold mt-2 mb-0">Dokumentasi FIKES UIS</h4>
+          <div class="p-5 rounded-4 text-center text-white mb-4" style="background: #046B26;">
+            <i class="bi bi-camera-fill" style="font-size: 64px; color: #FED802;"></i>
+            <h4 class="fw-bold mt-2 mb-0">Dokumentasi Universitas Ibnu Sina</h4>
           </div>
         @endif
 
         <!-- Card Deskripsi Lengkap -->
         <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm border mb-4">
           <h3 class="fw-bold mb-3 text-dark" style="font-size: 22px;">
-            <i class="bi bi-info-circle-fill text-primary me-2" style="color: var(--fikes-purple) !important;"></i>Keterangan & Informasi Kegiatan
+            <i class="bi bi-info-circle-fill text-primary me-2" style="color: var(--uis-purple) !important;"></i>Keterangan & Informasi Kegiatan
           </h3>
           <div class="divider-line mb-4"></div>
 
@@ -140,7 +140,7 @@
             </div>
           @else
             <p class="text-muted">
-              Dokumentasi visual kegiatan dan aktivitas sivitas akademika Fakultas Ilmu Kesehatan Universitas Ibnu Sina (FIKES UIS).
+              Dokumentasi visual kegiatan dan aktivitas sivitas akademika Universitas Ibnu Sina (UIS).
             </p>
           @endif
 
@@ -151,7 +151,7 @@
 
             @php
               $shareUrl  = urlencode(url()->current());
-              $shareText = urlencode('Dokumentasi FIKES UIS: ' . ($gallery->judul ?? 'Dokumentasi Visual'));
+              $shareText = urlencode('Dokumentasi Universitas Ibnu Sina: ' . ($gallery->judul ?? 'Dokumentasi Visual'));
             @endphp
             <div class="d-flex align-items-center gap-2">
               <span class="text-muted small fw-semibold">Bagikan:</span>
@@ -182,12 +182,12 @@
 
           <div class="info-meta-row">
             <span class="info-meta-label">Kategori</span>
-            <span class="info-meta-val text-primary" style="color: var(--fikes-purple) !important;">Dokumentasi Visual</span>
+            <span class="info-meta-val text-primary" style="color: var(--uis-purple) !important;">Dokumentasi Visual</span>
           </div>
 
           <div class="info-meta-row">
             <span class="info-meta-label">Fakultas</span>
-            <span class="info-meta-val">FIKES UIS</span>
+            <span class="info-meta-val">Universitas Ibnu Sina</span>
           </div>
 
           <div class="info-meta-row">
@@ -201,10 +201,10 @@
           <div class="info-badge-card">
             <h5 class="fw-bold mb-3 text-dark d-flex align-items-center justify-content-between" style="font-size: 17px;">
               <span class="d-flex align-items-center gap-2">
-                <i class="bi bi-images text-primary" style="color: var(--fikes-purple) !important;"></i>
+                <i class="bi bi-images text-primary" style="color: var(--uis-purple) !important;"></i>
                 Dokumentasi Lainnya
               </span>
-              <a href="{{ route('homepage.galeri') }}" class="small fw-semibold text-decoration-none" style="font-size: 12.5px; color: var(--fikes-purple);">Lihat Semua</a>
+              <a href="{{ route('homepage.galeri') }}" class="small fw-semibold text-decoration-none" style="font-size: 12.5px; color: var(--uis-purple);">Lihat Semua</a>
             </h5>
 
             <div>
@@ -213,7 +213,7 @@
                   @if(!empty($other->url))
                     <img src="{{ asset('storage/' . $other->url) }}" alt="{{ $other->judul }}" class="other-galeri-img">
                   @else
-                    <div class="other-galeri-img d-flex align-items-center justify-content-center text-white" style="background: linear-gradient(135deg, #823ca2, #4a1563);">
+                    <div class="other-galeri-img d-flex align-items-center justify-content-center text-white" style="background: #046B26;">
                       <i class="bi bi-camera-fill small"></i>
                     </div>
                   @endif

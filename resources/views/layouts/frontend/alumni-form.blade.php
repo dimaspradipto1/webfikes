@@ -1,29 +1,29 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Formulir Ulasan & Testimoni Alumni — Fakultas Ilmu Kesehatan (FIKES)')
-@section('meta_description', 'Portal khusus pengisian testimoni dan kisah sukses alumni serta civitas akademika Fakultas Ilmu Kesehatan Universitas Ibnu Sina.')
+@section('title', 'Formulir Ulasan & Testimoni Alumni — Universitas Ibnu Sina (UIS)')
+@section('meta_description', 'Portal khusus pengisian testimoni dan kisah sukses alumni serta civitas akademika Universitas Ibnu Sina.')
 
 @section('content')
 
 <!-- ═══════════════════════════════════════════════
      HERO BANNER
 ═══════════════════════════════════════════════ -->
-<div class="about-hero" style="background: var(--obsidian-dark); padding: 75px 0 55px; border-bottom: 3px solid var(--fikes-purple);">
+<div class="about-hero" style="background: var(--obsidian-dark); padding: 75px 0 55px; border-bottom: 3px solid var(--uis-purple);">
   <div class="container">
     <div class="about-hero-content" data-aos="fade-up" data-aos-duration="800">
-      <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3" style="background: rgba(255, 156, 0, 0.15); border: 1px solid rgba(255, 156, 0, 0.4);">
+      <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3" style="background: rgba(254, 216, 2, 0.15); border: 1px solid rgba(254, 216, 2, 0.4);">
         <i class="bi bi-mortarboard-fill text-warning"></i>
         <span class="text-warning small fw-bold">PORTAL KHUSUS ALUMNI & CIVITAS</span>
       </div>
       <h1 style="font-size: 36px; font-weight: 800; color: var(--white); margin-bottom: 10px;">
-        Formulir <em style="font-style: normal; color: var(--fikes-orange);">Testimoni & Pengalaman</em>
+        Formulir <em style="font-style: normal; color: var(--uis-orange);">Testimoni & Pengalaman</em>
       </h1>
       <div class="breadcrumb-custom">
         <a href="{{ route('homepage') }}"><i class="bi bi-house-fill me-1"></i>Beranda</a>
         <span class="mx-2 text-white-50">/</span>
         <a href="{{ route('login') }}"><i class="bi bi-box-arrow-in-right me-1"></i>Portal</a>
         <span class="mx-2 text-white-50">/</span>
-        <span style="color: var(--fikes-orange); font-weight: 600;">Isi Testimoni</span>
+        <span style="color: var(--uis-orange); font-weight: 600;">Isi Testimoni</span>
       </div>
     </div>
   </div>
@@ -43,18 +43,18 @@
           <div>
             <h6 class="fw-bold text-dark mb-1">Verifikasi & Moderasi Ulasan</h6>
             <p class="small text-muted mb-0">
-              Formulir ini dikhususkan bagi alumni, mahasiswa, maupun mitra institusi kesehatan FIKES UIS. Setiap testimoni yang dikirimkan akan diverifikasi oleh admin sebelum ditampilkan di halaman website resmi demi menjaga validitas data.
+              Formulir ini dikhususkan bagi alumni, mahasiswa, maupun mitra industri dan institusi Universitas Ibnu Sina. Setiap testimoni yang dikirimkan akan diverifikasi oleh admin sebelum ditampilkan di halaman website resmi demi menjaga validitas data.
             </p>
           </div>
         </div>
 
-        <div class="card border-0 shadow-lg p-4 p-md-5" style="border-radius: 24px; background: var(--white); border: 1px solid #ede4f2 !important;">
+        <div class="card border-0 shadow-lg p-4 p-md-5" style="border-radius: 24px; background: var(--white); border: 1px solid #d8e8dc !important;">
           
           <div class="text-center mb-4">
             <div class="section-label mx-auto">Kisah Sukses Alumni</div>
             <h3 class="fw-bold mb-2 text-dark">Bagikan Jejak Karier & Pengalaman Anda</h3>
             <p class="text-muted small" style="max-width: 520px; margin: 0 auto;">
-              Cerita dan pengalaman Anda akan sangat menginspirasi calon mahasiswa baru serta membanggakan almamater FIKES UIS.
+              Cerita dan pengalaman Anda akan sangat menginspirasi calon mahasiswa baru serta membanggakan almamater Universitas Ibnu Sina.
             </p>
           </div>
 
@@ -110,9 +110,9 @@
                 @endphp
                 <select id="kategoriSelect" name="_kategori_select" class="form-select form-select-lg @error('kategori') is-invalid @enderror" style="border-radius: 12px; font-size: 14px;" onchange="handleKategoriChange(this)">
                   <option value="" disabled {{ (!$oldKategori || $isCustom) ? '' : '' }}>-- Pilih Kategori --</option>
-                  <option value="Alumni" {{ $oldKategori == 'Alumni' ? 'selected' : '' }}>Alumni FIKES</option>
+                  <option value="Alumni" {{ $oldKategori == 'Alumni' ? 'selected' : '' }}>Alumni UIS</option>
                   <option value="Mahasiswa" {{ $oldKategori == 'Mahasiswa' ? 'selected' : '' }}>Mahasiswa Aktif</option>
-                  <option value="Mitra Rumah Sakit" {{ $oldKategori == 'Mitra Rumah Sakit' ? 'selected' : '' }}>Mitra Rumah Sakit / Klinik</option>
+                  <option value="Mitra Industri" {{ $oldKategori == 'Mitra Industri' ? 'selected' : '' }}>Mitra Dunia Usaha & Industri (DUDI)</option>
                   <option value="Dosen & Staff" {{ $oldKategori == 'Dosen & Staff' ? 'selected' : '' }}>Dosen & Tenaga Kependidikan</option>
                   <option value="Industri / Perusahaan" {{ $oldKategori == 'Industri / Perusahaan' ? 'selected' : '' }}>Industri / Perusahaan</option>
                   <option value="Pengguna Lulusan / Stakeholder" {{ $oldKategori == 'Pengguna Lulusan / Stakeholder' ? 'selected' : '' }}>Pengguna Lulusan / Stakeholder</option>
@@ -122,7 +122,7 @@
                 <input type="hidden" id="kategoriValue" name="kategori" value="{{ $isCustom ? $oldKategori : ($oldKategori ?: 'Alumni') }}">
                 {{-- Custom input (shown when Lainnya selected) --}}
                 <div id="kategoriCustomWrap" style="margin-top: 8px; display: {{ $isCustom ? 'block' : 'none' }};">
-                  <input type="text" id="kategoriCustomInput" class="form-control form-control-lg" placeholder="Contoh: Puskesmas, NGO Kesehatan, Peneliti..." value="{{ $isCustom ? $oldKategori : '' }}" style="border-radius: 12px; font-size: 14px; border-color: #823ca2;" oninput="document.getElementById('kategoriValue').value = this.value">
+                  <input type="text" id="kategoriCustomInput" class="form-control form-control-lg" placeholder="Contoh: Manufaktur, BUMN, Perbankan, IT Konsultan..." value="{{ $isCustom ? $oldKategori : '' }}" style="border-radius: 12px; font-size: 14px; border-color: #046B26;" oninput="document.getElementById('kategoriValue').value = this.value">
                   <div class="small text-muted mt-1"><i class="bi bi-info-circle me-1"></i>Tuliskan kategori Anda secara spesifik.</div>
                 </div>
                 @error('kategori')
@@ -148,7 +148,7 @@
               {{-- Pesan Ulasan --}}
               <div class="col-12">
                 <label class="form-label fw-semibold text-dark">Pesan, Ulasan & Testimoni Anda <span class="text-danger">*</span></label>
-                <textarea name="pesan" rows="5" class="form-control @error('pesan') is-invalid @enderror" placeholder="Tuliskan pengalaman belajar, suasana perkuliahan di FIKES UIS, bimbingan para dosen, laboratorium, atau kemudahan berkarir setelah lulus..." required style="border-radius: 12px; font-size: 14px;">{{ old('pesan') }}</textarea>
+                <textarea name="pesan" rows="5" class="form-control @error('pesan') is-invalid @enderror" placeholder="Tuliskan pengalaman belajar, suasana perkuliahan di Universitas Ibnu Sina, bimbingan para dosen, laboratorium, atau kemudahan berkarir setelah lulus..." required style="border-radius: 12px; font-size: 14px;">{{ old('pesan') }}</textarea>
                 @error('pesan')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

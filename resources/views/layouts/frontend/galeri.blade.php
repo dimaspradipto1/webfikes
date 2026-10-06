@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Galeri & Dokumentasi — Fakultas Ilmu Kesehatan (FIKES)')
-@section('meta_description', 'Galeri foto kegiatan akademik, praktikum laboratorium, pengabdian masyarakat, dan wisuda Fakultas Ilmu Kesehatan (FIKES).')
-@section('meta_keywords', 'galeri fikes, dokumentasi fikes, foto praktikum kesehatan, kegiatan mahasiswa fikes')
+@section('title', 'Galeri & Dokumentasi — Universitas Ibnu Sina (UIS)')
+@section('meta_description', 'Galeri foto kegiatan akademik, praktikum laboratorium, pengabdian masyarakat, dan wisuda Universitas Ibnu Sina (UIS).')
+@section('meta_keywords', 'galeri uis, dokumentasi uis, foto kampus uis, kegiatan mahasiswa uis, universitas ibnu sina batam')
 
 @push('styles')
 <style>
@@ -10,7 +10,7 @@
     position: relative;
     background: var(--obsidian-dark);
     padding: 70px 0 50px;
-    border-bottom: 2px solid var(--fikes-purple);
+    border-bottom: 2px solid var(--uis-purple);
   }
   .galeri-hero-title {
     font-size: 38px;
@@ -20,7 +20,7 @@
   }
   .galeri-hero-title em {
     font-style: normal;
-    color: var(--fikes-orange);
+    color: var(--uis-orange);
   }
   .galeri-item-card {
     background: var(--white);
@@ -64,7 +64,7 @@
       <div class="breadcrumb-custom">
         <a href="{{ route('homepage') }}" class="text-white-50"><i class="bi bi-house-fill me-1"></i>Beranda</a>
         <span class="mx-2 text-white-50">/</span>
-        <span style="color: var(--fikes-orange); font-weight: 600;">Galeri Kegiatan</span>
+        <span style="color: var(--uis-orange); font-weight: 600;">Galeri Kegiatan</span>
       </div>
     </div>
   </div>
@@ -80,7 +80,7 @@
       <h2 class="section-title">Aktivitas & <em>Kegiatan Mahasiswa</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Kumpulan dokumentasi praktikum laboratorium, pengabdian masyarakat, seminar kesehatan, dan momen prestasi civitas akademika FIKES.
+        Kumpulan dokumentasi praktikum laboratorium, pengabdian masyarakat, seminar nasional, dan momen prestasi civitas akademika UIS.
       </p>
     </div>
 
@@ -99,9 +99,9 @@
             <a href="{{ route('homepage.galeri.detail', $item->slug ?? $item->id) }}" class="text-decoration-none d-block">
               <div class="galeri-item-card">
                 @if(!empty($item->url))
-                  <img src="{{ asset('storage/' . $item->url) }}" alt="{{ $item->judul ?? 'Dokumentasi FIKES' }}" class="galeri-img-wrap">
+                  <img src="{{ asset('storage/' . $item->url) }}" alt="{{ $item->judul ?? 'Dokumentasi UIS' }}" class="galeri-img-wrap">
                 @else
-                  <div class="d-flex align-items-center justify-content-center text-white" style="height: 220px; background: linear-gradient(135deg, #823ca2 0%, #190a24 100%);">
+                  <div class="d-flex align-items-center justify-content-center text-white" style="height: 220px; background: #032e12;">
                     <i class="bi bi-camera-fill fs-1 text-white-50"></i>
                   </div>
                 @endif
@@ -111,7 +111,7 @@
                     @if(!empty($item->deskripsi))
                       <small class="text-muted d-block" style="font-size: 13px; line-height: 1.5; color: #64748b !important;">{!! Str::limit(strip_tags($item->deskripsi), 90) !!}</small>
                     @endif
-                    <div class="mt-2 text-primary fw-bold small d-flex align-items-center gap-1" style="font-size: 12.5px; color: var(--fikes-purple) !important;">
+                    <div class="mt-2 text-primary fw-bold small d-flex align-items-center gap-1" style="font-size: 12.5px; color: var(--uis-purple) !important;">
                       <span>Lihat Detail</span>
                       <i class="bi bi-arrow-right"></i>
                     </div>

@@ -43,8 +43,8 @@
                         <h6 class="fw-bold text-primary mb-3"><i class="bi bi-building me-2"></i>1. Profil Fakultas</h6>
                         
                         <div class="mb-3">
-                            <label for="judul_profil" class="form-label fw-semibold">Judul Profil Fakultas</label>
-                            <input type="text" id="judul_profil" name="judul_profil" class="form-control @error('judul_profil') is-invalid @enderror" value="{{ old('judul_profil') }}" placeholder="Contoh: Dedikasi Mencetak Pemimpin di Bidang Kesehatan">
+                            <label for="judul_profil" class="form-label fw-semibold">Judul Profil Universitas</label>
+                            <input type="text" id="judul_profil" name="judul_profil" class="form-control @error('judul_profil') is-invalid @enderror" value="{{ old('judul_profil') }}" placeholder="Contoh: Kampusnya Profesional Muda — Universitas Ibnu Sina">
                             @error('judul_profil')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

@@ -71,7 +71,7 @@
                                class="form-control @error('link') is-invalid @enderror"
                                value="{{ old('link', $layanan->link) }}"
                                placeholder="Contoh: https://kesmas.uis.ac.id atau https://...">
-                        <div class="form-text">Jika diisi, klik pada menu dropdown Program Studi di navbar akan langsung membuka tautan ini. Jika dikosongkan, akan membuka halaman detail prodi di website FIKES.</div>
+                        <div class="form-text">Jika diisi, klik pada menu dropdown Program Studi di navbar akan langsung membuka tautan ini. Jika dikosongkan, akan membuka halaman detail prodi di website UIS.</div>
                         @error('link')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

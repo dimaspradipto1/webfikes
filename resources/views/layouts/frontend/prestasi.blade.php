@@ -1,14 +1,14 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Prestasi Mahasiswa — Fakultas Ilmu Kesehatan Universitas Ibnu Sina')
-@section('meta_description', 'Daftar capaian prestasi, kejuaraan, dan penghargaan mahasiswa Fakultas Ilmu Kesehatan (FIKES) UIS di tingkat regional, nasional, dan internasional.')
+@section('title', 'Prestasi Mahasiswa — Universitas Ibnu Sina')
+@section('meta_description', 'Daftar capaian prestasi, kejuaraan, dan penghargaan mahasiswa Universitas Ibnu Sina (UIS) UIS di tingkat regional, nasional, dan internasional.')
 
 @push('styles')
 <style>
   .prestasi-hero {
     background: var(--obsidian-dark);
     padding: 70px 0 50px;
-    border-bottom: 2px solid var(--fikes-purple);
+    border-bottom: 2px solid var(--uis-purple);
   }
   .prestasi-card-portal {
     background: var(--white);
@@ -23,14 +23,14 @@
   }
   .prestasi-card-portal:hover {
     transform: translateY(-6px);
-    box-shadow: 0 20px 35px -10px rgba(130, 60, 162, 0.2);
-    border-color: rgba(130, 60, 162, 0.35);
+    box-shadow: 0 20px 35px -10px rgba(4, 107, 38, 0.2);
+    border-color: rgba(4, 107, 38, 0.35);
   }
   .prestasi-thumb-wrap {
     width: 100%;
     height: 240px;
     position: relative;
-    background: #190a24;
+    background: #032e12;
     overflow: hidden;
   }
   .prestasi-thumb {
@@ -59,7 +59,7 @@
     bottom: 12px;
     right: 12px;
     background: #e5a823;
-    color: #190a24;
+    color: #032e12;
     padding: 4px 10px;
     font-size: 11px;
     font-weight: 800;
@@ -82,9 +82,9 @@
     white-space: nowrap;
   }
   .cat-pill-item:hover, .cat-pill-item.active {
-    background: var(--fikes-purple, #823ca2) !important;
+    background: var(--uis-purple, #046B26) !important;
     color: #ffffff !important;
-    border-color: var(--fikes-purple, #823ca2);
+    border-color: var(--uis-purple, #046B26);
   }
 
   /* Custom Pagination */
@@ -102,15 +102,15 @@
     transition: all 0.2s ease;
   }
   .page-item.active .page-link {
-    background-color: var(--fikes-purple, #823ca2) !important;
-    border-color: var(--fikes-purple, #823ca2) !important;
+    background-color: var(--uis-purple, #046B26) !important;
+    border-color: var(--uis-purple, #046B26) !important;
     color: #ffffff !important;
-    box-shadow: 0 4px 12px rgba(130, 60, 162, 0.35);
+    box-shadow: 0 4px 12px rgba(4, 107, 38, 0.35);
   }
   .page-item .page-link:hover {
-    background-color: #f3e8f8;
-    color: var(--fikes-purple, #823ca2);
-    border-color: var(--fikes-purple, #823ca2);
+    background-color: #eaf6ee;
+    color: var(--uis-purple, #046B26);
+    border-color: var(--uis-purple, #046B26);
   }
 </style>
 @endpush
@@ -119,12 +119,12 @@
 <!-- Header Banner -->
 <div class="prestasi-hero text-white">
   <div class="container text-center">
-    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: rgba(229, 168, 35, 0.2); color: #ffd166; border: 1px solid rgba(229, 168, 35, 0.4);">
+    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: rgba(229, 168, 35, 0.2); color: #FED802; border: 1px solid rgba(229, 168, 35, 0.4);">
       <i class="bi bi-trophy-fill me-1"></i> Hall of Fame & Prestasi
     </div>
-    <h1 class="fw-bold mb-3" style="font-size: 38px;">Prestasi Mahasiswa FIKES UIS</h1>
+    <h1 class="fw-bold mb-3" style="font-size: 38px;">Prestasi Mahasiswa Universitas Ibnu Sina</h1>
     <p class="text-white-50 mx-auto" style="max-width: 650px; line-height: 1.7;">
-      Koleksi prestasi gemilang, medali kejuaraan, dan publikasi ilmiah sivitas akademika Fakultas Ilmu Kesehatan Universitas Ibnu Sina di tingkat regional, nasional, dan internasional.
+      Koleksi prestasi gemilang, medali kejuaraan, dan publikasi ilmiah sivitas akademika Universitas Ibnu Sina di tingkat regional, nasional, dan internasional.
     </p>
   </div>
 </div>
@@ -152,7 +152,7 @@
             <input type="hidden" name="tingkat" value="{{ $selectedTingkat }}">
           @endif
           <input type="text" name="q" value="{{ $search ?? '' }}" class="form-control form-control-sm rounded-pill px-3" placeholder="Cari nama / kejuaraan..." style="max-width: 240px;">
-          <button type="submit" class="btn btn-sm btn-primary rounded-pill px-3" style="background: #823ca2; border-color: #823ca2;">
+          <button type="submit" class="btn btn-sm btn-primary rounded-pill px-3" style="background: #046B26; border-color: #046B26;">
             <i class="bi bi-search"></i>
           </button>
         </form>
@@ -193,9 +193,9 @@
                 @if(!empty($prestasi->foto))
                   <img src="{{ asset('storage/' . $prestasi->foto) }}" alt="{{ $prestasi->judul_prestasi }}" class="prestasi-thumb">
                 @else
-                  <div class="d-flex align-items-center justify-content-center h-100 text-white flex-column gap-2" style="background: linear-gradient(135deg, #823ca2 0%, #4a1563 100%);">
-                    <i class="bi bi-trophy-fill" style="font-size: 44px; color: #ffd166;"></i>
-                    <span class="small fw-semibold text-white-50">FIKES UIS Achievement</span>
+                  <div class="d-flex align-items-center justify-content-center h-100 text-white flex-column gap-2" style="background: #046B26;">
+                    <i class="bi bi-trophy-fill" style="font-size: 44px; color: #FED802;"></i>
+                    <span class="small fw-semibold text-white-50">Universitas Ibnu Sina Achievement</span>
                   </div>
                 @endif
                 <span class="prestasi-tingkat-badge badge {{ $tingkatBadge }}">
@@ -217,7 +217,7 @@
                   </h4>
 
                   <div class="d-flex align-items-center gap-2 mb-3 mt-3">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white flex-shrink-0" style="width: 32px; height: 32px; background: #823ca2; font-size: 13px;">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white flex-shrink-0" style="width: 32px; height: 32px; background: #046B26; font-size: 13px;">
                       <i class="bi bi-person-fill"></i>
                     </div>
                     <div>
@@ -243,7 +243,7 @@
                 </div>
 
                 <div class="pt-3 border-top">
-                  <a href="{{ route('homepage.prestasi.detail', $prestasi->slug ?? $prestasi->id) }}" class="fw-bold text-decoration-none d-flex align-items-center justify-content-between" style="color: var(--fikes-purple); font-size: 13.5px;">
+                  <a href="{{ route('homepage.prestasi.detail', $prestasi->slug ?? $prestasi->id) }}" class="fw-bold text-decoration-none d-flex align-items-center justify-content-between" style="color: var(--uis-purple); font-size: 13.5px;">
                     <span>Lihat Selengkapnya</span>
                     <i class="bi bi-arrow-right"></i>
                   </a>
@@ -264,7 +264,7 @@
       <div class="p-5 text-center bg-white rounded-4 shadow-sm">
         <i class="bi bi-trophy fs-1 text-muted mb-3 d-block"></i>
         <h4 class="fw-bold text-dark">Belum Ada Data Prestasi</h4>
-        <p class="text-muted small">Data prestasi mahasiswa FIKES UIS akan segera diperbarui di sini.</p>
+        <p class="text-muted small">Data prestasi mahasiswa Universitas Ibnu Sina akan segera diperbarui di sini.</p>
         <a href="{{ route('homepage.prestasi') }}" class="btn btn-sm btn-outline-secondary rounded-pill px-4 mt-2">
           Lihat Semua Prestasi
         </a>

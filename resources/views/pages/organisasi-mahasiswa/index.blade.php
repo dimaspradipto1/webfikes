@@ -31,7 +31,7 @@
 <div class="card shadow-sm mb-4">
     <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2 py-3">
         <h5 class="mb-0 fw-semibold text-dark">
-            <i class="bi bi-people-fill me-2 text-primary"></i>Daftar Lembaga & Organisasi Mahasiswa FIKES
+            <i class="bi bi-people-fill me-2 text-primary"></i>Daftar Lembaga & Organisasi Mahasiswa UIS
         </h5>
         <a href="{{ route('organisasi-mahasiswa.create') }}" class="btn btn-primary btn-sm">
             <i class="bi bi-plus-circle me-1"></i> Tambah Organisasi

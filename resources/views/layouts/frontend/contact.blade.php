@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Hubungi Kami — Fakultas Ilmu Kesehatan (FIKES)')
-@section('meta_description', 'Hubungi Fakultas Ilmu Kesehatan (FIKES) untuk informasi program studi, layanan akademik, praktikum laboratorium, dan penerimaan mahasiswa baru.')
-@section('meta_keywords', 'kontak fikes, alamat fakultas ilmu kesehatan, nomor wa fikes, lokasi kampus fikes')
+@section('title', 'Hubungi Kami — Universitas Ibnu Sina (UIS)')
+@section('meta_description', 'Hubungi Universitas Ibnu Sina (UIS) untuk informasi program studi, layanan akademik, praktikum laboratorium, dan penerimaan mahasiswa baru.')
+@section('meta_keywords', 'kontak uis, alamat universitas ibnu sina, nomor wa uis, lokasi kampus uis')
 
 @push('styles')
 <style>
@@ -10,7 +10,7 @@
     position: relative;
     background: var(--obsidian-dark);
     padding: 70px 0 50px;
-    border-bottom: 2px solid var(--fikes-purple);
+    border-bottom: 2px solid var(--uis-purple);
   }
   .contact-hero-title {
     font-size: 38px;
@@ -20,7 +20,7 @@
   }
   .contact-hero-title em {
     font-style: normal;
-    color: var(--fikes-orange);
+    color: var(--uis-orange);
   }
   .contact-card-box {
     background: var(--white);
@@ -40,8 +40,8 @@
   .contact-card-icon {
     width: 56px;
     height: 56px;
-    background: var(--fikes-purple-light);
-    color: var(--fikes-purple);
+    background: var(--uis-purple-light);
+    color: var(--uis-purple);
     border-radius: 16px;
     display: flex;
     align-items: center;
@@ -96,12 +96,12 @@
   <div class="container">
     <div class="contact-hero-content" data-aos="fade-up" data-aos-duration="800">
       <h1 class="contact-hero-title">
-        Hubungi <em>FIKES</em>
+        Hubungi <em>UIS</em>
       </h1>
       <div class="breadcrumb-custom">
         <a href="{{ route('homepage') }}" class="text-white-50"><i class="bi bi-house-fill me-1"></i>Beranda</a>
         <span class="mx-2 text-white-50">/</span>
-        <span style="color: var(--fikes-orange); font-weight: 600;">Kontak</span>
+        <span style="color: var(--uis-orange); font-weight: 600;">Kontak</span>
       </div>
     </div>
   </div>
@@ -119,7 +119,7 @@
           <div class="contact-card-icon"><i class="bi bi-geo-alt-fill"></i></div>
           <h4 class="contact-card-title">Alamat Kampus</h4>
           <p class="contact-card-text">
-            {{ $contact->alamat ?? 'Gedung Fakultas Ilmu Kesehatan (FIKES), Kampus Terpadu' }}
+            {{ $contact->alamat ?? 'Gedung Universitas Ibnu Sina (UIS), Kampus Terpadu' }}
           </p>
         </div>
       </div>
@@ -129,8 +129,8 @@
           <div class="contact-card-icon"><i class="bi bi-envelope-open-fill"></i></div>
           <h4 class="contact-card-title">Email Resmi</h4>
           <p class="contact-card-text">
-            <a href="mailto:{{ $contact->email ?? 'info@fikes.ac.id' }}" class="text-decoration-none fw-bold" style="color: var(--fikes-purple);">
-              {{ $contact->email ?? 'info@fikes.ac.id' }}
+            <a href="mailto:{{ $contact->email ?? 'humas@uis.ac.id' }}" class="text-decoration-none fw-bold" style="color: var(--uis-purple);">
+              {{ $contact->email ?? 'humas@uis.ac.id' }}
             </a>
           </p>
         </div>
@@ -170,7 +170,7 @@
         <div class="p-3 bg-light border-bottom fw-bold text-dark d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center">
             <i class="bi bi-pin-map-fill text-danger me-2 fs-5"></i>
-            <span>Lokasi Kampus FIKES di Google Maps</span>
+            <span>Lokasi Kampus UIS di Google Maps</span>
           </div>
           @if(!empty($contact->latitude) && !empty($contact->longitude))
             <a href="https://www.google.com/maps/search/?api=1&query={{ $contact->latitude }},{{ $contact->longitude }}" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-semibold" style="font-size: 12.5px;">

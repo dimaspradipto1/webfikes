@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Visi & Misi — Fakultas Ilmu Kesehatan (FIKES UIS)')
-@section('meta_description', 'Visi, Misi, dan Nilai-nilai Budaya Civitas Akademika Fakultas Ilmu Kesehatan Universitas Ibnu Sina.')
-@section('meta_keywords', 'visi misi fikes, visi fikes uis, misi fakultas ilmu kesehatan batam')
+@section('title', 'Visi & Misi — Universitas Ibnu Sina (UIS)')
+@section('meta_description', 'Visi, Misi, dan Nilai-nilai Budaya Civitas Akademika Universitas Ibnu Sina.')
+@section('meta_keywords', 'visi misi uis, visi universitas ibnu sina, misi universitas ibnu sina batam')
 
 @push('styles')
 <style>
@@ -10,7 +10,7 @@
     position: relative;
     background: var(--obsidian-dark);
     padding: 70px 0 50px;
-    border-bottom: 2px solid var(--fikes-purple);
+    border-bottom: 2px solid var(--uis-purple);
   }
   .visimisi-hero-title {
     font-size: 38px;
@@ -20,7 +20,7 @@
   }
   .visimisi-hero-title em {
     font-style: normal;
-    color: var(--fikes-orange);
+    color: var(--uis-orange);
   }
   .breadcrumb-custom {
     display: inline-flex;
@@ -30,8 +30,8 @@
     color: rgba(255, 255, 255, 0.6);
   }
   .breadcrumb-custom a { color: rgba(255, 255, 255, 0.85); text-decoration: none; }
-  .breadcrumb-custom a:hover { color: var(--fikes-orange); }
-  .breadcrumb-custom .active { color: var(--fikes-orange); font-weight: 600; }
+  .breadcrumb-custom a:hover { color: var(--uis-orange); }
+  .breadcrumb-custom .active { color: var(--uis-orange); font-weight: 600; }
 </style>
 @endpush
 
@@ -64,9 +64,9 @@
   <div class="container py-3">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label">Arah & Landasan Institusi</div>
-      <h2 class="section-title">Visi & Misi <em>FIKES UIS</em></h2>
+      <h2 class="section-title">Visi & Misi <em>Universitas Ibnu Sina</em></h2>
       <p class="section-desc mx-auto" style="max-width: 650px;">
-        Komitmen fundamental yang mengarahkan setiap langkah Tri Dharma Perguruan Tinggi di Fakultas Ilmu Kesehatan.
+        Komitmen fundamental yang mengarahkan setiap langkah Tri Dharma Perguruan Tinggi di Universitas Ibnu Sina.
       </p>
     </div>
 
@@ -88,7 +88,7 @@
             @endforeach
           @else
             <p class="value-desc" style="font-size:15.5px; line-height:1.9; text-align: justify;">
-              {{ $about->visi ?? 'Menjadi Fakultas Ilmu Kesehatan yang unggul, terkemuka, dan berdaya saing internasional dalam penyelenggaraan Tri Dharma Perguruan Tinggi di bidang ilmu kesehatan yang berlandaskan nilai integritas dan kemanusiaan.' }}
+              {{ $about->visi ?? 'Menjadi Universitas Unggul, Bermartabat, Bereputasi Nasional dan Internasional serta berjiwa Entrepreneur berbasis Imtaq tahun 2029.' }}
             </p>
           @endif
         </div>
@@ -105,10 +105,11 @@
             $misiPoin = ($visiMisis['misi'] ?? collect())->pluck('isi');
             if ($misiPoin->isEmpty()) {
               $misiPoin = collect([
-                'Menyelenggarakan pendidikan akademik dan profesi kesehatan yang berkualitas dan berstandar nasional/internasional.',
-                'Mengembangkan penelitian terapan dan inovatif di bidang ilmu kesehatan yang bermanfaat bagi masyarakat.',
-                'Melaksanakan pengabdian kepada masyarakat secara berkelanjutan demi meningkatkan derajat kesehatan publik.',
-                'Menjalin kerjasama strategis dengan institusi pelayanan kesehatan, rumah sakit, dan mitra global.',
+                'Menyelenggarakan pendidikan dan pengajaran berkualitas berbasis teknologi informasi dan komunikasi untuk menghasilkan lulusan yang kompeten, profesional, berjiwa entrepreneur, dan berakhlak mulia.',
+                'Melaksanakan penelitian yang inovatif, terapan, dan bernilai guna bagi pengembangan ilmu pengetahuan, teknologi, dan industri di tingkat nasional maupun internasional.',
+                'Melaksanakan pengabdian kepada masyarakat berbasis riset yang berdaya guna dalam meningkatkan kesejahteraan masyarakat dan kemajuan bangsa.',
+                'Menjalin kerja sama yang strategis, luas, dan berkelanjutan dengan institusi dalam dan luar negeri, dunia usaha, dan industri (DUDI).',
+                'Mengembangkan tata kelola universitas yang transparan, akuntabel, kredibel, dan berintegritas berlandaskan nilai-nilai iman dan taqwa (Imtaq).',
               ]);
             }
           @endphp

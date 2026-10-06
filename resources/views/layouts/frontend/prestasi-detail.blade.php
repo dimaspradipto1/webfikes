@@ -1,6 +1,6 @@
 @extends('layouts.frontend.template')
 
-@section('title', $prestasi->judul_prestasi . ' — FIKES UIS')
+@section('title', $prestasi->judul_prestasi . ' — Universitas Ibnu Sina')
 @section('meta_description', Str::limit(strip_tags($prestasi->deskripsi ?? $prestasi->judul_prestasi), 160))
 
 @push('styles')
@@ -8,7 +8,7 @@
   .detail-hero {
     background: var(--obsidian-dark);
     padding: 60px 0 40px;
-    border-bottom: 2px solid var(--fikes-purple);
+    border-bottom: 2px solid var(--uis-purple);
   }
   .prestasi-img-main {
     width: 100%;
@@ -118,9 +118,9 @@
             <img src="{{ asset('storage/' . $prestasi->foto) }}" alt="{{ $prestasi->judul_prestasi }}" class="prestasi-img-main img-fluid">
           </div>
         @else
-          <div class="p-5 rounded-4 text-center text-white mb-4" style="background: linear-gradient(135deg, #823ca2 0%, #4a1563 100%);">
-            <i class="bi bi-trophy-fill" style="font-size: 64px; color: #ffd166;"></i>
-            <h4 class="fw-bold mt-2 mb-0">Prestasi Sivitas FIKES UIS</h4>
+          <div class="p-5 rounded-4 text-center text-white mb-4" style="background: #046B26;">
+            <i class="bi bi-trophy-fill" style="font-size: 64px; color: #FED802;"></i>
+            <h4 class="fw-bold mt-2 mb-0">Prestasi Sivitas Universitas Ibnu Sina</h4>
           </div>
         @endif
 
@@ -137,7 +137,7 @@
             </div>
           @else
             <p class="text-muted">
-              Selamat dan sukses atas keberhasilan mahasiswa Fakultas Ilmu Kesehatan Universitas Ibnu Sina dalam meraih <strong>{{ $prestasi->peringkat ?? 'Prestasi Membanggakan' }}</strong> pada ajang <strong>{{ $prestasi->judul_prestasi }}</strong>.
+              Selamat dan sukses atas keberhasilan mahasiswa Universitas Ibnu Sina dalam meraih <strong>{{ $prestasi->peringkat ?? 'Prestasi Membanggakan' }}</strong> pada ajang <strong>{{ $prestasi->judul_prestasi }}</strong>.
             </p>
           @endif
 
@@ -148,7 +148,7 @@
 
             @php
               $shareUrl  = urlencode(url()->current());
-              $shareText = urlencode("Prestasi Mahasiswa FIKES UIS: " . $prestasi->judul_prestasi);
+              $shareText = urlencode("Prestasi Mahasiswa Universitas Ibnu Sina: " . $prestasi->judul_prestasi);
             @endphp
             <div class="d-flex align-items-center gap-2">
               <span class="text-muted small fw-semibold">Bagikan:</span>
@@ -229,7 +229,7 @@
                   @if(!empty($other->foto))
                     <img src="{{ asset('storage/' . $other->foto) }}" alt="{{ $other->judul_prestasi }}" class="other-prestasi-img">
                   @else
-                    <div class="other-prestasi-img d-flex align-items-center justify-content-center text-white" style="background: #823ca2;">
+                    <div class="other-prestasi-img d-flex align-items-center justify-content-center text-white" style="background: #046B26;">
                       <i class="bi bi-trophy-fill text-warning"></i>
                     </div>
                   @endif
@@ -246,7 +246,7 @@
             </div>
 
             <div class="mt-3 text-center pt-2 border-top">
-              <a href="{{ route('homepage.prestasi') }}" class="btn btn-sm btn-outline-primary w-100 rounded-pill" style="color: #823ca2; border-color: #823ca2;">
+              <a href="{{ route('homepage.prestasi') }}" class="btn btn-sm btn-outline-primary w-100 rounded-pill" style="color: #046B26; border-color: #046B26;">
                 Lihat Semua Prestasi
               </a>
             </div>

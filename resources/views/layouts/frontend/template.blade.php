@@ -13,28 +13,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@yield('title', 'FIKES — Fakultas Ilmu Kesehatan | Unggul & Berintegritas')</title>
-  <meta name="description" content="@yield('meta_description', 'Portal Resmi Fakultas Ilmu Kesehatan (FIKES) — Pusat Pendidikan Kesehatan, Layanan Laboratorium, Informasi Akademik, dan Riset Terpadu.')">
-  <meta name="keywords" content="@yield('meta_keywords', 'fikes, fakultas ilmu kesehatan, keperawatan, kebidanan, farmasi, gizi, kesehatan masyarakat, laboratorium kesehatan, pendidikan tinggi')">
-  <meta name="author" content="@yield('meta_author', 'Fakultas Ilmu Kesehatan')">
+  <title>@yield('title', 'Universitas Ibnu Sina (UIS) | Unggul, Profesional & Berintegritas')</title>
+  <meta name="description" content="@yield('meta_description', 'Portal Resmi Universitas Ibnu Sina (UIS) — Menyelenggarakan Pendidikan Tinggi Berkualitas, Riset Terapan, dan Pengabdian Masyarakat Berdaya Saing Global.')">
+  <meta name="keywords" content="@yield('meta_keywords', 'universitas ibnu sina, uis, pmb uis, pendaftaran uis, kampus batam, perguruan tinggi batam, pendidikan tinggi, riset terpadu')">
+  <meta name="author" content="@yield('meta_author', 'Universitas Ibnu Sina')">
 
   <!-- Open Graph / Facebook / WhatsApp / Telegram Preview -->
   <meta property="og:type" content="@yield('og_type', 'website')">
   <meta property="og:url" content="{{ url()->current() }}">
-  <meta property="og:title" content="@yield('og_title', View::yieldContent('title', 'FIKES — Fakultas Ilmu Kesehatan | Unggul & Berintegritas'))">
-  <meta property="og:description" content="@yield('og_description', View::yieldContent('meta_description', 'Portal Resmi Fakultas Ilmu Kesehatan (FIKES) — Pusat Pendidikan Kesehatan, Layanan Laboratorium, Informasi Akademik, dan Riset Terpadu.'))">
+  <meta property="og:title" content="@yield('og_title', View::yieldContent('title', 'Universitas Ibnu Sina (UIS) | Unggul, Profesional & Berintegritas'))">
+  <meta property="og:description" content="@yield('og_description', View::yieldContent('meta_description', 'Portal Resmi Universitas Ibnu Sina (UIS) — Menyelenggarakan Pendidikan Tinggi Berkualitas, Riset Terapan, dan Pengabdian Masyarakat Berdaya Saing Global.'))">
   <meta property="og:image" content="@yield('og_image', asset('assets/img/logouis.png'))">
   <meta property="og:image:secure_url" content="@yield('og_image', asset('assets/img/logouis.png'))">
   <meta property="og:image:width" content="@yield('og_image_width', '1200')">
   <meta property="og:image:height" content="@yield('og_image_height', '630')">
   <meta property="og:image:type" content="@yield('og_image_type', 'image/jpeg')">
-  <meta property="og:site_name" content="FIKES — Fakultas Ilmu Kesehatan">
+  <meta property="og:site_name" content="Universitas Ibnu Sina">
 
   <!-- Twitter / X Cards -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="{{ url()->current() }}">
-  <meta name="twitter:title" content="@yield('og_title', View::yieldContent('title', 'FIKES — Fakultas Ilmu Kesehatan | Unggul & Berintegritas'))">
-  <meta name="twitter:description" content="@yield('og_description', View::yieldContent('meta_description', 'Portal Resmi Fakultas Ilmu Kesehatan (FIKES) — Pusat Pendidikan Kesehatan, Layanan Laboratorium, Informasi Akademik, dan Riset Terpadu.'))">
+  <meta name="twitter:title" content="@yield('og_title', View::yieldContent('title', 'Universitas Ibnu Sina (UIS) | Unggul, Profesional & Berintegritas'))">
+  <meta name="twitter:description" content="@yield('og_description', View::yieldContent('meta_description', 'Portal Resmi Universitas Ibnu Sina (UIS) — Menyelenggarakan Pendidikan Tinggi Berkualitas, Riset Terapan, dan Pengabdian Masyarakat Berdaya Saing Global.'))">
   <meta name="twitter:image" content="@yield('og_image', asset('assets/img/logouis.png'))">
 
   <!-- Favicon -->
@@ -60,47 +60,63 @@
 
   <style>
     /* ═══════════════════════════════════════════════
-       DESIGN TOKENS — FIKES (SOLID PALETTE, ZERO GRADIENTS)
-       Purple: #823ca2 | Orange: #ff9c00
+       DESIGN TOKENS — UNIVERSITAS IBNU SINA (UIS)
+       SOLID PALETTE — ZERO GRADIENTS
+       Hijau UIS: #046B26 | Kuning UIS: #FED802
     ═══════════════════════════════════════════════ */
     :root {
-      --fikes-purple:       #823ca2;
-      --fikes-purple-dark:  #682985;
-      --fikes-purple-deep:  #47175d;
-      --fikes-purple-light: #f5eefb;
-      --fikes-purple-subtle:#ecdcf7;
+      --uis-green:          #046B26;
+      --uis-green-dark:     #03521d;
+      --uis-green-deep:     #023814;
+      --uis-green-light:    #eaf6ee;
+      --uis-green-subtle:   #d4edd9;
       
-      --fikes-orange:       #ff9c00;
-      --fikes-orange-hover: #e88d00;
-      --fikes-orange-dark:  #cc7c00;
-      --fikes-orange-light: #fff8eb;
-      --fikes-orange-subtle:#ffeecd;
+      --uis-yellow:         #FED802;
+      --uis-yellow-hover:   #e5c302;
+      --uis-yellow-dark:    #cfae00;
+      --uis-yellow-light:   #fefde8;
+      --uis-yellow-subtle:  #fef9c3;
       
-      --obsidian-dark:      #190a24;
-      --obsidian-card:      #241033;
+      /* Backward compatibility alias */
+      --uis-purple:       var(--uis-green);
+      --uis-purple-dark:  var(--uis-green-dark);
+      --uis-purple-deep:  var(--uis-green-deep);
+      --uis-purple-light: var(--uis-green-light);
+      --uis-purple-subtle:var(--uis-green-subtle);
+      
+      --uis-orange:       var(--uis-yellow);
+      --uis-orange-hover: var(--uis-yellow-hover);
+      --uis-orange-dark:  var(--uis-yellow-dark);
+      --uis-orange-light: var(--uis-yellow-light);
+      --uis-orange-subtle:var(--uis-yellow-subtle);
+      
+      --obsidian-dark:      #032e12;
+      --obsidian-card:      #053d18;
       
       --white:              #ffffff;
-      --page-bg:            #fcfaff;
-      --surface-light:      #f6effb;
-      --surface-muted:      #f0e5f7;
+      --page-bg:            #f8fcf9;
+      --surface-light:      #edf6f0;
+      --surface-muted:      #e2ede5;
       
-      --text-main:          #190a24;
-      --text-muted:         #655672;
-      --text-light:         #9586a2;
+      --text-main:          #0e2417;
+      --text-muted:         #475b4e;
+      --text-light:         #768a7d;
       
-      --border-light:       #ebdff2;
-      --border-purple:      #cfb5db;
-      --border-orange:      #ffd79a;
+      --border-light:       #d8e8dc;
+      --border-purple:      #86c299;
+      --border-orange:      #FED802;
       
-      --shadow-sm:          0 4px 12px rgba(130, 60, 162, 0.08);
-      --shadow-md:          0 8px 24px rgba(130, 60, 162, 0.12);
-      --shadow-lg:          0 16px 36px rgba(130, 60, 162, 0.15);
-      --shadow-orange:      0 8px 24px rgba(255, 156, 0, 0.28);
-      --shadow-purple:      0 8px 24px rgba(130, 60, 162, 0.28);
+      --shadow-sm:          0 4px 12px rgba(4, 107, 38, 0.08);
+      --shadow-md:          0 8px 24px rgba(4, 107, 38, 0.12);
+      --shadow-lg:          0 16px 36px rgba(4, 107, 38, 0.16);
+      --shadow-orange:      0 6px 18px rgba(254, 216, 2, 0.25);
+      --shadow-purple:      0 6px 18px rgba(4, 107, 38, 0.25);
     }
 
-    .text-terracotta, .text-fikes-purple { color: var(--fikes-purple) !important; }
-    .text-fikes-orange { color: var(--fikes-orange) !important; }
+    .text-terracotta, .text-uis-purple, .text-uis-green { color: var(--uis-green) !important; }
+    .text-uis-orange, .text-uis-yellow { color: var(--uis-yellow) !important; }
+    .bg-uis-green, .bg-uis-purple { background-color: var(--uis-green) !important; }
+    .bg-uis-yellow, .bg-uis-orange { background-color: var(--uis-yellow) !important; }
 
     /* ═══════════════════════════════════════════════
        MOBILE SMOOTH PERFORMANCE & INSTANT CONTENT RENDER
@@ -119,8 +135,8 @@
         text-align: center !important;
       }
     }
-    .bg-fikes-purple { background-color: var(--fikes-purple) !important; }
-    .bg-fikes-orange { background-color: var(--fikes-orange) !important; }
+    .bg-uis-purple { background-color: var(--uis-purple) !important; }
+    .bg-uis-orange { background-color: var(--uis-orange) !important; }
 
     html { 
       scroll-behavior: smooth;
@@ -146,7 +162,7 @@
       border-radius: 50% !important;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
       border: 1px solid var(--border-light) !important;
-      color: var(--fikes-purple) !important;
+      color: var(--uis-purple) !important;
       transition: all 0.25s ease !important;
     }
     .swiper-button-prev::after,
@@ -156,7 +172,7 @@
     }
     .swiper-button-prev:hover,
     .swiper-button-next:hover {
-      background: var(--fikes-purple) !important;
+      background: var(--uis-purple) !important;
       color: #ffffff !important;
       transform: scale(1.08);
     }
@@ -176,28 +192,28 @@
     a { text-decoration: none; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
 
     /* ═══════════════════════════════════════════════
-       TOPBAR — Solid Obsidian Theme
+       TOPBAR — Solid UIS Dark Green Theme
     ═══════════════════════════════════════════════ */
     .topbar-main {
       background: var(--obsidian-dark);
       padding: 9px 0;
-      border-bottom: 1px solid rgba(130, 60, 162, 0.3);
+      border-bottom: 1px solid rgba(4, 107, 38, 0.4);
       font-size: 13px;
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.85);
     }
 
     .topbar-main a {
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255, 255, 255, 0.9);
     }
     .topbar-main a:hover {
-      color: var(--fikes-orange);
+      color: var(--uis-yellow);
     }
 
     .topbar-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: var(--fikes-purple);
+      background: var(--uis-green);
       color: var(--white);
       font-size: 11px;
       font-weight: 700;
@@ -205,19 +221,20 @@
       padding: 3px 10px;
       border-radius: 50px;
       text-transform: uppercase;
+      border: 1px solid rgba(254, 216, 2, 0.3);
     }
 
     /* ═══════════════════════════════════════════════
-       NAVBAR — Solid FIKES Purple (#823ca2) with Orange (#ff9c00) Font & Dropdowns
+       NAVBAR — Solid UIS Green (#046B26) with Yellow (#FED802) Accents & Dropdowns
     ═══════════════════════════════════════════════ */
     .navbar-main {
-      background: var(--fikes-purple, #823ca2);
+      background: var(--uis-green, #046B26);
       padding: 10px 0;
       position: sticky;
       top: 0;
       z-index: 1050;
-      border-bottom: 2.5px solid var(--fikes-orange, #ff9c00);
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.16);
+      border-bottom: 3px solid var(--uis-yellow, #FED802);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
     }
 
     .navbar-brand-custom {
@@ -250,8 +267,8 @@
     .nav-link-custom:hover,
     .nav-link-custom.active,
     .show > .nav-link-custom {
-      color: var(--fikes-orange, #ff9c00) !important;
-      background: rgba(255, 255, 255, 0.15);
+      color: var(--uis-yellow, #FED802) !important;
+      background: rgba(254, 216, 2, 0.18);
     }
 
     /* Hide bootstrap default dropdown caret (prevent double arrow) */
@@ -263,9 +280,9 @@
     .dropdown-menu-custom {
       background: var(--white);
       border: 1px solid var(--border-light);
-      border-top: 3px solid var(--fikes-purple);
+      border-top: 3px solid var(--uis-green);
       border-radius: 14px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
       padding: 10px 8px;
       min-width: 220px;
       animation: fadeInDown 0.2s ease forwards;
@@ -316,18 +333,18 @@
     }
 
     .dropdown-item-custom:hover {
-      background: var(--fikes-purple-light);
-      color: var(--fikes-purple);
+      background: var(--uis-green-light);
+      color: var(--uis-green);
       padding-left: 18px;
     }
 
     .dropdown-item-custom i {
       font-size: 14px;
-      color: var(--fikes-orange);
+      color: var(--uis-green);
     }
 
     .navbar-toggler {
-      border: 1.5px solid var(--fikes-orange, #ff9c00) !important;
+      border: 1.5px solid var(--uis-yellow, #FED802) !important;
       padding: 6px 10px;
       border-radius: 8px;
       outline: none !important;
@@ -341,8 +358,8 @@
     ═══════════════════════════════════════════════ */
     @media (max-width: 1199.98px) {
       .navbar-collapse {
-        background: #1e092b !important;
-        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        background: #032e12 !important;
+        border: 1px solid rgba(254, 216, 2, 0.25) !important;
         border-radius: 20px !important;
         padding: 20px 16px !important;
         margin-top: 14px !important;
@@ -364,8 +381,8 @@
         padding: 11px 16px !important;
         font-size: 14px !important;
         font-weight: 700 !important;
-        color: rgba(255, 255, 255, 0.9) !important;
-        background: rgba(255, 255, 255, 0.04) !important;
+        color: rgba(255, 255, 255, 0.95) !important;
+        background: rgba(255, 255, 255, 0.05) !important;
         border-radius: 12px !important;
         margin-bottom: 2px !important;
         transition: all 0.2s ease !important;
@@ -374,13 +391,13 @@
       .nav-link-custom:hover,
       .nav-link-custom.active,
       .show > .nav-link-custom {
-        background: var(--fikes-purple, #823ca2) !important;
-        color: #ffffff !important;
+        background: var(--uis-green, #046B26) !important;
+        color: var(--uis-yellow, #FED802) !important;
       }
       .dropdown-menu-custom {
         background: rgba(0, 0, 0, 0.3) !important;
         border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        border-left: 3px solid var(--fikes-orange) !important;
+        border-left: 3px solid var(--uis-yellow) !important;
         border-radius: 12px !important;
         margin: 6px 0 10px 10px !important;
         padding: 8px !important;
@@ -388,15 +405,15 @@
         animation: none !important;
       }
       .dropdown-item-custom {
-        color: rgba(255, 255, 255, 0.85) !important;
+        color: rgba(255, 255, 255, 0.9) !important;
         padding: 9px 14px !important;
         font-size: 13px !important;
         border-radius: 8px !important;
       }
       .dropdown-item-custom:hover,
       .dropdown-item-custom.active {
-        background: rgba(255, 156, 0, 0.18) !important;
-        color: var(--fikes-orange, #ff9c00) !important;
+        background: rgba(254, 216, 2, 0.2) !important;
+        color: var(--uis-yellow, #FED802) !important;
       }
       .navbar-main .d-flex.align-items-center.gap-2.mt-3.mt-xl-0 {
         display: grid !important;
@@ -419,29 +436,29 @@
 
     /* CTA Buttons */
     .btn-pmb-nav {
-      background: var(--fikes-orange, #ff9c00);
-      color: #190a24 !important;
+      background: var(--uis-yellow, #FED802);
+      color: #046B26 !important;
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 800;
       font-size: 12.5px;
       padding: 8px 15px;
       border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(255, 156, 0, 0.35);
+      box-shadow: 0 4px 12px rgba(254, 216, 2, 0.35);
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      border: 1px solid var(--fikes-orange, #ff9c00);
+      border: 1px solid var(--uis-yellow, #FED802);
       transition: all 0.25s ease;
       white-space: nowrap;
     }
     .btn-pmb-nav:hover {
-      background: #e68c00;
-      color: #ffffff !important;
+      background: #e5c302;
+      color: #023814 !important;
       transform: translateY(-2px);
     }
 
     .btn-portal-nav {
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.14);
       color: #ffffff !important;
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
@@ -457,16 +474,16 @@
     }
     .btn-portal-nav:hover {
       background: rgba(255, 255, 255, 0.25);
-      border-color: var(--fikes-orange);
-      color: var(--fikes-orange) !important;
+      border-color: var(--uis-yellow);
+      color: var(--uis-yellow) !important;
       transform: translateY(-2px);
     }
 
     .btn-primary-hero {
-      background: var(--fikes-orange);
-      color: var(--white);
+      background: var(--uis-yellow);
+      color: #046B26;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 15px;
       padding: 14px 28px;
       border-radius: 12px;
@@ -477,27 +494,27 @@
       gap: 9px;
     }
     .btn-primary-hero:hover {
-      background: var(--fikes-orange-hover);
-      color: var(--white);
+      background: var(--uis-yellow-hover);
+      color: #023814;
       transform: translateY(-2px);
     }
 
     .btn-outline-hero {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.12);
       color: var(--white);
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
       font-size: 15px;
       padding: 14px 28px;
       border-radius: 12px;
-      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
       display: inline-flex;
       align-items: center;
       gap: 9px;
     }
     .btn-outline-hero:hover {
       background: var(--white);
-      color: var(--obsidian-dark);
+      color: var(--uis-green);
       border-color: var(--white);
       transform: translateY(-2px);
     }
@@ -514,8 +531,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--fikes-purple-light);
-      color: var(--fikes-purple);
+      background: var(--uis-green-light);
+      color: var(--uis-green);
       border: 1px solid var(--border-purple);
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 12px;
@@ -536,7 +553,7 @@
     }
     .section-title em {
       font-style: normal;
-      color: var(--fikes-purple);
+      color: var(--uis-green);
     }
 
     .section-desc {
@@ -549,7 +566,7 @@
     .divider-line {
       width: 60px;
       height: 4px;
-      background: var(--fikes-orange);
+      background: var(--uis-yellow);
       border-radius: 2px;
       margin-bottom: 24px;
     }
@@ -576,15 +593,15 @@
     .feature-icon-wrap, .value-icon-wrap {
       width: 64px;
       height: 64px;
-      background: var(--fikes-purple-light);
+      background: var(--uis-green-light);
       border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--fikes-purple);
+      color: var(--uis-green);
       font-size: 28px;
       margin-bottom: 24px;
-      border: 1px solid var(--fikes-purple-subtle);
+      border: 1px solid var(--uis-green-subtle);
     }
 
     .feature-title, .value-title {
@@ -599,16 +616,16 @@
       line-height: 1.65;
     }
 
-    /* Counter Section */
+    /* Counter Section — Solid Dark Emerald */
     .counter-section {
-      background: var(--obsidian-dark);
+      background: #023814;
       padding: 60px 0;
       color: var(--white);
-      border-top: 1px solid rgba(130, 60, 162, 0.3);
-      border-bottom: 1px solid rgba(130, 60, 162, 0.3);
+      border-top: 1px solid rgba(254, 216, 2, 0.2);
+      border-bottom: 1px solid rgba(254, 216, 2, 0.2);
     }
     .counter-item { text-align: center; }
-    .counter-icon { font-size: 32px; color: var(--fikes-orange); margin-bottom: 10px; }
+    .counter-icon { font-size: 32px; color: var(--uis-yellow); margin-bottom: 10px; }
     .counter-num {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 42px;
@@ -617,8 +634,8 @@
       line-height: 1;
       margin-bottom: 6px;
     }
-    .counter-num sup { font-size: 22px; color: var(--fikes-orange); }
-    .counter-label { font-size: 14px; color: rgba(255, 255, 255, 0.7); font-weight: 500; }
+    .counter-num sup { font-size: 22px; color: var(--uis-yellow); }
+    .counter-label { font-size: 14px; color: rgba(255, 255, 255, 0.75); font-weight: 500; }
 
     /* Testimonials */
     .testi-card {
@@ -638,12 +655,12 @@
       box-shadow: var(--shadow-lg);
       border-color: var(--border-purple);
     }
-    .testi-stars { color: var(--fikes-orange); font-size: 16px; margin-bottom: 14px; }
+    .testi-stars { color: #e5c302; font-size: 16px; margin-bottom: 14px; }
     .testi-text { font-size: 14.5px; color: var(--text-main); line-height: 1.7; margin-bottom: 24px; font-style: italic; }
     .testi-author { display: flex; align-items: center; gap: 14px; }
     .testi-avatar {
       width: 46px; height: 46px;
-      background: var(--fikes-purple);
+      background: var(--uis-green);
       color: var(--white);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
@@ -673,11 +690,11 @@
       color: var(--text-main);
       user-select: none;
     }
-    .faq-header:hover { color: var(--fikes-purple); }
+    .faq-header:hover { color: var(--uis-green); }
     .faq-icon {
       width: 28px; height: 28px;
-      background: var(--fikes-purple-light);
-      color: var(--fikes-purple);
+      background: var(--uis-green-light);
+      color: var(--uis-green);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-size: 13px;
@@ -691,17 +708,16 @@
       display: none;
     }
     .faq-item.open .faq-body { display: block; }
-    .faq-item.open .faq-icon { transform: rotate(180deg); background: var(--fikes-purple); color: var(--white); }
+    .faq-item.open .faq-icon { transform: rotate(180deg); background: var(--uis-green); color: var(--white); }
 
     /* ═══════════════════════════════════════════════
-       FOOTER — Purple #823ca2
+       FOOTER — Solid Deep UIS Green (#023814) with Yellow (#FED802) Accent
     ═══════════════════════════════════════════════ */
     .footer-main {
-      background: #823ca2;
-      background: linear-gradient(180deg, #823ca2 0%, #591e73 100%);
-      color: rgba(255, 255, 255, 0.88);
+      background: #023814;
+      color: rgba(255, 255, 255, 0.9);
       padding: 70px 0 28px;
-      border-top: 3.5px solid var(--fikes-orange, #ff9c00);
+      border-top: 4px solid var(--uis-yellow, #FED802);
     }
     .footer-logo {
       display: flex;
@@ -724,23 +740,23 @@
       font-size: 14px;
       line-height: 1.75;
       margin-bottom: 24px;
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255, 255, 255, 0.88);
     }
     .footer-social { display: flex; gap: 10px; }
     .footer-social a {
       width: 38px; height: 38px;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.12);
       border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
       color: var(--white);
       font-size: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       transition: all 0.25s ease;
     }
     .footer-social a:hover {
-      background: var(--fikes-orange, #ff9c00);
-      border-color: var(--fikes-orange, #ff9c00);
-      color: #190a24;
+      background: var(--uis-yellow, #FED802);
+      border-color: var(--uis-yellow, #FED802);
+      color: #046B26;
       transform: translateY(-2px);
     }
     .footer-heading {
@@ -761,7 +777,7 @@
       gap: 6px;
       transition: all 0.2s ease;
     }
-    .footer-links a:hover { color: #ffd026; transform: translateX(3px); }
+    .footer-links a:hover { color: #FED802; transform: translateX(3px); }
     .footer-contact-item {
       display: flex;
       align-items: flex-start;
@@ -770,7 +786,7 @@
       font-size: 13.5px;
     }
     .footer-contact-icon {
-      color: #ffd026;
+      color: #FED802;
       font-size: 18px;
       flex-shrink: 0;
       margin-top: 2px;
@@ -778,13 +794,12 @@
     .footer-contact-text strong { display: block; color: var(--white); margin-bottom: 2px; }
     .footer-divider {
       height: 1px;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.18);
       margin: 48px 0 24px;
     }
-    .footer-bottom { font-size: 13px; color: rgba(255, 255, 255, 0.8); }
+    .footer-bottom { font-size: 13px; color: rgba(255, 255, 255, 0.82); }
     .footer-bottom a { color: rgba(255, 255, 255, 0.85); }
-    .footer-bottom a:hover { color: #ffd026; }
-    .footer-bottom a:hover { color: var(--white); }
+    .footer-bottom a:hover { color: #FED802; }
 
     /* Back to Top */
     .back-to-top {
@@ -793,7 +808,7 @@
       right: 24px;
       width: 44px;
       height: 44px;
-      background: var(--fikes-purple);
+      background: var(--uis-green);
       color: var(--white);
       border-radius: 12px;
       display: flex;
@@ -805,12 +820,13 @@
       visibility: hidden;
       transition: all 0.3s ease;
       box-shadow: var(--shadow-purple);
+      border: 1px solid var(--uis-yellow);
     }
     .back-to-top.show { opacity: 1; visibility: visible; }
     .back-to-top:hover {
-      background: var(--fikes-purple-dark);
+      background: var(--uis-green-dark);
       transform: translateY(-3px);
-      color: var(--white);
+      color: var(--uis-yellow);
     }
 
     /* Check list */
@@ -824,8 +840,8 @@
     }
     .check-icon {
       width: 22px; height: 22px;
-      background: var(--fikes-purple-light);
-      color: var(--fikes-purple);
+      background: var(--uis-green-light);
+      color: var(--uis-green);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-size: 12px;

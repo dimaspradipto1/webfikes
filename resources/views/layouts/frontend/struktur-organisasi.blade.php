@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Struktur Organisasi — Fakultas Ilmu Kesehatan (FIKES)')
-@section('meta_description', 'Susunan pimpinan dekanat, ketua program studi, dan tata kelola organisasi Fakultas Ilmu Kesehatan (FIKES).')
-@section('meta_keywords', 'struktur organisasi fikes, dekanat fikes, ketua program studi, manajemen fikes')
+@section('title', 'Struktur Organisasi — Universitas Ibnu Sina (UIS)')
+@section('meta_description', 'Susunan pimpinan pimpinan, ketua program studi, dan tata kelola organisasi Universitas Ibnu Sina (UIS).')
+@section('meta_keywords', 'struktur organisasi uis, pimpinan uis, ketua program studi, manajemen uis')
 
 @push('styles')
 <style>
@@ -10,7 +10,7 @@
     position: relative;
     background: var(--obsidian-dark);
     padding: 70px 0 50px;
-    border-bottom: 2px solid var(--fikes-purple);
+    border-bottom: 2px solid var(--uis-purple);
   }
   .about-hero-title {
     font-size: 38px;
@@ -20,7 +20,7 @@
   }
   .about-hero-title em {
     font-style: normal;
-    color: var(--fikes-orange);
+    color: var(--uis-orange);
   }
   .struktur-card {
     background: var(--white);
@@ -46,7 +46,7 @@
       <div class="breadcrumb-custom">
         <a href="{{ route('homepage') }}" class="text-white-50"><i class="bi bi-house-fill me-1"></i>Beranda</a>
         <span class="mx-2 text-white-50">/</span>
-        <span style="color: var(--fikes-orange); font-weight: 600;">Struktur Organisasi</span>
+        <span style="color: var(--uis-orange); font-weight: 600;">Struktur Organisasi</span>
       </div>
     </div>
   </div>
@@ -59,10 +59,10 @@
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label mx-auto">Tata Kelola Fakultas</div>
-      <h2 class="section-title">Bagan <em>Kepemimpinan & Organisasi</em> FIKES</h2>
+      <h2 class="section-title">Bagan <em>Kepemimpinan & Organisasi</em> UIS</h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Tata kelola yang profesional, transparan, dan akuntabel di bawah pimpinan Dekanat serta Ketua Program Studi Fakultas Ilmu Kesehatan.
+        Tata kelola yang profesional, transparan, dan akuntabel di bawah pimpinan Pimpinan serta Ketua Program Studi Universitas Ibnu Sina.
       </p>
     </div>
 
@@ -72,7 +72,7 @@
           @if(isset($struktur) && $struktur->url_struktur)
             <img
               src="{{ asset($struktur->url_struktur) }}"
-              alt="Struktur Organisasi FIKES"
+              alt="Struktur Organisasi UIS"
               class="img-fluid rounded-4"
               style="max-width: 900px; width: 100%;"
             >

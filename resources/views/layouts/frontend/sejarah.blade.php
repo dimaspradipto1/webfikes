@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Sejarah & Milestone — Fakultas Ilmu Kesehatan (FIKES UIS)')
-@section('meta_description', 'Sejarah perjalanan, pendirian, dan tonggak sejarah milestone Fakultas Ilmu Kesehatan Universitas Ibnu Sina.')
-@section('meta_keywords', 'sejarah fikes, milestone fikes uis, pendirian fakultas ilmu kesehatan')
+@section('title', 'Sejarah & Milestone — Universitas Ibnu Sina (UIS)')
+@section('meta_description', 'Sejarah perjalanan, pendirian, dan tonggak sejarah milestone Universitas Ibnu Sina.')
+@section('meta_keywords', 'sejarah uis, milestone universitas ibnu sina, pendirian universitas ibnu sina')
 
 @push('styles')
 <style>
@@ -10,7 +10,7 @@
     position: relative;
     background: var(--obsidian-dark);
     padding: 70px 0 50px;
-    border-bottom: 2px solid var(--fikes-purple);
+    border-bottom: 2px solid var(--uis-purple);
   }
   .sejarah-hero-title {
     font-size: 38px;
@@ -20,7 +20,7 @@
   }
   .sejarah-hero-title em {
     font-style: normal;
-    color: var(--fikes-orange);
+    color: var(--uis-orange);
   }
   .breadcrumb-custom {
     display: inline-flex;
@@ -30,8 +30,8 @@
     color: rgba(255, 255, 255, 0.6);
   }
   .breadcrumb-custom a { color: rgba(255, 255, 255, 0.85); text-decoration: none; }
-  .breadcrumb-custom a:hover { color: var(--fikes-orange); }
-  .breadcrumb-custom .active { color: var(--fikes-orange); font-weight: 600; }
+  .breadcrumb-custom a:hover { color: var(--uis-orange); }
+  .breadcrumb-custom .active { color: var(--uis-orange); font-weight: 600; }
 
   /* Timeline Styles */
   .timeline-container {
@@ -45,7 +45,7 @@
     bottom: 0;
     left: 50%;
     width: 3px;
-    background: linear-gradient(180deg, var(--fikes-purple) 0%, var(--fikes-orange) 100%);
+    background: #046B26;
     transform: translateX(-50%);
     border-radius: 4px;
   }
@@ -71,14 +71,14 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: var(--fikes-purple);
+    background: var(--uis-purple);
     color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
     font-size: 13px;
-    box-shadow: 0 0 0 5px rgba(130, 60, 162, 0.2);
+    box-shadow: 0 0 0 5px rgba(4, 107, 38, 0.2);
     z-index: 2;
   }
   @media (max-width: 768px) {
@@ -123,8 +123,8 @@
 
   .timeline-year-tag {
     display: inline-block;
-    background: var(--fikes-purple-light);
-    color: var(--fikes-purple);
+    background: var(--uis-purple-light);
+    color: var(--uis-purple);
     font-weight: 800;
     font-size: 13px;
     padding: 4px 14px;
@@ -163,32 +163,32 @@
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-lg-6" data-aos="fade-right">
-        <div class="section-label">Jejak Langkah Fakultas</div>
-        <h2 class="section-title">Perjalanan Berkelanjutan <em>Membangun Insan Kesehatan</em></h2>
+        <div class="section-label">Jejak Langkah Universitas</div>
+        <h2 class="section-title">Perjalanan Berkelanjutan <em>Mencetak Profesional Muda</em></h2>
         <div class="divider-line"></div>
         <div class="section-desc" style="text-align: justify; line-height: 1.8; color: #4a5568;">
           <p>
-            Fakultas Ilmu Kesehatan (FIKES) Universitas Ibnu Sina didirikan sebagai bentuk komitmen nyata dalam menjawab tingginya kebutuhan tenaga kesehatan profesional di wilayah Kepulauan Riau dan kawasan industri nasional.
+            Universitas Ibnu Sina (UIS) Batam berdiri dari tonggak sejarah panjang pengabdian Yayasan Pendidikan Ibnu Sina Batam (YAPISNA) sejak tahun 1993 dalam memajukan kualitas sumber daya manusia di kawasan strategis perbatasan Kepulauan Riau.
           </p>
           <p>
-            Berawal dari program studi unggulan di bidang Keselamatan dan Kesehatan Kerja (K3) serta Kesehatan Lingkungan, FIKES UIS terus bertransformasi menjadi pusat rujukan pendidikan kesehatan terdepan dengan fasilitas laboratorium modern dan kemitraan rumah sakit terpercaya.
+            Melalui penggabungan tiga institusi pendidikan tinggi terkemuka—Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES)—lembaga ini resmi bertransformasi menjadi <strong>Universitas Ibnu Sina</strong> berdasarkan Surat Keputusan Menristekdikti RI. Kini UIS menaungi Fakultas Teknik, Fakultas Ekonomi & Bisnis (FEB), Fakultas Ilmu Kesehatan (FIKES), dan Program Pascasarjana.
           </p>
         </div>
       </div>
 
       <div class="col-lg-6" data-aos="fade-left">
-        <div class="p-4 rounded-4 text-white" style="background: linear-gradient(135deg, #190a24 0%, #47175d 100%); border: 2px solid var(--fikes-purple);">
+        <div class="p-4 rounded-4 text-white" style="background: #032e12; border: 2px solid var(--uis-green);">
           <div class="d-flex align-items-center gap-3 mb-3">
-            <div class="p-3 rounded-3" style="background: var(--fikes-orange); color: #190a24;">
-              <i class="bi bi-hourglass-split fs-2"></i>
+            <div class="p-3 rounded-3" style="background: var(--uis-yellow); color: #032e12;">
+              <i class="bi bi-mortarboard-fill fs-2"></i>
             </div>
             <div>
-              <h5 class="fw-bold text-white mb-0">Komitmen Tri Dharma Perguruan Tinggi</h5>
-              <div class="text-white-50 small">Pendidikan, Penelitian & Pengabdian Masyarakat</div>
+              <h5 class="fw-bold text-white mb-0">Kampusnya Profesional Muda</h5>
+              <div class="text-white-50 small">Pendidikan, Riset Terapan & Kemitraan Industri Global</div>
             </div>
           </div>
           <p class="text-white-50 small mb-0" style="line-height: 1.8;">
-            Setiap fase perkembangan fakultas diarahkan untuk memperkuat mutu pembelajaran, meningkatkan riset berbasis masalah kesehatan tropis & industri perbatasan, serta mewujudkan lulusan yang beretika luhur.
+            Setiap fase perkembangan Universitas Ibnu Sina diarahkan untuk memperkuat mutu pembelajaran berbasis teknologi informasi, riset terapan bernilai guna bagi industri manufaktur dan maritim, serta membentuk lulusan berjiwa entrepreneur berbasis Imtaq.
           </p>
         </div>
       </div>
@@ -206,7 +206,7 @@
       <h2 class="section-title">Milestone & <em>Tonggak Sejarah</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Catatan pencapaian dan peristiwa penting dalam perjalanan Fakultas Ilmu Kesehatan UIS.
+        Catatan pencapaian dan peristiwa penting dalam perjalanan Universitas Ibnu Sina UIS.
       </p>
     </div>
 

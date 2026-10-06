@@ -96,10 +96,25 @@
                             </label>
                             <select id="prodi" name="prodi" class="form-select @error('prodi') is-invalid @enderror">
                                 <option value="">-- Pilih Program Studi --</option>
-                                <option value="S2 Kesehatan Masyarakat" {{ old('prodi') === 'S2 Kesehatan Masyarakat' ? 'selected' : '' }}>S2 Kesehatan Masyarakat</option>
-                                <option value="S1 Kesehatan dan Keselamatan Kerja" {{ old('prodi') === 'S1 Kesehatan dan Keselamatan Kerja' ? 'selected' : '' }}>S1 Kesehatan dan Keselamatan Kerja</option>
-                                <option value="S1 Kesehatan Lingkungan" {{ old('prodi') === 'S1 Kesehatan Lingkungan' ? 'selected' : '' }}>S1 Kesehatan Lingkungan</option>
-                                <option value="Fakultas Ilmu Kesehatan" {{ old('prodi') === 'Fakultas Ilmu Kesehatan' ? 'selected' : '' }}>Fakultas Ilmu Kesehatan</option>
+                                <optgroup label="Fakultas Teknik">
+                                    <option value="S1 Teknik Informatika" {{ old('prodi') === 'S1 Teknik Informatika' ? 'selected' : '' }}>S1 Teknik Informatika</option>
+                                    <option value="S1 Sistem Informasi" {{ old('prodi') === 'S1 Sistem Informasi' ? 'selected' : '' }}>S1 Sistem Informasi</option>
+                                    <option value="S1 Teknik Industri" {{ old('prodi') === 'S1 Teknik Industri' ? 'selected' : '' }}>S1 Teknik Industri</option>
+                                    <option value="S1 Teknik Logistik" {{ old('prodi') === 'S1 Teknik Logistik' ? 'selected' : '' }}>S1 Teknik Logistik</option>
+                                    <option value="S1 Teknik Perkapalan" {{ old('prodi') === 'S1 Teknik Perkapalan' ? 'selected' : '' }}>S1 Teknik Perkapalan</option>
+                                </optgroup>
+                                <optgroup label="Fakultas Ekonomi dan Bisnis">
+                                    <option value="S2 Magister Manajemen" {{ old('prodi') === 'S2 Magister Manajemen' ? 'selected' : '' }}>S2 Magister Manajemen</option>
+                                    <option value="S1 Manajemen" {{ old('prodi') === 'S1 Manajemen' ? 'selected' : '' }}>S1 Manajemen</option>
+                                    <option value="S1 Akuntansi" {{ old('prodi') === 'S1 Akuntansi' ? 'selected' : '' }}>S1 Akuntansi</option>
+                                    <option value="D3 Akuntansi" {{ old('prodi') === 'D3 Akuntansi' ? 'selected' : '' }}>D3 Akuntansi</option>
+                                </optgroup>
+                                <optgroup label="Fakultas Ilmu Kesehatan">
+                                    <option value="S2 Kesehatan Masyarakat" {{ old('prodi') === 'S2 Kesehatan Masyarakat' ? 'selected' : '' }}>S2 Kesehatan Masyarakat</option>
+                                    <option value="S1 Kesehatan dan Keselamatan Kerja" {{ old('prodi') === 'S1 Kesehatan dan Keselamatan Kerja' ? 'selected' : '' }}>S1 Kesehatan dan Keselamatan Kerja (K3)</option>
+                                    <option value="S1 Kesehatan Lingkungan" {{ old('prodi') === 'S1 Kesehatan Lingkungan' ? 'selected' : '' }}>S1 Kesehatan Lingkungan</option>
+                                </optgroup>
+                                <option value="Universitas Ibnu Sina" {{ old('prodi') === 'Universitas Ibnu Sina' ? 'selected' : '' }}>Universitas Ibnu Sina (Umum)</option>
                             </select>
                             @error('prodi')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -239,7 +254,7 @@
                             <a href="{{ route('prestasi.index') }}" class="btn btn-outline-secondary px-4">
                                 <i class="bi bi-arrow-left me-1"></i> Kembali
                             </a>
-                            <button type="submit" class="btn btn-primary px-4 fw-bold" style="background: #823ca2; border-color: #823ca2;">
+                            <button type="submit" class="btn btn-primary px-4 fw-bold" style="background: #046B26; border-color: #046B26;">
                                 <i class="bi bi-save me-1"></i> Simpan Data Prestasi
                             </button>
                         </div>

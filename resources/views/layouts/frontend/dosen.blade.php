@@ -1,19 +1,19 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($pageTitle ?? 'Dosen Pengajar') . ' — Fakultas Ilmu Kesehatan Universitas Ibnu Sina')
-@section('meta_description', 'Direktori staf pengajar dan dosen tetap program studi Fakultas Ilmu Kesehatan (FIKES) Universitas Ibnu Sina.')
+@section('title', ($pageTitle ?? 'Dosen Pengajar') . ' — Universitas Ibnu Sina')
+@section('meta_description', 'Direktori staf pengajar dan dosen tetap program studi Universitas Ibnu Sina (UIS) Universitas Ibnu Sina.')
 
 @push('styles')
 <style>
   .dosen-hero {
     background: var(--obsidian-dark);
     padding: 65px 0 45px;
-    border-bottom: 2px solid var(--fikes-purple);
+    border-bottom: 2px solid var(--uis-purple);
   }
   .prodi-header-pill {
     background: #ffc107;
-    background: linear-gradient(135deg, #ffd026 0%, #e5a823 100%);
-    color: #190a24;
+    background: #FED802;
+    color: #032e12;
     font-size: 24px;
     font-weight: 800;
     padding: 18px 30px;
@@ -53,10 +53,10 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.03);
   }
   .prodi-tab-btn:hover, .prodi-tab-btn.active {
-    background: var(--fikes-purple, #823ca2) !important;
+    background: var(--uis-purple, #046B26) !important;
     color: #ffffff !important;
-    border-color: var(--fikes-purple, #823ca2);
-    box-shadow: 0 6px 18px rgba(130, 60, 162, 0.3);
+    border-color: var(--uis-purple, #046B26);
+    box-shadow: 0 6px 18px rgba(4, 107, 38, 0.3);
   }
 
   .dosen-table-card {
@@ -73,7 +73,7 @@
   }
   .table-dosen thead th {
     background: #501224;
-    background: linear-gradient(135deg, #4a1563 0%, #190a24 100%);
+    background: #032e12;
     color: #ffffff;
     font-weight: 700;
     font-size: 13.5px;
@@ -94,7 +94,7 @@
   }
   .btn-lihat-dosen {
     background: #501224;
-    background: linear-gradient(135deg, #60237c 0%, #190a24 100%);
+    background: #032e12;
     color: #ffffff !important;
     border: none;
     font-size: 12px;
@@ -115,20 +115,20 @@
 
   /* Custom Pagination Theme */
   .pagination .page-item.active .page-link {
-    background-color: var(--fikes-purple, #823ca2) !important;
-    border-color: var(--fikes-purple, #823ca2) !important;
+    background-color: var(--uis-purple, #046B26) !important;
+    border-color: var(--uis-purple, #046B26) !important;
     color: #ffffff !important;
     font-weight: 700;
   }
   .pagination .page-link {
-    color: var(--fikes-purple, #823ca2);
+    color: var(--uis-purple, #046B26);
     border-radius: 8px;
     margin: 0 3px;
     border: 1px solid var(--border-light);
   }
   .pagination .page-link:hover {
-    background-color: #f3e8f8;
-    color: #60237c;
+    background-color: #eaf6ee;
+    color: #03521d;
   }
 </style>
 @endpush
@@ -144,12 +144,12 @@
         <li class="breadcrumb-item active text-white" aria-current="page">Dosen</li>
       </ol>
     </nav>
-    <div class="badge px-3 py-2 rounded-pill mb-2" style="background: rgba(229, 168, 35, 0.2); color: #ffd166; border: 1px solid rgba(229, 168, 35, 0.4);">
-      <i class="bi bi-person-workspace me-1"></i> Tenaga Pendidik & Dosen FIKES UIS
+    <div class="badge px-3 py-2 rounded-pill mb-2" style="background: rgba(229, 168, 35, 0.2); color: #FED802; border: 1px solid rgba(229, 168, 35, 0.4);">
+      <i class="bi bi-person-workspace me-1"></i> Tenaga Pendidik & Dosen Universitas Ibnu Sina
     </div>
     <h1 class="fw-bold mb-2" style="font-size: 34px;">Daftar Dosen Pengajar</h1>
     <p class="text-white-50 mx-auto mb-0" style="max-width: 620px; font-size: 14.5px;">
-      Tenaga pendidik berkualifikasi magister, doktor, dan profesor berdedikasi tinggi dalam membimbing mahasiswa di bidang ilmu kesehatan.
+      Tenaga pendidik berkualifikasi magister, doktor, dan profesor berdedikasi tinggi dalam membimbing mahasiswa di bidang teknik, ekonomi bisnis, kesehatan, dan pascasarjana.
     </p>
   </div>
 </div>
@@ -171,7 +171,7 @@
     <!-- Header Banner Kuning / Gold Sesuai Permintaan -->
     <div class="mb-4" data-aos="fade-up">
       <div class="prodi-header-pill">
-        Dosen {{ $currentProdi->judul ?? 'Program Studi Fakultas Ilmu Kesehatan' }}
+        Dosen {{ $currentProdi->judul ?? 'Program Studi Universitas Ibnu Sina' }}
       </div>
     </div>
 
@@ -181,7 +181,7 @@
         {{-- Info Total --}}
         <div class="col-lg-5 col-md-6">
           <div class="d-flex align-items-center gap-3">
-            <div class="rounded-circle p-2 d-flex align-items-center justify-content-center text-white" style="width: 44px; height: 44px; background: #823ca2;">
+            <div class="rounded-circle p-2 d-flex align-items-center justify-content-center text-white" style="width: 44px; height: 44px; background: #046B26;">
               <i class="bi bi-people-fill fs-5"></i>
             </div>
             <div>
@@ -202,7 +202,7 @@
                 <i class="bi bi-search"></i>
               </span>
               <input type="text" name="q" class="form-control border-start-0 ps-0" placeholder="Cari nama dosen, NIDN, NUPTK, jabatan..." value="{{ $search ?? '' }}">
-              <button class="btn text-white px-3 fw-semibold" type="submit" style="background: #823ca2;">
+              <button class="btn text-white px-3 fw-semibold" type="submit" style="background: #046B26;">
                 Cari
               </button>
             </div>
@@ -243,9 +243,9 @@
                   <td>
                     <div class="d-flex align-items-center gap-3">
                       @if(!empty($dosen->foto))
-                        <img src="{{ asset('storage/' . $dosen->foto) }}" alt="{{ $dosen->nama_dosen }}" class="rounded-circle shadow-sm" style="width: 42px; height: 42px; object-fit: cover; border: 2px solid var(--fikes-purple-light);">
+                        <img src="{{ asset('storage/' . $dosen->foto) }}" alt="{{ $dosen->nama_dosen }}" class="rounded-circle shadow-sm" style="width: 42px; height: 42px; object-fit: cover; border: 2px solid var(--uis-purple-light);">
                       @else
-                        <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold shadow-sm" style="width: 42px; height: 42px; background: linear-gradient(135deg, #823ca2 0%, #190a24 100%); font-size: 14px;">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold shadow-sm" style="width: 42px; height: 42px; background: #032e12; font-size: 14px;">
                           {{ strtoupper(substr($dosen->nama_dosen, 0, 1)) }}
                         </div>
                       @endif
@@ -257,7 +257,7 @@
                   </td>
                   <td class="text-center">
                     @if(!empty($dosen->jabatan_fungsional))
-                      <span class="badge" style="background:#823ca2; color:#fff; font-size:12px; font-weight:600; padding:6px 12px; border-radius:20px;">
+                      <span class="badge" style="background:#046B26; color:#fff; font-size:12px; font-weight:600; padding:6px 12px; border-radius:20px;">
                         {{ $dosen->jabatan_fungsional }}
                       </span>
                     @else
@@ -309,12 +309,12 @@
     @endif
 
     <!-- Info Bantuan Box -->
-    <div class="mt-5 p-4 rounded-4 text-white d-flex flex-wrap align-items-center justify-content-between gap-3 shadow-sm" style="background: linear-gradient(135deg, #190a24 0%, #60237c 100%); border: 1px solid rgba(255,255,255,0.2);" data-aos="fade-up">
+    <div class="mt-5 p-4 rounded-4 text-white d-flex flex-wrap align-items-center justify-content-between gap-3 shadow-sm" style="background: #032e12; border: 1px solid rgba(255,255,255,0.2);" data-aos="fade-up">
       <div>
-        <h5 class="fw-bold text-white mb-1"><i class="bi bi-mortarboard-fill me-2 text-warning"></i>Tertarik Menjadi Mahasiswa Bimbingan Dosen FIKES UIS?</h5>
-        <p class="text-white-50 small mb-0">Daftarkan diri Anda pada program sarjana & magister kesehatan melalui jalur PMB Online.</p>
+        <h5 class="fw-bold text-white mb-1"><i class="bi bi-mortarboard-fill me-2" style="color: #FED802;"></i>Tertarik Menjadi Mahasiswa Bimbingan Dosen Universitas Ibnu Sina?</h5>
+        <p class="text-white-50 small mb-0">Daftarkan diri Anda pada program sarjana & magister melalui jalur PMB Online Universitas Ibnu Sina Batam.</p>
       </div>
-      <a href="{{ route('homepage.kontak') }}" class="btn btn-warning rounded-pill px-4 fw-bold" style="color: #190a24;">
+      <a href="{{ route('homepage.kontak') }}" class="btn btn-warning rounded-pill px-4 fw-bold" style="color: #032e12;">
         <i class="bi bi-arrow-right-circle me-1"></i> Informasi PMB
       </a>
     </div>

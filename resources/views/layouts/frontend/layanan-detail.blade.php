@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', $layanan->judul . ' — Fakultas Ilmu Kesehatan (FIKES)')
+@section('title', $layanan->judul . ' — Universitas Ibnu Sina (UIS)')
 @section('meta_description', Str::limit($layanan->deskripsi, 160))
-@section('meta_keywords', 'fikes, ' . strtolower($layanan->judul) . ', fakultas ilmu kesehatan')
+@section('meta_keywords', 'uis, ' . strtolower($layanan->judul) . ', universitas ibnu sina')
 
 @push('styles')
 <style>
@@ -10,7 +10,7 @@
     position: relative;
     background: var(--obsidian-dark);
     padding: 70px 0 50px;
-    border-bottom: 2px solid var(--fikes-purple);
+    border-bottom: 2px solid var(--uis-purple);
   }
   .layanan-hero-title {
     font-size: 34px;
@@ -49,8 +49,8 @@
     transition: all 0.2s ease;
   }
   .ld-sidebar-link:hover, .ld-sidebar-link.active {
-    background: var(--fikes-purple-light);
-    color: var(--fikes-purple);
+    background: var(--uis-purple-light);
+    color: var(--uis-purple);
   }
   .ld-content-card {
     background: var(--white);
@@ -60,8 +60,8 @@
     box-shadow: var(--shadow-sm);
   }
   .ld-badge {
-    background: var(--fikes-orange-light);
-    color: var(--fikes-orange-dark);
+    background: var(--uis-orange-light);
+    color: var(--uis-orange-dark);
     border: 1px solid var(--border-orange);
     font-weight: 700;
     font-size: 12px;
@@ -92,7 +92,7 @@
         <span class="mx-2 text-white-50">/</span>
         <a href="{{ route('homepage.layanan') }}" class="text-white-50">Layanan & Fasilitas</a>
         <span class="mx-2 text-white-50">/</span>
-        <span style="color: var(--fikes-orange); font-weight:600;">Detail</span>
+        <span style="color: var(--uis-orange); font-weight:600;">Detail</span>
       </div>
     </div>
   </div>
@@ -109,7 +109,7 @@
       <div class="col-lg-4" data-aos="fade-right">
         <div class="ld-sidebar">
           <div class="ld-sidebar-title">
-            <i class="bi bi-grid me-2 text-primary" style="color:var(--fikes-purple) !important;"></i>Program & Fasilitas Lainnya
+            <i class="bi bi-grid me-2 text-primary" style="color:var(--uis-purple) !important;"></i>Program & Fasilitas Lainnya
           </div>
           <ul class="ld-sidebar-list">
             @foreach($layanans as $item)
@@ -150,7 +150,7 @@
                 @foreach($rincianItems as $item)
                   <div class="col-12">
                     <div class="p-3 rounded-3" style="background: var(--surface-light); border: 1px solid var(--border-light); display: flex; align-items: flex-start; gap: 12px;">
-                      <i class="bi bi-check2-circle fs-5" style="color: var(--fikes-purple); margin-top: -2px;"></i>
+                      <i class="bi bi-check2-circle fs-5" style="color: var(--uis-purple); margin-top: -2px;"></i>
                       <span class="fw-medium text-dark">{!! strip_tags($item) !!}</span>
                     </div>
                   </div>
@@ -161,10 +161,10 @@
 
           <div class="p-4 rounded-4 mt-5" style="background: var(--obsidian-dark); color: white;">
             <h5 class="fw-bold text-white mb-2">Tertarik dengan Program Ini?</h5>
-            <p class="text-white-50 small mb-3">Dapatkan informasi pendaftaran, kurikulum, dan jadwal seleksi dengan menghubungi tim layanan FIKES.</p>
+            <p class="text-white-50 small mb-3">Dapatkan informasi pendaftaran, kurikulum, dan jadwal seleksi dengan menghubungi tim layanan UIS.</p>
             <div class="d-flex flex-wrap gap-2">
               @if($layanan->link)
-                <a href="{{ $layanan->link }}" target="_blank" rel="noopener noreferrer" class="btn-primary-hero" style="font-size: 13.5px; padding: 10px 20px; background: linear-gradient(135deg, #10b981, #059669); border:none;">
+                <a href="{{ $layanan->link }}" target="_blank" rel="noopener noreferrer" class="btn-primary-hero" style="font-size: 13.5px; padding: 10px 20px; background: #046B26; color: #ffffff; border:none;">
                   <i class="bi bi-box-arrow-up-right"></i> Website Resmi Prodi
                 </a>
               @endif

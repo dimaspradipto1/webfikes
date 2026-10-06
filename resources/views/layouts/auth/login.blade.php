@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login — FIKES (Fakultas Ilmu Kesehatan)</title>
-  <meta name="description" content="Portal Login Resmi FIKES - Fakultas Ilmu Kesehatan">
+  <title>Login — UIS (Universitas Ibnu Sina)</title>
+  <meta name="description" content="Portal Login Resmi UIS - Universitas Ibnu Sina">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="{{ asset('assets/img/logouis.png') }}">
@@ -23,33 +23,33 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --fikes-purple:       #823ca2;
-      --fikes-purple-dark:  #682985;
-      --fikes-purple-deep:  #47175d;
-      --fikes-purple-light: #f5eefb;
-      --fikes-purple-subtle:#ecdcf7;
+      --uis-purple:       #046B26;
+      --uis-purple-dark:  #03521d;
+      --uis-purple-deep:  #023814;
+      --uis-purple-light: #eaf6ee;
+      --uis-purple-subtle:#d4edd9;
       
-      --fikes-orange:       #ff9c00;
-      --fikes-orange-hover: #e88d00;
-      --fikes-orange-dark:  #cc7c00;
-      --fikes-orange-light: #fff8eb;
-      --fikes-orange-subtle:#ffeecd;
+      --uis-orange:       #FED802;
+      --uis-orange-hover: #e5c302;
+      --uis-orange-dark:  #cfae00;
+      --uis-orange-light: #fefde8;
+      --uis-orange-subtle:#fef9c3;
       
-      --obsidian-dark:      #190a24;
-      --obsidian-card:      #241033;
+      --obsidian-dark:      #032e12;
+      --obsidian-card:      #053d18;
       
       --white:              #ffffff;
-      --page-bg:            #fcfaff;
-      --surface-light:      #f6effb;
-      --text-main:          #190a24;
+      --page-bg:            #f8fcf9;
+      --surface-light:      #edf6f0;
+      --text-main:          #032e12;
       --text-muted:         #655672;
       --text-light:         #9586a2;
-      --border-light:       #ebdff2;
+      --border-light:       #d8e8dc;
       
-      --shadow-sm:          0 4px 12px rgba(130, 60, 162, 0.08);
-      --shadow-md:          0 8px 24px rgba(130, 60, 162, 0.12);
-      --shadow-lg:          0 16px 36px rgba(130, 60, 162, 0.15);
-      --shadow-purple:      0 8px 24px rgba(130, 60, 162, 0.28);
+      --shadow-sm:          0 4px 12px rgba(4, 107, 38, 0.08);
+      --shadow-md:          0 8px 24px rgba(4, 107, 38, 0.12);
+      --shadow-lg:          0 16px 36px rgba(4, 107, 38, 0.15);
+      --shadow-purple:      0 8px 24px rgba(4, 107, 38, 0.28);
     }
 
     html, body { height: 100%; }
@@ -112,8 +112,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(130, 60, 162, 0.3);
-      border: 1px solid rgba(255, 156, 0, 0.4);
+      background: rgba(4, 107, 38, 0.3);
+      border: 1px solid rgba(254, 216, 2, 0.4);
       border-radius: 50px;
       padding: 6px 16px;
       margin-bottom: 24px;
@@ -123,7 +123,7 @@
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
-      color: var(--fikes-orange);
+      color: var(--uis-orange);
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
@@ -138,7 +138,7 @@
     }
     .brand-middle h1 em {
       font-style: normal;
-      color: var(--fikes-orange);
+      color: var(--uis-orange);
     }
 
     .brand-middle p {
@@ -166,7 +166,7 @@
       font-size: 12.5px;
       font-weight: 500;
     }
-    .f-chip i { color: var(--fikes-orange); }
+    .f-chip i { color: var(--uis-orange); }
 
     .stats-row {
       display: flex;
@@ -181,7 +181,7 @@
       color: var(--white);
       line-height: 1;
     }
-    .stat-num sup { font-size: 14px; color: var(--fikes-orange); vertical-align: super; }
+    .stat-num sup { font-size: 14px; color: var(--uis-orange); vertical-align: super; }
     .stat-txt {
       font-size: 11.5px;
       color: rgba(255, 255, 255, 0.5);
@@ -228,7 +228,7 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 17px;
       font-weight: 800;
-      color: var(--fikes-purple);
+      color: var(--uis-purple);
     }
 
     .form-heading { margin-bottom: 28px; }
@@ -304,9 +304,9 @@
     }
 
     .form-input:focus {
-      border-color: var(--fikes-purple);
+      border-color: var(--uis-purple);
       background: var(--white);
-      box-shadow: 0 0 0 3px rgba(130, 60, 162, 0.12);
+      box-shadow: 0 0 0 3px rgba(4, 107, 38, 0.12);
     }
 
     .field-err-msg {
@@ -340,7 +340,7 @@
     .remember-row input[type=checkbox] {
       width: 16px;
       height: 16px;
-      accent-color: var(--fikes-purple);
+      accent-color: var(--uis-purple);
       cursor: pointer;
     }
     .remember-row label {
@@ -352,7 +352,7 @@
     .btn-masuk {
       width: 100%;
       padding: 14px;
-      background: var(--fikes-purple);
+      background: var(--uis-purple);
       border: none;
       border-radius: 12px;
       color: var(--white);
@@ -368,7 +368,7 @@
       gap: 8px;
     }
     .btn-masuk:hover {
-      background: var(--fikes-purple-dark);
+      background: var(--uis-purple-dark);
       transform: translateY(-2px);
     }
 
@@ -377,7 +377,7 @@
       padding-top: 18px;
     }
     .form-footer a {
-      color: var(--fikes-purple);
+      color: var(--uis-purple);
       font-weight: 600;
     }
     .back-to-home-link {
@@ -411,7 +411,7 @@
   <div class="panel-left">
     <div class="panel-left-content">
       <div class="brand-top">
-        <img src="{{ asset('frontend/img/logofikes.png') }}" alt="Logo FIKES UIS" style="height: 52px; width: auto; object-fit: contain;">
+        <img src="{{ asset('frontend/img/logouis.png') }}" alt="Logo Universitas Ibnu Sina" style="height: 52px; width: auto; object-fit: contain;">
       </div>
 
       <div class="brand-middle">
@@ -419,10 +419,10 @@
           <span>Portal Resmi Akademik</span>
         </div>
 
-        <h1>Fakultas Ilmu Kesehatan<br><em>Unggul & Berintegritas</em></h1>
+        <h1>Universitas Ibnu Sina<br><em>Unggul & Berintegritas</em></h1>
 
         <p>
-          Sistem informasi terpadu pengelolaan akademik, publikasi berita, dokumentasi fasilitas, dan data informasi FIKES.
+          Sistem informasi terpadu pengelolaan akademik, publikasi berita, dokumentasi fasilitas, dan data informasi UIS.
         </p>
 
         <div class="faculty-chips">
@@ -440,8 +440,8 @@
     <div class="form-container">
       <div class="form-card">
         <div class="form-logo-sm">
-          <img src="{{ asset('frontend/img/logofikes.png') }}" alt="Logo FIKES" style="height: 38px; width: auto; object-fit: contain;">
-          <div class="txt">Portal FIKES</div>
+          <img src="{{ asset('frontend/img/logouis.png') }}" alt="Logo UIS" style="height: 38px; width: auto; object-fit: contain;">
+          <div class="txt">Portal UIS</div>
         </div>
 
         <div class="form-heading">
@@ -469,7 +469,7 @@
           <div class="field">
             <label class="field-label" for="email"><span>Email</span></label>
             <div class="input-wrap">
-              <input type="email" id="email" name="email" class="form-input {{ $errors->has('email') && !str_contains($errors->first('email'), 'salah') ? 'is-invalid' : '' }}" placeholder="admin@fikes.ac.id" value="{{ old('email') }}" required>
+              <input type="email" id="email" name="email" class="form-input {{ $errors->has('email') && !str_contains($errors->first('email'), 'salah') ? 'is-invalid' : '' }}" placeholder="admin@uis.ac.id" value="{{ old('email') }}" required>
               <i class="bi bi-envelope input-icon"></i>
             </div>
             @error('email')
@@ -498,12 +498,12 @@
         </form>
 
         <!-- Link Akses Formulir Testimoni Alumni (Tanpa Login) -->
-        <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(130, 60, 162, 0.12); text-align: center;">
-          <div style="background: rgba(130, 60, 162, 0.05); border: 1.5px dashed rgba(130, 60, 162, 0.25); border-radius: 14px; padding: 14px 16px; transition: all 0.25s ease;">
+        <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(4, 107, 38, 0.12); text-align: center;">
+          <div style="background: rgba(4, 107, 38, 0.05); border: 1.5px dashed rgba(4, 107, 38, 0.25); border-radius: 14px; padding: 14px 16px; transition: all 0.25s ease;">
             <p style="font-size: 12.5px; color: #555555; margin-bottom: 6px; font-weight: 500;">
-              🎓 <strong>Alumni atau Mitra FIKES UIS?</strong>
+              🎓 <strong>Alumni atau Mitra Universitas Ibnu Sina?</strong>
             </p>
-            <a href="{{ route('homepage.alumni.create') }}" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px; font-weight: 700; color: #823ca2; text-decoration: none; padding: 6px 12px; border-radius: 8px; background: rgba(130, 60, 162, 0.08);">
+            <a href="{{ route('homepage.alumni.create') }}" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px; font-weight: 700; color: #046B26; text-decoration: none; padding: 6px 12px; border-radius: 8px; background: rgba(4, 107, 38, 0.08);">
               <i class="bi bi-chat-quote-fill"></i>
               <span>Isi Ulasan & Testimoni Alumni di Sini</span>
               <i class="bi bi-arrow-right"></i>
@@ -517,7 +517,7 @@
       </div>
 
       <div class="copyright">
-        &copy; {{ date('Y') }} FIKES — Fakultas Ilmu Kesehatan. All rights reserved.
+        &copy; {{ date('Y') }} UIS — Universitas Ibnu Sina. All rights reserved.
       </div>
     </div>
   </div>

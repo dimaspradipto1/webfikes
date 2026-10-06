@@ -17,7 +17,7 @@
         <div class="card shadow-sm">
             <div class="card-header py-3">
                 <h5 class="mb-0 fw-semibold">
-                    <i class="bi bi-newspaper me-2 text-primary"></i>Form Tambah Post & Berita FIKES
+                    <i class="bi bi-newspaper me-2 text-primary"></i>Form Tambah Post & Berita UIS
                 </h5>
             </div>
             <div class="card-body pt-4">
@@ -114,14 +114,15 @@
                                     name="category"
                                     class="form-select @error('category') is-invalid @enderror"
                                     required>
-                                <option value="Berita Fakultas"         {{ $cat == 'Berita Fakultas' ? 'selected' : '' }}>Berita Fakultas</option>
-                                <option value="Akademik & Mahasiswa"   {{ $cat == 'Akademik & Mahasiswa' ? 'selected' : '' }}>Akademik & Mahasiswa</option>
-                                <option value="K3 & Keselamatan Kerja"  {{ $cat == 'K3 & Keselamatan Kerja' ? 'selected' : '' }}>K3 & Keselamatan Kerja</option>
-                                <option value="Kesehatan Lingkungan"    {{ $cat == 'Kesehatan Lingkungan' ? 'selected' : '' }}>Kesehatan Lingkungan</option>
-                                <option value="Penelitian & Riset"      {{ $cat == 'Penelitian & Riset' ? 'selected' : '' }}>Penelitian & Riset</option>
-                                <option value="Pengabdian Masyarakat"   {{ $cat == 'Pengabdian Masyarakat' ? 'selected' : '' }}>Pengabdian Masyarakat</option>
-                                <option value="Tips & Edukasi Kesehatan"{{ $cat == 'Tips & Edukasi Kesehatan' ? 'selected' : '' }}>Tips & Edukasi Kesehatan</option>
-                                <option value="Pengumuman & Agenda"     {{ $cat == 'Pengumuman & Agenda' ? 'selected' : '' }}>Pengumuman & Agenda</option>
+                                <option value="Berita Universitas"          {{ $cat == 'Berita Universitas' ? 'selected' : '' }}>Berita Universitas</option>
+                                <option value="Akademik & Kemahasiswaan"    {{ $cat == 'Akademik & Kemahasiswaan' ? 'selected' : '' }}>Akademik & Kemahasiswaan</option>
+                                <option value="Teknologi & Rekayasa"        {{ $cat == 'Teknologi & Rekayasa' ? 'selected' : '' }}>Teknologi & Rekayasa</option>
+                                <option value="Bisnis & Manajemen"          {{ $cat == 'Bisnis & Manajemen' ? 'selected' : '' }}>Bisnis & Manajemen</option>
+                                <option value="K3 & Lingkungan Industri"    {{ $cat == 'K3 & Lingkungan Industri' ? 'selected' : '' }}>K3 & Lingkungan Industri</option>
+                                <option value="Penelitian & Riset"          {{ $cat == 'Penelitian & Riset' ? 'selected' : '' }}>Penelitian & Riset</option>
+                                <option value="Pengabdian Masyarakat"       {{ $cat == 'Pengabdian Masyarakat' ? 'selected' : '' }}>Pengabdian Masyarakat</option>
+                                <option value="Kerjasama Industri"          {{ $cat == 'Kerjasama Industri' ? 'selected' : '' }}>Kerjasama Industri</option>
+                                <option value="Pengumuman & Agenda"         {{ $cat == 'Pengumuman & Agenda' ? 'selected' : '' }}>Pengumuman & Agenda</option>
                             </select>
                             @error('category')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -219,7 +220,7 @@
                         <a href="{{ route('news.index') }}" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-1"></i> Batal
                         </a>
-                        <button type="submit" class="btn btn-primary" style="background: var(--fikes-purple); border-color: var(--fikes-purple);">
+                        <button type="submit" class="btn btn-primary" style="background: var(--uis-purple); border-color: var(--uis-purple);">
                             <i class="bi bi-send me-1"></i> Terbitkan Berita
                         </button>
                     </div>

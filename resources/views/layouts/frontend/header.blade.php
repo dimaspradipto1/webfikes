@@ -1,11 +1,11 @@
 <!-- ═══════════════════════════════════════════════
-     NAVBAR HEADER UTAMA — FIKES UIS
+     NAVBAR HEADER UTAMA — UNIVERSITAS IBNU SINA (UIS)
 ═══════════════════════════════════════════════ -->
 <nav class="navbar navbar-expand-xl navbar-main">
   <div class="container-fluid px-lg-4 px-xl-5">
-    <!-- Logo FIKES UIS -->
+    <!-- Logo UIS -->
     <a class="navbar-brand navbar-brand-custom me-2 me-xl-4" href="{{ route('homepage') }}">
-      <img src="{{ asset('frontend/img/logofikes.png') }}" alt="Logo FIKES UIS" class="brand-logo-img">
+      <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo Universitas Ibnu Sina" class="brand-logo-img">
     </a>
 
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,11 +25,11 @@
             Profil <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.tentang') ? 'active' : '' }}" href="{{ route('homepage.tentang') }}"><i class="bi bi-building"></i> Tentang FIKES</a></li>
+            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.tentang') ? 'active' : '' }}" href="{{ route('homepage.tentang') }}"><i class="bi bi-building"></i> Tentang Universitas</a></li>
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.visi-misi') ? 'active' : '' }}" href="{{ route('homepage.visi-misi') }}"><i class="bi bi-bullseye"></i> Visi & Misi</a></li>
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.sambutan-dekan') ? 'active' : '' }}" href="{{ route('homepage.sambutan-dekan') }}"><i class="bi bi-person-badge"></i> Sambutan Dekan</a></li>
+            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.sambutan-dekan') ? 'active' : '' }}" href="{{ route('homepage.sambutan-dekan') }}"><i class="bi bi-person-badge"></i> Sambutan Rektor</a></li>
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.struktur-organisasi') ? 'active' : '' }}" href="{{ route('homepage.struktur-organisasi') }}"><i class="bi bi-diagram-3"></i> Struktur Organisasi</a></li>
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.sejarah') ? 'active' : '' }}" href="{{ route('homepage.sejarah') }}"><i class="bi bi-hourglass-split"></i> Sejarah Fakultas</a></li>
+            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.sejarah') ? 'active' : '' }}" href="{{ route('homepage.sejarah') }}"><i class="bi bi-hourglass-split"></i> Sejarah Universitas</a></li>
           </ul>
         </li>
 
@@ -39,10 +39,10 @@
             Akademik <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
-            <!-- Kurikulum FIKES with Submenu -->
+            <!-- Kurikulum UIS with Submenu -->
             <li class="dropdown-submenu">
               <a class="dropdown-item dropdown-item-custom d-flex justify-content-between align-items-center {{ request()->routeIs('homepage.kurikulum*') ? 'active' : '' }}" href="{{ route('homepage.kurikulum') }}">
-                <span><i class="bi bi-journal-text me-1"></i> Kurikulum FIKES</span>
+                <span><i class="bi bi-journal-text me-1"></i> Kurikulum Akademik</span>
                 <i class="bi bi-chevron-right ms-2 d-none d-xl-inline" style="font-size: 10px;"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-custom" style="min-width: 270px;">
@@ -68,7 +68,7 @@
 
         <!-- Program Studi Dropdown -->
         <li class="nav-item dropdown">
-          <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.layanan*') || request()->routeIs('homepage.dosen*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.layanan*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Program Studi <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
@@ -96,36 +96,16 @@
                 </li>
               @endforeach
 
-              {{-- Dosen Submenu --}}
-              <li class="dropdown-submenu">
-                <a class="dropdown-item dropdown-item-custom d-flex justify-content-between align-items-center {{ request()->routeIs('homepage.dosen*') ? 'active' : '' }}" href="{{ route('homepage.dosen') }}">
-                  <span><i class="bi bi-person-workspace me-1"></i> Dosen</span>
-                  <i class="bi bi-chevron-right ms-2 d-none d-xl-inline" style="font-size: 10px;"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-custom" style="min-width: 280px;">
-                  @foreach($navProdis as $np)
-                    <li>
-                      <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.dosen', ['prodi' => $np->id]) }}">
-                        <i class="bi bi-person-badge-fill text-warning"></i> Dosen {{ $np->judul }}
-                      </a>
-                    </li>
-                  @endforeach
-                </ul>
-              </li>
-
               <li><hr class="dropdown-divider my-1"></li>
               <li>
-                <a class="dropdown-item dropdown-item-custom fw-semibold" href="{{ route('homepage.layanan') }}" style="color: var(--fikes-purple);">
-                  <i class="bi bi-grid-fill" style="color: var(--fikes-purple);"></i>
+                <a class="dropdown-item dropdown-item-custom fw-semibold" href="{{ route('homepage.layanan') }}" style="color: var(--uis-green);">
+                  <i class="bi bi-grid-fill" style="color: var(--uis-green);"></i>
                   <span>Semua Program & Fasilitas</span>
                   <i class="bi bi-arrow-right ms-auto" style="font-size: 11px;"></i>
                 </a>
               </li>
             @else
-              <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.layanan') }}"><i class="bi bi-mortarboard-fill"></i> S2 Kesehatan Masyarakat</a></li>
-              <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.layanan') }}"><i class="bi bi-shield-plus"></i> S1 Kesehatan dan Keselamatan Kerja</a></li>
-              <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.layanan') }}"><i class="bi bi-tree-fill"></i> S1 Kesehatan Lingkungan</a></li>
-              <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.dosen') }}"><i class="bi bi-person-workspace"></i> Dosen FIKES</a></li>
+              <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.layanan') }}"><i class="bi bi-mortarboard-fill"></i> Fakultas & Program Studi</a></li>
             @endif
           </ul>
         </li>
@@ -137,7 +117,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.prestasi*') ? 'active' : '' }}" href="{{ route('homepage.prestasi') }}"><i class="bi bi-trophy-fill text-warning"></i> Prestasi Mahasiswa</a></li>
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.organisasi*') ? 'active' : '' }}" href="{{ route('homepage.organisasi') }}"><i class="bi bi-people-fill text-primary"></i> Organisasi & Kegiatan</a></li>
+            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.organisasi*') ? 'active' : '' }}" href="{{ route('homepage.organisasi') }}"><i class="bi bi-people-fill text-success"></i> Organisasi & Ormawa</a></li>
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.galeri*') ? 'active' : '' }}" href="{{ route('homepage.galeri') }}"><i class="bi bi-camera"></i> Galeri Dokumentasi</a></li>
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.testimoni*') ? 'active' : '' }}" href="{{ route('homepage.testimoni') }}"><i class="bi bi-mortarboard"></i> Alumni & Testimoni</a></li>
           </ul>
@@ -162,7 +142,7 @@
             Informasi <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news', ['category' => 'Berita Fakultas']) }}"><i class="bi bi-newspaper"></i> Berita</a></li>
+            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news', ['category' => 'Berita Universitas']) }}"><i class="bi bi-newspaper"></i> Berita Kampus</a></li>
             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news', ['category' => 'Pengumuman & Agenda']) }}"><i class="bi bi-megaphone"></i> Pengumuman</a></li>
             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news', ['category' => 'Pengumuman & Agenda']) }}"><i class="bi bi-calendar-event"></i> Agenda</a></li>
             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news') }}"><i class="bi bi-card-text"></i> Artikel</a></li>

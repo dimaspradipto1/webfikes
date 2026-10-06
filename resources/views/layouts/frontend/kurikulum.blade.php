@@ -1,19 +1,19 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($pageTitle ?? 'Kurikulum Program Studi') . ' — Fakultas Ilmu Kesehatan Universitas Ibnu Sina')
-@section('meta_description', 'Struktur kurikulum lengkap per semester dan unduhan silabus RPS program studi Fakultas Ilmu Kesehatan (FIKES) Universitas Ibnu Sina.')
+@section('title', ($pageTitle ?? 'Kurikulum Program Studi') . ' — Universitas Ibnu Sina')
+@section('meta_description', 'Struktur kurikulum lengkap per semester dan unduhan silabus RPS program studi Universitas Ibnu Sina (UIS) Universitas Ibnu Sina.')
 
 @push('styles')
 <style>
   .kurikulum-hero {
     background: var(--obsidian-dark);
     padding: 65px 0 45px;
-    border-bottom: 2px solid var(--fikes-purple);
+    border-bottom: 2px solid var(--uis-purple);
   }
   .prodi-header-pill {
     background: #ffc107;
-    background: linear-gradient(135deg, #ffd026 0%, #e5a823 100%);
-    color: #190a24;
+    background: #FED802;
+    color: #032e12;
     font-size: 24px;
     font-weight: 800;
     padding: 18px 30px;
@@ -53,10 +53,10 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.03);
   }
   .prodi-tab-btn:hover, .prodi-tab-btn.active {
-    background: var(--fikes-purple, #823ca2) !important;
+    background: var(--uis-purple, #046B26) !important;
     color: #ffffff !important;
-    border-color: var(--fikes-purple, #823ca2);
-    box-shadow: 0 6px 18px rgba(130, 60, 162, 0.3);
+    border-color: var(--uis-purple, #046B26);
+    box-shadow: 0 6px 18px rgba(4, 107, 38, 0.3);
   }
 
   /* Table Style Matching Screenshot */
@@ -74,7 +74,7 @@
   }
   .table-kurikulum thead th {
     background: #501224; /* Maroon header like screenshot */
-    background: linear-gradient(135deg, #4a1563 0%, #190a24 100%);
+    background: #032e12;
     color: #ffffff;
     font-weight: 700;
     font-size: 13.5px;
@@ -105,7 +105,7 @@
   }
   .btn-rps-download {
     background: #501224;
-    background: linear-gradient(135deg, #60237c 0%, #190a24 100%);
+    background: #032e12;
     color: #ffffff !important;
     border: none;
     font-size: 11.5px;
@@ -138,12 +138,12 @@
         <li class="breadcrumb-item active text-white" aria-current="page">Kurikulum</li>
       </ol>
     </nav>
-    <div class="badge px-3 py-2 rounded-pill mb-2" style="background: rgba(229, 168, 35, 0.2); color: #ffd166; border: 1px solid rgba(229, 168, 35, 0.4);">
-      <i class="bi bi-mortarboard-fill me-1"></i> Layanan Akademik FIKES UIS
+    <div class="badge px-3 py-2 rounded-pill mb-2" style="background: rgba(229, 168, 35, 0.2); color: #FED802; border: 1px solid rgba(229, 168, 35, 0.4);">
+      <i class="bi bi-mortarboard-fill me-1"></i> Layanan Akademik Universitas Ibnu Sina
     </div>
     <h1 class="fw-bold mb-2" style="font-size: 34px;">Kurikulum & Capaian Pembelajaran</h1>
     <p class="text-white-50 mx-auto mb-0" style="max-width: 620px; font-size: 14.5px;">
-      Struktur kurikulum berbasis kompetensi dan Kerangka Kualifikasi Nasional Indonesia (KKNI) untuk setiap program studi di Fakultas Ilmu Kesehatan.
+      Struktur kurikulum berbasis kompetensi dan Kerangka Kualifikasi Nasional Indonesia (KKNI) untuk setiap program studi di Universitas Ibnu Sina.
     </p>
   </div>
 </div>
@@ -165,14 +165,14 @@
     <!-- Header Banner Kuning / Gold Sesuai Permintaan -->
     <div class="text-center" data-aos="fade-up">
       <div class="prodi-header-pill">
-        Kurikulum {{ $currentProdi->judul ?? 'Program Studi Fakultas Ilmu Kesehatan' }}
+        Kurikulum {{ $currentProdi->judul ?? 'Program Studi Universitas Ibnu Sina' }}
       </div>
     </div>
 
     <!-- Summary & Info -->
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 bg-white p-3 rounded-4 shadow-sm border" data-aos="fade-up">
       <div class="d-flex align-items-center gap-3">
-        <div class="rounded-circle p-2 d-flex align-items-center justify-content-center text-white" style="width: 44px; height: 44px; background: #823ca2;">
+        <div class="rounded-circle p-2 d-flex align-items-center justify-content-center text-white" style="width: 44px; height: 44px; background: #046B26;">
           <i class="bi bi-book-half fs-5"></i>
         </div>
         <div>
@@ -255,7 +255,7 @@
                 <td colspan="6" class="text-center py-5">
                   <i class="bi bi-journal-x fs-1 text-muted d-block mb-2"></i>
                   <h6 class="fw-bold text-dark">Data Matakuliah Belum Tersedia</h6>
-                  <p class="text-muted small mb-0">Daftar kurikulum untuk program studi ini akan segera diperbarui oleh dekanat.</p>
+                  <p class="text-muted small mb-0">Daftar kurikulum untuk program studi ini akan segera diperbarui oleh pimpinan.</p>
                 </td>
               </tr>
             @endif
@@ -265,12 +265,12 @@
     </div>
 
     <!-- Info Bantuan Box -->
-    <div class="mt-5 p-4 rounded-4 text-white d-flex flex-wrap align-items-center justify-content-between gap-3 shadow-sm" style="background: linear-gradient(135deg, #190a24 0%, #60237c 100%); border: 1px solid rgba(255,255,255,0.2);" data-aos="fade-up">
+    <div class="mt-5 p-4 rounded-4 text-white d-flex flex-wrap align-items-center justify-content-between gap-3 shadow-sm" style="background: #032e12; border: 1px solid rgba(255,255,255,0.2);" data-aos="fade-up">
       <div>
         <h5 class="fw-bold text-white mb-1"><i class="bi bi-question-circle-fill me-2 text-warning"></i>Butuh Informasi Kurikulum & Konversi SKS?</h5>
-        <p class="text-white-50 small mb-0">Hubungi Bagian Akademik & Tata Usaha FIKES UIS untuk panduan registrasi mata kuliah dan bimbingan akademik.</p>
+        <p class="text-white-50 small mb-0">Hubungi Bagian Akademik & Tata Usaha Universitas Ibnu Sina untuk panduan registrasi mata kuliah dan bimbingan akademik.</p>
       </div>
-      <a href="{{ route('homepage.kontak') }}" class="btn btn-warning rounded-pill px-4 fw-bold" style="color: #190a24;">
+      <a href="{{ route('homepage.kontak') }}" class="btn btn-warning rounded-pill px-4 fw-bold" style="color: #032e12;">
         <i class="bi bi-telephone-fill me-1"></i> Hubungi Kami
       </a>
     </div>

@@ -49,7 +49,7 @@
                                name="title"
                                class="form-control @error('title') is-invalid @enderror"
                                value="{{ old('title', $facultyStat->title) }}"
-                               placeholder="Contoh: FIKES UIS Dalam Angka">
+                               placeholder="Contoh: UIS Dalam Angka">
                         <div class="form-text">Teks judul yang tampil di atas angka statistik.</div>
                         @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -63,7 +63,7 @@
                         </label>
                         <div class="row g-3">
                             {{-- Jumlah Prodi --}}
-                            <div class="col-sm-6 col-md-3">
+                            <div class="col-md-4">
                                 <div class="card border-0 bg-primary bg-opacity-10 h-100">
                                     <div class="card-body text-center py-3">
                                         <i class="bi bi-mortarboard fs-3 text-primary mb-2 d-block"></i>
@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                             {{-- Total Mahasiswa --}}
-                            <div class="col-sm-6 col-md-3">
+                            <div class="col-md-4">
                                 <div class="card border-0 bg-success bg-opacity-10 h-100">
                                     <div class="card-body text-center py-3">
                                         <i class="bi bi-people fs-3 text-success mb-2 d-block"></i>
@@ -98,26 +98,8 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- Total Dosen --}}
-                            <div class="col-sm-6 col-md-3">
-                                <div class="card border-0 bg-warning bg-opacity-10 h-100">
-                                    <div class="card-body text-center py-3">
-                                        <i class="bi bi-person-workspace fs-3 text-warning mb-2 d-block"></i>
-                                        <label for="total_dosen" class="form-label fw-semibold small">Total Dosen</label>
-                                        <input type="number"
-                                               id="total_dosen"
-                                               name="total_dosen"
-                                               class="form-control text-center fw-bold fs-5 @error('total_dosen') is-invalid @enderror"
-                                               value="{{ old('total_dosen', $facultyStat->total_dosen) }}"
-                                               min="0">
-                                        @error('total_dosen')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
                             {{-- Total Alumni --}}
-                            <div class="col-sm-6 col-md-3">
+                            <div class="col-md-4">
                                 <div class="card border-0 bg-info bg-opacity-10 h-100">
                                     <div class="card-body text-center py-3">
                                         <i class="bi bi-award fs-3 text-info mb-2 d-block"></i>
@@ -134,6 +116,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="total_dosen" value="{{ old('total_dosen', $facultyStat->total_dosen ?? 0) }}">
                         </div>
                     </div>
 

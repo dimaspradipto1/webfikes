@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Program Studi & Fasilitas — Fakultas Ilmu Kesehatan (FIKES)')
-@section('meta_description', 'Jelajahi program studi unggulan dan fasilitas laboratorium terpadu di Fakultas Ilmu Kesehatan (FIKES).')
-@section('meta_keywords', 'program studi fikes, keperawatan, kebidanan, farmasi, gizi, kesehatan masyarakat, laboratorium fikes')
+@section('title', 'Fakultas & Program Studi — Universitas Ibnu Sina (UIS)')
+@section('meta_description', 'Jelajahi fakultas dan program studi unggulan serta fasilitas akademik terpadu di Universitas Ibnu Sina (UIS) Batam.')
+@section('meta_keywords', 'program studi uis, fakultas teknik, fakultas ekonomi bisnis, fakultas ilmu kesehatan, magister manajemen, universitas ibnu sina batam')
 
 @push('styles')
 <style>
@@ -10,7 +10,7 @@
     position: relative;
     background: var(--obsidian-dark);
     padding: 70px 0 50px;
-    border-bottom: 2px solid var(--fikes-purple);
+    border-bottom: 2px solid var(--uis-purple);
   }
   .layanan-hero-title {
     font-size: 38px;
@@ -20,7 +20,7 @@
   }
   .layanan-hero-title em {
     font-style: normal;
-    color: var(--fikes-orange);
+    color: var(--uis-orange);
   }
   .layanan-card-box {
     background: var(--white);
@@ -48,8 +48,8 @@
   .layanan-card-icon {
     width: 58px;
     height: 58px;
-    background: var(--fikes-purple-light);
-    color: var(--fikes-purple);
+    background: var(--uis-purple-light);
+    color: var(--uis-purple);
     border-radius: 16px;
     display: flex;
     align-items: center;
@@ -65,8 +65,8 @@
   }
   .layanan-card-badge {
     display: inline-block;
-    background: var(--fikes-orange-light);
-    color: var(--fikes-orange-dark);
+    background: var(--uis-orange-light);
+    color: var(--uis-orange-dark);
     font-size: 11px;
     font-weight: 700;
     padding: 2px 10px;
@@ -93,12 +93,12 @@
     margin-bottom: 8px;
   }
   .layanan-card-list li i {
-    color: var(--fikes-purple);
+    color: var(--uis-purple);
     margin-top: 2px;
   }
   .layanan-detail-btn {
-    background: var(--fikes-purple-light);
-    color: var(--fikes-purple);
+    background: var(--uis-purple-light);
+    color: var(--uis-purple);
     border: 1px solid var(--border-purple);
     font-weight: 700;
     font-size: 13.5px;
@@ -110,9 +110,9 @@
     transition: all 0.2s ease;
   }
   .layanan-detail-btn:hover {
-    background: var(--fikes-purple);
+    background: var(--uis-purple);
     color: var(--white);
-    border-color: var(--fikes-purple);
+    border-color: var(--uis-purple);
   }
 </style>
 @endpush
@@ -131,7 +131,7 @@
       <div class="breadcrumb-custom">
         <a href="{{ route('homepage') }}" class="text-white-50"><i class="bi bi-house-fill me-1"></i>Beranda</a>
         <span class="mx-2 text-white-50">/</span>
-        <span style="color: var(--fikes-orange); font-weight:600;">Layanan & Fasilitas</span>
+        <span style="color: var(--uis-orange); font-weight:600;">Layanan & Fasilitas</span>
       </div>
     </div>
   </div>
@@ -147,7 +147,7 @@
       <h2 class="section-title">Pendidikan Berkualitas & <em>Fasilitas Modern</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Menghasilkan lulusan tenaga kesehatan yang unggul, beretika, dan siap berkontribusi nyata dalam sistem pelayanan kesehatan.
+        Mencetak profesional muda yang unggul, kompeten, berjiwa entrepreneur, dan siap berkontribusi nyata bagi industri nasional maupun global.
       </p>
     </div>
 
@@ -189,7 +189,7 @@
             </div>
             <div class="d-flex gap-2 flex-wrap">
               @if($layanan->link)
-                <a href="{{ $layanan->link }}" target="_blank" rel="noopener noreferrer" class="layanan-detail-btn" style="background:var(--fikes-purple); color:#fff; border-color:var(--fikes-purple);">
+                <a href="{{ $layanan->link }}" target="_blank" rel="noopener noreferrer" class="layanan-detail-btn" style="background:var(--uis-purple); color:#fff; border-color:var(--uis-purple);">
                   Website Prodi <i class="bi bi-box-arrow-up-right ms-1"></i>
                 </a>
               @endif
