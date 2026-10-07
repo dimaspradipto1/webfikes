@@ -27,12 +27,13 @@
             </div>
         @endif
 
-        <div class="alert alert-info d-flex align-items-start gap-3 shadow-sm rounded-3 mb-4" role="alert">
+        {{-- Info Box --}}
+        <div class="alert alert-info d-flex align-items-start gap-3 shadow-sm rounded-3 mb-4" role="alert" style="background-color: #e8f4fd; border-color: #b8e0fe; color: #0c5460;">
             <i class="bi bi-info-circle-fill fs-4 text-primary mt-1"></i>
             <div>
-                <h6 class="fw-bold mb-1">Pengaturan Program Studi (Header Website & Kartu Beranda)</h6>
-                <p class="mb-0 small text-muted">
-                    Halaman ini digunakan untuk mengelola menu <strong>Program Studi</strong> di header/navbar frontend dan bagian <strong>Program Studi Unggulan</strong> di Beranda. Gunakan editor <strong>TinyMCE</strong> pada kolom Deskripsi & Keunggulan untuk mempercantik format teks.
+                <h6 class="fw-bold mb-1">Sinkronisasi Menu Dropdown Program Studi di Navbar</h6>
+                <p class="mb-0 small">
+                    Daftar di bawah ini langsung terhubung dan tersinkronisasi secara otomatis dengan dropdown <strong>Program Studi</strong> pada navbar website. Pengunjung yang mengklik menu di navbar akan langsung diarahkan ke tautan link website yang Anda isi di sini.
                 </p>
             </div>
         </div>
@@ -40,152 +41,104 @@
         <form action="{{ route('layanan.update-all') }}" method="POST" id="form-prodi-settings">
             @csrf
 
-            <div class="card shadow-sm border-0 mb-4">
-                <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0 fw-semibold text-dark">
-                        <i class="bi bi-mortarboard-fill text-primary me-2"></i>Daftar Program Studi
+            <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
+                <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-top: 3px solid #046B26; border-radius: 12px 12px 0 0;">
+                    <h5 class="mb-0 fw-bold text-dark" style="font-size: 16px;">
+                        <i class="bi bi-link-45deg me-2" style="color: #046B26;"></i>Daftar Link Menu Program Studi
                     </h5>
                     <div class="d-flex gap-2">
                         <a href="{{ route('homepage') }}" target="_blank" class="btn btn-sm btn-outline-secondary">
-                            <i class="bi bi-box-arrow-up-right me-1"></i> Lihat di Website
+                            <i class="bi bi-box-arrow-up-right me-1"></i> Lihat di Navbar
                         </a>
-                        <button type="button" class="btn btn-sm btn-primary" id="btn-add-prodi" style="background: #046B26; border-color: #046B26;">
+                        <button type="button" class="btn btn-sm fw-semibold shadow-sm text-white" id="btn-add-prodi" style="background: #046B26; border-color: #046B26;">
                             <i class="bi bi-plus-circle-fill me-1"></i> Tambah Menu Prodi
                         </button>
                     </div>
                 </div>
 
                 <div class="card-body pt-3">
-                    <div id="prodi-list-container" class="d-flex flex-column gap-4">
+                    <div id="prodi-list-container" class="d-flex flex-column gap-3">
                         @foreach($prodis as $index => $prodi)
-                            <div class="card border prodi-item shadow-none rounded-3" style="background: #fafafa;" data-item-index="{{ $index }}">
+                            <div class="card border prodi-item shadow-none rounded-3" style="background: #fdfdfd;" data-item-index="{{ $index }}">
                                 <div class="card-header bg-white d-flex align-items-center justify-content-between py-2 border-bottom">
                                     <div class="d-flex align-items-center gap-2">
-                                        <span class="badge bg-primary rounded-pill prodi-index-badge px-2 py-1" style="background: #046B26 !important;">
+                                        <span class="badge rounded-pill prodi-index-badge px-2 py-1 text-white" style="background: #046B26 !important; font-size: 11px;">
                                             Menu #{{ $loop->iteration }}
                                         </span>
-                                        <span class="fw-semibold text-dark prodi-title-preview">
+                                        <span class="fw-bold text-dark prodi-title-preview" style="font-size: 14px;">
                                             {{ $prodi->judul }}
                                         </span>
                                     </div>
-                                    <button type="button" class="btn btn-link text-danger p-0 btn-remove-prodi" title="Hapus menu prodi ini">
-                                        <i class="bi bi-trash-fill"></i> Hapus
+                                    <button type="button" class="btn btn-sm btn-link text-danger p-0 text-decoration-none btn-remove-prodi" title="Hapus menu prodi ini">
+                                        <i class="bi bi-trash3-fill me-1"></i> Hapus
                                     </button>
                                 </div>
 
                                 <div class="card-body pt-3 pb-3">
                                     <input type="hidden" name="prodis[{{ $index }}][id]" value="{{ $prodi->id }}">
 
-                                    <div class="row g-3">
-                                        <!-- Nama Program Studi -->
-                                        <div class="col-md-7">
-                                            <label class="form-label fw-semibold small text-dark">
-                                                Nama Program Studi <span class="text-danger">*</span>
+                                    <div class="row g-3 align-items-center">
+                                        <!-- Nama Program Studi / Menu -->
+                                        <div class="col-lg-5 col-md-12">
+                                            <label class="form-label fw-bold small text-dark mb-1">
+                                                Nama Menu Program Studi <span class="text-danger">*</span>
                                             </label>
                                             <input type="text"
                                                    name="prodis[{{ $index }}][judul]"
-                                                   class="form-control form-control-sm prodi-judul-input"
+                                                   class="form-control prodi-judul-input"
                                                    value="{{ old("prodis.{$index}.judul", $prodi->judul) }}"
-                                                   placeholder="Contoh: S1 Teknik Informatika / S1 Manajemen / S1 K3"
+                                                   placeholder="Contoh: Fakultas Teknik & Teknologi / S1 K3"
                                                    required>
                                         </div>
 
-                                        <!-- Icon -->
-                                        <div class="col-md-5">
-                                            <label class="form-label fw-semibold small text-dark">
-                                                Icon Bootstrap <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="input-group input-group-sm">
-                                                <span class="input-group-text bg-white border-end-0 text-primary">
-                                                    <i class="bi {{ $prodi->icon ?: 'bi-mortarboard-fill' }} prodi-icon-preview"></i>
-                                                </span>
-                                                <input type="text"
-                                                       name="prodis[{{ $index }}][icon]"
-                                                       class="form-control form-control-sm border-start-0 prodi-icon-input"
-                                                       value="{{ old("prodis.{$index}.icon", $prodi->icon ?: 'bi-mortarboard-fill') }}"
-                                                       placeholder="bi-mortarboard-fill"
-                                                       required>
-                                            </div>
-                                        </div>
-
-                                        <!-- Link Website Program Studi -->
-                                        <div class="col-md-12">
-                                            <label class="form-label fw-semibold small text-dark d-flex align-items-center justify-content-between">
-                                                <span>
-                                                    <i class="bi bi-link-45deg text-primary me-1"></i>Link / URL Website Program Studi
-                                                </span>
+                                        <!-- Link / URL Website Tujuan -->
+                                        <div class="col-lg-5 col-md-12">
+                                            <label class="form-label fw-bold small text-dark mb-1 d-flex align-items-center justify-content-between">
+                                                <span><i class="bi bi-globe me-1 text-success"></i>Link / URL Website Tujuan</span>
                                                 @if(!empty($prodi->link))
-                                                    <a href="{{ $prodi->link }}" target="_blank" class="badge bg-light text-primary text-decoration-none border" style="font-size: 11px;">
-                                                        <i class="bi bi-box-arrow-up-right me-1"></i>Test Link
+                                                    <a href="{{ $prodi->link }}" target="_blank" class="text-success text-decoration-none small" style="font-size: 11px;">
+                                                        <i class="bi bi-box-arrow-up-right me-1"></i>Test Tautan
                                                     </a>
                                                 @endif
                                             </label>
-                                            <div class="input-group input-group-sm">
-                                                <span class="input-group-text bg-light text-muted border-end-0">
-                                                    <i class="bi bi-globe"></i>
-                                                </span>
-                                                <input type="url"
+                                            <div class="input-group">
+                                                <span class="input-group-text bg-light text-muted"><i class="bi bi-link-45deg"></i></span>
+                                                <input type="text"
                                                        name="prodis[{{ $index }}][link]"
-                                                       class="form-control form-control-sm border-start-0 font-monospace"
+                                                       class="form-control font-monospace"
                                                        value="{{ old("prodis.{$index}.link", $prodi->link) }}"
-                                                       placeholder="https://kesmas.uis.ac.id atau https://...">
-                                            </div>
-                                            <div class="form-text" style="font-size: 11.5px;">
-                                                Menu di header dropdown akan langsung membuka tautan ini. Jika dikosongkan, akan diarahkan ke halaman detail prodi di portal UIS.
+                                                       placeholder="Contoh: https://ft.uis.ac.id atau https://kesmas.uis.ac.id">
                                             </div>
                                         </div>
 
-                                        <!-- Deskripsi Singkat (TinyMCE) -->
-                                        <div class="col-md-6">
-                                            <label class="form-label fw-semibold small text-dark d-flex align-items-center justify-content-between">
-                                                <span><i class="bi bi-card-text text-primary me-1"></i>Deskripsi Singkat (Kartu Beranda)</span>
-                                                <span class="badge bg-light text-muted border" style="font-size: 10px;">TinyMCE</span>
+                                        <!-- Icon Bootstrap & Toggle Aktif -->
+                                        <div class="col-lg-2 col-md-12">
+                                            <label class="form-label fw-bold small text-dark mb-1">
+                                                Icon & Tampilkan
                                             </label>
-                                            <textarea id="deskripsi_{{ $index }}"
-                                                      name="prodis[{{ $index }}][deskripsi]"
-                                                      class="form-control prodi-tinymce-deskripsi"
-                                                      rows="4"
-                                                      placeholder="Ringkasan singkat tentang program studi...">{{ old("prodis.{$index}.deskripsi", $prodi->deskripsi) }}</textarea>
-                                        </div>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div class="input-group input-group-sm" style="max-width: 130px;" title="Icon Bootstrap">
+                                                    <span class="input-group-text bg-white text-success">
+                                                        <i class="bi {{ $prodi->icon ?: 'bi-mortarboard-fill' }} prodi-icon-preview"></i>
+                                                    </span>
+                                                    <input type="text"
+                                                           name="prodis[{{ $index }}][icon]"
+                                                           class="form-control prodi-icon-input"
+                                                           value="{{ old("prodis.{$index}.icon", $prodi->icon ?: 'bi-mortarboard-fill') }}"
+                                                           placeholder="bi-mortarboard-fill">
+                                                </div>
 
-                                        <!-- Poin Keunggulan (TinyMCE) -->
-                                        <div class="col-md-6">
-                                            <label class="form-label fw-semibold small text-dark d-flex align-items-center justify-content-between">
-                                                <span><i class="bi bi-award text-primary me-1"></i>Kompetensi / Poin Keunggulan</span>
-                                                <span class="badge bg-light text-muted border" style="font-size: 10px;">TinyMCE</span>
-                                            </label>
-                                            <textarea id="rincian_{{ $index }}"
-                                                      name="prodis[{{ $index }}][rincian]"
-                                                      class="form-control prodi-tinymce-rincian"
-                                                      rows="4"
-                                                      placeholder="Poin-poin keunggulan atau kurikulum unggulan...">{{ old("prodis.{$index}.rincian", $prodi->rincian) }}</textarea>
-                                        </div>
-
-                                        <!-- SK / Akreditasi & Status -->
-                                        <div class="col-md-7">
-                                            <label class="form-label fw-semibold small text-dark">
-                                                Keterangan / Akreditasi <span class="badge bg-secondary fw-normal ms-1" style="font-size:9px">Opsional</span>
-                                            </label>
-                                            <input type="text"
-                                                   name="prodis[{{ $index }}][dasar_hukum]"
-                                                   class="form-control form-control-sm"
-                                                   value="{{ old("prodis.{$index}.dasar_hukum", $prodi->dasar_hukum) }}"
-                                                   placeholder="Contoh: SK LAM-PTKes & Kemendikbudristek">
-                                        </div>
-
-                                        <div class="col-md-5 d-flex align-items-center" style="padding-top: 24px;">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input"
-                                                       type="checkbox"
-                                                       id="aktif_{{ $index }}"
-                                                       name="prodis[{{ $index }}][aktif]"
-                                                       value="1"
-                                                       {{ old("prodis.{$index}.aktif", $prodi->aktif) ? 'checked' : '' }}>
-                                                <label class="form-check-label fw-semibold small text-dark" for="aktif_{{ $index }}">
-                                                    Tampilkan di Dropdown & Beranda
-                                                </label>
+                                                <div class="form-check form-switch m-0" title="Aktif di dropdown navbar">
+                                                    <input class="form-check-input"
+                                                           type="checkbox"
+                                                           id="aktif_{{ $index }}"
+                                                           name="prodis[{{ $index }}][aktif]"
+                                                           value="1"
+                                                           {{ old("prodis.{$index}.aktif", $prodi->aktif) ? 'checked' : '' }}>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -193,12 +146,12 @@
                     </div>
                 </div>
 
-                <div class="card-footer bg-light py-3 d-flex justify-content-between align-items-center">
-                    <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary px-4 rounded-3">
-                        <i class="bi bi-arrow-left me-1"></i> Kembali ke Dashboard
+                <div class="card-footer bg-light py-3 d-flex justify-content-between align-items-center" style="border-radius: 0 0 12px 12px;">
+                    <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary px-3 rounded-2">
+                        <i class="bi bi-arrow-left me-1"></i> Dashboard
                     </a>
-                    <button type="submit" class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm" style="background: #046B26; border-color: #046B26;">
-                        <i class="bi bi-check2-circle me-1"></i> Simpan Pengaturan Program Studi
+                    <button type="submit" class="btn fw-semibold px-4 py-2 text-white shadow-sm" style="background: #046B26; border: none; border-radius: 8px;">
+                        <i class="bi bi-save me-1"></i> Simpan & Sinkronkan ke Navbar
                     </button>
                 </div>
             </div>
@@ -213,238 +166,126 @@
 document.addEventListener('DOMContentLoaded', function () {
     const container = document.getElementById('prodi-list-container');
     const btnAdd = document.getElementById('btn-add-prodi');
-    const prodiForm = document.getElementById('form-prodi-settings');
 
-    const tinyConfig = {
-        height: 220,
-        menubar: false,
-        plugins: 'advlist autolink lists link charmap preview searchreplace visualblocks code wordcount',
-        toolbar: 'undo redo | bold italic underline | forecolor backcolor | bullist numlist | link removeformat code',
-        content_style: 'body { font-family: Plus Jakarta Sans, Arial, sans-serif; font-size: 13.5px; line-height: 1.6; }',
-    };
-
-    function initTinyMCEOn(textareaId) {
-        if (typeof tinymce === 'undefined') return;
-        if (tinymce.get(textareaId)) {
-            tinymce.get(textareaId).remove();
-        }
-        tinymce.init({
-            ...tinyConfig,
-            selector: '#' + textareaId,
-            setup: function (editor) {
-                editor.on('change keyup', function () {
-                    editor.save();
-                });
-            }
-        });
-    }
-
-    // Inisialisasi TinyMCE untuk setiap textarea yang ada
-    document.querySelectorAll('.prodi-tinymce-deskripsi, .prodi-tinymce-rincian').forEach(function (el) {
-        if (el.id) {
-            initTinyMCEOn(el.id);
-        }
-    });
-
-    function updateIndexes() {
-        const items = container.querySelectorAll('.prodi-item');
-        items.forEach((item, idx) => {
-            const badge = item.querySelector('.prodi-index-badge');
-            if (badge) badge.textContent = `Menu #${idx + 1}`;
-            item.setAttribute('data-item-index', idx);
-
-            // Update basic inputs (kecuali textarea yang terhubung tinymce)
-            item.querySelectorAll('input').forEach(input => {
-                const name = input.getAttribute('name');
-                if (name) {
-                    input.setAttribute('name', name.replace(/prodis\[\d+\]/, `prodis[${idx}]`));
-                }
-                const id = input.getAttribute('id');
-                if (id && id.startsWith('aktif_')) {
-                    input.setAttribute('id', `aktif_${idx}`);
-                }
-            });
-
-            item.querySelectorAll('label[for^="aktif_"]').forEach(label => {
-                label.setAttribute('for', `aktif_${idx}`);
-            });
-        });
-    }
-
-    // Live update title preview and icon preview
+    // Live update preview title
     container.addEventListener('input', function (e) {
         if (e.target.classList.contains('prodi-judul-input')) {
             const card = e.target.closest('.prodi-item');
             const preview = card.querySelector('.prodi-title-preview');
-            if (preview) {
-                preview.textContent = e.target.value || 'Program Studi Baru';
-            }
+            preview.textContent = e.target.value.trim() || 'Menu Baru';
         }
         if (e.target.classList.contains('prodi-icon-input')) {
             const card = e.target.closest('.prodi-item');
             const iconPreview = card.querySelector('.prodi-icon-preview');
-            if (iconPreview) {
-                iconPreview.className = `bi ${e.target.value.trim()} prodi-icon-preview`;
+            const iconClass = e.target.value.trim() || 'bi-mortarboard-fill';
+            iconPreview.className = 'bi ' + iconClass + ' prodi-icon-preview';
+        }
+    });
+
+    // Remove item
+    container.addEventListener('click', function (e) {
+        const btnRemove = e.target.closest('.btn-remove-prodi');
+        if (btnRemove) {
+            const allItems = container.querySelectorAll('.prodi-item');
+            if (allItems.length <= 1) {
+                alert('Minimal harus menyisakan 1 menu program studi.');
+                return;
+            }
+            if (confirm('Yakin ingin menghapus menu prodi ini?')) {
+                const card = btnRemove.closest('.prodi-item');
+                card.remove();
+                reindexItems();
             }
         }
     });
 
-    if (btnAdd) {
-        btnAdd.addEventListener('click', function () {
-            const newIndex = Date.now(); // unique timestamp index
-            const card = document.createElement('div');
-            card.className = 'card border prodi-item shadow-none rounded-3';
-            card.style.background = '#fafafa';
-            card.innerHTML = `
+    // Add new item
+    btnAdd.addEventListener('click', function () {
+        const allItems = container.querySelectorAll('.prodi-item');
+        const newIndex = new Date().getTime(); // unique index
+        const nextNumber = allItems.length + 1;
+
+        const template = `
+            <div class="card border prodi-item shadow-none rounded-3" style="background: #fdfdfc;" data-item-index="${newIndex}">
                 <div class="card-header bg-white d-flex align-items-center justify-content-between py-2 border-bottom">
                     <div class="d-flex align-items-center gap-2">
-                        <span class="badge bg-primary rounded-pill prodi-index-badge px-2 py-1" style="background: #046B26 !important;">
+                        <span class="badge rounded-pill prodi-index-badge px-2 py-1 text-white" style="background: #046B26 !important; font-size: 11px;">
+                            Menu #${nextNumber}
+                        </span>
+                        <span class="fw-bold text-dark prodi-title-preview" style="font-size: 14px;">
                             Menu Baru
                         </span>
-                        <span class="fw-semibold text-dark prodi-title-preview">
-                            Program Studi Baru
-                        </span>
                     </div>
-                    <button type="button" class="btn btn-link text-danger p-0 btn-remove-prodi" title="Hapus menu prodi ini">
-                        <i class="bi bi-trash-fill"></i> Hapus
+                    <button type="button" class="btn btn-sm btn-link text-danger p-0 text-decoration-none btn-remove-prodi" title="Hapus menu prodi ini">
+                        <i class="bi bi-trash3-fill me-1"></i> Hapus
                     </button>
                 </div>
 
                 <div class="card-body pt-3 pb-3">
-                    <div class="row g-3">
-                        <div class="col-md-7">
-                            <label class="form-label fw-semibold small text-dark">
-                                Nama Program Studi <span class="text-danger">*</span>
+                    <div class="row g-3 align-items-center">
+                        <div class="col-lg-5 col-md-12">
+                            <label class="form-label fw-bold small text-dark mb-1">
+                                Nama Menu Program Studi <span class="text-danger">*</span>
                             </label>
                             <input type="text"
                                    name="prodis[${newIndex}][judul]"
-                                   class="form-control form-control-sm prodi-judul-input"
-                                   placeholder="Contoh: Program Sarjana (S1) Farmasi"
+                                   class="form-control prodi-judul-input"
+                                   placeholder="Contoh: S1 Farmasi / S1 Sistem Informasi"
                                    required>
                         </div>
 
-                        <div class="col-md-5">
-                            <label class="form-label fw-semibold small text-dark">
-                                Icon Bootstrap <span class="text-danger">*</span>
+                        <div class="col-lg-5 col-md-12">
+                            <label class="form-label fw-bold small text-dark mb-1">
+                                <i class="bi bi-globe me-1 text-success"></i>Link / URL Website Tujuan
                             </label>
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-text bg-white border-end-0 text-primary">
-                                    <i class="bi bi-mortarboard-fill prodi-icon-preview"></i>
-                                </span>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light text-muted"><i class="bi bi-link-45deg"></i></span>
                                 <input type="text"
-                                       name="prodis[${newIndex}][icon]"
-                                       class="form-control form-control-sm border-start-0 prodi-icon-input"
-                                       value="bi-mortarboard-fill"
-                                       placeholder="bi-mortarboard-fill"
-                                       required>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <label class="form-label fw-semibold small text-dark">
-                                <i class="bi bi-link-45deg text-primary me-1"></i>Link / URL Website Program Studi
-                            </label>
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-text bg-light text-muted border-end-0">
-                                    <i class="bi bi-globe"></i>
-                                </span>
-                                <input type="url"
                                        name="prodis[${newIndex}][link]"
-                                       class="form-control form-control-sm border-start-0 font-monospace"
-                                       placeholder="https://farmasi.uis.ac.id atau https://...">
-                            </div>
-                            <div class="form-text" style="font-size: 11.5px;">
-                                Menu di header dropdown akan langsung membuka tautan ini. Jika dikosongkan, akan diarahkan ke halaman detail prodi di portal UIS.
+                                       class="form-control font-monospace"
+                                       placeholder="Contoh: https://farmasi.uis.ac.id">
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label fw-semibold small text-dark d-flex align-items-center justify-content-between">
-                                <span><i class="bi bi-card-text text-primary me-1"></i>Deskripsi Singkat (Kartu Beranda)</span>
-                                <span class="badge bg-light text-muted border" style="font-size: 10px;">TinyMCE</span>
+                        <div class="col-lg-2 col-md-12">
+                            <label class="form-label fw-bold small text-dark mb-1">
+                                Icon & Tampilkan
                             </label>
-                            <textarea id="deskripsi_${newIndex}"
-                                      name="prodis[${newIndex}][deskripsi]"
-                                      class="form-control prodi-tinymce-deskripsi"
-                                      rows="4"
-                                      placeholder="Ringkasan singkat tentang program studi..."></textarea>
-                        </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="input-group input-group-sm" style="max-width: 130px;" title="Icon Bootstrap">
+                                    <span class="input-group-text bg-white text-success">
+                                        <i class="bi bi-mortarboard-fill prodi-icon-preview"></i>
+                                    </span>
+                                    <input type="text"
+                                           name="prodis[${newIndex}][icon]"
+                                           class="form-control prodi-icon-input"
+                                           value="bi-mortarboard-fill"
+                                           placeholder="bi-mortarboard-fill">
+                                </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label fw-semibold small text-dark d-flex align-items-center justify-content-between">
-                                <span><i class="bi bi-award text-primary me-1"></i>Kompetensi / Poin Keunggulan</span>
-                                <span class="badge bg-light text-muted border" style="font-size: 10px;">TinyMCE</span>
-                            </label>
-                            <textarea id="rincian_${newIndex}"
-                                      name="prodis[${newIndex}][rincian]"
-                                      class="form-control prodi-tinymce-rincian"
-                                      rows="4"
-                                      placeholder="Poin-poin keunggulan atau kurikulum unggulan..."></textarea>
-                        </div>
-
-                        <div class="col-md-7">
-                            <label class="form-label fw-semibold small text-dark">
-                                Keterangan / Akreditasi <span class="badge bg-secondary fw-normal ms-1" style="font-size:9px">Opsional</span>
-                            </label>
-                            <input type="text"
-                                   name="prodis[${newIndex}][dasar_hukum]"
-                                   class="form-control form-control-sm"
-                                   placeholder="Contoh: SK LAM-PTKes & Kemendikbudristek">
-                        </div>
-
-                        <div class="col-md-5 d-flex align-items-center" style="padding-top: 24px;">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input"
-                                       type="checkbox"
-                                       id="aktif_${newIndex}"
-                                       name="prodis[${newIndex}][aktif]"
-                                       value="1"
-                                       checked>
-                                <label class="form-check-label fw-semibold small text-dark" for="aktif_${newIndex}">
-                                    Tampilkan di Dropdown & Beranda
-                                </label>
+                                <div class="form-check form-switch m-0" title="Aktif di dropdown navbar">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           name="prodis[${newIndex}][aktif]"
+                                           value="1"
+                                           checked>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            `;
-            container.appendChild(card);
-            updateIndexes();
+            </div>
+        `;
 
-            // Initialize TinyMCE for new item
-            initTinyMCEOn(`deskripsi_${newIndex}`);
-            initTinyMCEOn(`rincian_${newIndex}`);
-
-            card.querySelector('.prodi-judul-input').focus();
-        });
-    }
-
-    container.addEventListener('click', function (e) {
-        const removeBtn = e.target.closest('.btn-remove-prodi');
-        if (removeBtn) {
-            if (container.querySelectorAll('.prodi-item').length <= 1) {
-                alert('Setidaknya harus ada 1 menu Program Studi.');
-                return;
-            }
-            if (confirm('Yakin ingin menghapus program studi ini?')) {
-                const card = removeBtn.closest('.prodi-item');
-                // Remove tinymce instances if any
-                card.querySelectorAll('textarea').forEach(ta => {
-                    if (ta.id && typeof tinymce !== 'undefined' && tinymce.get(ta.id)) {
-                        tinymce.get(ta.id).remove();
-                    }
-                });
-                card.remove();
-                updateIndexes();
-            }
-        }
+        container.insertAdjacentHTML('beforeend', template);
+        reindexItems();
     });
 
-    if (prodiForm) {
-        prodiForm.addEventListener('submit', function () {
-            if (typeof tinymce !== 'undefined') {
-                tinymce.triggerSave();
-            }
+    function reindexItems() {
+        const items = container.querySelectorAll('.prodi-item');
+        items.forEach((item, idx) => {
+            const badge = item.querySelector('.prodi-index-badge');
+            if (badge) badge.textContent = `Menu #${idx + 1}`;
         });
     }
 });

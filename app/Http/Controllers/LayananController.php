@@ -68,11 +68,10 @@ class LayananController extends Controller
         $request->validate([
             'prodis'         => ['required', 'array', 'min:1'],
             'prodis.*.judul' => ['required', 'string', 'max:255'],
-            'prodis.*.icon'  => ['required', 'string', 'max:100'],
+            'prodis.*.icon'  => ['nullable', 'string', 'max:100'],
             'prodis.*.link'  => ['nullable', 'string', 'max:500'],
         ], [
             'prodis.*.judul.required' => 'Nama Program Studi tidak boleh kosong.',
-            'prodis.*.icon.required'  => 'Icon Program Studi tidak boleh kosong.',
         ]);
 
         $submittedIds = [];

@@ -210,16 +210,6 @@
           @endif
         </div>
 
-        {{-- Link Navigasi Cepat --}}
-        <div class="d-flex flex-wrap gap-3 mt-5 pt-4 border-top">
-          <a href="{{ route('homepage.layanan') }}" class="btn-primary-hero" style="font-size: 13.5px; padding: 10px 22px;">
-            <i class="bi bi-grid-fill me-1"></i> Program Studi Kami
-          </a>
-          <a href="{{ route('homepage.kontak') }}" class="btn-outline-hero" style="font-size: 13.5px; padding: 10px 22px; color: #046B26; border-color: #046B26;">
-            <i class="bi bi-envelope me-1"></i> Hubungi Pimpinan
-          </a>
-        </div>
-
       </div>
 
     </div>

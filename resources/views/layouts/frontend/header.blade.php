@@ -80,14 +80,14 @@
                       $rawLink = 'https://' . $rawLink;
                   }
                   $hasLink = !empty($rawLink);
-                  $prodiHref = $hasLink ? $rawLink : route('homepage.layanan.detail', $navProdi->id);
+                  $prodiHref = $hasLink ? $rawLink : '#';
                   $isExternal = $hasLink && (str_starts_with($rawLink, 'http://') || str_starts_with($rawLink, 'https://'));
                 @endphp
                 <li>
                   <a class="dropdown-item dropdown-item-custom"
                      href="{{ $prodiHref }}"
                      @if($isExternal) target="_blank" rel="noopener noreferrer" @endif>
-                    <i class="bi {{ $navProdi->icon ?: 'bi-mortarboard-fill' }}"></i>
+                    <i class="bi {{ $navProdi->icon ?: 'bi-mortarboard-fill' }}" style="color: var(--uis-green);"></i>
                     <span>{{ $navProdi->judul }}</span>
                     @if($isExternal)
                       <i class="bi bi-box-arrow-up-right ms-auto text-muted" style="font-size: 10px;" title="Buka website prodi"></i>
@@ -95,17 +95,8 @@
                   </a>
                 </li>
               @endforeach
-
-              <li><hr class="dropdown-divider my-1"></li>
-              <li>
-                <a class="dropdown-item dropdown-item-custom fw-semibold" href="{{ route('homepage.layanan') }}" style="color: var(--uis-green);">
-                  <i class="bi bi-grid-fill" style="color: var(--uis-green);"></i>
-                  <span>Semua Program & Fasilitas</span>
-                  <i class="bi bi-arrow-right ms-auto" style="font-size: 11px;"></i>
-                </a>
-              </li>
             @else
-              <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.layanan') }}"><i class="bi bi-mortarboard-fill"></i> Fakultas & Program Studi</a></li>
+              <li><a class="dropdown-item dropdown-item-custom" href="#"><i class="bi bi-mortarboard-fill"></i> Fakultas & Program Studi</a></li>
             @endif
           </ul>
         </li>
