@@ -33,6 +33,7 @@ use App\Http\Controllers\FacultyStatController;
 use App\Http\Controllers\TriDharmaController;
 use App\Http\Controllers\TenagaPendidikController;
 use App\Http\Controllers\LayananTerkaitController;
+use App\Http\Controllers\SocialMediaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -132,6 +133,9 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('banner', BannerController::class);
     Route::post('layanan-terkait/setting', [LayananTerkaitController::class, 'updateSetting'])->name('layanan-terkait.update-setting');
     Route::resource('layanan-terkait', LayananTerkaitController::class);
+    Route::post('social-media/setting', [SocialMediaController::class, 'updateSetting'])->name('social-media.update-setting');
+    Route::resource('social-media', SocialMediaController::class)
+        ->parameters(['social-media' => 'socialMedia']);
     Route::resource('feature', FeatureController::class);
     Route::resource('sarana', SaranaController::class);
     Route::resource('tridharma', TriDharmaController::class);

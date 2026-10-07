@@ -41,18 +41,22 @@
   }
   .news-card-thumb-wrap {
     position: relative;
-    height: 210px;
+    height: 220px;
     overflow: hidden;
-    background: var(--uis-purple-light);
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .news-card-thumb {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
     transition: transform 0.4s ease;
   }
   .news-card-portal:hover .news-card-thumb {
-    transform: scale(1.05);
+    transform: scale(1.04);
   }
   .news-gallery-badge {
     position: absolute;

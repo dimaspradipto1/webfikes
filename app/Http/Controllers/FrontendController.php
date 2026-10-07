@@ -59,6 +59,8 @@ class FrontendController extends Controller
         $facultyStat      = \App\Models\FacultyStat::where('is_active', true)->latest('id')->first();
         $layananTerkaits  = \App\Models\LayananTerkait::where('is_active', true)->orderBy('urutan')->get();
         $layananTerkaitSetting = \App\Models\LayananTerkaitSetting::first();
+        $socialMedias          = \App\Models\SocialMedia::where('is_active', true)->orderBy('urutan')->get();
+        $socialMediaSetting    = \App\Models\SocialMediaSetting::first();
 
         if (!$facultyStat) {
             $facultyStat = (object) [
@@ -95,7 +97,9 @@ class FrontendController extends Controller
             'pmbSetting',
             'facultyStat',
             'layananTerkaits',
-            'layananTerkaitSetting'
+            'layananTerkaitSetting',
+            'socialMedias',
+            'socialMediaSetting'
         ));
     }
 

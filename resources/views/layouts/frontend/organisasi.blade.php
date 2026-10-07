@@ -88,30 +88,36 @@
   }
 
   .ormawa-card-header {
-    background: rgba(4, 107, 38, 0.06);
-    padding: 24px 20px 16px;
+    height: 180px;
+    width: 100%;
     position: relative;
-    text-align: center;
-    border-bottom: 1px solid #f0e6f5;
+    overflow: hidden;
+    background: #f0f7f2;
+    padding: 0;
+    border-bottom: 1px solid #eef2ef;
+  }
+  .ormawa-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .ormawa-card:hover .ormawa-img-top {
+    transform: scale(1.06);
   }
   .ormawa-logo-container {
     width: 80px;
     height: 80px;
-    border-radius: 50%;
-    background: #ffffff;
-    padding: 6px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    background: transparent;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 12px;
-    border: 2px solid #d4edd9;
   }
   .ormawa-logo-img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    border-radius: 50%;
   }
 
   .ormawa-badge-cat {
@@ -306,25 +312,20 @@
         @foreach($organisasiList as $item)
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 80 }}">
             <div class="ormawa-card">
-              <!-- Card Top Header with Logo -->
+              <!-- Card Top Header with Half-Card Image -->
               <div class="ormawa-card-header">
-                <div class="ormawa-logo-container">
-                  @if(!empty($item->logo))
-                    <img src="{{ asset('storage/' . $item->logo) }}" alt="{{ $item->nama_organisasi }}" class="ormawa-logo-img">
-                  @else
-                    <div class="w-100 h-100 rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="background: #032e12; font-size: 18px;">
-                      {{ strtoupper(substr($item->singkatan ?: $item->nama_organisasi, 0, 2)) }}
-                    </div>
-                  @endif
-                </div>
-                <div>
-                  <span class="ormawa-badge-cat">{{ $item->kategori }}</span>
-                </div>
-                @if(!empty($item->singkatan))
-                  <div class="fw-bold mt-2 text-dark" style="font-size: 15px; letter-spacing: 0.5px;">
-                    {{ $item->singkatan }}
+                @if(!empty($item->foto_kegiatan))
+                  <img src="{{ asset('storage/' . $item->foto_kegiatan) }}" alt="{{ $item->nama_organisasi }}" class="ormawa-img-top">
+                @elseif(!empty($item->logo))
+                  <img src="{{ asset('storage/' . $item->logo) }}" alt="{{ $item->nama_organisasi }}" class="ormawa-img-top">
+                @else
+                  <div class="w-100 h-100 d-flex align-items-center justify-content-center text-white fw-bold" style="background: #032e12; font-size: 28px;">
+                    {{ strtoupper(substr($item->singkatan ?: $item->nama_organisasi, 0, 2)) }}
                   </div>
                 @endif
+                <div style="position: absolute; top: 12px; left: 12px;">
+                  <span class="ormawa-badge-cat" style="backdrop-filter: blur(4px);">{{ $item->kategori }}</span>
+                </div>
               </div>
 
               <!-- Card Body -->

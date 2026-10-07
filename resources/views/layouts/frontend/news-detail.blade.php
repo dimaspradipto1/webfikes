@@ -69,8 +69,9 @@
   }
   .article-main-thumb {
     width: 100%;
-    max-height: 480px;
-    object-fit: cover;
+    max-height: 520px;
+    object-fit: contain;
+    background: #f8fafc;
     border-radius: 18px;
     margin-bottom: 30px;
     box-shadow: var(--shadow-sm);

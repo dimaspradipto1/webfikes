@@ -173,6 +173,120 @@
   }
 
   /* ═══════════════════════════════════════════════
+     MEDIA SOSIAL (IKUTI UIS DI MEDIA SOSIAL)
+  ═══════════════════════════════════════════════ */
+  .social-media-section {
+    background-color: #ffffff;
+    padding: 55px 0 45px 0;
+    position: relative;
+  }
+  .social-media-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(22px, 3.2vw, 30px);
+    font-weight: 800;
+    color: #2b7044;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .social-divider-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    max-width: 440px;
+    margin: 0 auto 20px auto;
+  }
+  .social-divider-line {
+    flex: 1;
+    height: 3px;
+    background-color: #2b7044;
+    border-radius: 2px;
+  }
+  .social-divider-icon {
+    color: #2b7044;
+    font-size: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .social-media-quote {
+    font-size: 15.5px;
+    color: #2b2b2b;
+    line-height: 1.65;
+    max-width: 860px;
+    margin: 0 auto 32px auto;
+    text-align: center;
+    font-weight: 500;
+  }
+  .social-media-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .social-media-btn {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    min-height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    text-decoration: none !important;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
+  }
+  .social-media-btn:hover {
+    transform: translateY(-4px) scale(1.1);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.16));
+  }
+  .social-media-img-logo {
+    width: 46px;
+    height: 46px;
+    max-width: 46px;
+    max-height: 46px;
+    object-fit: contain;
+    border-radius: 10px;
+    display: block;
+  }
+  .social-media-icon-fallback {
+    width: 46px;
+    height: 46px;
+    font-size: 44px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #2b7044;
+    transition: color 0.25s ease;
+  }
+  .social-media-btn:hover .social-media-icon-fallback {
+    color: #046B26;
+  }
+  @media (max-width: 575.98px) {
+    .social-media-btn,
+    .social-media-img-logo,
+    .social-media-icon-fallback {
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      min-height: 38px;
+    }
+    .social-media-icon-fallback {
+      font-size: 36px;
+    }
+    .social-media-grid {
+      gap: 14px;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════
      2. STATISTIK STRIP
   ═══════════════════════════════════════════════ */
   .stats-strip {
@@ -455,26 +569,30 @@
     color: var(--uis-purple, #046B26);
   }
   .news-mini-img-wrap {
-    width: 112px;
-    height: 72px;
     flex-shrink: 0;
-    border-radius: 10px;
-    overflow: hidden;
-    background: #f3f4f6;
-    border: 1px solid rgba(0,0,0,0.06);
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
   }
   .news-mini-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 110px;
+    max-height: 85px;
+    width: auto;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease;
   }
   .news-mini-item:hover .news-mini-img {
-    transform: scale(1.06);
+    transform: scale(1.05);
   }
   .news-mini-fallback {
-    width: 100%;
-    height: 100%;
+    width: 80px;
+    height: 75px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -912,6 +1030,19 @@
       max-width: 100% !important;
     }
   }
+
+  /* Ormawa Half-Card Image Style */
+  .ormawa-card-box {
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .ormawa-card-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(4, 107, 38, 0.14) !important;
+    border-color: #046B26 !important;
+  }
+  .ormawa-card-box:hover .ormawa-img-top {
+    transform: scale(1.06);
+  }
 </style>
 @endpush
 
@@ -1082,38 +1213,6 @@
       </div>
     </div>
 
-    <!-- 4. SAMBUTAN REKTOR CARD (FULL HORIZONTAL BANNER) -->
-    <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="300">
-      <div class="col-12">
-        <div class="p-4 rounded-4 shadow-sm" style="background: var(--surface-light); border: 1.5px solid var(--border-light);">
-          <div class="row align-items-center g-4">
-            <div class="col-md-auto text-center text-md-start">
-              @if(!empty($sambutanDekan?->foto_dekan))
-                <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="{{ $sambutanDekan->nama_dekan ?? 'Rektor Universitas Ibnu Sina' }}" class="rounded-circle shadow-sm" style="width: 85px; height: 85px; object-fit: cover; object-position: top center; border: 3px solid var(--uis-green); display:inline-block;">
-              @else
-                <div style="width: 85px; height: 85px; border-radius: 50%; background: #046B26; color: white; display:inline-flex; align-items:center; justify-content:center; font-size:36px; border: 3px solid var(--uis-yellow);">
-                  <i class="bi bi-person-badge-fill"></i>
-                </div>
-              @endif
-            </div>
-            <div class="col-md">
-              <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
-                <div>
-                  <h5 class="fw-bold mb-0 text-dark">{{ $sambutanDekan->nama_dekan ?? 'Assoc. Prof. Dr. Ir. Larisang, S.T., M.T., IPU., ASEAN Eng.' }}</h5>
-                  <span class="text-muted small fw-semibold">{{ $sambutanDekan->jabatan_dekan ?? 'Rektor Universitas Ibnu Sina (UIS) Batam' }}</span>
-                </div>
-                <a href="{{ route('homepage.sambutan-rektor') }}" class="badge text-decoration-none" style="background: var(--uis-yellow); color: #046B26; font-weight: 800; padding: 7px 14px; font-size: 13px;">
-                  Baca Sambutan Rektor <i class="bi bi-arrow-right ms-1"></i>
-                </a>
-              </div>
-              <blockquote class="text-muted mb-0" style="font-style: italic; line-height: 1.7; text-align: justify; font-size: 14px;">
-                "{{ strip_tags($sambutanDekan->kutipan_singkat ?? ($sambutanDekan->sambutan_dekan ?? 'Selamat datang di Universitas Ibnu Sina (UIS) Batam — Kampusnya Profesional Muda. Kami bertekad membentuk generasi intelektual yang unggul, inovatif, berjiwa entrepreneur, dan berkarakter Imtaq yang siap memimpin industri di kancah nasional maupun global.')) }}"
-              </blockquote>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1248,67 +1347,6 @@
 
 @endif
 
-<!-- ═══════════════════════════════════════════════
-     4. PROGRAM STUDI UNGGULAN
-═══════════════════════════════════════════════ -->
-<section class="section-bg-sand" id="prodi">
-  <div class="container">
-    <div class="text-center mb-5" data-aos="fade-up">
-      <div class="section-label mx-auto">Fakultas & Program Studi</div>
-      <h2 class="section-title">Fakultas & Program Studi <em>Unggulan</em> UIS</h2>
-      <div class="divider-line centered"></div>
-      <p class="section-desc mx-auto">
-        Program sarjana dan pascasarjana multidisiplin yang dirancang khusus menjawab kebutuhan industri manufaktur modern, logistik maritim, tata kelola bisnis, dan keselamatan kerja profesional di Batam.
-      </p>
-    </div>
-
-    <div class="row g-4">
-      @if(isset($layanans) && $layanans->count() > 0)
-        @foreach($layanans as $index => $l)
-          @php
-            $rincianItems = $l->rincian ? array_filter(array_map('trim', explode("\n", $l->rincian))) : [];
-            $prodiUrl = !empty($l->link) ? $l->link : route('homepage.layanan.detail', $l->id);
-            $isExternal = !empty($l->link) && (str_starts_with($l->link, 'http://') || str_starts_with($l->link, 'https://'));
-          @endphp
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
-            <div class="prodi-card h-100 d-flex flex-column justify-content-between">
-              <div>
-                @if($l->dasar_hukum)
-                  <span class="prodi-badge">{{ $l->dasar_hukum }}</span>
-                @endif
-                <h3 class="prodi-title" style="font-size:20px;">{{ $l->judul }}</h3>
-                <div class="text-muted small mb-3 prodi-desc" style="line-height: 1.65; text-align: justify;">
-                  {!! $l->deskripsi !!}
-                </div>
-
-                @if(!empty($l->rincian))
-                  <div class="prodi-subhead mb-2"><i class="bi bi-award-fill me-1"></i> Kompetensi / Keunggulan:</div>
-                  @if(str_contains($l->rincian, '<') && str_contains($l->rincian, '>'))
-                    <div class="prodi-rich-rincian small mb-0">
-                      {!! $l->rincian !!}
-                    </div>
-                  @else
-                    <ul class="prodi-list">
-                      @foreach(array_slice($rincianItems, 0, 4) as $point)
-                        <li><i class="bi bi-check-circle-fill"></i> {{ $point }}</li>
-                      @endforeach
-                    </ul>
-                  @endif
-                @endif
-              </div>
-
-              <div class="mt-4 pt-3 border-top">
-                <a href="{{ $prodiUrl }}" @if($isExternal) target="_blank" rel="noopener noreferrer" @endif class="btn-primary-hero w-100 justify-content-center" style="font-size:13px; padding:10px 16px;">
-                  Detail {{ $l->judul }} @if($isExternal)<i class="bi bi-box-arrow-up-right ms-1"></i>@else<i class="bi bi-arrow-right"></i>@endif
-                </a>
-              </div>
-            </div>
-          </div>
-        @endforeach
-      @endif
-    </div>
-  </div>
-</section>
 
 <!-- ═══════════════════════════════════════════════
      5. MENGAPA MEMILIH Universitas Ibnu Sina
@@ -1608,37 +1646,45 @@
       <div class="row g-4">
         @foreach($organisasis->take(4) as $index => $ormawa)
           <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
-            <div class="p-4 rounded-4 bg-white border text-center h-100 shadow-sm d-flex flex-column justify-content-between" style="transition: all 0.3s ease; border-color: #d8e8dc !important;">
+            <div class="rounded-4 bg-white border h-100 shadow-sm d-flex flex-column justify-content-between overflow-hidden position-relative ormawa-card-box" style="border-color: #d8e8dc !important;">
               <div>
-                <div style="width: 70px; height: 70px; border-radius: 50%; background: #ffffff; border: 2px solid #d4edd9; box-shadow: 0 4px 12px rgba(0,0,0,0.06); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 14px; padding: 5px;">
-                  @if(!empty($ormawa->logo))
-                    <img src="{{ asset('storage/' . $ormawa->logo) }}" alt="{{ $ormawa->nama_organisasi }}" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 50%;">
+                {{-- Gambar Setengah Card --}}
+                <div style="height: 165px; width: 100%; overflow: hidden; background: #f0f7f2; position: relative;">
+                  @if(!empty($ormawa->foto_kegiatan))
+                    <img src="{{ asset('storage/' . $ormawa->foto_kegiatan) }}" alt="{{ $ormawa->nama_organisasi }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="ormawa-img-top">
+                  @elseif(!empty($ormawa->logo))
+                    <img src="{{ asset('storage/' . $ormawa->logo) }}" alt="{{ $ormawa->nama_organisasi }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="ormawa-img-top">
                   @else
-                    <span class="fw-bold" style="color: #046B26; font-size: 16px;">{{ strtoupper(substr($ormawa->singkatan ?: $ormawa->nama_organisasi, 0, 2)) }}</span>
+                    <div class="w-100 h-100 d-flex align-items-center justify-content-center fw-bold" style="background: #046B26; color: white; font-size: 28px;">
+                      {{ strtoupper(substr($ormawa->singkatan ?: $ormawa->nama_organisasi, 0, 2)) }}
+                    </div>
                   @endif
                 </div>
 
-                <div class="mb-2">
-                  <span class="badge" style="background: rgba(4, 107, 38, 0.1); color: #046B26; font-size: 11px; font-weight: 700; border-radius: 20px; padding: 4px 10px;">
-                    {{ $ormawa->kategori }}
-                  </span>
+                {{-- Konten Card --}}
+                <div class="p-3 text-center">
+                  <div class="mb-2">
+                    <span class="badge" style="background: rgba(4, 107, 38, 0.1); color: #046B26; font-size: 11px; font-weight: 700; border-radius: 20px; padding: 4px 10px;">
+                      {{ $ormawa->kategori }}
+                    </span>
+                  </div>
+
+                  <h5 class="fw-bold text-dark mb-1" style="font-size: 16px; line-height: 1.35;">
+                    <a href="{{ route('homepage.organisasi.detail', $ormawa->slug) }}" class="text-dark text-decoration-none">
+                      {{ $ormawa->singkatan ?: $ormawa->nama_organisasi }}
+                    </a>
+                  </h5>
+                  @if(!empty($ormawa->singkatan) && $ormawa->singkatan !== $ormawa->nama_organisasi)
+                    <div class="text-muted small mb-2 text-truncate" style="font-size: 12px;">{{ $ormawa->nama_organisasi }}</div>
+                  @endif
+
+                  <p class="text-muted small mb-0" style="font-size: 12.5px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                    {{ strip_tags($ormawa->deskripsi ?: ($ormawa->visi ?: 'Lembaga kemahasiswaan aktif di lingkungan Universitas Ibnu Sina.')) }}
+                  </p>
                 </div>
-
-                <h5 class="fw-bold text-dark mb-1" style="font-size: 16px; line-height: 1.35;">
-                  <a href="{{ route('homepage.organisasi.detail', $ormawa->slug) }}" class="text-dark text-decoration-none">
-                    {{ $ormawa->singkatan ?: $ormawa->nama_organisasi }}
-                  </a>
-                </h5>
-                @if(!empty($ormawa->singkatan) && $ormawa->singkatan !== $ormawa->nama_organisasi)
-                  <div class="text-muted small mb-2 text-truncate" style="font-size: 12px;">{{ $ormawa->nama_organisasi }}</div>
-                @endif
-
-                <p class="text-muted small mb-3" style="font-size: 12.5px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
-                  {{ strip_tags($ormawa->deskripsi ?: ($ormawa->visi ?: 'Lembaga kemahasiswaan aktif di lingkungan Universitas Ibnu Sina.')) }}
-                </p>
               </div>
 
-              <div class="pt-3 border-top mt-auto d-flex align-items-center justify-content-between">
+              <div class="px-3 pb-3 pt-2 border-top mt-auto d-flex align-items-center justify-content-between">
                 <small class="text-muted"><i class="bi bi-person-fill text-primary me-1"></i>{{ Str::limit($ormawa->nama_ketua ?: 'Ketua Ormawa', 14) }}</small>
                 <a href="{{ route('homepage.organisasi.detail', $ormawa->slug) }}" class="fw-bold text-decoration-none" style="color: var(--uis-purple); font-size: 12.5px;">
                   Detail <i class="bi bi-arrow-right"></i>
@@ -1812,6 +1858,52 @@
             </h3>
           </a>
         </div>
+      @endforeach
+    </div>
+  </div>
+</section>
+@endif
+
+<!-- ═══════════════════════════════════════════════
+     MEDIA SOSIAL (IKUTI UIS DI MEDIA SOSIAL)
+═══════════════════════════════════════════════ -->
+@if(isset($socialMedias) && $socialMedias->count() > 0)
+<section class="social-media-section" id="media-sosial">
+  <div class="container">
+    {{-- Header Judul Seksi --}}
+    <h2 class="social-media-title" data-aos="fade-up">
+      {{ $socialMediaSetting->judul_seksi ?? 'IKUTI UIS DI MEDIA SOSIAL' }}
+    </h2>
+
+    {{-- Divider Garis Ikon Share --}}
+    <div class="social-divider-wrap" data-aos="fade-up" data-aos-delay="50">
+      <span class="social-divider-line"></span>
+      <span class="social-divider-icon"><i class="bi bi-share"></i></span>
+      <span class="social-divider-line"></span>
+    </div>
+
+    {{-- Deskripsi Kutipan Ajakan --}}
+    @if(!empty($socialMediaSetting?->subjudul_seksi))
+      <p class="social-media-quote" data-aos="fade-up" data-aos-delay="100">
+        {{ $socialMediaSetting->subjudul_seksi }}
+      </p>
+    @endif
+
+    {{-- Tombol Baris Ikon Media Sosial --}}
+    <div class="social-media-grid" data-aos="fade-up" data-aos-delay="150">
+      @foreach($socialMedias as $sm)
+        <a href="{{ $sm->url }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="social-media-btn"
+           title="{{ $sm->nama }}"
+           aria-label="{{ $sm->nama }}">
+          @if($sm->logo_url)
+            <img src="{{ $sm->logo_url }}" alt="{{ $sm->nama }}" class="social-media-img-logo">
+          @else
+            <i class="bi {{ $sm->icon ?: 'bi-globe' }} social-media-icon-fallback"></i>
+          @endif
+        </a>
       @endforeach
     </div>
   </div>

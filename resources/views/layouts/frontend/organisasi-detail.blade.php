@@ -79,6 +79,14 @@
     padding: 24px;
     margin-bottom: 24px;
   }
+  .visi-misi-card ol, .visi-misi-card ul {
+    padding-left: 20px;
+    margin-bottom: 0.5rem;
+  }
+  .visi-misi-card li {
+    margin-bottom: 8px;
+    line-height: 1.65;
+  }
 
   .sidebar-ormawa-item {
     display: flex;
@@ -143,11 +151,11 @@
         <div class="detail-card">
           <!-- Logo & Header info -->
           <div class="d-flex flex-wrap align-items-center gap-4 pb-4 border-bottom mb-4">
-            <div style="width: 100px; height: 100px; border-radius: 50%; padding: 6px; background: #ffffff; border: 2px solid #d4edd9; box-shadow: 0 4px 14px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <div class="flex-shrink-0" style="display: flex; align-items: center; justify-content: center;">
               @if(!empty($organisasi->logo))
-                <img src="{{ asset('storage/' . $organisasi->logo) }}" alt="{{ $organisasi->nama_organisasi }}" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 50%;">
+                <img src="{{ asset('storage/' . $organisasi->logo) }}" alt="{{ $organisasi->nama_organisasi }}" style="width: 85px; height: 85px; object-fit: contain; display: block;">
               @else
-                <div class="w-100 h-100 rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="background: #032e12; font-size: 24px;">
+                <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="width: 80px; height: 80px; background: #032e12; font-size: 24px;">
                   {{ strtoupper(substr($organisasi->singkatan ?: $organisasi->nama_organisasi, 0, 2)) }}
                 </div>
               @endif
@@ -238,7 +246,7 @@
                   <h4 class="h6 fw-bold text-dark d-flex align-items-center gap-2">
                     <i class="bi bi-bullseye text-danger"></i> Visi
                   </h4>
-                  <p class="mb-0 text-secondary" style="font-size: 14.5px;">{{ $organisasi->visi }}</p>
+                  <div class="mb-0 text-secondary" style="font-size: 14.5px;">{!! $organisasi->visi !!}</div>
                 </div>
               @endif
 
@@ -247,7 +255,7 @@
                   <h4 class="h6 fw-bold text-dark d-flex align-items-center gap-2">
                     <i class="bi bi-list-check text-success"></i> Misi
                   </h4>
-                  <div class="text-secondary" style="font-size: 14.5px; white-space: pre-line;">{{ $organisasi->misi }}</div>
+                  <div class="text-secondary" style="font-size: 14.5px;">{!! $organisasi->misi !!}</div>
                 </div>
               @endif
             </div>
