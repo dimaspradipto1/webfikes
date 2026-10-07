@@ -141,7 +141,7 @@
 
     html { 
       scroll-behavior: smooth;
-      overflow-x: hidden;
+      overflow-x: clip;
       max-width: 100vw;
     }
 
@@ -149,7 +149,7 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: var(--page-bg);
       color: var(--text-main);
-      overflow-x: hidden;
+      overflow-x: clip;
       max-width: 100vw;
       line-height: 1.65;
     }
@@ -231,8 +231,12 @@
     .navbar-main {
       background: var(--uis-green, #046B26);
       padding: 10px 0;
+      position: -webkit-sticky;
       position: sticky;
       top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
       z-index: 1050;
       border-bottom: 3px solid var(--uis-yellow, #FED802);
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
@@ -867,10 +871,6 @@
 
 <body>
 
-<!-- ═══════════════════════════════════════════════
-     TOPBAR BILAH ATAS
-═══════════════════════════════════════════════ -->
-@include('layouts.frontend.topbar')
 
 <!-- ═══════════════════════════════════════════════
      NAVBAR HEADER UTAMA

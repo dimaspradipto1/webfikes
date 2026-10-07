@@ -983,49 +983,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════
-     2. LAYANAN TERKAIT (PORTAL & DIGITAL SERVICES)
-═══════════════════════════════════════════════ -->
-@if(isset($layananTerkaits) && $layananTerkaits->count() > 0)
-<section class="layanan-terkait-section" id="layanan-terkait">
-  <div class="container">
-    {{-- Header Title & Subtitle --}}
-    <div class="text-center mb-4" data-aos="fade-up">
-      <h2 class="layanan-terkait-title">
-        {{ $layananTerkaitSetting->judul_seksi ?? 'LAYANAN TERKAIT' }}
-      </h2>
-      @if(!empty($layananTerkaitSetting?->subjudul_seksi))
-        <p class="layanan-terkait-desc">
-          “{{ $layananTerkaitSetting->subjudul_seksi }}”
-        </p>
-      @endif
-    </div>
-
-    {{-- Grid 4 Columns of Dark Cards --}}
-    <div class="row g-3 g-lg-4 justify-content-center">
-      @foreach($layananTerkaits as $item)
-        <div class="col-xl-3 col-lg-3 col-md-6 col-12" data-aos="fade-up" data-aos-delay="{{ min(400, 50 * ($loop->index + 1)) }}">
-          <a href="{{ $item->url }}" target="_blank" rel="noopener noreferrer" class="layanan-terkait-card" title="{{ $item->deskripsi ?? $item->nama }}">
-            {{-- Top Right Logo / Icon --}}
-            <div class="layanan-terkait-logo-wrap">
-              @if($item->logo_url)
-                <img src="{{ $item->logo_url }}" alt="{{ $item->nama }}" class="layanan-terkait-logo">
-              @else
-                <i class="bi {{ $item->icon ?: 'bi-box-arrow-up-right' }} layanan-terkait-icon"></i>
-              @endif
-            </div>
-
-            {{-- Bottom Left Service Name --}}
-            <h3 class="layanan-terkait-name">
-              {{ $item->nama }}
-            </h3>
-          </a>
-        </div>
-      @endforeach
-    </div>
-  </div>
-</section>
-@endif
 
 
 
@@ -1816,6 +1773,50 @@
     </div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════════════
+     LAYANAN TERKAIT (PORTAL & DIGITAL SERVICES)
+═══════════════════════════════════════════════ -->
+@if(isset($layananTerkaits) && $layananTerkaits->count() > 0)
+<section class="layanan-terkait-section" id="layanan-terkait">
+  <div class="container">
+    {{-- Header Title & Subtitle --}}
+    <div class="text-center mb-4" data-aos="fade-up">
+      <h2 class="layanan-terkait-title">
+        {{ $layananTerkaitSetting->judul_seksi ?? 'LAYANAN TERKAIT' }}
+      </h2>
+      @if(!empty($layananTerkaitSetting?->subjudul_seksi))
+        <p class="layanan-terkait-desc">
+          “{{ $layananTerkaitSetting->subjudul_seksi }}”
+        </p>
+      @endif
+    </div>
+
+    {{-- Grid 4 Columns of Dark Cards --}}
+    <div class="row g-3 g-lg-4 justify-content-center">
+      @foreach($layananTerkaits as $item)
+        <div class="col-xl-3 col-lg-3 col-md-6 col-12" data-aos="fade-up" data-aos-delay="{{ min(400, 50 * ($loop->index + 1)) }}">
+          <a href="{{ $item->url }}" target="_blank" rel="noopener noreferrer" class="layanan-terkait-card" title="{{ $item->deskripsi ?? $item->nama }}">
+            {{-- Top Right Logo / Icon --}}
+            <div class="layanan-terkait-logo-wrap">
+              @if($item->logo_url)
+                <img src="{{ $item->logo_url }}" alt="{{ $item->nama }}" class="layanan-terkait-logo">
+              @else
+                <i class="bi {{ $item->icon ?: 'bi-box-arrow-up-right' }} layanan-terkait-icon"></i>
+              @endif
+            </div>
+
+            {{-- Bottom Left Service Name --}}
+            <h3 class="layanan-terkait-name">
+              {{ $item->nama }}
+            </h3>
+          </a>
+        </div>
+      @endforeach
+    </div>
+  </div>
+</section>
+@endif
 
 <!-- ═══════════════════════════════════════════════
      11. BERITA, PENGUMUMAN & AGENDA (LAYOUT BARU)
