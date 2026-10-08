@@ -78,6 +78,16 @@
       --uis-yellow-light:   #fefde8;
       --uis-yellow-subtle:  #fef9c3;
       
+      /* Cheerful & Professional Secondary Accents (Solid Warm & Emerald, No Blue) */
+      --uis-coral:          #ea580c;  /* Warm Coral / Tangerine */
+      --uis-coral-light:    #ffedd5;
+      
+      --uis-amber:          #d97706;  /* Warm Amber Gold */
+      --uis-amber-light:    #fef3c7;
+      
+      --uis-teal:           #0d9488;  /* Mint / Teal */
+      --uis-teal-light:     #ccfbf1;
+      
       /* Backward compatibility alias */
       --uis-purple:       var(--uis-green);
       --uis-purple-dark:  var(--uis-green-dark);
@@ -91,33 +101,39 @@
       --uis-orange-light: var(--uis-yellow-light);
       --uis-orange-subtle:var(--uis-yellow-subtle);
       
-      --obsidian-dark:      #032e12;
-      --obsidian-card:      #053d18;
+      --obsidian-dark:      #03521d;
+      --obsidian-card:      #046B26;
       
       --white:              #ffffff;
-      --page-bg:            #f8fcf9;
-      --surface-light:      #edf6f0;
-      --surface-muted:      #e2ede5;
+      --page-bg:            #f8fafc;  /* Clean Slate-50 */
+      --surface-light:      #f1f5f9;  /* Crisp Slate-100 */
+      --surface-muted:      #e2e8f0;  /* Slate-200 */
       
-      --text-main:          #0e2417;
-      --text-muted:         #475b4e;
-      --text-light:         #768a7d;
+      --text-main:          #0f172a;  /* Slate-900 (ultra-crisp readability) */
+      --text-muted:         #475569;  /* Slate-600 */
+      --text-light:         #94a3b8;  /* Slate-400 */
       
-      --border-light:       #d8e8dc;
-      --border-purple:      #86c299;
+      --border-light:       #e2e8f0;  /* Slate-200 */
+      --border-purple:      #046B26;
       --border-orange:      #FED802;
       
-      --shadow-sm:          0 4px 12px rgba(4, 107, 38, 0.08);
-      --shadow-md:          0 8px 24px rgba(4, 107, 38, 0.12);
-      --shadow-lg:          0 16px 36px rgba(4, 107, 38, 0.16);
-      --shadow-orange:      0 6px 18px rgba(254, 216, 2, 0.25);
-      --shadow-purple:      0 6px 18px rgba(4, 107, 38, 0.25);
+      --shadow-sm:          0 2px 10px rgba(15, 23, 42, 0.05);
+      --shadow-md:          0 8px 24px rgba(15, 23, 42, 0.08);
+      --shadow-lg:          0 16px 36px rgba(15, 23, 42, 0.12);
+      --shadow-orange:      0 6px 18px rgba(254, 216, 2, 0.28);
+      --shadow-purple:      0 6px 18px rgba(4, 107, 38, 0.2);
     }
 
     .text-terracotta, .text-uis-purple, .text-uis-green { color: var(--uis-green) !important; }
     .text-uis-orange, .text-uis-yellow { color: var(--uis-yellow) !important; }
     .bg-uis-green, .bg-uis-purple { background-color: var(--uis-green) !important; }
     .bg-uis-yellow, .bg-uis-orange { background-color: var(--uis-yellow) !important; }
+
+    /* Cheerful Soft Badges (Solid Tones, No Blue) */
+    .badge-soft-teal { background: #ccfbf1; color: #0d9488; border: 1px solid #99f6e4; font-weight: 700; }
+    .badge-soft-coral { background: #ffedd5; color: #ea580c; border: 1px solid #fed7aa; font-weight: 700; }
+    .badge-soft-amber { background: #fef3c7; color: #d97706; border: 1px solid #fde68a; font-weight: 700; }
+    .badge-soft-green { background: #eaf6ee; color: #046B26; border: 1px solid #d4edd9; font-weight: 700; }
 
     /* ═══════════════════════════════════════════════
        MOBILE SMOOTH PERFORMANCE & INSTANT CONTENT RENDER
@@ -188,6 +204,104 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
       color: var(--text-main);
+    }
+
+    /* ═══════════════════════════════════════════════
+       UNIVERSAL SUBPAGE HERO BANNER CONTRAST & TYPOGRAPHY
+       Guarantees crisp white headings & legible subtitles across all hero sections
+    ═══════════════════════════════════════════════ */
+    .prestasi-hero, .dosen-hero, .news-hero, .article-hero, .about-hero, .sejarah-hero,
+    .visimisi-hero, .rektor-hero, .detail-hero, .ormawa-hero, .layanan-hero, .galeri-hero,
+    .fasilitas-hero, .kontak-hero, .faq-hero, .kerjasama-hero, .tracer-hero, .download-hero,
+    .kurikulum-hero, .hero-subpage, .page-hero-banner {
+      background: #046B26 !important;
+      border-bottom: 3px solid #FED802 !important;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prestasi-hero h1, .prestasi-hero h2, .prestasi-hero h3,
+    .dosen-hero h1, .dosen-hero h2, .dosen-hero h3,
+    .news-hero h1, .news-hero h2, .news-hero h3,
+    .article-hero h1, .article-hero h2, .article-hero h3,
+    .about-hero h1, .about-hero h2, .about-hero h3,
+    .sejarah-hero h1, .sejarah-hero h2, .sejarah-hero h3,
+    .visimisi-hero h1, .visimisi-hero h2, .visimisi-hero h3,
+    .rektor-hero h1, .rektor-hero h2, .rektor-hero h3,
+    .detail-hero h1, .detail-hero h2, .detail-hero h3,
+    .ormawa-hero h1, .ormawa-hero h2, .ormawa-hero h3,
+    .layanan-hero h1, .layanan-hero h2, .layanan-hero h3,
+    .galeri-hero h1, .galeri-hero h2, .galeri-hero h3,
+    .fasilitas-hero h1, .fasilitas-hero h2, .fasilitas-hero h3,
+    .kontak-hero h1, .kontak-hero h2, .kontak-hero h3,
+    .faq-hero h1, .faq-hero h2, .faq-hero h3,
+    .kurikulum-hero h1, .hero-subpage h1, .page-hero-banner h1,
+    .text-white h1, .text-white h2, .text-white h3, .text-white h4 {
+      color: #ffffff !important;
+      font-weight: 800 !important;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    .prestasi-hero p, .dosen-hero p, .news-hero p, .article-hero p,
+    .about-hero p, .sejarah-hero p, .visimisi-hero p, .rektor-hero p,
+    .detail-hero p, .ormawa-hero p, .layanan-hero p, .galeri-hero p,
+    .fasilitas-hero p, .kontak-hero p, .faq-hero p, .kurikulum-hero p,
+    .hero-subpage p, .page-hero-banner p {
+      color: rgba(255, 255, 255, 0.92) !important;
+    }
+
+    .prestasi-hero .text-white-50, .dosen-hero .text-white-50, .news-hero .text-white-50,
+    .sejarah-hero .text-white-50, .detail-hero .text-white-50, .about-hero .text-white-50 {
+      color: rgba(255, 255, 255, 0.88) !important;
+    }
+
+    /* ═══════════════════════════════════════════════
+       UNIVERSAL BREADCRUMB CUSTOM — KONSISTEN SEMUA MENU
+       Kecil, Ramping & Proporsional (Sesuai arahan: jangan besar, kecilkan)
+    ═══════════════════════════════════════════════ */
+    .breadcrumb-custom {
+      display: inline-flex !important;
+      align-items: center !important;
+      flex-wrap: wrap !important;
+      gap: 5px !important;
+      font-size: 11px !important;
+      line-height: 1.3 !important;
+      color: rgba(255, 255, 255, 0.6) !important;
+      margin-top: 8px !important;
+      margin-bottom: 0 !important;
+      letter-spacing: 0.25px !important;
+    }
+    .breadcrumb-custom a {
+      color: rgba(255, 255, 255, 0.8) !important;
+      text-decoration: none !important;
+      font-size: 11px !important;
+      font-weight: 500 !important;
+      transition: color 0.2s ease !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 3.5px !important;
+    }
+    .breadcrumb-custom a:hover {
+      color: #FED802 !important;
+    }
+    .breadcrumb-custom a i,
+    .breadcrumb-custom i {
+      font-size: 10.5px !important;
+      line-height: 1 !important;
+      opacity: 0.85 !important;
+    }
+    .breadcrumb-custom span {
+      color: rgba(255, 255, 255, 0.4) !important;
+      font-size: 9.5px !important;
+      line-height: 1 !important;
+      user-select: none !important;
+    }
+    .breadcrumb-custom .active,
+    .breadcrumb-custom span.active {
+      color: #FED802 !important;
+      font-size: 11px !important;
+      font-weight: 600 !important;
+      line-height: 1.3 !important;
     }
 
     a { text-decoration: none; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -600,8 +714,8 @@
     .divider-line {
       width: 60px;
       height: 4px;
-      background: var(--uis-yellow);
-      border-radius: 2px;
+      background: #FED802;
+      border-radius: 4px;
       margin-bottom: 24px;
     }
     .divider-line.centered { margin-left: auto; margin-right: auto; }

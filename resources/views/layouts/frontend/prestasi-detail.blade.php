@@ -69,19 +69,19 @@
 <!-- Header Hero -->
 <div class="detail-hero text-white">
   <div class="container">
-    <nav aria-label="breadcrumb" class="mb-3">
-      <ol class="breadcrumb mb-0">
-        <li class="breadcrumb-item"><a href="{{ route('homepage') }}" class="text-white-50 text-decoration-none">Beranda</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('homepage.prestasi') }}" class="text-white-50 text-decoration-none">Prestasi Mahasiswa</a></li>
-        <li class="breadcrumb-item active text-white" aria-current="page">{{ Str::limit($prestasi->judul_prestasi, 35) }}</li>
-      </ol>
-    </nav>
+    <div class="breadcrumb-custom mb-3">
+      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+      <span>/</span>
+      <a href="{{ route('homepage.prestasi') }}">Prestasi Mahasiswa</a>
+      <span>/</span>
+      <span class="active">{{ Str::limit($prestasi->judul_prestasi, 35) }}</span>
+    </div>
     <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
       @php
         $tingkatBadge = match($prestasi->tingkat) {
             'Internasional' => 'bg-danger text-white',
             'Nasional'      => 'bg-success text-white',
-            'Provinsi / Wilayah' => 'bg-primary text-white',
+            'Provinsi / Wilayah' => 'bg-warning text-dark',
             default         => 'bg-secondary text-white',
         };
       @endphp

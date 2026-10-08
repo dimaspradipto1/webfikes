@@ -83,7 +83,7 @@
 <!-- ═══════════════════════════════════════════════
      HERO BANNER
 ═══════════════════════════════════════════════ -->
-<div class="about-hero" style="background: var(--obsidian-dark); padding: 75px 0 55px; border-bottom: 3px solid var(--uis-purple);">
+<div class="about-hero">
   <div class="container">
     <div class="about-hero-content" data-aos="fade-up" data-aos-duration="800">
       <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3" style="background: rgba(254, 216, 2, 0.15); border: 1px solid rgba(254, 216, 2, 0.4);">
@@ -94,9 +94,9 @@
         Kisah Sukses & <em style="font-style: normal; color: var(--uis-orange);">Testimoni Alumni</em>
       </h1>
       <div class="breadcrumb-custom">
-        <a href="{{ route('homepage') }}"><i class="bi bi-house-fill me-1"></i>Beranda</a>
-        <span class="mx-2 text-white-50">/</span>
-        <span style="color: var(--uis-orange); font-weight: 600;">Testimoni Alumni</span>
+        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+        <span>/</span>
+        <span class="active">Testimoni Alumni</span>
       </div>
     </div>
   </div>

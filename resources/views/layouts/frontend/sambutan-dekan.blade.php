@@ -22,16 +22,7 @@
     font-style: normal;
     color: #FED802;
   }
-  .breadcrumb-custom {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13.5px;
-    color: rgba(255, 255, 255, 0.75);
-  }
-  .breadcrumb-custom a { color: rgba(255, 255, 255, 0.9); text-decoration: none; }
-  .breadcrumb-custom a:hover { color: #FED802; }
-  .breadcrumb-custom .active { color: #FED802; font-weight: 600; }
+
 
   /* Rektor Card */
   .rektor-portrait-box {
@@ -128,7 +119,7 @@
         Sambutan <em>Rektor</em>
       </h1>
       <div class="breadcrumb-custom">
-        <a href="{{ route('homepage') }}"><i class="bi bi-house-fill me-1"></i>Beranda</a>
+        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
         <span>/</span>
         <a href="{{ route('homepage.tentang') }}">Profil</a>
         <span>/</span>

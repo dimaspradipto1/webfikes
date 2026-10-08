@@ -72,9 +72,9 @@
         Tanya Jawab <em>(FAQ)</em>
       </h1>
       <div class="breadcrumb-custom">
-        <a href="{{ route('homepage') }}" class="text-white-50"><i class="bi bi-house-fill me-1"></i>Beranda</a>
-        <span class="mx-2 text-white-50">/</span>
-        <span style="color: var(--uis-orange); font-weight: 600;">FAQ</span>
+        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+        <span>/</span>
+        <span class="active">Tanya Jawab (FAQ)</span>
       </div>
     </div>
   </div>

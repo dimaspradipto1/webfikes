@@ -22,16 +22,7 @@
     font-style: normal;
     color: var(--uis-orange);
   }
-  .breadcrumb-custom {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13.5px;
-    color: rgba(255, 255, 255, 0.6);
-  }
-  .breadcrumb-custom a { color: rgba(255, 255, 255, 0.85); }
-  .breadcrumb-custom a:hover { color: var(--uis-orange); }
-  .breadcrumb-custom .active { color: var(--uis-orange); font-weight: 600; }
+
 
   .visual-card-frame {
     background: var(--white);
@@ -86,9 +77,9 @@
         Tentang <em>UIS</em>
       </h1>
       <div class="breadcrumb-custom">
-        <a href="{{ route('homepage') }}"><i class="bi bi-house-fill me-1"></i>Beranda</a>
+        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
         <span>/</span>
-        <span class="active">Tentang Kami</span>
+        <span class="active">Tentang Universitas</span>
       </div>
     </div>
   </div>

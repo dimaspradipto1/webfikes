@@ -6,9 +6,15 @@
 @push('styles')
 <style>
   .prestasi-hero {
-    background: var(--obsidian-dark);
-    padding: 70px 0 50px;
-    border-bottom: 2px solid var(--uis-purple);
+    background: #046B26;
+    padding: 72px 0 54px;
+    border-bottom: 3px solid #FED802;
+    position: relative;
+  }
+  .prestasi-hero h1 {
+    color: #ffffff !important;
+    font-weight: 800;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
   }
   .prestasi-card-portal {
     background: var(--white);
@@ -119,13 +125,18 @@
 <!-- Header Banner -->
 <div class="prestasi-hero text-white">
   <div class="container text-center">
-    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: rgba(229, 168, 35, 0.2); color: #FED802; border: 1px solid rgba(229, 168, 35, 0.4);">
+    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: rgba(254, 216, 2, 0.18); color: #FED802; border: 1px solid rgba(254, 216, 2, 0.45); font-weight: 700; font-size: 13px; letter-spacing: 0.5px;">
       <i class="bi bi-trophy-fill me-1"></i> Hall of Fame & Prestasi
     </div>
-    <h1 class="fw-bold mb-3" style="font-size: 38px;">Prestasi Mahasiswa Universitas Ibnu Sina</h1>
-    <p class="text-white-50 mx-auto" style="max-width: 650px; line-height: 1.7;">
+    <h1 class="fw-bold mb-3 text-white" style="font-size: 38px; color: #ffffff !important; text-shadow: 0 2px 10px rgba(0,0,0,0.35);">Prestasi Mahasiswa Universitas Ibnu Sina</h1>
+    <p class="mx-auto text-white mb-2" style="max-width: 680px; line-height: 1.7; color: rgba(255, 255, 255, 0.92) !important; font-size: 15.5px;">
       Koleksi prestasi gemilang, medali kejuaraan, dan publikasi ilmiah sivitas akademika Universitas Ibnu Sina di tingkat regional, nasional, dan internasional.
     </p>
+    <div class="breadcrumb-custom justify-content-center mt-3">
+      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+      <span>/</span>
+      <span class="active">Prestasi Mahasiswa</span>
+    </div>
   </div>
 </div>
 
@@ -183,7 +194,7 @@
             $tingkatBadge = match($prestasi->tingkat) {
                 'Internasional' => 'bg-danger text-white',
                 'Nasional'      => 'bg-success text-white',
-                'Provinsi / Wilayah' => 'bg-primary text-white',
+                'Provinsi / Wilayah' => 'bg-warning text-dark',
                 default         => 'bg-secondary text-white',
             };
           @endphp

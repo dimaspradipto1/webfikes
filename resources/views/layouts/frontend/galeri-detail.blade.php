@@ -84,13 +84,13 @@
 <!-- Header Hero -->
 <div class="detail-hero text-white">
   <div class="container">
-    <nav aria-label="breadcrumb" class="mb-3">
-      <ol class="breadcrumb mb-0">
-        <li class="breadcrumb-item"><a href="{{ route('homepage') }}" class="text-white-50 text-decoration-none">Beranda</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('homepage.galeri') }}" class="text-white-50 text-decoration-none">Galeri & Dokumentasi</a></li>
-        <li class="breadcrumb-item active text-white" aria-current="page">{{ Str::limit($gallery->judul ?? 'Detail Dokumentasi', 35) }}</li>
-      </ol>
-    </nav>
+    <div class="breadcrumb-custom mb-3">
+      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+      <span>/</span>
+      <a href="{{ route('homepage.galeri') }}">Galeri Dokumentasi</a>
+      <span>/</span>
+      <span class="active">{{ Str::limit($gallery->judul ?? 'Detail Dokumentasi', 35) }}</span>
+    </div>
     <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
       <span class="badge px-3 py-2 rounded-pill font-weight-bold" style="background: var(--uis-purple); color: white; font-size: 12px;">
         <i class="bi bi-camera-fill me-1"></i>Dokumentasi Visual

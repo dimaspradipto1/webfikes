@@ -6,9 +6,14 @@
 @push('styles')
 <style>
   .dosen-hero {
-    background: var(--obsidian-dark);
-    padding: 65px 0 45px;
-    border-bottom: 2px solid var(--uis-purple);
+    background: #046B26;
+    padding: 68px 0 48px;
+    border-bottom: 3px solid #FED802;
+  }
+  .dosen-hero h1 {
+    color: #ffffff !important;
+    font-weight: 800;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
   }
   .prodi-header-pill {
     background: #ffc107;
@@ -137,20 +142,18 @@
 <!-- Header Hero -->
 <div class="dosen-hero text-white">
   <div class="container text-center">
-    <nav aria-label="breadcrumb" class="mb-3">
-      <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="{{ route('homepage') }}" class="text-white-50 text-decoration-none">Beranda</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('homepage.layanan') }}" class="text-white-50 text-decoration-none">Program Studi</a></li>
-        <li class="breadcrumb-item active text-white" aria-current="page">Dosen</li>
-      </ol>
-    </nav>
-    <div class="badge px-3 py-2 rounded-pill mb-2" style="background: rgba(229, 168, 35, 0.2); color: #FED802; border: 1px solid rgba(229, 168, 35, 0.4);">
+    <div class="badge px-3 py-2 rounded-pill mb-2" style="background: rgba(254, 216, 2, 0.18); color: #FED802; border: 1px solid rgba(254, 216, 2, 0.45); font-weight: 700; font-size: 13px;">
       <i class="bi bi-person-workspace me-1"></i> Tenaga Pendidik & Dosen Universitas Ibnu Sina
     </div>
-    <h1 class="fw-bold mb-2" style="font-size: 34px;">Daftar Dosen Pengajar</h1>
-    <p class="text-white-50 mx-auto mb-0" style="max-width: 620px; font-size: 14.5px;">
+    <h1 class="fw-bold mb-2 text-white" style="font-size: 34px; color: #ffffff !important; text-shadow: 0 2px 10px rgba(0,0,0,0.35);">Daftar Dosen Pengajar</h1>
+    <p class="mx-auto mb-0 text-white" style="max-width: 650px; font-size: 15px; color: rgba(255, 255, 255, 0.92) !important; line-height: 1.65;">
       Tenaga pendidik berkualifikasi magister, doktor, dan profesor berdedikasi tinggi dalam membimbing mahasiswa di bidang teknik, ekonomi bisnis, kesehatan, dan pascasarjana.
     </p>
+    <div class="breadcrumb-custom justify-content-center mt-3">
+      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+      <span>/</span>
+      <span class="active">Daftar Dosen Pengajar</span>
+    </div>
   </div>
 </div>
 

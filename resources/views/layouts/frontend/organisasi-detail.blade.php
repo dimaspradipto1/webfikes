@@ -114,13 +114,13 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-8" data-aos="fade-up">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb mb-3 bg-transparent p-0">
-            <li class="breadcrumb-item"><a href="{{ route('homepage') }}" class="text-white-50 text-decoration-none">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('homepage.organisasi') }}" class="text-white-50 text-decoration-none">Organisasi Mahasiswa</a></li>
-            <li class="breadcrumb-item text-warning active fw-semibold" aria-current="page">{{ $organisasi->singkatan ?: $organisasi->nama_organisasi }}</li>
-          </ol>
-        </nav>
+        <div class="breadcrumb-custom mb-3">
+          <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+          <span>/</span>
+          <a href="{{ route('homepage.organisasi') }}">Organisasi Mahasiswa</a>
+          <span>/</span>
+          <span class="active">{{ $organisasi->singkatan ?: $organisasi->nama_organisasi }}</span>
+        </div>
         <span class="badge mb-2" style="background:#FED802; color:#1a0528; font-size:12px; font-weight:700; padding:6px 14px;">
           {{ $organisasi->kategori }}
         </span>

@@ -8,9 +8,9 @@
 <style>
   .news-hero {
     position: relative;
-    background: var(--obsidian-dark);
+    background: #046B26;
     padding: 75px 0 55px;
-    border-bottom: 2px solid var(--uis-purple);
+    border-bottom: 3px solid #FED802;
   }
   .news-hero-title {
     font-size: 38px;
@@ -22,26 +22,29 @@
     font-style: normal;
     color: var(--uis-orange);
   }
+  /* ═══════════════════════════════════════════════
+     REGULAR NEWS CARDS — Proporsional & Pas Sesuai Pandangan
+  ═══════════════════════════════════════════════ */
   .news-card-portal {
     background: var(--white);
     border: 1px solid var(--border-light);
-    border-radius: 20px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
   .news-card-portal:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--border-purple);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
   }
   .news-card-thumb-wrap {
     position: relative;
-    height: 220px;
+    height: 185px;
     overflow: hidden;
     background: #f1f5f9;
     display: flex;
@@ -51,7 +54,7 @@
   .news-card-thumb {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
     transition: transform 0.4s ease;
   }
@@ -60,43 +63,119 @@
   }
   .news-gallery-badge {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: rgba(25, 10, 36, 0.85);
-    color: var(--uis-orange);
+    bottom: 8px;
+    right: 8px;
+    background: rgba(15, 23, 42, 0.85);
+    color: #FED802;
     border: 1px solid rgba(254, 216, 2, 0.4);
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 700;
-    padding: 3px 9px;
+    padding: 3px 8px;
     border-radius: 50px;
     backdrop-filter: blur(4px);
   }
   .news-cat-badge {
     position: absolute;
-    top: 12px;
-    left: 12px;
-    background: var(--uis-purple);
+    top: 10px;
+    left: 10px;
+    background: var(--uis-green);
     color: var(--white);
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 700;
-    padding: 4px 12px;
+    padding: 3px 10px;
     border-radius: 50px;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   }
   .news-card-body {
-    padding: 22px;
+    padding: 16px 18px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
+
+  /* ═══════════════════════════════════════════════
+     FEATURED NEWS CARD (BERITA UTAMA)
+     Ukuran Ramping, Seimbang, & Pas Sesuai Pandangan (Tidak Kebesaran)
+  ═══════════════════════════════════════════════ */
   .news-featured-box {
     background: var(--white);
-    border: 2px solid var(--uis-purple);
-    border-radius: 24px;
+    border: 1px solid var(--border-light);
+    border-radius: 18px;
     overflow: hidden;
-    box-shadow: var(--shadow-md);
-    margin-bottom: 35px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+    margin-bottom: 28px;
+    transition: all 0.25s ease;
+  }
+  .news-featured-box:hover {
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
+  }
+  .news-featured-img-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    background: #f1f5f9;
+    overflow: hidden;
+  }
+  .news-featured-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+    transition: transform 0.4s ease;
+  }
+  .news-featured-box:hover .news-featured-thumb {
+    transform: scale(1.03);
+  }
+  .news-featured-body {
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+  .news-featured-title {
+    font-size: clamp(17px, 1.5vw, 21px);
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 10px;
+    color: #0f172a;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .news-featured-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #64748b;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  @media (min-width: 992px) {
+    .news-featured-box {
+      height: 310px;
+    }
+    .news-featured-img-wrap {
+      height: 310px;
+    }
+    .news-featured-body {
+      height: 310px;
+      padding: 24px 32px;
+    }
+  }
+  @media (max-width: 991.98px) {
+    .news-featured-img-wrap {
+      height: 220px;
+    }
+    .news-featured-body {
+      padding: 20px;
+    }
   }
 
   /* Filter Category Bar */
@@ -186,10 +265,10 @@
       <p class="text-white-50 mb-3" style="max-width: 650px;">
         Kumpulan warta kegiatan universitas, pengumuman akademik, prestasi mahasiswa, riset terapan, dan inovasi civitas akademika Universitas Ibnu Sina Batam.
       </p>
-      <div class="d-flex align-items-center gap-2 text-white-50 small">
-        <a href="{{ route('homepage') }}" class="text-white text-decoration-none">Beranda</a>
+      <div class="breadcrumb-custom">
+        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
         <span>/</span>
-        <span style="color: var(--uis-orange);">Berita & Artikel</span>
+        <span class="active">Berita & Warta Kampus</span>
       </div>
     </div>
   </div>
@@ -204,17 +283,17 @@
     {{-- Featured / Berita Utama --}}
     @if(isset($featured) && $featured)
       <div class="news-featured-box" data-aos="fade-up">
-        <div class="row g-0">
-          <div class="col-lg-6">
-            <div class="position-relative h-100" style="min-height: 280px;">
+        <div class="row g-0 h-100 align-items-stretch">
+          <div class="col-lg-5 col-md-5">
+            <div class="news-featured-img-wrap">
               @if($featured->thumbnail)
-                <img src="{{ asset('storage/' . $featured->thumbnail) }}" alt="{{ $featured->title }}" class="w-100 h-100" style="object-fit: cover;">
+                <img src="{{ asset('storage/' . $featured->thumbnail) }}" alt="{{ $featured->title }}" class="news-featured-thumb">
               @else
                 <div class="w-100 h-100 d-flex align-items-center justify-content-center bg-secondary text-white">
                   <i class="bi bi-image fs-1"></i>
                 </div>
               @endif
-              <span class="badge position-absolute top-0 start-0 m-3 px-3 py-2" style="background: var(--uis-orange); color: #032e12; font-weight: 800;">
+              <span class="badge position-absolute top-0 start-0 m-3 px-3 py-2" style="background: #FED802; color: #046B26; font-weight: 800; font-size: 11px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.18);">
                 <i class="bi bi-star-fill me-1"></i> BERITA UTAMA
               </span>
               @if(!empty($featured->gallery) && count($featured->gallery) > 0)
@@ -224,22 +303,26 @@
               @endif
             </div>
           </div>
-          <div class="col-lg-6 p-4 p-md-5 d-flex flex-column justify-content-between">
-            <div>
-              <div class="d-flex align-items-center gap-3 text-muted small mb-2">
-                <span><i class="bi bi-calendar3 me-1"></i> {{ $featured->created_at->format('d M Y') }}</span>
+          <div class="col-lg-7 col-md-7">
+            <div class="news-featured-body">
+              <div class="d-flex align-items-center gap-2 text-muted small mb-2">
+                <span><i class="bi bi-calendar3 me-1 text-secondary"></i> {{ $featured->created_at->format('d M Y') }}</span>
                 <span>•</span>
                 <span class="badge bg-light text-dark border">{{ $featured->category ?? 'Berita Universitas' }}</span>
               </div>
-              <h3 class="fw-bold mb-3 text-dark">{{ $featured->title }}</h3>
-              <p class="text-muted small mb-4" style="line-height: 1.7;">
-                {{ $featured->description ?? Str::limit(strip_tags($featured->content), 180) }}
+              <h3 class="news-featured-title">
+                <a href="{{ route('homepage.news.detail', $featured->slug ?? $featured->id) }}" class="text-dark text-decoration-none">
+                  {{ $featured->title }}
+                </a>
+              </h3>
+              <p class="news-featured-desc">
+                {{ $featured->description ?? Str::limit(strip_tags($featured->content), 170) }}
               </p>
-            </div>
-            <div>
-              <a href="{{ route('homepage.news.detail', $featured->slug ?? $featured->id) }}" class="btn-primary-hero" style="font-size: 13.5px; padding: 10px 22px;">
-                Baca Berita Lengkap <i class="bi bi-arrow-right"></i>
-              </a>
+              <div>
+                <a href="{{ route('homepage.news.detail', $featured->slug ?? $featured->id) }}" class="btn-primary-hero" style="font-size: 13px; padding: 8px 20px;">
+                  Baca Berita Lengkap <i class="bi bi-arrow-right ms-1"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -312,7 +395,7 @@
             <div class="news-card-portal">
               <div class="news-card-thumb-wrap">
                 @if($article->thumbnail)
-                  <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="{{ $article->title }}" class="news-card-thumb">
+                  <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="{{ $article->title }}" class="news-card-thumb" loading="lazy">
                 @else
                   <div class="w-100 h-100 d-flex align-items-center justify-content-center text-muted">
                     <i class="bi bi-newspaper fs-1"></i>
@@ -328,19 +411,23 @@
 
               <div class="news-card-body">
                 <div>
-                  <div class="text-muted small mb-2">
+                  <div class="text-muted small mb-2" style="font-size: 11.5px;">
                     <i class="bi bi-calendar3 me-1"></i> {{ $article->created_at->format('d M Y') }}
                     <span class="mx-1">•</span>
                     <i class="bi bi-person me-1"></i> {{ $article->user?->name ?? 'Admin UIS' }}
                   </div>
-                  <h5 class="fw-bold mb-2 text-dark">{{ Str::limit($article->title, 65) }}</h5>
-                  <p class="text-muted small mb-3">
+                  <h5 class="fw-bold mb-2 text-dark" style="font-size: 15px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                    <a href="{{ route('homepage.news.detail', $article->slug ?? $article->id) }}" class="text-dark text-decoration-none">
+                      {{ $article->title }}
+                    </a>
+                  </h5>
+                  <p class="text-muted small mb-3" style="font-size: 12.5px; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                     {{ Str::limit($article->description ?? strip_tags($article->content), 110) }}
                   </p>
                 </div>
-                <div class="pt-3 border-top d-flex justify-content-between align-items-center">
-                  <a href="{{ route('homepage.news.detail', $article->slug ?? $article->id) }}" class="fw-bold text-decoration-none" style="color: var(--uis-purple); font-size: 13.5px;">
-                    Selengkapnya <i class="bi bi-arrow-right"></i>
+                <div class="pt-2 border-top d-flex justify-content-between align-items-center">
+                  <a href="{{ route('homepage.news.detail', $article->slug ?? $article->id) }}" class="fw-bold text-decoration-none" style="color: var(--uis-green); font-size: 12.5px;">
+                    Selengkapnya <i class="bi bi-arrow-right ms-1"></i>
                   </a>
                 </div>
               </div>

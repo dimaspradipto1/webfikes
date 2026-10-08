@@ -36,9 +36,9 @@
 <style>
   .article-hero {
     position: relative;
-    background: var(--obsidian-dark);
+    background: #046B26;
     padding: 65px 0 45px;
-    border-bottom: 2px solid var(--uis-purple);
+    border-bottom: 3px solid #FED802;
   }
   .article-meta-badge {
     display: inline-flex;
@@ -329,12 +329,19 @@
         <span>{{ $news->category ?? 'Berita Universitas' }}</span>
       </div>
       <h1 class="article-title-main">{{ $news->title }}</h1>
-      <div class="d-flex flex-wrap align-items-center gap-3 text-white-50 small">
+      <div class="d-flex flex-wrap align-items-center gap-3 text-white-50 small mb-3">
         <span><i class="bi bi-calendar3 me-1" style="color:var(--uis-orange);"></i> {{ $news->created_at->translatedFormat('d F Y') }}</span>
         <span>•</span>
         <span><i class="bi bi-person me-1" style="color:var(--uis-orange);"></i> {{ $news->user?->name ?? 'Redaksi Universitas Ibnu Sina' }}</span>
         <span>•</span>
         <span><i class="bi bi-clock me-1" style="color:var(--uis-orange);"></i> {{ ceil(str_word_count(strip_tags($news->content ?? '')) / 200) ?: 1 }} menit baca</span>
+      </div>
+      <div class="breadcrumb-custom">
+        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+        <span>/</span>
+        <a href="{{ route('homepage.news') }}">Berita</a>
+        <span>/</span>
+        <span class="active">{{ Str::limit($news->title, 35) }}</span>
       </div>
     </div>
   </div>

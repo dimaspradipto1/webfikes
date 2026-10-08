@@ -237,13 +237,11 @@
         </p>
       </div>
       <div class="col-lg-4 text-lg-end mt-4 mt-lg-0" data-aos="fade-left">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb justify-content-lg-end mb-0 bg-transparent p-0">
-            <li class="breadcrumb-item"><a href="{{ route('homepage') }}" class="text-white-50 text-decoration-none">Beranda</a></li>
-            <li class="breadcrumb-item text-white-50">Kemahasiswaan</li>
-            <li class="breadcrumb-item text-warning active fw-semibold" aria-current="page">Organisasi Mahasiswa</li>
-          </ol>
-        </nav>
+        <div class="breadcrumb-custom justify-content-lg-end">
+          <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+          <span>/</span>
+          <span class="active">Organisasi Mahasiswa</span>
+        </div>
       </div>
     </div>
   </div>
@@ -294,7 +292,7 @@
         <div class="small">
           Menampilkan hasil untuk:
           @if(!empty($selectedKategori))
-            <span class="badge bg-primary me-1">{{ $selectedKategori }}</span>
+            <span class="badge bg-success me-1">{{ $selectedKategori }}</span>
           @endif
           @if(!empty($search))
             <span class="badge bg-warning text-dark">Kata kunci: "{{ $search }}"</span>

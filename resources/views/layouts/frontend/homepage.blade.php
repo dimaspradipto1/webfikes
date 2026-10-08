@@ -764,13 +764,12 @@
   /* PMB Banner Box */
   .pmb-cta-box {
     background: #046B26;
-    background: #046B26;
     border-radius: 28px;
     padding: 56px 44px;
     color: var(--white);
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(254, 216, 2, 0.35);
     box-shadow: 0 20px 45px -12px rgba(4, 107, 38, 0.5);
   }
 
@@ -1160,9 +1159,6 @@
   </div>
 </section>
 
-
-
-
 <!-- ═══════════════════════════════════════════════
      3. PROFIL SINGKAT Universitas Ibnu Sina & SAMBUTAN REKTOR
 ═══════════════════════════════════════════════ -->
@@ -1173,7 +1169,7 @@
       <div class="col-12">
         <div class="section-label mx-auto">Profil Universitas</div>
         <h2 class="section-title">
-          {{ $about->judul_profil ?? 'Kampusnya Profesional Muda — Universitas Ibnu Sina' }}
+          {{ $about->judul_profil ?? 'Universitas Ibnu Sina' }}
         </h2>
         <div class="divider-line centered"></div>
       </div>
@@ -1237,30 +1233,30 @@
     <!-- 3. PILAR KEUNGGULAN (3 CARD HORIZONTAL & TOMBOL CTA) -->
     <div class="row g-3 justify-content-center mb-5" data-aos="fade-up" data-aos-delay="250">
       <div class="col-md-4">
-        <div class="p-3 rounded-3 h-100" style="background:#f8faf9; border:1px solid #e2e8f0;">
-          <div class="d-flex align-items-center gap-2 mb-2 text-success fw-bold">
-            <i class="bi bi-award-fill fs-5" style="color:var(--uis-green);"></i>
+        <div class="p-3 rounded-3 h-100 shadow-sm" style="background: #fffbeb; border: 1px solid #fde68a; transition: transform 0.25s ease;">
+          <div class="d-flex align-items-center gap-2 mb-2 fw-bold" style="color: #b45309;">
+            <i class="bi bi-award-fill fs-5" style="color: #d97706;"></i>
             <span>Kurikulum OBE</span>
           </div>
-          <p class="small text-muted mb-0">Terintegrasi sertifikasi kompetensi industri dan pembinaan jiwa wirausaha muda.</p>
+          <p class="small mb-0" style="color: #334155; line-height: 1.6;">Terintegrasi sertifikasi kompetensi industri dan pembinaan jiwa wirausaha muda.</p>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="p-3 rounded-3 h-100" style="background:#f8faf9; border:1px solid #e2e8f0;">
-          <div class="d-flex align-items-center gap-2 mb-2 text-success fw-bold">
-            <i class="bi bi-cpu-fill fs-5" style="color:var(--uis-green);"></i>
+        <div class="p-3 rounded-3 h-100 shadow-sm" style="background: #fff7ed; border: 1px solid #fed7aa; transition: transform 0.25s ease;">
+          <div class="d-flex align-items-center gap-2 mb-2 fw-bold" style="color: #c2410c;">
+            <i class="bi bi-cpu-fill fs-5" style="color: #ea580c;"></i>
             <span>Lab Terpadu & AI</span>
           </div>
-          <p class="small text-muted mb-0">Laboratorium komputasi cerdas, studio logistik industri, dan pengujian K3 modern.</p>
+          <p class="small mb-0" style="color: #334155; line-height: 1.6;">Laboratorium komputasi cerdas, studio logistik industri, dan pengujian K3 modern.</p>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="p-3 rounded-3 h-100" style="background:#f8faf9; border:1px solid #e2e8f0;">
-          <div class="d-flex align-items-center gap-2 mb-2 text-success fw-bold">
-            <i class="bi bi-people-fill fs-5" style="color:var(--uis-green);"></i>
+        <div class="p-3 rounded-3 h-100 shadow-sm" style="background: #f0fdf4; border: 1px solid #bbf7d0; transition: transform 0.25s ease;">
+          <div class="d-flex align-items-center gap-2 mb-2 fw-bold" style="color: #046B26;">
+            <i class="bi bi-people-fill fs-5" style="color: #046B26;"></i>
             <span>Dosen Doktor & Praktisi</span>
           </div>
-          <p class="small text-muted mb-0">Dibimbing pakar berkualifikasi S3 serta praktisi industri multinasional kawasan Batam.</p>
+          <p class="small mb-0" style="color: #334155; line-height: 1.6;">Dibimbing pakar berkualifikasi S3 serta praktisi industri multinasional kawasan Batam.</p>
         </div>
       </div>
       <div class="col-12 text-center mt-3">
@@ -1425,7 +1421,7 @@
         <div class="value-card">
           <div class="value-icon-wrap"><i class="bi bi-book-half"></i></div>
           <div class="value-title">Kurikulum Berbasis Industri</div>
-          <p class="value-desc">Materi kuliah diselaraskan dengan kebutuhan kompetensi industri modern, Permenaker, dan standar sertifikasi internasional.</p>
+          <p class="value-desc">Materi kuliah diselaraskan dengan kebutuhan kompetensi industri, Permenaker, dan standar sertifikasi internasional.</p>
         </div>
       </div>
 
@@ -1441,7 +1437,7 @@
         <div class="value-card">
           <div class="value-icon-wrap"><i class="bi bi-cpu-fill"></i></div>
           <div class="value-title">Laboratorium Mutakhir</div>
-          <p class="value-desc">Peralatan komputasi AI, laboratorium jaringan Cisco, studio teknik industri, perancangan logistik, dan pengujian K3 lingkungan modern.</p>
+          <p class="value-desc">Peralatan komputasi AI, laboratorium jaringan Cisco, studio teknik industri, perancangan logistik, dan pengujian K3 lingkungan.</p>
         </div>
       </div>
 
@@ -1479,7 +1475,7 @@
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label mx-auto">Sarana Kampus</div>
-      <h2 class="section-title">Fasilitas & <em>Laboratorium Modern</em></h2>
+      <h2 class="section-title">Fasilitas & <em>Laboratorium</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
         Menunjang proses riset dan praktikum mahasiswa dengan sarana pengujian berteknologi mutakhir.
@@ -1547,7 +1543,7 @@
             </div>
             <div class="col-sm-6">
               <div class="p-3 rounded-3 bg-light border">
-                <div class="fw-bold text-dark mb-1"><i class="bi bi-people-fill text-primary me-2"></i>Pengmas Berkelanjutan</div>
+                <div class="fw-bold text-dark mb-1"><i class="bi bi-people-fill me-2" style="color: #ea580c !important;"></i>Pengmas Berkelanjutan</div>
                 <p class="text-muted small mb-0">Pemberdayaan digitalisasi UMKM, K3 industri, dan sanitasi pesisir.</p>
               </div>
             </div>
@@ -1602,7 +1598,7 @@
             $tingkatBadge = match($prestasi->tingkat) {
                 'Internasional' => 'bg-danger text-white',
                 'Nasional'      => 'bg-success text-white',
-                'Provinsi / Wilayah' => 'bg-primary text-white',
+                'Provinsi / Wilayah' => 'bg-warning text-dark',
                 default         => 'bg-secondary text-white',
             };
           @endphp
@@ -1649,7 +1645,7 @@
 
                   @if(!empty($prestasi->penyelenggara) || !empty($prestasi->tahun))
                     <div class="d-flex align-items-center justify-content-between text-muted small py-2 px-3 rounded-3 mb-3" style="background: #f8f9fa; font-size: 11.5px;">
-                      <span class="text-truncate me-2"><i class="bi bi-building me-1 text-primary"></i>{{ $prestasi->penyelenggara ?? 'Penyelenggara Nasional' }}</span>
+                      <span class="text-truncate me-2"><i class="bi bi-building me-1 text-warning"></i>{{ $prestasi->penyelenggara ?? 'Penyelenggara Nasional' }}</span>
                       <span class="fw-bold text-dark flex-shrink-0">{{ $prestasi->tahun ?? '' }}</span>
                     </div>
                   @endif
@@ -1815,7 +1811,7 @@
       <h2 class="section-title">Jejak Karir <em>Alumni Universitas Ibnu Sina</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Lulusan Universitas Ibnu Sina telah berkarier di berbagai perusahaan multinasional, industri manufaktur modern, sektor logistik maritim, perbankan, instansi BUMN, pemerintahan, serta sukses menjadi wirausahawan mandiri.
+        Lulusan Universitas Ibnu Sina telah berkarier di berbagai perusahaan multinasional, industri manufaktur, sektor logistik maritim, perbankan, instansi BUMN, pemerintahan, serta sukses menjadi wirausahawan mandiri.
       </p>
     </div>
 

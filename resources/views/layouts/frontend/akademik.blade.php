@@ -78,13 +78,6 @@
 ═══════════════════════════════════════════════ -->
 <section class="akademik-hero">
   <div class="container position-relative" data-aos="fade-up">
-    <nav aria-label="breadcrumb" class="mb-3">
-      <ol class="breadcrumb mb-0" style="font-size: 13px;">
-        <li class="breadcrumb-item"><a href="{{ route('homepage') }}" class="text-white-50 text-decoration-none">Beranda</a></li>
-        <li class="breadcrumb-item text-white-50">Akademik</li>
-        <li class="breadcrumb-item text-white active" aria-current="page">{{ $pageTitle }}</li>
-      </ol>
-    </nav>
     <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange); color: #032e12; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
       LAYANAN AKADEMIK Universitas Ibnu Sina
     </div>
@@ -94,6 +87,11 @@
         {{ $item->subjudul }}
       </p>
     @endif
+    <div class="breadcrumb-custom mt-3">
+      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+      <span>/</span>
+      <span class="active">{{ $pageTitle }}</span>
+    </div>
   </div>
 </section>
 
