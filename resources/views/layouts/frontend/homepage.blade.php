@@ -1251,15 +1251,12 @@
     position: relative;
     width: 380px;
     max-width: 100%;
-    height: 640px;
-    perspective: 1200px;
-    perspective-origin: center 35%;
+    height: 560px;
   }
   .ormawa-deck-stack {
     position: relative;
     width: 100%;
     height: 100%;
-    transform-style: preserve-3d;
     cursor: grab;
   }
   .ormawa-deck-stack:active {
@@ -1273,10 +1270,11 @@
     left: 0;
     width: 100%;
     height: 410px;
-    border-radius: 32px;
+    border-radius: 28px;
     overflow: hidden;
-    background-color: #033814;
+    background-color: #02230d;
     border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.38);
     transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
                 opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
                 filter 0.65s ease,
@@ -1285,9 +1283,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 24px;
+    padding: 22px 24px;
     cursor: pointer;
-    transform-origin: center bottom;
+    transform-origin: top center;
   }
   .card-artistic-bg {
     position: absolute;
@@ -1348,12 +1346,12 @@
   }
   .card-bg-watermark {
     position: absolute;
-    top: 35%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 130px;
+    font-size: 120px;
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.05);
     letter-spacing: -4px;
     pointer-events: none;
     user-select: none;
@@ -2225,7 +2223,7 @@
           </h2>
 
           <p class="ormawa-deck-lead mb-4">
-            {{ $organisasiSetting?->deskripsi ?: 'Eksplorasi ragam organisasi kemahasiswaan, himpunan program studi, dan unit kegiatan minat bakat di Universitas Ibnu Sina Batam. Ruang kolaborasi untuk mengasah karakter, kepemimpinan, dan inovasi civitas kampus.' }}
+            {{ strip_tags($organisasiSetting?->deskripsi ?: 'Eksplorasi ragam organisasi kemahasiswaan, himpunan program studi, dan unit kegiatan minat bakat di Universitas Ibnu Sina Batam. Ruang kolaborasi untuk mengasah karakter, kepemimpinan, dan inovasi civitas kampus.') }}
           </p>
 
           <div class="d-flex align-items-center gap-3 flex-wrap mb-4">
@@ -3183,49 +3181,44 @@
         const nextBtn = document.getElementById('deckNextBtn');
         const stageArea = document.getElementById('ormawaStageArea');
 
-        // Slot tumpukan: 0 = kartu aktif (bawah), 1..3 = kartu di belakang (naik ke atas)
+        // Slot tumpukan: 0 = kartu aktif di depan (bawah), 1..3 = kartu di belakang bertingkat ke atas
         const SLOT_STYLE = [
-          { s: 1.00, z: 0,    op: 1.00, br: 1.00, sh: '0 30px 60px -15px rgba(0, 35, 12, 0.48), 0 0 0 1px rgba(255,255,255,0.22) inset' },
-          { s: 0.94, z: -35,  op: 0.96, br: 0.93, sh: '0 20px 40px rgba(0, 0, 0, 0.25)' },
-          { s: 0.88, z: -70,  op: 0.85, br: 0.86, sh: '0 16px 32px rgba(0, 0, 0, 0.20)' },
-          { s: 0.82, z: -105, op: 0.70, br: 0.78, sh: '0 12px 24px rgba(0, 0, 0, 0.16)' }
+          { s: 1.00, y: 135, op: 1.00, br: 1.00, sh: '0 28px 55px -12px rgba(0, 35, 12, 0.50), 0 0 0 1px rgba(255,255,255,0.22) inset' },
+          { s: 0.94, y: 85,  op: 0.95, br: 0.92, sh: '0 20px 40px rgba(0, 0, 0, 0.28)' },
+          { s: 0.88, y: 40,  op: 0.82, br: 0.85, sh: '0 16px 32px rgba(0, 0, 0, 0.22)' },
+          { s: 0.82, y: 0,   op: 0.65, br: 0.75, sh: '0 12px 24px rgba(0, 0, 0, 0.16)' }
         ];
-        // Jarak tepi atas yang terlihat untuk tiap slot (desktop), slot terakhir rata atas (0)
-        const SLOT_TOP = [225, 125, 55, 0];
+
         const TRANSITION_ON = 'transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), filter 0.65s ease, box-shadow 0.65s ease';
 
         function getDeckPositions() {
           const w = window.innerWidth;
           const k = w <= 576 ? 0.75 : (w <= 991 ? 0.85 : 1);
-          const H = cards[0].offsetHeight || 410;
-          // transform-origin: center bottom → kartu yang diskalakan menyusut ke bawah,
-          // jadi kompensasi H*(1-s) agar tepi atas terlihat tepat di SLOT_TOP
-          const slotY = SLOT_STYLE.map((st, i) => SLOT_TOP[i] * k - H * (1 - st.s));
           return {
-            slotY,
-            yHidden: -H * (1 - 0.76) - 30,
-            yDrop: SLOT_TOP[0] * k + H + 160
+            slotY: SLOT_STYLE.map(st => st.y * k),
+            yHidden: -60 * k,
+            yDrop: 560 * k
           };
         }
 
         function applyState(card, state, pos) {
           if (state === 'dropped') {
-            card.style.transform = `translate3d(0, ${pos.yDrop}px, 80px) rotateX(-14deg) scale(1.04)`;
-            card.style.zIndex = '30';
+            card.style.transform = `translate3d(0, ${pos.yDrop}px, 0) scale(1.04)`;
+            card.style.zIndex = '25';
             card.style.opacity = '0';
             card.style.pointerEvents = 'none';
           } else if (state === 'hidden') {
-            card.style.transform = `translate3d(0, ${pos.yHidden}px, -140px) rotateX(0deg) scale(0.76)`;
+            card.style.transform = `translate3d(0, ${pos.yHidden}px, 0) scale(0.76)`;
             card.style.zIndex = '15';
             card.style.opacity = '0';
             card.style.pointerEvents = 'none';
           } else {
             const st = SLOT_STYLE[state];
-            card.style.transform = `translate3d(0, ${pos.slotY[state]}px, ${st.z}px) rotateX(0deg) scale(${st.s})`;
+            card.style.transform = `translate3d(0, ${pos.slotY[state]}px, 0) scale(${st.s})`;
             card.style.zIndex = String(20 - state);
             card.style.opacity = String(st.op);
             card.style.filter = `brightness(${st.br})`;
-            card.style.pointerEvents = 'auto';
+            card.style.pointerEvents = state === 0 ? 'auto' : 'auto';
             card.style.boxShadow = st.sh;
           }
         }
@@ -3236,7 +3229,6 @@
           activeIdx = targetIdx;
 
           const pos = getDeckPositions();
-          // Sisakan 1 kartu sebagai "kartu jatuh" agar siklus tetap bersambung
           const visibleSlots = Math.min(SLOT_STYLE.length, Math.max(1, totalCards - 1));
 
           cards.forEach((card, idx) => {
@@ -3253,14 +3245,14 @@
               card.style.transition = 'none';
               applyState(card, state, pos);
             } else if (prev === 'dropped' && state !== 0) {
-              // Kartu yang sudah jatuh kembali ke belakang tumpukan: muncul dari atas, tidak terbang melintas
+              // Kartu yang sebelumnya di bawah dipindah diam-diam ke atas, lalu meluncur ke slot belakang
               card.style.transition = 'none';
               applyState(card, 'hidden', pos);
               void card.offsetHeight;
               card.style.transition = TRANSITION_ON;
               applyState(card, state, pos);
             } else if (state === 'dropped' && prev !== '0') {
-              // Arah mundur: kartu belakang memudar di atas, lalu dipindah diam-diam ke posisi jatuh
+              // Transisi ke arah mundur
               card.style.transition = TRANSITION_ON;
               applyState(card, 'hidden', pos);
               card._deckTimer = setTimeout(() => {
