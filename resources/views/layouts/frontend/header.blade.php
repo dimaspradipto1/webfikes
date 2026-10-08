@@ -137,6 +137,56 @@
         <li class="nav-item">
           <a href="{{ route('homepage.kontak') }}" class="nav-link nav-link-custom {{ request()->routeIs('homepage.kontak') ? 'active' : '' }}">Kontak</a>
         </li>
+
+        <!-- Pilih Bahasa Dropdown (Di Samping Menu Kontak) -->
+        @if(isset($bahasaList) && $bahasaList->count() > 0)
+        <li class="nav-item dropdown uis-lang-nav-item">
+          <a class="nav-link nav-link-custom dropdown-toggle uis-lang-toggle" 
+             href="#" 
+             role="button" 
+             data-bs-toggle="dropdown" 
+             aria-expanded="false" 
+             id="dropdownLangSelect" 
+             title="Pilih Bahasa / Select Language">
+            <img src="{{ $defaultBahasa?->flag_url ?? asset('assets/img/flags/id.png') }}" 
+                 id="uisCurrentFlagImg" 
+                 alt="Bendera" 
+                 class="uis-flag-img-main" 
+                 width="22" 
+                 height="15"
+                 onerror="this.onerror=null; this.src='{{ asset('assets/img/flags/id.png') }}';">
+            <span class="uis-lang-name d-none d-xxl-inline" id="uisCurrentName">{{ $defaultBahasa->nama ?? 'Bahasa Indonesia' }}</span>
+            <span class="uis-lang-name d-inline d-xxl-none" id="uisCurrentShort">{{ $defaultBahasa ? (str_contains($defaultBahasa->nama, ' ') ? explode(' ', $defaultBahasa->nama)[1] ?? $defaultBahasa->nama : $defaultBahasa->nama) : 'Indonesia' }}</span>
+            <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-custom dropdown-menu-end uis-lang-menu shadow-lg" aria-labelledby="dropdownLangSelect">
+            <li class="px-3 py-1 dropdown-header text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">
+              <i class="bi bi-translate me-1"></i> Select Language
+            </li>
+            @foreach($bahasaList as $lang)
+              <li>
+                <a class="dropdown-item dropdown-item-custom uis-lang-item justify-content-between" 
+                   href="javascript:void(0)" 
+                   onclick="uisChangeLanguage('{{ $lang->kode }}', '{{ addslashes($lang->nama) }}', '{{ $lang->flag_url }}')"
+                   data-code="{{ $lang->kode }}"
+                   data-name="{{ $lang->nama }}"
+                   data-flag="{{ $lang->flag_url }}">
+                  <span class="d-flex align-items-center gap-2">
+                    <img src="{{ $lang->flag_url }}" 
+                         alt="{{ $lang->nama }}" 
+                         class="uis-flag-img" 
+                         width="22" 
+                         height="15"
+                         onerror="this.onerror=null; this.src='{{ asset('assets/img/flags/id.png') }}';">
+                    <span class="uis-lang-text">{{ $lang->nama }}</span>
+                  </span>
+                  <i class="bi bi-check2 text-success fw-bold uis-check-icon {{ ($lang->is_default) ? '' : 'd-none' }}" id="check-lang-{{ $lang->kode }}"></i>
+                </a>
+              </li>
+            @endforeach
+          </ul>
+        </li>
+        @endif
       </ul>
 
       <!-- CTA Buttons -->

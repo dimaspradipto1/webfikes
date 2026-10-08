@@ -35,6 +35,7 @@ use App\Http\Controllers\TenagaPendidikController;
 use App\Http\Controllers\LayananTerkaitController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\PublikasiController;
+use App\Http\Controllers\BahasaSettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -167,4 +168,13 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('visimisi', VisiMisiController::class);
     Route::resource('nilaiperusahaan', NilaiPerusahaanController::class);
     Route::resource('faculty-stat', FacultyStatController::class);
+
+    // Pengaturan Bahasa (Multi-Language)
+    Route::get('admin-bahasa', [BahasaSettingController::class, 'index'])->name('bahasa.index');
+    Route::post('admin-bahasa', [BahasaSettingController::class, 'store'])->name('bahasa.store');
+    Route::post('admin-bahasa/update-all', [BahasaSettingController::class, 'updateAll'])->name('bahasa.update-all');
+    Route::put('admin-bahasa/{id}', [BahasaSettingController::class, 'update'])->name('bahasa.update');
+    Route::post('admin-bahasa/{id}/toggle', [BahasaSettingController::class, 'toggle'])->name('bahasa.toggle');
+    Route::post('admin-bahasa/{id}/set-default', [BahasaSettingController::class, 'setDefault'])->name('bahasa.set-default');
+    Route::delete('admin-bahasa/{id}', [BahasaSettingController::class, 'destroy'])->name('bahasa.destroy');
 });

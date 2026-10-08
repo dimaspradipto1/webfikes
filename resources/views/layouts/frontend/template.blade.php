@@ -502,6 +502,134 @@
     }
 
     /* ═══════════════════════════════════════════════
+       LANGUAGE SELECTOR DROPDOWN (SAMPING KONTAK)
+    ═══════════════════════════════════════════════ */
+    .uis-lang-nav-item {
+      position: relative;
+    }
+    .uis-lang-toggle {
+      background: rgba(255, 255, 255, 0.12) !important;
+      border: 1px solid rgba(254, 216, 2, 0.35) !important;
+      border-radius: 20px !important;
+      padding: 6px 14px !important;
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      color: #ffffff !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      transition: all 0.25s ease !important;
+    }
+    .uis-lang-toggle:hover,
+    .uis-lang-toggle:focus,
+    .show > .uis-lang-toggle {
+      background: var(--uis-yellow, #FED802) !important;
+      border-color: var(--uis-yellow, #FED802) !important;
+      color: var(--uis-green-deep, #023814) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .uis-lang-toggle:hover i,
+    .show > .uis-lang-toggle i {
+      color: var(--uis-green-deep, #023814) !important;
+    }
+    .uis-flag-img-main {
+      width: 22px !important;
+      height: 15px !important;
+      object-fit: cover !important;
+      border-radius: 3px !important;
+      border: 1px solid rgba(255, 255, 255, 0.6) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) !important;
+      display: inline-block !important;
+      vertical-align: middle !important;
+      flex-shrink: 0 !important;
+    }
+    .uis-flag-img {
+      width: 22px !important;
+      height: 15px !important;
+      object-fit: cover !important;
+      border-radius: 3px !important;
+      border: 1px solid rgba(0, 0, 0, 0.12) !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15) !important;
+      display: inline-block !important;
+      vertical-align: middle !important;
+      flex-shrink: 0 !important;
+    }
+    .uis-lang-flag {
+      font-size: 16px;
+      line-height: 1;
+    }
+    .uis-lang-menu {
+      min-width: 220px;
+      max-height: 380px;
+      overflow-y: auto;
+      border-top: 3px solid var(--uis-yellow, #FED802) !important;
+      border-radius: 14px !important;
+      padding: 6px !important;
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.2) !important;
+    }
+    .uis-lang-menu::-webkit-scrollbar {
+      width: 5px;
+    }
+    .uis-lang-menu::-webkit-scrollbar-thumb {
+      background: rgba(4, 107, 38, 0.25);
+      border-radius: 4px;
+    }
+    .uis-lang-item {
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      padding: 7px 12px !important;
+      border-radius: 8px !important;
+      color: var(--text-main) !important;
+      transition: all 0.2s ease !important;
+    }
+    .uis-lang-item:hover {
+      background: #eaf6ee !important;
+      color: var(--uis-green) !important;
+      padding-left: 14px !important;
+    }
+    .uis-lang-item.active-lang {
+      background: #eaf6ee !important;
+      color: var(--uis-green) !important;
+      font-weight: 700 !important;
+    }
+    @media (max-width: 1199.98px) {
+      .uis-lang-toggle {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 4px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════
+       GOOGLE TRANSLATE SEAMLESS ENGINE OVERRIDES
+    ═══════════════════════════════════════════════ */
+    body {
+      top: 0px !important;
+      position: static !important;
+    }
+    .goog-te-banner-frame,
+    .goog-te-banner-frame.skiptranslate,
+    iframe.goog-te-banner-frame,
+    .goog-te-balloon-frame {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+    }
+    #goog-gt-tt,
+    .goog-tooltip,
+    .goog-tooltip:hover {
+      display: none !important;
+    }
+    .goog-text-highlight {
+      background-color: transparent !important;
+      box-shadow: none !important;
+    }
+    body > .skiptranslate {
+      display: none !important;
+    }
+
+    /* ═══════════════════════════════════════════════
        MOBILE NAVBAR DRAWER & STYLING (< 1200px)
     ═══════════════════════════════════════════════ */
     @media (max-width: 1199.98px) {
@@ -1078,6 +1206,144 @@
     if (!isOpen) item.classList.add('open');
   }
 </script>
+
+<!-- ═══════════════════════════════════════════════
+     GOOGLE TRANSLATE MULTI-LANGUAGE SYSTEM
+═══════════════════════════════════════════════ -->
+<div id="google_translate_element" style="display:none; position:absolute; left:-9999px; top:-9999px;"></div>
+
+@php
+  $includedCodes = (isset($bahasaList) && $bahasaList->count() > 0)
+      ? $bahasaList->pluck('kode')->implode(',')
+      : 'id,en,ar,zh-CN,nl,tl,fr,de,hi,it,ko,ja';
+@endphp
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'id',
+      includedLanguages: '{{ $includedCodes }}',
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'));
+    return match ? decodeURIComponent(match[3]) : null;
+  }
+
+  function clearGoogTransCookie() {
+    var hostname = window.location.hostname;
+    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + hostname;
+    var domainParts = hostname.split('.');
+    while (domainParts.length > 1) {
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + domainParts.join('.');
+      domainParts.shift();
+    }
+  }
+
+  function setGoogTransCookie(langCode) {
+    var val = '/id/' + langCode;
+    var hostname = window.location.hostname;
+    document.cookie = "googtrans=" + val + "; path=/;";
+    document.cookie = "googtrans=" + val + "; path=/; domain=" + hostname;
+    var domainParts = hostname.split('.');
+    if (domainParts.length > 1) {
+      document.cookie = "googtrans=" + val + "; path=/; domain=." + domainParts.slice(-2).join('.');
+    }
+  }
+
+  function updateActiveLangUI(langCode, langName, flagUrl) {
+    var nameEl = document.getElementById('uisCurrentName');
+    var shortEl = document.getElementById('uisCurrentShort');
+    var flagImgEl = document.getElementById('uisCurrentFlagImg');
+
+    if (nameEl) nameEl.textContent = langName;
+    if (shortEl) {
+      var shortName = langName.indexOf(' ') !== -1 ? langName.split(' ')[1] : langName;
+      shortEl.textContent = shortName;
+    }
+    if (flagImgEl && flagUrl) {
+      flagImgEl.src = flagUrl;
+    }
+
+    document.querySelectorAll('.uis-lang-item').forEach(function(item) {
+      item.classList.remove('active-lang');
+    });
+    document.querySelectorAll('.uis-check-icon').forEach(function(icon) {
+      icon.classList.add('d-none');
+    });
+
+    var activeItem = document.querySelector('.uis-lang-item[data-code="' + langCode + '"]');
+    if (activeItem) {
+      activeItem.classList.add('active-lang');
+      var checkIcon = document.getElementById('check-lang-' + langCode);
+      if (checkIcon) checkIcon.classList.remove('d-none');
+    }
+  }
+
+  function uisChangeLanguage(langCode, langName, flagUrl) {
+    if (langCode === 'id') {
+      clearGoogTransCookie();
+      localStorage.setItem('uis_selected_lang', 'id');
+      localStorage.setItem('uis_selected_lang_name', 'Bahasa Indonesia');
+      localStorage.setItem('uis_selected_lang_flag', flagUrl || '{{ asset('assets/img/flags/id.png') }}');
+      
+      var combo = document.querySelector('.goog-te-combo');
+      if (combo) {
+        combo.value = 'id';
+        combo.dispatchEvent(new Event('change'));
+      }
+      setTimeout(function() {
+        window.location.reload();
+      }, 150);
+      return;
+    }
+
+    setGoogTransCookie(langCode);
+    localStorage.setItem('uis_selected_lang', langCode);
+    localStorage.setItem('uis_selected_lang_name', langName);
+    localStorage.setItem('uis_selected_lang_flag', flagUrl);
+
+    var combo = document.querySelector('.goog-te-combo');
+    if (combo) {
+      combo.value = langCode;
+      combo.dispatchEvent(new Event('change'));
+      updateActiveLangUI(langCode, langName, flagUrl);
+    } else {
+      window.location.reload();
+    }
+  }
+
+  // Restore active language selection UI on load
+  document.addEventListener('DOMContentLoaded', function() {
+    var savedCode = localStorage.getItem('uis_selected_lang');
+    var savedName = localStorage.getItem('uis_selected_lang_name');
+    var savedFlag = localStorage.getItem('uis_selected_lang_flag');
+
+    var googCookie = getCookie('googtrans');
+    if (googCookie) {
+      var parts = googCookie.split('/');
+      var currentCookieLang = parts[parts.length - 1];
+      if (currentCookieLang && currentCookieLang !== 'id') {
+        savedCode = currentCookieLang;
+      } else if (currentCookieLang === 'id') {
+        savedCode = 'id';
+      }
+    }
+
+    if (savedCode) {
+      var item = document.querySelector('.uis-lang-item[data-code="' + savedCode + '"]');
+      if (item) {
+        var flag = item.getAttribute('data-flag') || savedFlag;
+        var name = item.getAttribute('data-name') || savedName || savedCode;
+        updateActiveLangUI(savedCode, name, flag);
+      }
+    }
+  });
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
 
 @stack('scripts')
 

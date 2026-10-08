@@ -224,6 +224,13 @@
 
           @if($isAdmin)
           <li class="nav-item">
+              <a class="nav-link {{ Route::is('bahasa.*') ? '' : 'collapsed' }}" href="{{ route('bahasa.index') }}">
+                  <i class="bi bi-translate"></i>
+                  <span>Pengaturan Bahasa</span>
+              </a>
+          </li>
+
+          <li class="nav-item">
               <a class="nav-link {{ Route::is('user.*') ? '' : 'collapsed' }}" href="{{ route('user.index') }}">
                   <i class="bi bi-people"></i>
                   <span>Manajemen Pengguna</span>

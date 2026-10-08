@@ -42,6 +42,14 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
 
+            try {
+                $bahasaList    = \App\Models\BahasaSetting::where('is_active', true)->orderBy('urutan')->get();
+                $defaultBahasa = $bahasaList->firstWhere('is_default', true) ?? $bahasaList->first();
+            } catch (\Throwable $e) {
+                $bahasaList    = collect();
+                $defaultBahasa = null;
+            }
+
             $view->with([
                 'contact'       => $contact,
                 'cleanWa'       => $cleanWa,
@@ -49,6 +57,8 @@ class AppServiceProvider extends ServiceProvider
                 'navProdis'     => $navProdis,
                 'navPublikasis' => $navPublikasis,
                 'topbarSetting' => $topbarSetting,
+                'bahasaList'    => $bahasaList,
+                'defaultBahasa' => $defaultBahasa,
             ]);
         });
     }
