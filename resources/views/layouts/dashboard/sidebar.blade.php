@@ -202,28 +202,39 @@
           @endif
 
           @if($isAdmin)
+          <li class="nav-heading">Layanan Humas</li>
           <li class="nav-item">
               <a class="nav-link {{ Route::is('news.*') || Route::is('faq.*') ? '' : 'collapsed' }}" data-bs-target="#humas-nav" data-bs-toggle="collapse" href="#">
-                  <i class="bi bi-newspaper"></i><span>Humas</span><i class="bi bi-chevron-down ms-auto"></i>
+                  <i class="bi bi-newspaper"></i><span>Beranda Humas</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
               <ul id="humas-nav" class="nav-content collapse {{ Route::is('news.*') || Route::is('faq.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                   <li>
                       <a href="{{ route('news.index') }}" class="{{ Route::is('news.index') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Semua Berita & Pengumuman</span>
+                          <i class="bi bi-circle"></i><span>Hero Humas</span>
                       </a>
                   </li>
                   <li>
                       <a href="{{ route('news.create') }}" class="{{ Route::is('news.create') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Tulis Berita / Pengumuman</span>
+                          <i class="bi bi-circle"></i><span>Banner</span>
                       </a>
                   </li>
-                  @if($isAdmin)
+                  <li>
+                      <a href="{{ route('news.create') }}" class="{{ Route::is('news.create') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Layanan</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('news.create') }}" class="{{ Route::is('news.create') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Sosial Media</span>
+                      </a>
+                  </li>
+            
                   <li>
                       <a href="{{ route('faq.index') }}" class="{{ Route::is('faq.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>FAQ Informasi</span>
                       </a>
                   </li>
-                  @endif
+                
               </ul>
           </li>
           <!-- 8. Kontak (Sesuai Urutan Header) -->
@@ -234,7 +245,6 @@
               </a>
           </li>
           @endif
-
 
           <li class="nav-heading">Pengaturan & Administrator</li>
 
