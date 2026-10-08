@@ -4,58 +4,6 @@
 @section('meta_description', 'Kenali lebih dekat Universitas Ibnu Sina (UIS) — profil, visi misi, nilai karakter akademik, dan fasilitas unggulan kami.')
 @section('meta_keywords', 'tentang uis, profil universitas ibnu sina, visi misi uis, struktur organisasi uis, pendidikan kesehatan')
 
-@push('styles')
-<style>
-  .about-hero {
-    position: relative;
-    background: var(--obsidian-dark);
-    padding: 26px 0 20px;
-    border-bottom: 2px solid var(--uis-purple);
-  }
-  .about-hero-title {
-    font-size: 26px;
-    font-weight: 800;
-    color: var(--white);
-    margin-bottom: 6px;
-  }
-  .about-hero-title em {
-    font-style: normal;
-    color: var(--uis-orange);
-  }
-
-
-  .visual-card-frame {
-    background: var(--white);
-    border: 1px solid var(--border-light);
-    border-radius: 24px;
-    padding: 36px;
-    box-shadow: var(--shadow-md);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .visual-card-frame::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 6px;
-    background: var(--uis-purple);
-  }
-  .visual-badge-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--uis-purple-light);
-    color: var(--uis-purple);
-    font-weight: 700;
-    font-size: 13px;
-    padding: 6px 18px;
-    border-radius: 50px;
-    margin-bottom: 20px;
-  }
-</style>
-@endpush
-
 @section('content')
 @php
   $cleanWa = '';

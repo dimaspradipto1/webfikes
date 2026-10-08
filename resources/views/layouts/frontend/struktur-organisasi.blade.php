@@ -4,34 +4,6 @@
 @section('meta_description', 'Susunan pimpinan pimpinan, ketua program studi, dan tata kelola organisasi Universitas Ibnu Sina (UIS).')
 @section('meta_keywords', 'struktur organisasi uis, pimpinan uis, ketua program studi, manajemen uis')
 
-@push('styles')
-<style>
-  .about-hero {
-    position: relative;
-    background: var(--obsidian-dark);
-    padding: 70px 0 50px;
-    border-bottom: 2px solid var(--uis-purple);
-  }
-  .about-hero-title {
-    font-size: 38px;
-    font-weight: 800;
-    color: var(--white);
-    margin-bottom: 8px;
-  }
-  .about-hero-title em {
-    font-style: normal;
-    color: var(--uis-orange);
-  }
-  .struktur-card {
-    background: var(--white);
-    border: 1px solid var(--border-light);
-    border-radius: 24px;
-    padding: 40px;
-    box-shadow: var(--shadow-md);
-  }
-</style>
-@endpush
-
 @section('content')
 
 <!-- ═══════════════════════════════════════════════

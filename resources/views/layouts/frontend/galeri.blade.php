@@ -4,52 +4,6 @@
 @section('meta_description', 'Galeri foto kegiatan akademik, praktikum laboratorium, pengabdian masyarakat, dan wisuda Universitas Ibnu Sina (UIS).')
 @section('meta_keywords', 'galeri uis, dokumentasi uis, foto kampus uis, kegiatan mahasiswa uis, universitas ibnu sina batam')
 
-@push('styles')
-<style>
-  .galeri-hero {
-    position: relative;
-    background: var(--obsidian-dark);
-    padding: 70px 0 50px;
-    border-bottom: 2px solid var(--uis-purple);
-  }
-  .galeri-hero-title {
-    font-size: 38px;
-    font-weight: 800;
-    color: var(--white);
-    margin-bottom: 8px;
-  }
-  .galeri-hero-title em {
-    font-style: normal;
-    color: var(--uis-orange);
-  }
-  .galeri-item-card {
-    background: var(--white);
-    border: 1px solid var(--border-light);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .galeri-item-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--border-purple);
-  }
-  .galeri-img-wrap {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-  }
-  .galeri-caption {
-    padding: 16px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 600;
-    font-size: 14.5px;
-    color: var(--text-main);
-  }
-</style>
-@endpush
-
 @section('content')
 
 <!-- ═══════════════════════════════════════════════

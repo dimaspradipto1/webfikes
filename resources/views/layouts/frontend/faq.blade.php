@@ -4,53 +4,6 @@
 @section('meta_description', 'Temukan jawaban cepat atas pertanyaan seputar fakultas, program studi, PMB, fasilitas kampus, dan akreditasi UIS Batam.')
 @section('meta_keywords', 'faq uis, tanya jawab universitas ibnu sina, pmb uis batam, pendaftaran mahasiswa baru, akreditasi uis batam')
 
-@push('styles')
-<style>
-  .faq-hero {
-    position: relative;
-    background: var(--obsidian-dark);
-    padding: 26px 0 20px;
-    border-bottom: 2px solid var(--uis-purple);
-  }
-  .faq-hero-title {
-    font-size: 26px;
-    font-weight: 800;
-    color: var(--white);
-    margin-bottom: 6px;
-  }
-  .faq-hero-title em {
-    font-style: normal;
-    color: var(--uis-orange);
-  }
-  .accordion-item {
-    border: 1px solid var(--border-light) !important;
-    border-radius: 16px !important;
-    margin-bottom: 12px;
-    overflow: hidden;
-    background: var(--white);
-  }
-  .accordion-button {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 700;
-    font-size: 15.5px;
-    color: var(--text-main);
-    padding: 18px 24px;
-    background: var(--white);
-  }
-  .accordion-button:not(.collapsed) {
-    background: var(--uis-purple-light);
-    color: var(--uis-purple);
-    box-shadow: none;
-  }
-  .accordion-body {
-    font-size: 14.5px;
-    color: var(--text-muted);
-    line-height: 1.75;
-    padding: 20px 24px;
-  }
-</style>
-@endpush
-
 @section('content')
 @php
   $cleanWa = $cleanWa ?? '';

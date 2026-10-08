@@ -4,28 +4,6 @@
 @section('meta_description', 'Visi, Misi, dan Nilai-nilai Budaya Civitas Akademika Universitas Ibnu Sina.')
 @section('meta_keywords', 'visi misi uis, visi universitas ibnu sina, misi universitas ibnu sina batam')
 
-@push('styles')
-<style>
-  .visimisi-hero {
-    position: relative;
-    background: var(--obsidian-dark);
-    padding: 70px 0 50px;
-    border-bottom: 2px solid var(--uis-purple);
-  }
-  .visimisi-hero-title {
-    font-size: 38px;
-    font-weight: 800;
-    color: var(--white);
-    margin-bottom: 8px;
-  }
-  .visimisi-hero-title em {
-    font-style: normal;
-    color: var(--uis-orange);
-  }
-
-</style>
-@endpush
-
 @section('content')
 
 <!-- ═══════════════════════════════════════════════

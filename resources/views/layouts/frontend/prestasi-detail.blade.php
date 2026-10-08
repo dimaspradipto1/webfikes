@@ -3,68 +3,6 @@
 @section('title', $prestasi->judul_prestasi . ' — Universitas Ibnu Sina')
 @section('meta_description', Str::limit(strip_tags($prestasi->deskripsi ?? $prestasi->judul_prestasi), 160))
 
-@push('styles')
-<style>
-  .detail-hero {
-    background: var(--obsidian-dark);
-    padding: 60px 0 40px;
-    border-bottom: 2px solid var(--uis-purple);
-  }
-  .prestasi-img-main {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    border: 1px solid var(--border-light);
-  }
-  .info-badge-card {
-    background: #ffffff;
-    border: 1px solid var(--border-light);
-    border-radius: 18px;
-    padding: 24px;
-    box-shadow: var(--shadow-sm);
-  }
-  .info-meta-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px dashed var(--border-light);
-    font-size: 14px;
-  }
-  .info-meta-row:last-child {
-    border-bottom: none;
-  }
-  .info-meta-label {
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-  .info-meta-val {
-    font-weight: 700;
-    color: var(--obsidian-dark);
-    text-align: right;
-  }
-  .other-prestasi-item {
-    display: flex;
-    gap: 14px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--border-light);
-    text-decoration: none !important;
-  }
-  .other-prestasi-item:last-child {
-    border-bottom: none;
-  }
-  .other-prestasi-img {
-    width: 75px;
-    height: 60px;
-    border-radius: 10px;
-    object-fit: cover;
-    flex-shrink: 0;
-  }
-</style>
-@endpush
-
 @section('content')
 <!-- Header Hero -->
 <div class="detail-hero text-white">
