@@ -47,9 +47,11 @@ class ProfilDataTable extends DataTable
                     : '<span class="text-muted fst-italic">—</span>';
             })
             ->addColumn('alamat', function ($profil) {
-                return $profil->alamat
-                    ? '<span title="' . e($profil->alamat) . '">' . e(\Illuminate\Support\Str::limit($profil->alamat, 50)) . '</span>'
-                    : '<span class="text-muted fst-italic">—</span>';
+                if (!$profil->alamat) {
+                    return '<span class="text-muted fst-italic">—</span>';
+                }
+                $clean = trim(html_entity_decode(strip_tags($profil->alamat), ENT_QUOTES, 'UTF-8'));
+                return '<span title="' . e($clean) . '">' . e(\Illuminate\Support\Str::limit($clean, 50)) . '</span>';
             })
             ->addColumn('action', function ($profil) {
                 $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';

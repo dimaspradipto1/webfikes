@@ -33,9 +33,11 @@ class ContactDataTable extends DataTable
                     : '<span class="text-muted fst-italic">—</span>';
             })
             ->addColumn('alamat', function ($contact) {
-                return $contact->alamat
-                    ? '<span title="' . e($contact->alamat) . '">' . e(\Illuminate\Support\Str::limit($contact->alamat, 50)) . '</span>'
-                    : '<span class="text-muted fst-italic">—</span>';
+                if (!$contact->alamat) {
+                    return '<span class="text-muted fst-italic">—</span>';
+                }
+                $clean = trim(html_entity_decode(strip_tags($contact->alamat), ENT_QUOTES, 'UTF-8'));
+                return '<span title="' . e($clean) . '">' . e(\Illuminate\Support\Str::limit($clean, 50)) . '</span>';
             })
             ->addColumn('koordinat', function ($contact) {
                 if ($contact->latitude && $contact->longitude) {

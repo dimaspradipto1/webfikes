@@ -27,7 +27,8 @@ class FaqDataTable extends DataTable
                 return e($faq->question);
             })
             ->addColumn('answer', function ($faq) {
-                return e(Str::limit($faq->answer, 100));
+                $clean = trim(html_entity_decode(strip_tags($faq->answer ?? ''), ENT_QUOTES, 'UTF-8'));
+                return e(Str::limit($clean, 100));
             })
             ->addColumn('category', function ($faq) {
                 $categories = [

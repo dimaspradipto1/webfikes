@@ -4,12 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login — UIS (Universitas Ibnu Sina)</title>
-  <meta name="description" content="Portal Login Resmi UIS - Universitas Ibnu Sina">
+  <title>Login — Portal Universitas Ibnu Sina (UIS)</title>
+  <meta name="description" content="Portal Login Resmi Universitas Ibnu Sina (UIS) Batam — Sistem Informasi Terpadu Mahasiswa, Dosen, dan Tenaga Kependidikan.">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="{{ asset('assets/img/logouis.png') }}">
-  <link rel="apple-touch-icon" href="{{ asset('assets/img/logouis.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('frontend/img/logouis.png') }}">
+  <link rel="apple-touch-icon" href="{{ asset('frontend/img/logouis.png') }}">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,517 +20,717 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
-      --uis-purple:       #046B26;
-      --uis-purple-dark:  #03521d;
-      --uis-purple-deep:  #023814;
-      --uis-purple-light: #eaf6ee;
-      --uis-purple-subtle:#d4edd9;
+      --uis-green:          #046B26;
+      --uis-green-dark:     #03521d;
+      --uis-green-deep:     #023814;
+      --uis-green-light:    #eaf6ee;
+      --uis-green-subtle:   #d4edd9;
+      --uis-yellow:         #FED802;
+      --uis-yellow-hover:   #e5c302;
       
-      --uis-orange:       #FED802;
-      --uis-orange-hover: #e5c302;
-      --uis-orange-dark:  #cfae00;
-      --uis-orange-light: #fefde8;
-      --uis-orange-subtle:#fef9c3;
+      --brand-primary:      var(--uis-green);
+      --brand-primary-dark: var(--uis-green-dark);
+      --brand-primary-light:var(--uis-green-light);
+      --brand-accent:       var(--uis-yellow);
       
-      --obsidian-dark:      #032e12;
-      --obsidian-card:      #053d18;
-      
-      --white:              #ffffff;
-      --page-bg:            #f8fcf9;
-      --surface-light:      #edf6f0;
-      --text-main:          #032e12;
-      --text-muted:         #655672;
-      --text-light:         #9586a2;
-      --border-light:       #d8e8dc;
-      
-      --shadow-sm:          0 4px 12px rgba(4, 107, 38, 0.08);
-      --shadow-md:          0 8px 24px rgba(4, 107, 38, 0.12);
-      --shadow-lg:          0 16px 36px rgba(4, 107, 38, 0.15);
-      --shadow-purple:      0 8px 24px rgba(4, 107, 38, 0.28);
+      --text-heading:       #0a2313;
+      --text-body:          #2a4734;
+      --text-muted:         #4b6855;
+      --text-light:         #769280;
+
+      --bg-page:            #edf6f0;
+      --card-bg:            #FFFFFF;
+      --border-color:       #d0e7d7;
+
+      --shadow-card:        0 14px 34px -5px rgba(4, 107, 38, 0.12), 0 4px 12px rgba(4, 107, 38, 0.05);
+      --shadow-primary:     0 8px 18px -3px rgba(4, 107, 38, 0.4);
+      --transition-smooth:  all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    html, body { height: 100%; }
-
-    body {
+    html, body {
+      height: 100vh;
+      max-height: 100vh;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--surface-light);
-      color: var(--text-main);
-      overflow: hidden;
+      background-color: var(--bg-page);
+      color: var(--text-body);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow: hidden; /* Pas di layar tanpa scroll vertikal di desktop */
     }
 
-    .login-wrapper {
+    /* ── LAYOUT SHELL ── */
+    .auth-container {
       display: flex;
       height: 100vh;
+      max-height: 100vh;
       width: 100vw;
+      overflow: hidden;
+      position: relative;
     }
 
-    /* ── LEFT PANEL ──────── */
-    .panel-left {
+    /* ── LEFT SHOWCASE PANEL (FOTO ASLI GEDUNG TANPA TINT HIJAU) ── */
+    .showcase-panel {
       flex: 1.15;
       position: relative;
-      background: var(--obsidian-dark);
+      background-color: var(--uis-green-deep);
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 32px 42px;
     }
 
-    .panel-left-content {
+    /* Foto Asli Gedung Kampus UIS - Natural Tanpa Hijau */
+    .showcase-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url("{{ asset('frontend/img/gedung-uis.jpg') }}");
+      background-size: cover;
+      background-position: center bottom;
+      transform: scale(1.02);
+      transition: transform 10s ease;
+      z-index: 1;
+    }
+    .auth-container:hover .showcase-bg {
+      transform: scale(1.06);
+    }
+
+    /* Scrim minimal di bagian atas untuk logo */
+    .showcase-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(2, 46, 18, 0.45) 0%,
+        rgba(2, 46, 18, 0) 25%
+      );
+      z-index: 2;
+    }
+
+    .showcase-content {
       position: relative;
       z-index: 3;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 52px 56px;
     }
 
-    .brand-top {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .brand-title .name {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--white);
-      letter-spacing: -0.5px;
-      line-height: 1.1;
-    }
-    .brand-title .sub {
-      font-size: 11.5px;
-      color: rgba(255, 255, 255, 0.65);
-      letter-spacing: 0.4px;
-      margin-top: 2px;
-    }
-
-    .brand-middle { max-width: 480px; }
-
-    .badge-kategori {
+    /* Header Brand (Warna Resmi Hijau UIS & Kuning Emas) */
+    .showcase-brand {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(4, 107, 38, 0.3);
-      border: 1px solid rgba(254, 216, 2, 0.4);
-      border-radius: 50px;
-      padding: 6px 16px;
-      margin-bottom: 24px;
+      gap: 12px;
+      text-decoration: none;
+      align-self: flex-start;
+      background: rgba(2, 46, 18, 0.82);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(254, 216, 2, 0.45);
+      padding: 8px 18px;
+      border-radius: 100px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
     }
-    .badge-kategori span {
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--uis-orange);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    .brand-middle h1 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 42px;
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1.15;
-      letter-spacing: -1.2px;
-      margin-bottom: 18px;
-    }
-    .brand-middle h1 em {
-      font-style: normal;
-      color: var(--uis-orange);
-    }
-
-    .brand-middle p {
-      font-size: 15px;
-      color: rgba(255, 255, 255, 0.7);
-      line-height: 1.75;
-      margin-bottom: 32px;
-    }
-
-    .faculty-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 36px;
-    }
-    .f-chip {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 50px;
-      padding: 7px 16px;
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 12.5px;
-      font-weight: 500;
-    }
-    .f-chip i { color: var(--uis-orange); }
-
-    .stats-row {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-    .stat { text-align: left; }
-    .stat-num {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 26px;
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1;
-    }
-    .stat-num sup { font-size: 14px; color: var(--uis-orange); vertical-align: super; }
-    .stat-txt {
-      font-size: 11.5px;
-      color: rgba(255, 255, 255, 0.5);
-      margin-top: 4px;
-    }
-    .stat-sep {
-      width: 1px;
-      height: 36px;
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    /* ── RIGHT PANEL ──────────────── */
-    .panel-right {
-      flex: 0.85;
-      background: var(--page-bg);
+    .showcase-logo-wrap {
+      width: 38px;
+      height: 38px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 48px 44px;
+      flex-shrink: 0;
+    }
+    .showcase-logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .showcase-brand-text h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.1;
+    }
+    .showcase-brand-text span {
+      font-size: 11px;
+      color: var(--uis-yellow);
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    /* ── RIGHT AUTH PANEL (WARNA RESMI UIS: HIJAU LEMBUT & ELEGAN) ── */
+    .auth-panel {
+      flex: 0.95;
+      background: linear-gradient(155deg, #eaf6ee 0%, #edf6f0 50%, #e2efe6 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 36px;
+      height: 100vh;
+      max-height: 100vh;
       overflow-y: auto;
       position: relative;
     }
 
-    .form-container {
-      width: 100%;
-      max-width: 420px;
-    }
-
-    .form-card {
-      background: var(--white);
-      border-radius: 24px;
-      padding: 42px 38px;
-      border: 1px solid var(--border-light);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .form-logo-sm {
+    /* Top navigation bar */
+    .auth-topbar {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 26px;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 420px;
+      margin-bottom: 12px;
     }
-    .form-logo-sm .txt {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--uis-purple);
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--brand-primary);
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(4, 107, 38, 0.25);
+      background: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(4, 107, 38, 0.05);
+      transition: var(--transition-smooth);
+    }
+    .btn-back-home:hover {
+      color: #FFFFFF;
+      border-color: var(--brand-primary);
+      background: var(--brand-primary);
+      transform: translateX(-2px);
+      box-shadow: 0 4px 12px rgba(4, 107, 38, 0.2);
+    }
+    .auth-badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      color: var(--brand-primary);
+      font-weight: 700;
+      background: #FFFFFF;
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1.5px solid rgba(4, 107, 38, 0.25);
+      white-space: nowrap;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(4, 107, 38, 0.05);
+    }
+    .auth-badge-status span:first-child {
+      width: 6px;
+      height: 6px;
+      background: #22C55E;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #22C55E;
     }
 
-    .form-heading { margin-bottom: 28px; }
-    .form-heading h2 {
+    /* Main form container */
+    .auth-card-wrapper {
+      width: 100%;
+      max-width: 420px;
+      margin: auto 0;
+    }
+
+    .auth-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 26px 28px;
+      border: 1.5px solid rgba(4, 107, 38, 0.16);
+      border-top: 4px solid var(--brand-primary);
+      box-shadow: var(--shadow-card);
+      position: relative;
+    }
+
+    .auth-header {
+      margin-bottom: 18px;
+    }
+    .auth-badge-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--brand-primary-light);
+      color: var(--brand-primary);
+      font-size: 11px;
+      font-weight: 700;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 24px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      border: 1px solid rgba(4, 107, 38, 0.15);
+    }
+    .auth-header h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 22px;
       font-weight: 800;
-      color: var(--text-main);
+      color: var(--text-heading);
       letter-spacing: -0.5px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
-    .form-heading p {
-      font-size: 13.5px;
+    .auth-header p {
+      font-size: 13px;
       color: var(--text-muted);
-      line-height: 1.5;
+      line-height: 1.45;
     }
 
-    .alert-box {
-      border-radius: 12px;
-      padding: 12px 15px;
-      font-size: 13px;
+    /* Alert Boxes */
+    .alert-modern {
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 12.5px;
       font-weight: 500;
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
+      line-height: 1.4;
     }
-    .alert-err {
-      background: #fff5f5;
-      border: 1px solid #fed7d7;
-      color: #c53030;
+    .alert-modern-err {
+      background: #FEF2F2;
+      border: 1px solid #FEE2E2;
+      color: #991B1B;
     }
-    .alert-ok {
-      background: #f0fff4;
-      border: 1px solid #c6f6d5;
-      color: #276749;
+    .alert-modern-ok {
+      background: #F0FDF4;
+      border: 1px solid #DCFCE7;
+      color: #166534;
     }
 
-    .field { margin-bottom: 18px; }
-    .field-label {
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-label-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 13.5px;
+      margin-bottom: 6px;
+    }
+    .form-label {
+      font-size: 13px;
       font-weight: 600;
-      color: var(--text-main);
-      margin-bottom: 8px;
+      color: var(--text-heading);
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
-
-    .input-wrap { position: relative; }
-
-    .input-icon {
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      transform: translateY(-50%);
+    .form-label-hint {
+      font-size: 11px;
       color: var(--text-light);
-      font-size: 16px;
-      pointer-events: none;
+      font-weight: 400;
     }
 
-    .form-input {
+    .input-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .input-box .input-icon-lead {
+      position: absolute;
+      left: 14px;
+      color: var(--text-light);
+      font-size: 15px;
+      pointer-events: none;
+      transition: color 0.2s ease;
+    }
+    .custom-input {
       width: 100%;
-      background: var(--surface-light);
-      border: 1.5px solid var(--border-light);
-      border-radius: 12px;
-      padding: 13px 44px 13px 44px;
-      font-size: 14px;
-      color: var(--text-main);
+      height: 44px;
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0 42px 0 40px;
+      font-size: 13.5px;
+      color: var(--text-heading);
       font-family: 'Inter', sans-serif;
       outline: none;
-      transition: all 0.25s ease;
+      transition: var(--transition-smooth);
+    }
+    .custom-input::placeholder {
+      color: #769280;
+      font-size: 13px;
+    }
+    .custom-input:focus {
+      background: #FFFFFF;
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 3px rgba(4, 107, 38, 0.16);
+    }
+    .input-box:focus-within .input-icon-lead {
+      color: var(--brand-primary);
+    }
+    .custom-input.has-error {
+      border-color: #EF4444;
+      background: #FFFBFB;
     }
 
-    .form-input:focus {
-      border-color: var(--uis-purple);
-      background: var(--white);
-      box-shadow: 0 0 0 3px rgba(4, 107, 38, 0.12);
+    .btn-toggle-eye {
+      position: absolute;
+      right: 10px;
+      background: transparent;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      padding: 6px;
+      font-size: 15px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s ease;
+    }
+    .btn-toggle-eye:hover {
+      color: var(--text-heading);
     }
 
-    .field-err-msg {
-      font-size: 12px;
-      color: #c53030;
-      margin-top: 6px;
+    .error-feedback {
       display: flex;
       align-items: center;
       gap: 5px;
+      font-size: 11.5px;
+      color: #DC2626;
+      margin-top: 4px;
+      font-weight: 500;
     }
 
-    .btn-show-pw {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--text-light);
-      font-size: 16px;
-      padding: 4px 6px;
-    }
-
-    .remember-row {
+    /* Actions Row */
+    .form-options-row {
       display: flex;
       align-items: center;
-      gap: 9px;
-      margin-bottom: 24px;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      font-size: 12.5px;
     }
-    .remember-row input[type=checkbox] {
-      width: 16px;
-      height: 16px;
-      accent-color: var(--uis-purple);
+    .remember-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 7px;
       cursor: pointer;
+      user-select: none;
     }
-    .remember-row label {
-      font-size: 13px;
-      color: var(--text-muted);
+    .remember-wrapper input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      accent-color: var(--brand-primary);
       cursor: pointer;
+      border-radius: 4px;
+    }
+    .remember-wrapper span {
+      color: var(--text-body);
+      font-weight: 500;
     }
 
-    .btn-masuk {
+    /* Submit CTA */
+    .btn-submit-login {
       width: 100%;
-      padding: 14px;
-      background: var(--uis-purple);
+      height: 44px;
+      background: linear-gradient(180deg, #057a2c 0%, #046B26 100%);
+      color: #FFFFFF;
       border: none;
-      border-radius: 12px;
-      color: var(--white);
-      font-size: 15px;
+      border-radius: 10px;
+      font-size: 14.5px;
       font-weight: 700;
       font-family: 'Plus Jakarta Sans', sans-serif;
       cursor: pointer;
-      transition: all 0.25s ease;
-      box-shadow: var(--shadow-purple);
+      box-shadow: var(--shadow-primary);
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
+      transition: var(--transition-smooth);
     }
-    .btn-masuk:hover {
-      background: var(--uis-purple-dark);
-      transform: translateY(-2px);
+    .btn-submit-login:hover {
+      background: linear-gradient(180deg, #046B26 0%, #024a19 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px -3px rgba(4, 107, 38, 0.4);
+    }
+    .btn-submit-login:active {
+      transform: translateY(0);
     }
 
-    .form-footer {
+    /* Alumni & Mitra Card */
+    .alumni-card {
+      margin-top: 14px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #F4FAF6;
+      border: 1.5px solid rgba(4, 107, 38, 0.18);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+    .alumni-card:hover {
+      background: #F0FDF4;
+      border-color: rgba(4, 107, 38, 0.35);
+      transform: translateY(-1px);
+    }
+    .alumni-card-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--brand-primary-light);
+      color: var(--brand-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .alumni-card-text {
+      flex: 1;
+    }
+    .alumni-card-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-heading);
+    }
+    .alumni-card-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+    .alumni-card-arrow {
+      color: var(--text-light);
+      font-size: 12px;
+    }
+
+    /* Auth Footer */
+    .auth-bottom-info {
       text-align: center;
-      padding-top: 18px;
+      margin-top: 14px;
     }
-    .form-footer a {
-      color: var(--uis-purple);
-      font-weight: 600;
-    }
-    .back-to-home-link {
-      color: var(--text-muted) !important;
-      font-weight: 500 !important;
+    .security-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      margin-top: 8px;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
     }
-
-    .copyright {
-      text-align: center;
-      margin-top: 22px;
-      font-size: 11.5px;
+    .security-badge i {
+      color: var(--brand-primary);
+      font-size: 12px;
+    }
+    .auth-copyright {
+      font-size: 11px;
       color: var(--text-light);
     }
 
-    @media (max-width: 900px) {
-      .panel-left { display: none; }
-      .panel-right { flex: 1; }
+    /* ── RESPONSIVE DESIGN ── */
+    @media (max-width: 992px) {
+      .showcase-panel {
+        display: none; /* Pada tablet & mobile hanya fokus form */
+      }
+      .auth-panel {
+        flex: 1;
+        padding: 24px 20px;
+      }
+      html, body {
+        overflow-y: auto; /* Izinkan scroll jika layar sangat kecil */
+      }
     }
   </style>
 </head>
 
 <body>
 
-<div class="login-wrapper">
+<div class="auth-container">
 
-  <!-- LEFT PANEL -->
-  <div class="panel-left">
-    <div class="panel-left-content">
-      <div class="brand-top">
-        <img src="{{ asset('frontend/img/logouis.png') }}" alt="Logo Universitas Ibnu Sina" style="height: 52px; width: auto; object-fit: contain;">
-      </div>
+  <!-- ══════════════════════════════════════════════════════════════════════
+       LEFT SHOWCASE PANEL (FOTO ASLI GEDUNG UIS DENGAN WARNA NATURAL)
+  ══════════════════════════════════════════════════════════════════════ -->
+  <aside class="showcase-panel">
+    <!-- Foto Asli Gedung Kampus UIS -->
+    <div class="showcase-bg"></div>
+    <div class="showcase-overlay"></div>
 
-      <div class="brand-middle">
-        <div class="badge-kategori">
-          <span>Portal Resmi Akademik</span>
+    <div class="showcase-content">
+      <!-- Top Branding -->
+      <a href="{{ route('homepage') }}" class="showcase-brand">
+        <div class="showcase-logo-wrap">
+          <img src="{{ asset('frontend/img/logouis.png') }}" alt="Lambang Resmi UIS">
         </div>
-
-        <h1>Universitas Ibnu Sina<br><em>Unggul & Berintegritas</em></h1>
-
-        <p>
-          Sistem informasi terpadu pengelolaan akademik, publikasi berita, dokumentasi fasilitas, dan data informasi UIS.
-        </p>
-
-        <div class="faculty-chips">
-          <div class="f-chip"><i class="bi bi-hospital"></i> <span>Laboratorium Modern</span></div>
-          <div class="f-chip"><i class="bi bi-patch-check-fill"></i> <span>Akreditasi Unggul</span></div>
-          <div class="f-chip"><i class="bi bi-mortarboard-fill"></i> <span>Dosen Profesional</span></div>
-          <div class="f-chip"><i class="bi bi-shield-check"></i> <span>Standar Nasional</span></div>
+        <div class="showcase-brand-text">
+          <h2>Universitas Ibnu Sina</h2>
+          <span>Portal Akademik & Administrasi Terpadu</span>
         </div>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       RIGHT AUTH PANEL (PAS DI LAYAR & TERTATA RAPI)
+  ══════════════════════════════════════════════ -->
+  <main class="auth-panel">
+    <!-- Top Bar Navigation -->
+    <div class="auth-topbar">
+      <a href="{{ route('homepage') }}" class="btn-back-home">
+        <i class="bi bi-arrow-left"></i>
+        <span>Kembali ke Beranda</span>
+      </a>
+
+      <div class="auth-badge-status">
+        <span></span>
+        <span>Sistem Aktif</span>
       </div>
     </div>
-  </div>
 
-  <!-- RIGHT PANEL -->
-  <div class="panel-right">
-    <div class="form-container">
-      <div class="form-card">
-        <div class="form-logo-sm">
-          <img src="{{ asset('frontend/img/logouis.png') }}" alt="Logo UIS" style="height: 38px; width: auto; object-fit: contain;">
-          <div class="txt">Portal UIS</div>
-        </div>
-
-        <div class="form-heading">
+    <!-- Center Card Wrapper -->
+    <div class="auth-card-wrapper">
+      <div class="auth-card">
+        <!-- Auth Header -->
+        <div class="auth-header">
+          <div class="auth-badge-top">
+            <i class="bi bi-shield-lock-fill"></i>
+            <span>AUTENTIKASI AKUN</span>
+          </div>
           <h2>Masuk ke Akun Anda</h2>
-          <p>Silakan masukkan kredensial untuk mengakses dashboard</p>
+          <p>Gunakan kredensial resmi untuk mengakses panel kontrol sistem.</p>
         </div>
 
+        <!-- Flash Messages -->
         @if (session('success'))
-          <div class="alert-box alert-ok">
+          <div class="alert-modern alert-modern-ok">
             <i class="bi bi-check-circle-fill"></i>
-            <span>{{ session('success') }}</span>
+            <div>{{ session('success') }}</div>
           </div>
         @endif
 
         @if ($errors->has('email') && str_contains($errors->first('email'), 'salah'))
-          <div class="alert-box alert-err">
+          <div class="alert-modern alert-modern-err">
             <i class="bi bi-exclamation-triangle-fill"></i>
-            <span>{{ $errors->first('email') }}</span>
+            <div>{{ $errors->first('email') }}</div>
           </div>
         @endif
 
+        <!-- Login Form -->
         <form id="formLogin" action="{{ route('loginproses') }}" method="POST" novalidate>
           @csrf
 
-          <div class="field">
-            <label class="field-label" for="email"><span>Email</span></label>
-            <div class="input-wrap">
-              <input type="email" id="email" name="email" class="form-input {{ $errors->has('email') && !str_contains($errors->first('email'), 'salah') ? 'is-invalid' : '' }}" placeholder="admin@uis.ac.id" value="{{ old('email') }}" required>
-              <i class="bi bi-envelope input-icon"></i>
+          <!-- Email / Username Field -->
+          <div class="form-group">
+            <div class="form-label-row">
+              <label for="email" class="form-label">Email Institusi / Akun</label>
+              <span class="form-label-hint">contoh: admin@uis.ac.id</span>
+            </div>
+            <div class="input-box">
+              <i class="bi bi-envelope input-icon-lead"></i>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="custom-input {{ $errors->has('email') && !str_contains($errors->first('email'), 'salah') ? 'has-error' : '' }}" 
+                placeholder="nama@uis.ac.id" 
+                value="{{ old('email') }}" 
+                autocomplete="email"
+                required
+              >
             </div>
             @error('email')
               @if (!str_contains($message, 'salah'))
-                <div class="field-err-msg"><i class="bi bi-x-circle-fill"></i> {{ $message }}</div>
+                <div class="error-feedback">
+                  <i class="bi bi-exclamation-circle-fill"></i>
+                  <span>{{ $message }}</span>
+                </div>
               @endif
             @enderror
           </div>
 
-          <div class="field">
-            <label class="field-label" for="password"><span>Password</span></label>
-            <div class="input-wrap">
-              <input type="password" id="password" name="password" class="form-input {{ $errors->has('password') ? 'is-invalid' : '' }}" placeholder="Masukkan password Anda" required>
-              <i class="bi bi-lock input-icon"></i>
-              <button type="button" id="togglePw" class="btn-show-pw"><i class="bi bi-eye" id="eyeIcon"></i></button>
+          <!-- Password Field -->
+          <div class="form-group">
+            <div class="form-label-row">
+              <label for="password" class="form-label">Kata Sandi</label>
+            </div>
+            <div class="input-box">
+              <i class="bi bi-lock-fill input-icon-lead"></i>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                class="custom-input {{ $errors->has('password') ? 'has-error' : '' }}" 
+                placeholder="Masukkan kata sandi Anda" 
+                autocomplete="current-password"
+                required
+              >
+              <button type="button" id="togglePw" class="btn-toggle-eye" aria-label="Lihat kata sandi">
+                <i class="bi bi-eye" id="eyeIcon"></i>
+              </button>
             </div>
             @error('password')
-              <div class="field-err-msg"><i class="bi bi-x-circle-fill"></i> {{ $message }}</div>
+              <div class="error-feedback">
+                <i class="bi bi-exclamation-circle-fill"></i>
+                <span>{{ $message }}</span>
+              </div>
             @enderror
           </div>
 
-          <button type="submit" class="btn-masuk" id="btnMasuk">
-            <i class="bi bi-box-arrow-in-right"></i>
-            Masuk Portal
+          <!-- Options Row (Ingat Saya) -->
+          <div class="form-options-row">
+            <label class="remember-wrapper">
+              <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+              <span>Ingat saya di perangkat ini</span>
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn-submit-login" id="btnMasuk">
+            <span>Masuk ke Portal</span>
+            <i class="bi bi-arrow-right"></i>
           </button>
         </form>
 
-        <!-- Link Akses Formulir Testimoni Alumni (Tanpa Login) -->
-        <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(4, 107, 38, 0.12); text-align: center;">
-          <div style="background: rgba(4, 107, 38, 0.05); border: 1.5px dashed rgba(4, 107, 38, 0.25); border-radius: 14px; padding: 14px 16px; transition: all 0.25s ease;">
-            <p style="font-size: 12.5px; color: #555555; margin-bottom: 6px; font-weight: 500;">
-              🎓 <strong>Alumni atau Mitra Universitas Ibnu Sina?</strong>
-            </p>
-            <a href="{{ route('homepage.alumni.create') }}" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px; font-weight: 700; color: #046B26; text-decoration: none; padding: 6px 12px; border-radius: 8px; background: rgba(4, 107, 38, 0.08);">
-              <i class="bi bi-chat-quote-fill"></i>
-              <span>Isi Ulasan & Testimoni Alumni di Sini</span>
-              <i class="bi bi-arrow-right"></i>
-            </a>
+        <!-- Alumni / Mitra Public Action Card -->
+        <a href="{{ route('homepage.alumni.create') }}" class="alumni-card">
+          <div class="alumni-card-icon">
+            <i class="bi bi-mortarboard-fill"></i>
           </div>
-        </div>
-
-        <div class="form-footer" style="margin-top: 18px;">
-          <p><a href="{{ route('homepage') }}" class="back-to-home-link"><i class="bi bi-arrow-left"></i> Kembali ke Beranda</a></p>
-        </div>
+          <div class="alumni-card-text">
+            <div class="alumni-card-title">
+              <span>Alumni atau Mitra UIS?</span>
+            </div>
+            <div class="alumni-card-sub">
+              Kirimkan ulasan & testimoni tanpa perlu login
+            </div>
+          </div>
+          <i class="bi bi-chevron-right alumni-card-arrow"></i>
+        </a>
       </div>
 
-      <div class="copyright">
-        &copy; {{ date('Y') }} UIS — Universitas Ibnu Sina. All rights reserved.
+      <!-- Security & Copyright Footer -->
+      <div class="auth-bottom-info">
+        <div class="security-badge">
+          <i class="bi bi-shield-check"></i>
+          <span>Koneksi aman SSL 256-bit • Portal Resmi UIS</span>
+        </div>
+        <div class="auth-copyright">
+          &copy; {{ date('Y') }} Universitas Ibnu Sina (UIS). Hak cipta dilindungi.
+        </div>
       </div>
     </div>
-  </div>
+
+    <!-- Empty bottom element for flex balance -->
+    <div></div>
+  </main>
 
 </div>
 
+<!-- Password Toggle Script -->
 <script>
   document.getElementById('togglePw').addEventListener('click', function () {
-    const inp  = document.getElementById('password');
-    const icon = document.getElementById('eyeIcon');
-    const show = inp.type === 'password';
-    inp.type = show ? 'text' : 'password';
-    icon.className = show ? 'bi bi-eye-slash' : 'bi bi-eye';
+    const input = document.getElementById('password');
+    const icon  = document.getElementById('eyeIcon');
+    const isPw  = input.type === 'password';
+
+    input.type = isPw ? 'text' : 'password';
+    icon.className = isPw ? 'bi bi-eye-slash' : 'bi bi-eye';
   });
 </script>
 

@@ -246,13 +246,42 @@
       display: flex;
       align-items: center;
       text-decoration: none;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .navbar-brand-custom:hover {
+      opacity: 0.95;
     }
 
     .brand-logo-img {
-      height: 48px;
-      max-height: 48px;
+      height: 46px;
+      max-height: 46px;
       width: auto;
       object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+    }
+
+    .brand-title-main {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+      line-height: 1;
+    }
+
+    @media (max-width: 576px) {
+      .brand-logo-img {
+        height: 38px;
+        max-height: 38px;
+      }
+      .brand-title-main {
+        font-size: 12.5px;
+        letter-spacing: 0.3px;
+      }
     }
 
     .nav-link-custom {

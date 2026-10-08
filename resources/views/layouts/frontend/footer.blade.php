@@ -6,8 +6,9 @@
     <div class="row g-5">
       <!-- Brand -->
       <div class="col-lg-4">
-        <a href="{{ route('homepage') }}" class="footer-logo mb-3 d-inline-block">
-          <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo Universitas Ibnu Sina" style="height: 52px; width: auto; object-fit: contain;">
+        <a href="{{ route('homepage') }}" class="footer-logo mb-3 d-inline-flex align-items-center gap-2 text-decoration-none">
+          <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo Universitas Ibnu Sina" style="height: 48px; width: auto; object-fit: contain;">
+          <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; color: #ffffff; letter-spacing: 0.5px;">UNIVERSITAS IBNU SINA</span>
         </a>
         <p class="footer-desc">
           Universitas Ibnu Sina (UIS) Batam — Kampusnya Profesional Muda. Berkomitmen menyelenggarakan pendidikan tinggi unggul, bermartabat, bereputasi nasional dan internasional serta berjiwa entrepreneur berbasis Imtaq.
@@ -33,9 +34,9 @@
         </ul>
       </div>
 
-      <!-- Akademik Info -->
+      <!-- Informasi Kampus -->
       <div class="col-6 col-lg-2">
-        <div class="footer-heading">Akademik</div>
+        <div class="footer-heading">Informasi</div>
         <ul class="footer-links">
           <li><a href="{{ route('homepage.visi-misi') }}"><i class="bi bi-chevron-right"></i> Visi & Misi</a></li>
           <li><a href="{{ route('homepage.sambutan-rektor') }}"><i class="bi bi-chevron-right"></i> Sambutan Rektor</a></li>

@@ -28,34 +28,60 @@
     display: block;
     object-fit: contain;
   }
+  #heroCarousel {
+    user-select: none;
+    touch-action: pan-y;
+    cursor: grab;
+  }
+  #heroCarousel.is-dragging {
+    cursor: grabbing;
+  }
+  #heroCarousel img {
+    -webkit-user-drag: none;
+    user-select: none;
+    pointer-events: none;
+  }
   .hero-slider-section .carousel-control-prev,
   .hero-slider-section .carousel-control-next {
     width: 48px;
     height: 48px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(3, 46, 18, 0.7);
-    border-radius: 50%;
-    opacity: 0.75;
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+    background: rgba(3, 46, 18, 0.75) !important;
+    border-radius: 50% !important;
+    opacity: 0.85 !important;
     margin: 0 20px;
     transition: all 0.25s ease;
-    border: 1px solid rgba(254, 216, 2, 0.35);
+    border: 1.5px solid rgba(254, 216, 2, 0.5) !important;
+    z-index: 25 !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
   @media (max-width: 768px) {
     .hero-slider-section .carousel-control-prev,
     .hero-slider-section .carousel-control-next {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       margin: 0 8px;
       font-size: 12px;
-      opacity: 0.6;
+      opacity: 0.75 !important;
     }
   }
   .hero-slider-section .carousel-control-prev:hover,
   .hero-slider-section .carousel-control-next:hover {
-    background: var(--uis-green);
-    opacity: 1;
-    transform: translateY(-50%) scale(1.08);
+    background: var(--uis-green) !important;
+    opacity: 1 !important;
+    transform: translateY(-50%) scale(1.08) !important;
+    border-color: #FED802 !important;
+  }
+  .hero-slider-section .carousel-indicators {
+    z-index: 25 !important;
+    margin-bottom: 14px !important;
+    pointer-events: auto !important;
   }
   .hero-slider-section .carousel-indicators [data-bs-target] {
     width: 10px;
@@ -63,9 +89,11 @@
     border-radius: 50%;
     margin: 0 5px;
     background-color: var(--white);
-    opacity: 0.5;
+    opacity: 0.6;
     border: none;
     transition: all 0.3s ease;
+    cursor: pointer !important;
+    pointer-events: auto !important;
   }
   .hero-slider-section .carousel-indicators .active {
     width: 28px;
@@ -137,21 +165,39 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 38px;
     margin-bottom: 14px;
+    min-height: 50px;
+  }
+  .layanan-terkait-logo-badge {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 6px 14px;
+    min-height: 48px;
+    min-width: 58px;
+    max-width: 120px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    border: 1.5px solid rgba(255, 255, 255, 0.9);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .layanan-terkait-card:hover .layanan-terkait-logo-badge {
+    transform: scale(1.08);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
   }
   .layanan-terkait-logo {
-    max-height: 36px;
-    max-width: 65px;
+    max-height: 38px;
+    max-width: 96px;
+    width: auto;
+    height: auto;
     object-fit: contain;
+    display: block;
     transition: transform 0.3s ease;
-  }
-  .layanan-terkait-card:hover .layanan-terkait-logo {
-    transform: scale(1.1);
   }
   .layanan-terkait-icon {
     font-size: 26px;
-    color: var(--uis-yellow, #FED802);
+    color: var(--uis-green, #046B26);
     transition: transform 0.3s ease;
   }
   .layanan-terkait-card:hover .layanan-terkait-icon {
@@ -1061,7 +1107,7 @@
      1. HERO BANNER (FULL IMAGE PROMOTION)
 ═══════════════════════════════════════════════ -->
 <section class="hero-slider-section p-0">
-  <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+  <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4500" data-bs-pause="false" data-bs-wrap="true" data-bs-touch="true">
     
     @php
       $activeBanners = isset($banners) ? $banners->filter(fn($b) => !empty($b->url) || !empty($b->gambar)) : collect();
@@ -1133,13 +1179,14 @@
       </div>
     </div>
 
-    <!-- 1. VIDEO PROFIL DI ATAS (FULL WIDTH) -->
+    <!-- VIDEO KIRI & CONTENT KANAN (SIDE-BY-SIDE) -->
     @if($about?->hasVideo())
-      <div class="row mb-5" data-aos="fade-up" data-aos-delay="100">
-        <div class="col-12">
-          <div class="position-relative rounded-4 overflow-hidden shadow-lg border w-100" style="border-color: #e2e8f0; background: #000;">
+      <div class="row g-4 align-items-center mb-5" data-aos="fade-up" data-aos-delay="150">
+        {{-- Video Profil Kiri --}}
+        <div class="col-lg-6">
+          <div class="position-relative rounded-4 overflow-hidden shadow-sm border w-100" style="border-color: #e2e8f0; background: #000;">
             @if($about->video_file)
-              <video controls class="w-100 d-block" style="max-height: 540px; object-fit: contain;">
+              <video controls class="w-100 d-block" style="max-height: 440px; object-fit: contain;">
                 <source src="{{ asset('storage/' . $about->video_file) }}">
                 Browser Anda tidak mendukung tag video.
               </video>
@@ -1156,25 +1203,36 @@
             @endif
           </div>
           @if($about->youtube_watch_url)
-            <div class="d-flex justify-content-end align-items-center gap-2 mt-2 px-1">
-              <span class="text-muted small">Video bermasalah saat diputar?</span>
-              <a href="{{ $about->youtube_watch_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm text-white fw-semibold d-inline-flex align-items-center gap-1" style="background-color: #046B26; font-size: 12.5px; border-radius: 6px; padding: 4px 12px;">
+            <div class="d-flex justify-content-between align-items-center gap-2 mt-2 px-1">
+              <span class="text-muted small" style="font-size: 12px;">Video bermasalah saat diputar?</span>
+              <a href="{{ $about->youtube_watch_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm text-white fw-semibold d-inline-flex align-items-center gap-1" style="background-color: #046B26; font-size: 12px; border-radius: 6px; padding: 4px 12px;">
                 <i class="bi bi-youtube text-warning"></i> Buka Langsung di YouTube <i class="bi bi-box-arrow-up-right ms-1" style="font-size: 10px;"></i>
               </a>
             </div>
           @endif
         </div>
-      </div>
-    @endif
 
-    <!-- 2. DESKRIPSI PARAGRAF DI BAWAH (FULL WIDTH 100%) -->
-    <div class="row mb-5" data-aos="fade-up" data-aos-delay="200">
-      <div class="col-12">
-        <div class="w-100 p-4 p-md-5 rounded-4 shadow-sm" style="width: 100% !important; max-width: 100% !important; text-align: justify; font-size: 17px; line-height: 2.0; color: #2d3748; background: #f8faf9; border-left: 6px solid var(--uis-green, #046B26); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
-          {!! $about->deskripsi_profil_1 ?? 'Universitas Ibnu Sina (UIS) Batam merupakan perguruan tinggi swasta terkemuka di Provinsi Kepulauan Riau yang lahir dari perpaduan keunggulan akademik Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES) di bawah naungan Yayasan Pendidikan Ibnu Sina Batam (YAPISNA). Berlokasi strategis di kawasan industri dan perdagangan internasional Kota Batam, UIS mengelola tiga fakultas unggulan: Fakultas Teknik (Sains & Teknologi), Fakultas Ekonomi dan Bisnis (FEB), serta Fakultas Ilmu Kesehatan (FIKES), beserta Program Pascasarjana (Magister). UIS bertekad mencetak lulusan profesional muda yang inovatif, berdaya saing global, berjiwa entrepreneur, dan berakhlak mulia berlandaskan Iman dan Taqwa (Imtaq).' !!}
+        {{-- Content / Deskripsi Kanan --}}
+        <div class="col-lg-6">
+          <div class="h-100 p-4 p-md-4 rounded-4 shadow-sm" style="font-size: 15.5px; line-height: 1.85; color: #2d3748; background: #f8faf9; border-left: 5px solid var(--uis-green, #046B26); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
+            <div class="about-desc-content" style="text-align: justify;">
+              {!! $about->deskripsi_profil_1 ?? 'Universitas Ibnu Sina (UIS) Batam merupakan perguruan tinggi swasta terkemuka di Provinsi Kepulauan Riau yang lahir dari perpaduan keunggulan akademik Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES) di bawah naungan Yayasan Pendidikan Ibnu Sina Batam (YAPISNA). Berlokasi strategis di kawasan industri dan perdagangan internasional Kota Batam, UIS mengelola tiga fakultas unggulan: Fakultas Teknik (Sains & Teknologi), Fakultas Ekonomi dan Bisnis (FEB), serta Fakultas Ilmu Kesehatan (FIKES), beserta Program Pascasarjana (Magister). UIS bertekad mencetak lulusan profesional muda yang inovatif, berdaya saing global, berjiwa entrepreneur, dan berakhlak mulia berlandaskan Iman dan Taqwa (Imtaq).' !!}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    @else
+      {{-- Fallback jika belum ada video --}}
+      <div class="row mb-5" data-aos="fade-up" data-aos-delay="150">
+        <div class="col-12">
+          <div class="w-100 p-4 p-md-5 rounded-4 shadow-sm" style="text-align: justify; font-size: 16.5px; line-height: 1.9; color: #2d3748; background: #f8faf9; border-left: 6px solid var(--uis-green, #046B26); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
+            <div class="about-desc-content">
+              {!! $about->deskripsi_profil_1 ?? 'Universitas Ibnu Sina (UIS) Batam merupakan perguruan tinggi swasta terkemuka di Provinsi Kepulauan Riau yang lahir dari perpaduan keunggulan akademik Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES) di bawah naungan Yayasan Pendidikan Ibnu Sina Batam (YAPISNA). Berlokasi strategis di kawasan industri dan perdagangan internasional Kota Batam, UIS mengelola tiga fakultas unggulan: Fakultas Teknik (Sains & Teknologi), Fakultas Ekonomi dan Bisnis (FEB), serta Fakultas Ilmu Kesehatan (FIKES), beserta Program Pascasarjana (Magister). UIS bertekad mencetak lulusan profesional muda yang inovatif, berdaya saing global, berjiwa entrepreneur, dan berakhlak mulia berlandaskan Iman dan Taqwa (Imtaq).' !!}
+            </div>
+          </div>
+        </div>
+      </div>
+    @endif
 
     <!-- 3. PILAR KEUNGGULAN (3 CARD HORIZONTAL & TOMBOL CTA) -->
     <div class="row g-3 justify-content-center mb-5" data-aos="fade-up" data-aos-delay="250">
@@ -1842,14 +1900,16 @@
     <div class="row g-3 g-lg-4 justify-content-center">
       @foreach($layananTerkaits as $item)
         <div class="col-xl-3 col-lg-3 col-md-6 col-12" data-aos="fade-up" data-aos-delay="{{ min(400, 50 * ($loop->index + 1)) }}">
-          <a href="{{ $item->url }}" target="_blank" rel="noopener noreferrer" class="layanan-terkait-card" title="{{ $item->deskripsi ?? $item->nama }}">
-            {{-- Top Right Logo / Icon --}}
+          <a href="{{ $item->url }}" target="_blank" rel="noopener noreferrer" class="layanan-terkait-card" title="{{ trim(strip_tags($item->deskripsi ?? $item->nama)) }}">
+            {{-- Top Right Logo / Icon in High-Contrast White Container --}}
             <div class="layanan-terkait-logo-wrap">
-              @if($item->logo_url)
-                <img src="{{ $item->logo_url }}" alt="{{ $item->nama }}" class="layanan-terkait-logo">
-              @else
-                <i class="bi {{ $item->icon ?: 'bi-box-arrow-up-right' }} layanan-terkait-icon"></i>
-              @endif
+              <div class="layanan-terkait-logo-badge">
+                @if($item->logo_url)
+                  <img src="{{ $item->logo_url }}" alt="{{ $item->nama }}" class="layanan-terkait-logo">
+                @else
+                  <i class="bi {{ $item->icon ?: 'bi-box-arrow-up-right' }} layanan-terkait-icon"></i>
+                @endif
+              </div>
             </div>
 
             {{-- Bottom Left Service Name --}}
@@ -2238,6 +2298,94 @@
 @push('scripts')
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    // ── Hero Banner Carousel Auto Slide & Click / Swipe Interaction ───────────
+    const heroCarouselEl = document.getElementById('heroCarousel');
+    if (heroCarouselEl && typeof bootstrap !== 'undefined' && bootstrap.Carousel) {
+      const carouselInstance = bootstrap.Carousel.getOrCreateInstance(heroCarouselEl, {
+        interval: 4500,
+        ride: 'carousel',
+        pause: false,
+        wrap: true,
+        touch: true
+      });
+
+      // Mulai auto slide langsung saat DOM selesai dimuat
+      carouselInstance.cycle();
+
+      // Tombol Navigasi Prev / Next (Manual Click Fallback)
+      const prevBtn = heroCarouselEl.querySelector('.carousel-control-prev');
+      const nextBtn = heroCarouselEl.querySelector('.carousel-control-next');
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          carouselInstance.prev();
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          carouselInstance.next();
+        });
+      }
+
+      // Indikator Titik / Kapsul
+      const indicatorBtns = heroCarouselEl.querySelectorAll('.carousel-indicators [data-bs-slide-to]');
+      indicatorBtns.forEach((btn) => {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetIndex = parseInt(this.getAttribute('data-bs-slide-to'), 10);
+          if (!isNaN(targetIndex)) {
+            carouselInstance.to(targetIndex);
+          }
+        });
+      });
+
+      // Geser / Swipe Banner (Touch & Mouse Drag)
+      let touchStartX = 0;
+      let touchEndX = 0;
+      let mouseStartX = 0;
+      let isMouseDown = false;
+
+      heroCarouselEl.addEventListener('touchstart', function (e) {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+
+      heroCarouselEl.addEventListener('touchend', function (e) {
+        touchEndX = e.changedTouches[0].clientX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) {
+            carouselInstance.next();
+          } else {
+            carouselInstance.prev();
+          }
+        }
+      }, { passive: true });
+
+      heroCarouselEl.addEventListener('mousedown', function (e) {
+        if (e.target.closest('.carousel-control-prev') || e.target.closest('.carousel-control-next') || e.target.closest('.carousel-indicators')) {
+          return;
+        }
+        isMouseDown = true;
+        mouseStartX = e.clientX;
+        heroCarouselEl.classList.add('is-dragging');
+      });
+
+      window.addEventListener('mouseup', function (e) {
+        if (!isMouseDown) return;
+        isMouseDown = false;
+        heroCarouselEl.classList.remove('is-dragging');
+        const diff = mouseStartX - e.clientX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) {
+            carouselInstance.next();
+          } else {
+            carouselInstance.prev();
+          }
+        }
+      });
+    }
+
     if (document.querySelector('.alumniSwiper')) {
       new Swiper('.alumniSwiper', {
         slidesPerView: 1,

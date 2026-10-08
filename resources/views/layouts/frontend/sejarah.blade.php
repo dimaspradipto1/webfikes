@@ -177,19 +177,45 @@
       </div>
 
       <div class="col-lg-6" data-aos="fade-left">
-        <div class="p-4 rounded-4 text-white" style="background: #032e12; border: 2px solid var(--uis-green);">
-          <div class="d-flex align-items-center gap-3 mb-3">
-            <div class="p-3 rounded-3" style="background: var(--uis-yellow); color: #032e12;">
-              <i class="bi bi-mortarboard-fill fs-2"></i>
+        <div class="card border-0 rounded-4 shadow-sm h-100 position-relative overflow-hidden" 
+             style="background: #ffffff; border: 1px solid rgba(4, 107, 38, 0.16) !important; border-top: 5px solid var(--uis-green, #046B26) !important; box-shadow: 0 10px 30px rgba(4, 107, 38, 0.06) !important;">
+          <div class="card-body p-4 p-md-5">
+            {{-- Header Card --}}
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0" 
+                   style="width: 52px; height: 52px; background: #edf6f0; color: #046B26; font-size: 24px; border: 1px solid #cce5d4;">
+                <i class="bi bi-mortarboard-fill"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-1" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; color: #0a2313; letter-spacing: -0.2px;">
+                  Kampusnya Profesional Muda
+                </h5>
+                <div class="fw-semibold" style="font-size: 13px; color: #046B26;">
+                  Pendidikan, Riset Terapan & Kemitraan Industri Global
+                </div>
+              </div>
             </div>
-            <div>
-              <h5 class="fw-bold text-white mb-0">Kampusnya Profesional Muda</h5>
-              <div class="text-white-50 small">Pendidikan, Riset Terapan & Kemitraan Industri Global</div>
+
+            {{-- Narasi Utama --}}
+            <div class="p-3 rounded-3 mb-4" style="background: #f8faf9; border-left: 4px solid #046B26; border-top: 1px solid #eef5f0; border-right: 1px solid #eef5f0; border-bottom: 1px solid #eef5f0;">
+              <p class="mb-0" style="font-size: 14.5px; line-height: 1.85; color: #2d3748; text-align: justify;">
+                Setiap fase perkembangan Universitas Ibnu Sina diarahkan untuk memperkuat mutu pembelajaran berbasis teknologi informasi, riset terapan bernilai guna bagi industri manufaktur dan maritim, serta membentuk lulusan berjiwa entrepreneur berbasis Imtaq.
+              </p>
+            </div>
+
+            {{-- Pilar Fokus Institusi --}}
+            <div class="d-flex flex-wrap gap-2 pt-2 border-top" style="border-color: #edf2f7 !important;">
+              <span class="badge px-3 py-2 rounded-pill fw-semibold" style="background: #edf6f0; color: #046B26; border: 1px solid #d0e7d7; font-size: 11.5px;">
+                <i class="bi bi-laptop me-1"></i> Teknologi Informasi
+              </span>
+              <span class="badge px-3 py-2 rounded-pill fw-semibold" style="background: #edf6f0; color: #046B26; border: 1px solid #d0e7d7; font-size: 11.5px;">
+                <i class="bi bi-gear-fill me-1"></i> Industri & Maritim
+              </span>
+              <span class="badge px-3 py-2 rounded-pill fw-semibold" style="background: #fffbeb; color: #92400e; border: 1px solid #fef3c7; font-size: 11.5px;">
+                <i class="bi bi-star-fill me-1 text-warning"></i> Entrepreneur & Imtaq
+              </span>
             </div>
           </div>
-          <p class="text-white-50 small mb-0" style="line-height: 1.8;">
-            Setiap fase perkembangan Universitas Ibnu Sina diarahkan untuk memperkuat mutu pembelajaran berbasis teknologi informasi, riset terapan bernilai guna bagi industri manufaktur dan maritim, serta membentuk lulusan berjiwa entrepreneur berbasis Imtaq.
-          </p>
         </div>
       </div>
     </div>

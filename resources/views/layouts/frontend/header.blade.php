@@ -4,8 +4,9 @@
 <nav class="navbar navbar-expand-xl navbar-main sticky-top">
   <div class="container-fluid px-lg-4 px-xl-5">
     <!-- Logo UIS -->
-    <a class="navbar-brand navbar-brand-custom me-2 me-xl-4" href="{{ route('homepage') }}">
+    <a class="navbar-brand navbar-brand-custom me-2 me-xl-3" href="{{ route('homepage') }}">
       <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo Universitas Ibnu Sina" class="brand-logo-img">
+      <span class="brand-title-main ms-2">UNIVERSITAS IBNU SINA</span>
     </a>
 
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,38 +34,6 @@
           </ul>
         </li>
 
-        <!-- Akademik Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.kurikulum*') || request()->routeIs('homepage.kalender-akademik') || request()->routeIs('homepage.pedoman-akademik') || request()->routeIs('homepage.sistem-akademik') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Akademik <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-custom">
-            <!-- Kurikulum UIS with Submenu -->
-            <li class="dropdown-submenu">
-              <a class="dropdown-item dropdown-item-custom d-flex justify-content-between align-items-center {{ request()->routeIs('homepage.kurikulum*') ? 'active' : '' }}" href="{{ route('homepage.kurikulum') }}">
-                <span><i class="bi bi-journal-text me-1"></i> Kurikulum Akademik</span>
-                <i class="bi bi-chevron-right ms-2 d-none d-xl-inline" style="font-size: 10px;"></i>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-custom" style="min-width: 270px;">
-                @if(isset($navProdis) && $navProdis->count() > 0)
-                  @foreach($navProdis as $np)
-                    <li>
-                      <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.kurikulum', ['prodi' => $np->id]) }}">
-                        <i class="bi bi-mortarboard-fill text-warning"></i> {{ $np->judul }}
-                      </a>
-                    </li>
-                  @endforeach
-                @else
-                  <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.kurikulum') }}"><i class="bi bi-mortarboard"></i> Semua Kurikulum Prodi</a></li>
-                @endif
-              </ul>
-            </li>
-
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.kalender-akademik') ? 'active' : '' }}" href="{{ route('homepage.kalender-akademik') }}"><i class="bi bi-calendar-check"></i> Kalender Akademik</a></li>
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.pedoman-akademik') ? 'active' : '' }}" href="{{ route('homepage.pedoman-akademik') }}"><i class="bi bi-book"></i> Pedoman Akademik</a></li>
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.sistem-akademik') ? 'active' : '' }}" href="{{ route('homepage.sistem-akademik') }}"><i class="bi bi-laptop"></i> Sistem Akademik</a></li>
-          </ul>
-        </li>
 
         <!-- Program Studi Dropdown -->
         <li class="nav-item dropdown">

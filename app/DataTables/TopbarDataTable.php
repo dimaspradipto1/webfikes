@@ -24,7 +24,8 @@ class TopbarDataTable extends DataTable
                         </span>';
             })
             ->editColumn('alamat', function ($t) {
-                return '<div class="small text-dark" style="max-width: 250px;"><i class="bi bi-geo-alt me-1 text-warning"></i>' . e($t->alamat ?? '-') . '</div>';
+                $cleanAlamat = trim(html_entity_decode(strip_tags($t->alamat ?? '-'), ENT_QUOTES, 'UTF-8'));
+                return '<div class="small text-dark" style="max-width: 250px;"><i class="bi bi-geo-alt me-1 text-warning"></i>' . e($cleanAlamat) . '</div>';
             })
             ->editColumn('jam_operasional', function ($t) {
                 return '<div class="small text-dark text-nowrap"><i class="bi bi-clock me-1 text-warning"></i>' . e($t->jam_operasional ?? '-') . '</div>';

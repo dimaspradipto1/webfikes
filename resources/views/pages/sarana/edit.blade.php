@@ -148,7 +148,7 @@
                         <i id="prev-icon" class="bi {{ old('icon', $sarana->icon ?? 'bi-building') }}" style="font-size:24px;color:#046B26;"></i>
                     </div>
                     <div id="prev-nama" class="fw-bold mb-1" style="font-size:15px;">{{ $sarana->nama }}</div>
-                    <div id="prev-deskripsi" class="text-muted small" style="line-height:1.6;">{{ $sarana->deskripsi ?: 'Deskripsi sarana akan tampil di sini.' }}</div>
+                    <div id="prev-deskripsi" class="text-muted small" style="line-height:1.6;">{{ strip_tags($sarana->deskripsi) ?: 'Deskripsi sarana akan tampil di sini.' }}</div>
                 </div>
             </div>
         </div>

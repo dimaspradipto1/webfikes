@@ -24,12 +24,12 @@ class LayananTerkaitDataTable extends DataTable
             ->addColumn('DT_RowIndex', '')
             ->addColumn('logo', function ($item) {
                 if ($item->logo_url) {
-                    return '<div class="d-inline-flex align-items-center justify-content-center p-2 rounded-3" style="background:#823ca2; width:48px; height:48px; box-shadow:0 2px 6px rgba(130,60,162,0.25)">
-                                <img src="' . e($item->logo_url) . '" alt="' . e($item->nama) . '" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    return '<div class="d-flex align-items-center justify-content-center" style="width:52px; height:52px;">
+                                <img src="' . e($item->logo_url) . '" alt="' . e($item->nama) . '" style="max-width:50px; max-height:50px; width:auto; height:auto; object-fit:contain; display:block;">
                             </div>';
                 }
                 $icon = $item->icon ?: 'bi-link-45deg';
-                return '<div class="d-inline-flex align-items-center justify-content-center rounded-3 text-white" style="background:#823ca2; width:48px; height:48px; font-size:20px; color:#ff9c00 !important; box-shadow:0 2px 6px rgba(130,60,162,0.25)">
+                return '<div class="d-flex align-items-center justify-content-center" style="width:52px; height:52px; font-size:26px; color:#046B26;">
                             <i class="bi ' . e($icon) . '"></i>
                         </div>';
             })
@@ -37,7 +37,8 @@ class LayananTerkaitDataTable extends DataTable
                 $html = '<div class="text-start">';
                 $html .= '<div class="fw-bold text-dark" style="font-size:14px; letter-spacing:0.3px;">' . e($item->nama) . '</div>';
                 if ($item->deskripsi) {
-                    $shortDesc = mb_strimwidth($item->deskripsi, 0, 75, '...');
+                    $cleanDesc = trim(html_entity_decode(strip_tags($item->deskripsi), ENT_QUOTES, 'UTF-8'));
+                    $shortDesc = mb_strimwidth($cleanDesc, 0, 75, '...');
                     $html .= '<small class="text-muted d-block mt-1" style="font-size:12px; line-height:1.35;">' . e($shortDesc) . '</small>';
                 }
                 $html .= '</div>';

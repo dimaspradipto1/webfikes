@@ -38,9 +38,11 @@ class TestimonialDataTable extends DataTable
                 return $stars;
             })
             ->addColumn('pesan', function ($testimonial) {
-                return $testimonial->pesan
-                    ? '<span title="' . e($testimonial->pesan) . '">' . e(\Illuminate\Support\Str::limit($testimonial->pesan, 60)) . '</span>'
-                    : '<span class="text-muted fst-italic">—</span>';
+                if (!$testimonial->pesan) {
+                    return '<span class="text-muted fst-italic">—</span>';
+                }
+                $clean = trim(html_entity_decode(strip_tags($testimonial->pesan), ENT_QUOTES, 'UTF-8'));
+                return '<span title="' . e($clean) . '">' . e(\Illuminate\Support\Str::limit($clean, 60)) . '</span>';
             })
             ->addColumn('kategori', function ($testimonial) {
                 $kat = strtolower($testimonial->kategori ?? '');

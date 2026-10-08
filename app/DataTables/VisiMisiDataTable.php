@@ -26,7 +26,7 @@ class VisiMisiDataTable extends DataTable
                     ? '<span class="badge bg-primary">Visi</span>'
                     : '<span class="badge bg-info text-dark">Misi</span>';
             })
-            ->addColumn('isi', fn ($vm) => e(Str::limit($vm->isi, 90)))
+            ->addColumn('isi', fn ($vm) => e(Str::limit(trim(html_entity_decode(strip_tags($vm->isi ?? ''), ENT_QUOTES, 'UTF-8')), 90)))
             ->addColumn('urutan', fn ($vm) => '<span class="badge bg-secondary">' . $vm->urutan . '</span>')
             ->addColumn('action', function ($visimisi) {
                 $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';

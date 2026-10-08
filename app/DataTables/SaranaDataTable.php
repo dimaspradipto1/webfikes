@@ -32,11 +32,13 @@ class SaranaDataTable extends DataTable
                 return '<span class="fw-semibold">' . e($sarana->nama) . '</span>';
             })
             ->addColumn('deskripsi', function (Sarana $sarana) {
-                return $sarana->deskripsi
-                    ? '<span title="' . e($sarana->deskripsi) . '">'
-                      . e(\Illuminate\Support\Str::limit($sarana->deskripsi, 65))
-                      . '</span>'
-                    : '<span class="text-muted fst-italic">&mdash;</span>';
+                if (!$sarana->deskripsi) {
+                    return '<span class="text-muted fst-italic">&mdash;</span>';
+                }
+                $clean = trim(html_entity_decode(strip_tags($sarana->deskripsi), ENT_QUOTES, 'UTF-8'));
+                return '<span title="' . e($clean) . '">'
+                      . e(\Illuminate\Support\Str::limit($clean, 65))
+                      . '</span>';
             })
             ->addColumn('urutan', function (Sarana $sarana) {
                 return '<span class="badge bg-secondary">' . $sarana->urutan . '</span>';

@@ -23,7 +23,7 @@ class NilaiPerusahaanDataTable extends DataTable
             ->addColumn('DT_RowIndex', '')
             ->addColumn('icon', fn ($n) => '<i class="bi ' . e($n->icon) . '" style="font-size:20px"></i>')
             ->addColumn('judul', fn ($n) => e($n->judul))
-            ->addColumn('deskripsi', fn ($n) => e(Str::limit($n->deskripsi, 90)))
+            ->addColumn('deskripsi', fn ($n) => e(Str::limit(trim(html_entity_decode(strip_tags($n->deskripsi ?? ''), ENT_QUOTES, 'UTF-8')), 90)))
             ->addColumn('urutan', fn ($n) => '<span class="badge bg-secondary">' . $n->urutan . '</span>')
             ->addColumn('action', function ($nilaiPerusahaan) {
                 $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
