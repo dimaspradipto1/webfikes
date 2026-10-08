@@ -52,6 +52,7 @@ class FrontendController extends Controller
         $galleries        = \App\Models\Gallery::latest()->take(6)->get();
         $prestasis        = \App\Models\Prestasi::where('is_active', true)->orderBy('urutan')->latest('id')->take(6)->get();
         $organisasis      = \App\Models\OrganisasiMahasiswa::where('is_active', true)->orderBy('urutan')->get();
+        $organisasiSetting= \App\Models\OrganisasiMahasiswaSetting::first();
         $about            = \App\Models\About::first();
         $sambutanDekan    = \App\Models\SambutanDekan::first();
         $struktur         = \App\Models\StrukturOrganisasi::first();
@@ -91,6 +92,7 @@ class FrontendController extends Controller
             'galleries',
             'prestasis',
             'organisasis',
+            'organisasiSetting',
             'about',
             'sambutanDekan',
             'struktur',

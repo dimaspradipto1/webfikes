@@ -1076,17 +1076,525 @@
     }
   }
 
-  /* Ormawa Half-Card Image Style */
-  .ormawa-card-box {
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  /* ═══════════════════════════════════════════════
+     ORMAWA DECK SHOWCASE — 3D STACKED CARDS & TRACKER
+  ═══════════════════════════════════════════════ */
+  .ormawa-deck-section {
+    position: relative;
+    background: #fbfcfd;
+    padding: 56px 0 56px;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    overflow: hidden;
   }
-  .ormawa-card-box:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 32px rgba(4, 107, 38, 0.14) !important;
-    border-color: #046B26 !important;
+  .ormawa-deck-section::before {
+    content: '';
+    position: absolute;
+    top: 5%;
+    right: -5%;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, rgba(4, 107, 38, 0.07) 0%, rgba(254, 216, 2, 0.04) 50%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
   }
-  .ormawa-card-box:hover .ormawa-img-top {
-    transform: scale(1.06);
+  .ormawa-deck-section::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    left: -5%;
+    width: 440px;
+    height: 440px;
+    background: radial-gradient(circle, rgba(4, 107, 38, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ormawa-eyebrow-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid #d1fae5;
+    padding: 6px 14px;
+    border-radius: 50px;
+    box-shadow: 0 2px 6px rgba(4, 107, 38, 0.05);
+  }
+  .ormawa-eyebrow-pill .eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #046B26;
+    box-shadow: 0 0 8px rgba(4, 107, 38, 0.6);
+  }
+  .ormawa-eyebrow-pill .eyebrow-text {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #046B26;
+    text-transform: uppercase;
+  }
+  .ormawa-deck-headline {
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+  }
+  .ormawa-deck-headline .gradient-text {
+    background: linear-gradient(135deg, #046B26 0%, #15803d 45%, #d97706 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style: italic;
+  }
+  .ormawa-deck-lead {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: #475569;
+    max-width: 460px;
+  }
+  .btn-deck-main {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #0f172a;
+    color: #ffffff !important;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 13.5px;
+    font-weight: 700;
+    text-decoration: none !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 22px -5px rgba(15, 23, 42, 0.28);
+  }
+  .btn-deck-main:hover {
+    background: #046B26;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px -5px rgba(4, 107, 38, 0.38);
+  }
+  .btn-deck-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.16);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12.5px;
+    transition: all 0.3s ease;
+  }
+  .btn-deck-main:hover .btn-deck-icon {
+    transform: translateX(4px);
+    background: #FED802;
+    color: #046B26;
+  }
+  .deck-arrows-wrap {
+    display: inline-flex;
+    gap: 8px;
+  }
+  .btn-deck-arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid #cbd5e1;
+    background: #ffffff;
+    color: #1e293b;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+  .btn-deck-arrow:hover {
+    background: #046B26;
+    border-color: #046B26;
+    color: #FED802;
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px rgba(4, 107, 38, 0.2);
+  }
+  .deck-scroll-hint {
+    font-size: 12px;
+    letter-spacing: 0.2px;
+  }
+  .hint-wheel-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #046B26;
+    font-size: 13px;
+    animation: mousePulse 2s infinite ease-in-out;
+  }
+  @keyframes mousePulse {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+
+  /* Right Stage */
+  .ormawa-showcase-stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    position: relative;
+    min-height: 0;
+    user-select: none;
+  }
+  .ormawa-deck-viewport {
+    position: relative;
+    width: 380px;
+    max-width: 100%;
+    height: 640px;
+    perspective: 1200px;
+    perspective-origin: center 35%;
+  }
+  .ormawa-deck-stack {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    cursor: grab;
+  }
+  .ormawa-deck-stack:active {
+    cursor: grabbing;
+  }
+
+  /* Card Styling */
+  .ormawa-deck-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 410px;
+    border-radius: 32px;
+    overflow: hidden;
+    background-color: #033814;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.65s ease,
+                box-shadow 0.65s ease;
+    will-change: transform, opacity;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    cursor: pointer;
+    transform-origin: center bottom;
+  }
+  .card-artistic-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .card-mesh-glow {
+    position: absolute;
+    top: -25%;
+    right: -25%;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(254, 216, 2, 0.32) 0%, rgba(255, 255, 255, 0.1) 40%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(15px);
+  }
+  .card-mesh-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+  }
+  .card-organic-wave {
+    position: absolute;
+    bottom: -15%;
+    left: -20%;
+    width: 140%;
+    height: 65%;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
+    transform: rotate(-10deg);
+    pointer-events: none;
+  }
+  .card-bg-logo-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .ormawa-deck-card:hover .card-bg-logo-img {
+    transform: scale(1.05);
+  }
+  .card-bg-logo-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, 
+      rgba(0, 0, 0, 0.45) 0%, 
+      rgba(0, 0, 0, 0.1) 32%, 
+      rgba(2, 28, 10, 0.78) 62%, 
+      rgba(2, 22, 8, 0.96) 100%);
+    pointer-events: none;
+  }
+  .card-bg-watermark {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 130px;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.08);
+    letter-spacing: -4px;
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+  }
+  .card-top-bar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-counter-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+  }
+  .card-cat-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(254, 216, 2, 0.5);
+    color: #FED802;
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+  .card-content-bottom {
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+  }
+  .card-kicker {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #FED802;
+    margin-bottom: 3px;
+  }
+  .card-title-text {
+    font-size: 26px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.25;
+    margin-bottom: 2px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+  .card-subtitle-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.88);
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-desc-snippet {
+    font-size: 12.5px;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.5;
+    margin-bottom: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .card-meta-ketua {
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.9);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .card-meta-ketua i {
+    color: #FED802;
+  }
+  .card-link-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #ffffff !important;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+  }
+  .card-link-action:hover {
+    background: #FED802;
+    border-color: #FED802;
+    color: #046B26 !important;
+    transform: translateY(-1px);
+  }
+
+  /* Vertical Tracker (Right Side) */
+  .ormawa-deck-tracker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    height: 520px;
+    width: 50px;
+  }
+  .tracker-counter-box {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .tracker-current-num {
+    font-size: 26px;
+    font-weight: 900;
+    color: #0f172a;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .tracker-slash {
+    font-size: 13px;
+    color: #94a3b8;
+    font-weight: 600;
+  }
+  .tracker-total-num {
+    font-size: 13px;
+    color: #94a3b8;
+    font-weight: 700;
+  }
+  .tracker-rail-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 10px 0;
+  }
+  .tracker-rail-track {
+    width: 2.5px;
+    height: 100%;
+    background: #e2e8f0;
+    border-radius: 4px;
+    position: relative;
+  }
+  .tracker-rail-thumb {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 28px;
+    background: #046B26;
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(4, 107, 38, 0.5);
+    transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .tracker-active-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #64748b;
+    max-height: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 991.98px) {
+    .ormawa-deck-headline {
+      font-size: 32px;
+    }
+    .ormawa-showcase-stage {
+      min-height: 0;
+      gap: 20px;
+    }
+    .ormawa-deck-viewport {
+      width: 330px;
+      height: 580px;
+    }
+    .ormawa-deck-card {
+      height: 380px;
+      top: 0;
+      padding: 18px;
+      border-radius: 26px;
+    }
+    .card-title-text {
+      font-size: 22px;
+    }
+  }
+  @media (max-width: 575.98px) {
+    .ormawa-deck-section {
+      padding: 60px 0;
+    }
+    .ormawa-deck-headline {
+      font-size: 28px;
+    }
+    .ormawa-showcase-stage {
+      gap: 12px;
+      min-height: 0;
+    }
+    .ormawa-deck-viewport {
+      width: 100%;
+      max-width: 310px;
+      height: 535px;
+    }
+    .ormawa-deck-card {
+      height: 360px;
+      top: 0;
+      padding: 16px;
+      border-radius: 24px;
+    }
+    .ormawa-deck-tracker {
+      display: none;
+    }
   }
 </style>
 @endpush
@@ -1682,73 +2190,180 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     9.3 ORGANISASI & KEGIATAN MAHASISWA (ORMAWA)
+     9.3 ORGANISASI & KEGIATAN MAHASISWA (ORMAWA DECK SHOWCASE)
 ═══════════════════════════════════════════════ -->
-<section class="section-bg-white py-5" id="organisasi-mahasiswa" style="border-top: 1px solid var(--border-light);">
-  <div class="container py-3">
-    <div class="d-flex align-items-end justify-content-between mb-5 flex-wrap gap-3" data-aos="fade-up">
-      <div>
-        <div class="section-label mb-2">Lembaga Kemahasiswaan</div>
-        <h2 class="section-title mb-0">Organisasi & <em>Kegiatan Mahasiswa</em></h2>
-      </div>
-      <a href="{{ route('homepage.organisasi') }}" class="btn-outline-hero" style="color: var(--uis-purple); border-color: var(--uis-purple); font-size: 13.5px; padding: 10px 22px;">
-        <i class="bi bi-people-fill me-1"></i> Lihat Semua Organisasi
-      </a>
-    </div>
+<section class="ormawa-deck-section" id="organisasi-mahasiswa">
+  <div class="container position-relative">
+    <div class="row align-items-center g-5">
+      
+      <!-- LEFT COLUMN: Editorial & Controls -->
+      <div class="col-lg-5" data-aos="fade-right">
+        <div class="ormawa-deck-intro">
+          
+          <div class="ormawa-eyebrow-pill mb-3">
+            <span class="eyebrow-dot"></span>
+            <span class="eyebrow-text">{{ $organisasiSetting?->badge_teks ?: 'LEMBAGA KEMAHASISWAAN · UIS' }}</span>
+          </div>
 
-    @if(isset($organisasis) && $organisasis->count() > 0)
-      <div class="row g-4">
-        @foreach($organisasis->take(4) as $index => $ormawa)
-          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
-            <div class="rounded-4 bg-white border h-100 shadow-sm d-flex flex-column justify-content-between overflow-hidden position-relative ormawa-card-box" style="border-color: #d8e8dc !important;">
-              <div>
-                {{-- Gambar Setengah Card --}}
-                <div style="height: 165px; width: 100%; overflow: hidden; background: #f0f7f2; position: relative;">
-                  @if(!empty($ormawa->foto_kegiatan))
-                    <img src="{{ asset('storage/' . $ormawa->foto_kegiatan) }}" alt="{{ $ormawa->nama_organisasi }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="ormawa-img-top">
-                  @elseif(!empty($ormawa->logo))
-                    <img src="{{ asset('storage/' . $ormawa->logo) }}" alt="{{ $ormawa->nama_organisasi }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" class="ormawa-img-top">
-                  @else
-                    <div class="w-100 h-100 d-flex align-items-center justify-content-center fw-bold" style="background: #046B26; color: white; font-size: 28px;">
-                      {{ strtoupper(substr($ormawa->singkatan ?: $ormawa->nama_organisasi, 0, 2)) }}
-                    </div>
-                  @endif
-                </div>
+          <h2 class="ormawa-deck-headline mb-3">
+            @if(!empty($organisasiSetting?->judul))
+              @php
+                $rawJudul = $organisasiSetting->judul;
+                $highlight = $organisasiSetting->judul_highlight;
+                if (!empty($highlight) && str_contains($rawJudul, $highlight)) {
+                    $escapedHighlight = e($highlight);
+                    $renderedJudul = str_replace($highlight, '<span class="gradient-text">' . $escapedHighlight . '</span>', e($rawJudul));
+                } else {
+                    $renderedJudul = e($rawJudul);
+                }
+              @endphp
+              {!! nl2br($renderedJudul) !!}
+            @else
+              Kiprah & <span class="gradient-text">Kepemimpinan</span><br>
+              Mahasiswa UIS
+            @endif
+          </h2>
 
-                {{-- Konten Card --}}
-                <div class="p-3 text-center">
-                  <div class="mb-2">
-                    <span class="badge" style="background: rgba(4, 107, 38, 0.1); color: #046B26; font-size: 11px; font-weight: 700; border-radius: 20px; padding: 4px 10px;">
-                      {{ $ormawa->kategori }}
-                    </span>
-                  </div>
+          <p class="ormawa-deck-lead mb-4">
+            {{ $organisasiSetting?->deskripsi ?: 'Eksplorasi ragam organisasi kemahasiswaan, himpunan program studi, dan unit kegiatan minat bakat di Universitas Ibnu Sina Batam. Ruang kolaborasi untuk mengasah karakter, kepemimpinan, dan inovasi civitas kampus.' }}
+          </p>
 
-                  <h5 class="fw-bold text-dark mb-1" style="font-size: 16px; line-height: 1.35;">
-                    <a href="{{ route('homepage.organisasi.detail', $ormawa->slug) }}" class="text-dark text-decoration-none">
-                      {{ $ormawa->singkatan ?: $ormawa->nama_organisasi }}
-                    </a>
-                  </h5>
-                  @if(!empty($ormawa->singkatan) && $ormawa->singkatan !== $ormawa->nama_organisasi)
-                    <div class="text-muted small mb-2 text-truncate" style="font-size: 12px;">{{ $ormawa->nama_organisasi }}</div>
-                  @endif
+          <div class="d-flex align-items-center gap-3 flex-wrap mb-4">
+            <a href="{{ !empty($organisasiSetting?->tombol_url) ? $organisasiSetting->tombol_url : route('homepage.organisasi') }}" class="btn-deck-main">
+              <span>{{ $organisasiSetting?->tombol_teks ?: 'Jelajahi Semua Organisasi' }}</span>
+              <span class="btn-deck-icon"><i class="bi bi-arrow-right"></i></span>
+            </a>
 
-                  <p class="text-muted small mb-0" style="font-size: 12.5px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
-                    {{ strip_tags($ormawa->deskripsi ?: ($ormawa->visi ?: 'Lembaga kemahasiswaan aktif di lingkungan Universitas Ibnu Sina.')) }}
-                  </p>
-                </div>
-              </div>
-
-              <div class="px-3 pb-3 pt-2 border-top mt-auto d-flex align-items-center justify-content-between">
-                <small class="text-muted"><i class="bi bi-person-fill text-primary me-1"></i>{{ Str::limit($ormawa->nama_ketua ?: 'Ketua Ormawa', 14) }}</small>
-                <a href="{{ route('homepage.organisasi.detail', $ormawa->slug) }}" class="fw-bold text-decoration-none" style="color: var(--uis-purple); font-size: 12.5px;">
-                  Detail <i class="bi bi-arrow-right"></i>
-                </a>
-              </div>
+            <!-- Deck Navigation Buttons -->
+            <div class="deck-arrows-wrap">
+              <button type="button" class="btn-deck-arrow" id="deckPrevBtn" aria-label="Organisasi Sebelumnya" title="Sebelumnya">
+                <i class="bi bi-arrow-up"></i>
+              </button>
+              <button type="button" class="btn-deck-arrow" id="deckNextBtn" aria-label="Organisasi Selanjutnya" title="Selanjutnya">
+                <i class="bi bi-arrow-down"></i>
+              </button>
             </div>
           </div>
-        @endforeach
+
+          <!-- Micro Hint -->
+          <div class="deck-scroll-hint d-flex align-items-center gap-2 text-muted">
+            <span class="hint-wheel-icon"><i class="bi bi-mouse"></i></span>
+            <span class="hint-text">{{ $organisasiSetting?->hint_teks ?: 'Scroll mouse atau geser kartu untuk menggulir ormawa' }}</span>
+          </div>
+
+        </div>
       </div>
-    @endif
+
+      <!-- RIGHT COLUMN: 3D Cascading Stacked Cards + Vertical Tracker -->
+      <div class="col-lg-7" data-aos="fade-left">
+        <div class="ormawa-showcase-stage" id="ormawaStageArea">
+          
+          <!-- Stack Container -->
+          <div class="ormawa-deck-viewport">
+            <div class="ormawa-deck-stack" id="ormawaDeckStack">
+              @if(isset($organisasis) && $organisasis->count() > 0)
+                @php
+                  $themes = [
+                    'radial-gradient(circle at 85% 15%, rgba(254, 216, 2, 0.32) 0%, transparent 45%), linear-gradient(155deg, #022c0f 0%, #046B26 48%, #011d0a 100%)', // Emerald Gold (UIS)
+                    'radial-gradient(circle at 85% 15%, rgba(56, 189, 248, 0.35) 0%, transparent 45%), linear-gradient(155deg, #0a192f 0%, #1e3a5f 48%, #050d1a 100%)', // Deep Navy / Blue
+                    'radial-gradient(circle at 85% 15%, rgba(216, 180, 254, 0.35) 0%, transparent 45%), linear-gradient(155deg, #2e1065 0%, #6b21a8 48%, #170536 100%)', // Royal Purple
+                    'radial-gradient(circle at 85% 15%, rgba(251, 191, 36, 0.35) 0%, transparent 45%), linear-gradient(155deg, #451a03 0%, #b45309 48%, #1c0701 100%)', // Amber Gold
+                    'radial-gradient(circle at 85% 15%, rgba(45, 212, 191, 0.35) 0%, transparent 45%), linear-gradient(155deg, #042f2e 0%, #0f766e 48%, #021a19 100%)', // Teal Lagoon
+                  ];
+                @endphp
+                @foreach($organisasis as $index => $ormawa)
+                  @php
+                    $singkat = $ormawa->singkatan ?: $ormawa->nama_organisasi;
+                    $cardTheme = $themes[$index % count($themes)];
+                    $initial = strtoupper(substr($ormawa->singkatan ?: $ormawa->nama_organisasi, 0, 2));
+                  @endphp
+                  <div class="ormawa-deck-card" 
+                       data-index="{{ $index }}"
+                       data-label="{{ $singkat }}"
+                       data-num="{{ sprintf('%02d', $index + 1) }}">
+                    
+                    <!-- Artistic Card Background (Logo image as full-bleed background) -->
+                    <div class="card-artistic-bg" style="background: {{ $cardTheme }};">
+                      @if(!empty($ormawa->logo))
+                        <img src="{{ asset('storage/' . $ormawa->logo) }}" alt="{{ $ormawa->nama_organisasi }}" class="card-bg-logo-img">
+                        <div class="card-bg-logo-overlay"></div>
+                      @else
+                        <div class="card-mesh-glow"></div>
+                        <div class="card-mesh-pattern"></div>
+                        <div class="card-organic-wave"></div>
+                        <div class="card-bg-watermark">{{ $initial }}</div>
+                      @endif
+                    </div>
+
+                    <!-- Card Header (Top Bar) -->
+                    <div class="card-top-bar">
+                      <div class="card-counter-badge">
+                        <span>{{ sprintf('%02d', $index + 1) }}</span>
+                        <span class="mx-1">/</span>
+                        <span>{{ sprintf('%02d', $organisasis->count()) }}</span>
+                      </div>
+                      <div class="card-cat-badge">
+                        {{ strtoupper($ormawa->kategori) }}
+                      </div>
+                    </div>
+
+                    <!-- Card Body & Footer (Bottom) -->
+                    <div class="card-content-bottom">
+                      <div class="card-kicker">CHAPTER {{ sprintf('%02d', $index + 1) }} · ORMAWA UIS</div>
+                      <h3 class="card-title-text">{{ $singkat }}</h3>
+                      <div class="card-subtitle-text">
+                        {{ $ormawa->nama_organisasi }}
+                        @if(!empty($ormawa->periode))
+                          · Periode {{ $ormawa->periode }}
+                        @endif
+                      </div>
+                      <p class="card-desc-snippet">
+                        {{ Str::limit(strip_tags($ormawa->deskripsi ?: ($ormawa->visi ?: 'Lembaga kemahasiswaan aktif di lingkungan Universitas Ibnu Sina.')), 105) }}
+                      </p>
+
+                      <div class="card-meta-row">
+                        <div class="card-meta-ketua">
+                          <i class="bi bi-person-fill"></i>
+                          <span>Ketua: {{ $ormawa->nama_ketua ?: 'Pengurus Ormawa' }}</span>
+                        </div>
+                        <a href="{{ route('homepage.organisasi.detail', $ormawa->slug) }}" class="card-link-action">
+                          <span>Profil Lengkap</span>
+                          <i class="bi bi-arrow-up-right"></i>
+                        </a>
+                      </div>
+                    </div>
+
+                  </div>
+                @endforeach
+              @endif
+            </div>
+          </div>
+
+          <!-- Vertical Tracker / Progress Timeline (Right side of stack) -->
+          @if(isset($organisasis) && $organisasis->count() > 0)
+            <div class="ormawa-deck-tracker" id="ormawaTracker">
+              <div class="tracker-counter-box">
+                <span class="tracker-current-num" id="deckTrackerNum">01</span>
+                <span class="tracker-slash">/</span>
+                <span class="tracker-total-num">{{ sprintf('%02d', $organisasis->count()) }}</span>
+              </div>
+              
+              <div class="tracker-rail-container" id="deckTrackerRail" title="Klik untuk berpindah">
+                <div class="tracker-rail-track">
+                  <div class="tracker-rail-thumb" id="deckTrackerThumb"></div>
+                </div>
+              </div>
+
+              <div class="tracker-active-label" id="deckTrackerLabel">
+                {{ $organisasis->first()->singkatan ?: $organisasis->first()->nama_organisasi }}
+              </div>
+            </div>
+          @endif
+
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -2549,6 +3164,252 @@
         }
       }
     });
+    // ── 3D Stacked Card Deck Showcase (Ormawa & Kegiatan Mahasiswa) ────────
+    const deckStack = document.getElementById('ormawaDeckStack');
+    if (deckStack) {
+      const cards = Array.from(deckStack.querySelectorAll('.ormawa-deck-card'));
+      const totalCards = cards.length;
+
+      if (totalCards > 0) {
+        let activeIdx = 0;
+        let isTransitioning = false;
+        let autoDeckTimer = null;
+
+        const numEl = document.getElementById('deckTrackerNum');
+        const thumbEl = document.getElementById('deckTrackerThumb');
+        const labelEl = document.getElementById('deckTrackerLabel');
+        const railEl = document.getElementById('deckTrackerRail');
+        const prevBtn = document.getElementById('deckPrevBtn');
+        const nextBtn = document.getElementById('deckNextBtn');
+        const stageArea = document.getElementById('ormawaStageArea');
+
+        // Slot tumpukan: 0 = kartu aktif (bawah), 1..3 = kartu di belakang (naik ke atas)
+        const SLOT_STYLE = [
+          { s: 1.00, z: 0,    op: 1.00, br: 1.00, sh: '0 30px 60px -15px rgba(0, 35, 12, 0.48), 0 0 0 1px rgba(255,255,255,0.22) inset' },
+          { s: 0.94, z: -35,  op: 0.96, br: 0.93, sh: '0 20px 40px rgba(0, 0, 0, 0.25)' },
+          { s: 0.88, z: -70,  op: 0.85, br: 0.86, sh: '0 16px 32px rgba(0, 0, 0, 0.20)' },
+          { s: 0.82, z: -105, op: 0.70, br: 0.78, sh: '0 12px 24px rgba(0, 0, 0, 0.16)' }
+        ];
+        // Jarak tepi atas yang terlihat untuk tiap slot (desktop), slot terakhir rata atas (0)
+        const SLOT_TOP = [225, 125, 55, 0];
+        const TRANSITION_ON = 'transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), filter 0.65s ease, box-shadow 0.65s ease';
+
+        function getDeckPositions() {
+          const w = window.innerWidth;
+          const k = w <= 576 ? 0.75 : (w <= 991 ? 0.85 : 1);
+          const H = cards[0].offsetHeight || 410;
+          // transform-origin: center bottom → kartu yang diskalakan menyusut ke bawah,
+          // jadi kompensasi H*(1-s) agar tepi atas terlihat tepat di SLOT_TOP
+          const slotY = SLOT_STYLE.map((st, i) => SLOT_TOP[i] * k - H * (1 - st.s));
+          return {
+            slotY,
+            yHidden: -H * (1 - 0.76) - 30,
+            yDrop: SLOT_TOP[0] * k + H + 160
+          };
+        }
+
+        function applyState(card, state, pos) {
+          if (state === 'dropped') {
+            card.style.transform = `translate3d(0, ${pos.yDrop}px, 80px) rotateX(-14deg) scale(1.04)`;
+            card.style.zIndex = '30';
+            card.style.opacity = '0';
+            card.style.pointerEvents = 'none';
+          } else if (state === 'hidden') {
+            card.style.transform = `translate3d(0, ${pos.yHidden}px, -140px) rotateX(0deg) scale(0.76)`;
+            card.style.zIndex = '15';
+            card.style.opacity = '0';
+            card.style.pointerEvents = 'none';
+          } else {
+            const st = SLOT_STYLE[state];
+            card.style.transform = `translate3d(0, ${pos.slotY[state]}px, ${st.z}px) rotateX(0deg) scale(${st.s})`;
+            card.style.zIndex = String(20 - state);
+            card.style.opacity = String(st.op);
+            card.style.filter = `brightness(${st.br})`;
+            card.style.pointerEvents = 'auto';
+            card.style.boxShadow = st.sh;
+          }
+        }
+
+        function renderDeck(targetIdx, smooth = true) {
+          if (targetIdx < 0) targetIdx = totalCards - 1;
+          if (targetIdx >= totalCards) targetIdx = 0;
+          activeIdx = targetIdx;
+
+          const pos = getDeckPositions();
+          // Sisakan 1 kartu sebagai "kartu jatuh" agar siklus tetap bersambung
+          const visibleSlots = Math.min(SLOT_STYLE.length, Math.max(1, totalCards - 1));
+
+          cards.forEach((card, idx) => {
+            const diff = ((idx - activeIdx) % totalCards + totalCards) % totalCards;
+            let state;
+            if (diff < visibleSlots) state = diff;
+            else if (totalCards > 1 && diff === totalCards - 1) state = 'dropped';
+            else state = 'hidden';
+
+            const prev = card.dataset.state;
+            clearTimeout(card._deckTimer);
+
+            if (!smooth || prev === undefined) {
+              card.style.transition = 'none';
+              applyState(card, state, pos);
+            } else if (prev === 'dropped' && state !== 0) {
+              // Kartu yang sudah jatuh kembali ke belakang tumpukan: muncul dari atas, tidak terbang melintas
+              card.style.transition = 'none';
+              applyState(card, 'hidden', pos);
+              void card.offsetHeight;
+              card.style.transition = TRANSITION_ON;
+              applyState(card, state, pos);
+            } else if (state === 'dropped' && prev !== '0') {
+              // Arah mundur: kartu belakang memudar di atas, lalu dipindah diam-diam ke posisi jatuh
+              card.style.transition = TRANSITION_ON;
+              applyState(card, 'hidden', pos);
+              card._deckTimer = setTimeout(() => {
+                card.style.transition = 'none';
+                applyState(card, 'dropped', getDeckPositions());
+              }, 700);
+            } else {
+              card.style.transition = TRANSITION_ON;
+              applyState(card, state, pos);
+            }
+            card.dataset.state = String(state);
+          });
+
+          // Update Tracker UI
+          const currentCard = cards[activeIdx];
+          const formattedNum = (activeIdx + 1).toString().padStart(2, '0');
+          if (numEl) numEl.textContent = formattedNum;
+          if (labelEl) labelEl.textContent = currentCard.getAttribute('data-label') || '';
+
+          if (thumbEl && totalCards > 1) {
+            const pct = (activeIdx / (totalCards - 1)) * 100;
+            thumbEl.style.top = `calc(${pct}% - ${(pct / 100) * 28}px)`;
+          }
+        }
+
+        function nextCard() {
+          if (isTransitioning) return;
+          isTransitioning = true;
+          let next = activeIdx + 1;
+          if (next >= totalCards) next = 0;
+          renderDeck(next);
+          setTimeout(() => { isTransitioning = false; }, 650);
+        }
+
+        function prevCard() {
+          if (isTransitioning) return;
+          isTransitioning = true;
+          let prev = activeIdx - 1;
+          if (prev < 0) prev = totalCards - 1;
+          renderDeck(prev);
+          setTimeout(() => { isTransitioning = false; }, 650);
+        }
+
+        // Mouse Wheel Scroll Listener: Mulus, responsif, jatuh ke bawah
+        if (stageArea) {
+          let lastWheelTime = 0;
+          const wheelCooldown = 650;
+
+          stageArea.addEventListener('wheel', function (e) {
+            e.preventDefault();
+            const now = Date.now();
+            if (now - lastWheelTime < wheelCooldown) return;
+
+            if (Math.abs(e.deltaY) < 15) return;
+
+            lastWheelTime = now;
+            if (e.deltaY > 0) {
+              nextCard();
+            } else {
+              prevCard();
+            }
+          }, { passive: false });
+        }
+
+        // Klik kartu belakang untuk langsung menjadikannya aktif
+        cards.forEach((card, idx) => {
+          card.addEventListener('click', function (e) {
+            if (e.target.closest('a')) return;
+            if (idx !== activeIdx && !isTransitioning) {
+              isTransitioning = true;
+              renderDeck(idx);
+              setTimeout(() => { isTransitioning = false; }, 650);
+            }
+          });
+        });
+
+        // Touch Swipe (Mobile & Tablet)
+        let touchStartY = 0;
+        let touchStartX = 0;
+        let lastTouchTime = 0;
+
+        stageArea.addEventListener('touchstart', function (e) {
+          touchStartY = e.touches[0].clientY;
+          touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+
+        stageArea.addEventListener('touchend', function (e) {
+          const now = Date.now();
+          if (now - lastTouchTime < 650) return;
+
+          const touchEndY = e.changedTouches[0].clientY;
+          const touchEndX = e.changedTouches[0].clientX;
+          const deltaY = touchStartY - touchEndY;
+          const deltaX = touchStartX - touchEndX;
+
+          if (Math.abs(deltaY) > 25 && Math.abs(deltaY) > Math.abs(deltaX)) {
+            lastTouchTime = now;
+            if (deltaY > 0) nextCard();
+            else prevCard();
+          } else if (Math.abs(deltaX) > 25) {
+            lastTouchTime = now;
+            if (deltaX > 0) nextCard();
+            else prevCard();
+          }
+        }, { passive: true });
+
+        // Tombol Navigasi Panah
+        if (prevBtn) prevBtn.addEventListener('click', prevCard);
+        if (nextBtn) nextBtn.addEventListener('click', nextCard);
+
+        // Tracker Rail Klik Langsung
+        if (railEl) {
+          railEl.addEventListener('click', function (e) {
+            const rect = railEl.getBoundingClientRect();
+            const clickPos = e.clientY - rect.top;
+            const ratio = Math.max(0, Math.min(1, clickPos / rect.height));
+            const target = Math.round(ratio * (totalCards - 1));
+            renderDeck(target);
+          });
+        }
+
+        // Window resize re-render to keep responsiveness snappy
+        let resizeTimer = null;
+        window.addEventListener('resize', function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            renderDeck(activeIdx, false);
+          }, 100);
+        });
+
+        // Auto Advance halus setiap 6 detik dengan Pause on Hover
+        function startAutoDeck() {
+          stopAutoDeck();
+          autoDeckTimer = setInterval(nextCard, 6000);
+        }
+        function stopAutoDeck() {
+          if (autoDeckTimer) clearInterval(autoDeckTimer);
+        }
+
+        if (stageArea) {
+          stageArea.addEventListener('mouseenter', stopAutoDeck);
+          stageArea.addEventListener('mouseleave', startAutoDeck);
+        }
+
+        // Render Awal
+        renderDeck(0, false);
+        startAutoDeck();
+      }
+    }
   });
 </script>
 @endpush

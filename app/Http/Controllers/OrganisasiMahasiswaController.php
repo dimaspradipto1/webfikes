@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\DataTables\OrganisasiMahasiswaDataTable;
 use App\Http\Requests\OrganisasiMahasiswaRequest;
 use App\Models\OrganisasiMahasiswa;
+use App\Models\OrganisasiMahasiswaSetting;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -14,7 +16,44 @@ class OrganisasiMahasiswaController extends Controller
 {
     public function index(OrganisasiMahasiswaDataTable $dataTable)
     {
-        return $dataTable->render('pages.organisasi-mahasiswa.index');
+        $setting = OrganisasiMahasiswaSetting::firstOrCreate(
+            ['id' => 1],
+            [
+                'badge_teks'      => 'LEMBAGA KEMAHASISWAAN · UIS',
+                'judul'           => 'Kiprah & Kepemimpinan Mahasiswa UIS',
+                'judul_highlight' => 'Kepemimpinan',
+                'deskripsi'       => 'Eksplorasi ragam organisasi kemahasiswaan, himpunan program studi, dan unit kegiatan minat bakat di Universitas Ibnu Sina Batam. Ruang kolaborasi untuk mengasah karakter, kepemimpinan, dan inovasi civitas kampus.',
+                'tombol_teks'     => 'Jelajahi Semua Organisasi',
+                'tombol_url'      => null,
+                'hint_teks'       => 'Scroll mouse atau geser kartu untuk menggulir ormawa',
+            ]
+        );
+
+        return $dataTable->render('pages.organisasi-mahasiswa.index', compact('setting'));
+    }
+
+    public function updateSetting(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'badge_teks'       => ['nullable', 'string', 'max:255'],
+            'judul'            => ['required', 'string', 'max:255'],
+            'judul_highlight'  => ['nullable', 'string', 'max:255'],
+            'deskripsi'        => ['nullable', 'string'],
+            'tombol_teks'      => ['nullable', 'string', 'max:255'],
+            'tombol_url'       => ['nullable', 'string', 'max:255'],
+            'hint_teks'        => ['nullable', 'string', 'max:255'],
+        ], [
+            'judul.required' => 'Judul seksi wajib diisi.',
+        ]);
+
+        $setting = OrganisasiMahasiswaSetting::firstOrCreate(['id' => 1]);
+        $setting->update($validated);
+
+        if (function_exists('alert')) {
+            alert()->success('Berhasil!', 'Pengaturan seksi Organisasi Mahasiswa berhasil disimpan.');
+        }
+
+        return redirect()->route('organisasi-mahasiswa.index')->with('success', 'Pengaturan seksi Organisasi Mahasiswa berhasil disimpan.');
     }
 
     public function create(): View

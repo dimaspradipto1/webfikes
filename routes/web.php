@@ -144,6 +144,7 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('tenaga-pendidik', TenagaPendidikController::class);
     Route::resource('testimonial', TestimonialController::class);
     Route::resource('prestasi', PrestasiController::class);
+    Route::post('admin-organisasi-mahasiswa/setting', [OrganisasiMahasiswaController::class, 'updateSetting'])->name('organisasi-mahasiswa.update-setting');
     Route::resource('admin-organisasi-mahasiswa', OrganisasiMahasiswaController::class)
         ->parameters(['admin-organisasi-mahasiswa' => 'organisasi-mahasiswa'])
         ->names('organisasi-mahasiswa');
