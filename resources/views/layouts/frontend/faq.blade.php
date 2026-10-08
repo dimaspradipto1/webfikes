@@ -9,14 +9,14 @@
   .faq-hero {
     position: relative;
     background: var(--obsidian-dark);
-    padding: 70px 0 50px;
+    padding: 26px 0 20px;
     border-bottom: 2px solid var(--uis-purple);
   }
   .faq-hero-title {
-    font-size: 38px;
+    font-size: 26px;
     font-weight: 800;
     color: var(--white);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
   .faq-hero-title em {
     font-style: normal;

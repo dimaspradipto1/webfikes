@@ -207,17 +207,19 @@
     }
 
     /* ═══════════════════════════════════════════════
-       UNIVERSAL SUBPAGE HERO BANNER CONTRAST & TYPOGRAPHY
-       Guarantees crisp white headings & legible subtitles across all hero sections
+       UNIVERSAL SUBPAGE HERO BANNER / BREADCRUMB HEADER
+       Kompak, Ramping & Proporsional (Tinggi dipendekkan & Font diperkecil)
     ═══════════════════════════════════════════════ */
     .prestasi-hero, .dosen-hero, .news-hero, .article-hero, .about-hero, .sejarah-hero,
     .visimisi-hero, .rektor-hero, .detail-hero, .ormawa-hero, .layanan-hero, .galeri-hero,
     .fasilitas-hero, .kontak-hero, .faq-hero, .kerjasama-hero, .tracer-hero, .download-hero,
-    .kurikulum-hero, .hero-subpage, .page-hero-banner {
+    .kurikulum-hero, .hero-subpage, .page-hero-banner, .akademik-hero {
       background: #046B26 !important;
       border-bottom: 3px solid #FED802 !important;
       position: relative;
       overflow: hidden;
+      padding-top: 26px !important;
+      padding-bottom: 20px !important;
     }
 
     .prestasi-hero h1, .prestasi-hero h2, .prestasi-hero h3,
@@ -236,10 +238,14 @@
     .kontak-hero h1, .kontak-hero h2, .kontak-hero h3,
     .faq-hero h1, .faq-hero h2, .faq-hero h3,
     .kurikulum-hero h1, .hero-subpage h1, .page-hero-banner h1,
-    .text-white h1, .text-white h2, .text-white h3, .text-white h4 {
+    .text-white h1, .text-white h2, .text-white h3, .text-white h4,
+    .news-hero-title, .faq-hero-title, .about-hero-title, .sejarah-hero-title {
       color: #ffffff !important;
       font-weight: 800 !important;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+      font-size: 26px !important;
+      margin-bottom: 6px !important;
+      line-height: 1.25 !important;
     }
 
     .prestasi-hero p, .dosen-hero p, .news-hero p, .article-hero p,
@@ -248,60 +254,75 @@
     .fasilitas-hero p, .kontak-hero p, .faq-hero p, .kurikulum-hero p,
     .hero-subpage p, .page-hero-banner p {
       color: rgba(255, 255, 255, 0.92) !important;
+      font-size: 13px !important;
+      line-height: 1.45 !important;
+      margin-bottom: 6px !important;
     }
 
     .prestasi-hero .text-white-50, .dosen-hero .text-white-50, .news-hero .text-white-50,
     .sejarah-hero .text-white-50, .detail-hero .text-white-50, .about-hero .text-white-50 {
       color: rgba(255, 255, 255, 0.88) !important;
+      font-size: 13px !important;
+      line-height: 1.45 !important;
+      margin-bottom: 6px !important;
+    }
+
+    .prestasi-hero .badge, .dosen-hero .badge, .news-hero .badge,
+    .about-hero .badge, .sejarah-hero .badge, .visimisi-hero .badge,
+    .rektor-hero .badge, .detail-hero .badge, .ormawa-hero .badge,
+    .layanan-hero .badge, .galeri-hero .badge, .faq-hero .badge {
+      font-size: 10.5px !important;
+      padding: 3px 10px !important;
+      margin-bottom: 6px !important;
     }
 
     /* ═══════════════════════════════════════════════
        UNIVERSAL BREADCRUMB CUSTOM — KONSISTEN SEMUA MENU
-       Kecil, Ramping & Proporsional (Sesuai arahan: jangan besar, kecilkan)
+       Kecil, Ramping & Proporsional (Sesuai arahan: kecilkan lagi & pendekkan)
     ═══════════════════════════════════════════════ */
     .breadcrumb-custom {
       display: inline-flex !important;
       align-items: center !important;
       flex-wrap: wrap !important;
-      gap: 5px !important;
-      font-size: 11px !important;
-      line-height: 1.3 !important;
+      gap: 4px !important;
+      font-size: 9.5px !important;
+      line-height: 1.25 !important;
       color: rgba(255, 255, 255, 0.6) !important;
-      margin-top: 8px !important;
+      margin-top: 4px !important;
       margin-bottom: 0 !important;
-      letter-spacing: 0.25px !important;
+      letter-spacing: 0.2px !important;
     }
     .breadcrumb-custom a {
       color: rgba(255, 255, 255, 0.8) !important;
       text-decoration: none !important;
-      font-size: 11px !important;
+      font-size: 9.5px !important;
       font-weight: 500 !important;
       transition: color 0.2s ease !important;
       display: inline-flex !important;
       align-items: center !important;
-      gap: 3.5px !important;
+      gap: 3px !important;
     }
     .breadcrumb-custom a:hover {
       color: #FED802 !important;
     }
     .breadcrumb-custom a i,
     .breadcrumb-custom i {
-      font-size: 10.5px !important;
+      font-size: 9px !important;
       line-height: 1 !important;
       opacity: 0.85 !important;
     }
     .breadcrumb-custom span {
       color: rgba(255, 255, 255, 0.4) !important;
-      font-size: 9.5px !important;
+      font-size: 8.5px !important;
       line-height: 1 !important;
       user-select: none !important;
     }
     .breadcrumb-custom .active,
     .breadcrumb-custom span.active {
       color: #FED802 !important;
-      font-size: 11px !important;
+      font-size: 9.5px !important;
       font-weight: 600 !important;
-      line-height: 1.3 !important;
+      line-height: 1.25 !important;
     }
 
     a { text-decoration: none; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }

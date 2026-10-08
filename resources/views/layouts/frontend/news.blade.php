@@ -9,14 +9,14 @@
   .news-hero {
     position: relative;
     background: #046B26;
-    padding: 75px 0 55px;
+    padding: 26px 0 20px;
     border-bottom: 3px solid #FED802;
   }
   .news-hero-title {
-    font-size: 38px;
+    font-size: 26px;
     font-weight: 800;
     color: var(--white);
-    margin-bottom: 12px;
+    margin-bottom: 6px;
   }
   .news-hero-title em {
     font-style: normal;
@@ -258,11 +258,11 @@
 <div class="news-hero">
   <div class="container">
     <div data-aos="fade-up">
-      <div class="badge px-3 py-2 rounded-pill mb-3" style="background: rgba(4, 107, 38, 0.45); color: var(--uis-orange); border: 1px solid rgba(254, 216, 2, 0.4);">
+      <div class="badge px-2.5 py-1 rounded-pill mb-2" style="background: rgba(4, 107, 38, 0.45); color: var(--uis-orange); border: 1px solid rgba(254, 216, 2, 0.4); font-size: 11px;">
         <i class="bi bi-newspaper me-1"></i> Warta & Informasi Universitas Ibnu Sina
       </div>
       <h1 class="news-hero-title">Berita & <em>Warta Kampus</em> UIS</h1>
-      <p class="text-white-50 mb-3" style="max-width: 650px;">
+      <p class="text-white-50 mb-2" style="max-width: 650px; font-size: 13px; line-height: 1.45;">
         Kumpulan warta kegiatan universitas, pengumuman akademik, prestasi mahasiswa, riset terapan, dan inovasi civitas akademika Universitas Ibnu Sina Batam.
       </p>
       <div class="breadcrumb-custom">
