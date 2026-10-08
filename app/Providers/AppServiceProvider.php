@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
             $contact       = \App\Models\Contact::latest('id')->first();
             $pmbSetting    = \App\Models\PmbSetting::first();
             $navProdis     = \App\Models\Layanan::where('aktif', true)->orderBy('urutan')->get();
+            $navPublikasis = \App\Models\Publikasi::where('aktif', true)->orderBy('urutan')->get();
             $topbarSetting = \App\Models\Topbar::where('is_active', true)->latest('id')->first();
 
             $cleanWa = '';
@@ -46,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
                 'cleanWa'       => $cleanWa,
                 'pmbSetting'    => $pmbSetting,
                 'navProdis'     => $navProdis,
+                'navPublikasis' => $navPublikasis,
                 'topbarSetting' => $topbarSetting,
             ]);
         });

@@ -34,6 +34,7 @@ use App\Http\Controllers\TriDharmaController;
 use App\Http\Controllers\TenagaPendidikController;
 use App\Http\Controllers\LayananTerkaitController;
 use App\Http\Controllers\SocialMediaController;
+use App\Http\Controllers\PublikasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -147,6 +148,8 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
         ->names('organisasi-mahasiswa');
     Route::get('admin-program-studi', [LayananController::class, 'index'])->name('layanan.index');
     Route::post('admin-program-studi', [LayananController::class, 'updateAll'])->name('layanan.update-all');
+    Route::get('admin-publikasi', [PublikasiController::class, 'index'])->name('publikasi.index');
+    Route::post('admin-publikasi', [PublikasiController::class, 'updateAll'])->name('publikasi.update-all');
 
     // Dosen Bulk Actions & Excel Import / Template
     Route::post('admin-dosen/bulk-delete', [DosenController::class, 'bulkDelete'])->name('dosen.bulk-delete');

@@ -38,7 +38,7 @@
         <!-- Program Studi Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.layanan*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Program Studi <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+            Fakultas <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
             @if(isset($navProdis) && $navProdis->count() > 0)
@@ -83,16 +83,39 @@
           </ul>
         </li>
 
-        <!-- Penelitian & Pengabdian Dropdown -->
+        <!-- Publikasi Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link nav-link-custom dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Penelitian & Pengabdian <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+            Publikasi <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news') }}"><i class="bi bi-file-earmark-medical"></i> Penelitian Dosen</a></li>
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news') }}"><i class="bi bi-journal-richtext"></i> Publikasi Ilmiah</a></li>
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.galeri') }}"><i class="bi bi-heart-pulse"></i> Pengabdian Masyarakat</a></li>
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.layanan') }}"><i class="bi bi-briefcase"></i> Kerja Sama Riset</a></li>
+            @if(isset($navPublikasis) && $navPublikasis->count() > 0)
+              @foreach($navPublikasis as $navPub)
+                @php
+                  $rawLink = trim($navPub->link ?? '');
+                  if (!empty($rawLink) && !str_starts_with($rawLink, 'http://') && !str_starts_with($rawLink, 'https://') && !str_starts_with($rawLink, '/') && !str_starts_with($rawLink, '#')) {
+                      $rawLink = 'https://' . $rawLink;
+                  }
+                  $hasLink = !empty($rawLink);
+                  $pubHref = $hasLink ? $rawLink : '#';
+                  $isExternal = $hasLink && (str_starts_with($rawLink, 'http://') || str_starts_with($rawLink, 'https://'));
+                @endphp
+                <li>
+                  <a class="dropdown-item dropdown-item-custom"
+                     href="{{ $pubHref }}"
+                     @if($isExternal) target="_blank" rel="noopener noreferrer" @endif
+                     title="{{ $navPub->deskripsi ?: $navPub->judul }}">
+                    <i class="bi {{ $navPub->icon ?: 'bi-journal-richtext' }}" style="color: var(--uis-green);"></i>
+                    <span>{{ $navPub->judul }}</span>
+                    @if($isExternal)
+                      <i class="bi bi-box-arrow-up-right ms-auto text-muted" style="font-size: 10px;" title="Buka website"></i>
+                    @endif
+                  </a>
+                </li>
+              @endforeach
+            @else
+              <li><a class="dropdown-item dropdown-item-custom" href="https://journal.uis.ac.id/" target="_blank"><i class="bi bi-journal-richtext" style="color: var(--uis-green);"></i> <span>E-Journal UIS</span></a></li>
+            @endif
           </ul>
         </li>
 

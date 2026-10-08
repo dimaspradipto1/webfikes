@@ -105,10 +105,10 @@
           </li>
 
 
-          <!-- 4. Program Studi (Sesuai Urutan Header) -->
+          <!-- 4. Fakultas (Sesuai Urutan Header) -->
           <li class="nav-item">
             <a class="nav-link {{ Route::is('layanan.*') ? '' : 'collapsed' }}" href="{{ route('layanan.index') }}">
-              <i class="bi bi-mortarboard"></i><span>Program Studi</span>
+              <i class="bi bi-mortarboard"></i><span>Fakultas</span>
             </a>
           </li>
 
@@ -146,12 +146,17 @@
             </ul>
           </li>
 
-          <!-- 6. Penelitian & Pengabdian (Sesuai Urutan Header) -->
+          <!-- 6. Publikasi dan mitra (Sesuai Urutan Header) -->
           <li class="nav-item">
-            <a class="nav-link {{ Route::is('partner.*') ? '' : 'collapsed' }}" data-bs-target="#penelitian-nav" data-bs-toggle="collapse" href="#">
-              <i class="bi bi-file-earmark-medical"></i><span>Penelitian & Pengabdian</span><i class="bi bi-chevron-down ms-auto"></i>
+            <a class="nav-link {{ Route::is('publikasi.*') || Route::is('partner.*') ? '' : 'collapsed' }}" data-bs-target="#penelitian-nav" data-bs-toggle="collapse" href="#">
+              <i class="bi bi-file-earmark-medical"></i><span>Publikasi dan mitra</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="penelitian-nav" class="nav-content collapse {{ Route::is('partner.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+            <ul id="penelitian-nav" class="nav-content collapse {{ Route::is('publikasi.*') || Route::is('partner.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+              <li>
+                <a href="{{ route('publikasi.index') }}" class="{{ Route::is('publikasi.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Publikasi</span>
+                </a>
+              </li>
               <li>
                 <a href="{{ route('partner.index') }}" class="{{ Route::is('partner.*') ? 'active' : '' }}">
                   <i class="bi bi-circle"></i><span>Mitra Kerjasama Riset</span>
