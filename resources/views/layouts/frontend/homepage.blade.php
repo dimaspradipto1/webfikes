@@ -381,6 +381,68 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
+     PMB BANNER (PENERIMAAN MAHASISWA BARU)
+═══════════════════════════════════════════════ -->
+@if(!isset($pmbSetting) || $pmbSetting->is_active)
+<section class="section-bg-sand" id="pmb">
+  <div class="container" data-aos="fade-up">
+    <div class="pmb-cta-box">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <div class="badge pmb-badge-wrap px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange); color: #032e12; font-weight: 800; font-size: 12px; letter-spacing: 1px;">
+            {{ $pmbSetting->badge_text ?? 'PENERIMAAN MAHASISWA BARU (PMB) T.A. 2026/2027' }}
+          </div>
+          <h2 class="text-white fw-bold mb-3" style="font-size: clamp(1.5rem, 3.5vw, 2.1rem); line-height: 1.3;">
+            {{ $pmbSetting->judul ?? 'Daftar Sekarang & Raih Masa Depan Cerah Bersama Universitas Ibnu Sina!' }}
+          </h2>
+          <div class="text-white mb-4 pmb-desc-content" style="line-height: 1.7; max-width: 620px; opacity: 0.92; font-size: 14.5px;">
+            {!! $pmbSetting->deskripsi ?? 'Tersedia berbagai jalur seleksi: Jalur Bebas Tes / Prestasi, Jalur Reguler, Jalur KIP-Kuliah, dan Jalur Alih Jenjang Karyawan.' !!}
+          </div>
+          <div class="d-flex flex-wrap gap-3 pmb-btn-group">
+            @php
+              $link1 = $pmbSetting->tombol_link_1 ?? route('homepage.kontak');
+              if (!str_starts_with($link1, 'http') && !str_starts_with($link1, '/')) {
+                  $link1 = '/' . $link1;
+              }
+            @endphp
+            <a href="{{ $link1 }}" target="{{ str_starts_with($link1, 'http') ? '_blank' : '_self' }}" class="btn-primary-hero">
+              <i class="bi bi-pencil-square"></i> {{ $pmbSetting->tombol_text_1 ?? 'Daftar PMB Sekarang' }}
+            </a>
+
+            @php
+              $link2 = $pmbSetting->tombol_link_2 ?? '';
+              if (empty($link2) && !empty($cleanWa)) {
+                  $link2 = "https://wa.me/{$cleanWa}?text=" . urlencode("Halo Admin PMB Universitas Ibnu Sina, saya ingin konsultasi pendaftaran mahasiswa baru");
+              }
+            @endphp
+            @if(!empty($link2))
+              <a href="{{ $link2 }}" target="_blank" class="btn-pmb-wa">
+                <i class="bi bi-whatsapp"></i> {{ $pmbSetting->tombol_text_2 ?? 'Konsultasi WhatsApp PMB' }}
+              </a>
+            @endif
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="p-4 rounded-4" style="background: rgba(0, 0, 0, 0.22); border: 1px solid rgba(255, 255, 255, 0.22); backdrop-filter: blur(8px);">
+            <h5 class="text-white fw-bold mb-3"><i class="bi bi-calendar-event text-warning me-2"></i>Jadwal Gelombang:</h5>
+            <ul class="text-white small list-unstyled mb-0" style="line-height: 2; opacity: 0.95;">
+              @php
+                $waveList = $pmbSetting->waves ?? ['Gelombang 1: Jan - Apr', 'Gelombang 2: Mei - Jul', 'Gelombang 3: Agu - Sep'];
+              @endphp
+              @foreach($waveList as $waveItem)
+                <li><i class="bi bi-check2 text-warning me-1"></i> {{ $waveItem }}</li>
+              @endforeach
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+@endif
+
+<!-- ═══════════════════════════════════════════════
      6. FASILITAS & LABORATORIUM
 ═══════════════════════════════════════════════ -->
 <section class="section-bg-sand" id="fasilitas">
@@ -820,12 +882,16 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     LAYANAN TERKAIT (PORTAL & DIGITAL SERVICES)
+     LAYANAN TERKAIT (MIRROR MOTION / 3D U-CURVE CAROUSEL)
 ═══════════════════════════════════════════════ -->
 @if(isset($layananTerkaits) && $layananTerkaits->count() > 0)
 <section class="layanan-terkait-section" id="layanan-terkait">
-  <div class="container">
-    {{-- Header Title & Subtitle --}}
+  {{-- Header inside Container --}}
+  <div class="container position-relative">
+    <div class="mirror-hall-badge" data-aos="fade-down">
+      <span><i class="bi bi-grid-3x3-gap-fill me-1"></i> PORTAL DIGITAL & SISTEM INFORMASI</span>
+    </div>
+    
     <div class="text-center mb-4" data-aos="fade-up">
       <h2 class="layanan-terkait-title">
         {{ $layananTerkaitSetting->judul_seksi ?? 'LAYANAN TERKAIT' }}
@@ -836,30 +902,72 @@
         </p>
       @endif
     </div>
+  </div>
 
-    {{-- Grid 4 Columns of Dark Cards --}}
-    <div class="row g-3 g-lg-4 justify-content-center">
-      @foreach($layananTerkaits as $item)
-        <div class="col-xl-3 col-lg-3 col-md-6 col-12" data-aos="fade-up" data-aos-delay="{{ min(400, 50 * ($loop->index + 1)) }}">
-          <a href="{{ $item->url }}" target="_blank" rel="noopener noreferrer" class="layanan-terkait-card" title="{{ trim(strip_tags($item->deskripsi ?? $item->nama)) }}">
-            {{-- Top Right Logo / Icon in High-Contrast White Container --}}
-            <div class="layanan-terkait-logo-wrap">
-              <div class="layanan-terkait-logo-badge">
-                @if($item->logo_url)
-                  <img src="{{ $item->logo_url }}" alt="{{ $item->nama }}" class="layanan-terkait-logo">
-                @else
-                  <i class="bi {{ $item->icon ?: 'bi-box-arrow-up-right' }} layanan-terkait-icon"></i>
-                @endif
+  {{-- Full Width 3D U-Curve Mirror Swiper Stage --}}
+  <div class="mirror-hall-stage-full position-relative" data-aos="zoom-in" data-aos-delay="100">
+    <div class="swiper mirror-swiper-container" id="mirrorHallSwiper">
+      <div class="swiper-wrapper">
+        @php
+          $totalCount = $layananTerkaits->count();
+          // Ulangi daftar item agar Swiper loop memiliki cukup slide di semua resolusi (minimal 18 slide)
+          $repeatFactor = $totalCount > 0 ? (int) max(1, ceil(18 / $totalCount)) : 1;
+        @endphp
+        @for($r = 0; $r < $repeatFactor; $r++)
+          @foreach($layananTerkaits as $idx => $item)
+            @php
+              $itemDesc = trim(strip_tags($item->deskripsi ?? 'Akses layanan digital terpadu Universitas Ibnu Sina'));
+              $itemNum = $idx + 1;
+            @endphp
+            <div class="swiper-slide mirror-slide-item" 
+                 data-index="{{ sprintf('%02d', $itemNum) }}" 
+                 data-total="{{ sprintf('%02d', $totalCount) }}" 
+                 data-name="{{ $item->nama }}" 
+                 data-desc="{{ $itemDesc }}" 
+                 data-url="{{ $item->url }}"
+                 role="button"
+                 tabindex="0"
+                 aria-label="Kunjungi Layanan {{ $item->nama }}">
+              
+              {{-- Interactive Full-Logo Mirror Card (Entire Card is Clickable) --}}
+              <div class="mirror-card">
+                <div class="mirror-card-media-wrap">
+                  @if($item->logo_url)
+                    <img src="{{ $item->logo_url }}" alt="{{ $item->nama }}" class="mirror-card-full-logo" loading="lazy">
+                  @else
+                    <div class="mirror-card-fallback-icon">
+                      <i class="bi {{ $item->icon ?: 'bi-globe' }}"></i>
+                      <span class="mirror-fallback-title">{{ $item->nama }}</span>
+                    </div>
+                  @endif
+                </div>
               </div>
             </div>
+          @endforeach
+        @endfor
+      </div>
+    </div>
+    {{-- Interactive Water Ripple Canvas on Reflective Floor --}}
+    <canvas id="mirrorWaterCanvas" class="mirror-water-canvas"></canvas>
+  </div>
 
-            {{-- Bottom Left Service Name --}}
-            <h3 class="layanan-terkait-name">
-              {{ $item->nama }}
-            </h3>
-          </a>
-        </div>
-      @endforeach
+  {{-- Floor Info & Active Details (Mirror Hall Footer) inside Container --}}
+  <div class="container position-relative">
+    <div class="mirror-hall-floor" data-aos="fade-up" data-aos-delay="200">
+      <div class="mirror-counter-badge" id="mirrorCounter">
+        01 / {{ sprintf('%02d', $layananTerkaits->count()) }}
+      </div>
+      <h3 class="mirror-active-title" id="mirrorActiveTitle">
+        {{ $layananTerkaits->first()->nama ?? 'Layanan Digital' }}
+      </h3>
+      <p class="mirror-active-desc" id="mirrorActiveDesc">
+        {{ trim(strip_tags($layananTerkaits->first()->deskripsi ?? 'Akses layanan digital terpadu Universitas Ibnu Sina')) }}
+      </p>
+      <a href="{{ $layananTerkaits->first()->url ?? '#' }}" target="_blank" rel="noopener noreferrer" class="mirror-active-cta" id="mirrorActiveBtn">
+        <span>Kunjungi Layanan</span>
+        <i class="bi bi-arrow-right-circle-fill"></i>
+      </a>
+      <div class="mirror-hall-pagination swiper-pagination"></div>
     </div>
   </div>
 </section>
@@ -1034,68 +1142,6 @@
     </div>
   </div>
 </section>
-
-<!-- ═══════════════════════════════════════════════
-     12. PMB BANNER (PENERIMAAN MAHASISWA BARU)
-═══════════════════════════════════════════════ -->
-@if(!isset($pmbSetting) || $pmbSetting->is_active)
-<section class="section-bg-sand" id="pmb">
-  <div class="container" data-aos="fade-up">
-    <div class="pmb-cta-box">
-      <div class="row align-items-center g-4">
-        <div class="col-lg-8">
-          <div class="badge pmb-badge-wrap px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange); color: #032e12; font-weight: 800; font-size: 12px; letter-spacing: 1px;">
-            {{ $pmbSetting->badge_text ?? 'PENERIMAAN MAHASISWA BARU (PMB) T.A. 2026/2027' }}
-          </div>
-          <h2 class="text-white fw-bold mb-3" style="font-size: clamp(1.5rem, 3.5vw, 2.1rem); line-height: 1.3;">
-            {{ $pmbSetting->judul ?? 'Daftar Sekarang & Raih Masa Depan Cerah Bersama Universitas Ibnu Sina!' }}
-          </h2>
-          <p class="text-white mb-4" style="line-height: 1.7; max-width: 620px; opacity: 0.92; font-size: 14.5px;">
-            {{ $pmbSetting->deskripsi ?? 'Tersedia berbagai jalur seleksi: Jalur Bebas Tes / Prestasi, Jalur Reguler, Jalur KIP-Kuliah, dan Jalur Alih Jenjang Karyawan.' }}
-          </p>
-          <div class="d-flex flex-wrap gap-3 pmb-btn-group">
-            @php
-              $link1 = $pmbSetting->tombol_link_1 ?? route('homepage.kontak');
-              if (!str_starts_with($link1, 'http') && !str_starts_with($link1, '/')) {
-                  $link1 = '/' . $link1;
-              }
-            @endphp
-            <a href="{{ $link1 }}" target="{{ str_starts_with($link1, 'http') ? '_blank' : '_self' }}" class="btn-primary-hero">
-              <i class="bi bi-pencil-square"></i> {{ $pmbSetting->tombol_text_1 ?? 'Daftar PMB Sekarang' }}
-            </a>
-
-            @php
-              $link2 = $pmbSetting->tombol_link_2 ?? '';
-              if (empty($link2) && !empty($cleanWa)) {
-                  $link2 = "https://wa.me/{$cleanWa}?text=" . urlencode("Halo Admin PMB Universitas Ibnu Sina, saya ingin konsultasi pendaftaran mahasiswa baru");
-              }
-            @endphp
-            @if(!empty($link2))
-              <a href="{{ $link2 }}" target="_blank" class="btn-pmb-wa">
-                <i class="bi bi-whatsapp"></i> {{ $pmbSetting->tombol_text_2 ?? 'Konsultasi WhatsApp PMB' }}
-              </a>
-            @endif
-          </div>
-        </div>
-
-        <div class="col-lg-4">
-          <div class="p-4 rounded-4" style="background: rgba(0, 0, 0, 0.22); border: 1px solid rgba(255, 255, 255, 0.22); backdrop-filter: blur(8px);">
-            <h5 class="text-white fw-bold mb-3"><i class="bi bi-calendar-event text-warning me-2"></i>Jadwal Gelombang:</h5>
-            <ul class="text-white small list-unstyled mb-0" style="line-height: 2; opacity: 0.95;">
-              @php
-                $waveList = $pmbSetting->waves ?? ['Gelombang 1: Jan - Apr', 'Gelombang 2: Mei - Jul', 'Gelombang 3: Agu - Sep'];
-              @endphp
-              @foreach($waveList as $waveItem)
-                <li><i class="bi bi-check2 text-warning me-1"></i> {{ $waveItem }}</li>
-              @endforeach
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-@endif
 
 <!-- ═══════════════════════════════════════════════
      13. PARTNER & KERJA SAMA (2-ROW INFINITE SLIDER)
@@ -1757,6 +1803,339 @@
         // Render Awal
         renderDeck(0, false);
         startAutoDeck();
+      }
+    }
+
+    // ═══════════════════════════════════════════════
+    // 3D CONCAVE U-SHAPE MIRROR HALL (LAYANAN TERKAIT)
+    // ═══════════════════════════════════════════════
+    const mirrorSwiperEl = document.querySelector('#mirrorHallSwiper');
+    if (mirrorSwiperEl && typeof Swiper !== 'undefined') {
+      const mirrorCounter = document.getElementById('mirrorCounter');
+      const mirrorActiveTitle = document.getElementById('mirrorActiveTitle');
+      const mirrorActiveDesc = document.getElementById('mirrorActiveDesc');
+      const mirrorActiveBtn = document.getElementById('mirrorActiveBtn');
+      const totalSlidesCount = mirrorSwiperEl.querySelectorAll('.mirror-slide-item').length;
+
+      function updateMirrorDetails(swiper) {
+        if (!swiper || !swiper.slides || swiper.slides.length === 0) return;
+        const activeSlide = swiper.slides[swiper.activeIndex];
+        if (!activeSlide) return;
+
+        const name = activeSlide.getAttribute('data-name');
+        const desc = activeSlide.getAttribute('data-desc');
+        const url = activeSlide.getAttribute('data-url');
+        const rawIndex = activeSlide.getAttribute('data-index');
+        const total = activeSlide.getAttribute('data-total') || (totalSlidesCount < 10 ? '0' + totalSlidesCount : '' + totalSlidesCount);
+
+        let displayIndex = rawIndex;
+        if (!displayIndex) {
+          const realIdx = (swiper.realIndex !== undefined ? swiper.realIndex : swiper.activeIndex) + 1;
+          displayIndex = realIdx < 10 ? '0' + realIdx : '' + realIdx;
+        }
+
+        if (mirrorCounter && displayIndex) {
+          mirrorCounter.textContent = `${displayIndex} / ${total}`;
+        }
+        
+        // Animasi transisi teks halus (fade + slide)
+        if (mirrorActiveTitle && name && mirrorActiveTitle.textContent.trim() !== name.trim()) {
+          mirrorActiveTitle.style.opacity = '0';
+          mirrorActiveTitle.style.transform = 'translateY(6px)';
+          setTimeout(() => {
+            mirrorActiveTitle.textContent = name;
+            mirrorActiveTitle.style.opacity = '1';
+            mirrorActiveTitle.style.transform = 'translateY(0)';
+          }, 140);
+        }
+        if (mirrorActiveDesc && desc && mirrorActiveDesc.textContent.trim() !== desc.trim()) {
+          mirrorActiveDesc.style.opacity = '0';
+          setTimeout(() => {
+            mirrorActiveDesc.textContent = desc;
+            mirrorActiveDesc.style.opacity = '1';
+          }, 140);
+        }
+        if (mirrorActiveBtn && url) {
+          mirrorActiveBtn.setAttribute('href', url);
+        }
+      }
+
+      // ═══════════════════════════════════════════════
+      // 3D MOTION CURVATURE & PARALLAX ENGINE
+      // ═══════════════════════════════════════════════
+      let mouseTiltX = 0;
+      let mouseTiltY = 0;
+      let targetTiltX = 0;
+      let targetTiltY = 0;
+      let hoveredSlideIndex = -1;
+      let motionAnimFrame = null;
+
+      // 3D Mirror Hall Cylindrical Arc with Dynamic 3D Motion
+      function applyUCurveTransforms(swiper, time = performance.now()) {
+        if (!swiper || !swiper.slides) return;
+        const slides = swiper.slides;
+        const slidesLength = slides.length;
+
+        // Smooth Lerp Mouse Parallax Tilt
+        mouseTiltX += (targetTiltX - mouseTiltX) * 0.08;
+        mouseTiltY += (targetTiltY - mouseTiltY) * 0.08;
+
+        for (let i = 0; i < slidesLength; i++) {
+          const slide = slides[i];
+          const progress = slide.progress !== undefined ? slide.progress : 0;
+          const absP = Math.abs(progress);
+
+          // 1. Sudut Rotasi 3D Silinder + Mouse Parallax Yaw:
+          const baseRotateY = -progress * 16.5;
+          const parallaxRotateY = mouseTiltX * (1 - Math.min(absP, 3) * 0.2);
+          const rotateY = baseRotateY + parallaxRotateY;
+          const clampedRotateY = Math.max(Math.min(rotateY, 56), -56);
+
+          // 2. Sudut Rotasi Pitch 3D dari Gerakan Mouse:
+          const rotateX = mouseTiltY * (1 - Math.min(absP, 3) * 0.25);
+
+          // 3. Kedalaman Z 3D: Puncak tengah paling depan, samping melengkung ke belakang
+          const rad = Math.min(absP, 4.5) * 0.28;
+          let translateZ = -(1 - Math.cos(rad)) * 520;
+
+          // 4. Efek Gelombang Melayang Halus di Air (3D Ambient Wave Motion):
+          const wavePhase = (time * 0.0022) + (i * 0.55);
+          const ambientWaveY = Math.sin(wavePhase) * 4.5;
+          const ambientWaveRoll = Math.cos(wavePhase) * 1.2;
+
+          let translateY = ambientWaveY;
+
+          // 5. 3D Pop Lift saat Card disentuh/di-hover mouse:
+          if (i === hoveredSlideIndex) {
+            translateZ += 45;
+            translateY -= 10;
+          }
+
+          // 6. Kompensasi Jarak Horizontal
+          const translateX = progress * -5;
+
+          // 7. Z-Index Berurutan (Pusat paling depan)
+          const zIndex = (i === hoveredSlideIndex) ? 150 : Math.round(100 - absP * 10);
+
+          slide.style.transform = `translate3d(${translateX}px, ${translateY}px, ${translateZ}px) rotateY(${clampedRotateY}deg) rotateX(${rotateX}deg) rotateZ(${ambientWaveRoll}deg) scale(1.0)`;
+          slide.style.zIndex = zIndex;
+          slide.style.opacity = '1';
+        }
+      }
+
+      // Loop animasi kontinu 3D Motion (Floating + Parallax)
+      function start3DMotionLoop(swiper) {
+        function tick(now) {
+          applyUCurveTransforms(swiper, now);
+          motionAnimFrame = requestAnimationFrame(tick);
+        }
+        if (!motionAnimFrame) {
+          motionAnimFrame = requestAnimationFrame(tick);
+        }
+      }
+
+      const mirrorSwiper = new Swiper('#mirrorHallSwiper', {
+        watchSlidesProgress: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        spaceBetween: 24,
+        loop: true,
+        speed: 800,
+        grabCursor: true,
+        allowTouchMove: true,
+        autoplay: {
+          delay: 2800,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: false,
+        },
+        pagination: {
+          el: '.mirror-hall-pagination',
+          clickable: true,
+        },
+        on: {
+          init: function () {
+            applyUCurveTransforms(this);
+            updateMirrorDetails(this);
+            start3DMotionLoop(this);
+          },
+          progress: function () {
+            applyUCurveTransforms(this);
+          },
+          setTranslate: function () {
+            applyUCurveTransforms(this);
+          },
+          setTransition: function (swiper, duration) {
+            swiper.slides.forEach((slide) => {
+              slide.style.transitionDuration = `${duration}ms`;
+            });
+          },
+          slideChange: function () {
+            updateMirrorDetails(this);
+          },
+        },
+      });
+
+      // Mouse Parallax & Hover Tracking untuk 3D Motion
+      mirrorSwiperEl.addEventListener('mousemove', function(e) {
+        const rect = mirrorSwiperEl.getBoundingClientRect();
+        const normX = ((e.clientX - rect.left) / rect.width) - 0.5; // -0.5 to 0.5
+        const normY = ((e.clientY - rect.top) / rect.height) - 0.5;
+        targetTiltX = normX * 12; // tilt yaw ±6 deg
+        targetTiltY = -normY * 8;  // tilt pitch ±4 deg
+
+        const hoveredSlide = e.target.closest('.swiper-slide');
+        if (hoveredSlide) {
+          const allSlides = Array.from(mirrorSwiper.slides);
+          hoveredSlideIndex = allSlides.indexOf(hoveredSlide);
+        } else {
+          hoveredSlideIndex = -1;
+        }
+      });
+
+      mirrorSwiperEl.addEventListener('mouseleave', function() {
+        targetTiltX = 0;
+        targetTiltY = 0;
+        hoveredSlideIndex = -1;
+      });
+
+      // Interaksi Card seperti Button:
+      // 1. Klik card aktif (di tengah) -> langsung buka link portal di tab baru
+      // 2. Klik card samping -> bergeser secara mulus ke posisi tengah (U-shape transition)
+      mirrorSwiperEl.addEventListener('click', function(e) {
+        const slide = e.target.closest('.swiper-slide');
+        if (!slide) return;
+
+        const slideUrl = slide.getAttribute('data-url');
+        const isCenter = slide.classList.contains('swiper-slide-active');
+
+        if (isCenter) {
+          if (slideUrl && slideUrl !== '#' && slideUrl.trim() !== '') {
+            window.open(slideUrl, '_blank', 'noopener,noreferrer');
+          }
+        } else {
+          const allSlides = Array.from(mirrorSwiper.slides);
+          const clickedIdx = allSlides.indexOf(slide);
+          if (clickedIdx !== -1) {
+            mirrorSwiper.slideTo(clickedIdx);
+          }
+        }
+      });
+
+      // Aksesibilitas keyboard (Enter / Spasi) untuk navigasi card
+      mirrorSwiperEl.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          const slide = document.activeElement ? document.activeElement.closest('.swiper-slide') : null;
+          if (slide) {
+            e.preventDefault();
+            const slideUrl = slide.getAttribute('data-url');
+            if (slide.classList.contains('swiper-slide-active')) {
+              if (slideUrl && slideUrl !== '#' && slideUrl.trim() !== '') {
+                window.open(slideUrl, '_blank', 'noopener,noreferrer');
+              }
+            } else {
+              const allSlides = Array.from(mirrorSwiper.slides);
+              const clickedIdx = allSlides.indexOf(slide);
+              if (clickedIdx !== -1) {
+                mirrorSwiper.slideTo(clickedIdx);
+              }
+            }
+          }
+        }
+      });
+      // ═══════════════════════════════════════════════
+      // EFEK AIR BERGELOMBANG PADA CERMIN (WATER RIPPLE EFFECT)
+      // ═══════════════════════════════════════════════
+      const waterCanvas = document.getElementById('mirrorWaterCanvas');
+      if (waterCanvas && mirrorSwiperEl) {
+        const ctx = waterCanvas.getContext('2d');
+        let ripples = [];
+        let animId = null;
+
+        function resizeWaterCanvas() {
+          waterCanvas.width = waterCanvas.offsetWidth || window.innerWidth;
+          waterCanvas.height = waterCanvas.offsetHeight || 280;
+        }
+        resizeWaterCanvas();
+        window.addEventListener('resize', resizeWaterCanvas);
+
+        function spawnRipple(x, y, intensity = 1.0) {
+          ripples.push({
+            x: x,
+            y: y,
+            radius: 5,
+            maxRadius: 130 * intensity,
+            opacity: 0.7 * intensity,
+            speed: 2.4,
+            width: 2.2
+          });
+          if (!animId) {
+            animId = requestAnimationFrame(animateRipples);
+          }
+        }
+
+        function animateRipples() {
+          ctx.clearRect(0, 0, waterCanvas.width, waterCanvas.height);
+
+          for (let i = ripples.length - 1; i >= 0; i--) {
+            const r = ripples[i];
+            r.radius += r.speed;
+            r.opacity -= 0.013;
+
+            if (r.opacity <= 0 || r.radius >= r.maxRadius) {
+              ripples.splice(i, 1);
+              continue;
+            }
+
+            // Lingkaran gelombang elips (perspektif 3D lantai air)
+            ctx.save();
+            ctx.beginPath();
+            ctx.ellipse(r.x, r.y, r.radius, r.radius * 0.32, 0, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${r.opacity * 0.75})`;
+            ctx.lineWidth = r.width;
+            ctx.shadowColor = 'rgba(56, 189, 248, 0.4)';
+            ctx.shadowBlur = 10;
+            ctx.stroke();
+
+            // Cincin harmonik dalam dengan kilau emas
+            if (r.radius > 12) {
+              ctx.beginPath();
+              ctx.ellipse(r.x, r.y, r.radius * 0.62, (r.radius * 0.62) * 0.32, 0, 0, Math.PI * 2);
+              ctx.strokeStyle = `rgba(254, 216, 2, ${r.opacity * 0.5})`;
+              ctx.lineWidth = r.width * 0.7;
+              ctx.stroke();
+            }
+            ctx.restore();
+          }
+
+          if (ripples.length > 0) {
+            animId = requestAnimationFrame(animateRipples);
+          } else {
+            animId = null;
+          }
+        }
+
+        let lastRippleTime = 0;
+        const triggerRippleEvent = (e) => {
+          const now = Date.now();
+          if (now - lastRippleTime > 55) {
+            const rect = waterCanvas.getBoundingClientRect();
+            const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+            const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
+
+            // Spawn gelombang di area cermin lantai
+            spawnRipple(x, Math.max(20, Math.min(y, rect.height - 20)), 1.0);
+            lastRippleTime = now;
+          }
+        };
+
+        mirrorSwiperEl.addEventListener('mousemove', triggerRippleEvent);
+        mirrorSwiperEl.addEventListener('touchmove', triggerRippleEvent, { passive: true });
+        mirrorSwiperEl.addEventListener('click', function(e) {
+          const rect = waterCanvas.getBoundingClientRect();
+          spawnRipple(e.clientX - rect.left, Math.max(20, Math.min(e.clientY - rect.top, rect.height - 20)), 1.5);
+        });
       }
     }
   });

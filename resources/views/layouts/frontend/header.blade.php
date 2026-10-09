@@ -133,6 +133,11 @@
           </ul>
         </li>
 
+        <!-- Humas -->
+        <li class="nav-item">
+          <a href="{{ route('homepage.humas') }}" class="nav-link nav-link-custom {{ request()->routeIs('homepage.humas*') ? 'active' : '' }}">Humas</a>
+        </li>
+
         <!-- Kontak -->
         <li class="nav-item">
           <a href="{{ route('homepage.kontak') }}" class="nav-link nav-link-custom {{ request()->routeIs('homepage.kontak') ? 'active' : '' }}">Kontak</a>

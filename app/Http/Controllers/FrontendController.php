@@ -290,6 +290,27 @@ class FrontendController extends Controller
         return view('layouts.frontend.contact');
     }
 
+    public function humas()
+    {
+        $contact      = \App\Models\Contact::first();
+        $about        = \App\Models\About::first();
+        $pmbSetting   = \App\Models\PmbSetting::first();
+        
+        // Ambil berita khusus yang berkategori 'Berita Humas' saja
+        $latestNews   = \App\Models\News::where('status', 'published')
+                            ->where('category', 'Berita Humas')
+                            ->latest()
+                            ->take(3)
+                            ->get();
+
+        $faqs         = \App\Models\Faq::take(6)->get();
+        $socialMedias = \App\Models\SocialMedia::where('is_active', true)->orderBy('urutan')->get();
+        $banners      = \App\Models\Banner::where('aktif', true)->orderBy('urutan')->get();
+        $galleries    = \App\Models\Gallery::latest()->take(6)->get();
+        $heroHumas    = \App\Models\HeroHumas::first();
+        return view('layouts.frontend.humas', compact('contact', 'about', 'pmbSetting', 'latestNews', 'faqs', 'socialMedias', 'banners', 'galleries', 'heroHumas'));
+    }
+
     public function news(\Illuminate\Http\Request $request)
     {
         $search      = $request->query('q');

@@ -95,7 +95,8 @@
 
           @php
             $portalCategories = [
-              'Berita Universitas'         => 'bi-newspaper',
+              'Berita Universitas'      => 'bi-newspaper',
+              'Berita Humas'            => 'bi-megaphone-fill',
               'Akademik & Mahasiswa'    => 'bi-mortarboard',
               'K3 & Keselamatan Kerja'  => 'bi-shield-check',
               'Kesehatan Lingkungan'    => 'bi-tree',

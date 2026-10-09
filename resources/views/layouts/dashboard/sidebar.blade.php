@@ -209,7 +209,7 @@
               </a>
               <ul id="humas-nav" class="nav-content collapse {{ Route::is('news.*') || Route::is('faq.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                   <li>
-                      <a href="{{ route('news.index') }}" class="{{ Route::is('news.index') ? 'active' : '' }}">
+                      <a href="{{ route('hero-humas.index') }}" class="{{ Route::is('hero-humas.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Hero Humas</span>
                       </a>
                   </li>

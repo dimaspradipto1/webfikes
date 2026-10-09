@@ -36,6 +36,7 @@ use App\Http\Controllers\LayananTerkaitController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\PublikasiController;
 use App\Http\Controllers\BahasaSettingController;
+use App\Http\Controllers\HeroHumasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +71,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/berita', 'news')->name('homepage.news');
     Route::get('/berita/{slug}', 'newsDetail')->name('homepage.news.detail');
     Route::get('/faq', 'faq')->name('homepage.faq');
+    Route::get('/humas', 'humas')->name('homepage.humas');
     Route::get('/kontak', 'kontak')->name('homepage.kontak');
 });
 
@@ -118,6 +120,8 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::put('sambutan-dekan-admin', [SambutanDekanController::class, 'update'])->name('sambutan-dekan.update');
     Route::get('pmb-setting-admin', [PmbSettingController::class, 'index'])->name('pmb-setting.index');
     Route::put('pmb-setting-admin', [PmbSettingController::class, 'update'])->name('pmb-setting.update');
+    Route::get('admin-hero-humas', [HeroHumasController::class, 'index'])->name('hero-humas.index');
+    Route::put('admin-hero-humas', [HeroHumasController::class, 'update'])->name('hero-humas.update');
 
     // Akademik Routes
     Route::prefix('admin-akademik')->name('akademik.')->group(function () {
