@@ -246,6 +246,14 @@
               </a>
           </li>
 
+          <!-- Desain Grafis Humas (Menu Terpisah di Bawah Unduhan Dokumen Humas) -->
+          <li class="nav-item">
+              <a class="nav-link {{ Route::is('desain-grafis.*') ? '' : 'collapsed' }}" href="{{ route('desain-grafis.index') }}">
+                  <i class="bi bi-palette"></i>
+                  <span>Desain Grafis Humas</span>
+              </a>
+          </li>
+
           <!-- 8. Kontak (Sesuai Urutan Header) -->
           <li class="nav-item">
               <a class="nav-link {{ Route::is('contact.*') ? '' : 'collapsed' }}" href="{{ route('contact.index') }}">

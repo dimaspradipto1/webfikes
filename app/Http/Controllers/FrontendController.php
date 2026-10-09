@@ -325,6 +325,85 @@ class FrontendController extends Controller
         return view('layouts.frontend.unduhan', compact('unduhans', 'selectedCat', 'contact', 'pmbSetting'));
     }
 
+    public function desainGrafis()
+    {
+        $contact    = \App\Models\Contact::first();
+        $pmbSetting = \App\Models\PmbSetting::first();
+        
+        $categoryConfigs = [
+            'audit' => [
+                'id'    => 'audit',
+                'name'  => 'Auditorium lt. 4 Rektorat',
+                'specs' => 'Ukuran: LED TENGAH untuk gedung Auditorium lt. 4 gedung H. Rasit Kurnain (Format 704 x 320 px / Landscape)',
+            ],
+            'sidang' => [
+                'id'    => 'sidang',
+                'name'  => 'Ruang Sidang lt. 2 Rektorat',
+                'specs' => 'Ukuran Layar LCD & Proyektor Ruang Sidang Utama lt. 2 (Format 1920 x 1080 px / 16:9 Full HD)',
+            ],
+            'dekanat' => [
+                'id'    => 'dekanat',
+                'name'  => 'Ruang Rapat Dekanat',
+                'specs' => 'Format Display TV Ruang Rapat Fakultas / Dekanat (Format 1920 x 1080 px / Full HD)',
+            ],
+            'spanduk' => [
+                'id'    => 'spanduk',
+                'name'  => 'Banner & Spanduk Outdoor',
+                'specs' => 'Spanduk Gerbang Depan & Backdrop Panggung Utama (Format 3 x 1 meter & 4 x 2 meter)',
+            ],
+        ];
+
+        $dbTemplates = \App\Models\DesainGrafis::where('is_active', true)
+            ->orderBy('urutan')
+            ->orderBy('id')
+            ->get();
+
+        $categories = [];
+        foreach ($categoryConfigs as $catKey => $config) {
+            $matched = $dbTemplates->where('kategori', $catKey);
+            $categories[$catKey] = [
+                'id'        => $config['id'],
+                'name'      => $config['name'],
+                'specs'     => $matched->first()?->spesifikasi ?: $config['specs'],
+                'templates' => $matched->map(function ($item) {
+                    return [
+                        'title'          => $item->judul,
+                        'desc'           => $item->deskripsi,
+                        'badge'          => $item->badge_teks ?: 'Landscape',
+                        'url'            => $item->canva_url ?: 'https://www.canva.com',
+                        'color'          => $item->warna_gradient ?: 'linear-gradient(135deg, #0b6828 0%, #15803d 100%)',
+                        'gambar_preview' => $item->preview_url,
+                    ];
+                })->values()->toArray(),
+            ];
+        }
+
+        $setting = \App\Models\DesainGrafisSetting::firstOrCreate([], [
+            'hero_title'         => 'Desain Mudah,',
+            'hero_highlight'     => 'Siap Digunakan !',
+            'hero_subtitle'      => 'Kami menyediakan template desain resmi untuk keperluan presentasi LED, ruang sidang, agenda rapat, dan spanduk acara di lingkungan Universitas Ibnu Sina.',
+            'order_box_title'    => 'Pesan desain disini',
+            'order_box_text'     => 'Butuh desain yang belum tersedia dalam template? Sampaikan kebutuhan acara Anda, dan tim Humas & Promosi UIS siap membantu mewujudkannya.',
+            'order_box_btn_text' => 'Pesan Sekarang',
+            'track_bar_text'     => 'Lacak progress pesanan desain kamu disini!',
+            'stat_total'         => 82,
+            'stat_selesai'       => 74,
+            'stat_dikerjakan'    => 2,
+            'stat_menunggu'      => 5,
+            'guide_title'        => 'Langkah Menggunakan Templat Desain',
+            'guide_steps'        => "1. Pilih Templat\n2. Masuk ke Canva\n3. Edit Teks/Elemen Templat\n4. Desain Siap\n5. Export Desain format .JPG\n6. Klik tombol Share (kanan atas)\n7. Klik Download\n8. Pilih Format .JPG\n9. Atur Quality Spasi ke 100% untuk kualitas terbaik\n10. Klik Download",
+        ]);
+
+        $stats = [
+            'total'      => $setting->stat_total ?? 82,
+            'selesai'    => $setting->stat_selesai ?? 74,
+            'dikerjakan' => $setting->stat_dikerjakan ?? 2,
+            'menunggu'   => $setting->stat_menunggu ?? 5,
+        ];
+
+        return view('layouts.frontend.desain-grafis', compact('contact', 'pmbSetting', 'categories', 'stats', 'setting'));
+    }
+
     public function news(\Illuminate\Http\Request $request)
     {
         $search      = $request->query('q');

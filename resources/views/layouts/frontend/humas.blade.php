@@ -68,30 +68,36 @@
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
   }
 
-  /* Quick Services White Bar */
+  .humas-hero-section .container {
+    max-width: 1320px;
+  }
+
+  /* Quick Services White Bar (8 Items Single Row) */
   .humas-quick-bar {
     background: #ffffff;
-    border-radius: 20px;
-    padding: 18px 24px;
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    max-width: 1060px;
-    margin: 0 auto 28px auto;
+    border-radius: 24px;
+    padding: 18px 16px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.20);
+    display: grid !important;
+    grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto 30px auto;
   }
   .humas-quick-item {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     text-decoration: none;
     color: #212529;
-    padding: 8px 12px;
-    border-radius: 12px;
+    padding: 8px 4px;
+    border-radius: 14px;
     transition: all 0.25s ease;
-    min-width: 90px;
+    width: 100%;
+    min-width: 0;
   }
   .humas-quick-item:hover {
     transform: translateY(-4px);
@@ -99,16 +105,17 @@
     color: var(--uis-humas-green);
   }
   .humas-quick-icon-wrap {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
     background: #e8f5e9;
     color: #0b6828;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    margin-bottom: 6px;
+    font-size: 22px;
+    margin-bottom: 8px;
+    flex-shrink: 0;
     transition: all 0.25s ease;
   }
   .humas-quick-item:hover .humas-quick-icon-wrap {
@@ -117,62 +124,99 @@
     box-shadow: 0 6px 14px rgba(11, 104, 40, 0.3);
   }
   .humas-quick-label {
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 11.5px;
+    font-weight: 700;
     text-align: center;
-    line-height: 1.2;
+    line-height: 1.25;
+    color: #1e293b;
+    word-break: normal;
   }
 
-  /* Floating Info Pills */
+  @media (max-width: 991.98px) {
+    .humas-quick-bar {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      justify-content: flex-start !important;
+      padding: 14px 16px !important;
+      gap: 12px !important;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .humas-quick-bar::-webkit-scrollbar {
+      display: none;
+    }
+    .humas-quick-item {
+      flex: 0 0 100px !important;
+      min-width: 100px !important;
+    }
+  }
+
+  /* Floating Info Action Pills (Matching exact reference design) */
   .humas-pill-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 14px;
-    max-width: 1060px;
+    gap: 16px;
+    max-width: 1100px;
     margin: 0 auto;
   }
   .humas-info-pill {
-    background: #fbf0b9;
-    color: #533f03;
-    border: 1px solid #fae27d;
-    padding: 10px 18px;
+    padding: 7px 8px 7px 22px;
     border-radius: 50px;
-    font-size: 13.5px;
-    font-weight: 600;
-    display: flex;
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 14px;
     text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: all 0.25s ease;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .humas-info-pill:hover {
-    background: #fce881;
-    transform: translateY(-2px);
-    color: #3b2c01;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
   }
-  .humas-info-pill.pill-green {
-    background: #074e1d;
-    color: #ffffff;
-    border-color: #0b6e2b;
+  
+  /* Pill Variant 1: Lime-Yellow Style */
+  .humas-info-pill.pill-lime {
+    background: linear-gradient(90deg, #d8e51b 0%, #b2cb0c 100%);
+    color: #1a1a1a;
+    border: 1px solid rgba(0, 0, 0, 0.08);
   }
-  .humas-info-pill.pill-green:hover {
-    background: #095f24;
+  .humas-info-pill.pill-lime .humas-pill-btn {
+    background: #231815;
     color: #ffffff;
-  }
-  .humas-pill-btn {
-    background: #212529;
-    color: #ffffff;
-    font-size: 11px;
     font-weight: 700;
-    padding: 4px 12px;
-    border-radius: 20px;
-    text-transform: uppercase;
+    font-size: 12.5px;
+    padding: 6px 20px;
+    border-radius: 50px;
+    letter-spacing: 0.2px;
   }
-  .humas-info-pill.pill-green .humas-pill-btn {
-    background: #ffd600;
-    color: #111;
+  .humas-info-pill.pill-lime:hover {
+    background: linear-gradient(90deg, #e0ee1e 0%, #bdd70e 100%);
+    color: #000000;
+  }
+
+  /* Pill Variant 2 & 3: Deep Emerald Green Style */
+  .humas-info-pill.pill-emerald {
+    background: linear-gradient(90deg, #057d38 0%, #035a26 100%);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .humas-info-pill.pill-emerald .humas-pill-btn {
+    background: #fab005;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 12.5px;
+    padding: 6px 20px;
+    border-radius: 50px;
+    letter-spacing: 0.2px;
+  }
+  .humas-info-pill.pill-emerald:hover {
+    background: linear-gradient(90deg, #069041 0%, #046b2e 100%);
+    color: #ffffff;
   }
 
   /* Award Banner Section */
@@ -468,12 +512,12 @@
   $heroJudul = $heroHumas?->judul ?: 'Selamat Datang';
   $heroSubjudul = $heroHumas?->subjudul ?: 'di Biro Hubungan Masyarakat dan Protokoler Universitas Islam Riau';
   $heroBadge = $heroHumas?->badge_text ?: 'Layanan';
-  $pillText1 = $heroHumas?->pill_text_1 ?: 'Informasi Khusus PMB TA 2026/2027';
-  $pillUrl1 = $heroHumas?->pill_url_1 ?: $pmbNavUrl;
-  $pillText2 = $heroHumas?->pill_text_2 ?: 'Pengumuman Prestasi & Kejuaraan Kampus';
-  $pillUrl2 = $heroHumas?->pill_url_2 ?: route('homepage.prestasi');
-  $pillText3 = $heroHumas?->pill_text_3 ?: 'Live Chat Layanan Humas';
-  $pillUrl3 = $heroHumas?->pill_url_3 ?: (!empty($cleanWa) ? 'https://wa.me/' . $cleanWa : route('homepage.kontak'));
+  $pillText1 = $heroHumas?->pill_text_1 ?: 'Twibbon & Logo PKKMB UIR 2026';
+  $pillUrl1 = $heroHumas?->pill_url_1 ?: route('homepage.unduhan', ['kategori' => 'image']);
+  $pillText2 = $heroHumas?->pill_text_2 ?: 'Panduan Penggunaan Logo & Merek';
+  $pillUrl2 = $heroHumas?->pill_url_2 ?: route('homepage.unduhan', ['kategori' => 'template']);
+  $pillText3 = $heroHumas?->pill_text_3 ?: 'Logo UIR';
+  $pillUrl3 = $heroHumas?->pill_url_3 ?: route('homepage.unduhan', ['kategori' => 'image']);
 @endphp
 
 <!-- ══════════════════════════════════════════════════════
@@ -498,56 +542,56 @@
         <div class="humas-quick-icon-wrap"><i class="bi bi-cloud-arrow-down"></i></div>
         <span class="humas-quick-label">Unduhan</span>
       </a>
-      <a href="{{ route('homepage.news', ['category' => 'Berita Humas']) }}" class="humas-quick-item" title="Siaran & Rilis Berita">
+      <a href="{{ route('homepage.desain-grafis') }}" class="humas-quick-item" title="Pusat Layanan & Templat Desain Grafis">
         <div class="humas-quick-icon-wrap"><i class="bi bi-newspaper"></i></div>
-        <span class="humas-quick-label">Siaran Pers</span>
+        <span class="humas-quick-label">Desain Grafis</span>
       </a>
       <a href="{{ route('homepage.faq') }}" class="humas-quick-item" title="Layanan Informasi & PPID">
         <div class="humas-quick-icon-wrap"><i class="bi bi-file-earmark-text"></i></div>
-        <span class="humas-quick-label">PPID / Info</span>
+        <span class="humas-quick-label">Template Dokumen</span>
       </a>
       <a href="{{ route('homepage.galeri') }}" class="humas-quick-item" title="Galeri Dokumentasi & Video">
         <div class="humas-quick-icon-wrap"><i class="bi bi-camera-video"></i></div>
-        <span class="humas-quick-label">Galeri Media</span>
+        <span class="humas-quick-label">Panduan Desain dan Video</span>
       </a>
       <a href="#eksplorasi-medsos" class="humas-quick-item" title="Media Sosial Resmi">
         <div class="humas-quick-icon-wrap"><i class="bi bi-share-fill"></i></div>
-        <span class="humas-quick-label">Sosial Media</span>
+        <span class="humas-quick-label">Galeri Kegiatan</span>
       </a>
       <a href="#emagazine-section" class="humas-quick-item" title="E-Magazine UIS">
         <div class="humas-quick-icon-wrap"><i class="bi bi-journal-richtext"></i></div>
-        <span class="humas-quick-label">E-Magazine</span>
+        <span class="humas-quick-label">Permintaan Rilis</span>
       </a>
       <a href="{{ route('homepage.kontak') }}" class="humas-quick-item" title="Kemitraan & Liputan Media">
         <div class="humas-quick-icon-wrap"><i class="bi bi-people-fill"></i></div>
-        <span class="humas-quick-label">Kemitraan</span>
+        <span class="humas-quick-label">Pendampingan Acara</span>
       </a>
       <a href="{{ route('homepage.kontak') }}" class="humas-quick-item" title="Layanan Pengaduan & Aspirasi">
         <div class="humas-quick-icon-wrap"><i class="bi bi-chat-left-dots"></i></div>
-        <span class="humas-quick-label">Pengaduan</span>
+        <span class="humas-quick-label">Survey Layanan</span>
       </a>
     </div>
 
-    <!-- Notification Info Action Pills -->
+    <!-- Notification Info Action Pills (Matching exact reference design) -->
     <div class="humas-pill-container" data-aos="fade-up" data-aos-delay="150">
       @if(!empty($pillText1))
-      <a href="{{ $pillUrl1 }}" class="humas-info-pill">
-        <span><i class="bi bi-megaphone-fill text-warning me-1"></i> {{ $pillText1 }}</span>
-        <span class="humas-pill-btn">Pilih</span>
+      <a href="{{ $pillUrl1 }}" class="humas-info-pill pill-lime">
+        <span>{{ $pillText1 }}</span>
+        <span class="humas-pill-btn">Unduh</span>
       </a>
       @endif
 
       @if(!empty($pillText2))
-      <a href="{{ $pillUrl2 }}" class="humas-info-pill">
-        <span><i class="bi bi-trophy-fill text-warning me-1"></i> {{ $pillText2 }}</span>
-        <span class="humas-pill-btn">Pilih</span>
+      <a href="{{ $pillUrl2 }}" class="humas-info-pill pill-emerald">
+        <span>{{ $pillText2 }}</span>
+        <span class="humas-pill-btn">Lihat</span>
       </a>
       @endif
 
       @if(!empty($pillText3))
-      <a href="{{ $pillUrl3 }}" target="{{ str_starts_with($pillUrl3, 'http') ? '_blank' : '_self' }}" class="humas-info-pill pill-green">
-        <span><i class="bi bi-whatsapp me-1"></i> {{ $pillText3 }}</span>
-        <span class="humas-pill-btn">Pilih</span>
+      <a href="{{ $pillUrl3 }}" target="{{ str_starts_with($pillUrl3, 'http') ? '_blank' : '_self' }}" class="humas-info-pill pill-emerald">
+        <span>{{ $pillText3 }}</span>
+        <span class="humas-pill-btn">Unduh</span>
       </a>
       @endif
     </div>

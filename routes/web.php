@@ -38,6 +38,7 @@ use App\Http\Controllers\PublikasiController;
 use App\Http\Controllers\BahasaSettingController;
 use App\Http\Controllers\HeroHumasController;
 use App\Http\Controllers\UnduhanController;
+use App\Http\Controllers\DesainGrafisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +75,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/faq', 'faq')->name('homepage.faq');
     Route::get('/humas', 'humas')->name('homepage.humas');
     Route::get('/unduhan', 'unduhan')->name('homepage.unduhan');
+    Route::get('/desain-grafis', 'desainGrafis')->name('homepage.desain-grafis');
     Route::get('/kontak', 'kontak')->name('homepage.kontak');
 });
 
@@ -127,6 +129,10 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('admin-unduhan', UnduhanController::class)
         ->parameters(['admin-unduhan' => 'unduhan'])
         ->names('unduhan');
+    Route::put('admin-desain-grafis-setting', [DesainGrafisController::class, 'updateSetting'])->name('desain-grafis.update-setting');
+    Route::resource('admin-desain-grafis', DesainGrafisController::class)
+        ->parameters(['admin-desain-grafis' => 'desainGrafis'])
+        ->names('desain-grafis');
 
     // Akademik Routes
     Route::prefix('admin-akademik')->name('akademik.')->group(function () {
