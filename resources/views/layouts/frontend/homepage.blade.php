@@ -910,8 +910,8 @@
       <div class="swiper-wrapper">
         @php
           $totalCount = $layananTerkaits->count();
-          // Ulangi daftar item agar Swiper loop memiliki cukup slide di semua resolusi (minimal 18 slide)
-          $repeatFactor = $totalCount > 0 ? (int) max(1, ceil(18 / $totalCount)) : 1;
+          // Minimal 24 slide agar perputaran kontinu (marquee flow) bergerak mulus tanpa putus
+          $repeatFactor = $totalCount > 0 ? (int) max(3, ceil(24 / $totalCount)) : 3;
         @endphp
         @for($r = 0; $r < $repeatFactor; $r++)
           @foreach($layananTerkaits as $idx => $item)
@@ -929,6 +929,9 @@
                  tabindex="0"
                  aria-label="Kunjungi Layanan {{ $item->nama }}">
               
+              {{-- Floating Title Label Above Card (Mirror Hall Reference Style) --}}
+              <div class="mirror-slide-label">{{ $item->nama }}</div>
+
               {{-- Interactive Full-Logo Mirror Card (Entire Card is Clickable) --}}
               <div class="mirror-card">
                 <div class="mirror-card-media-wrap">
@@ -1861,76 +1864,42 @@
       }
 
       // ═══════════════════════════════════════════════
-      // 3D MOTION CURVATURE & PARALLAX ENGINE
+      // 3D CONCAVE MIRROR HALL (PERSIS REFERENSI MIRROR HALL)
       // ═══════════════════════════════════════════════
-      let mouseTiltX = 0;
-      let mouseTiltY = 0;
-      let targetTiltX = 0;
-      let targetTiltY = 0;
-      let hoveredSlideIndex = -1;
-      let motionAnimFrame = null;
-
-      // 3D Mirror Hall Cylindrical Arc with Dynamic 3D Motion
-      function applyUCurveTransforms(swiper, time = performance.now()) {
-        if (!swiper || !swiper.slides) return;
+      function applyBowArchTransforms(swiper) {
+        if (!swiper || !swiper.slides || swiper.slides.length === 0) return;
         const slides = swiper.slides;
         const slidesLength = slides.length;
-
-        // Smooth Lerp Mouse Parallax Tilt
-        mouseTiltX += (targetTiltX - mouseTiltX) * 0.08;
-        mouseTiltY += (targetTiltY - mouseTiltY) * 0.08;
 
         for (let i = 0; i < slidesLength; i++) {
           const slide = slides[i];
           const progress = slide.progress !== undefined ? slide.progress : 0;
           const absP = Math.abs(progress);
 
-          // 1. Sudut Rotasi 3D Silinder + Mouse Parallax Yaw:
-          const baseRotateY = -progress * 16.5;
-          const parallaxRotateY = mouseTiltX * (1 - Math.min(absP, 3) * 0.2);
-          const rotateY = baseRotateY + parallaxRotateY;
-          const clampedRotateY = Math.max(Math.min(rotateY, 56), -56);
+          // 1. Rotasi 3D Silinder Cermin (Concave Theater Arc):
+          // Kartu samping menghadap ke arah pusat/pengguna
+          const rotateY = -progress * 15.5; 
+          const clampedRotateY = Math.max(Math.min(rotateY, 55), -55);
 
-          // 2. Sudut Rotasi Pitch 3D dari Gerakan Mouse:
-          const rotateX = mouseTiltY * (1 - Math.min(absP, 3) * 0.25);
+          // 2. Kedalaman 3D Arc: Puncak tengah di depan, samping melengkung halus ke belakang
+          const rad = Math.min(absP, 4.5) * 0.26;
+          const translateZ = -(1 - Math.cos(rad)) * 380;
 
-          // 3. Kedalaman Z 3D: Puncak tengah paling depan, samping melengkung ke belakang
-          const rad = Math.min(absP, 4.5) * 0.28;
-          let translateZ = -(1 - Math.cos(rad)) * 520;
+          // 3. Garis Lantai Air Datar: Seluruh kartu berdiri sejajar di atas lantai cermin
+          const translateY = 0;
 
-          // 4. Efek Gelombang Melayang Halus di Air (3D Ambient Wave Motion):
-          const wavePhase = (time * 0.0022) + (i * 0.55);
-          const ambientWaveY = Math.sin(wavePhase) * 4.5;
-          const ambientWaveRoll = Math.cos(wavePhase) * 1.2;
+          // 4. Kompensasi Jarak Horizontal (Presisi Spacing Antar Kartu)
+          const translateX = progress * -3;
 
-          let translateY = ambientWaveY;
+          // 5. Skala Natural: Pusat tegas (1.0), samping seimbang (0.95 - 0.90)
+          const scale = Math.max(0.88, 1.0 - absP * 0.025);
 
-          // 5. 3D Pop Lift saat Card disentuh/di-hover mouse:
-          if (i === hoveredSlideIndex) {
-            translateZ += 45;
-            translateY -= 10;
-          }
+          // 6. Susunan lapis Z-Index: Pusat selalu di depan
+          const zIndex = Math.round(100 - absP * 10);
 
-          // 6. Kompensasi Jarak Horizontal
-          const translateX = progress * -5;
-
-          // 7. Z-Index Berurutan (Pusat paling depan)
-          const zIndex = (i === hoveredSlideIndex) ? 150 : Math.round(100 - absP * 10);
-
-          slide.style.transform = `translate3d(${translateX}px, ${translateY}px, ${translateZ}px) rotateY(${clampedRotateY}deg) rotateX(${rotateX}deg) rotateZ(${ambientWaveRoll}deg) scale(1.0)`;
+          slide.style.transform = `translate3d(${translateX}px, ${translateY}px, ${translateZ}px) rotateY(${clampedRotateY}deg) scale(${scale})`;
           slide.style.zIndex = zIndex;
           slide.style.opacity = '1';
-        }
-      }
-
-      // Loop animasi kontinu 3D Motion (Floating + Parallax)
-      function start3DMotionLoop(swiper) {
-        function tick(now) {
-          applyUCurveTransforms(swiper, now);
-          motionAnimFrame = requestAnimationFrame(tick);
-        }
-        if (!motionAnimFrame) {
-          motionAnimFrame = requestAnimationFrame(tick);
         }
       }
 
@@ -1938,15 +1907,17 @@
         watchSlidesProgress: true,
         centeredSlides: true,
         slidesPerView: 'auto',
-        spaceBetween: 24,
+        spaceBetween: 20, // Jarak presisi serasi persis sesuai gambar referensi
         loop: true,
-        speed: 800,
+        loopAdditionalSlides: 8,
+        speed: 800, // Durasi transisi geser yang halus
         grabCursor: true,
         allowTouchMove: true,
         autoplay: {
-          delay: 2800,
+          delay: 1800, // Berjalan terus setiap 1.8 detik
           disableOnInteraction: false,
           pauseOnMouseEnter: false,
+          waitForTransition: false,
         },
         pagination: {
           el: '.mirror-hall-pagination',
@@ -1954,15 +1925,17 @@
         },
         on: {
           init: function () {
-            applyUCurveTransforms(this);
+            applyBowArchTransforms(this);
             updateMirrorDetails(this);
-            start3DMotionLoop(this);
+            if (this.autoplay && typeof this.autoplay.start === 'function') {
+              this.autoplay.start();
+            }
           },
           progress: function () {
-            applyUCurveTransforms(this);
+            applyBowArchTransforms(this);
           },
           setTranslate: function () {
-            applyUCurveTransforms(this);
+            applyBowArchTransforms(this);
           },
           setTransition: function (swiper, duration) {
             swiper.slides.forEach((slide) => {
@@ -1971,36 +1944,25 @@
           },
           slideChange: function () {
             updateMirrorDetails(this);
+            if (typeof spawnCenterRipple === 'function') {
+              spawnCenterRipple();
+            }
           },
         },
       });
 
-      // Mouse Parallax & Hover Tracking untuk 3D Motion
-      mirrorSwiperEl.addEventListener('mousemove', function(e) {
-        const rect = mirrorSwiperEl.getBoundingClientRect();
-        const normX = ((e.clientX - rect.left) / rect.width) - 0.5; // -0.5 to 0.5
-        const normY = ((e.clientY - rect.top) / rect.height) - 0.5;
-        targetTiltX = normX * 12; // tilt yaw ±6 deg
-        targetTiltY = -normY * 8;  // tilt pitch ±4 deg
-
-        const hoveredSlide = e.target.closest('.swiper-slide');
-        if (hoveredSlide) {
-          const allSlides = Array.from(mirrorSwiper.slides);
-          hoveredSlideIndex = allSlides.indexOf(hoveredSlide);
-        } else {
-          hoveredSlideIndex = -1;
+      // Safeguard interval: Memastikan slide terus berjalan tanpa henti secara konsisten
+      setInterval(function () {
+        if (mirrorSwiper && mirrorSwiper.slideNext) {
+          if (!mirrorSwiper.autoplay || !mirrorSwiper.autoplay.running) {
+            mirrorSwiper.slideNext(800);
+          }
         }
-      });
-
-      mirrorSwiperEl.addEventListener('mouseleave', function() {
-        targetTiltX = 0;
-        targetTiltY = 0;
-        hoveredSlideIndex = -1;
-      });
+      }, 2000);
 
       // Interaksi Card seperti Button:
       // 1. Klik card aktif (di tengah) -> langsung buka link portal di tab baru
-      // 2. Klik card samping -> bergeser secara mulus ke posisi tengah (U-shape transition)
+      // 2. Klik card samping -> bergeser secara mulus ke posisi tengah (Bow Arch transition)
       mirrorSwiperEl.addEventListener('click', function(e) {
         const slide = e.target.closest('.swiper-slide');
         if (!slide) return;
@@ -2042,10 +2004,13 @@
           }
         }
       });
+
       // ═══════════════════════════════════════════════
-      // EFEK AIR BERGELOMBANG PADA CERMIN (WATER RIPPLE EFFECT)
+      // EFEK CERMIN ELEGAN (WATER RIPPLE ON SLIDE / CLICK)
       // ═══════════════════════════════════════════════
       const waterCanvas = document.getElementById('mirrorWaterCanvas');
+      let spawnCenterRipple = null;
+
       if (waterCanvas && mirrorSwiperEl) {
         const ctx = waterCanvas.getContext('2d');
         let ripples = [];
@@ -2053,7 +2018,7 @@
 
         function resizeWaterCanvas() {
           waterCanvas.width = waterCanvas.offsetWidth || window.innerWidth;
-          waterCanvas.height = waterCanvas.offsetHeight || 280;
+          waterCanvas.height = waterCanvas.offsetHeight || 260;
         }
         resizeWaterCanvas();
         window.addEventListener('resize', resizeWaterCanvas);
@@ -2063,15 +2028,20 @@
             x: x,
             y: y,
             radius: 5,
-            maxRadius: 130 * intensity,
-            opacity: 0.7 * intensity,
-            speed: 2.4,
-            width: 2.2
+            maxRadius: 100 * intensity,
+            opacity: 0.6 * intensity,
+            speed: 2.0,
+            width: 1.8
           });
           if (!animId) {
             animId = requestAnimationFrame(animateRipples);
           }
         }
+
+        spawnCenterRipple = function() {
+          const rect = waterCanvas.getBoundingClientRect();
+          spawnRipple(rect.width / 2, rect.height * 0.45, 1.2);
+        };
 
         function animateRipples() {
           ctx.clearRect(0, 0, waterCanvas.width, waterCanvas.height);
@@ -2079,28 +2049,26 @@
           for (let i = ripples.length - 1; i >= 0; i--) {
             const r = ripples[i];
             r.radius += r.speed;
-            r.opacity -= 0.013;
+            r.opacity -= 0.016;
 
             if (r.opacity <= 0 || r.radius >= r.maxRadius) {
               ripples.splice(i, 1);
               continue;
             }
 
-            // Lingkaran gelombang elips (perspektif 3D lantai air)
+            // Lingkaran gelombang elips lembut di lantai cermin
             ctx.save();
             ctx.beginPath();
-            ctx.ellipse(r.x, r.y, r.radius, r.radius * 0.32, 0, 0, Math.PI * 2);
-            ctx.strokeStyle = `rgba(56, 189, 248, ${r.opacity * 0.75})`;
+            ctx.ellipse(r.x, r.y, r.radius, r.radius * 0.3, 0, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${r.opacity * 0.6})`;
             ctx.lineWidth = r.width;
-            ctx.shadowColor = 'rgba(56, 189, 248, 0.4)';
-            ctx.shadowBlur = 10;
             ctx.stroke();
 
-            // Cincin harmonik dalam dengan kilau emas
-            if (r.radius > 12) {
+            // Cincin emas lembut
+            if (r.radius > 14) {
               ctx.beginPath();
-              ctx.ellipse(r.x, r.y, r.radius * 0.62, (r.radius * 0.62) * 0.32, 0, 0, Math.PI * 2);
-              ctx.strokeStyle = `rgba(254, 216, 2, ${r.opacity * 0.5})`;
+              ctx.ellipse(r.x, r.y, r.radius * 0.65, (r.radius * 0.65) * 0.3, 0, 0, Math.PI * 2);
+              ctx.strokeStyle = `rgba(254, 216, 2, ${r.opacity * 0.35})`;
               ctx.lineWidth = r.width * 0.7;
               ctx.stroke();
             }
@@ -2114,27 +2082,9 @@
           }
         }
 
-        let lastRippleTime = 0;
-        const triggerRippleEvent = (e) => {
-          const now = Date.now();
-          if (now - lastRippleTime > 55) {
-            const rect = waterCanvas.getBoundingClientRect();
-            const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
-            const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
-            const x = clientX - rect.left;
-            const y = clientY - rect.top;
-
-            // Spawn gelombang di area cermin lantai
-            spawnRipple(x, Math.max(20, Math.min(y, rect.height - 20)), 1.0);
-            lastRippleTime = now;
-          }
-        };
-
-        mirrorSwiperEl.addEventListener('mousemove', triggerRippleEvent);
-        mirrorSwiperEl.addEventListener('touchmove', triggerRippleEvent, { passive: true });
-        mirrorSwiperEl.addEventListener('click', function(e) {
+        waterCanvas.addEventListener('click', function(e) {
           const rect = waterCanvas.getBoundingClientRect();
-          spawnRipple(e.clientX - rect.left, Math.max(20, Math.min(e.clientY - rect.top, rect.height - 20)), 1.5);
+          spawnRipple(e.clientX - rect.left, Math.max(20, Math.min(e.clientY - rect.top, rect.height - 20)), 1.2);
         });
       }
     }
