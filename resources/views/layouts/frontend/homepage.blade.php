@@ -1878,21 +1878,21 @@
 
           // 1. Rotasi 3D Silinder Cermin (Concave Theater Arc):
           // Kartu samping menghadap ke arah pusat/pengguna
-          const rotateY = -progress * 15.5; 
-          const clampedRotateY = Math.max(Math.min(rotateY, 55), -55);
+          const rotateY = -progress * 13.5; 
+          const clampedRotateY = Math.max(Math.min(rotateY, 52), -52);
 
           // 2. Kedalaman 3D Arc: Puncak tengah di depan, samping melengkung halus ke belakang
-          const rad = Math.min(absP, 4.5) * 0.26;
-          const translateZ = -(1 - Math.cos(rad)) * 380;
+          const rad = Math.min(absP, 5) * 0.22;
+          const translateZ = -(1 - Math.cos(rad)) * 260;
 
           // 3. Garis Lantai Air Datar: Seluruh kartu berdiri sejajar di atas lantai cermin
           const translateY = 0;
 
           // 4. Kompensasi Jarak Horizontal (Presisi Spacing Antar Kartu)
-          const translateX = progress * -3;
+          const translateX = progress * -2;
 
-          // 5. Skala Natural: Pusat tegas (1.0), samping seimbang (0.95 - 0.90)
-          const scale = Math.max(0.88, 1.0 - absP * 0.025);
+          // 5. Skala Natural: Pusat tegas (1.0), samping seimbang (0.96 - 0.90)
+          const scale = Math.max(0.90, 1.0 - absP * 0.02);
 
           // 6. Susunan lapis Z-Index: Pusat selalu di depan
           const zIndex = Math.round(100 - absP * 10);
@@ -1907,17 +1907,16 @@
         watchSlidesProgress: true,
         centeredSlides: true,
         slidesPerView: 'auto',
-        spaceBetween: 20, // Jarak presisi serasi persis sesuai gambar referensi
+        spaceBetween: 14, // Jarak presisi kompak agar seluruh 8 kartu tampil serentak
         loop: true,
         loopAdditionalSlides: 8,
-        speed: 800, // Durasi transisi geser yang halus
+        speed: 700, // Durasi transisi geser yang halus
         grabCursor: true,
         allowTouchMove: true,
         autoplay: {
-          delay: 1800, // Berjalan terus setiap 1.8 detik
+          delay: 1600, // Berjalan otomatis terus-menerus
           disableOnInteraction: false,
           pauseOnMouseEnter: false,
-          waitForTransition: false,
         },
         pagination: {
           el: '.mirror-hall-pagination',
@@ -1951,14 +1950,12 @@
         },
       });
 
-      // Safeguard interval: Memastikan slide terus berjalan tanpa henti secara konsisten
+      // Timer otomatis terus berjalan tanpa henti
       setInterval(function () {
-        if (mirrorSwiper && mirrorSwiper.slideNext) {
-          if (!mirrorSwiper.autoplay || !mirrorSwiper.autoplay.running) {
-            mirrorSwiper.slideNext(800);
-          }
+        if (mirrorSwiper && typeof mirrorSwiper.slideNext === 'function') {
+          mirrorSwiper.slideNext(700);
         }
-      }, 2000);
+      }, 1600);
 
       // Interaksi Card seperti Button:
       // 1. Klik card aktif (di tengah) -> langsung buka link portal di tab baru

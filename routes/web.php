@@ -37,6 +37,7 @@ use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\PublikasiController;
 use App\Http\Controllers\BahasaSettingController;
 use App\Http\Controllers\HeroHumasController;
+use App\Http\Controllers\UnduhanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/berita/{slug}', 'newsDetail')->name('homepage.news.detail');
     Route::get('/faq', 'faq')->name('homepage.faq');
     Route::get('/humas', 'humas')->name('homepage.humas');
+    Route::get('/unduhan', 'unduhan')->name('homepage.unduhan');
     Route::get('/kontak', 'kontak')->name('homepage.kontak');
 });
 
@@ -122,6 +124,9 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::put('pmb-setting-admin', [PmbSettingController::class, 'update'])->name('pmb-setting.update');
     Route::get('admin-hero-humas', [HeroHumasController::class, 'index'])->name('hero-humas.index');
     Route::put('admin-hero-humas', [HeroHumasController::class, 'update'])->name('hero-humas.update');
+    Route::resource('admin-unduhan', UnduhanController::class)
+        ->parameters(['admin-unduhan' => 'unduhan'])
+        ->names('unduhan');
 
     // Akademik Routes
     Route::prefix('admin-akademik')->name('akademik.')->group(function () {

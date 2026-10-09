@@ -466,7 +466,7 @@
 @php
   $heroBgUrl = $heroHumas?->background_image_url;
   $heroJudul = $heroHumas?->judul ?: 'Selamat Datang';
-  $heroSubjudul = $heroHumas?->subjudul ?: 'di Biro Hubungan Masyarakat dan Protokoler Universitas Ibnu Sina';
+  $heroSubjudul = $heroHumas?->subjudul ?: 'di Biro Hubungan Masyarakat dan Protokoler Universitas Islam Riau';
   $heroBadge = $heroHumas?->badge_text ?: 'Layanan';
   $pillText1 = $heroHumas?->pill_text_1 ?: 'Informasi Khusus PMB TA 2026/2027';
   $pillUrl1 = $heroHumas?->pill_url_1 ?: $pmbNavUrl;
@@ -477,7 +477,7 @@
 @endphp
 
 <!-- ══════════════════════════════════════════════════════
-     1. HERO BANNER HUMAS UIS
+     1. HERO BANNER HUMAS UIR
 ══════════════════════════════════════════════════════ -->
 <section class="humas-hero-section text-center" style="@if(!empty($heroBgUrl)) background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.20) 50%, rgba(0, 0, 0, 0.55) 100%), url('{{ $heroBgUrl }}') center/cover no-repeat; @else background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); @endif">
   <div class="container position-relative">
@@ -494,9 +494,9 @@
 
     <!-- Quick Access Icons (Horizontal White Bar) -->
     <div class="humas-quick-bar" data-aos="fade-up" data-aos-duration="800">
-      <a href="{{ route('homepage.tentang') }}" class="humas-quick-item" title="Profil Humas">
-        <div class="humas-quick-icon-wrap"><i class="bi bi-building"></i></div>
-        <span class="humas-quick-label">Profil</span>
+      <a href="{{ route('homepage.unduhan') }}" class="humas-quick-item" title="Pusat Unduhan & Asset Media">
+        <div class="humas-quick-icon-wrap"><i class="bi bi-cloud-arrow-down"></i></div>
+        <span class="humas-quick-label">Unduhan</span>
       </a>
       <a href="{{ route('homepage.news', ['category' => 'Berita Humas']) }}" class="humas-quick-item" title="Siaran & Rilis Berita">
         <div class="humas-quick-icon-wrap"><i class="bi bi-newspaper"></i></div>
@@ -846,12 +846,12 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════
-     8. E-MAGAZINE PROFIL UNIVERSITAS IBNU SINA
+     8. E-MAGAZINE PROFIL UNIVERSITAS
 ══════════════════════════════════════════════════════ -->
 <section class="humas-emagz-section" id="emagazine-section">
   <div class="container">
     <div class="humas-emagz-container" data-aos="fade-up">
-      <h2 class="fw-bold mb-3" style="color: #0f172a; font-size: 28px;">E-Magazine Profil Universitas Ibnu Sina</h2>
+      <h2 class="fw-bold mb-3" style="color: #0f172a; font-size: 28px;">E-Magazine Profil Universitas</h2>
       
       <div class="d-flex align-items-center justify-content-center gap-2 mb-4">
         <button class="humas-emagz-btn-tab active" id="tabEmagzBtn" onclick="switchMagTab('emagz')">
@@ -869,14 +869,14 @@
             <div class="d-inline-flex align-items-center justify-content-center shadow-lg" style="width: 140px; height: 180px; background: linear-gradient(135deg, #044b1c 0%, #032e12 100%); border-radius: 12px; color: #ffd600; border: 4px solid #fff;">
               <div class="text-center p-2">
                 <i class="bi bi-journal-richtext fs-1 d-block mb-1"></i>
-                <span style="font-size: 11px; font-weight: 800; color: #fff; line-height: 1.2; display: block;">PROFIL UIS 2026</span>
+                <span style="font-size: 11px; font-weight: 800; color: #fff; line-height: 1.2; display: block;">PROFIL 2026</span>
               </div>
             </div>
           </div>
 
           <h4 class="fw-bold mb-2 text-dark" id="emagzTitle">E-Magazine Edisi Eksklusif Profil Kampus</h4>
           <p class="text-muted small mx-auto mb-4" style="max-width: 500px;">
-            Jelajahi informasi lengkap mengenai fasilitas laboratorium, profil fakultas, program beasiswa, dan prestasi mahasiswa UIS Batam.
+            Jelajahi informasi lengkap mengenai fasilitas laboratorium, profil fakultas, program beasiswa, dan prestasi mahasiswa.
           </p>
 
           <div class="d-flex align-items-center justify-content-center gap-2 flex-wrap">
@@ -906,7 +906,7 @@
     } else {
       btn2.classList.add('active');
       btn1.classList.remove('active');
-      title.innerText = 'Buku Saku Panduan Mahasiswa & Akademik UIS';
+      title.innerText = 'Buku Saku Panduan Mahasiswa & Akademik';
     }
   }
 </script>

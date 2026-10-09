@@ -237,6 +237,15 @@
                 
               </ul>
           </li>
+
+          <!-- Unduhan Dokumen Humas (Menu Terpisah di Bawah Beranda Humas) -->
+          <li class="nav-item">
+              <a class="nav-link {{ Route::is('unduhan.*') ? '' : 'collapsed' }}" href="{{ route('unduhan.index') }}">
+                  <i class="bi bi-cloud-arrow-down"></i>
+                  <span>Unduhan Dokumen Humas</span>
+              </a>
+          </li>
+
           <!-- 8. Kontak (Sesuai Urutan Header) -->
           <li class="nav-item">
               <a class="nav-link {{ Route::is('contact.*') ? '' : 'collapsed' }}" href="{{ route('contact.index') }}">

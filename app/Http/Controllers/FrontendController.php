@@ -308,7 +308,21 @@ class FrontendController extends Controller
         $banners      = \App\Models\Banner::where('aktif', true)->orderBy('urutan')->get();
         $galleries    = \App\Models\Gallery::latest()->take(6)->get();
         $heroHumas    = \App\Models\HeroHumas::first();
+        
         return view('layouts.frontend.humas', compact('contact', 'about', 'pmbSetting', 'latestNews', 'faqs', 'socialMedias', 'banners', 'galleries', 'heroHumas'));
+    }
+
+    public function unduhan(\Illuminate\Http\Request $request)
+    {
+        $contact      = \App\Models\Contact::first();
+        $pmbSetting   = \App\Models\PmbSetting::first();
+        $selectedCat  = $request->query('kategori', 'image');
+        $unduhans     = \App\Models\Unduhan::where('is_active', true)
+                            ->orderBy('urutan')
+                            ->orderBy('id')
+                            ->get();
+
+        return view('layouts.frontend.unduhan', compact('unduhans', 'selectedCat', 'contact', 'pmbSetting'));
     }
 
     public function news(\Illuminate\Http\Request $request)
