@@ -39,6 +39,7 @@ use App\Http\Controllers\BahasaSettingController;
 use App\Http\Controllers\HeroHumasController;
 use App\Http\Controllers\UnduhanController;
 use App\Http\Controllers\DesainGrafisController;
+use App\Http\Controllers\PusatInformasiHumasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -137,6 +138,10 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('admin-desain-grafis', DesainGrafisController::class)
         ->parameters(['admin-desain-grafis' => 'desainGrafis'])
         ->names('desain-grafis');
+    Route::put('admin-pusat-informasi/setting', [PusatInformasiHumasController::class, 'updateSetting'])->name('pusat-informasi.update-setting');
+    Route::resource('admin-pusat-informasi', PusatInformasiHumasController::class)
+        ->parameters(['admin-pusat-informasi' => 'pusatInformasi'])
+        ->names('pusat-informasi');
 
     // Akademik Routes
     Route::prefix('admin-akademik')->name('akademik.')->group(function () {

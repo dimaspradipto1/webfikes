@@ -308,16 +308,14 @@
     margin-bottom: 14px;
   }
   .humas-phone-logo {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 26px;
     margin-bottom: 14px;
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    background: transparent !important;
+    box-shadow: none !important;
   }
   .humas-phone-screen {
     position: relative;
@@ -372,6 +370,31 @@
     transform: translate(-50%, -50%) scale(1.15);
     background: #ffe338;
     box-shadow: 0 0 25px rgba(254, 216, 2, 0.85);
+  }
+  .humas-sound-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: all 0.25s ease;
+  }
+  .humas-sound-btn:hover {
+    background: #FED802;
+    color: #111111;
+    border-color: #FED802;
+    transform: scale(1.1);
   }
   .humas-phone-video-overlay {
     position: absolute;
@@ -451,49 +474,64 @@
     text-align: center;
   }
   .humas-media-box {
-    background: #ffffff;
+    position: relative;
+    background-color: #f8fafc;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border-radius: 20px;
     border: 1px solid #e2e8f0;
-    padding: 24px 18px 20px 18px;
+    padding: 24px 18px 24px 18px;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
     height: 100%;
+    min-height: 260px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+  .humas-media-box.has-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.65) 100%);
+    pointer-events: none;
+    border-radius: 20px;
+    transition: background 0.3s ease;
   }
   .humas-media-box:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.15);
     border-color: #0b6828;
   }
+  .humas-media-box.has-bg:hover::before {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.75) 100%);
+  }
   .humas-media-art {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 16px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    font-size: 38px;
+    display: none;
   }
   .humas-media-btn {
+    position: relative;
+    z-index: 2;
     background: #ffd600;
     color: #111;
     font-weight: 700;
-    font-size: 13px;
-    padding: 7px 22px;
+    font-size: 13.5px;
+    padding: 8px 28px;
     border-radius: 50px;
     text-decoration: none;
     display: inline-block;
     transition: all 0.2s ease;
-    margin-top: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
   }
   .humas-media-btn:hover {
     background: #e6c200;
     color: #000;
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
   }
 
   /* Helpdesk Strip */
@@ -750,7 +788,8 @@
             // Default styling presets by platform
             if (str_contains($lowerName, 'instagram')) {
                 $brandIcon    = 'bi-instagram';
-                $logoBg       = 'radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)';
+                $brandColor   = '#E1306C';
+                $logoBg       = 'transparent';
                 $previewBg    = 'linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%)';
                 $previewIcon  = 'bi-camera-reels text-danger';
                 $btnText      = 'Ikuti';
@@ -759,7 +798,8 @@
                 $defaultHandle= '@universitasibnusina';
             } elseif (str_contains($lowerName, 'tiktok')) {
                 $brandIcon    = 'bi-tiktok';
-                $logoBg       = '#000000';
+                $brandColor   = '#000000';
+                $logoBg       = 'transparent';
                 $previewBg    = 'linear-gradient(135deg, #e0f2fe 0%, #f0fdfa 100%)';
                 $previewIcon  = 'bi-play-circle-fill text-dark';
                 $btnText      = 'Ikuti';
@@ -768,7 +808,8 @@
                 $defaultHandle= '@humas_uis';
             } elseif (str_contains($lowerName, 'facebook')) {
                 $brandIcon    = 'bi-facebook';
-                $logoBg       = '#1877f2';
+                $brandColor   = '#1877f2';
+                $logoBg       = 'transparent';
                 $previewBg    = 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)';
                 $previewIcon  = 'bi-people-fill text-primary';
                 $btnText      = 'Kunjungi';
@@ -777,7 +818,8 @@
                 $defaultHandle= 'Universitas Ibnu Sina';
             } elseif (str_contains($lowerName, 'youtube')) {
                 $brandIcon    = 'bi-youtube';
-                $logoBg       = '#ff0000';
+                $brandColor   = '#ff0000';
+                $logoBg       = 'transparent';
                 $previewBg    = 'linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)';
                 $previewIcon  = 'bi-play-btn-fill text-danger';
                 $btnText      = 'Kunjungi';
@@ -786,7 +828,8 @@
                 $defaultHandle= 'Universitas Ibnu Sina Channel';
             } elseif (str_contains($lowerName, 'whatsapp') || str_contains($lowerName, 'wa')) {
                 $brandIcon    = 'bi-whatsapp';
-                $logoBg       = '#25D366';
+                $brandColor   = '#25D366';
+                $logoBg       = 'transparent';
                 $previewBg    = 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)';
                 $previewIcon  = 'bi-chat-dots-fill text-success';
                 $btnText      = 'Chat WhatsApp';
@@ -795,7 +838,8 @@
                 $defaultHandle= 'Layanan Informasi Cepat';
             } elseif (str_contains($lowerName, 'linkedin')) {
                 $brandIcon    = 'bi-linkedin';
-                $logoBg       = '#0a66c2';
+                $brandColor   = '#0a66c2';
+                $logoBg       = 'transparent';
                 $previewBg    = 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)';
                 $previewIcon  = 'bi-briefcase-fill text-primary';
                 $btnText      = 'Terhubung';
@@ -804,7 +848,8 @@
                 $defaultHandle= 'Universitas Ibnu Sina';
             } else {
                 $brandIcon    = !empty($sm->icon) ? $sm->icon : 'bi-globe2';
-                $logoBg       = '#046B26';
+                $brandColor   = '#046B26';
+                $logoBg       = 'transparent';
                 $previewBg    = 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)';
                 $previewIcon  = $brandIcon . ' text-success';
                 $btnText      = 'Kunjungi';
@@ -822,7 +867,18 @@
                 }
             }
 
-            $displayHandle  = !empty($sm->handle) ? (str_starts_with($sm->handle, '@') ? $sm->handle : '@' . $sm->handle) : $handleDisplay;
+            // Bersihkan jika handle diisi URL lengkap
+            $cleanHandle = $sm->handle;
+            if (!empty($cleanHandle) && (str_starts_with($cleanHandle, 'http://') || str_starts_with($cleanHandle, 'https://'))) {
+                $cleanPath = trim(parse_url($cleanHandle, PHP_URL_PATH) ?? '', '/');
+                $cleanHandle = !empty($cleanPath) ? '@' . $cleanPath : $handleDisplay;
+            } elseif (!empty($cleanHandle)) {
+                $cleanHandle = str_starts_with($cleanHandle, '@') ? $cleanHandle : '@' . $cleanHandle;
+            } else {
+                $cleanHandle = $handleDisplay;
+            }
+
+            $displayHandle  = $cleanHandle;
             $hasMedia       = !empty($sm->thumbnail_video_url);
             $isVideoFile    = method_exists($sm, 'isVideoFile') ? $sm->isVideoFile() : false;
             $videoTargetUrl = !empty($sm->video_url) ? $sm->video_url : ($sm->url ?? '#');
@@ -833,32 +889,81 @@
               {{-- Speaker Notch --}}
               <div class="humas-phone-speaker"></div>
 
-              {{-- Platform App Icon Badge --}}
-              <div class="humas-phone-logo" style="background: {{ $logoBg }};">
+              {{-- Platform App Icon Badge (Tanpa Background) --}}
+              <div class="humas-phone-logo">
                 @if(!empty($sm->logo_url))
-                  <img src="{{ $sm->logo_url }}" alt="{{ $sm->nama }}" style="max-width: 32px; max-height: 32px; object-fit: contain;">
+                  <img src="{{ $sm->logo_url }}" alt="{{ $sm->nama }}" style="max-width: 44px; max-height: 44px; object-fit: contain;">
                 @else
-                  <i class="bi {{ $brandIcon }}"></i>
+                  <i class="bi {{ $brandIcon }}" style="color: {{ $brandColor }}; font-size: 38px;"></i>
                 @endif
               </div>
 
               {{-- Video Screen Area --}}
               <div class="humas-phone-screen">
-                @if(!empty($sm->video_embed_url))
+                @if(!empty($sm->direct_video_url))
+                  {{-- 1. Video Auto-Playing (Direct MP4 Stream TikTok / CDN) --}}
+                  <video src="{{ $sm->direct_video_url }}" 
+                         autoplay 
+                         muted 
+                         loop 
+                         playsinline 
+                         class="humas-phone-video-media w-100 h-100" 
+                         style="object-fit: cover; border-radius: 18px; position: absolute; inset: 0;">
+                  </video>
+
+                  {{-- Tombol Toggle Suara Unmute / Mute --}}
+                  <button type="button" class="humas-sound-btn" title="Aktifkan / Matikan Suara Video">
+                    <i class="bi bi-volume-mute-fill"></i>
+                  </button>
+
+                  {{-- Overlay Info Video --}}
+                  <div class="humas-phone-video-overlay">
+                    <div class="d-flex align-items-center justify-content-between w-100">
+                      <span class="badge bg-danger bg-opacity-85 text-white" style="font-size: 10px; font-weight: 600; padding: 4px 8px; border-radius: 20px;">
+                        <i class="bi bi-broadcast me-1"></i> Auto Play
+                      </span>
+                      <span class="badge bg-black bg-opacity-60 text-white" style="font-size: 10px; padding: 4px 8px; border-radius: 20px;">
+                        <i class="bi {{ $brandIcon }} me-1"></i> {{ $sm->nama }}
+                      </span>
+                    </div>
+
+                    <div class="w-100">
+                      <div class="humas-phone-video-title">{{ $videoJudul }}</div>
+                      <div class="humas-phone-video-meta d-flex align-items-center justify-content-between">
+                        <span class="text-white-50"><i class="bi bi-play-circle-fill me-1 text-warning"></i> Sedang Diputar</span>
+                        <a href="{{ $videoTargetUrl }}" target="_blank" rel="noopener" class="badge bg-warning text-dark text-decoration-none px-2 py-1" style="pointer-events: auto;">
+                          Buka di {{ $sm->nama }} <i class="bi bi-box-arrow-up-right ms-1"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                @elseif(!empty($sm->video_embed_url))
                   @if(preg_match('/\.(mp4|webm|ogg)$/i', $sm->video_embed_url))
-                    <video src="{{ $sm->video_embed_url }}" controls playsinline class="w-100 h-100" style="object-fit: cover; border-radius: 18px;"></video>
+                    <video src="{{ $sm->video_embed_url }}" autoplay muted loop playsinline class="humas-phone-video-media w-100 h-100" style="object-fit: cover; border-radius: 18px;"></video>
+                    <button type="button" class="humas-sound-btn" title="Aktifkan / Matikan Suara Video">
+                      <i class="bi bi-volume-mute-fill"></i>
+                    </button>
                   @else
-                    <iframe src="{{ $sm->video_embed_url }}" 
+                    @php
+                      $embedSrc = $sm->video_embed_url;
+                      if (str_contains($embedSrc, 'youtube.com') && !str_contains($embedSrc, 'autoplay=1')) {
+                          $embedSrc .= (str_contains($embedSrc, '?') ? '&' : '?') . 'autoplay=1&mute=1&loop=1&playsinline=1';
+                      }
+                    @endphp
+                    <iframe src="{{ $embedSrc }}" 
                             class="w-100 h-100" 
-                            style="border: none; border-radius: 18px;" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            style="border: none; border-radius: 18px; background: #ffffff;" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                             allowfullscreen>
                     </iframe>
                   @endif
                 @elseif($hasMedia && $isVideoFile)
                   <video src="{{ $sm->thumbnail_video_url }}" class="humas-phone-video-media" autoplay muted loop playsinline></video>
+                  <button type="button" class="humas-sound-btn" title="Aktifkan / Matikan Suara Video">
+                    <i class="bi bi-volume-mute-fill"></i>
+                  </button>
                 @else
-                  <a href="{{ $videoTargetUrl }}" target="_blank" rel="noopener" class="d-block w-100 h-100 position-relative text-decoration-none" title="Tonton {{ $videoJudul }}">
+                  <a href="{{ $videoTargetUrl }}" target="_blank" rel="noopener" class="d-block w-100 h-100 position-relative text-decoration-none" title="Lihat {{ $videoJudul }}">
                     @if($hasMedia)
                       <img src="{{ $sm->thumbnail_video_url }}" class="humas-phone-video-media" alt="{{ $videoJudul }}">
                     @else
@@ -900,7 +1005,7 @@
 
               {{-- Action Button --}}
               <a href="{{ $videoTargetUrl }}" target="_blank" rel="noopener" class="humas-phone-btn text-center">
-                <i class="bi {{ !empty($sm->video_url) ? 'bi-play-btn-fill' : $btnIcon }} me-1"></i> {{ !empty($sm->video_url) ? 'Tonton Video' : $btnText }}
+                <i class="bi {{ !empty($sm->video_url) ? 'bi-play-btn-fill' : $btnIcon }} me-1"></i> {{ !empty($sm->video_url) ? 'Lihat' : $btnText }}
               </a>
             </div>
           </div>
@@ -935,68 +1040,31 @@
 </div>
 
 <!-- ══════════════════════════════════════════════════════
-     5. HUBUNGI KAMI / PUSAT PUBLIKASI (4 CARDS)
+     5. HUBUNGI KAMI / PUSAT PUBLIKASI (CARDS)
 ══════════════════════════════════════════════════════ -->
 <section class="humas-hubungi-section">
   <div class="container">
-    <h2 class="humas-section-heading" data-aos="fade-up">Hubungi Kami & Pusat Informasi</h2>
+    <h2 class="humas-section-heading" data-aos="fade-up">
+      {{ $pusatInformasiSetting->judul_seksi ?? 'Hubungi Kami & Pusat Informasi' }}
+    </h2>
 
     <div class="row g-4 justify-content-center">
-      <!-- 1. Siaran Pers & Liputan -->
-      <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-        <div class="humas-media-box">
-          <div>
-            <div class="humas-media-art" style="background: #e0f2fe; color: #0284c7;">
-              <i class="bi bi-broadcast"></i>
-            </div>
-            <h5 class="fw-bold fs-6 mb-1">Siaran Pers & Rilis</h5>
-            <p class="text-muted small mb-0">Rilis berita dan konferensi pers resmi universitas.</p>
+      @forelse($pusatInformasis ?? [] as $index => $card)
+        <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="{{ (($index % 4) + 1) * 100 }}">
+          <div class="humas-media-box {{ $card->image_url ? 'has-bg' : '' }}"
+               style="{{ $card->image_url ? "background-image: url('" . e($card->image_url) . "');" : '' }}">
+            <a href="{{ $card->button_url ?: '#' }}" 
+               @if($card->target_blank) target="_blank" rel="noopener noreferrer" @endif
+               class="humas-media-btn">
+              {{ $card->button_text ?? 'Lihat' }}
+            </a>
           </div>
-          <a href="{{ route('homepage.news') }}" class="humas-media-btn">Baca</a>
         </div>
-      </div>
-
-      <!-- 2. Formulir PPID -->
-      <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-        <div class="humas-media-box">
-          <div>
-            <div class="humas-media-art" style="background: #dcfce7; color: #16a34a;">
-              <i class="bi bi-file-earmark-spreadsheet"></i>
-            </div>
-            <h5 class="fw-bold fs-6 mb-1">Formulir PPID</h5>
-            <p class="text-muted small mb-0">Permohonan informasi publik dan dokumen resmi.</p>
-          </div>
-          <a href="{{ route('homepage.faq') }}" class="humas-media-btn">Akses</a>
+      @empty
+        <div class="col-12 text-center text-muted py-4">
+          <p class="mb-0">Belum ada informasi publikasi yang ditambahkan.</p>
         </div>
-      </div>
-
-      <!-- 3. E-Katalog & Booklet -->
-      <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-        <div class="humas-media-box">
-          <div>
-            <div class="humas-media-art" style="background: #fef3c7; color: #d97706;">
-              <i class="bi bi-book-half"></i>
-            </div>
-            <h5 class="fw-bold fs-6 mb-1">Booklet Profil UIS</h5>
-            <p class="text-muted small mb-0">Buku saku dan panduan akademik universitas.</p>
-          </div>
-          <a href="#emagazine-section" class="humas-media-btn">Lihat</a>
-        </div>
-      </div>
-
-      <!-- 4. Warta & Tabloid -->
-      <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-        <div class="humas-media-box">
-          <div>
-            <div class="humas-media-art" style="background: #f1f5f9; color: #475569;">
-              <i class="bi bi-newspaper"></i>
-            </div>
-            <h5 class="fw-bold fs-6 mb-1">Warta & Majalah</h5>
-            <p class="text-muted small mb-0">Majalah berkala kegiatan civitas kampus.</p>
-          </div>
-          <a href="{{ route('homepage.news') }}" class="humas-media-btn">Buka</a>
-        </div>
-      </div>
+      @endforelse
     </div>
   </div>
 </section>
@@ -1031,60 +1099,7 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════
-     7. BERITA TERBARU HUMAS (CAMPUS GREEN BACKGROUND)
-══════════════════════════════════════════════════════ -->
-<section class="humas-news-section">
-  <div class="container">
-    <div class="text-center mb-5" data-aos="fade-up">
-      <h2 class="fw-bold text-white mb-2" style="font-size: 32px;">Berita & Siaran Pers Humas</h2>
-      <p class="text-white-50 small mb-0">Informasi resmi dan rilis liputan kegiatan kehumasan terkini Universitas Ibnu Sina</p>
-    </div>
 
-    <div class="row g-4 justify-content-center">
-      @forelse($latestNews as $item)
-        @php
-          $thumbUrl = asset('frontend/img/gedung-uis.jpg');
-          if (!empty($item->thumbnail)) {
-              if (str_starts_with($item->thumbnail, 'http://') || str_starts_with($item->thumbnail, 'https://')) {
-                  $thumbUrl = $item->thumbnail;
-              } elseif (str_starts_with($item->thumbnail, 'assets/')) {
-                  $thumbUrl = asset($item->thumbnail);
-              } else {
-                  $thumbUrl = asset('storage/' . $item->thumbnail);
-              }
-          }
-        @endphp
-        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
-          <a href="{{ route('homepage.news.detail', $item->slug ?? $item->id) }}" class="humas-news-card">
-            <img src="{{ $thumbUrl }}" alt="{{ $item->title }}" class="humas-news-img" onerror="this.onerror=null; this.src='{{ asset('frontend/img/gedung-uis.jpg') }}';">
-            <div class="humas-news-body">
-              <div>
-                <span class="badge bg-success mb-2" style="font-size: 11px;">{{ $item->category ?: 'Berita Humas' }}</span>
-                <h4 class="humas-news-title">{{ $item->title }}</h4>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-muted small mt-2 pt-2 border-top">
-                <span><i class="bi bi-calendar3 me-1"></i> {{ $item->created_at ? $item->created_at->translatedFormat('d M Y') : 'Terbaru' }}</span>
-                <span class="text-success fw-bold">Baca <i class="bi bi-arrow-right"></i></span>
-              </div>
-            </div>
-          </a>
-        </div>
-      @empty
-        <div class="col-12 text-center text-white-50 py-4">
-          <i class="bi bi-newspaper fs-1 mb-2 d-block"></i>
-          Belum ada berita humas yang dipublikasikan.
-        </div>
-      @endforelse
-    </div>
-
-    <div class="text-center mt-5" data-aos="fade-up">
-      <a href="{{ route('homepage.news', ['category' => 'Berita Humas']) }}" class="btn btn-warning fw-bold px-5 py-2 rounded-pill shadow-sm" style="color: #032e12;">
-        Lihat Semua Berita Humas <i class="bi bi-arrow-right ms-1"></i>
-      </a>
-    </div>
-  </div>
-</section>
 
 <!-- ══════════════════════════════════════════════════════
      8. E-MAGAZINE PROFIL UNIVERSITAS
@@ -1150,6 +1165,43 @@
       title.innerText = 'Buku Saku Panduan Mahasiswa & Akademik';
     }
   }
+
+  // Ensure all video tags inside humas-phone-screen autoplay immediately
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.humas-phone-screen video').forEach(function(vid) {
+      vid.muted = true;
+      var playPromise = vid.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function(err) {
+          console.log('Video autoplay fallback handled:', err);
+        });
+      }
+    });
+
+    // Sound toggle buttons
+    document.querySelectorAll('.humas-sound-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var screen = this.closest('.humas-phone-screen');
+        if (!screen) return;
+        var video = screen.querySelector('video');
+        if (!video) return;
+
+        video.muted = !video.muted;
+        var icon = this.querySelector('i');
+        if (icon) {
+          if (video.muted) {
+            icon.className = 'bi bi-volume-mute-fill';
+            this.title = 'Aktifkan Suara';
+          } else {
+            icon.className = 'bi bi-volume-up-fill text-warning';
+            this.title = 'Matikan Suara';
+          }
+        }
+      });
+    });
+  });
 </script>
 
 @endsection

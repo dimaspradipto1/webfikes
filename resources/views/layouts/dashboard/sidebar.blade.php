@@ -24,7 +24,7 @@
               <a class="nav-link {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || Route::is('social-media.*') || Route::is('feature.*') || Route::is('sarana.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') ? '' : 'collapsed' }}" data-bs-target="#beranda-nav" data-bs-toggle="collapse" href="#">
                   <i class="bi bi-layout-text-window-reverse"></i><span>Konten Beranda</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
-              <ul id="beranda-nav" class="nav-content collapse {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || Route::is('social-media.*') || Route::is('feature.*') || Route::is('sarana.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+              <ul id="beranda-nav" class="nav-content collapse {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || (Route::is('social-media.*') && request('kategori') !== 'humas') || Route::is('feature.*') || Route::is('sarana.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                   <li>
                       <a href="{{ route('banner.index') }}" class="{{ Route::is('banner.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Banner Hero</span>
@@ -36,8 +36,8 @@
                       </a>
                   </li>
                   <li>
-                      <a href="{{ route('social-media.index') }}" class="{{ Route::is('social-media.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Media Sosial</span>
+                      <a href="{{ route('social-media.index', ['kategori' => 'universitas']) }}" class="{{ Route::is('social-media.*') && request('kategori') !== 'humas' ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Media Sosial Universitas</span>
                       </a>
                   </li>
                   <li>
@@ -204,23 +204,18 @@
           @if($isAdmin)
           <li class="nav-heading">Layanan Humas</li>
           <li class="nav-item">
-              <a class="nav-link {{ Route::is('hero-humas.*') || Route::is('social-media.*') || Route::is('faq.*') ? '' : 'collapsed' }}" data-bs-target="#humas-nav" data-bs-toggle="collapse" href="#">
+              <a class="nav-link {{ Route::is('hero-humas.*') || (Route::is('social-media.*') && request('kategori') === 'humas') ? '' : 'collapsed' }}" data-bs-target="#humas-nav" data-bs-toggle="collapse" href="#">
                   <i class="bi bi-newspaper"></i><span>Beranda Humas</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
-              <ul id="humas-nav" class="nav-content collapse {{ Route::is('hero-humas.*') || Route::is('social-media.*') || Route::is('faq.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+              <ul id="humas-nav" class="nav-content collapse {{ Route::is('hero-humas.*') || (Route::is('social-media.*') && request('kategori') === 'humas') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                   <li>
                       <a href="{{ route('hero-humas.index') }}" class="{{ Route::is('hero-humas.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Hero Humas</span>
                       </a>
                   </li>
                   <li>
-                      <a href="{{ route('social-media.index') }}" class="{{ Route::is('social-media.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Sosial Media</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('faq.index') }}" class="{{ Route::is('faq.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>FAQ Informasi</span>
+                      <a href="{{ route('social-media.index', ['kategori' => 'humas']) }}" class="{{ Route::is('social-media.*') && request('kategori') === 'humas' ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Media Sosial Humas</span>
                       </a>
                   </li>
               </ul>
@@ -239,6 +234,14 @@
               <a class="nav-link {{ Route::is('desain-grafis.*') ? '' : 'collapsed' }}" href="{{ route('desain-grafis.index') }}">
                   <i class="bi bi-palette"></i>
                   <span>Desain Grafis Humas</span>
+              </a>
+          </li>
+
+          <!-- Hubungi Kami & Pusat Informasi Humas -->
+          <li class="nav-item">
+              <a class="nav-link {{ Route::is('pusat-informasi.*') ? '' : 'collapsed' }}" href="{{ route('pusat-informasi.index') }}">
+                  <i class="bi bi-info-circle"></i>
+                  <span>Hubungi Kami & Pusat Informasi</span>
               </a>
           </li>
 

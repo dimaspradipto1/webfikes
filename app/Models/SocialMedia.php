@@ -13,11 +13,13 @@ class SocialMedia extends Model
 
     protected $fillable = [
         'nama',
+        'kategori',
         'handle',
         'logo',
         'icon',
         'url',
         'video_url',
+        'direct_video_url',
         'thumbnail_video',
         'video_judul',
         'urutan',
@@ -28,6 +30,85 @@ class SocialMedia extends Model
         'is_active' => 'boolean',
         'urutan'    => 'integer',
     ];
+
+    protected static function booted()
+    {
+        static::saving(function ($model) {
+            if (!empty($model->video_url)) {
+                if (empty($model->direct_video_url) || $model->isDirty('video_url')) {
+                    $resolved = static::resolveDirectVideo($model->video_url);
+                    if ($resolved && !empty($resolved['play'])) {
+                        $model->direct_video_url = $resolved['play'];
+                        if (empty($model->video_judul) && !empty($resolved['title'])) {
+                            $model->video_judul = mb_strimwidth($resolved['title'], 0, 100, '...');
+                        }
+                    }
+                }
+            } else {
+                $model->direct_video_url = null;
+            }
+        });
+    }
+
+    /**
+     * Scope for Universitas
+     */
+    public function scopeUniversitas($query)
+    {
+        return $query->where('kategori', 'universitas');
+    }
+
+    /**
+     * Scope for Humas
+     */
+    public function scopeHumas($query)
+    {
+        return $query->where('kategori', 'humas');
+    }
+
+    /**
+     * Resolve direct MP4 stream for TikTok or direct video
+     */
+    public static function resolveDirectVideo(?string $url): ?array
+    {
+        if (empty($url)) return null;
+
+        $cleanUrl = trim($url);
+
+        // Direct video files
+        if (preg_match('/\.(mp4|webm|ogg)$/i', $cleanUrl)) {
+            return ['play' => $cleanUrl, 'cover' => null, 'title' => null];
+        }
+
+        // TikTok direct mp4 resolver
+        if (str_contains(strtolower($cleanUrl), 'tiktok.com')) {
+            try {
+                $apiUrl = 'https://www.tikwm.com/api/?url=' . urlencode($cleanUrl);
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $apiUrl);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)');
+                curl_setopt($ch, CURLOPT_TIMEOUT, 6);
+                $res = curl_exec($ch);
+                curl_close($ch);
+
+                if ($res) {
+                    $json = json_decode($res, true);
+                    if (isset($json['data']['play'])) {
+                        return [
+                            'play'  => $json['data']['play'],
+                            'cover' => $json['data']['cover'] ?? null,
+                            'title' => $json['data']['title'] ?? null,
+                        ];
+                    }
+                }
+            } catch (\Throwable $e) {
+                // Ignore failure
+            }
+        }
+
+        return null;
+    }
 
     /**
      * Get logo asset URL or null
@@ -109,7 +190,7 @@ class SocialMedia extends Model
 
         // YouTube: watch?v=, youtu.be/, shorts/, embed/
         if (preg_match('/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i', $url, $matches)) {
-            return 'https://www.youtube.com/embed/' . $matches[1] . '?rel=0';
+            return 'https://www.youtube.com/embed/' . $matches[1] . '?autoplay=1&mute=1&loop=1&playlist=' . $matches[1] . '&rel=0';
         }
 
         // TikTok: matches /video/, /photo/, /embed/v2/, /embed/, /v/, or numeric ID (15-25 digits)
@@ -122,6 +203,15 @@ class SocialMedia extends Model
         // Instagram: instagram.com/reel/CODE or instagram.com/p/CODE
         if (preg_match('/instagram\.com\/(?:reel|p)\/([a-zA-Z0-9_-]+)/i', $url, $matches)) {
             return 'https://www.instagram.com/reel/' . $matches[1] . '/embed/';
+        }
+
+        // Facebook: video, reel, watch, or post/photo
+        if (str_contains(strtolower($url), 'facebook.com') || str_contains(strtolower($url), 'fb.watch')) {
+            $isFbVideo = str_contains(strtolower($url), 'watch') || str_contains(strtolower($url), 'reel') || str_contains(strtolower($url), '/videos/');
+            if ($isFbVideo) {
+                return 'https://www.facebook.com/plugins/video.php?href=' . urlencode($url) . '&show_text=false&autoplay=true&mute=1&width=500';
+            }
+            return 'https://www.facebook.com/plugins/post.php?href=' . urlencode($url) . '&show_text=false&width=500';
         }
 
         // Direct video

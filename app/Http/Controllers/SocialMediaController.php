@@ -15,7 +15,7 @@ class SocialMediaController extends Controller
     /**
      * Tampilkan data media sosial dan setting header seksi.
      */
-    public function index(SocialMediaDataTable $dataTable)
+    public function index(SocialMediaDataTable $dataTable, Request $request)
     {
         $setting = SocialMediaSetting::firstOrCreate(
             ['id' => 1],
@@ -25,7 +25,20 @@ class SocialMediaController extends Controller
             ]
         );
 
-        return $dataTable->render('pages.social-media.index', compact('setting'));
+        $kategori = $request->query('kategori');
+        $countAll = SocialMedia::count();
+        $countUniversitas = SocialMedia::where(function ($q) {
+            $q->where('kategori', 'universitas')->orWhereNull('kategori');
+        })->count();
+        $countHumas = SocialMedia::where('kategori', 'humas')->count();
+
+        return $dataTable->render('pages.social-media.index', compact(
+            'setting',
+            'kategori',
+            'countAll',
+            'countUniversitas',
+            'countHumas'
+        ));
     }
 
     /**
@@ -46,16 +59,17 @@ class SocialMediaController extends Controller
 
         alert()->success('Berhasil!', 'Pengaturan Seksi Media Sosial berhasil diperbarui.');
 
-        return redirect()->route('social-media.index');
+        return redirect()->route('social-media.index', ['kategori' => 'universitas']);
     }
 
     /**
      * Tampilkan form tambah media sosial baru.
      */
-    public function create(): View
+    public function create(Request $request): View
     {
         $nextUrutan = (SocialMedia::max('urutan') ?? 0) + 1;
-        return view('pages.social-media.create', compact('nextUrutan'));
+        $kategori = $request->query('kategori', 'universitas');
+        return view('pages.social-media.create', compact('nextUrutan', 'kategori'));
     }
 
     /**
@@ -65,6 +79,7 @@ class SocialMediaController extends Controller
     {
         $validated = $request->validate([
             'nama'            => ['required', 'string', 'max:255'],
+            'kategori'        => ['required', 'string', 'in:universitas,humas'],
             'handle'          => ['nullable', 'string', 'max:255'],
             'logo'            => ['nullable', 'file', 'mimes:png,webp,svg,jpg,jpeg', 'max:2048'],
             'url'             => ['required', 'string', 'max:500'],
@@ -74,10 +89,11 @@ class SocialMediaController extends Controller
             'urutan'          => ['nullable', 'integer', 'min:0'],
             'is_active'       => ['nullable', 'boolean'],
         ], [
-            'nama.required'   => 'Nama media sosial wajib diisi.',
-            'logo.mimes'      => 'Logo harus berformat gambar PNG (atau webp/svg).',
-            'logo.max'        => 'Ukuran file logo maksimal 2MB.',
-            'url.required'    => 'URL / Link media sosial wajib diisi.',
+            'nama.required'     => 'Nama media sosial wajib diisi.',
+            'kategori.required' => 'Kategori (Universitas/Humas) wajib dipilih.',
+            'logo.mimes'        => 'Logo harus berformat gambar PNG (atau webp/svg).',
+            'logo.max'          => 'Ukuran file logo maksimal 2MB.',
+            'url.required'      => 'URL / Link media sosial wajib diisi.',
             'thumbnail_video.max' => 'Ukuran thumbnail / video maksimal 20MB.',
         ]);
 
@@ -98,6 +114,7 @@ class SocialMediaController extends Controller
 
         SocialMedia::create([
             'nama'            => $validated['nama'],
+            'kategori'        => $validated['kategori'],
             'handle'          => $validated['handle'] ?? null,
             'logo'            => $logoPath,
             'icon'            => null,
@@ -111,7 +128,7 @@ class SocialMediaController extends Controller
 
         alert()->success('Berhasil!', 'Link Media Sosial baru berhasil ditambahkan.');
 
-        return redirect()->route('social-media.index');
+        return redirect()->route('social-media.index', ['kategori' => $validated['kategori']]);
     }
 
     /**
@@ -129,6 +146,7 @@ class SocialMediaController extends Controller
     {
         $validated = $request->validate([
             'nama'            => ['required', 'string', 'max:255'],
+            'kategori'        => ['required', 'string', 'in:universitas,humas'],
             'handle'          => ['nullable', 'string', 'max:255'],
             'logo'            => ['nullable', 'file', 'mimes:png,webp,svg,jpg,jpeg', 'max:2048'],
             'url'             => ['required', 'string', 'max:500'],
@@ -138,10 +156,11 @@ class SocialMediaController extends Controller
             'urutan'          => ['nullable', 'integer', 'min:0'],
             'is_active'       => ['nullable', 'boolean'],
         ], [
-            'nama.required'   => 'Nama media sosial wajib diisi.',
-            'logo.mimes'      => 'Logo harus berformat gambar PNG (atau webp/svg).',
-            'logo.max'        => 'Ukuran file logo maksimal 2MB.',
-            'url.required'    => 'URL / Link media sosial wajib diisi.',
+            'nama.required'     => 'Nama media sosial wajib diisi.',
+            'kategori.required' => 'Kategori (Universitas/Humas) wajib dipilih.',
+            'logo.mimes'        => 'Logo harus berformat gambar PNG (atau webp/svg).',
+            'logo.max'          => 'Ukuran file logo maksimal 2MB.',
+            'url.required'      => 'URL / Link media sosial wajib diisi.',
             'thumbnail_video.max' => 'Ukuran thumbnail / video maksimal 20MB.',
         ]);
 
@@ -152,6 +171,7 @@ class SocialMediaController extends Controller
 
         $data = [
             'nama'        => $validated['nama'],
+            'kategori'    => $validated['kategori'],
             'handle'      => $validated['handle'] ?? null,
             'url'         => $url,
             'video_url'   => $validated['video_url'] ?? null,
@@ -159,6 +179,11 @@ class SocialMediaController extends Controller
             'urutan'      => $validated['urutan'] ?? $socialMedia->urutan,
             'is_active'   => $request->has('is_active') ? true : false,
         ];
+
+        // If video_url changed, reset direct_video_url so model saves fresh stream
+        if (($validated['video_url'] ?? null) !== $socialMedia->video_url) {
+            $data['direct_video_url'] = null;
+        }
 
         if ($request->hasFile('logo')) {
             // Hapus file logo lama jika ada
@@ -180,7 +205,7 @@ class SocialMediaController extends Controller
 
         alert()->success('Berhasil!', 'Data Media Sosial & Video berhasil diperbarui.');
 
-        return redirect()->route('social-media.index');
+        return redirect()->route('social-media.index', ['kategori' => $validated['kategori']]);
     }
 
     /**
@@ -188,6 +213,8 @@ class SocialMediaController extends Controller
      */
     public function destroy(SocialMedia $socialMedia): RedirectResponse
     {
+        $kat = $socialMedia->kategori ?? 'universitas';
+
         if ($socialMedia->logo && Storage::disk('public')->exists($socialMedia->logo)) {
             Storage::disk('public')->delete($socialMedia->logo);
         }
@@ -200,6 +227,6 @@ class SocialMediaController extends Controller
 
         alert()->success('Berhasil!', 'Link Media Sosial berhasil dihapus.');
 
-        return redirect()->route('social-media.index');
+        return redirect()->route('social-media.index', ['kategori' => $kat]);
     }
 }

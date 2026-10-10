@@ -62,7 +62,12 @@ class FrontendController extends Controller
         $facultyStat      = \App\Models\FacultyStat::where('is_active', true)->latest('id')->first();
         $layananTerkaits  = \App\Models\LayananTerkait::where('is_active', true)->orderBy('urutan')->get();
         $layananTerkaitSetting = \App\Models\LayananTerkaitSetting::first();
-        $socialMedias          = \App\Models\SocialMedia::where('is_active', true)->orderBy('urutan')->get();
+        $socialMedias          = \App\Models\SocialMedia::where('is_active', true)
+                                    ->where(function ($q) {
+                                        $q->where('kategori', 'universitas')->orWhereNull('kategori');
+                                    })
+                                    ->orderBy('urutan')
+                                    ->get();
         $socialMediaSetting    = \App\Models\SocialMediaSetting::first();
 
         if (!$facultyStat) {
@@ -363,12 +368,21 @@ class FrontendController extends Controller
                             ->get();
 
         $faqs         = \App\Models\Faq::take(6)->get();
-        $socialMedias = \App\Models\SocialMedia::where('is_active', true)->orderBy('urutan')->get();
+        $socialMedias = \App\Models\SocialMedia::where('is_active', true)
+                            ->where('kategori', 'humas')
+                            ->orderBy('urutan')
+                            ->get();
         $banners      = \App\Models\Banner::where('aktif', true)->orderBy('urutan')->get();
         $galleries    = \App\Models\Gallery::where('kategori', 'humas')->latest()->take(6)->get();
         $heroHumas    = \App\Models\HeroHumas::first();
+        $pusatInformasis = \App\Models\PusatInformasiHumas::active()->get();
+        $pusatInformasiSetting = \App\Models\PusatInformasiHumasSetting::first();
         
-        return view('layouts.frontend.humas', compact('contact', 'about', 'pmbSetting', 'latestNews', 'faqs', 'socialMedias', 'banners', 'galleries', 'heroHumas'));
+        return view('layouts.frontend.humas', compact(
+            'contact', 'about', 'pmbSetting', 'latestNews', 'faqs', 
+            'socialMedias', 'banners', 'galleries', 'heroHumas',
+            'pusatInformasis', 'pusatInformasiSetting'
+        ));
     }
 
     public function unduhan(\Illuminate\Http\Request $request, $kategori = null)

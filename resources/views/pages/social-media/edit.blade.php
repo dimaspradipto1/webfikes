@@ -6,7 +6,7 @@
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('social-media.index') }}">Media Sosial</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('social-media.index', ['kategori' => $socialMedia->kategori ?? 'universitas']) }}">Media Sosial {{ ($socialMedia->kategori ?? '') === 'humas' ? 'Humas' : 'Universitas' }}</a></li>
             <li class="breadcrumb-item active">Edit</li>
         </ol>
     </nav>
@@ -38,6 +38,25 @@
                 <form action="{{ route('social-media.update', $socialMedia->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+
+                    {{-- Kategori Media Sosial --}}
+                    <div class="mb-3">
+                        <label for="kategori" class="form-label fw-bold text-dark">
+                            Kategori Penempatan <span class="text-danger">*</span>
+                        </label>
+                        <select name="kategori" id="kategori" class="form-select @error('kategori') is-invalid @enderror" required>
+                            <option value="universitas" {{ old('kategori', $socialMedia->kategori ?? 'universitas') === 'universitas' ? 'selected' : '' }}>
+                                🏛️ Media Sosial Universitas (Tampil di Beranda Utama UIS)
+                            </option>
+                            <option value="humas" {{ old('kategori', $socialMedia->kategori) === 'humas' ? 'selected' : '' }}>
+                                📢 Media Sosial Humas (Tampil di Beranda Humas & Smartphone Video Mockup)
+                            </option>
+                        </select>
+                        <div class="form-text">Pilih apakah platform ini milik Universitas atau Humas.</div>
+                        @error('kategori')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
                     {{-- Nama Platform --}}
                     <div class="mb-3">
@@ -323,7 +342,7 @@
 
                     {{-- Tombol Aksi --}}
                     <div class="d-flex justify-content-between align-items-center pt-3 border-top">
-                        <a href="{{ route('social-media.index') }}" class="btn btn-outline-secondary px-4">
+                        <a href="{{ route('social-media.index', ['kategori' => old('kategori', $socialMedia->kategori ?? 'universitas')]) }}" class="btn btn-outline-secondary px-4">
                             <i class="bi bi-arrow-left me-1"></i> Kembali
                         </a>
                         <button type="submit" class="btn fw-semibold shadow-sm px-4" style="background-color: #046B26; color: #ffffff; border: none;">
@@ -426,6 +445,18 @@
             if (igMatch) {
                 embedUrl = 'https://www.instagram.com/reel/' + igMatch[1] + '/embed/';
                 platform = 'Instagram';
+            }
+
+            // Facebook
+            if (url.toLowerCase().includes('facebook.com') || url.toLowerCase().includes('fb.watch')) {
+                const isFbVideo = url.toLowerCase().includes('watch') || url.toLowerCase().includes('reel') || url.toLowerCase().includes('/videos/');
+                if (isFbVideo) {
+                    embedUrl = 'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent(url) + '&show_text=false&autoplay=true&mute=1&width=500';
+                    platform = 'Facebook Video';
+                } else {
+                    embedUrl = 'https://www.facebook.com/plugins/post.php?href=' + encodeURIComponent(url) + '&show_text=false&width=500';
+                    platform = 'Facebook Post';
+                }
             }
 
             // MP4 direct file

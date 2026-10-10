@@ -65,6 +65,16 @@ class SocialMediaDataTable extends DataTable
                     ? '<span class="badge" style="background-color:#198754; font-size:11.5px; font-weight:600; padding:6px 12px; border-radius:50px;"><i class="bi bi-check-circle-fill me-1"></i>Aktif</span>'
                     : '<span class="badge" style="background-color:#dc3545; font-size:11.5px; font-weight:600; padding:6px 12px; border-radius:50px;"><i class="bi bi-x-circle-fill me-1"></i>Nonaktif</span>';
             })
+            ->addColumn('kategori', function ($item) {
+                if ($item->kategori === 'humas') {
+                    return '<span class="badge" style="background-color: #6366f1; color: #ffffff; font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 50px;">
+                                <i class="bi bi-megaphone-fill me-1"></i>Humas
+                            </span>';
+                }
+                return '<span class="badge" style="background-color: #0284c7; color: #ffffff; font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 50px;">
+                            <i class="bi bi-building me-1"></i>Universitas
+                        </span>';
+            })
             ->addColumn('action', function ($item) {
                 $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:6px">';
                 $btn .= '<a href="' . route('social-media.edit', $item->id) . '"
@@ -88,7 +98,7 @@ class SocialMediaDataTable extends DataTable
                 return $btn;
             })
             ->setRowId('id')
-            ->rawColumns(['logo', 'nama', 'url', 'urutan', 'is_active', 'action']);
+            ->rawColumns(['logo', 'nama', 'kategori', 'url', 'urutan', 'is_active', 'action']);
     }
 
     /**
@@ -99,7 +109,20 @@ class SocialMediaDataTable extends DataTable
      */
     public function query(SocialMedia $model): QueryBuilder
     {
-        return $model->newQuery()->orderBy('urutan');
+        $query = $model->newQuery();
+
+        if (request()->filled('kategori')) {
+            $kat = request('kategori');
+            if ($kat === 'universitas') {
+                $query->where(function ($q) {
+                    $q->where('kategori', 'universitas')->orWhereNull('kategori');
+                });
+            } else {
+                $query->where('kategori', $kat);
+            }
+        }
+
+        return $query->orderBy('urutan');
     }
 
     /**
@@ -111,7 +134,7 @@ class SocialMediaDataTable extends DataTable
             ->setTableId('social-media-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(4, 'asc')
+            ->orderBy(5, 'asc')
             ->selectStyleSingle()
             ->parameters([
                 'pageLength' => 10,
@@ -136,9 +159,10 @@ class SocialMediaDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->width('5%')->addClass('text-center align-middle')->searchable(false)->orderable(false),
-            Column::computed('logo')->title('Logo PNG')->width('10%')->addClass('text-center align-middle')->exportable(false)->printable(false),
+            Column::computed('logo')->title('Logo PNG')->width('9%')->addClass('text-center align-middle')->exportable(false)->printable(false),
             Column::make('nama')->title('Nama Platform')->addClass('align-middle'),
-            Column::computed('url')->title('Tautan / URL')->width('26%')->addClass('align-middle'),
+            Column::computed('kategori')->title('Kategori')->width('12%')->addClass('text-center align-middle'),
+            Column::computed('url')->title('Tautan / URL')->width('24%')->addClass('align-middle'),
             Column::make('urutan')->title('Urutan')->width('8%')->addClass('text-center align-middle'),
             Column::make('is_active')->title('Status')->width('10%')->addClass('text-center align-middle'),
             Column::computed('action')->title('Aksi')->exportable(false)->printable(false)->width('10%')->addClass('text-center align-middle'),
