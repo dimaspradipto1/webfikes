@@ -315,9 +315,9 @@
       emptyRow.style.display = (visibleCount === 0) ? '' : 'none';
     }
 
-    // Update URL query without page reload
+    // Update URL with slug without page reload
     if (history.pushState) {
-      const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?kategori=' + cat;
+      const newUrl = "{{ url('/unduhan') }}/" + cat;
       window.history.replaceState({path: newUrl}, '', newUrl);
     }
   }

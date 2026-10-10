@@ -11,6 +11,7 @@ class Layanan extends Model
     protected $fillable = [
         'icon',
         'judul',
+        'slug',
         'dasar_hukum',
         'link',
         'deskripsi',
@@ -22,4 +23,15 @@ class Layanan extends Model
     protected $casts = [
         'aktif' => 'boolean',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($layanan) {
+            if (empty($layanan->slug) && !empty($layanan->judul)) {
+                $layanan->slug = \Illuminate\Support\Str::slug($layanan->judul);
+            }
+        });
+    }
 }

@@ -35,9 +35,14 @@ class SocialMediaDataTable extends DataTable
                         </div>';
             })
             ->addColumn('nama', function ($item) {
+                $videoBadge = '';
+                if ($item->thumbnail_video_url || $item->video_url) {
+                    $videoBadge = '<span class="badge bg-warning text-dark ms-1" style="font-size:10px; font-weight:600;"><i class="bi bi-play-circle-fill me-1"></i>Video Aktif</span>';
+                }
+                $handleText = $item->handle ? '<small class="text-success fw-semibold d-block" style="font-size:11.5px;">@' . e(ltrim($item->handle, '@')) . '</small>' : '<small class="text-muted d-block" style="font-size:11px;">Media Sosial Resmi UIS</small>';
                 return '<div class="text-start">
-                            <div class="fw-bold text-dark" style="font-size:14px; letter-spacing:0.3px;">' . e($item->nama) . '</div>
-                            <small class="text-muted d-block mt-0" style="font-size:11.5px;">Media Sosial Resmi UIS</small>
+                            <div class="fw-bold text-dark" style="font-size:14px; letter-spacing:0.3px;">' . e($item->nama) . ' ' . $videoBadge . '</div>
+                            ' . $handleText . '
                         </div>';
             })
             ->addColumn('url', function ($item) {

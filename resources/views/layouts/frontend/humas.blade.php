@@ -286,7 +286,7 @@
     background: #ffffff;
     border-radius: 28px;
     border: 4px solid #1e293b;
-    padding: 24px 18px 20px 18px;
+    padding: 22px 18px 20px 18px;
     box-shadow: 0 16px 32px rgba(15, 23, 42, 0.1);
     position: relative;
     transition: all 0.3s ease;
@@ -297,37 +297,114 @@
   }
   .humas-phone-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 24px 44px rgba(15, 23, 42, 0.18);
+    border-color: #FED802;
+    box-shadow: 0 24px 44px rgba(254, 216, 2, 0.25), 0 16px 32px rgba(15, 23, 42, 0.12);
   }
   .humas-phone-speaker {
-    width: 60px;
-    height: 6px;
+    width: 54px;
+    height: 5px;
     background: #cbd5e1;
     border-radius: 10px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
   .humas-phone-logo {
-    width: 54px;
-    height: 54px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 26px;
-    margin-bottom: 12px;
-    color: #ffffff;
-  }
-  .humas-phone-avatar {
-    width: 140px;
-    height: 170px;
-    object-fit: cover;
-    border-radius: 18px;
     margin-bottom: 14px;
-    background: #e2e8f0;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+  .humas-phone-screen {
+    position: relative;
+    width: 100%;
+    height: 340px;
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 14px;
+    background: #000000;
+    display: block;
+    text-decoration: none;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 8px 18px rgba(0, 0, 0, 0.12);
+  }
+  .humas-phone-screen iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
+    display: block;
+    border-radius: 18px;
+  }
+  .humas-phone-video-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease, filter 0.3s ease;
+    display: block;
+  }
+  .humas-phone-screen:hover .humas-phone-video-media {
+    transform: scale(1.06);
+    filter: brightness(0.92);
+  }
+  .humas-phone-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #FED802;
+    color: #111111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    padding-left: 3px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 3;
+  }
+  .humas-phone-screen:hover .humas-phone-play-btn {
+    transform: translate(-50%, -50%) scale(1.15);
+    background: #ffe338;
+    box-shadow: 0 0 25px rgba(254, 216, 2, 0.85);
+  }
+  .humas-phone-video-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.05) 40%, rgba(15, 23, 42, 0.9) 100%);
+    z-index: 2;
+    text-align: left;
+    pointer-events: none;
+  }
+  .humas-phone-video-title {
+    color: #ffffff;
+    font-size: 12.5px;
+    font-weight: 700;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    margin-bottom: 3px;
+  }
+  .humas-phone-video-meta {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 10.5px;
+    font-weight: 600;
   }
   .humas-phone-handle {
     font-weight: 800;
-    font-size: 16px;
+    font-size: 15.5px;
     color: #0f172a;
     margin-bottom: 2px;
   }
@@ -338,7 +415,7 @@
   }
   .humas-phone-btn {
     width: 100%;
-    background: #ffd600;
+    background: #FED802;
     color: #111;
     font-weight: 700;
     font-size: 13.5px;
@@ -347,11 +424,13 @@
     text-decoration: none;
     transition: all 0.2s ease;
     display: block;
+    box-shadow: 0 4px 10px rgba(254, 216, 2, 0.35);
   }
   .humas-phone-btn:hover {
-    background: #f1c40f;
+    background: #ffd600;
     color: #000;
     transform: scale(1.02);
+    box-shadow: 0 6px 14px rgba(254, 216, 2, 0.5);
   }
 
   /* PMB Horizontal Banner */
@@ -550,12 +629,12 @@
         <div class="humas-quick-icon-wrap"><i class="bi bi-file-earmark-text"></i></div>
         <span class="humas-quick-label">Template Dokumen</span>
       </a>
-      <a href="{{ route('homepage.galeri') }}" class="humas-quick-item" title="Galeri Dokumentasi & Video">
+      <a href="{{ route('homepage.desain-grafis') }}" class="humas-quick-item" title="Panduan Desain & Video">
         <div class="humas-quick-icon-wrap"><i class="bi bi-camera-video"></i></div>
-        <span class="humas-quick-label">Panduan Desain dan Video</span>
+        <span class="humas-quick-label">Panduan Desain & Video</span>
       </a>
-      <a href="#eksplorasi-medsos" class="humas-quick-item" title="Media Sosial Resmi">
-        <div class="humas-quick-icon-wrap"><i class="bi bi-share-fill"></i></div>
+      <a href="{{ route('homepage.galeri.humas') }}" class="humas-quick-item" title="Galeri & Kegiatan Humas">
+        <div class="humas-quick-icon-wrap"><i class="bi bi-images"></i></div>
         <span class="humas-quick-label">Galeri Kegiatan</span>
       </a>
       <a href="#emagazine-section" class="humas-quick-item" title="E-Magazine UIS">
@@ -599,52 +678,51 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════
-     2. PERINGKAT #1 HUMAS TERBAIK (AWARD BANNER)
+     2. GALERI & KEGIATAN HUMAS
 ══════════════════════════════════════════════════════ -->
-<section class="humas-award-section">
-  <div class="container">
-    <div data-aos="fade-up">
-      <h2 class="humas-rank-title">Peringkat #1</h2>
-      <p class="humas-rank-subtitle">Humas Terbaik di Lingkungan LLDIKTI Wilayah XVII Tahun 2024</p>
+<section class="section-bg-sand py-5" id="galeri-humas">
+  <div class="container py-3">
+    <div class="d-flex align-items-end justify-content-between mb-5 flex-wrap gap-3" data-aos="fade-up">
+      <div>
+        <div class="section-label mb-2">Dokumentasi Visual</div>
+        <h2 class="section-title mb-0">Galeri & <em>Kegiatan Humas</em></h2>
+      </div>
+      <a href="{{ route('homepage.galeri.humas') }}" class="btn-outline-hero" style="color: var(--uis-green); border-color: var(--uis-green); font-size: 13.5px; padding: 10px 22px;">
+        <i class="bi bi-images me-1"></i> Lihat Semua Galeri
+      </a>
     </div>
 
-    <div class="humas-award-banner-card mx-auto max-w-1000" data-aos="zoom-in" data-aos-duration="800">
-      <div class="humas-award-confetti"></div>
-      
-      <div class="position-relative z-1 py-2">
-        <h4 style="font-family: 'Brush Script MT', cursive, sans-serif; font-size: 36px; color: #ffd700; margin-bottom: 2px;">Alhamdulillah</h4>
-        <p class="text-white-50 small mb-4">Apresiasi & Komitmen Pelayanan Informasi Terbaik</p>
-
-        <div class="d-flex align-items-center justify-content-center gap-4 flex-wrap my-3">
-          <!-- Smartphone Icon Badge -->
-          <div class="d-none d-md-flex align-items-center justify-content-center" style="width: 70px; height: 70px; border-radius: 50%; background: rgba(255, 215, 0, 0.15); border: 2px solid rgba(255, 215, 0, 0.4); color: #ffd700; font-size: 32px;">
-            <i class="bi bi-phone"></i>
+    @if(isset($galleries) && $galleries->count() > 0)
+      <div class="row g-4">
+        @foreach($galleries->take(6) as $index => $gal)
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
+            <a href="{{ route('homepage.galeri.detail', $gal->slug ?? $gal->id) }}" class="gallery-card-item d-block text-decoration-none">
+              <div class="gallery-img-container">
+                @if(!empty($gal->url))
+                  <img src="{{ asset('storage/' . $gal->url) }}" alt="{{ $gal->judul }}" class="gallery-card-img" loading="lazy">
+                @else
+                  <div class="gallery-fallback-box">
+                    <i class="bi bi-camera-fill fs-1 text-white-50"></i>
+                  </div>
+                @endif
+                <div class="gallery-card-overlay">
+                  <span class="gallery-tag"><i class="bi bi-tag-fill me-1"></i>Dokumentasi</span>
+                  <h5 class="gallery-card-title">{{ $gal->judul }}</h5>
+                  @if(!empty($gal->deskripsi))
+                    <p class="gallery-card-desc mb-0">{!! Str::limit(strip_tags($gal->deskripsi), 90) !!}</p>
+                  @endif
+                </div>
+              </div>
+            </a>
           </div>
-
-          <!-- Trophy Golden Center Badge -->
-          <div class="text-center">
-            <div style="display: inline-block; background: linear-gradient(135deg, #ffd700 0%, #ffae00 100%); color: #022b10; padding: 18px 36px; border-radius: 50px; font-weight: 900; font-size: 26px; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35); border: 4px solid #ffffff;">
-              <i class="bi bi-award-fill me-2"></i> JUARA 1
-            </div>
-            <div class="mt-2 text-warning fw-bold text-uppercase" style="font-size: 13px; letter-spacing: 1px;">Kategori Kinerja Pengelolaan Media Humas</div>
-          </div>
-
-          <!-- Web Globe Icon Badge -->
-          <div class="d-none d-md-flex align-items-center justify-content-center" style="width: 70px; height: 70px; border-radius: 50%; background: rgba(255, 215, 0, 0.15); border: 2px solid rgba(255, 215, 0, 0.4); color: #ffd700; font-size: 32px;">
-            <i class="bi bi-globe2"></i>
-          </div>
-        </div>
-
-        <p class="text-light fw-semibold mx-auto mt-3 mb-0" style="max-width: 650px; font-size: 15px;">
-          Perguruan Tinggi Terbaik Kategori Pengelolaan Website & Media Sosial<br class="d-none d-md-block">
-          dalam Anugerah Humas Diktiristek & LLDIKTI Wilayah XVII
-        </p>
+        @endforeach
       </div>
-
-      <div class="humas-award-banner-footer">
-        <i class="bi bi-trophy-fill me-1"></i> Terus Berinovasi Menghadirkan Informasi Akurat, Cepat, dan Transparan
+    @else
+      <div class="text-center py-5 bg-white rounded-4 border">
+        <i class="bi bi-images fs-1 text-muted d-block mb-2"></i>
+        <p class="text-muted mb-0">Belum ada dokumentasi foto kegiatan Humas yang diunggah.</p>
       </div>
-    </div>
+    @endif
   </div>
 </section>
 
@@ -655,61 +733,180 @@
   <div class="container">
     <h2 class="humas-section-heading" data-aos="fade-up">Eksplorasi di Sosial Media</h2>
 
-    <div class="row g-4 justify-content-center">
-      <!-- 1. Instagram -->
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-        <div class="humas-phone-card">
-          <div class="humas-phone-speaker"></div>
-          <div class="humas-phone-logo" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);">
-            <i class="bi bi-instagram"></i>
-          </div>
-          <div class="d-flex align-items-center justify-content-center w-100 mb-3" style="height: 170px; background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%); border-radius: 18px;">
-            <i class="bi bi-camera-reels text-danger" style="font-size: 64px; opacity: 0.85;"></i>
-          </div>
-          <div class="humas-phone-handle">@universitasibnusina</div>
-          <div class="humas-phone-label">Instagram Resmi UIS</div>
-          <a href="https://www.instagram.com/universitasibnusina/" target="_blank" rel="noopener" class="humas-phone-btn">
-            <i class="bi bi-instagram me-1"></i> Ikuti
-          </a>
-        </div>
-      </div>
+    @php
+      // Ambil daftar sosial media aktif (kecuali peta lokasi)
+      $activeSocials = isset($socialMedias) ? $socialMedias->filter(function($item) {
+          $name = strtolower($item->nama);
+          return !str_contains($name, 'peta') && !str_contains($name, 'map');
+      }) : collect();
+    @endphp
 
-      <!-- 2. TikTok -->
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-        <div class="humas-phone-card">
-          <div class="humas-phone-speaker"></div>
-          <div class="humas-phone-logo" style="background: #000000;">
-            <i class="bi bi-tiktok"></i>
-          </div>
-          <div class="d-flex align-items-center justify-content-center w-100 mb-3" style="height: 170px; background: linear-gradient(135deg, #e0f2fe 0%, #f0fdfa 100%); border-radius: 18px;">
-            <i class="bi bi-play-circle-fill text-dark" style="font-size: 64px; opacity: 0.85;"></i>
-          </div>
-          <div class="humas-phone-handle">@humas_uis</div>
-          <div class="humas-phone-label">TikTok Resmi Kampus</div>
-          <a href="https://www.tiktok.com" target="_blank" rel="noopener" class="humas-phone-btn">
-            <i class="bi bi-tiktok me-1"></i> Ikuti
-          </a>
-        </div>
-      </div>
+    @if($activeSocials->count() > 0)
+      <div class="row g-4 justify-content-center">
+        @foreach($activeSocials as $index => $sm)
+          @php
+            $lowerName = strtolower($sm->nama);
+            
+            // Default styling presets by platform
+            if (str_contains($lowerName, 'instagram')) {
+                $brandIcon    = 'bi-instagram';
+                $logoBg       = 'radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)';
+                $previewBg    = 'linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%)';
+                $previewIcon  = 'bi-camera-reels text-danger';
+                $btnText      = 'Ikuti';
+                $btnIcon      = 'bi-instagram';
+                $defaultLabel = 'Instagram Resmi UIS';
+                $defaultHandle= '@universitasibnusina';
+            } elseif (str_contains($lowerName, 'tiktok')) {
+                $brandIcon    = 'bi-tiktok';
+                $logoBg       = '#000000';
+                $previewBg    = 'linear-gradient(135deg, #e0f2fe 0%, #f0fdfa 100%)';
+                $previewIcon  = 'bi-play-circle-fill text-dark';
+                $btnText      = 'Ikuti';
+                $btnIcon      = 'bi-tiktok';
+                $defaultLabel = 'TikTok Resmi Kampus';
+                $defaultHandle= '@humas_uis';
+            } elseif (str_contains($lowerName, 'facebook')) {
+                $brandIcon    = 'bi-facebook';
+                $logoBg       = '#1877f2';
+                $previewBg    = 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)';
+                $previewIcon  = 'bi-people-fill text-primary';
+                $btnText      = 'Kunjungi';
+                $btnIcon      = 'bi-facebook';
+                $defaultLabel = 'Facebook & YouTube Humas';
+                $defaultHandle= 'Universitas Ibnu Sina';
+            } elseif (str_contains($lowerName, 'youtube')) {
+                $brandIcon    = 'bi-youtube';
+                $logoBg       = '#ff0000';
+                $previewBg    = 'linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)';
+                $previewIcon  = 'bi-play-btn-fill text-danger';
+                $btnText      = 'Kunjungi';
+                $btnIcon      = 'bi-youtube';
+                $defaultLabel = 'YouTube Resmi UIS';
+                $defaultHandle= 'Universitas Ibnu Sina Channel';
+            } elseif (str_contains($lowerName, 'whatsapp') || str_contains($lowerName, 'wa')) {
+                $brandIcon    = 'bi-whatsapp';
+                $logoBg       = '#25D366';
+                $previewBg    = 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)';
+                $previewIcon  = 'bi-chat-dots-fill text-success';
+                $btnText      = 'Chat WhatsApp';
+                $btnIcon      = 'bi-whatsapp';
+                $defaultLabel = 'Layanan WhatsApp Humas';
+                $defaultHandle= 'Layanan Informasi Cepat';
+            } elseif (str_contains($lowerName, 'linkedin')) {
+                $brandIcon    = 'bi-linkedin';
+                $logoBg       = '#0a66c2';
+                $previewBg    = 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)';
+                $previewIcon  = 'bi-briefcase-fill text-primary';
+                $btnText      = 'Terhubung';
+                $btnIcon      = 'bi-linkedin';
+                $defaultLabel = 'Jejaring Profesional UIS';
+                $defaultHandle= 'Universitas Ibnu Sina';
+            } else {
+                $brandIcon    = !empty($sm->icon) ? $sm->icon : 'bi-globe2';
+                $logoBg       = '#046B26';
+                $previewBg    = 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)';
+                $previewIcon  = $brandIcon . ' text-success';
+                $btnText      = 'Kunjungi';
+                $btnIcon      = 'bi-box-arrow-up-right';
+                $defaultLabel = $sm->nama . ' Resmi UIS';
+                $defaultHandle= $sm->nama;
+            }
 
-      <!-- 3. Facebook / YouTube -->
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-        <div class="humas-phone-card">
-          <div class="humas-phone-speaker"></div>
-          <div class="humas-phone-logo" style="background: #1877f2;">
-            <i class="bi bi-facebook"></i>
+            // Extract or build clean handle display from URL
+            $handleDisplay = $defaultHandle;
+            if (!empty($sm->url)) {
+                $parsedPath = trim(parse_url($sm->url, PHP_URL_PATH) ?? '', '/');
+                if (!empty($parsedPath) && !str_contains($parsedPath, '?') && !str_contains($parsedPath, '=')) {
+                    $handleDisplay = str_starts_with($parsedPath, '@') ? $parsedPath : '@' . $parsedPath;
+                }
+            }
+
+            $displayHandle  = !empty($sm->handle) ? (str_starts_with($sm->handle, '@') ? $sm->handle : '@' . $sm->handle) : $handleDisplay;
+            $hasMedia       = !empty($sm->thumbnail_video_url);
+            $isVideoFile    = method_exists($sm, 'isVideoFile') ? $sm->isVideoFile() : false;
+            $videoTargetUrl = !empty($sm->video_url) ? $sm->video_url : ($sm->url ?? '#');
+            $videoJudul     = !empty($sm->video_judul) ? $sm->video_judul : ('Video & Momen Terbaru ' . $sm->nama . ' UIS');
+          @endphp
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
+            <div class="humas-phone-card">
+              {{-- Speaker Notch --}}
+              <div class="humas-phone-speaker"></div>
+
+              {{-- Platform App Icon Badge --}}
+              <div class="humas-phone-logo" style="background: {{ $logoBg }};">
+                @if(!empty($sm->logo_url))
+                  <img src="{{ $sm->logo_url }}" alt="{{ $sm->nama }}" style="max-width: 32px; max-height: 32px; object-fit: contain;">
+                @else
+                  <i class="bi {{ $brandIcon }}"></i>
+                @endif
+              </div>
+
+              {{-- Video Screen Area --}}
+              <div class="humas-phone-screen">
+                @if(!empty($sm->video_embed_url))
+                  @if(preg_match('/\.(mp4|webm|ogg)$/i', $sm->video_embed_url))
+                    <video src="{{ $sm->video_embed_url }}" controls playsinline class="w-100 h-100" style="object-fit: cover; border-radius: 18px;"></video>
+                  @else
+                    <iframe src="{{ $sm->video_embed_url }}" 
+                            class="w-100 h-100" 
+                            style="border: none; border-radius: 18px;" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                  @endif
+                @elseif($hasMedia && $isVideoFile)
+                  <video src="{{ $sm->thumbnail_video_url }}" class="humas-phone-video-media" autoplay muted loop playsinline></video>
+                @else
+                  <a href="{{ $videoTargetUrl }}" target="_blank" rel="noopener" class="d-block w-100 h-100 position-relative text-decoration-none" title="Tonton {{ $videoJudul }}">
+                    @if($hasMedia)
+                      <img src="{{ $sm->thumbnail_video_url }}" class="humas-phone-video-media" alt="{{ $videoJudul }}">
+                    @else
+                      {{-- Default Campus Documentation Video Preview --}}
+                      <img src="{{ asset('frontend/img/gedung-uis.jpg') }}" class="humas-phone-video-media" alt="{{ $videoJudul }}" style="filter: brightness(0.8);">
+                    @endif
+
+                    {{-- Play Button Overlay --}}
+                    <div class="humas-phone-play-btn">
+                      <i class="bi bi-play-fill"></i>
+                    </div>
+
+                    {{-- Video Overlay Details --}}
+                    <div class="humas-phone-video-overlay">
+                      <div class="d-flex align-items-center justify-content-between w-100">
+                        <span class="badge bg-dark bg-opacity-75 text-white border border-light border-opacity-25" style="font-size: 10px; font-weight: 600; padding: 4px 8px; border-radius: 20px;">
+                          <i class="bi bi-broadcast text-danger me-1"></i> Video Terbaru
+                        </span>
+                        <span class="badge bg-black bg-opacity-60 text-white" style="font-size: 10px; padding: 4px 8px; border-radius: 20px;">
+                          <i class="bi {{ $brandIcon }} me-1"></i> {{ $sm->nama }}
+                        </span>
+                      </div>
+
+                      <div class="w-100">
+                        <div class="humas-phone-video-title">{{ $videoJudul }}</div>
+                        <div class="humas-phone-video-meta d-flex align-items-center justify-content-between">
+                          <span><i class="bi bi-play-circle-fill me-1 text-warning"></i> Putar Video</span>
+                          <span class="badge bg-danger bg-opacity-75 text-white px-2 py-0" style="font-size: 9.5px;">Terbaru</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                @endif
+              </div>
+
+              {{-- Handle & Label --}}
+              <div class="humas-phone-handle text-truncate w-100 text-center">{{ $displayHandle }}</div>
+              <div class="humas-phone-label text-truncate w-100 text-center">{{ $defaultLabel }}</div>
+
+              {{-- Action Button --}}
+              <a href="{{ $videoTargetUrl }}" target="_blank" rel="noopener" class="humas-phone-btn text-center">
+                <i class="bi {{ !empty($sm->video_url) ? 'bi-play-btn-fill' : $btnIcon }} me-1"></i> {{ !empty($sm->video_url) ? 'Tonton Video' : $btnText }}
+              </a>
+            </div>
           </div>
-          <div class="d-flex align-items-center justify-content-center w-100 mb-3" style="height: 170px; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 18px;">
-            <i class="bi bi-people-fill text-primary" style="font-size: 64px; opacity: 0.85;"></i>
-          </div>
-          <div class="humas-phone-handle">Universitas Ibnu Sina</div>
-          <div class="humas-phone-label">Facebook & YouTube Humas</div>
-          <a href="https://www.facebook.com/universitasibnusina/" target="_blank" rel="noopener" class="humas-phone-btn">
-            <i class="bi bi-box-arrow-up-right me-1"></i> Kunjungi
-          </a>
-        </div>
+        @endforeach
       </div>
-    </div>
+    @endif
   </div>
 </section>
 

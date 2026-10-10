@@ -49,7 +49,9 @@ class FrontendController extends Controller
                                 ->take(5)
                                 ->get();
         $faqs             = \App\Models\Faq::take(6)->get();
-        $galleries        = \App\Models\Gallery::latest()->take(6)->get();
+        $galleries        = \App\Models\Gallery::where(function ($q) {
+                                $q->where('kategori', 'universitas')->orWhereNull('kategori');
+                            })->latest()->take(6)->get();
         $prestasis        = \App\Models\Prestasi::where('is_active', true)->orderBy('urutan')->latest('id')->take(6)->get();
         $organisasis      = \App\Models\OrganisasiMahasiswa::where('is_active', true)->orderBy('urutan')->get();
         $organisasiSetting= \App\Models\OrganisasiMahasiswaSetting::first();
@@ -212,28 +214,85 @@ class FrontendController extends Controller
         return view('layouts.frontend.layanan', compact('layanans'));
     }
 
-    public function layananDetail($id)
+    public function layananDetail($slug)
     {
-        $layanan  = \App\Models\Layanan::findOrFail($id);
+        $layanan = \App\Models\Layanan::where(function ($q) use ($slug) {
+                $q->where('slug', $slug)
+                  ->orWhere('id', $slug);
+            })
+            ->firstOrFail();
+
+        // Redirect numeric ID to slug if available
+        if (is_numeric($slug) && !empty($layanan->slug)) {
+            return redirect()->route('homepage.layanan.detail', $layanan->slug, 301);
+        }
+
         $layanans = \App\Models\Layanan::where('aktif', true)->orderBy('urutan')->get();
         return view('layouts.frontend.layanan-detail', compact('layanan', 'layanans'));
     }
 
-    public function galeri()
+    public function galeri(\Illuminate\Http\Request $request, $kategori = null)
     {
-        $galleries = \App\Models\Gallery::latest()->paginate(12);
-        return view('layouts.frontend.galeri', compact('galleries'));
+        // Jika ada query param ?kategori=humas, redirect 301 ke URL slug /galeri/humas
+        if ($request->has('kategori') && empty($kategori)) {
+            $cat = $request->query('kategori');
+            if (in_array($cat, ['humas', 'universitas'])) {
+                return redirect()->route('homepage.galeri.' . $cat, [], 301);
+            }
+        }
+
+        $kategori = $kategori ?? $request->query('kategori');
+
+        $query = \App\Models\Gallery::query();
+        if ($kategori === 'humas') {
+            $query->where('kategori', 'humas');
+        } else {
+            // Default untuk /galeri atau /galeri/universitas: khusus galeri universitas
+            $query->where(function ($q) {
+                $q->where('kategori', 'universitas')->orWhereNull('kategori');
+            });
+            $kategori = 'universitas';
+        }
+
+        $galleries = $query->latest()->paginate(12)->withPath(
+            $kategori === 'humas' ? url('/galeri/humas') : url('/galeri')
+        );
+
+        return view('layouts.frontend.galeri', compact('galleries', 'kategori'));
+    }
+
+    public function galeriHumas(\Illuminate\Http\Request $request)
+    {
+        return $this->galeri($request, 'humas');
+    }
+
+    public function galeriUniversitas(\Illuminate\Http\Request $request)
+    {
+        return $this->galeri($request, 'universitas');
     }
 
     public function galeriDetail($slug)
     {
+        if ($slug === 'humas') {
+            return redirect()->route('homepage.galeri.humas', [], 301);
+        }
+        if ($slug === 'universitas') {
+            return redirect()->route('homepage.galeri.universitas', [], 301);
+        }
+
         $gallery = \App\Models\Gallery::where(function ($q) use ($slug) {
                 $q->where('slug', $slug)
                   ->orWhere('id', $slug);
             })
             ->firstOrFail();
 
+        // Redirect numeric ID to slug if available
+        if (is_numeric($slug) && !empty($gallery->slug)) {
+            return redirect()->route('homepage.galeri.detail', $gallery->slug, 301);
+        }
+
         $otherGalleries = \App\Models\Gallery::where('id', '!=', $gallery->id)
+                            ->when(!empty($gallery->kategori), fn($q) => $q->where('kategori', $gallery->kategori))
                             ->latest('id')
                             ->take(6)
                             ->get();
@@ -306,17 +365,23 @@ class FrontendController extends Controller
         $faqs         = \App\Models\Faq::take(6)->get();
         $socialMedias = \App\Models\SocialMedia::where('is_active', true)->orderBy('urutan')->get();
         $banners      = \App\Models\Banner::where('aktif', true)->orderBy('urutan')->get();
-        $galleries    = \App\Models\Gallery::latest()->take(6)->get();
+        $galleries    = \App\Models\Gallery::where('kategori', 'humas')->latest()->take(6)->get();
         $heroHumas    = \App\Models\HeroHumas::first();
         
         return view('layouts.frontend.humas', compact('contact', 'about', 'pmbSetting', 'latestNews', 'faqs', 'socialMedias', 'banners', 'galleries', 'heroHumas'));
     }
 
-    public function unduhan(\Illuminate\Http\Request $request)
+    public function unduhan(\Illuminate\Http\Request $request, $kategori = null)
     {
+        // Jika ada ?kategori=image, redirect 301 ke /unduhan/image
+        if ($request->has('kategori') && empty($kategori)) {
+            $cat = $request->query('kategori');
+            return redirect()->route('homepage.unduhan.kategori', $cat, 301);
+        }
+
         $contact      = \App\Models\Contact::first();
         $pmbSetting   = \App\Models\PmbSetting::first();
-        $selectedCat  = $request->query('kategori', 'image');
+        $selectedCat  = $kategori ?? $request->query('kategori', 'image');
         $unduhans     = \App\Models\Unduhan::where('is_active', true)
                             ->orderBy('urutan')
                             ->orderBy('id')
@@ -404,10 +469,16 @@ class FrontendController extends Controller
         return view('layouts.frontend.desain-grafis', compact('contact', 'pmbSetting', 'categories', 'stats', 'setting'));
     }
 
-    public function news(\Illuminate\Http\Request $request)
+    public function news(\Illuminate\Http\Request $request, $categorySlug = null)
     {
+        // Jika ada query param ?category=..., redirect 301 ke slug URL
+        if ($request->has('category') && empty($categorySlug)) {
+            $catParam = $request->query('category');
+            $slug = \Illuminate\Support\Str::slug($catParam);
+            return redirect()->route('homepage.news.category', $slug, 301);
+        }
+
         $search      = $request->query('q');
-        $selectedCat = $request->query('category');
         $query       = \App\Models\News::where('status', 'published');
 
         if (!empty($search)) {
@@ -419,12 +490,32 @@ class FrontendController extends Controller
             });
         }
 
-        if (!empty($selectedCat)) {
-            $query->where('category', $selectedCat);
+        // Resolving category slug
+        $selectedCat = null;
+        if (!empty($categorySlug)) {
+            $knownCategories = \App\Models\News::whereNotNull('category')->pluck('category')->unique();
+            foreach ($knownCategories as $cat) {
+                if (\Illuminate\Support\Str::slug($cat) === $categorySlug) {
+                    $selectedCat = $cat;
+                    break;
+                }
+            }
+            if (!$selectedCat) {
+                if (str_contains($categorySlug, 'pengumuman') || str_contains($categorySlug, 'agenda')) {
+                    $selectedCat = 'Pengumuman & Agenda';
+                } elseif (str_contains($categorySlug, 'berita') || str_contains($categorySlug, 'kampus')) {
+                    $selectedCat = 'Berita Universitas';
+                } elseif (str_contains($categorySlug, 'humas')) {
+                    $selectedCat = 'Berita Humas';
+                } else {
+                    $selectedCat = str_replace('-', ' ', $categorySlug);
+                }
+            }
+            $query->where('category', 'like', "%{$selectedCat}%");
         }
 
         $featured = null;
-        if (empty($search) && empty($selectedCat)) {
+        if (empty($search) && empty($categorySlug)) {
             $featured = \App\Models\News::where('status', 'published')
                             ->where('is_featured', true)
                             ->latest()
@@ -441,7 +532,7 @@ class FrontendController extends Controller
                         ->when($featured, fn($q) => $q->where('id', '!=', $featured->id))
                         ->latest()
                         ->paginate(10)
-                        ->withQueryString();
+                        ->withPath($categorySlug ? url('/berita/kategori/' . $categorySlug) : url('/berita'));
 
         $categories = \App\Models\News::where('status', 'published')
                         ->whereNotNull('category')
@@ -451,7 +542,12 @@ class FrontendController extends Controller
                         ->orderBy('category')
                         ->get();
 
-        return view('layouts.frontend.news', compact('featured', 'newsList', 'search', 'categories', 'selectedCat'));
+        return view('layouts.frontend.news', compact('featured', 'newsList', 'search', 'categories', 'selectedCat', 'categorySlug'));
+    }
+
+    public function newsCategory(\Illuminate\Http\Request $request, $categorySlug)
+    {
+        return $this->news($request, $categorySlug);
     }
 
     public function newsDetail($slug)
@@ -462,6 +558,11 @@ class FrontendController extends Controller
                   ->orWhere('id', $slug);
             })
             ->firstOrFail();
+
+        // Redirect numeric ID to slug if available
+        if (is_numeric($slug) && !empty($news->slug)) {
+            return redirect()->route('homepage.news.detail', $news->slug, 301);
+        }
 
         $relatedNews = \App\Models\News::where('status', 'published')
                         ->where('id', '!=', $news->id)

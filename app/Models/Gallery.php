@@ -12,6 +12,7 @@ class Gallery extends Model
     protected $fillable = [
         'judul',
         'slug',
+        'kategori',
         'deskripsi',
         'url',
     ];

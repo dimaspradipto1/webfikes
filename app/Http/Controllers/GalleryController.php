@@ -41,6 +41,7 @@ class GalleryController extends Controller
 
         Gallery::create([
             'judul'     => $request->judul,
+            'kategori'  => $request->kategori ?? 'universitas',
             'deskripsi' => $request->deskripsi,
             'url'       => $path,
         ]);
@@ -67,6 +68,7 @@ class GalleryController extends Controller
     {
         $data = [
             'judul'     => $request->judul,
+            'kategori'  => $request->kategori ?? 'universitas',
             'deskripsi' => $request->deskripsi,
         ];
 

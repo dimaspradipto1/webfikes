@@ -43,6 +43,12 @@ class GalleryDataTable extends DataTable
                 $clean = trim(html_entity_decode(strip_tags($gallery->deskripsi), ENT_QUOTES, 'UTF-8'));
                 return '<span title="' . e($clean) . '">' . e(\Illuminate\Support\Str::limit($clean, 60)) . '</span>';
             })
+            ->addColumn('kategori', function ($gallery) {
+                if ($gallery->kategori === 'humas') {
+                    return '<span class="badge bg-success px-2 py-1"><i class="bi bi-megaphone-fill me-1"></i>Humas</span>';
+                }
+                return '<span class="badge bg-primary px-2 py-1"><i class="bi bi-building me-1"></i>Universitas</span>';
+            })
             ->addColumn('action', function ($gallery) {
                 $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
 
@@ -71,7 +77,7 @@ class GalleryDataTable extends DataTable
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
-            ->rawColumns(['foto', 'judul', 'deskripsi', 'action']);
+            ->rawColumns(['foto', 'judul', 'kategori', 'deskripsi', 'action']);
     }
 
     /**
@@ -81,7 +87,7 @@ class GalleryDataTable extends DataTable
      */
     public function query(Gallery $model): QueryBuilder
     {
-        return $model->newQuery()->select(['id', 'judul', 'deskripsi', 'url']);
+        return $model->newQuery()->select(['id', 'judul', 'kategori', 'deskripsi', 'url']);
     }
 
     /**
@@ -126,6 +132,11 @@ class GalleryDataTable extends DataTable
 
             Column::make('judul')
                 ->title('Judul'),
+
+            Column::make('kategori')
+                ->title('Kategori')
+                ->width('12%')
+                ->addClass('text-center'),
 
             Column::make('deskripsi')
                 ->title('Deskripsi'),

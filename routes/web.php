@@ -58,8 +58,10 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/pedoman-akademik', 'pedomanAkademik')->name('homepage.pedoman-akademik');
     Route::get('/sistem-akademik', 'sistemAkademik')->name('homepage.sistem-akademik');
     Route::get('/layanan', 'layanan')->name('homepage.layanan');
-    Route::get('/layanan/{id}', 'layananDetail')->name('homepage.layanan.detail');
+    Route::get('/layanan/{slug}', 'layananDetail')->name('homepage.layanan.detail');
     Route::get('/galeri', 'galeri')->name('homepage.galeri');
+    Route::get('/galeri/humas', 'galeriHumas')->name('homepage.galeri.humas');
+    Route::get('/galeri/universitas', 'galeriUniversitas')->name('homepage.galeri.universitas');
     Route::get('/galeri/{slug}', 'galeriDetail')->name('homepage.galeri.detail');
     Route::get('/prestasi-mahasiswa', 'prestasi')->name('homepage.prestasi');
     Route::get('/prestasi-mahasiswa/{slug}', 'prestasiDetail')->name('homepage.prestasi.detail');
@@ -71,10 +73,12 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/alumni/kirim-testimoni', 'alumniCreateTestimoni')->name('homepage.alumni.create');
     Route::post('/alumni/kirim-testimoni', 'storeTestimonial')->name('homepage.alumni.store');
     Route::get('/berita', 'news')->name('homepage.news');
+    Route::get('/berita/kategori/{categorySlug}', 'newsCategory')->name('homepage.news.category');
     Route::get('/berita/{slug}', 'newsDetail')->name('homepage.news.detail');
     Route::get('/faq', 'faq')->name('homepage.faq');
     Route::get('/humas', 'humas')->name('homepage.humas');
     Route::get('/unduhan', 'unduhan')->name('homepage.unduhan');
+    Route::get('/unduhan/{kategori}', 'unduhan')->name('homepage.unduhan.kategori');
     Route::get('/desain-grafis', 'desainGrafis')->name('homepage.desain-grafis');
     Route::get('/kontak', 'kontak')->name('homepage.kontak');
 });

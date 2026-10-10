@@ -80,7 +80,7 @@
                   Website Prodi <i class="bi bi-box-arrow-up-right ms-1"></i>
                 </a>
               @endif
-              <a href="{{ route('homepage.layanan.detail', $layanan->id) }}" class="layanan-detail-btn">
+              <a href="{{ route('homepage.layanan.detail', $layanan->slug ?: $layanan->id) }}" class="layanan-detail-btn">
                 Lihat Detail <i class="bi bi-arrow-right"></i>
               </a>
             </div>

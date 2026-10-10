@@ -1652,74 +1652,140 @@ section {
     ═══════════════════════════════════════════════ */
 
 .feature-card,
-.value-card,
 .service-card {
     background: var(--white);
-
     border: 1px solid var(--border-light);
-
     border-radius: 20px;
-
     padding: 36px 30px;
-
     box-shadow: var(--shadow-sm);
-
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
     height: 100%;
 }
 
 .feature-card:hover,
-.value-card:hover,
 .service-card:hover {
     transform: translateY(-6px);
-
-    border-color: var(--border-purple);
-
+    border-color: var(--uis-green);
     box-shadow: var(--shadow-lg);
 }
 
-.feature-icon-wrap,
-.value-icon-wrap {
+.feature-icon-wrap {
     width: 64px;
-
     height: 64px;
-
     background: var(--uis-green-light);
-
     border-radius: 16px;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     color: var(--uis-green);
-
     font-size: 28px;
-
     margin-bottom: 24px;
-
     border: 1px solid var(--uis-green-subtle);
 }
 
-.feature-title,
-.value-title {
+.feature-title {
     font-size: 20px;
-
     font-weight: 700;
-
     margin-bottom: 12px;
 }
 
-.feature-desc,
-.value-desc {
+.feature-desc {
     font-size: 14.5px;
-
     color: var(--text-muted);
-
     line-height: 1.65;
+}
+
+/* ═══════════════════════════════════════════════
+   VALUE CARD (Mengapa Memilih Universitas Ibnu Sina)
+═══════════════════════════════════════════════ */
+.value-card {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 42px 28px 36px 28px;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    cursor: pointer;
+}
+
+.value-card:hover {
+    background: #FED802 !important;
+    border-color: #FED802 !important;
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(254, 216, 2, 0.45), 0 6px 14px rgba(0, 0, 0, 0.06);
+}
+
+.value-icon-wrap {
+    width: 90px;
+    height: 90px;
+    background: #eaf7ee;
+    border-radius: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #046B26;
+    font-size: 42px;
+    margin: 0 auto 24px auto;
+    border: 1.5px solid #b7e4c7;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+}
+
+.value-icon-wrap i {
+    font-size: 42px;
+    line-height: 1;
+    display: block;
+    transition: transform 0.35s ease, color 0.35s ease;
+}
+
+.value-card:hover .value-icon-wrap {
+    background: #046B26;
+    border-color: #046B26;
+    color: #FED802;
+    transform: scale(1.08);
+    box-shadow: 0 10px 24px rgba(4, 107, 38, 0.32);
+}
+
+.value-card:hover .value-icon-wrap i {
+    color: #FED802;
+}
+
+.value-title {
+    font-size: 21px;
+    font-weight: 750;
+    color: #0f172a;
+    margin-bottom: 14px;
+    line-height: 1.4;
+    letter-spacing: -0.2px;
+    transition: color 0.3s ease;
+    width: 100%;
+}
+
+.value-card:hover .value-title {
+    color: #043615 !important;
+    font-weight: 800;
+}
+
+.value-desc {
+    font-size: 15px;
+    color: #334155;
+    line-height: 1.7;
+    font-weight: 500;
+    margin-bottom: 0;
+    transition: color 0.3s ease;
+    width: 100%;
+}
+
+.value-card:hover .value-desc {
+    color: #062b12 !important;
+    font-weight: 600;
 }
 
 /* Counter Section — Solid Dark Emerald */
@@ -3103,52 +3169,101 @@ section {
     flex-shrink: 0;
 }
 
-/* Facility Card */
-
+/* ═══════════════════════════════════════════════
+   FASILITAS & LABORATORIUM CARD
+═══════════════════════════════════════════════ */
 .fasilitas-box {
-    background: var(--white);
-
-    border: 1px solid var(--border-light);
-
-    border-radius: 20px;
-
-    padding: 28px 24px;
-
-    box-shadow: var(--shadow-sm);
-
-    transition: all 0.25s ease;
-
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 42px 28px 36px 28px;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    cursor: pointer;
 }
 
 .fasilitas-box:hover {
-    transform: translateY(-6px);
-
-    border-color: var(--border-purple);
-
-    box-shadow: var(--shadow-md);
+    background: #FED802 !important;
+    border-color: #FED802 !important;
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(254, 216, 2, 0.45), 0 6px 14px rgba(0, 0, 0, 0.06);
 }
 
 .fasilitas-icon {
-    width: 56px;
-
-    height: 56px;
-
-    background: var(--uis-purple-light);
-
-    color: var(--uis-purple);
-
-    border-radius: 16px;
-
-    display: flex;
-
+    width: 90px;
+    height: 90px;
+    background: #eaf7ee;
+    border-radius: 24px;
+    display: inline-flex;
     align-items: center;
-
     justify-content: center;
+    color: #046B26;
+    font-size: 42px;
+    margin: 0 auto 24px auto;
+    border: 1.5px solid #b7e4c7;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+}
 
-    font-size: 26px;
+.fasilitas-icon i {
+    font-size: 42px;
+    line-height: 1;
+    display: block;
+    transition: transform 0.35s ease, color 0.35s ease;
+}
 
-    margin-bottom: 18px;
+.fasilitas-box:hover .fasilitas-icon {
+    background: #046B26;
+    border-color: #046B26;
+    color: #FED802;
+    transform: scale(1.08);
+    box-shadow: 0 10px 24px rgba(4, 107, 38, 0.32);
+}
+
+.fasilitas-box:hover .fasilitas-icon i {
+    color: #FED802;
+}
+
+.fasilitas-box h4,
+.fasilitas-title {
+    font-size: 21px;
+    font-weight: 750;
+    color: #0f172a;
+    margin-bottom: 14px;
+    line-height: 1.4;
+    letter-spacing: -0.2px;
+    transition: color 0.3s ease;
+    width: 100%;
+}
+
+.fasilitas-box:hover h4,
+.fasilitas-box:hover .fasilitas-title {
+    color: #043615 !important;
+    font-weight: 800;
+}
+
+.fasilitas-box p,
+.fasilitas-desc {
+    font-size: 15px;
+    color: #334155;
+    line-height: 1.7;
+    font-weight: 500;
+    margin-bottom: 0;
+    transition: color 0.3s ease;
+    width: 100%;
+}
+
+.fasilitas-box:hover p,
+.fasilitas-box:hover .fasilitas-desc {
+    color: #062b12 !important;
+    font-weight: 600;
 }
 
 /* Dosen Card */

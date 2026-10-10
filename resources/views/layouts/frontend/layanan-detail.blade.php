@@ -45,7 +45,7 @@
           <ul class="ld-sidebar-list">
             @foreach($layanans as $item)
               <li>
-                <a href="{{ route('homepage.layanan.detail', $item->id) }}"
+                <a href="{{ route('homepage.layanan.detail', $item->slug ?: $item->id) }}"
                    class="ld-sidebar-link {{ $item->id === $layanan->id ? 'active' : '' }}">
                   <i class="bi {{ $item->icon }}"></i>
                   <span>{{ $item->judul }}</span>

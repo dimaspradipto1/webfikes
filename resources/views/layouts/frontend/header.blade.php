@@ -125,9 +125,9 @@
             Informasi <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news', ['category' => 'Berita Universitas']) }}"><i class="bi bi-newspaper"></i> Berita Kampus</a></li>
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news', ['category' => 'Pengumuman & Agenda']) }}"><i class="bi bi-megaphone"></i> Pengumuman</a></li>
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news', ['category' => 'Pengumuman & Agenda']) }}"><i class="bi bi-calendar-event"></i> Agenda</a></li>
+            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'berita-universitas') }}"><i class="bi bi-newspaper"></i> Berita Kampus</a></li>
+            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'pengumuman-agenda') }}"><i class="bi bi-megaphone"></i> Pengumuman</a></li>
+            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'agenda') }}"><i class="bi bi-calendar-event"></i> Agenda</a></li>
             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news') }}"><i class="bi bi-card-text"></i> Artikel</a></li>
             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.faq') }}"><i class="bi bi-question-circle"></i> FAQ Informasi</a></li>
           </ul>

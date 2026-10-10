@@ -64,17 +64,21 @@ class SocialMediaController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'nama'      => ['required', 'string', 'max:255'],
-            'logo'      => ['required', 'file', 'mimes:png,webp,svg,jpg,jpeg', 'max:2048'],
-            'url'       => ['required', 'string', 'max:500'],
-            'urutan'    => ['nullable', 'integer', 'min:0'],
-            'is_active' => ['nullable', 'boolean'],
+            'nama'            => ['required', 'string', 'max:255'],
+            'handle'          => ['nullable', 'string', 'max:255'],
+            'logo'            => ['nullable', 'file', 'mimes:png,webp,svg,jpg,jpeg', 'max:2048'],
+            'url'             => ['required', 'string', 'max:500'],
+            'video_url'       => ['nullable', 'string', 'max:500'],
+            'thumbnail_video' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp,mp4,webm', 'max:20480'],
+            'video_judul'     => ['nullable', 'string', 'max:255'],
+            'urutan'          => ['nullable', 'integer', 'min:0'],
+            'is_active'       => ['nullable', 'boolean'],
         ], [
-            'nama.required' => 'Nama media sosial wajib diisi.',
-            'logo.required' => 'File Logo PNG wajib diunggah.',
-            'logo.mimes'    => 'Logo harus berformat gambar PNG (atau webp/svg).',
-            'logo.max'      => 'Ukuran file logo maksimal 2MB.',
-            'url.required'  => 'URL / Link media sosial wajib diisi.',
+            'nama.required'   => 'Nama media sosial wajib diisi.',
+            'logo.mimes'      => 'Logo harus berformat gambar PNG (atau webp/svg).',
+            'logo.max'        => 'Ukuran file logo maksimal 2MB.',
+            'url.required'    => 'URL / Link media sosial wajib diisi.',
+            'thumbnail_video.max' => 'Ukuran thumbnail / video maksimal 20MB.',
         ]);
 
         $url = trim($validated['url']);
@@ -87,13 +91,22 @@ class SocialMediaController extends Controller
             $logoPath = $request->file('logo')->store('social-media', 'public');
         }
 
+        $thumbnailVideoPath = null;
+        if ($request->hasFile('thumbnail_video')) {
+            $thumbnailVideoPath = $request->file('thumbnail_video')->store('social-media/videos', 'public');
+        }
+
         SocialMedia::create([
-            'nama'      => $validated['nama'],
-            'logo'      => $logoPath,
-            'icon'      => null,
-            'url'       => $url,
-            'urutan'    => $validated['urutan'] ?? ((SocialMedia::max('urutan') ?? 0) + 1),
-            'is_active' => $request->has('is_active') ? true : false,
+            'nama'            => $validated['nama'],
+            'handle'          => $validated['handle'] ?? null,
+            'logo'            => $logoPath,
+            'icon'            => null,
+            'url'             => $url,
+            'video_url'       => $validated['video_url'] ?? null,
+            'thumbnail_video' => $thumbnailVideoPath,
+            'video_judul'     => $validated['video_judul'] ?? null,
+            'urutan'          => $validated['urutan'] ?? ((SocialMedia::max('urutan') ?? 0) + 1),
+            'is_active'       => $request->has('is_active') ? true : false,
         ]);
 
         alert()->success('Berhasil!', 'Link Media Sosial baru berhasil ditambahkan.');
@@ -115,16 +128,21 @@ class SocialMediaController extends Controller
     public function update(Request $request, SocialMedia $socialMedia): RedirectResponse
     {
         $validated = $request->validate([
-            'nama'      => ['required', 'string', 'max:255'],
-            'logo'      => ['nullable', 'file', 'mimes:png,webp,svg,jpg,jpeg', 'max:2048'],
-            'url'       => ['required', 'string', 'max:500'],
-            'urutan'    => ['nullable', 'integer', 'min:0'],
-            'is_active' => ['nullable', 'boolean'],
+            'nama'            => ['required', 'string', 'max:255'],
+            'handle'          => ['nullable', 'string', 'max:255'],
+            'logo'            => ['nullable', 'file', 'mimes:png,webp,svg,jpg,jpeg', 'max:2048'],
+            'url'             => ['required', 'string', 'max:500'],
+            'video_url'       => ['nullable', 'string', 'max:500'],
+            'thumbnail_video' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp,mp4,webm', 'max:20480'],
+            'video_judul'     => ['nullable', 'string', 'max:255'],
+            'urutan'          => ['nullable', 'integer', 'min:0'],
+            'is_active'       => ['nullable', 'boolean'],
         ], [
-            'nama.required' => 'Nama media sosial wajib diisi.',
-            'logo.mimes'    => 'Logo harus berformat gambar PNG (atau webp/svg).',
-            'logo.max'      => 'Ukuran file logo maksimal 2MB.',
-            'url.required'  => 'URL / Link media sosial wajib diisi.',
+            'nama.required'   => 'Nama media sosial wajib diisi.',
+            'logo.mimes'      => 'Logo harus berformat gambar PNG (atau webp/svg).',
+            'logo.max'        => 'Ukuran file logo maksimal 2MB.',
+            'url.required'    => 'URL / Link media sosial wajib diisi.',
+            'thumbnail_video.max' => 'Ukuran thumbnail / video maksimal 20MB.',
         ]);
 
         $url = trim($validated['url']);
@@ -133,10 +151,13 @@ class SocialMediaController extends Controller
         }
 
         $data = [
-            'nama'      => $validated['nama'],
-            'url'       => $url,
-            'urutan'    => $validated['urutan'] ?? $socialMedia->urutan,
-            'is_active' => $request->has('is_active') ? true : false,
+            'nama'        => $validated['nama'],
+            'handle'      => $validated['handle'] ?? null,
+            'url'         => $url,
+            'video_url'   => $validated['video_url'] ?? null,
+            'video_judul' => $validated['video_judul'] ?? null,
+            'urutan'      => $validated['urutan'] ?? $socialMedia->urutan,
+            'is_active'   => $request->has('is_active') ? true : false,
         ];
 
         if ($request->hasFile('logo')) {
@@ -147,9 +168,17 @@ class SocialMediaController extends Controller
             $data['logo'] = $request->file('logo')->store('social-media', 'public');
         }
 
+        if ($request->hasFile('thumbnail_video')) {
+            // Hapus file thumbnail video lama jika ada
+            if ($socialMedia->thumbnail_video && Storage::disk('public')->exists($socialMedia->thumbnail_video)) {
+                Storage::disk('public')->delete($socialMedia->thumbnail_video);
+            }
+            $data['thumbnail_video'] = $request->file('thumbnail_video')->store('social-media/videos', 'public');
+        }
+
         $socialMedia->update($data);
 
-        alert()->success('Berhasil!', 'Data Link Media Sosial berhasil diperbarui.');
+        alert()->success('Berhasil!', 'Data Media Sosial & Video berhasil diperbarui.');
 
         return redirect()->route('social-media.index');
     }
@@ -161,6 +190,10 @@ class SocialMediaController extends Controller
     {
         if ($socialMedia->logo && Storage::disk('public')->exists($socialMedia->logo)) {
             Storage::disk('public')->delete($socialMedia->logo);
+        }
+
+        if ($socialMedia->thumbnail_video && Storage::disk('public')->exists($socialMedia->thumbnail_video)) {
+            Storage::disk('public')->delete($socialMedia->thumbnail_video);
         }
 
         $socialMedia->delete();

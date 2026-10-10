@@ -317,7 +317,7 @@
 <!-- ═══════════════════════════════════════════════
      5. MENGAPA MEMILIH Universitas Ibnu Sina
 ═══════════════════════════════════════════════ -->
-<section class="section-bg-white">
+<section class="section-bg-white" id="keunggulan">
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label mx-auto">Keunggulan Kami</div>
@@ -462,8 +462,8 @@
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ 100 + ($index * 100) }}">
             <div class="fasilitas-box">
               <div class="fasilitas-icon"><i class="bi {{ $sarana->icon ?? 'bi-building' }}"></i></div>
-              <h4 class="fw-bold mb-2">{{ $sarana->nama }}</h4>
-              <p class="text-muted small mb-0">{{ $sarana->deskripsi ?: 'Fasilitas yang mendukung kegiatan akademik dan riset mahasiswa.' }}</p>
+              <h4 class="fasilitas-title">{{ $sarana->nama }}</h4>
+              <p class="fasilitas-desc">{{ $sarana->deskripsi ?: 'Fasilitas yang mendukung kegiatan akademik dan riset mahasiswa.' }}</p>
             </div>
           </div>
         @endforeach
@@ -769,7 +769,7 @@
         <div class="section-label mb-2">Dokumentasi Visual</div>
         <h2 class="section-title mb-0">Galeri & <em>Kegiatan Universitas Ibnu Sina</em></h2>
       </div>
-      <a href="{{ route('homepage.galeri') }}" class="btn-outline-hero" style="color: var(--uis-purple); border-color: var(--uis-purple); font-size: 13.5px; padding: 10px 22px;">
+      <a href="{{ route('homepage.galeri.universitas') }}" class="btn-outline-hero" style="color: var(--uis-purple); border-color: var(--uis-purple); font-size: 13.5px; padding: 10px 22px;">
         <i class="bi bi-images me-1"></i> Lihat Semua Galeri
       </a>
     </div>
