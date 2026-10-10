@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="id">
 @php
-  $cleanWa = '';
-  if (!empty($contact->no_wa)) {
-      $cleanWa = preg_replace('/[^0-9]/', '', $contact->no_wa);
-      if (strpos($cleanWa, '08') === 0) {
-          $cleanWa = '628' . substr($cleanWa, 2);
+  if (!isset($cleanWa) || empty($cleanWa)) {
+      $cleanWa = '';
+      if (!empty($contact->no_wa)) {
+          $cleanWa = preg_replace('/[^0-9]/', '', $contact->no_wa);
+          if (strpos($cleanWa, '08') === 0) {
+              $cleanWa = '628' . substr($cleanWa, 2);
+          } elseif (strpos($cleanWa, '8') === 0) {
+              $cleanWa = '628' . substr($cleanWa, 1);
+          }
       }
   }
   $isHome = request()->routeIs('homepage') || request()->routeIs('homepage.galeri');

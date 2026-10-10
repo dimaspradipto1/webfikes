@@ -40,6 +40,8 @@ use App\Http\Controllers\HeroHumasController;
 use App\Http\Controllers\UnduhanController;
 use App\Http\Controllers\DesainGrafisController;
 use App\Http\Controllers\PusatInformasiHumasController;
+use App\Http\Controllers\LayananHumasController;
+use App\Http\Controllers\TemplateDokumenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +83,9 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/unduhan', 'unduhan')->name('homepage.unduhan');
     Route::get('/unduhan/{kategori}', 'unduhan')->name('homepage.unduhan.kategori');
     Route::get('/desain-grafis', 'desainGrafis')->name('homepage.desain-grafis');
+    Route::get('/template-dokumen', 'templateDokumen')->name('homepage.template-dokumen');
+    Route::get('/permintaan-rilis', 'permintaanRilis')->name('homepage.permintaan-rilis');
+    Route::get('/pendampingan-acara', 'pendampinganAcara')->name('homepage.pendampingan-acara');
     Route::get('/kontak', 'kontak')->name('homepage.kontak');
 });
 
@@ -142,6 +147,13 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('admin-pusat-informasi', PusatInformasiHumasController::class)
         ->parameters(['admin-pusat-informasi' => 'pusatInformasi'])
         ->names('pusat-informasi');
+    Route::get('admin-layanan-humas', [LayananHumasController::class, 'index'])->name('layanan-humas.index');
+    Route::get('admin-layanan-humas/{kode}', [LayananHumasController::class, 'editItem'])->name('layanan-humas.edit-item');
+    Route::put('admin-layanan-humas/{kode}', [LayananHumasController::class, 'updateItem'])->name('layanan-humas.update-item');
+    Route::put('admin-template-dokumen/setting', [TemplateDokumenController::class, 'updateSetting'])->name('template-dokumen.update-setting');
+    Route::resource('admin-template-dokumen', TemplateDokumenController::class)
+        ->parameters(['admin-template-dokumen' => 'templateDokumen'])
+        ->names('template-dokumen');
 
     // Akademik Routes
     Route::prefix('admin-akademik')->name('akademik.')->group(function () {

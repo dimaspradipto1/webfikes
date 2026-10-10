@@ -6,7 +6,7 @@
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item">Layanan Humas</li>
+            <li class="breadcrumb-item">Beranda Humas</li>
             <li class="breadcrumb-item"><a href="{{ route('pusat-informasi.index') }}">Hubungi Kami & Pusat Informasi</a></li>
             <li class="breadcrumb-item active">Edit Kartu</li>
         </ol>

@@ -655,38 +655,31 @@
 
     <!-- Quick Access Icons (Horizontal White Bar) -->
     <div class="humas-quick-bar" data-aos="fade-up" data-aos-duration="800">
-      <a href="{{ route('homepage.unduhan') }}" class="humas-quick-item" title="Pusat Unduhan & Asset Media">
-        <div class="humas-quick-icon-wrap"><i class="bi bi-cloud-arrow-down"></i></div>
-        <span class="humas-quick-label">Unduhan</span>
-      </a>
-      <a href="{{ route('homepage.desain-grafis') }}" class="humas-quick-item" title="Pusat Layanan & Templat Desain Grafis">
-        <div class="humas-quick-icon-wrap"><i class="bi bi-newspaper"></i></div>
-        <span class="humas-quick-label">Desain Grafis</span>
-      </a>
-      <a href="{{ route('homepage.faq') }}" class="humas-quick-item" title="Layanan Informasi & PPID">
-        <div class="humas-quick-icon-wrap"><i class="bi bi-file-earmark-text"></i></div>
-        <span class="humas-quick-label">Template Dokumen</span>
-      </a>
-      <a href="{{ route('homepage.desain-grafis') }}" class="humas-quick-item" title="Panduan Desain & Video">
-        <div class="humas-quick-icon-wrap"><i class="bi bi-camera-video"></i></div>
-        <span class="humas-quick-label">Panduan Desain & Video</span>
-      </a>
-      <a href="{{ route('homepage.galeri.humas') }}" class="humas-quick-item" title="Galeri & Kegiatan Humas">
-        <div class="humas-quick-icon-wrap"><i class="bi bi-images"></i></div>
-        <span class="humas-quick-label">Galeri Kegiatan</span>
-      </a>
-      <a href="#emagazine-section" class="humas-quick-item" title="E-Magazine UIS">
-        <div class="humas-quick-icon-wrap"><i class="bi bi-journal-richtext"></i></div>
-        <span class="humas-quick-label">Permintaan Rilis</span>
-      </a>
-      <a href="{{ route('homepage.kontak') }}" class="humas-quick-item" title="Kemitraan & Liputan Media">
-        <div class="humas-quick-icon-wrap"><i class="bi bi-people-fill"></i></div>
-        <span class="humas-quick-label">Pendampingan Acara</span>
-      </a>
-      <a href="{{ route('homepage.kontak') }}" class="humas-quick-item" title="Layanan Pengaduan & Aspirasi">
-        <div class="humas-quick-icon-wrap"><i class="bi bi-chat-left-dots"></i></div>
-        <span class="humas-quick-label">Survey Layanan</span>
-      </a>
+      @php
+        $defaultIcons = [
+          'unduhan'            => ['url' => route('homepage.unduhan'), 'icon' => 'bi-cloud-arrow-down', 'label' => 'Unduhan'],
+          'desain-grafis'      => ['url' => route('homepage.desain-grafis'), 'icon' => 'bi-newspaper', 'label' => 'Desain Grafis'],
+          'template-dokumen'   => ['url' => route('homepage.template-dokumen'), 'icon' => 'bi-file-earmark-text', 'label' => 'Template Dokumen'],
+          'panduan-desain'     => ['url' => route('homepage.desain-grafis'), 'icon' => 'bi-camera-video', 'label' => 'Panduan Desain & Video'],
+          'galeri-kegiatan'    => ['url' => route('homepage.galeri.humas'), 'icon' => 'bi-images', 'label' => 'Galeri Kegiatan'],
+          'permintaan-rilis'   => ['url' => route('homepage.permintaan-rilis'), 'icon' => 'bi-journal-richtext', 'label' => 'Permintaan Rilis'],
+          'pendampingan-acara' => ['url' => route('homepage.pendampingan-acara'), 'icon' => 'bi-people-fill', 'label' => 'Pendampingan Acara'],
+          'survey-layanan'     => ['url' => route('homepage.kontak'), 'icon' => 'bi-chat-left-dots', 'label' => 'Survey Layanan'],
+        ];
+      @endphp
+      @foreach($defaultIcons as $key => $def)
+        @php
+          $itemDb = $layananHumasItems[$key] ?? null;
+          $targetUrl = $itemDb ? $itemDb->target_url : $def['url'];
+          $targetBlank = $itemDb && $itemDb->target_blank;
+          $iconClass = $itemDb && $itemDb->icon ? $itemDb->icon : $def['icon'];
+          $label = $itemDb && $itemDb->nama ? $itemDb->nama : $def['label'];
+        @endphp
+        <a href="{{ $targetUrl }}" @if($targetBlank) target="_blank" rel="noopener noreferrer" @endif class="humas-quick-item" title="{{ $label }}">
+          <div class="humas-quick-icon-wrap"><i class="bi {{ $iconClass }}"></i></div>
+          <span class="humas-quick-label">{{ $label }}</span>
+        </a>
+      @endforeach
     </div>
 
     <!-- Notification Info Action Pills (Matching exact reference design) -->

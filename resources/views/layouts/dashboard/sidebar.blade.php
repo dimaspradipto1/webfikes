@@ -204,10 +204,10 @@
           @if($isAdmin)
           <li class="nav-heading">Layanan Humas</li>
           <li class="nav-item">
-              <a class="nav-link {{ Route::is('hero-humas.*') || (Route::is('social-media.*') && request('kategori') === 'humas') ? '' : 'collapsed' }}" data-bs-target="#humas-nav" data-bs-toggle="collapse" href="#">
+              <a class="nav-link {{ Route::is('hero-humas.*') || (Route::is('social-media.*') && request('kategori') === 'humas') || Route::is('pusat-informasi.*') ? '' : 'collapsed' }}" data-bs-target="#humas-nav" data-bs-toggle="collapse" href="#">
                   <i class="bi bi-newspaper"></i><span>Beranda Humas</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
-              <ul id="humas-nav" class="nav-content collapse {{ Route::is('hero-humas.*') || (Route::is('social-media.*') && request('kategori') === 'humas') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+              <ul id="humas-nav" class="nav-content collapse {{ Route::is('hero-humas.*') || (Route::is('social-media.*') && request('kategori') === 'humas') || Route::is('pusat-informasi.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                   <li>
                       <a href="{{ route('hero-humas.index') }}" class="{{ Route::is('hero-humas.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Hero Humas</span>
@@ -218,31 +218,61 @@
                           <i class="bi bi-circle"></i><span>Media Sosial Humas</span>
                       </a>
                   </li>
+                  <li>
+                      <a href="{{ route('pusat-informasi.index') }}" class="{{ Route::is('pusat-informasi.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Hubungi Kami & Pusat Informasi</span>
+                      </a>
+                  </li>
               </ul>
           </li>
 
-          <!-- Unduhan Dokumen Humas (Menu Terpisah di Bawah Beranda Humas) -->
+          <!-- Layanan Humas (Dropdown 8 Layanan Sesuai Floating Bar Frontend) -->
           <li class="nav-item">
-              <a class="nav-link {{ Route::is('unduhan.*') ? '' : 'collapsed' }}" href="{{ route('unduhan.index') }}">
-                  <i class="bi bi-cloud-arrow-down"></i>
-                  <span>Unduhan Dokumen Humas</span>
+              <a class="nav-link {{ Route::is('unduhan.*') || Route::is('desain-grafis.*') || (Route::is('gallery.*') && request('kategori') === 'humas') || Route::is('layanan-humas.*') || Route::is('template-dokumen.*') ? '' : 'collapsed' }}" data-bs-target="#layanan-humas-nav" data-bs-toggle="collapse" href="#">
+                  <i class="bi bi-grid-fill"></i><span>Layanan Humas</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
-          </li>
-
-          <!-- Desain Grafis Humas (Menu Terpisah di Bawah Unduhan Dokumen Humas) -->
-          <li class="nav-item">
-              <a class="nav-link {{ Route::is('desain-grafis.*') ? '' : 'collapsed' }}" href="{{ route('desain-grafis.index') }}">
-                  <i class="bi bi-palette"></i>
-                  <span>Desain Grafis Humas</span>
-              </a>
-          </li>
-
-          <!-- Hubungi Kami & Pusat Informasi Humas -->
-          <li class="nav-item">
-              <a class="nav-link {{ Route::is('pusat-informasi.*') ? '' : 'collapsed' }}" href="{{ route('pusat-informasi.index') }}">
-                  <i class="bi bi-info-circle"></i>
-                  <span>Hubungi Kami & Pusat Informasi</span>
-              </a>
+              <ul id="layanan-humas-nav" class="nav-content collapse {{ Route::is('unduhan.*') || Route::is('desain-grafis.*') || (Route::is('gallery.*') && request('kategori') === 'humas') || Route::is('layanan-humas.*') || Route::is('template-dokumen.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+                  <li>
+                      <a href="{{ route('unduhan.index') }}" class="{{ Route::is('unduhan.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Unduhan</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('desain-grafis.index') }}" class="{{ Route::is('desain-grafis.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Desain Grafis</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('template-dokumen.index') }}" class="{{ Route::is('template-dokumen.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Template Dokumen</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('layanan-humas.edit-item', 'panduan-desain') }}" class="{{ request()->route('kode') === 'panduan-desain' ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Panduan Desain & Video</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('gallery.index', ['kategori' => 'humas']) }}" class="{{ Route::is('gallery.*') && request('kategori') === 'humas' ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Galeri Kegiatan</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('layanan-humas.edit-item', 'permintaan-rilis') }}" class="{{ request()->route('kode') === 'permintaan-rilis' ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Permintaan Rilis</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('layanan-humas.edit-item', 'pendampingan-acara') }}" class="{{ request()->route('kode') === 'pendampingan-acara' ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Pendampingan Acara</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('layanan-humas.edit-item', 'survey-layanan') }}" class="{{ request()->route('kode') === 'survey-layanan' ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Survey Layanan</span>
+                      </a>
+                  </li>
+              </ul>
           </li>
 
           <!-- 8. Kontak (Sesuai Urutan Header) -->

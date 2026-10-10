@@ -377,11 +377,12 @@ class FrontendController extends Controller
         $heroHumas    = \App\Models\HeroHumas::first();
         $pusatInformasis = \App\Models\PusatInformasiHumas::active()->get();
         $pusatInformasiSetting = \App\Models\PusatInformasiHumasSetting::first();
+        $layananHumasItems = \App\Models\LayananHumasItem::active()->get()->keyBy('kode');
         
         return view('layouts.frontend.humas', compact(
             'contact', 'about', 'pmbSetting', 'latestNews', 'faqs', 
             'socialMedias', 'banners', 'galleries', 'heroHumas',
-            'pusatInformasis', 'pusatInformasiSetting'
+            'pusatInformasis', 'pusatInformasiSetting', 'layananHumasItems'
         ));
     }
 
@@ -481,6 +482,88 @@ class FrontendController extends Controller
         ];
 
         return view('layouts.frontend.desain-grafis', compact('contact', 'pmbSetting', 'categories', 'stats', 'setting'));
+    }
+
+    public function templateDokumen()
+    {
+        $contact    = \App\Models\Contact::first();
+        $pmbSetting = \App\Models\PmbSetting::first();
+        $setting    = \App\Models\TemplateDokumenSetting::firstOrCreate(
+            ['id' => 1],
+            [
+                'judul_seksi'     => 'TEMPLAT DOKUMEN',
+                'deskripsi_seksi' => 'Kami menyediakan Templat untuk Desain, Ms. Power Point, Ms. Word dan berbagai format lainnya. Guna menyeragamkan tampilan desain di lingkungan Universitas Ibnu Sina.',
+            ]
+        );
+        $templates  = \App\Models\TemplateDokumen::active()->get();
+
+        return view('layouts.frontend.template-dokumen', compact('contact', 'pmbSetting', 'setting', 'templates'));
+    }
+
+    public function permintaanRilis()
+    {
+        $contact    = \App\Models\Contact::first();
+        $pmbSetting = \App\Models\PmbSetting::first();
+        $item       = \App\Models\LayananHumasItem::where('kode', 'permintaan-rilis')->first();
+        $setting    = \App\Models\PermintaanRilisSetting::firstOrCreate(
+            ['id' => 1],
+            [
+                'judul_hero'        => 'Permintaan Rilis',
+                'subjudul_hero'     => 'Panduan & Layanan Pengajuan Siaran Pers Resmi Universitas Ibnu Sina',
+                'badge_label'       => 'LAYANAN PUBLIKASI & SIARAN PERS',
+                'judul_seksi'       => 'Ketentuan Permintaan Rilis Berita',
+                'deskripsi_seksi'   => 'Layanan ini disediakan oleh Biro Humas Universitas Ibnu Sina (UIS) guna memfasilitasi sivitas akademika dalam mengajukan rilis berita kegiatan atau siaran pers untuk dipublikasikan pada portal berita resmi uis.ac.id dan media massa mitra universitas.',
+                'link_form'         => 'https://forms.gle/',
+                'email_tujuan'      => 'info@uis.ac.id',
+                'no_wa'             => $contact->no_wa ?? '081234567890',
+                'min_kata'          => 250,
+                'min_paragraf'      => 4,
+                'is_active'         => true,
+            ]
+        );
+
+        // Nomor WA bersih untuk wa.me link
+        $waRaw = $setting->no_wa ?: ($contact->no_wa ?? '');
+        $cleanWa = preg_replace('/[^0-9]/', '', $waRaw);
+        if (str_starts_with($cleanWa, '08')) {
+            $cleanWa = '628' . substr($cleanWa, 2);
+        }
+
+        return view('layouts.frontend.permintaan-rilis', compact('contact', 'pmbSetting', 'item', 'setting', 'cleanWa'));
+    }
+
+    public function pendampinganAcara()
+    {
+        $contact    = \App\Models\Contact::first();
+        $pmbSetting = \App\Models\PmbSetting::first();
+        $item       = \App\Models\LayananHumasItem::where('kode', 'pendampingan-acara')->first();
+        $setting    = \App\Models\PendampinganAcaraSetting::firstOrCreate(
+            ['id' => 1],
+            [
+                'judul_hero'    => 'Pendampingan Acara',
+                'subjudul_hero' => 'Layanan Konsultasi Protokol & Pendampingan Acara Resmi Universitas Ibnu Sina',
+                'judul_seksi'   => 'Pendampingan Acara',
+                'sapaan'        => 'Halo, Civitas Akademika Universitas Ibnu Sina dan Mitra Eksternal!',
+                'paragraf_1'    => 'Kami hadir untuk mendukung kesuksesan acara dan kegiatan Anda melalui layanan konsultasi yang profesional, terstruktur, dan sesuai dengan Standar Operasional Prosedur (SOP) Universitas Ibnu Sina.',
+                'paragraf_2'    => 'Apakah Anda sedang merencanakan seminar, workshop, kegiatan sosial, atau event lainnya? Tim kami siap membantu dalam hal:',
+                'poin_bantuan'  => "Perencanaan dan konsep acara,\nStrategi promosi dan publikasi,\nPengelolaan logistik,\nPengurusan SOP dan perizinan, serta\nPendampingan selama pelaksanaan acara.",
+                'paragraf_3'    => 'Untuk memulai, silakan isi formulir konsultasi melalui tombol “Ajukan Permohonan” berikut:',
+                'link_form'     => 'https://forms.gle/',
+                'tombol_teks'   => 'Ajukan Permohonan',
+                'no_wa'         => '081234567890',
+                'is_active'     => true,
+            ]
+        );
+
+        $waRaw = !empty($setting->no_wa) ? $setting->no_wa : '081234567890';
+        $cleanWa = preg_replace('/[^0-9]/', '', $waRaw);
+        if (str_starts_with($cleanWa, '08')) {
+            $cleanWa = '628' . substr($cleanWa, 2);
+        } elseif (str_starts_with($cleanWa, '8')) {
+            $cleanWa = '628' . substr($cleanWa, 1);
+        }
+
+        return view('layouts.frontend.pendampingan-acara', compact('contact', 'pmbSetting', 'item', 'setting', 'cleanWa'));
     }
 
     public function news(\Illuminate\Http\Request $request, $categorySlug = null)
