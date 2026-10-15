@@ -217,34 +217,27 @@
                                            placeholder="Contoh: Pendampingan Acara">
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <label for="link_form" class="form-label fw-bold text-dark small">Tautan Formulir Permohonan (Google Form)</label>
+                                    <label for="link_form" class="form-label fw-bold text-dark small">Tautan Link / URL Permohonan</label>
                                     <input type="text" id="link_form" name="link_form" class="form-control"
                                            value="{{ old('link_form', $pendampinganAcaraSetting->link_form ?: $item->url) }}"
-                                           placeholder="https://forms.gle/... atau https://docs.google.com/forms/...">
-                                    <div class="form-text small text-muted">Akan terbuka saat pengunjung mengklik tombol "{{ $pendampinganAcaraSetting->tombol_teks ?? 'Ajukan Permohonan' }}".</div>
+                                           placeholder="https://... (contoh: https://forms.gle/... atau URL tujuan lainnya)">
+                                    <div class="form-text small text-muted">Tautan langsung yang akan dibuka saat pengunjung mengklik tombol "{{ $pendampinganAcaraSetting->tombol_teks ?? 'Ajukan Permohonan' }}".</div>
                                 </div>
                             </div>
 
                             <div class="row g-3 mb-3">
-                                <div class="col-md-6 col-12">
+                                <div class="col-md-4 col-12">
                                     <label for="tombol_teks" class="form-label fw-bold text-dark small">Teks Tombol Permohonan</label>
                                     <input type="text" id="tombol_teks" name="tombol_teks" class="form-control"
                                            value="{{ old('tombol_teks', $pendampinganAcaraSetting->tombol_teks ?? 'Ajukan Permohonan') }}"
                                            placeholder="Contoh: Ajukan Permohonan">
                                 </div>
-                                <div class="col-md-6 col-12">
-                                    <label for="no_wa" class="form-label fw-bold text-dark small">Nomor WhatsApp Konsultasi Acara</label>
-                                    <input type="text" id="no_wa" name="no_wa" class="form-control"
-                                           value="{{ old('no_wa', $pendampinganAcaraSetting->no_wa) }}"
-                                           placeholder="Contoh: 081234567890">
+                                <div class="col-md-8 col-12">
+                                    <label for="sapaan" class="form-label fw-bold text-dark small">Kalimat Sapaan Utama (Heading)</label>
+                                    <input type="text" id="sapaan" name="sapaan" class="form-control"
+                                           value="{{ old('sapaan', $pendampinganAcaraSetting->sapaan) }}"
+                                           placeholder="Halo, Civitas Akademika Universitas Ibnu Sina dan Mitra Eksternal!">
                                 </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="sapaan" class="form-label fw-bold text-dark small">Kalimat Sapaan Utama (Heading)</label>
-                                <input type="text" id="sapaan" name="sapaan" class="form-control"
-                                       value="{{ old('sapaan', $pendampinganAcaraSetting->sapaan) }}"
-                                       placeholder="Halo, Civitas Akademika Universitas Ibnu Sina dan Mitra Eksternal!">
                             </div>
 
                             {{-- Editor TinyMCE Terpadu untuk Narasi & Poin Layanan --}}
@@ -260,6 +253,115 @@
                         </div>
                     @endif
 
+                    @if($item->kode === 'survey-layanan' && isset($surveyLayananSetting))
+                        {{-- ═════════════════════════════════════════════════════
+                             PENGATURAN SPESIFIK HALAMAN SURVEY LAYANAN
+                        ═════════════════════════════════════════════════════ --}}
+                        <div class="card border border-success-subtle bg-white p-3 mb-4 shadow-sm" style="border-radius: 12px;">
+                            <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="bi bi-chat-left-dots text-success fs-5"></i>
+                                    <h6 class="fw-bold text-dark mb-0">Pengaturan Detail Halaman & Tombol Survei (/survey-layanan)</h6>
+                                </div>
+                                <a href="{{ route('homepage.survey-layanan') }}" target="_blank" class="btn btn-sm btn-outline-success">
+                                    <i class="bi bi-box-arrow-up-right me-1"></i> Preview Halaman
+                                </a>
+                            </div>
+
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-12">
+                                    <label for="judul_seksi_survey" class="form-label fw-bold text-dark small">Judul Seksi Survei</label>
+                                    <input type="text" id="judul_seksi_survey" name="judul_seksi" class="form-control"
+                                           value="{{ old('judul_seksi', $surveyLayananSetting->judul_seksi ?? 'Survei Evaluasi') }}"
+                                           placeholder="Contoh: Survei Evaluasi">
+                                    <div class="form-text small text-muted">Judul utama yang tampil di atas deretan kartu survei.</div>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="deskripsi_seksi_survey" class="form-label fw-bold text-dark small">Deskripsi / Pengantar Singkat Survei</label>
+                                <textarea id="deskripsi_seksi_survey" name="deskripsi_seksi" rows="2" class="form-control" placeholder="Tuliskan keterangan pengantar survei...">{{ old('deskripsi_seksi', $surveyLayananSetting->deskripsi_seksi) }}</textarea>
+                            </div>
+
+                            {{-- ── BUILDER TOMBOL SURVEI (TAMBAH / HAPUS / EDIT LINK) ── --}}
+                            <div class="border rounded-3 p-3 bg-light">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <div>
+                                        <h6 class="fw-bold text-dark mb-1">
+                                            <i class="bi bi-ui-checks-grid text-success me-1"></i> Daftar Kartu & Tombol Link Survei
+                                        </h6>
+                                        <p class="text-muted small mb-0">Atur judul survei dan link tujuan (Google Form dsb). Anda bebas menambah atau menghapus tombol sesuai kebutuhan.</p>
+                                    </div>
+                                    <button type="button" class="btn btn-success btn-sm fw-bold px-3 shadow-sm" id="btn-tambah-survey">
+                                        <i class="bi bi-plus-circle-fill me-1"></i> Tambah Tombol Survei
+                                    </button>
+                                </div>
+
+                                <div id="survey-buttons-container" class="d-flex flex-column gap-3">
+                                    @forelse($surveyButtons as $index => $btn)
+                                        <div class="survey-button-item card border shadow-sm p-3 bg-white" data-index="{{ $index }}">
+                                            <input type="hidden" name="survey_buttons[{{ $index }}][id]" value="{{ $btn->id }}">
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="badge bg-success-subtle text-success fw-bold survey-btn-badge">
+                                                    Survei #<span class="survey-btn-number">{{ $index + 1 }}</span>
+                                                </span>
+                                                <button type="button" class="btn btn-outline-danger btn-sm py-0 px-2 btn-hapus-survey" title="Hapus Tombol">
+                                                    <i class="bi bi-trash-fill me-1"></i> Hapus
+                                                </button>
+                                            </div>
+                                            <div class="row g-2">
+                                                <div class="col-md-6 col-12">
+                                                    <label class="form-label small fw-semibold text-dark mb-1">Judul Survei / Kuesioner</label>
+                                                    <input type="text" name="survey_buttons[{{ $index }}][judul]" class="form-control form-control-sm"
+                                                           value="{{ $btn->judul }}" placeholder="Contoh: Survei Kepuasan Informasi Publik" required>
+                                                </div>
+                                                <div class="col-md-4 col-12">
+                                                    <label class="form-label small fw-semibold text-dark mb-1">Tautan Link URL (Google Form dsb)</label>
+                                                    <input type="text" name="survey_buttons[{{ $index }}][link_url]" class="form-control form-control-sm"
+                                                           value="{{ $btn->link_url }}" placeholder="https://forms.gle/..." required>
+                                                </div>
+                                                <div class="col-md-2 col-12">
+                                                    <label class="form-label small fw-semibold text-dark mb-1">Teks Tombol</label>
+                                                    <input type="text" name="survey_buttons[{{ $index }}][tombol_teks]" class="form-control form-control-sm"
+                                                           value="{{ $btn->tombol_teks ?? 'Isi Survei' }}" placeholder="Isi Survei">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @empty
+                                        <div class="survey-button-item card border shadow-sm p-3 bg-white" data-index="0">
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <span class="badge bg-success-subtle text-success fw-bold survey-btn-badge">
+                                                    Survei #<span class="survey-btn-number">1</span>
+                                                </span>
+                                                <button type="button" class="btn btn-outline-danger btn-sm py-0 px-2 btn-hapus-survey" title="Hapus Tombol">
+                                                    <i class="bi bi-trash-fill me-1"></i> Hapus
+                                                </button>
+                                            </div>
+                                            <div class="row g-2">
+                                                <div class="col-md-6 col-12">
+                                                    <label class="form-label small fw-semibold text-dark mb-1">Judul Survei / Kuesioner</label>
+                                                    <input type="text" name="survey_buttons[0][judul]" class="form-control form-control-sm"
+                                                           placeholder="Contoh: Survei Kepuasan Informasi Publik" required>
+                                                </div>
+                                                <div class="col-md-4 col-12">
+                                                    <label class="form-label small fw-semibold text-dark mb-1">Tautan Link URL (Google Form dsb)</label>
+                                                    <input type="text" name="survey_buttons[0][link_url]" class="form-control form-control-sm"
+                                                           placeholder="https://forms.gle/..." required>
+                                                </div>
+                                                <div class="col-md-2 col-12">
+                                                    <label class="form-label small fw-semibold text-dark mb-1">Teks Tombol</label>
+                                                    <input type="text" name="survey_buttons[0][tombol_teks]" class="form-control form-control-sm"
+                                                           value="Isi Survei" placeholder="Isi Survei">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforelse
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    @if(!in_array($item->kode, ['pendampingan-acara', 'survey-layanan']))
                     {{-- Card Target Tautan / Upload File --}}
                     <div class="card border border-light-subtle bg-light p-3 mb-3" style="border-radius: 10px;">
                         <label class="form-label fw-bold text-dark mb-2" style="font-size: 13.5px;">
@@ -342,6 +444,7 @@
                             @endif
                         </div>
                     </div>
+                    @endif
 
                     {{-- Pengaturan Tambahan --}}
                     <div class="row g-3 mb-4">
@@ -414,6 +517,24 @@
                             {{ url('/permintaan-rilis') }} <i class="bi bi-box-arrow-up-right"></i>
                         </a>
                     </div>
+                @elseif($item->kode === 'pendampingan-acara')
+                    <div class="mt-3 pt-3 border-top text-start">
+                        <small class="fw-bold text-dark d-block mb-1">
+                            <i class="bi bi-link-45deg text-success"></i> Halaman Publik Tujuan:
+                        </small>
+                        <a href="{{ route('homepage.pendampingan-acara') }}" target="_blank" class="small text-success fw-bold text-break d-flex align-items-center gap-1">
+                            {{ url('/pendampingan-acara') }} <i class="bi bi-box-arrow-up-right"></i>
+                        </a>
+                    </div>
+                @elseif($item->kode === 'survey-layanan')
+                    <div class="mt-3 pt-3 border-top text-start">
+                        <small class="fw-bold text-dark d-block mb-1">
+                            <i class="bi bi-link-45deg text-success"></i> Halaman Publik Tujuan:
+                        </small>
+                        <a href="{{ route('homepage.survey-layanan') }}" target="_blank" class="small text-success fw-bold text-break d-flex align-items-center gap-1">
+                            {{ url('/survey-layanan') }} <i class="bi bi-box-arrow-up-right"></i>
+                        </a>
+                    </div>
                 @endif
             </div>
         </div>
@@ -442,6 +563,84 @@
         if (namaInput && previewNamaLive) {
             namaInput.addEventListener('input', function () {
                 previewNamaLive.textContent = this.value.trim() || 'Nama Layanan';
+            });
+        }
+
+        // Script Dinamis Tambah & Hapus Tombol Survei
+        const btnTambahSurvey = document.getElementById('btn-tambah-survey');
+        const containerSurvey = document.getElementById('survey-buttons-container');
+
+        function updateSurveyIndices() {
+            if (!containerSurvey) return;
+            const items = containerSurvey.querySelectorAll('.survey-button-item');
+            items.forEach((item, idx) => {
+                item.setAttribute('data-index', idx);
+                const numberBadge = item.querySelector('.survey-btn-number');
+                if (numberBadge) numberBadge.textContent = (idx + 1);
+
+                const idInput = item.querySelector('input[name*="[id]"]');
+                if (idInput) idInput.name = `survey_buttons[${idx}][id]`;
+
+                const judulInput = item.querySelector('input[name*="[judul]"]');
+                if (judulInput) judulInput.name = `survey_buttons[${idx}][judul]`;
+
+                const linkInput = item.querySelector('input[name*="[link_url]"]');
+                if (linkInput) linkInput.name = `survey_buttons[${idx}][link_url]`;
+
+                const teksInput = item.querySelector('input[name*="[tombol_teks]"]');
+                if (teksInput) teksInput.name = `survey_buttons[${idx}][tombol_teks]`;
+            });
+        }
+
+        if (btnTambahSurvey && containerSurvey) {
+            btnTambahSurvey.addEventListener('click', function () {
+                const items = containerSurvey.querySelectorAll('.survey-button-item');
+                const nextIdx = items.length;
+
+                const template = document.createElement('div');
+                template.className = 'survey-button-item card border shadow-sm p-3 bg-white';
+                template.setAttribute('data-index', nextIdx);
+                template.innerHTML = `
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="badge bg-success-subtle text-success fw-bold survey-btn-badge">
+                            Survei #<span class="survey-btn-number">${nextIdx + 1}</span>
+                        </span>
+                        <button type="button" class="btn btn-outline-danger btn-sm py-0 px-2 btn-hapus-survey" title="Hapus Tombol">
+                            <i class="bi bi-trash-fill me-1"></i> Hapus
+                        </button>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-md-6 col-12">
+                            <label class="form-label small fw-semibold text-dark mb-1">Judul Survei / Kuesioner</label>
+                            <input type="text" name="survey_buttons[${nextIdx}][judul]" class="form-control form-control-sm"
+                                   placeholder="Contoh: Survei Kepuasan Layanan Baru" required>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <label class="form-label small fw-semibold text-dark mb-1">Tautan Link URL (Google Form dsb)</label>
+                            <input type="text" name="survey_buttons[${nextIdx}][link_url]" class="form-control form-control-sm"
+                                   placeholder="https://forms.gle/..." required>
+                        </div>
+                        <div class="col-md-2 col-12">
+                            <label class="form-label small fw-semibold text-dark mb-1">Teks Tombol</label>
+                            <input type="text" name="survey_buttons[${nextIdx}][tombol_teks]" class="form-control form-control-sm"
+                                   value="Isi Survei" placeholder="Isi Survei">
+                        </div>
+                    </div>
+                `;
+
+                containerSurvey.appendChild(template);
+                updateSurveyIndices();
+            });
+
+            containerSurvey.addEventListener('click', function (e) {
+                const hapusBtn = e.target.closest('.btn-hapus-survey');
+                if (hapusBtn) {
+                    const item = hapusBtn.closest('.survey-button-item');
+                    if (item) {
+                        item.remove();
+                        updateSurveyIndices();
+                    }
+                }
             });
         }
     });

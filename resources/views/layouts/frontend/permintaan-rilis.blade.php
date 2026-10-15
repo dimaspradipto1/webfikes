@@ -192,13 +192,18 @@
             </p>
           </div>
           <div>
-            @if(!empty($setting->link_form))
-              <a href="{{ $setting->link_form }}" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100 fw-bold py-2 shadow-sm" style="background-color: #0b6828; border-color: #0b6828; border-radius: 8px;">
+            @php
+              $rilisForm = trim($setting->link_form ?? '');
+              $isInvalidRilisForm = in_array(rtrim($rilisForm, '/'), ['https://forms.gle', 'http://forms.gle', 'forms.gle', ''], true);
+              $waRilisApplyText = rawurlencode('Halo Tim Humas UIS, saya ingin mengajukan permohonan penerbitan rilis berita / siaran pers.');
+            @endphp
+            @if(!$isInvalidRilisForm)
+              <a href="{{ $rilisForm }}" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100 fw-bold py-2 shadow-sm" style="background-color: #0b6828; border-color: #0b6828; border-radius: 8px;">
                 <i class="bi bi-box-arrow-up-right me-1"></i> Isi Formulir Rilis
               </a>
             @else
-              <a href="https://forms.gle/" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100 fw-bold py-2 shadow-sm" style="background-color: #0b6828; border-color: #0b6828; border-radius: 8px;">
-                <i class="bi bi-box-arrow-up-right me-1"></i> Isi Formulir Rilis
+              <a href="https://wa.me/{{ $cleanWa }}?text={{ $waRilisApplyText }}" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100 fw-bold py-2 shadow-sm" style="background-color: #0b6828; border-color: #0b6828; border-radius: 8px;">
+                <i class="bi bi-whatsapp me-1"></i> Ajukan via WhatsApp
               </a>
             @endif
           </div>

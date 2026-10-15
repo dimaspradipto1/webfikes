@@ -50,6 +50,7 @@ class LayananHumasItem extends Model
             'template-dokumen'   => route('homepage.template-dokumen'),
             'permintaan-rilis'   => route('homepage.permintaan-rilis'),
             'pendampingan-acara' => route('homepage.pendampingan-acara'),
+            'survey-layanan'     => route('homepage.survey-layanan'),
             'panduan-desain'     => route('homepage.desain-grafis'),
             default              => '#',
         };

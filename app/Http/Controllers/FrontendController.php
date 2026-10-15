@@ -513,7 +513,7 @@ class FrontendController extends Controller
                 'badge_label'       => 'LAYANAN PUBLIKASI & SIARAN PERS',
                 'judul_seksi'       => 'Ketentuan Permintaan Rilis Berita',
                 'deskripsi_seksi'   => 'Layanan ini disediakan oleh Biro Humas Universitas Ibnu Sina (UIS) guna memfasilitasi sivitas akademika dalam mengajukan rilis berita kegiatan atau siaran pers untuk dipublikasikan pada portal berita resmi uis.ac.id dan media massa mitra universitas.',
-                'link_form'         => 'https://forms.gle/',
+                'link_form'         => null,
                 'email_tujuan'      => 'info@uis.ac.id',
                 'no_wa'             => $contact->no_wa ?? '081234567890',
                 'min_kata'          => 250,
@@ -548,7 +548,7 @@ class FrontendController extends Controller
                 'paragraf_2'    => 'Apakah Anda sedang merencanakan seminar, workshop, kegiatan sosial, atau event lainnya? Tim kami siap membantu dalam hal:',
                 'poin_bantuan'  => "Perencanaan dan konsep acara,\nStrategi promosi dan publikasi,\nPengelolaan logistik,\nPengurusan SOP dan perizinan, serta\nPendampingan selama pelaksanaan acara.",
                 'paragraf_3'    => 'Untuk memulai, silakan isi formulir konsultasi melalui tombol “Ajukan Permohonan” berikut:',
-                'link_form'     => 'https://forms.gle/',
+                'link_form'     => null,
                 'tombol_teks'   => 'Ajukan Permohonan',
                 'no_wa'         => '081234567890',
                 'is_active'     => true,
@@ -564,6 +564,30 @@ class FrontendController extends Controller
         }
 
         return view('layouts.frontend.pendampingan-acara', compact('contact', 'pmbSetting', 'item', 'setting', 'cleanWa'));
+    }
+
+    public function surveyLayanan()
+    {
+        $contact    = \App\Models\Contact::first();
+        $pmbSetting = \App\Models\PmbSetting::first();
+        $item       = \App\Models\LayananHumasItem::where('kode', 'survey-layanan')->first();
+        $setting    = \App\Models\SurveyLayananSetting::firstOrCreate(
+            ['id' => 1],
+            [
+                'judul_hero'      => 'Survey Layanan',
+                'subjudul_hero'   => 'Kuesioner Evaluasi Kepuasan & Mutu Pelayanan Humas Universitas Ibnu Sina',
+                'judul_seksi'     => 'Survei Evaluasi',
+                'deskripsi_seksi' => 'Silakan isi formulir evaluasi kepuasan layanan berikut untuk membantu kami meningkatkan kualitas mutu pelayanan Humas Universitas Ibnu Sina.',
+                'is_active'       => true,
+            ]
+        );
+
+        $buttons = \App\Models\SurveyLayananButton::where('is_active', true)
+            ->orderBy('urutan')
+            ->orderBy('id')
+            ->get();
+
+        return view('layouts.frontend.survey-layanan', compact('contact', 'pmbSetting', 'item', 'setting', 'buttons'));
     }
 
     public function news(\Illuminate\Http\Request $request, $categorySlug = null)

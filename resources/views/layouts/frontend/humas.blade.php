@@ -664,7 +664,7 @@
           'galeri-kegiatan'    => ['url' => route('homepage.galeri.humas'), 'icon' => 'bi-images', 'label' => 'Galeri Kegiatan'],
           'permintaan-rilis'   => ['url' => route('homepage.permintaan-rilis'), 'icon' => 'bi-journal-richtext', 'label' => 'Permintaan Rilis'],
           'pendampingan-acara' => ['url' => route('homepage.pendampingan-acara'), 'icon' => 'bi-people-fill', 'label' => 'Pendampingan Acara'],
-          'survey-layanan'     => ['url' => route('homepage.kontak'), 'icon' => 'bi-chat-left-dots', 'label' => 'Survey Layanan'],
+          'survey-layanan'     => ['url' => route('homepage.survey-layanan'), 'icon' => 'bi-chat-left-dots', 'label' => 'Survey Layanan'],
         ];
       @endphp
       @foreach($defaultIcons as $key => $def)

@@ -48,9 +48,9 @@
 
   .template-card-link:hover .template-icon-card {
     transform: translateY(-8px);
-    background-color: #e2f0e6;
-    border-color: #0b6828;
-    box-shadow: 0 18px 36px rgba(11, 104, 40, 0.15) !important;
+    background-color: #fffef2;
+    border-color: #f59e0b;
+    box-shadow: 0 16px 36px rgba(245, 158, 11, 0.22), 0 0 0 1.5px #f59e0b !important;
   }
 
   .template-svg-wrap {
@@ -61,7 +61,7 @@
   }
 
   .template-card-link:hover .template-svg-wrap {
-    transform: scale(1.05);
+    transform: scale(1.06);
   }
 
   .template-card-title {
@@ -71,13 +71,16 @@
     margin-top: 15px;
     text-align: center;
     letter-spacing: -0.2px;
-    transition: color 0.25s ease;
+    transition: all 0.25s ease;
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
   .template-card-link:hover .template-card-title {
-    color: #0b6828;
+    color: #d97706;
     text-decoration: underline;
+    text-decoration-color: #f59e0b;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 2px;
   }
 
   /* Yellow Divider Line matching FAQ Section */

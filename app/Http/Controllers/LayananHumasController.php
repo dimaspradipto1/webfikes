@@ -27,14 +27,34 @@ class LayananHumasController extends Controller
         $item = LayananHumasItem::where('kode', $kode)->firstOrFail();
         $permintaanRilisSetting = null;
         $pendampinganAcaraSetting = null;
+        $surveyLayananSetting = null;
+        $surveyButtons = collect();
 
         if ($kode === 'permintaan-rilis') {
             $permintaanRilisSetting = \App\Models\PermintaanRilisSetting::firstOrCreate(['id' => 1]);
         } elseif ($kode === 'pendampingan-acara') {
             $pendampinganAcaraSetting = \App\Models\PendampinganAcaraSetting::firstOrCreate(['id' => 1]);
+        } elseif ($kode === 'survey-layanan') {
+            $surveyLayananSetting = \App\Models\SurveyLayananSetting::firstOrCreate(
+                ['id' => 1],
+                [
+                    'judul_hero'      => 'Survey Layanan',
+                    'subjudul_hero'   => 'Kuesioner Evaluasi Kepuasan & Mutu Pelayanan Humas Universitas Ibnu Sina',
+                    'judul_seksi'     => 'Survei Evaluasi',
+                    'deskripsi_seksi' => 'Silakan isi formulir evaluasi kepuasan layanan berikut untuk membantu kami meningkatkan kualitas mutu pelayanan Humas Universitas Ibnu Sina.',
+                    'is_active'       => true,
+                ]
+            );
+            $surveyButtons = \App\Models\SurveyLayananButton::orderBy('urutan')->orderBy('id')->get();
         }
 
-        return view('pages.layanan-humas.edit', compact('item', 'permintaanRilisSetting', 'pendampinganAcaraSetting'));
+        return view('pages.layanan-humas.edit', compact(
+            'item', 
+            'permintaanRilisSetting', 
+            'pendampinganAcaraSetting',
+            'surveyLayananSetting',
+            'surveyButtons'
+        ));
     }
 
     /**
@@ -108,6 +128,18 @@ class LayananHumasController extends Controller
             $data['file_path'] = $request->file('file')->store('layanan-humas', 'public');
         }
 
+        $formLink = trim($request->input('link_form', ''));
+        if (!empty($formLink)) {
+            if (!str_starts_with($formLink, 'http://') && !str_starts_with($formLink, 'https://') && !str_starts_with($formLink, '/') && !str_starts_with($formLink, '#')) {
+                $formLink = 'https://' . $formLink;
+            }
+            if (in_array(rtrim($formLink, '/'), ['https://forms.gle', 'http://forms.gle'], true)) {
+                $formLink = null;
+            }
+        } else {
+            $formLink = null;
+        }
+
         $item->update($data);
 
         // Update pengaturan khusus jika kode adalah permintaan-rilis
@@ -116,7 +148,7 @@ class LayananHumasController extends Controller
             $settingData = [
                 'judul_seksi'      => $validated['judul_seksi'] ?? $setting->judul_seksi,
                 'deskripsi_seksi'  => $request->input('deskripsi_seksi', $setting->deskripsi_seksi),
-                'link_form'        => !empty($url) ? $url : $setting->link_form,
+                'link_form'        => $formLink,
                 'no_wa'            => $validated['no_wa'] ?? $setting->no_wa,
                 'email_tujuan'     => $validated['email_tujuan'] ?? $setting->email_tujuan,
                 'min_kata'         => $validated['min_kata'] ?? $setting->min_kata,
@@ -129,6 +161,7 @@ class LayananHumasController extends Controller
                 $settingData['file_sop'] = null;
             }
             $setting->update($settingData);
+            $item->update(['url' => $formLink]);
         }
 
         // Update pengaturan khusus jika kode adalah pendampingan-acara
@@ -138,16 +171,77 @@ class LayananHumasController extends Controller
                 'judul_seksi'  => $validated['judul_seksi'] ?? $setting->judul_seksi,
                 'sapaan'       => $validated['sapaan'] ?? $setting->sapaan,
                 'konten'       => $request->input('konten', $setting->konten),
-                'link_form'    => !empty($url) ? $url : $setting->link_form,
+                'link_form'    => $formLink,
                 'tombol_teks'  => $validated['tombol_teks'] ?? $setting->tombol_teks,
-                'no_wa'        => $validated['no_wa'] ?? $setting->no_wa,
+                'no_wa'        => null,
+                'file_sop'     => null,
             ];
-            if (isset($data['file_path'])) {
-                $settingData['file_sop'] = $data['file_path'];
-            } elseif ($request->has('hapus_file')) {
-                $settingData['file_sop'] = null;
-            }
             $setting->update($settingData);
+            $item->update(['url' => $formLink]);
+        }
+
+        // Update pengaturan khusus jika kode adalah survey-layanan
+        if ($kode === 'survey-layanan') {
+            $surveySetting = \App\Models\SurveyLayananSetting::firstOrCreate(['id' => 1]);
+            $surveySetting->update([
+                'judul_seksi'     => $validated['judul_seksi'] ?? $surveySetting->judul_seksi,
+                'deskripsi_seksi' => $request->input('deskripsi_seksi', $surveySetting->deskripsi_seksi),
+            ]);
+
+            // Selalu arahkan item->url ke halaman publik /survey-layanan jika tidak ada url khusus
+            if (empty($item->url)) {
+                $item->update(['url' => route('homepage.survey-layanan')]);
+            }
+
+            // Simpan daftar Tombol Survei Dinamis (Tambah, Edit, Hapus)
+            $buttonInputs = $request->input('survey_buttons', []);
+            $keptIds = [];
+
+            if (is_array($buttonInputs)) {
+                foreach ($buttonInputs as $idx => $btnData) {
+                    $btnJudul = trim($btnData['judul'] ?? '');
+                    $btnLink  = trim($btnData['link_url'] ?? '');
+                    $btnTeks  = trim($btnData['tombol_teks'] ?? '') ?: 'Isi Survei';
+
+                    if (empty($btnJudul) && empty($btnLink)) {
+                        continue; // Lewati baris kosong
+                    }
+
+                    if (!empty($btnLink) && !str_starts_with($btnLink, 'http://') && !str_starts_with($btnLink, 'https://') && !str_starts_with($btnLink, '/') && !str_starts_with($btnLink, '#')) {
+                        $btnLink = 'https://' . $btnLink;
+                    }
+
+                    $btnId = !empty($btnData['id']) ? (int) $btnData['id'] : null;
+
+                    if ($btnId && $existingBtn = \App\Models\SurveyLayananButton::find($btnId)) {
+                        $existingBtn->update([
+                            'judul'        => $btnJudul,
+                            'link_url'     => $btnLink,
+                            'tombol_teks'  => $btnTeks,
+                            'urutan'       => $idx + 1,
+                            'is_active'    => true,
+                        ]);
+                        $keptIds[] = $existingBtn->id;
+                    } else {
+                        $newBtn = \App\Models\SurveyLayananButton::create([
+                            'judul'        => $btnJudul,
+                            'link_url'     => $btnLink,
+                            'tombol_teks'  => $btnTeks,
+                            'urutan'       => $idx + 1,
+                            'is_active'    => true,
+                        ]);
+                        $keptIds[] = $newBtn->id;
+                    }
+                }
+            }
+
+            // Hapus tombol yang dihapus oleh admin dari form
+            if (!empty($keptIds)) {
+                \App\Models\SurveyLayananButton::whereNotIn('id', $keptIds)->delete();
+            } else {
+                // Jika sengaja dikosongkan semua
+                \App\Models\SurveyLayananButton::truncate();
+            }
         }
 
         alert()->success('Berhasil!', 'Pengaturan layanan "' . $item->nama . '" berhasil diperbarui.');

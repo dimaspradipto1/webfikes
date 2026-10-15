@@ -86,6 +86,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/template-dokumen', 'templateDokumen')->name('homepage.template-dokumen');
     Route::get('/permintaan-rilis', 'permintaanRilis')->name('homepage.permintaan-rilis');
     Route::get('/pendampingan-acara', 'pendampinganAcara')->name('homepage.pendampingan-acara');
+    Route::get('/survey-layanan', 'surveyLayanan')->name('homepage.survey-layanan');
     Route::get('/kontak', 'kontak')->name('homepage.kontak');
 });
 
