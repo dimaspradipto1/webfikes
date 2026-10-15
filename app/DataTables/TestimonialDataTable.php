@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\Testimonial;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -15,7 +16,7 @@ class TestimonialDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder<Testimonial> $query
+     * @param  QueryBuilder<Testimonial>  $query
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -23,8 +24,8 @@ class TestimonialDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('DT_RowIndex', '')
             ->addColumn('nama', function ($testimonial) {
-                return '<div class="fw-semibold">' . e($testimonial->nama) . '</div>'
-                     . '<span class="text-muted small">' . e($testimonial->pekerjaan) . '</span>';
+                return '<div class="fw-semibold">'.e($testimonial->nama).'</div>'
+                     .'<span class="text-muted small">'.e($testimonial->pekerjaan).'</span>';
             })
             ->addColumn('rating', function ($testimonial) {
                 $stars = '';
@@ -35,14 +36,16 @@ class TestimonialDataTable extends DataTable
                         $stars .= '<i class="bi bi-star text-muted" style="margin-right:2px"></i>';
                     }
                 }
+
                 return $stars;
             })
             ->addColumn('pesan', function ($testimonial) {
-                if (!$testimonial->pesan) {
+                if (! $testimonial->pesan) {
                     return '<span class="text-muted fst-italic">—</span>';
                 }
                 $clean = trim(html_entity_decode(strip_tags($testimonial->pesan), ENT_QUOTES, 'UTF-8'));
-                return '<span title="' . e($clean) . '">' . e(\Illuminate\Support\Str::limit($clean, 60)) . '</span>';
+
+                return '<span title="'.e($clean).'">'.e(Str::limit($clean, 60)).'</span>';
             })
             ->addColumn('kategori', function ($testimonial) {
                 $kat = strtolower($testimonial->kategori ?? '');
@@ -55,19 +58,21 @@ class TestimonialDataTable extends DataTable
                 } elseif (str_contains($kat, 'dosen') || str_contains($kat, 'staff')) {
                     return '<span class="badge bg-info text-dark">Dosen / Staff</span>';
                 }
-                return '<span class="badge bg-secondary">' . e($testimonial->kategori ?? 'Umum') . '</span>';
+
+                return '<span class="badge bg-secondary">'.e($testimonial->kategori ?? 'Umum').'</span>';
             })
             ->addColumn('aktif', function ($testimonial) {
                 if ($testimonial->aktif) {
                     return '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Aktif / Tayang</span>';
                 }
+
                 return '<span class="badge bg-warning text-dark"><i class="bi bi-hourglass-split me-1"></i>Pending</span>';
             })
             ->addColumn('action', function ($testimonial) {
-                $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
+                $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
 
                 // Tombol Edit
-                $btn .= '<a href="' . route('testimonial.edit', $testimonial->id) . '"
+                $btn .= '<a href="'.route('testimonial.edit', $testimonial->id).'"
                             class="btn btn-sm btn-warning text-white"
                             style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                             title="Edit">
@@ -75,11 +80,11 @@ class TestimonialDataTable extends DataTable
                          </a>';
 
                 // Tombol Hapus
-                $btn .= '<form action="' . route('testimonial.destroy', $testimonial->id) . '"
+                $btn .= '<form action="'.route('testimonial.destroy', $testimonial->id).'"
                               method="POST" class="m-0"
                               onsubmit="return confirm(\'Yakin ingin menghapus ulasan ini?\')">'
-                        . csrf_field() . method_field('DELETE')
-                        . '<button type="submit"
+                        .csrf_field().method_field('DELETE')
+                        .'<button type="submit"
                                    class="btn btn-sm btn-danger"
                                    style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                                    title="Hapus">
@@ -88,6 +93,7 @@ class TestimonialDataTable extends DataTable
                          </form>';
 
                 $btn .= '</div>';
+
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
@@ -173,6 +179,6 @@ class TestimonialDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Testimonial_' . date('YmdHis');
+        return 'Testimonial_'.date('YmdHis');
     }
 }

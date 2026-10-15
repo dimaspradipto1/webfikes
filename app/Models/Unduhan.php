@@ -24,8 +24,8 @@ class Unduhan extends Model
     ];
 
     protected $casts = [
-        'is_active'      => 'boolean',
-        'urutan'         => 'integer',
+        'is_active' => 'boolean',
+        'urutan' => 'integer',
         'download_count' => 'integer',
     ];
 
@@ -35,8 +35,9 @@ class Unduhan extends Model
     public function getDownloadUrlAttribute(): string
     {
         if ($this->file_path) {
-            return asset('storage/' . $this->file_path);
+            return asset('storage/'.$this->file_path);
         }
+
         return $this->file_url ?? '#';
     }
 
@@ -46,11 +47,11 @@ class Unduhan extends Model
     public function getCategoryIconAttribute(): string
     {
         return match ($this->kategori) {
-            'image'    => 'bi-image',
-            'video'    => 'bi-camera-video',
-            'audio'    => 'bi-music-note-beamed',
+            'image' => 'bi-image',
+            'video' => 'bi-camera-video',
+            'audio' => 'bi-music-note-beamed',
             'template' => 'bi-brush',
-            default    => 'bi-file-earmark-arrow-down',
+            default => 'bi-file-earmark-arrow-down',
         };
     }
 }

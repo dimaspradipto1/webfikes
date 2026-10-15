@@ -23,7 +23,7 @@ class LayananTerkait extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'urutan'    => 'integer',
+        'urutan' => 'integer',
     ];
 
     /**
@@ -38,8 +38,10 @@ class LayananTerkait extends Model
             if (str_starts_with($this->logo, 'assets/')) {
                 return asset($this->logo);
             }
-            return asset('storage/' . $this->logo);
+
+            return asset('storage/'.$this->logo);
         }
+
         return null;
     }
 }

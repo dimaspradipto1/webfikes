@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pendampingan_acara_settings', function (Blueprint $table) {
-            if (!Schema::hasColumn('pendampingan_acara_settings', 'konten')) {
+            if (! Schema::hasColumn('pendampingan_acara_settings', 'konten')) {
                 $table->longText('konten')->nullable()->after('sapaan');
             }
         });

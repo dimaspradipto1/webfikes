@@ -26,7 +26,7 @@ class DesainGrafis extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'urutan'    => 'integer',
+        'urutan' => 'integer',
     ];
 
     /**
@@ -35,11 +35,11 @@ class DesainGrafis extends Model
     public function getKategoriLabelAttribute(): string
     {
         return match ($this->kategori) {
-            'audit'   => 'Auditorium lt. 4 Rektorat',
-            'sidang'  => 'Ruang Sidang lt. 2 Rektorat',
+            'audit' => 'Auditorium lt. 4 Rektorat',
+            'sidang' => 'Ruang Sidang lt. 2 Rektorat',
             'dekanat' => 'Ruang Rapat Dekanat',
             'spanduk' => 'Banner & Spanduk Outdoor',
-            default   => ucfirst($this->kategori ?? 'Lainnya'),
+            default => ucfirst($this->kategori ?? 'Lainnya'),
         };
     }
 
@@ -49,8 +49,9 @@ class DesainGrafis extends Model
     public function getPreviewUrlAttribute(): ?string
     {
         if ($this->gambar_preview) {
-            return asset('storage/' . $this->gambar_preview);
+            return asset('storage/'.$this->gambar_preview);
         }
+
         return null;
     }
 }

@@ -16,19 +16,19 @@ class DesainGrafisController extends Controller
     public function index(DesainGrafisDataTable $dataTable)
     {
         $setting = DesainGrafisSetting::firstOrCreate([], [
-            'hero_title'         => 'Desain Mudah,',
-            'hero_highlight'     => 'Siap Digunakan !',
-            'hero_subtitle'      => 'Kami menyediakan template desain resmi untuk keperluan presentasi LED, ruang sidang, agenda rapat, dan spanduk acara di lingkungan Universitas Ibnu Sina.',
-            'order_box_title'    => 'Pesan desain disini',
-            'order_box_text'     => 'Butuh desain yang belum tersedia dalam template? Sampaikan kebutuhan acara Anda, dan tim Humas & Promosi UIS siap membantu mewujudkannya.',
+            'hero_title' => 'Desain Mudah,',
+            'hero_highlight' => 'Siap Digunakan !',
+            'hero_subtitle' => 'Kami menyediakan template desain resmi untuk keperluan presentasi LED, ruang sidang, agenda rapat, dan spanduk acara di lingkungan Universitas Ibnu Sina.',
+            'order_box_title' => 'Pesan desain disini',
+            'order_box_text' => 'Butuh desain yang belum tersedia dalam template? Sampaikan kebutuhan acara Anda, dan tim Humas & Promosi UIS siap membantu mewujudkannya.',
             'order_box_btn_text' => 'Pesan Sekarang',
-            'track_bar_text'     => 'Lacak progress pesanan desain kamu disini!',
-            'stat_total'         => 82,
-            'stat_selesai'       => 74,
-            'stat_dikerjakan'    => 2,
-            'stat_menunggu'      => 5,
-            'guide_title'        => 'Langkah Menggunakan Templat Desain',
-            'guide_steps'        => "1. Pilih Templat\n2. Masuk ke Canva\n3. Edit Teks/Elemen Templat\n4. Desain Siap\n5. Export Desain format .JPG\n6. Klik tombol Share (kanan atas)\n7. Klik Download\n8. Pilih Format .JPG\n9. Atur Quality Spasi ke 100% untuk kualitas terbaik\n10. Klik Download",
+            'track_bar_text' => 'Lacak progress pesanan desain kamu disini!',
+            'stat_total' => 82,
+            'stat_selesai' => 74,
+            'stat_dikerjakan' => 2,
+            'stat_menunggu' => 5,
+            'guide_title' => 'Langkah Menggunakan Templat Desain',
+            'guide_steps' => "1. Pilih Templat\n2. Masuk ke Canva\n3. Edit Teks/Elemen Templat\n4. Desain Siap\n5. Export Desain format .JPG\n6. Klik tombol Share (kanan atas)\n7. Klik Download\n8. Pilih Format .JPG\n9. Atur Quality Spasi ke 100% untuk kualitas terbaik\n10. Klik Download",
         ]);
 
         return $dataTable->render('pages.desain-grafis.index', compact('setting'));
@@ -39,24 +39,24 @@ class DesainGrafisController extends Controller
         $setting = DesainGrafisSetting::firstOrCreate([], []);
 
         $validated = $request->validate([
-            'hero_title'         => ['required', 'string', 'max:255'],
-            'hero_highlight'     => ['required', 'string', 'max:255'],
-            'hero_subtitle'      => ['nullable', 'string'],
-            'order_box_title'    => ['required', 'string', 'max:255'],
-            'order_box_text'     => ['nullable', 'string'],
+            'hero_title' => ['required', 'string', 'max:255'],
+            'hero_highlight' => ['required', 'string', 'max:255'],
+            'hero_subtitle' => ['nullable', 'string'],
+            'order_box_title' => ['required', 'string', 'max:255'],
+            'order_box_text' => ['nullable', 'string'],
             'order_box_btn_text' => ['required', 'string', 'max:100'],
-            'order_box_wa_url'   => ['nullable', 'url', 'max:1000'],
-            'track_bar_text'     => ['required', 'string', 'max:255'],
-            'stat_total'         => ['required', 'integer', 'min:0'],
-            'stat_selesai'       => ['required', 'integer', 'min:0'],
-            'stat_dikerjakan'    => ['required', 'integer', 'min:0'],
-            'stat_menunggu'      => ['required', 'integer', 'min:0'],
-            'guide_title'        => ['nullable', 'string', 'max:255'],
-            'guide_steps'        => ['nullable', 'string'],
-            'guide_image'        => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg', 'max:5120'], // maks 5MB
+            'order_box_wa_url' => ['nullable', 'url', 'max:1000'],
+            'track_bar_text' => ['required', 'string', 'max:255'],
+            'stat_total' => ['required', 'integer', 'min:0'],
+            'stat_selesai' => ['required', 'integer', 'min:0'],
+            'stat_dikerjakan' => ['required', 'integer', 'min:0'],
+            'stat_menunggu' => ['required', 'integer', 'min:0'],
+            'guide_title' => ['nullable', 'string', 'max:255'],
+            'guide_steps' => ['nullable', 'string'],
+            'guide_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg', 'max:5120'], // maks 5MB
         ], [
             'guide_image.image' => 'File gambar panduan harus berupa foto/gambar yang valid.',
-            'guide_image.max'   => 'Ukuran gambar panduan maksimal 5 MB.',
+            'guide_image.max' => 'Ukuran gambar panduan maksimal 5 MB.',
         ]);
 
         $guideImagePath = $setting->guide_image;
@@ -96,16 +96,16 @@ class DesainGrafisController extends Controller
         }
 
         DesainGrafis::create([
-            'judul'          => $request->judul,
-            'kategori'       => $request->kategori,
-            'badge_teks'     => $request->badge_teks,
-            'spesifikasi'    => $request->spesifikasi,
-            'deskripsi'      => $request->deskripsi,
-            'canva_url'      => $request->canva_url,
+            'judul' => $request->judul,
+            'kategori' => $request->kategori,
+            'badge_teks' => $request->badge_teks,
+            'spesifikasi' => $request->spesifikasi,
+            'deskripsi' => $request->deskripsi,
+            'canva_url' => $request->canva_url,
             'gambar_preview' => $previewPath,
             'warna_gradient' => $request->warna_gradient ?: 'linear-gradient(135deg, #0b6828 0%, #15803d 100%)',
-            'urutan'         => $request->urutan ?? 0,
-            'is_active'      => $request->has('is_active') ? true : false,
+            'urutan' => $request->urutan ?? 0,
+            'is_active' => $request->has('is_active') ? true : false,
         ]);
 
         alert()->success('Berhasil!', 'Templat desain grafis baru berhasil ditambahkan.');
@@ -130,16 +130,16 @@ class DesainGrafisController extends Controller
         }
 
         $desainGrafis->update([
-            'judul'          => $request->judul,
-            'kategori'       => $request->kategori,
-            'badge_teks'     => $request->badge_teks,
-            'spesifikasi'    => $request->spesifikasi,
-            'deskripsi'      => $request->deskripsi,
-            'canva_url'      => $request->canva_url,
+            'judul' => $request->judul,
+            'kategori' => $request->kategori,
+            'badge_teks' => $request->badge_teks,
+            'spesifikasi' => $request->spesifikasi,
+            'deskripsi' => $request->deskripsi,
+            'canva_url' => $request->canva_url,
             'gambar_preview' => $previewPath,
             'warna_gradient' => $request->warna_gradient ?: $desainGrafis->warna_gradient,
-            'urutan'         => $request->urutan ?? 0,
-            'is_active'      => $request->has('is_active') ? true : false,
+            'urutan' => $request->urutan ?? 0,
+            'is_active' => $request->has('is_active') ? true : false,
         ]);
 
         alert()->success('Berhasil!', 'Templat desain grafis berhasil diperbarui.');

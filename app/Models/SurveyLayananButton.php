@@ -22,8 +22,8 @@ class SurveyLayananButton extends Model
 
     protected $casts = [
         'target_blank' => 'boolean',
-        'is_active'    => 'boolean',
-        'urutan'       => 'integer',
+        'is_active' => 'boolean',
+        'urutan' => 'integer',
     ];
 
     /**
@@ -32,9 +32,10 @@ class SurveyLayananButton extends Model
     public function getFormattedUrlAttribute(): string
     {
         $url = trim($this->link_url ?? '');
-        if (!empty($url) && !str_starts_with($url, 'http://') && !str_starts_with($url, 'https://') && !str_starts_with($url, '/') && !str_starts_with($url, '#')) {
-            return 'https://' . $url;
+        if (! empty($url) && ! str_starts_with($url, 'http://') && ! str_starts_with($url, 'https://') && ! str_starts_with($url, '/') && ! str_starts_with($url, '#')) {
+            return 'https://'.$url;
         }
+
         return $url ?: '#';
     }
 }

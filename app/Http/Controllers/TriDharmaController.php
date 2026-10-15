@@ -32,11 +32,11 @@ class TriDharmaController extends Controller
     public function store(TriDharmaRequest $request): RedirectResponse
     {
         TriDharma::create([
-            'icon'      => $request->icon,
-            'warna'     => $request->warna ?? '#823ca2',
-            'judul'     => $request->judul,
+            'icon' => $request->icon,
+            'warna' => $request->warna ?? '#823ca2',
+            'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
-            'urutan'    => $request->urutan ?? 0,
+            'urutan' => $request->urutan ?? 0,
             'is_active' => $request->boolean('is_active', true),
         ]);
 
@@ -59,11 +59,11 @@ class TriDharmaController extends Controller
     public function update(TriDharmaRequest $request, TriDharma $tridharma): RedirectResponse
     {
         $tridharma->update([
-            'icon'      => $request->icon,
-            'warna'     => $request->warna ?? '#823ca2',
-            'judul'     => $request->judul,
+            'icon' => $request->icon,
+            'warna' => $request->warna ?? '#823ca2',
+            'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
-            'urutan'    => $request->urutan ?? 0,
+            'urutan' => $request->urutan ?? 0,
             'is_active' => $request->boolean('is_active', true),
         ]);
 

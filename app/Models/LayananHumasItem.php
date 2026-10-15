@@ -26,8 +26,8 @@ class LayananHumasItem extends Model
 
     protected $casts = [
         'target_blank' => 'boolean',
-        'is_active'    => 'boolean',
-        'urutan'       => 'integer',
+        'is_active' => 'boolean',
+        'urutan' => 'integer',
     ];
 
     /**
@@ -36,23 +36,23 @@ class LayananHumasItem extends Model
     public function getTargetUrlAttribute(): string
     {
         if ($this->file_path) {
-            return asset('storage/' . $this->file_path);
+            return asset('storage/'.$this->file_path);
         }
 
-        if (!empty($this->url)) {
+        if (! empty($this->url)) {
             return $this->url;
         }
 
         return match ($this->kode) {
-            'unduhan'          => route('homepage.unduhan'),
-            'desain-grafis'    => route('homepage.desain-grafis'),
-            'galeri-kegiatan'  => route('homepage.galeri.humas'),
-            'template-dokumen'   => route('homepage.template-dokumen'),
-            'permintaan-rilis'   => route('homepage.permintaan-rilis'),
+            'unduhan' => route('homepage.unduhan'),
+            'desain-grafis' => route('homepage.desain-grafis'),
+            'galeri-kegiatan' => route('homepage.galeri.humas'),
+            'template-dokumen' => route('homepage.template-dokumen'),
+            'permintaan-rilis' => route('homepage.permintaan-rilis'),
             'pendampingan-acara' => route('homepage.pendampingan-acara'),
-            'survey-layanan'     => route('homepage.survey-layanan'),
-            'panduan-desain'     => route('homepage.desain-grafis'),
-            default              => '#',
+            'survey-layanan' => route('homepage.survey-layanan'),
+            'panduan-desain' => route('homepage.desain-grafis'),
+            default => '#',
         };
     }
 

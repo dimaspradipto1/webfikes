@@ -18,18 +18,18 @@ return new class extends Migration
             $table->string('badge_label')->default('LAYANAN PUBLIKASI & SIARAN PERS');
             $table->string('judul_seksi')->default('Ketentuan Permintaan Rilis Berita');
             $table->text('deskripsi_seksi')->nullable();
-            
+
             // Link & Kontak Pengajuan
             $table->string('link_form', 1000)->nullable();
             $table->string('no_wa', 50)->nullable();
             $table->string('email_tujuan', 100)->nullable();
             $table->string('file_sop', 255)->nullable();
-            
+
             // Parameter & Teks Khusus
             $table->integer('min_kata')->default(250);
             $table->integer('min_paragraf')->default(4);
             $table->text('catatan_tambahan')->nullable();
-            
+
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

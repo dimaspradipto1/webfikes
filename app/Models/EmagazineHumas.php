@@ -50,8 +50,9 @@ class EmagazineHumas extends Model
     public function getTab1DownloadLinkAttribute(): string
     {
         if ($this->tab_1_file_download) {
-            return asset('storage/' . $this->tab_1_file_download);
+            return asset('storage/'.$this->tab_1_file_download);
         }
+
         return $this->tab_1_download_url ?: '#';
     }
 
@@ -61,8 +62,9 @@ class EmagazineHumas extends Model
     public function getTab2DownloadLinkAttribute(): string
     {
         if ($this->tab_2_file_download) {
-            return asset('storage/' . $this->tab_2_file_download);
+            return asset('storage/'.$this->tab_2_file_download);
         }
+
         return $this->tab_2_download_url ?: '#';
     }
 }

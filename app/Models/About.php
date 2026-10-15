@@ -41,7 +41,7 @@ class About extends Model
      */
     public function hasVideo(): bool
     {
-        return !empty($this->video_url) || !empty($this->video_file);
+        return ! empty($this->video_url) || ! empty($this->video_file);
     }
 
     /**
@@ -80,14 +80,15 @@ class About extends Model
     {
         $id = $this->youtube_video_id;
         if ($id) {
-            return 'https://www.youtube.com/embed/' . $id;
+            return 'https://www.youtube.com/embed/'.$id;
         }
 
-        if (!empty($this->video_url)) {
+        if (! empty($this->video_url)) {
             $url = trim($this->video_url);
             if (preg_match('/<iframe.*?src=["\']([^"\']+)["\']/i', $url, $frameMatch)) {
                 return $frameMatch[1];
             }
+
             return $url;
         }
 
@@ -101,9 +102,9 @@ class About extends Model
     {
         $id = $this->youtube_video_id;
         if ($id) {
-            return 'https://www.youtube.com/watch?v=' . $id;
+            return 'https://www.youtube.com/watch?v='.$id;
         }
 
-        return !empty($this->video_url) ? trim($this->video_url) : null;
+        return ! empty($this->video_url) ? trim($this->video_url) : null;
     }
 }

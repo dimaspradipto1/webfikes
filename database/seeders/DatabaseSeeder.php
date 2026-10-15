@@ -2,26 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Seeder;
-use Database\Seeders\UserSeeder;
-use Database\Seeders\AboutSeeder;
-use Database\Seeders\BannerSeeder;
-use Database\Seeders\ContactSeeder;
-use Database\Seeders\FeatureSeeder;
-use Database\Seeders\GallerySeeder;
-use Database\Seeders\LayananSeeder;
-use Database\Seeders\MilestoneSeeder;
-use Database\Seeders\SaranaSeeder;
-use Database\Seeders\NilaiPerusahaanSeeder;
-use Database\Seeders\PartnerSeeder;
-use Database\Seeders\StrukturOrganisasiSeeder;
-use Database\Seeders\TestimonialSeeder;
-use Database\Seeders\VisiMisiSeeder;
-use Database\Seeders\FacultyStatSeeder;
-use Database\Seeders\TriDharmaSeeder;
-use Database\Seeders\TenagaPendidikSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {

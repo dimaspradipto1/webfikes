@@ -21,21 +21,21 @@ class PartnerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama'   => ['required', 'string', 'max:255'],
-            'logo'   => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg', 'max:2048'],
+            'nama' => ['required', 'string', 'max:255'],
+            'logo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg', 'max:2048'],
             'urutan' => ['nullable', 'integer', 'min:0'],
-            'aktif'  => ['nullable', 'boolean'],
+            'aktif' => ['nullable', 'boolean'],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'nama.required'  => 'Nama partner wajib diisi.',
-            'nama.max'       => 'Nama maksimal 255 karakter.',
-            'logo.image'     => 'File harus berupa gambar.',
-            'logo.mimes'     => 'Format gambar harus jpeg, png, jpg, webp, atau svg.',
-            'logo.max'       => 'Ukuran file logo maksimal 2 MB.',
+            'nama.required' => 'Nama partner wajib diisi.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+            'logo.image' => 'File harus berupa gambar.',
+            'logo.mimes' => 'Format gambar harus jpeg, png, jpg, webp, atau svg.',
+            'logo.max' => 'Ukuran file logo maksimal 2 MB.',
             'urutan.integer' => 'Urutan harus berupa angka.',
         ];
     }

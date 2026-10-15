@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\SocialMediaDataTable;
+use App\Http\Requests\SocialMediaRequest;
+use App\Http\Requests\SocialMediaSettingRequest;
 use App\Models\SocialMedia;
 use App\Models\SocialMediaSetting;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +22,7 @@ class SocialMediaController extends Controller
         $setting = SocialMediaSetting::firstOrCreate(
             ['id' => 1],
             [
-                'judul_seksi'    => 'IKUTI UIS DI MEDIA SOSIAL',
+                'judul_seksi' => 'IKUTI UIS DI MEDIA SOSIAL',
                 'subjudul_seksi' => '"Dapatkan update terbaru, berita inspiratif, dan berbagai informasi menarik lainnya langsung dari platform media sosial kami. Jangan lewatkan momen penting dari UIS klik ikon di bawah untuk terhubung sekarang juga!"',
             ]
         );
@@ -44,15 +46,9 @@ class SocialMediaController extends Controller
     /**
      * Update pengaturan Judul & Subjudul Header Seksi Media Sosial.
      */
-    public function updateSetting(Request $request): RedirectResponse
+    public function updateSetting(SocialMediaSettingRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'judul_seksi'    => ['required', 'string', 'max:255'],
-            'subjudul_seksi' => ['required', 'string'],
-        ], [
-            'judul_seksi.required'    => 'Judul Seksi wajib diisi.',
-            'subjudul_seksi.required' => 'Subjudul / Kalimat Deskripsi wajib diisi.',
-        ]);
+        $validated = $request->validated();
 
         $setting = SocialMediaSetting::firstOrCreate(['id' => 1]);
         $setting->update($validated);
@@ -69,37 +65,20 @@ class SocialMediaController extends Controller
     {
         $nextUrutan = (SocialMedia::max('urutan') ?? 0) + 1;
         $kategori = $request->query('kategori', 'universitas');
+
         return view('pages.social-media.create', compact('nextUrutan', 'kategori'));
     }
 
     /**
      * Simpan media sosial baru dengan upload PNG logo.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(SocialMediaRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'nama'            => ['required', 'string', 'max:255'],
-            'kategori'        => ['required', 'string', 'in:universitas,humas'],
-            'handle'          => ['nullable', 'string', 'max:255'],
-            'logo'            => ['nullable', 'file', 'mimes:png,webp,svg,jpg,jpeg', 'max:2048'],
-            'url'             => ['required', 'string', 'max:500'],
-            'video_url'       => ['nullable', 'string', 'max:500'],
-            'thumbnail_video' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp,mp4,webm', 'max:20480'],
-            'video_judul'     => ['nullable', 'string', 'max:255'],
-            'urutan'          => ['nullable', 'integer', 'min:0'],
-            'is_active'       => ['nullable', 'boolean'],
-        ], [
-            'nama.required'     => 'Nama media sosial wajib diisi.',
-            'kategori.required' => 'Kategori (Universitas/Humas) wajib dipilih.',
-            'logo.mimes'        => 'Logo harus berformat gambar PNG (atau webp/svg).',
-            'logo.max'          => 'Ukuran file logo maksimal 2MB.',
-            'url.required'      => 'URL / Link media sosial wajib diisi.',
-            'thumbnail_video.max' => 'Ukuran thumbnail / video maksimal 20MB.',
-        ]);
+        $validated = $request->validated();
 
         $url = trim($validated['url']);
-        if (!str_starts_with($url, 'http://') && !str_starts_with($url, 'https://') && !str_starts_with($url, '/') && !str_starts_with($url, '#')) {
-            $url = 'https://' . $url;
+        if (! str_starts_with($url, 'http://') && ! str_starts_with($url, 'https://') && ! str_starts_with($url, '/') && ! str_starts_with($url, '#')) {
+            $url = 'https://'.$url;
         }
 
         $logoPath = null;
@@ -113,17 +92,17 @@ class SocialMediaController extends Controller
         }
 
         SocialMedia::create([
-            'nama'            => $validated['nama'],
-            'kategori'        => $validated['kategori'],
-            'handle'          => $validated['handle'] ?? null,
-            'logo'            => $logoPath,
-            'icon'            => null,
-            'url'             => $url,
-            'video_url'       => $validated['video_url'] ?? null,
+            'nama' => $validated['nama'],
+            'kategori' => $validated['kategori'],
+            'handle' => $validated['handle'] ?? null,
+            'logo' => $logoPath,
+            'icon' => null,
+            'url' => $url,
+            'video_url' => $validated['video_url'] ?? null,
             'thumbnail_video' => $thumbnailVideoPath,
-            'video_judul'     => $validated['video_judul'] ?? null,
-            'urutan'          => $validated['urutan'] ?? ((SocialMedia::max('urutan') ?? 0) + 1),
-            'is_active'       => $request->has('is_active') ? true : false,
+            'video_judul' => $validated['video_judul'] ?? null,
+            'urutan' => $validated['urutan'] ?? ((SocialMedia::max('urutan') ?? 0) + 1),
+            'is_active' => $request->has('is_active') ? true : false,
         ]);
 
         alert()->success('Berhasil!', 'Link Media Sosial baru berhasil ditambahkan.');
@@ -142,42 +121,24 @@ class SocialMediaController extends Controller
     /**
      * Update media sosial yang ada (termasuk upload logo baru jika ada).
      */
-    public function update(Request $request, SocialMedia $socialMedia): RedirectResponse
+    public function update(SocialMediaRequest $request, SocialMedia $socialMedia): RedirectResponse
     {
-        $validated = $request->validate([
-            'nama'            => ['required', 'string', 'max:255'],
-            'kategori'        => ['required', 'string', 'in:universitas,humas'],
-            'handle'          => ['nullable', 'string', 'max:255'],
-            'logo'            => ['nullable', 'file', 'mimes:png,webp,svg,jpg,jpeg', 'max:2048'],
-            'url'             => ['required', 'string', 'max:500'],
-            'video_url'       => ['nullable', 'string', 'max:500'],
-            'thumbnail_video' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp,mp4,webm', 'max:20480'],
-            'video_judul'     => ['nullable', 'string', 'max:255'],
-            'urutan'          => ['nullable', 'integer', 'min:0'],
-            'is_active'       => ['nullable', 'boolean'],
-        ], [
-            'nama.required'     => 'Nama media sosial wajib diisi.',
-            'kategori.required' => 'Kategori (Universitas/Humas) wajib dipilih.',
-            'logo.mimes'        => 'Logo harus berformat gambar PNG (atau webp/svg).',
-            'logo.max'          => 'Ukuran file logo maksimal 2MB.',
-            'url.required'      => 'URL / Link media sosial wajib diisi.',
-            'thumbnail_video.max' => 'Ukuran thumbnail / video maksimal 20MB.',
-        ]);
+        $validated = $request->validated();
 
         $url = trim($validated['url']);
-        if (!str_starts_with($url, 'http://') && !str_starts_with($url, 'https://') && !str_starts_with($url, '/') && !str_starts_with($url, '#')) {
-            $url = 'https://' . $url;
+        if (! str_starts_with($url, 'http://') && ! str_starts_with($url, 'https://') && ! str_starts_with($url, '/') && ! str_starts_with($url, '#')) {
+            $url = 'https://'.$url;
         }
 
         $data = [
-            'nama'        => $validated['nama'],
-            'kategori'    => $validated['kategori'],
-            'handle'      => $validated['handle'] ?? null,
-            'url'         => $url,
-            'video_url'   => $validated['video_url'] ?? null,
+            'nama' => $validated['nama'],
+            'kategori' => $validated['kategori'],
+            'handle' => $validated['handle'] ?? null,
+            'url' => $url,
+            'video_url' => $validated['video_url'] ?? null,
             'video_judul' => $validated['video_judul'] ?? null,
-            'urutan'      => $validated['urutan'] ?? $socialMedia->urutan,
-            'is_active'   => $request->has('is_active') ? true : false,
+            'urutan' => $validated['urutan'] ?? $socialMedia->urutan,
+            'is_active' => $request->has('is_active') ? true : false,
         ];
 
         // If video_url changed, reset direct_video_url so model saves fresh stream

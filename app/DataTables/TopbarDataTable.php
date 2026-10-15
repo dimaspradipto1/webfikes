@@ -18,43 +18,47 @@ class TopbarDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('DT_RowIndex', '')
             ->addColumn('badge_preview', function ($t) {
-                $icon = !empty($t->badge_icon) ? $t->badge_icon : 'bi-shield-check';
+                $icon = ! empty($t->badge_icon) ? $t->badge_icon : 'bi-shield-check';
+
                 return '<span class="badge rounded-pill text-nowrap" style="background: rgba(130, 60, 162, 0.15); color: #823ca2; border: 1px solid #823ca2; font-weight:700; padding:6px 12px;">
-                            <i class="bi ' . e($icon) . ' me-1"></i>' . e($t->badge_text) . '
+                            <i class="bi '.e($icon).' me-1"></i>'.e($t->badge_text).'
                         </span>';
             })
             ->editColumn('alamat', function ($t) {
                 $cleanAlamat = trim(html_entity_decode(strip_tags($t->alamat ?? '-'), ENT_QUOTES, 'UTF-8'));
-                return '<div class="small text-dark" style="max-width: 250px;"><i class="bi bi-geo-alt me-1 text-warning"></i>' . e($cleanAlamat) . '</div>';
+
+                return '<div class="small text-dark" style="max-width: 250px;"><i class="bi bi-geo-alt me-1 text-warning"></i>'.e($cleanAlamat).'</div>';
             })
             ->editColumn('jam_operasional', function ($t) {
-                return '<div class="small text-dark text-nowrap"><i class="bi bi-clock me-1 text-warning"></i>' . e($t->jam_operasional ?? '-') . '</div>';
+                return '<div class="small text-dark text-nowrap"><i class="bi bi-clock me-1 text-warning"></i>'.e($t->jam_operasional ?? '-').'</div>';
             })
             ->addColumn('kontak_info', function ($t) {
                 $html = '<div class="small text-nowrap">';
-                if (!empty($t->telepon)) {
-                    $html .= '<div><i class="bi bi-whatsapp text-success me-1"></i>' . e($t->telepon) . '</div>';
+                if (! empty($t->telepon)) {
+                    $html .= '<div><i class="bi bi-whatsapp text-success me-1"></i>'.e($t->telepon).'</div>';
                 }
-                if (!empty($t->email)) {
-                    $html .= '<div><i class="bi bi-envelope text-primary me-1"></i>' . e($t->email) . '</div>';
+                if (! empty($t->email)) {
+                    $html .= '<div><i class="bi bi-envelope text-primary me-1"></i>'.e($t->email).'</div>';
                 }
                 $html .= '</div>';
+
                 return $html;
             })
             ->addColumn('sosmed_preview', function ($t) {
                 $html = '<div class="d-flex flex-wrap align-items-center gap-1">';
                 $items = is_array($t->social_media) ? $t->social_media : [];
-                if (!empty($items)) {
+                if (! empty($items)) {
                     foreach ($items as $item) {
-                        $icon = !empty($item['icon']) ? $item['icon'] : 'bi-globe';
+                        $icon = ! empty($item['icon']) ? $item['icon'] : 'bi-globe';
                         $platform = $item['platform'] ?? 'Link';
                         $url = $item['url'] ?? '#';
-                        $html .= '<a href="' . e($url) . '" target="_blank" class="badge bg-light text-dark border p-1" title="' . e($platform) . '"><i class="bi ' . e($icon) . '"></i></a>';
+                        $html .= '<a href="'.e($url).'" target="_blank" class="badge bg-light text-dark border p-1" title="'.e($platform).'"><i class="bi '.e($icon).'"></i></a>';
                     }
                 } else {
                     $html .= '<span class="text-muted small">-</span>';
                 }
                 $html .= '</div>';
+
                 return $html;
             })
             ->addColumn('status', function ($t) {
@@ -65,18 +69,18 @@ class TopbarDataTable extends DataTable
             ->addColumn('action', function ($t) {
                 $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
 
-                $btn .= '<a href="' . route('topbar.edit', $t->id) . '"
+                $btn .= '<a href="'.route('topbar.edit', $t->id).'"
                             class="btn btn-sm btn-warning text-white"
                             style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                             title="Edit">
                             <i class="bi bi-pencil-fill" style="font-size:12px"></i>
                          </a>';
 
-                $btn .= '<form action="' . route('topbar.destroy', $t->id) . '"
+                $btn .= '<form action="'.route('topbar.destroy', $t->id).'"
                               method="POST" class="m-0"
                               onsubmit="return confirm(\'Yakin ingin menghapus pengaturan topbar ini?\')">'
-                        . csrf_field() . method_field('DELETE')
-                        . '<button type="submit"
+                        .csrf_field().method_field('DELETE')
+                        .'<button type="submit"
                                    class="btn btn-sm btn-danger"
                                    style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                                    title="Hapus">
@@ -85,6 +89,7 @@ class TopbarDataTable extends DataTable
                          </form>';
 
                 $btn .= '</div>';
+
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
@@ -103,7 +108,7 @@ class TopbarDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->parameters([
-                'scrollX'   => true,
+                'scrollX' => true,
                 'autoWidth' => false,
             ])
             ->orderBy(1)
@@ -133,6 +138,6 @@ class TopbarDataTable extends DataTable
 
     protected function filename(): string
     {
-        return 'Topbar_' . date('YmdHis');
+        return 'Topbar_'.date('YmdHis');
     }
 }

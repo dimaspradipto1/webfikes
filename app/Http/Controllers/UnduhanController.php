@@ -29,22 +29,22 @@ class UnduhanController extends Controller
         if ($request->hasFile('file')) {
             $uploadedFile = $request->file('file');
             $filePath = $uploadedFile->store('unduhan', 'public');
-            
-            if (!$fileSize) {
+
+            if (! $fileSize) {
                 $bytes = $uploadedFile->getSize();
                 $fileSize = $this->formatBytes($bytes);
             }
         }
 
         Unduhan::create([
-            'judul'          => $request->judul,
-            'kategori'       => $request->kategori,
-            'file_path'      => $filePath,
-            'file_url'       => $request->file_url,
-            'file_size'      => $fileSize,
-            'deskripsi'      => $request->deskripsi,
-            'urutan'         => $request->urutan ?? 0,
-            'is_active'      => $request->has('is_active') ? true : false,
+            'judul' => $request->judul,
+            'kategori' => $request->kategori,
+            'file_path' => $filePath,
+            'file_url' => $request->file_url,
+            'file_size' => $fileSize,
+            'deskripsi' => $request->deskripsi,
+            'urutan' => $request->urutan ?? 0,
+            'is_active' => $request->has('is_active') ? true : false,
             'download_count' => 0,
         ]);
 
@@ -61,20 +61,20 @@ class UnduhanController extends Controller
     public function update(UnduhanRequest $request, Unduhan $unduhan): RedirectResponse
     {
         $data = [
-            'judul'       => $request->judul,
-            'kategori'    => $request->kategori,
-            'file_url'    => $request->file_url,
-            'file_size'   => $request->file_size,
-            'deskripsi'   => $request->deskripsi,
-            'urutan'      => $request->urutan ?? 0,
-            'is_active'   => $request->has('is_active') ? true : false,
+            'judul' => $request->judul,
+            'kategori' => $request->kategori,
+            'file_url' => $request->file_url,
+            'file_size' => $request->file_size,
+            'deskripsi' => $request->deskripsi,
+            'urutan' => $request->urutan ?? 0,
+            'is_active' => $request->has('is_active') ? true : false,
         ];
 
         if ($request->hasFile('file')) {
             if ($unduhan->file_path && Storage::disk('public')->exists($unduhan->file_path)) {
                 Storage::disk('public')->delete($unduhan->file_path);
             }
-            
+
             $uploadedFile = $request->file('file');
             $data['file_path'] = $uploadedFile->store('unduhan', 'public');
 
@@ -114,6 +114,6 @@ class UnduhanController extends Controller
         $pow = min($pow, count($units) - 1);
         $bytes /= pow(1024, $pow);
 
-        return round($bytes, $precision) . ' ' . $units[$pow];
+        return round($bytes, $precision).' '.$units[$pow];
     }
 }

@@ -50,6 +50,7 @@ class PusatInformasiHumasController extends Controller
     public function create(): View
     {
         $nextUrutan = (PusatInformasiHumas::max('urutan') ?? 0) + 1;
+
         return view('pages.pusat-informasi.create', compact('nextUrutan'));
     }
 
@@ -59,19 +60,19 @@ class PusatInformasiHumasController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'judul'        => ['nullable', 'string', 'max:255'],
-            'gambar'       => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg', 'max:5120'],
-            'link_drive'   => ['nullable', 'string', 'max:1000'],
-            'button_text'  => ['required', 'string', 'max:50'],
-            'button_url'   => ['nullable', 'string', 'max:1000'],
+            'judul' => ['nullable', 'string', 'max:255'],
+            'gambar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg', 'max:5120'],
+            'link_drive' => ['nullable', 'string', 'max:1000'],
+            'button_text' => ['required', 'string', 'max:50'],
+            'button_url' => ['nullable', 'string', 'max:1000'],
             'target_blank' => ['nullable'],
-            'urutan'       => ['nullable', 'integer', 'min:0'],
-            'is_active'    => ['nullable'],
+            'urutan' => ['nullable', 'integer', 'min:0'],
+            'is_active' => ['nullable'],
         ], [
             'button_text.required' => 'Teks tombol wajib diisi (contoh: Lihat / Buka / Akses).',
-            'gambar.image'         => 'File background harus berupa gambar.',
-            'gambar.mimes'         => 'Format gambar harus jpeg, png, jpg, webp, atau svg.',
-            'gambar.max'           => 'Ukuran file gambar maksimal 5 MB.',
+            'gambar.image' => 'File background harus berupa gambar.',
+            'gambar.mimes' => 'Format gambar harus jpeg, png, jpg, webp, atau svg.',
+            'gambar.max' => 'Ukuran file gambar maksimal 5 MB.',
         ]);
 
         $gambarPath = null;
@@ -80,19 +81,19 @@ class PusatInformasiHumasController extends Controller
         }
 
         $buttonUrl = trim($validated['button_url'] ?? '');
-        if (!empty($buttonUrl) && !str_starts_with($buttonUrl, 'http://') && !str_starts_with($buttonUrl, 'https://') && !str_starts_with($buttonUrl, '/') && !str_starts_with($buttonUrl, '#')) {
-            $buttonUrl = 'https://' . $buttonUrl;
+        if (! empty($buttonUrl) && ! str_starts_with($buttonUrl, 'http://') && ! str_starts_with($buttonUrl, 'https://') && ! str_starts_with($buttonUrl, '/') && ! str_starts_with($buttonUrl, '#')) {
+            $buttonUrl = 'https://'.$buttonUrl;
         }
 
         PusatInformasiHumas::create([
-            'judul'        => $validated['judul'] ?? null,
-            'gambar'       => $gambarPath,
-            'link_drive'   => $validated['link_drive'] ?? null,
-            'button_text'  => $validated['button_text'],
-            'button_url'   => !empty($buttonUrl) ? $buttonUrl : null,
+            'judul' => $validated['judul'] ?? null,
+            'gambar' => $gambarPath,
+            'link_drive' => $validated['link_drive'] ?? null,
+            'button_text' => $validated['button_text'],
+            'button_url' => ! empty($buttonUrl) ? $buttonUrl : null,
             'target_blank' => $request->has('target_blank'),
-            'urutan'       => $validated['urutan'] ?? ((PusatInformasiHumas::max('urutan') ?? 0) + 1),
-            'is_active'    => $request->has('is_active'),
+            'urutan' => $validated['urutan'] ?? ((PusatInformasiHumas::max('urutan') ?? 0) + 1),
+            'is_active' => $request->has('is_active'),
         ]);
 
         alert()->success('Berhasil!', 'Kartu Pusat Informasi baru berhasil ditambahkan.');
@@ -114,34 +115,34 @@ class PusatInformasiHumasController extends Controller
     public function update(Request $request, PusatInformasiHumas $pusatInformasi): RedirectResponse
     {
         $validated = $request->validate([
-            'judul'        => ['nullable', 'string', 'max:255'],
-            'gambar'       => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg', 'max:5120'],
-            'link_drive'   => ['nullable', 'string', 'max:1000'],
-            'button_text'  => ['required', 'string', 'max:50'],
-            'button_url'   => ['nullable', 'string', 'max:1000'],
+            'judul' => ['nullable', 'string', 'max:255'],
+            'gambar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg', 'max:5120'],
+            'link_drive' => ['nullable', 'string', 'max:1000'],
+            'button_text' => ['required', 'string', 'max:50'],
+            'button_url' => ['nullable', 'string', 'max:1000'],
             'target_blank' => ['nullable'],
-            'urutan'       => ['nullable', 'integer', 'min:0'],
-            'is_active'    => ['nullable'],
+            'urutan' => ['nullable', 'integer', 'min:0'],
+            'is_active' => ['nullable'],
         ], [
             'button_text.required' => 'Teks tombol wajib diisi (contoh: Lihat / Buka / Akses).',
-            'gambar.image'         => 'File background harus berupa gambar.',
-            'gambar.mimes'         => 'Format gambar harus jpeg, png, jpg, webp, atau svg.',
-            'gambar.max'           => 'Ukuran file gambar maksimal 5 MB.',
+            'gambar.image' => 'File background harus berupa gambar.',
+            'gambar.mimes' => 'Format gambar harus jpeg, png, jpg, webp, atau svg.',
+            'gambar.max' => 'Ukuran file gambar maksimal 5 MB.',
         ]);
 
         $buttonUrl = trim($validated['button_url'] ?? '');
-        if (!empty($buttonUrl) && !str_starts_with($buttonUrl, 'http://') && !str_starts_with($buttonUrl, 'https://') && !str_starts_with($buttonUrl, '/') && !str_starts_with($buttonUrl, '#')) {
-            $buttonUrl = 'https://' . $buttonUrl;
+        if (! empty($buttonUrl) && ! str_starts_with($buttonUrl, 'http://') && ! str_starts_with($buttonUrl, 'https://') && ! str_starts_with($buttonUrl, '/') && ! str_starts_with($buttonUrl, '#')) {
+            $buttonUrl = 'https://'.$buttonUrl;
         }
 
         $data = [
-            'judul'        => $validated['judul'] ?? null,
-            'link_drive'   => $validated['link_drive'] ?? null,
-            'button_text'  => $validated['button_text'],
-            'button_url'   => !empty($buttonUrl) ? $buttonUrl : null,
+            'judul' => $validated['judul'] ?? null,
+            'link_drive' => $validated['link_drive'] ?? null,
+            'button_text' => $validated['button_text'],
+            'button_url' => ! empty($buttonUrl) ? $buttonUrl : null,
             'target_blank' => $request->has('target_blank'),
-            'urutan'       => $validated['urutan'] ?? $pusatInformasi->urutan,
-            'is_active'    => $request->has('is_active'),
+            'urutan' => $validated['urutan'] ?? $pusatInformasi->urutan,
+            'is_active' => $request->has('is_active'),
         ];
 
         if ($request->hasFile('gambar')) {

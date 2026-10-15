@@ -21,9 +21,9 @@ class BannerRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'judul'   => ['nullable', 'string', 'max:255'],
-            'urutan'  => ['nullable', 'integer', 'min:0'],
-            'aktif'   => ['nullable', 'boolean'],
+            'judul' => ['nullable', 'string', 'max:255'],
+            'urutan' => ['nullable', 'integer', 'min:0'],
+            'aktif' => ['nullable', 'boolean'],
         ];
 
         if ($this->isMethod('POST')) {
@@ -41,12 +41,12 @@ class BannerRequest extends FormRequest
     {
         return [
             'foto.required' => 'Gambar banner wajib diunggah.',
-            'foto.image'    => 'File harus berupa gambar.',
-            'foto.mimes'    => 'Format gambar harus jpeg, png, jpg, atau webp.',
-            'foto.max'      => 'Ukuran gambar banner maksimal 2 MB.',
-            'judul.max'     => 'Judul maksimal 255 karakter.',
-            'urutan.integer'=> 'Urutan harus berupa angka.',
-            'urutan.min'    => 'Urutan minimal 0.',
+            'foto.image' => 'File harus berupa gambar.',
+            'foto.mimes' => 'Format gambar harus jpeg, png, jpg, atau webp.',
+            'foto.max' => 'Ukuran gambar banner maksimal 2 MB.',
+            'judul.max' => 'Judul maksimal 255 karakter.',
+            'urutan.integer' => 'Urutan harus berupa angka.',
+            'urutan.min' => 'Urutan minimal 0.',
         ];
     }
 }

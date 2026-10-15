@@ -49,21 +49,21 @@ class FacultyStat extends Model
     ];
 
     protected $casts = [
-        'is_active'               => 'boolean',
-        'jumlah_prodi'            => 'integer',
-        'total_mahasiswa'         => 'integer',
-        'total_dosen'             => 'integer',
-        'total_alumni'            => 'integer',
-        'mhs_total'               => 'integer',
-        'mhs_baru'                => 'integer',
-        'mhs_alumni'              => 'integer',
-        'prestasi_nasional'       => 'integer',
-        'prestasi_provinsi'       => 'integer',
-        'prestasi_internasional'  => 'integer',
-        'kerjasama_total'         => 'integer',
-        'kerjasama_perusahaan'    => 'integer',
-        'kerjasama_pemerintahan'  => 'integer',
-        'kerjasama_sekolah'       => 'integer',
+        'is_active' => 'boolean',
+        'jumlah_prodi' => 'integer',
+        'total_mahasiswa' => 'integer',
+        'total_dosen' => 'integer',
+        'total_alumni' => 'integer',
+        'mhs_total' => 'integer',
+        'mhs_baru' => 'integer',
+        'mhs_alumni' => 'integer',
+        'prestasi_nasional' => 'integer',
+        'prestasi_provinsi' => 'integer',
+        'prestasi_internasional' => 'integer',
+        'kerjasama_total' => 'integer',
+        'kerjasama_perusahaan' => 'integer',
+        'kerjasama_pemerintahan' => 'integer',
+        'kerjasama_sekolah' => 'integer',
     ];
 
     /**
@@ -75,8 +75,10 @@ class FacultyStat extends Model
             if (file_exists(public_path($this->background_image))) {
                 return asset($this->background_image);
             }
-            return asset('storage/' . $this->background_image);
+
+            return asset('storage/'.$this->background_image);
         }
+
         return asset('frontend/img/gedung-uis.jpg');
     }
 }

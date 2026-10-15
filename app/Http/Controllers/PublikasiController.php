@@ -16,52 +16,52 @@ class PublikasiController extends Controller
         if ($publikasis->isEmpty()) {
             $defaults = [
                 [
-                    'icon'      => 'bi-file-earmark-medical',
-                    'judul'     => 'Penelitian Dosen',
-                    'link'      => 'https://lppm.uis.ac.id/',
+                    'icon' => 'bi-file-earmark-medical',
+                    'judul' => 'Penelitian Dosen',
+                    'link' => 'https://lppm.uis.ac.id/',
                     'deskripsi' => 'Portal LPPM Universitas Ibnu Sina',
-                    'urutan'    => 1,
-                    'aktif'     => true,
+                    'urutan' => 1,
+                    'aktif' => true,
                 ],
                 [
-                    'icon'      => 'bi-journal-richtext',
-                    'judul'     => 'Publikasi Ilmiah',
-                    'link'      => 'https://journal.uis.ac.id/',
+                    'icon' => 'bi-journal-richtext',
+                    'judul' => 'Publikasi Ilmiah',
+                    'link' => 'https://journal.uis.ac.id/',
                     'deskripsi' => 'Portal E-Journal OJS UIS',
-                    'urutan'    => 2,
-                    'aktif'     => true,
+                    'urutan' => 2,
+                    'aktif' => true,
                 ],
                 [
-                    'icon'      => 'bi-heart-pulse',
-                    'judul'     => 'Pengabdian Masyarakat',
-                    'link'      => 'https://lppm.uis.ac.id/',
+                    'icon' => 'bi-heart-pulse',
+                    'judul' => 'Pengabdian Masyarakat',
+                    'link' => 'https://lppm.uis.ac.id/',
                     'deskripsi' => 'Portal Pengabdian Masyarakat LPPM UIS',
-                    'urutan'    => 3,
-                    'aktif'     => true,
+                    'urutan' => 3,
+                    'aktif' => true,
                 ],
                 [
-                    'icon'      => 'bi-briefcase',
-                    'judul'     => 'Kerja Sama Riset',
-                    'link'      => 'https://lppm.uis.ac.id/',
+                    'icon' => 'bi-briefcase',
+                    'judul' => 'Kerja Sama Riset',
+                    'link' => 'https://lppm.uis.ac.id/',
                     'deskripsi' => 'Kerja Sama Riset & Kemitraan UIS',
-                    'urutan'    => 4,
-                    'aktif'     => true,
+                    'urutan' => 4,
+                    'aktif' => true,
                 ],
                 [
-                    'icon'      => 'bi-archive-fill',
-                    'judul'     => 'Repository Karya Ilmiah',
-                    'link'      => 'https://repository.uis.ac.id/',
+                    'icon' => 'bi-archive-fill',
+                    'judul' => 'Repository Karya Ilmiah',
+                    'link' => 'https://repository.uis.ac.id/',
                     'deskripsi' => 'Repositori Dokumen & Karya Ilmiah UIS',
-                    'urutan'    => 5,
-                    'aktif'     => true,
+                    'urutan' => 5,
+                    'aktif' => true,
                 ],
                 [
-                    'icon'      => 'bi-award-fill',
-                    'judul'     => 'SINTA Kemendikbud',
-                    'link'      => 'https://sinta.kemdikbud.go.id/',
+                    'icon' => 'bi-award-fill',
+                    'judul' => 'SINTA Kemendikbud',
+                    'link' => 'https://sinta.kemdikbud.go.id/',
                     'deskripsi' => 'Profil Publikasi Dosen SINTA Kemendikbud',
-                    'urutan'    => 6,
-                    'aktif'     => true,
+                    'urutan' => 6,
+                    'aktif' => true,
                 ],
             ];
 
@@ -78,10 +78,10 @@ class PublikasiController extends Controller
     public function updateAll(Request $request): RedirectResponse
     {
         $request->validate([
-            'publikasis'         => ['required', 'array', 'min:1'],
+            'publikasis' => ['required', 'array', 'min:1'],
             'publikasis.*.judul' => ['required', 'string', 'max:255'],
-            'publikasis.*.icon'  => ['nullable', 'string', 'max:100'],
-            'publikasis.*.link'  => ['nullable', 'string', 'max:500'],
+            'publikasis.*.icon' => ['nullable', 'string', 'max:100'],
+            'publikasis.*.link' => ['nullable', 'string', 'max:500'],
         ], [
             'publikasis.*.judul.required' => 'Nama Menu Publikasi tidak boleh kosong.',
         ]);
@@ -90,19 +90,19 @@ class PublikasiController extends Controller
         $publikasisInput = $request->input('publikasis', []);
 
         foreach ($publikasisInput as $index => $data) {
-            $id = !empty($data['id']) ? $data['id'] : null;
-            $linkValue = !empty(trim($data['link'] ?? '')) ? trim($data['link']) : null;
-            if ($linkValue && !str_starts_with($linkValue, 'http://') && !str_starts_with($linkValue, 'https://') && !str_starts_with($linkValue, '/') && !str_starts_with($linkValue, '#')) {
-                $linkValue = 'https://' . $linkValue;
+            $id = ! empty($data['id']) ? $data['id'] : null;
+            $linkValue = ! empty(trim($data['link'] ?? '')) ? trim($data['link']) : null;
+            if ($linkValue && ! str_starts_with($linkValue, 'http://') && ! str_starts_with($linkValue, 'https://') && ! str_starts_with($linkValue, '/') && ! str_starts_with($linkValue, '#')) {
+                $linkValue = 'https://'.$linkValue;
             }
 
             $payload = [
-                'icon'      => !empty($data['icon']) ? $data['icon'] : 'bi-journal-richtext',
-                'judul'     => $data['judul'],
-                'link'      => $linkValue,
-                'deskripsi' => !empty($data['deskripsi']) ? $data['deskripsi'] : $data['judul'],
-                'urutan'    => $index + 1,
-                'aktif'     => isset($data['aktif']) && $data['aktif'] == '1',
+                'icon' => ! empty($data['icon']) ? $data['icon'] : 'bi-journal-richtext',
+                'judul' => $data['judul'],
+                'link' => $linkValue,
+                'deskripsi' => ! empty($data['deskripsi']) ? $data['deskripsi'] : $data['judul'],
+                'urutan' => $index + 1,
+                'aktif' => isset($data['aktif']) && $data['aktif'] == '1',
             ];
 
             if ($id && ($existing = Publikasi::find($id))) {
@@ -114,7 +114,7 @@ class PublikasiController extends Controller
             }
         }
 
-        if (!empty($submittedIds)) {
+        if (! empty($submittedIds)) {
             Publikasi::whereNotIn('id', $submittedIds)->delete();
         }
 

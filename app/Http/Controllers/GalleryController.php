@@ -40,10 +40,10 @@ class GalleryController extends Controller
         }
 
         Gallery::create([
-            'judul'     => $request->judul,
-            'kategori'  => $request->kategori ?? 'universitas',
+            'judul' => $request->judul,
+            'kategori' => $request->kategori ?? 'universitas',
             'deskripsi' => $request->deskripsi,
-            'url'       => $path,
+            'url' => $path,
         ]);
 
         alert()->success('Berhasil!', 'Foto galeri berhasil ditambahkan.');
@@ -67,8 +67,8 @@ class GalleryController extends Controller
     public function update(GalleryRequest $request, Gallery $gallery): RedirectResponse
     {
         $data = [
-            'judul'     => $request->judul,
-            'kategori'  => $request->kategori ?? 'universitas',
+            'judul' => $request->judul,
+            'kategori' => $request->kategori ?? 'universitas',
             'deskripsi' => $request->deskripsi,
         ];
 

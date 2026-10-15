@@ -6,8 +6,8 @@ use App\DataTables\OrganisasiMahasiswaDataTable;
 use App\Http\Requests\OrganisasiMahasiswaRequest;
 use App\Models\OrganisasiMahasiswa;
 use App\Models\OrganisasiMahasiswaSetting;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -19,13 +19,13 @@ class OrganisasiMahasiswaController extends Controller
         $setting = OrganisasiMahasiswaSetting::firstOrCreate(
             ['id' => 1],
             [
-                'badge_teks'      => 'LEMBAGA KEMAHASISWAAN · UIS',
-                'judul'           => 'Kiprah & Kepemimpinan Mahasiswa UIS',
+                'badge_teks' => 'LEMBAGA KEMAHASISWAAN · UIS',
+                'judul' => 'Kiprah & Kepemimpinan Mahasiswa UIS',
                 'judul_highlight' => 'Kepemimpinan',
-                'deskripsi'       => 'Eksplorasi ragam organisasi kemahasiswaan, himpunan program studi, dan unit kegiatan minat bakat di Universitas Ibnu Sina Batam. Ruang kolaborasi untuk mengasah karakter, kepemimpinan, dan inovasi civitas kampus.',
-                'tombol_teks'     => 'Jelajahi Semua Organisasi',
-                'tombol_url'      => null,
-                'hint_teks'       => 'Scroll mouse atau geser kartu untuk menggulir ormawa',
+                'deskripsi' => 'Eksplorasi ragam organisasi kemahasiswaan, himpunan program studi, dan unit kegiatan minat bakat di Universitas Ibnu Sina Batam. Ruang kolaborasi untuk mengasah karakter, kepemimpinan, dan inovasi civitas kampus.',
+                'tombol_teks' => 'Jelajahi Semua Organisasi',
+                'tombol_url' => null,
+                'hint_teks' => 'Scroll mouse atau geser kartu untuk menggulir ormawa',
             ]
         );
 
@@ -35,13 +35,13 @@ class OrganisasiMahasiswaController extends Controller
     public function updateSetting(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'badge_teks'       => ['nullable', 'string', 'max:255'],
-            'judul'            => ['required', 'string', 'max:255'],
-            'judul_highlight'  => ['nullable', 'string', 'max:255'],
-            'deskripsi'        => ['nullable', 'string'],
-            'tombol_teks'      => ['nullable', 'string', 'max:255'],
-            'tombol_url'       => ['nullable', 'string', 'max:255'],
-            'hint_teks'        => ['nullable', 'string', 'max:255'],
+            'badge_teks' => ['nullable', 'string', 'max:255'],
+            'judul' => ['required', 'string', 'max:255'],
+            'judul_highlight' => ['nullable', 'string', 'max:255'],
+            'deskripsi' => ['nullable', 'string'],
+            'tombol_teks' => ['nullable', 'string', 'max:255'],
+            'tombol_url' => ['nullable', 'string', 'max:255'],
+            'hint_teks' => ['nullable', 'string', 'max:255'],
         ], [
             'judul.required' => 'Judul seksi wajib diisi.',
         ]);
@@ -67,7 +67,7 @@ class OrganisasiMahasiswaController extends Controller
         $data['is_active'] = $request->has('is_active');
 
         // Generate unique slug
-        $base = !empty($data['singkatan']) ? $data['singkatan'] : $data['nama_organisasi'];
+        $base = ! empty($data['singkatan']) ? $data['singkatan'] : $data['nama_organisasi'];
         $slug = Str::slug($base);
         $originalSlug = $slug;
         $count = 1;

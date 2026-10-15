@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\News;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -15,7 +16,7 @@ class NewsDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder<News> $query
+     * @param  QueryBuilder<News>  $query
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -24,11 +25,12 @@ class NewsDataTable extends DataTable
             ->addColumn('DT_RowIndex', '')
             ->addColumn('thumbnail', function ($news) {
                 if ($news->thumbnail) {
-                    return '<img src="' . asset('storage/' . $news->thumbnail) . '"
-                                 alt="' . e($news->title) . '"
+                    return '<img src="'.asset('storage/'.$news->thumbnail).'"
+                                 alt="'.e($news->title).'"
                                  style="width:70px;height:45px;object-fit:cover;border-radius:4px;border:1px solid #dee2e6"
                                  loading="lazy">';
                 }
+
                 return '<span class="text-muted small">Tidak ada</span>';
             })
             ->addColumn('title', function ($news) {
@@ -39,19 +41,21 @@ class NewsDataTable extends DataTable
             })
             ->addColumn('published_at', function ($news) {
                 $date = $news->published_at ?? $news->created_at;
-                return $date ? '<span class="small text-nowrap"><i class="bi bi-clock me-1 text-muted"></i>' . $date->format('d/m/Y H:i') . '</span>' : '-';
+
+                return $date ? '<span class="small text-nowrap"><i class="bi bi-clock me-1 text-muted"></i>'.$date->format('d/m/Y H:i').'</span>' : '-';
             })
             ->addColumn('status', function ($news) {
                 if ($news->status === 'published') {
                     return '<span class="badge bg-success">Published</span>';
                 }
+
                 return '<span class="badge bg-secondary">Draft</span>';
             })
             ->addColumn('action', function ($news) {
-                $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
+                $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
 
                 // Tombol Edit
-                $btn .= '<a href="' . route('news.edit', $news->id) . '"
+                $btn .= '<a href="'.route('news.edit', $news->id).'"
                             class="btn btn-sm btn-warning text-white"
                             style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                             title="Edit">
@@ -59,20 +63,21 @@ class NewsDataTable extends DataTable
                          </a>';
 
                 // Tombol Hapus (SweetAlert2)
-                $btn .= '<form action="' . route('news.destroy', $news->id) . '"
+                $btn .= '<form action="'.route('news.destroy', $news->id).'"
                               method="POST" class="m-0 form-delete-news">'
-                        . csrf_field() . method_field('DELETE')
-                        . '<button type="button"
+                        .csrf_field().method_field('DELETE')
+                        .'<button type="button"
                                    class="btn btn-sm btn-danger"
                                    style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                                    title="Hapus"
-                                   data-title="' . htmlspecialchars($news->title, ENT_QUOTES, 'UTF-8') . '"
+                                   data-title="'.htmlspecialchars($news->title, ENT_QUOTES, 'UTF-8').'"
                                    onclick="confirmDeleteNews(event, this)">
                             <i class="bi bi-trash-fill" style="font-size:12px"></i>
                            </button>
                          </form>';
 
                 $btn .= '</div>';
+
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
@@ -91,8 +96,8 @@ class NewsDataTable extends DataTable
             ->select(['id', 'user_id', 'thumbnail', 'title', 'status', 'published_at', 'created_at']);
 
         // Jika role penulis (dan bukan admin), hanya tampilkan berita miliknya sendiri. Admin menampilkan semua.
-        if (\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->hasExactRole('penulis') && !\Illuminate\Support\Facades\Auth::user()->isAdmin()) {
-            $query->where('user_id', \Illuminate\Support\Facades\Auth::id());
+        if (Auth::check() && Auth::user()->hasExactRole('penulis') && ! Auth::user()->isAdmin()) {
+            $query->where('user_id', Auth::id());
         }
 
         return $query->latest('id');
@@ -168,6 +173,6 @@ class NewsDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'News_' . date('YmdHis');
+        return 'News_'.date('YmdHis');
     }
 }

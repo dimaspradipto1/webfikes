@@ -28,8 +28,8 @@ class PermintaanRilisSetting extends Model
     ];
 
     protected $casts = [
-        'min_kata'     => 'integer',
+        'min_kata' => 'integer',
         'min_paragraf' => 'integer',
-        'is_active'    => 'boolean',
+        'is_active' => 'boolean',
     ];
 }

@@ -16,7 +16,7 @@ class SocialMediaSeeder extends Seeder
         SocialMediaSetting::firstOrCreate(
             ['id' => 1],
             [
-                'judul_seksi'    => 'IKUTI UIS DI MEDIA SOSIAL',
+                'judul_seksi' => 'IKUTI UIS DI MEDIA SOSIAL',
                 'subjudul_seksi' => 'Dapatkan update terbaru, berita inspiratif, dan berbagai informasi menarik lainnya langsung dari platform media sosial kami. Jangan lewatkan momen penting dari UIS klik ikon di bawah untuk terhubung sekarang juga!',
             ]
         );

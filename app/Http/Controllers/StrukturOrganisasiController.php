@@ -13,12 +13,13 @@ class StrukturOrganisasiController extends Controller
     public function index(): View
     {
         $struktur = StrukturOrganisasi::first();
+
         return view('pages.struktur-organisasi.index', compact('struktur'));
     }
 
     public function store(StrukturOrganisasiRequest $request): RedirectResponse
     {
-        $struktur = StrukturOrganisasi::first() ?? new StrukturOrganisasi();
+        $struktur = StrukturOrganisasi::first() ?? new StrukturOrganisasi;
 
         if ($request->hasFile('url_struktur')) {
             // Delete old file if exists
@@ -28,7 +29,7 @@ class StrukturOrganisasiController extends Controller
 
             // Upload new file
             $path = $request->file('url_struktur')->store('struktur-organisasi', 'public');
-            $struktur->url_struktur = 'storage/' . $path;
+            $struktur->url_struktur = 'storage/'.$path;
             $struktur->save();
         }
 

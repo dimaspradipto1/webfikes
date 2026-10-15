@@ -23,9 +23,9 @@ class PusatInformasiHumas extends Model
     ];
 
     protected $casts = [
-        'is_active'    => 'boolean',
+        'is_active' => 'boolean',
         'target_blank' => 'boolean',
-        'urutan'       => 'integer',
+        'urutan' => 'integer',
     ];
 
     /**
@@ -33,13 +33,15 @@ class PusatInformasiHumas extends Model
      */
     public static function formatGoogleDriveUrl(?string $url): ?string
     {
-        if (empty($url)) return null;
+        if (empty($url)) {
+            return null;
+        }
 
         $cleanUrl = trim($url);
 
         // Ekstrak ID Google Drive (file/d/ID atau id=ID atau open?id=ID)
         if (preg_match('/(?:drive\.google\.com\/(?:file\/d\/|open\?id=)|id=)([a-zA-Z0-9_-]{25,})/i', $cleanUrl, $matches)) {
-            return 'https://lh3.googleusercontent.com/d/' . $matches[1];
+            return 'https://lh3.googleusercontent.com/d/'.$matches[1];
         }
 
         return $cleanUrl;
@@ -57,7 +59,8 @@ class PusatInformasiHumas extends Model
             if (str_starts_with($this->gambar, 'assets/') || str_starts_with($this->gambar, 'frontend/')) {
                 return asset($this->gambar);
             }
-            return asset('storage/' . $this->gambar);
+
+            return asset('storage/'.$this->gambar);
         }
 
         if ($this->link_drive) {

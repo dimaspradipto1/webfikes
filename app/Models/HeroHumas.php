@@ -41,8 +41,10 @@ class HeroHumas extends Model
             if (str_starts_with($this->background_image, 'assets/') || str_starts_with($this->background_image, 'frontend/')) {
                 return asset($this->background_image);
             }
-            return asset('storage/' . $this->background_image);
+
+            return asset('storage/'.$this->background_image);
         }
+
         return null;
     }
 }

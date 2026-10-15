@@ -23,7 +23,7 @@ class TemplateDokumen extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'urutan'    => 'integer',
+        'urutan' => 'integer',
     ];
 
     /**
@@ -40,7 +40,7 @@ class TemplateDokumen extends Model
     public function getIconHtmlAttribute(): string
     {
         if ($this->custom_icon) {
-            return '<img src="' . asset('storage/' . $this->custom_icon) . '" alt="' . e($this->judul) . '" style="max-width: 140px; max-height: 150px; object-fit: contain;">';
+            return '<img src="'.asset('storage/'.$this->custom_icon).'" alt="'.e($this->judul).'" style="max-width: 140px; max-height: 150px; object-fit: contain;">';
         }
 
         return match ($this->icon_preset) {
@@ -58,7 +58,7 @@ class TemplateDokumen extends Model
                                 <!-- Bold P -->
                                 <text x="52" y="98" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Arial, sans-serif" font-weight="900" font-size="64" text-anchor="middle">P</text>
                              </svg>',
-            'idcard'     => '<svg viewBox="0 0 160 115" style="width: 150px; height: 115px;" xmlns="http://www.w3.org/2000/svg">
+            'idcard' => '<svg viewBox="0 0 160 115" style="width: 150px; height: 115px;" xmlns="http://www.w3.org/2000/svg">
                                 <!-- Card Outline/Base -->
                                 <rect x="0" y="0" width="160" height="115" rx="18" fill="#357a44"/>
                                 <!-- Top Stripe Header -->
@@ -72,17 +72,17 @@ class TemplateDokumen extends Model
                                 <rect x="90" y="62" width="48" height="9" rx="4.5" fill="#ffffff"/>
                                 <rect x="90" y="80" width="34" height="9" rx="4.5" fill="#ffffff"/>
                              </svg>',
-            'excel'      => '<svg viewBox="0 0 110 140" style="width: 110px; height: 140px;" xmlns="http://www.w3.org/2000/svg">
+            'excel' => '<svg viewBox="0 0 110 140" style="width: 110px; height: 140px;" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14 0 C6.3 0 0 6.3 0 14 L0 126 C0 133.7 6.3 140 14 140 L96 140 C103.7 140 110 133.7 110 126 L110 38 L72 0 Z" fill="#357a44"/>
                                 <path d="M72 0 L110 38 L84 38 C77.4 38 72 32.6 72 26 Z" fill="#1e582e" opacity="0.85"/>
                                 <text x="52" y="98" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Arial, sans-serif" font-weight="900" font-size="64" text-anchor="middle">X</text>
                              </svg>',
-            'pdf'        => '<svg viewBox="0 0 110 140" style="width: 110px; height: 140px;" xmlns="http://www.w3.org/2000/svg">
+            'pdf' => '<svg viewBox="0 0 110 140" style="width: 110px; height: 140px;" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14 0 C6.3 0 0 6.3 0 14 L0 126 C0 133.7 6.3 140 14 140 L96 140 C103.7 140 110 133.7 110 126 L110 38 L72 0 Z" fill="#357a44"/>
                                 <path d="M72 0 L110 38 L84 38 C77.4 38 72 32.6 72 26 Z" fill="#1e582e" opacity="0.85"/>
                                 <text x="52" y="90" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Arial, sans-serif" font-weight="900" font-size="34" text-anchor="middle">PDF</text>
                              </svg>',
-            default      => '<svg viewBox="0 0 110 140" style="width: 110px; height: 140px;" xmlns="http://www.w3.org/2000/svg">
+            default => '<svg viewBox="0 0 110 140" style="width: 110px; height: 140px;" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
                                     <linearGradient id="foldGradW" x1="0%" y1="0%" x2="100%" y2="100%">
                                         <stop offset="0%" stop-color="#1e582e"/>

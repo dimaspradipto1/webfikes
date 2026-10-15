@@ -32,10 +32,10 @@ class FeatureController extends Controller
     public function store(FeatureRequest $request): RedirectResponse
     {
         Feature::create([
-            'icon'      => $request->icon,
-            'judul'     => $request->judul,
+            'icon' => $request->icon,
+            'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
-            'urutan'    => $request->urutan ?? 0,
+            'urutan' => $request->urutan ?? 0,
         ]);
 
         alert()->success('Berhasil!', 'Keunggulan berhasil ditambahkan.');
@@ -57,10 +57,10 @@ class FeatureController extends Controller
     public function update(FeatureRequest $request, Feature $feature): RedirectResponse
     {
         $feature->update([
-            'icon'      => $request->icon,
-            'judul'     => $request->judul,
+            'icon' => $request->icon,
+            'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
-            'urutan'    => $request->urutan ?? 0,
+            'urutan' => $request->urutan ?? 0,
         ]);
 
         alert()->success('Berhasil!', 'Keunggulan berhasil diperbarui.');

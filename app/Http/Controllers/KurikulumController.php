@@ -7,7 +7,6 @@ use App\Http\Requests\KurikulumRequest;
 use App\Models\Kurikulum;
 use App\Models\Layanan;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -16,12 +15,14 @@ class KurikulumController extends Controller
     public function index(KurikulumDataTable $dataTable)
     {
         $prodis = Layanan::where('aktif', true)->orderBy('urutan')->get();
+
         return $dataTable->render('pages.kurikulum.index', compact('prodis'));
     }
 
     public function create(): View
     {
         $prodis = Layanan::where('aktif', true)->orderBy('urutan')->get();
+
         return view('pages.kurikulum.create', compact('prodis'));
     }
 
@@ -49,6 +50,7 @@ class KurikulumController extends Controller
     public function edit(Kurikulum $kurikulum): View
     {
         $prodis = Layanan::where('aktif', true)->orderBy('urutan')->get();
+
         return view('pages.kurikulum.edit', compact('kurikulum', 'prodis'));
     }
 

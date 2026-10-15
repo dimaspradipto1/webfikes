@@ -32,10 +32,10 @@ class SaranaController extends Controller
     public function store(SaranaRequest $request): RedirectResponse
     {
         Sarana::create([
-            'icon'      => $request->icon,
-            'nama'      => $request->nama,
+            'icon' => $request->icon,
+            'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
-            'urutan'    => $request->urutan ?? 0,
+            'urutan' => $request->urutan ?? 0,
             'is_active' => $request->boolean('is_active', true),
         ]);
 
@@ -58,10 +58,10 @@ class SaranaController extends Controller
     public function update(SaranaRequest $request, Sarana $sarana): RedirectResponse
     {
         $sarana->update([
-            'icon'      => $request->icon,
-            'nama'      => $request->nama,
+            'icon' => $request->icon,
+            'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
-            'urutan'    => $request->urutan ?? 0,
+            'urutan' => $request->urutan ?? 0,
             'is_active' => $request->boolean('is_active', true),
         ]);
 

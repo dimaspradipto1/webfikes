@@ -30,10 +30,10 @@ class DesainGrafisSetting extends Model
     ];
 
     protected $casts = [
-        'stat_total'      => 'integer',
-        'stat_selesai'    => 'integer',
+        'stat_total' => 'integer',
+        'stat_selesai' => 'integer',
         'stat_dikerjakan' => 'integer',
-        'stat_menunggu'   => 'integer',
+        'stat_menunggu' => 'integer',
     ];
 
     /**
@@ -42,8 +42,9 @@ class DesainGrafisSetting extends Model
     public function getGuideImageUrlAttribute(): ?string
     {
         if ($this->guide_image) {
-            return asset('storage/' . $this->guide_image);
+            return asset('storage/'.$this->guide_image);
         }
+
         return null;
     }
 }

@@ -1,9 +1,11 @@
 <?php
 
 use App\Providers\AppServiceProvider;
+use RealRashid\SweetAlert\SweetAlertServiceProvider;
+use Yajra\DataTables\DataTablesServiceProvider;
 
 return [
     AppServiceProvider::class,
-    Yajra\DataTables\DataTablesServiceProvider::class,
-    RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+    DataTablesServiceProvider::class,
+    SweetAlertServiceProvider::class,
 ];

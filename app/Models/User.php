@@ -23,7 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'roles',
-        'is_active'
+        'is_active',
     ];
 
     /**
@@ -66,6 +66,7 @@ class User extends Authenticatable
                 return $decoded;
             }
         }
+
         return array_values(array_filter(array_map('trim', explode(',', $this->roles))));
     }
 
@@ -79,8 +80,9 @@ class User extends Authenticatable
             return true;
         }
         if (is_array($role)) {
-            return !empty(array_intersect($role, $roles));
+            return ! empty(array_intersect($role, $roles));
         }
+
         return in_array($role, $roles);
     }
 

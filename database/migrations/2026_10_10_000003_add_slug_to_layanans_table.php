@@ -1,10 +1,10 @@
 <?php
 
+use App\Models\Layanan;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use App\Models\Layanan;
 
 return new class extends Migration
 {

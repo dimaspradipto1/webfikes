@@ -15,6 +15,7 @@ class BahasaSettingController extends Controller
     public function index(): View
     {
         $bahasas = BahasaSetting::orderBy('urutan')->orderBy('id')->get();
+
         return view('pages.bahasa.index', compact('bahasas'));
     }
 
@@ -24,10 +25,10 @@ class BahasaSettingController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'kode'        => 'required|string|max:10|unique:bahasa_settings,kode',
-            'nama'        => 'required|string|max:100',
+            'kode' => 'required|string|max:10|unique:bahasa_settings,kode',
+            'nama' => 'required|string|max:100',
             'kode_negara' => 'nullable|string|max:10',
-            'urutan'      => 'nullable|integer',
+            'urutan' => 'nullable|integer',
         ]);
 
         $maxOrder = BahasaSetting::max('urutan') ?? 0;
@@ -52,10 +53,10 @@ class BahasaSettingController extends Controller
         $bahasa = BahasaSetting::findOrFail($id);
 
         $validated = $request->validate([
-            'kode'        => 'required|string|max:10|unique:bahasa_settings,kode,' . $bahasa->id,
-            'nama'        => 'required|string|max:100',
+            'kode' => 'required|string|max:10|unique:bahasa_settings,kode,'.$bahasa->id,
+            'nama' => 'required|string|max:100',
             'kode_negara' => 'nullable|string|max:10',
-            'urutan'      => 'required|integer',
+            'urutan' => 'required|integer',
         ]);
 
         $bahasa->update($validated);
@@ -78,10 +79,11 @@ class BahasaSettingController extends Controller
             if (function_exists('alert')) {
                 alert()->error('Gagal!', 'Bahasa default tidak dapat dinonaktifkan.');
             }
+
             return redirect()->route('bahasa.index')->with('error', 'Bahasa default tidak dapat dinonaktifkan.');
         }
 
-        $bahasa->is_active = !$bahasa->is_active;
+        $bahasa->is_active = ! $bahasa->is_active;
         $bahasa->save();
 
         $statusText = $bahasa->is_active ? 'diaktifkan' : 'dinonaktifkan';
@@ -122,13 +124,13 @@ class BahasaSettingController extends Controller
         foreach ($items as $id => $data) {
             $bahasa = BahasaSetting::find($id);
             if ($bahasa) {
-                $bahasa->urutan = isset($data['urutan']) ? (int)$data['urutan'] : $bahasa->urutan;
+                $bahasa->urutan = isset($data['urutan']) ? (int) $data['urutan'] : $bahasa->urutan;
                 $bahasa->is_active = isset($data['is_active']) && $data['is_active'] == '1';
-                
+
                 if ($bahasa->is_default) {
                     $bahasa->is_active = true;
                 }
-                
+
                 $bahasa->save();
             }
         }
@@ -151,10 +153,11 @@ class BahasaSettingController extends Controller
             if (function_exists('alert')) {
                 alert()->error('Gagal!', 'Bahasa default tidak boleh dihapus.');
             }
+
             return redirect()->route('bahasa.index')->with('error', 'Bahasa default tidak boleh dihapus.');
         }
 
-        if (!empty($bahasa->bendera) && str_starts_with($bahasa->bendera, 'assets/img/flags/flag_') && file_exists(public_path($bahasa->bendera))) {
+        if (! empty($bahasa->bendera) && str_starts_with($bahasa->bendera, 'assets/img/flags/flag_') && file_exists(public_path($bahasa->bendera))) {
             @unlink(public_path($bahasa->bendera));
         }
 

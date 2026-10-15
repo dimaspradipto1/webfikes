@@ -14,7 +14,7 @@ use Yajra\DataTables\Services\DataTable;
 class VisiMisiDataTable extends DataTable
 {
     /**
-     * @param QueryBuilder<VisiMisi> $query
+     * @param  QueryBuilder<VisiMisi>  $query
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -27,20 +27,20 @@ class VisiMisiDataTable extends DataTable
                     : '<span class="badge bg-info text-dark">Misi</span>';
             })
             ->addColumn('isi', fn ($vm) => e(Str::limit(trim(html_entity_decode(strip_tags($vm->isi ?? ''), ENT_QUOTES, 'UTF-8')), 90)))
-            ->addColumn('urutan', fn ($vm) => '<span class="badge bg-secondary">' . $vm->urutan . '</span>')
+            ->addColumn('urutan', fn ($vm) => '<span class="badge bg-secondary">'.$vm->urutan.'</span>')
             ->addColumn('action', function ($visimisi) {
-                $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
-                $btn .= '<a href="' . route('visimisi.edit', $visimisi->id) . '"
+                $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
+                $btn .= '<a href="'.route('visimisi.edit', $visimisi->id).'"
                             class="btn btn-sm btn-warning text-white"
                             style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                             title="Edit">
                             <i class="bi bi-pencil-fill" style="font-size:12px"></i>
                          </a>';
-                $btn .= '<form action="' . route('visimisi.destroy', $visimisi->id) . '"
+                $btn .= '<form action="'.route('visimisi.destroy', $visimisi->id).'"
                               method="POST" class="m-0"
                               onsubmit="return confirm(\'Yakin ingin menghapus data ini?\')">'
-                        . csrf_field() . method_field('DELETE')
-                        . '<button type="submit"
+                        .csrf_field().method_field('DELETE')
+                        .'<button type="submit"
                                    class="btn btn-sm btn-danger"
                                    style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                                    title="Hapus">
@@ -48,6 +48,7 @@ class VisiMisiDataTable extends DataTable
                           </button>
                          </form>';
                 $btn .= '</div>';
+
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
@@ -95,6 +96,6 @@ class VisiMisiDataTable extends DataTable
 
     protected function filename(): string
     {
-        return 'VisiMisi_' . date('YmdHis');
+        return 'VisiMisi_'.date('YmdHis');
     }
 }

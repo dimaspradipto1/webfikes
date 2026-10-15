@@ -1,47 +1,48 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AkademikController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BahasaSettingController;
+use App\Http\Controllers\BannerController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DesainGrafisController;
+use App\Http\Controllers\DosenController;
+use App\Http\Controllers\EmagazineHumasController;
+use App\Http\Controllers\FacultyStatController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfilController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\NewsController;
-use App\Http\Controllers\FaqController;
-use App\Http\Controllers\AboutController;
-use App\Http\Controllers\MilestoneController;
-use App\Http\Controllers\BannerController;
-use App\Http\Controllers\FeatureController;
-use App\Http\Controllers\SaranaController;
-use App\Http\Controllers\TestimonialController;
-use App\Http\Controllers\LayananController;
-use App\Http\Controllers\StrukturOrganisasiController;
-use App\Http\Controllers\PartnerController;
-use App\Http\Controllers\VisiMisiController;
-use App\Http\Controllers\NilaiPerusahaanController;
-use App\Http\Controllers\SambutanDekanController;
-use App\Http\Controllers\PmbSettingController;
-use App\Http\Controllers\AkademikController;
-use App\Http\Controllers\PrestasiController;
-use App\Http\Controllers\KurikulumController;
-use App\Http\Controllers\DosenController;
-use App\Http\Controllers\TopbarController;
-use App\Http\Controllers\OrganisasiMahasiswaController;
-use App\Http\Controllers\FacultyStatController;
-use App\Http\Controllers\TriDharmaController;
-use App\Http\Controllers\TenagaPendidikController;
-use App\Http\Controllers\LayananTerkaitController;
-use App\Http\Controllers\SocialMediaController;
-use App\Http\Controllers\PublikasiController;
-use App\Http\Controllers\BahasaSettingController;
 use App\Http\Controllers\HeroHumasController;
-use App\Http\Controllers\UnduhanController;
-use App\Http\Controllers\DesainGrafisController;
-use App\Http\Controllers\PusatInformasiHumasController;
+use App\Http\Controllers\KurikulumController;
+use App\Http\Controllers\LayananController;
 use App\Http\Controllers\LayananHumasController;
+use App\Http\Controllers\LayananTerkaitController;
+use App\Http\Controllers\MilestoneController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\NilaiPerusahaanController;
+use App\Http\Controllers\OrganisasiMahasiswaController;
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\PmbSettingController;
+use App\Http\Controllers\PrestasiController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\PublikasiController;
+use App\Http\Controllers\PusatInformasiHumasController;
+use App\Http\Controllers\SambutanDekanController;
+use App\Http\Controllers\SaranaController;
+use App\Http\Controllers\SocialMediaController;
+use App\Http\Controllers\StrukturOrganisasiController;
 use App\Http\Controllers\TemplateDokumenController;
+use App\Http\Controllers\TenagaPendidikController;
+use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\TopbarController;
+use App\Http\Controllers\TriDharmaController;
+use App\Http\Controllers\UnduhanController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\VisiMisiController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -150,8 +151,8 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('admin-pusat-informasi', PusatInformasiHumasController::class)
         ->parameters(['admin-pusat-informasi' => 'pusatInformasi'])
         ->names('pusat-informasi');
-    Route::get('admin-emagazine-humas', [\App\Http\Controllers\EmagazineHumasController::class, 'index'])->name('emagazine-humas.index');
-    Route::put('admin-emagazine-humas', [\App\Http\Controllers\EmagazineHumasController::class, 'update'])->name('emagazine-humas.update');
+    Route::get('admin-emagazine-humas', [EmagazineHumasController::class, 'index'])->name('emagazine-humas.index');
+    Route::put('admin-emagazine-humas', [EmagazineHumasController::class, 'update'])->name('emagazine-humas.update');
     Route::get('admin-layanan-humas', [LayananHumasController::class, 'index'])->name('layanan-humas.index');
     Route::get('admin-layanan-humas/{kode}', [LayananHumasController::class, 'editItem'])->name('layanan-humas.edit-item');
     Route::put('admin-layanan-humas/{kode}', [LayananHumasController::class, 'updateItem'])->name('layanan-humas.update-item');

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Layanan extends Model
 {
@@ -29,8 +30,8 @@ class Layanan extends Model
         parent::boot();
 
         static::saving(function ($layanan) {
-            if (empty($layanan->slug) && !empty($layanan->judul)) {
-                $layanan->slug = \Illuminate\Support\Str::slug($layanan->judul);
+            if (empty($layanan->slug) && ! empty($layanan->judul)) {
+                $layanan->slug = Str::slug($layanan->judul);
             }
         });
     }

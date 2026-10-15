@@ -52,64 +52,64 @@ class EmagazineHumasController extends Controller
         $emagazine = EmagazineHumas::firstOrCreate(['id' => 1]);
 
         $validated = $request->validate([
-            'judul_seksi'            => ['required', 'string', 'max:255'],
-            'is_active'              => ['nullable'],
+            'judul_seksi' => ['required', 'string', 'max:255'],
+            'is_active' => ['nullable'],
 
             // Tab 1: E-Magazine
-            'tab_1_label'            => ['required', 'string', 'max:100'],
-            'tab_1_badge_text'       => ['nullable', 'string', 'max:50'],
-            'tab_1_cover_image'      => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:3072'],
-            'tab_1_judul'            => ['required', 'string', 'max:255'],
-            'tab_1_deskripsi'        => ['nullable', 'string'],
+            'tab_1_label' => ['required', 'string', 'max:100'],
+            'tab_1_badge_text' => ['nullable', 'string', 'max:50'],
+            'tab_1_cover_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:3072'],
+            'tab_1_judul' => ['required', 'string', 'max:255'],
+            'tab_1_deskripsi' => ['nullable', 'string'],
             'tab_1_btn_preview_text' => ['nullable', 'string', 'max:100'],
-            'tab_1_btn_preview_url'  => ['nullable', 'string', 'max:1000'],
-            'tab_1_btn_download_text'=> ['nullable', 'string', 'max:100'],
-            'tab_1_file_download'    => ['nullable', 'file', 'mimes:pdf,docx,zip', 'max:25600'],
-            'tab_1_download_url'     => ['nullable', 'string', 'max:1000'],
+            'tab_1_btn_preview_url' => ['nullable', 'string', 'max:1000'],
+            'tab_1_btn_download_text' => ['nullable', 'string', 'max:100'],
+            'tab_1_file_download' => ['nullable', 'file', 'mimes:pdf,docx,zip', 'max:25600'],
+            'tab_1_download_url' => ['nullable', 'string', 'max:1000'],
 
             // Tab 2: Buku Saku
-            'tab_2_label'            => ['required', 'string', 'max:100'],
-            'tab_2_badge_text'       => ['nullable', 'string', 'max:50'],
-            'tab_2_cover_image'      => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:3072'],
-            'tab_2_judul'            => ['required', 'string', 'max:255'],
-            'tab_2_deskripsi'        => ['nullable', 'string'],
+            'tab_2_label' => ['required', 'string', 'max:100'],
+            'tab_2_badge_text' => ['nullable', 'string', 'max:50'],
+            'tab_2_cover_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:3072'],
+            'tab_2_judul' => ['required', 'string', 'max:255'],
+            'tab_2_deskripsi' => ['nullable', 'string'],
             'tab_2_btn_preview_text' => ['nullable', 'string', 'max:100'],
-            'tab_2_btn_preview_url'  => ['nullable', 'string', 'max:1000'],
-            'tab_2_btn_download_text'=> ['nullable', 'string', 'max:100'],
-            'tab_2_file_download'    => ['nullable', 'file', 'mimes:pdf,docx,zip', 'max:25600'],
-            'tab_2_download_url'     => ['nullable', 'string', 'max:1000'],
+            'tab_2_btn_preview_url' => ['nullable', 'string', 'max:1000'],
+            'tab_2_btn_download_text' => ['nullable', 'string', 'max:100'],
+            'tab_2_file_download' => ['nullable', 'file', 'mimes:pdf,docx,zip', 'max:25600'],
+            'tab_2_download_url' => ['nullable', 'string', 'max:1000'],
         ]);
 
         $data = [
-            'judul_seksi'            => $validated['judul_seksi'],
-            'is_active'              => $request->has('is_active'),
+            'judul_seksi' => $validated['judul_seksi'],
+            'is_active' => $request->has('is_active'),
 
             // Tab 1
-            'tab_1_label'            => $validated['tab_1_label'],
-            'tab_1_badge_text'       => $validated['tab_1_badge_text'] ?? 'PROFIL 2026',
-            'tab_1_judul'            => $validated['tab_1_judul'],
-            'tab_1_deskripsi'        => $validated['tab_1_deskripsi'] ?? null,
+            'tab_1_label' => $validated['tab_1_label'],
+            'tab_1_badge_text' => $validated['tab_1_badge_text'] ?? 'PROFIL 2026',
+            'tab_1_judul' => $validated['tab_1_judul'],
+            'tab_1_deskripsi' => $validated['tab_1_deskripsi'] ?? null,
             'tab_1_btn_preview_text' => $validated['tab_1_btn_preview_text'] ?: 'Pratinjau Interaktif',
-            'tab_1_btn_preview_url'  => $validated['tab_1_btn_preview_url'] ?? null,
-            'tab_1_btn_download_text'=> $validated['tab_1_btn_download_text'] ?: 'Unduh Dokumen',
-            'tab_1_download_url'     => $validated['tab_1_download_url'] ?? null,
+            'tab_1_btn_preview_url' => $validated['tab_1_btn_preview_url'] ?? null,
+            'tab_1_btn_download_text' => $validated['tab_1_btn_download_text'] ?: 'Unduh Dokumen',
+            'tab_1_download_url' => $validated['tab_1_download_url'] ?? null,
 
             // Tab 2
-            'tab_2_label'            => $validated['tab_2_label'],
-            'tab_2_badge_text'       => $validated['tab_2_badge_text'] ?? 'BUKU SAKU',
-            'tab_2_judul'            => $validated['tab_2_judul'],
-            'tab_2_deskripsi'        => $validated['tab_2_deskripsi'] ?? null,
+            'tab_2_label' => $validated['tab_2_label'],
+            'tab_2_badge_text' => $validated['tab_2_badge_text'] ?? 'BUKU SAKU',
+            'tab_2_judul' => $validated['tab_2_judul'],
+            'tab_2_deskripsi' => $validated['tab_2_deskripsi'] ?? null,
             'tab_2_btn_preview_text' => $validated['tab_2_btn_preview_text'] ?: 'Pratinjau Interaktif',
-            'tab_2_btn_preview_url'  => $validated['tab_2_btn_preview_url'] ?? null,
-            'tab_2_btn_download_text'=> $validated['tab_2_btn_download_text'] ?: 'Unduh Dokumen',
-            'tab_2_download_url'     => $validated['tab_2_download_url'] ?? null,
+            'tab_2_btn_preview_url' => $validated['tab_2_btn_preview_url'] ?? null,
+            'tab_2_btn_download_text' => $validated['tab_2_btn_download_text'] ?: 'Unduh Dokumen',
+            'tab_2_download_url' => $validated['tab_2_download_url'] ?? null,
         ];
 
         // Format preview & download URL
         foreach (['tab_1_btn_preview_url', 'tab_1_download_url', 'tab_2_btn_preview_url', 'tab_2_download_url'] as $key) {
             $u = trim($data[$key] ?? '');
-            if (!empty($u) && !str_starts_with($u, 'http://') && !str_starts_with($u, 'https://') && !str_starts_with($u, '/') && !str_starts_with($u, '#')) {
-                $data[$key] = 'https://' . $u;
+            if (! empty($u) && ! str_starts_with($u, 'http://') && ! str_starts_with($u, 'https://') && ! str_starts_with($u, '/') && ! str_starts_with($u, '#')) {
+                $data[$key] = 'https://'.$u;
             }
         }
 

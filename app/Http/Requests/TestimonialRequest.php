@@ -24,28 +24,28 @@ class TestimonialRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama'      => ['required', 'string', 'max:255'],
+            'nama' => ['required', 'string', 'max:255'],
             'pekerjaan' => ['required', 'string', 'max:255'],
-            'kategori'  => ['required', 'in:kontraktor,arsitek,pemilik'],
-            'bintang'   => ['required', 'integer', 'min:1', 'max:5'],
-            'pesan'     => ['required', 'string', 'min:5'],
-            'aktif'     => ['nullable', 'boolean'],
+            'kategori' => ['required', 'in:kontraktor,arsitek,pemilik'],
+            'bintang' => ['required', 'integer', 'min:1', 'max:5'],
+            'pesan' => ['required', 'string', 'min:5'],
+            'aktif' => ['nullable', 'boolean'],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'nama.required'      => 'Nama lengkap wajib diisi.',
+            'nama.required' => 'Nama lengkap wajib diisi.',
             'pekerjaan.required' => 'Pekerjaan & Kota asal wajib diisi.',
-            'kategori.required'  => 'Pilih salah satu kategori profil Anda.',
-            'kategori.in'        => 'Kategori tidak valid.',
-            'bintang.required'   => 'Rating bintang wajib dipilih.',
-            'bintang.integer'    => 'Rating bintang tidak valid.',
-            'bintang.min'        => 'Rating bintang minimal 1.',
-            'bintang.max'        => 'Rating bintang maksimal 5.',
-            'pesan.required'     => 'Ulasan testimoni wajib diisi.',
-            'pesan.min'          => 'Ulasan testimoni minimal berisi 5 karakter.',
+            'kategori.required' => 'Pilih salah satu kategori profil Anda.',
+            'kategori.in' => 'Kategori tidak valid.',
+            'bintang.required' => 'Rating bintang wajib dipilih.',
+            'bintang.integer' => 'Rating bintang tidak valid.',
+            'bintang.min' => 'Rating bintang minimal 1.',
+            'bintang.max' => 'Rating bintang maksimal 5.',
+            'pesan.required' => 'Ulasan testimoni wajib diisi.',
+            'pesan.min' => 'Ulasan testimoni minimal berisi 5 karakter.',
         ];
     }
 }

@@ -18,7 +18,7 @@ return new class extends Migration
 
         // Set published_at data lama sama dengan created_at
         DB::table('news')->whereNull('published_at')->update([
-            'published_at' => DB::raw('created_at')
+            'published_at' => DB::raw('created_at'),
         ]);
     }
 

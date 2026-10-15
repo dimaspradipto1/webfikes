@@ -21,7 +21,7 @@ class Publikasi extends Model
     ];
 
     protected $casts = [
-        'aktif'  => 'boolean',
+        'aktif' => 'boolean',
         'urutan' => 'integer',
     ];
 }

@@ -13,66 +13,69 @@ use Yajra\DataTables\Services\DataTable;
 class UnduhanDataTable extends DataTable
 {
     /**
-     * @param QueryBuilder<Unduhan> $query
+     * @param  QueryBuilder<Unduhan>  $query
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('DT_RowIndex', '')
-            ->addColumn('judul', fn ($u) => '<span class="fw-semibold text-dark">' . e($u->judul) . '</span>')
+            ->addColumn('judul', fn ($u) => '<span class="fw-semibold text-dark">'.e($u->judul).'</span>')
             ->addColumn('kategori', function ($u) {
                 return match ($u->kategori) {
-                    'image'    => '<span class="badge" style="background:#047857; color:#fff"><i class="bi bi-image me-1"></i>Image</span>',
-                    'video'    => '<span class="badge bg-primary"><i class="bi bi-camera-video me-1"></i>Video</span>',
-                    'audio'    => '<span class="badge bg-warning text-dark"><i class="bi bi-music-note-beamed me-1"></i>Audio</span>',
+                    'image' => '<span class="badge" style="background:#047857; color:#fff"><i class="bi bi-image me-1"></i>Image</span>',
+                    'video' => '<span class="badge bg-primary"><i class="bi bi-camera-video me-1"></i>Video</span>',
+                    'audio' => '<span class="badge bg-warning text-dark"><i class="bi bi-music-note-beamed me-1"></i>Audio</span>',
                     'template' => '<span class="badge" style="background:#7c3aed; color:#fff"><i class="bi bi-brush me-1"></i>Template</span>',
-                    default    => '<span class="badge bg-secondary">' . e(ucfirst($u->kategori)) . '</span>',
+                    default => '<span class="badge bg-secondary">'.e(ucfirst($u->kategori)).'</span>',
                 };
             })
             ->addColumn('file_info', function ($u) {
-                $source = $u->file_path 
-                    ? '<span class="badge bg-info-subtle text-primary border me-1">File Upload</span>' 
+                $source = $u->file_path
+                    ? '<span class="badge bg-info-subtle text-primary border me-1">File Upload</span>'
                     : ($u->file_url ? '<span class="badge bg-secondary-subtle text-dark border me-1">External Link</span>' : '');
-                $size = $u->file_size ? '<span class="text-muted small">(' . e($u->file_size) . ')</span>' : '';
-                return ($source . $size) ?: '<span class="text-muted small">-</span>';
+                $size = $u->file_size ? '<span class="text-muted small">('.e($u->file_size).')</span>' : '';
+
+                return ($source.$size) ?: '<span class="text-muted small">-</span>';
             })
             ->addColumn('tautan', function ($u) {
                 $url = $u->download_url;
                 if ($url && $url !== '#') {
-                    return '<a href="' . $url . '" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-danger fw-bold rounded-pill px-3 py-1" style="font-size:12px">
+                    return '<a href="'.$url.'" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-danger fw-bold rounded-pill px-3 py-1" style="font-size:12px">
                                 <i class="bi bi-download me-1"></i>Download
                             </a>';
                 }
+
                 return '<span class="text-muted small"># (Dummy Link)</span>';
             })
-            ->addColumn('urutan', fn ($u) => '<span class="badge bg-secondary">' . $u->urutan . '</span>')
+            ->addColumn('urutan', fn ($u) => '<span class="badge bg-secondary">'.$u->urutan.'</span>')
             ->addColumn('is_active', function ($u) {
                 return $u->is_active
                     ? '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Aktif</span>'
                     : '<span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>Nonaktif</span>';
             })
             ->addColumn('action', function ($unduhan) {
-                $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
-                $btn .= '<a href="' . route('unduhan.edit', $unduhan->id) . '"
+                $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
+                $btn .= '<a href="'.route('unduhan.edit', $unduhan->id).'"
                             class="btn btn-sm btn-warning text-white"
                             style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                             title="Edit">
                             <i class="bi bi-pencil-fill" style="font-size:12px"></i>
                          </a>';
-                $btn .= '<form action="' . route('unduhan.destroy', $unduhan->id) . '"
+                $btn .= '<form action="'.route('unduhan.destroy', $unduhan->id).'"
                               method="POST" class="m-0 form-delete-unduhan">'
-                        . csrf_field() . method_field('DELETE')
-                        . '<button type="button"
+                        .csrf_field().method_field('DELETE')
+                        .'<button type="button"
                                    class="btn btn-sm btn-danger"
                                    style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                                    title="Hapus"
-                                   data-name="' . htmlspecialchars($unduhan->judul, ENT_QUOTES, 'UTF-8') . '"
+                                   data-name="'.htmlspecialchars($unduhan->judul, ENT_QUOTES, 'UTF-8').'"
                                    onclick="confirmDeleteUnduhan(event, this)">
                             <i class="bi bi-trash-fill" style="font-size:12px"></i>
                           </button>
                          </form>';
                 $btn .= '</div>';
+
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
@@ -123,6 +126,6 @@ class UnduhanDataTable extends DataTable
 
     protected function filename(): string
     {
-        return 'Unduhan_' . date('YmdHis');
+        return 'Unduhan_'.date('YmdHis');
     }
 }

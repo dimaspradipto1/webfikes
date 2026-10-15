@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\Banner;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -15,7 +16,7 @@ class BannerDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder<Banner> $query
+     * @param  QueryBuilder<Banner>  $query
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -24,32 +25,34 @@ class BannerDataTable extends DataTable
             ->addColumn('DT_RowIndex', '')
             ->addColumn('gambar', function ($banner) {
                 if ($banner->url) {
-                    return '<img src="' . asset('storage/' . $banner->url) . '"
-                                 alt="' . e($banner->judul ?? 'Banner') . '"
+                    return '<img src="'.asset('storage/'.$banner->url).'"
+                                 alt="'.e($banner->judul ?? 'Banner').'"
                                  style="width:120px;height:60px;object-fit:cover;border-radius:6px;border:1px solid #dee2e6"
                                  loading="lazy">';
                 }
+
                 return '<span class="text-muted small">Tidak ada gambar</span>';
             })
             ->addColumn('judul', function ($banner) {
                 return $banner->judul
-                    ? '<span title="' . e($banner->judul) . '">' . e(\Illuminate\Support\Str::limit($banner->judul, 40)) . '</span>'
+                    ? '<span title="'.e($banner->judul).'">'.e(Str::limit($banner->judul, 40)).'</span>'
                     : '<span class="text-muted fst-italic">—</span>';
             })
             ->addColumn('urutan', function ($banner) {
-                return '<span class="badge bg-secondary">' . $banner->urutan . '</span>';
+                return '<span class="badge bg-secondary">'.$banner->urutan.'</span>';
             })
             ->addColumn('aktif', function ($banner) {
                 if ($banner->aktif) {
                     return '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Aktif</span>';
                 }
+
                 return '<span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>Nonaktif</span>';
             })
             ->addColumn('action', function ($banner) {
-                $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
+                $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
 
                 // Tombol Edit
-                $btn .= '<a href="' . route('banner.edit', $banner->id) . '"
+                $btn .= '<a href="'.route('banner.edit', $banner->id).'"
                             class="btn btn-sm btn-warning text-white"
                             style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                             title="Edit">
@@ -57,11 +60,11 @@ class BannerDataTable extends DataTable
                          </a>';
 
                 // Tombol Hapus
-                $btn .= '<form action="' . route('banner.destroy', $banner->id) . '"
+                $btn .= '<form action="'.route('banner.destroy', $banner->id).'"
                               method="POST" class="m-0"
                               onsubmit="return confirm(\'Yakin ingin menghapus banner ini?\')">'
-                        . csrf_field() . method_field('DELETE')
-                        . '<button type="submit"
+                        .csrf_field().method_field('DELETE')
+                        .'<button type="submit"
                                    class="btn btn-sm btn-danger"
                                    style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                                    title="Hapus">
@@ -70,6 +73,7 @@ class BannerDataTable extends DataTable
                          </form>';
 
                 $btn .= '</div>';
+
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
@@ -155,6 +159,6 @@ class BannerDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Banner_' . date('YmdHis');
+        return 'Banner_'.date('YmdHis');
     }
 }

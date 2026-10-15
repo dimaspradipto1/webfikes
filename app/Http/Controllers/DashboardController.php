@@ -21,32 +21,32 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = Auth::user();
         $isAdmin = $user?->isAdmin() ?? false;
         $isPenulis = $user?->hasExactRole('penulis') ?? false;
         $isOrganisasi = $user?->hasExactRole('organisasi') ?? false;
 
         // 1. Metric Counters
-        $totalNewsPublished   = News::where('status', 'published')->count();
-        $totalNewsDraft       = News::where('status', 'draft')->count();
-        $totalNews            = $isPenulis && !$isAdmin ? News::where('user_id', $user->id)->count() : News::count();
-        $myNewsPublished      = News::where('user_id', $user->id)->where('status', 'published')->count();
-        $myNewsDraft          = News::where('user_id', $user->id)->where('status', 'draft')->count();
+        $totalNewsPublished = News::where('status', 'published')->count();
+        $totalNewsDraft = News::where('status', 'draft')->count();
+        $totalNews = $isPenulis && ! $isAdmin ? News::where('user_id', $user->id)->count() : News::count();
+        $myNewsPublished = News::where('user_id', $user->id)->where('status', 'published')->count();
+        $myNewsDraft = News::where('user_id', $user->id)->where('status', 'draft')->count();
 
-        $totalDosen           = Dosen::count();
-        $totalLayanan         = Layanan::count();
-        $totalPrestasi        = Prestasi::count();
-        $totalGalleries       = Gallery::count();
-        $totalTestimonials    = Testimonial::count();
-        $totalFaqs            = Faq::count();
-        $totalPartners        = Partner::count();
-        $totalBanners         = Banner::count();
-        $totalUsers           = User::count();
+        $totalDosen = Dosen::count();
+        $totalLayanan = Layanan::count();
+        $totalPrestasi = Prestasi::count();
+        $totalGalleries = Gallery::count();
+        $totalTestimonials = Testimonial::count();
+        $totalFaqs = Faq::count();
+        $totalPartners = Partner::count();
+        $totalBanners = Banner::count();
+        $totalUsers = User::count();
 
         // Organisasi Metrics
-        $totalOrganisasi      = OrganisasiMahasiswa::count();
-        $totalOrganisasiActive= OrganisasiMahasiswa::where('is_active', true)->count();
+        $totalOrganisasi = OrganisasiMahasiswa::count();
+        $totalOrganisasiActive = OrganisasiMahasiswa::where('is_active', true)->count();
         $totalOrganisasiOprec = OrganisasiMahasiswa::whereNotNull('link_pendaftaran')->where('link_pendaftaran', '!=', '')->count();
 
         // 2. Charts Data
@@ -59,7 +59,7 @@ class DashboardController extends Controller
             $months[] = $monthName;
 
             $query = News::whereYear('created_at', $date->year)->whereMonth('created_at', $date->month);
-            if ($isPenulis && !$isAdmin) {
+            if ($isPenulis && ! $isAdmin) {
                 $query->where('user_id', $user->id);
             }
             $newsMonthlyCounts[] = $query->count();
@@ -79,12 +79,12 @@ class DashboardController extends Controller
             ->toArray();
 
         // 3. Recent Feeds
-        $latestNewsQuery = ($isPenulis && !$isAdmin) ? News::where('user_id', $user->id) : News::query();
-        $latestNews      = $latestNewsQuery->latest('id')->take(5)->get();
+        $latestNewsQuery = ($isPenulis && ! $isAdmin) ? News::where('user_id', $user->id) : News::query();
+        $latestNews = $latestNewsQuery->latest('id')->take(5)->get();
 
         $latestTestimonials = Testimonial::latest('id')->take(5)->get();
-        $latestOrganisasis  = OrganisasiMahasiswa::orderBy('urutan')->latest('id')->take(5)->get();
-        $latestPrestasis    = Prestasi::latest('id')->take(5)->get();
+        $latestOrganisasis = OrganisasiMahasiswa::orderBy('urutan')->latest('id')->take(5)->get();
+        $latestPrestasis = Prestasi::latest('id')->take(5)->get();
 
         return view('layouts.dashboard.index', compact(
             'isAdmin',

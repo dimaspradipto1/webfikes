@@ -4,19 +4,19 @@ namespace App\DataTables;
 
 use App\Models\Faq;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
-use Illuminate\Support\Str;
 
 class FaqDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder<Faq> $query
+     * @param  QueryBuilder<Faq>  $query
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -28,6 +28,7 @@ class FaqDataTable extends DataTable
             })
             ->addColumn('answer', function ($faq) {
                 $clean = trim(html_entity_decode(strip_tags($faq->answer ?? ''), ENT_QUOTES, 'UTF-8'));
+
                 return e(Str::limit($clean, 100));
             })
             ->addColumn('category', function ($faq) {
@@ -36,13 +37,14 @@ class FaqDataTable extends DataTable
                     'spesifikasi' => 'Spesifikasi & Kustomisasi',
                     'pengiriman' => 'Pengiriman & Klaim Garansi',
                 ];
+
                 return $categories[$faq->category] ?? $faq->category;
             })
             ->addColumn('action', function ($faq) {
-                $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
+                $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
 
                 // Tombol Edit
-                $btn .= '<a href="' . route('faq.edit', $faq->id) . '"
+                $btn .= '<a href="'.route('faq.edit', $faq->id).'"
                             class="btn btn-sm btn-warning text-white"
                             style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                             title="Edit">
@@ -50,11 +52,11 @@ class FaqDataTable extends DataTable
                          </a>';
 
                 // Tombol Hapus
-                $btn .= '<form action="' . route('faq.destroy', $faq->id) . '"
+                $btn .= '<form action="'.route('faq.destroy', $faq->id).'"
                               method="POST" class="m-0"
                               onsubmit="return confirm(\'Yakin ingin menghapus FAQ ini?\')">'
-                        . csrf_field() . method_field('DELETE')
-                        . '<button type="submit"
+                        .csrf_field().method_field('DELETE')
+                        .'<button type="submit"
                                    class="btn btn-sm btn-danger"
                                    style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                                    title="Hapus">
@@ -63,6 +65,7 @@ class FaqDataTable extends DataTable
                          </form>';
 
                 $btn .= '</div>';
+
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
@@ -135,6 +138,6 @@ class FaqDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Faq_' . date('YmdHis');
+        return 'Faq_'.date('YmdHis');
     }
 }

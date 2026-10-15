@@ -22,9 +22,9 @@ class BahasaSetting extends Model
     ];
 
     protected $casts = [
-        'is_active'  => 'boolean',
+        'is_active' => 'boolean',
         'is_default' => 'boolean',
-        'urutan'     => 'integer',
+        'urutan' => 'integer',
     ];
 
     /**
@@ -45,7 +45,7 @@ class BahasaSetting extends Model
     public function getFlagUrlAttribute(): string
     {
         // 1. Cek jika 'bendera' berisi path file upload atau URL
-        if (!empty($this->bendera)) {
+        if (! empty($this->bendera)) {
             $benderaVal = trim($this->bendera);
             if (str_contains($benderaVal, '/') || str_contains($benderaVal, '.')) {
                 if (file_exists(public_path($benderaVal))) {
@@ -58,7 +58,7 @@ class BahasaSetting extends Model
         }
 
         // 2. Cek kode negara (misal: 'id', 'ps', 'gb', 'sa', 'tr', 'ple', 'ina', 'idn', 'gbr')
-        $rawCode = !empty($this->kode_negara) ? $this->kode_negara : $this->kode;
+        $rawCode = ! empty($this->kode_negara) ? $this->kode_negara : $this->kode;
         $code = strtolower(trim($rawCode ?? ''));
 
         // Normalisasi alias dari kode IOC, FIFA, ISO 3166-1 alpha-3 ke ISO 3166-1 alpha-2
@@ -108,7 +108,7 @@ class BahasaSetting extends Model
         }
 
         // Cek file lokal
-        if (!empty($code) && file_exists(public_path("assets/img/flags/{$code}.png"))) {
+        if (! empty($code) && file_exists(public_path("assets/img/flags/{$code}.png"))) {
             return asset("assets/img/flags/{$code}.png");
         }
 
@@ -125,12 +125,13 @@ class BahasaSetting extends Model
      */
     public function getTipeBenderaAttribute(): string
     {
-        if (!empty($this->bendera) && (str_contains($this->bendera, '/') || str_contains($this->bendera, '.'))) {
+        if (! empty($this->bendera) && (str_contains($this->bendera, '/') || str_contains($this->bendera, '.'))) {
             return 'upload';
         }
-        if (!empty($this->kode_negara)) {
+        if (! empty($this->kode_negara)) {
             return 'kode';
         }
+
         return 'otomatis';
     }
 }

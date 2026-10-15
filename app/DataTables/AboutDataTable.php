@@ -4,19 +4,19 @@ namespace App\DataTables;
 
 use App\Models\About;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
-use Illuminate\Support\Str;
 
 class AboutDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder<About> $query
+     * @param  QueryBuilder<About>  $query
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -36,10 +36,10 @@ class AboutDataTable extends DataTable
                 return Str::limit(strip_tags(html_entity_decode($about->misi ?? '')), 80);
             })
             ->addColumn('action', function ($about) {
-                $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
+                $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
 
                 // Tombol Edit
-                $btn .= '<a href="' . route('about.edit', $about->id) . '"
+                $btn .= '<a href="'.route('about.edit', $about->id).'"
                             class="btn btn-sm btn-warning text-white"
                             style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                             title="Edit">
@@ -47,11 +47,11 @@ class AboutDataTable extends DataTable
                          </a>';
 
                 // Tombol Hapus
-                $btn .= '<form action="' . route('about.destroy', $about->id) . '"
+                $btn .= '<form action="'.route('about.destroy', $about->id).'"
                               method="POST" class="m-0"
                               onsubmit="return confirm(\'Yakin ingin menghapus data ini?\')">'
-                        . csrf_field() . method_field('DELETE')
-                        . '<button type="submit"
+                        .csrf_field().method_field('DELETE')
+                        .'<button type="submit"
                                    class="btn btn-sm btn-danger"
                                    style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                                    title="Hapus">
@@ -60,6 +60,7 @@ class AboutDataTable extends DataTable
                          </form>';
 
                 $btn .= '</div>';
+
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
@@ -135,6 +136,6 @@ class AboutDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'About_' . date('YmdHis');
+        return 'About_'.date('YmdHis');
     }
 }

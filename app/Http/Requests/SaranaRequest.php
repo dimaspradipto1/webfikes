@@ -14,10 +14,10 @@ class SaranaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'icon'      => ['required', 'string', 'max:100'],
-            'nama'      => ['required', 'string', 'max:200'],
+            'icon' => ['required', 'string', 'max:100'],
+            'nama' => ['required', 'string', 'max:200'],
             'deskripsi' => ['nullable', 'string', 'max:1000'],
-            'urutan'    => ['nullable', 'integer', 'min:0'],
+            'urutan' => ['nullable', 'integer', 'min:0'],
             'is_active' => ['nullable', 'boolean'],
         ];
     }

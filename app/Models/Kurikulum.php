@@ -26,19 +26,20 @@ class Kurikulum extends Model
 
     public function getRpsUrlAttribute(): ?string
     {
-        if (!empty($this->file_rps)) {
-            return asset('storage/' . $this->file_rps);
+        if (! empty($this->file_rps)) {
+            return asset('storage/'.$this->file_rps);
         }
-        if (!empty($this->link_rps)) {
+        if (! empty($this->link_rps)) {
             return $this->link_rps;
         }
+
         return null;
     }
 
     protected $casts = [
-        'semester'  => 'integer',
-        'sks'       => 'integer',
-        'urutan'    => 'integer',
+        'semester' => 'integer',
+        'sks' => 'integer',
+        'urutan' => 'integer',
         'is_active' => 'boolean',
     ];
 
@@ -60,6 +61,6 @@ class Kurikulum extends Model
             8 => 'VIII',
         ];
 
-        return $romawi[$this->semester] ?? (string)$this->semester;
+        return $romawi[$this->semester] ?? (string) $this->semester;
     }
 }

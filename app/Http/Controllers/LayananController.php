@@ -16,40 +16,40 @@ class LayananController extends Controller
         if ($prodis->isEmpty()) {
             $defaults = [
                 [
-                    'icon'        => 'bi-mortarboard-fill',
-                    'judul'       => 'Program Magister (S2) Kesehatan Masyarakat',
+                    'icon' => 'bi-mortarboard-fill',
+                    'judul' => 'Program Magister (S2) Kesehatan Masyarakat',
                     'dasar_hukum' => 'SK LAM-PTKes & Kemendikbudristek',
-                    'link'        => '',
-                    'deskripsi'   => 'Program Magister Kesehatan Masyarakat (M.Kes) yang berfokus pada manajemen kebijakan publik, epidemiologi terapan, dan kepemimpinan kesehatan.',
-                    'urutan'      => 1,
-                    'aktif'       => true,
+                    'link' => '',
+                    'deskripsi' => 'Program Magister Kesehatan Masyarakat (M.Kes) yang berfokus pada manajemen kebijakan publik, epidemiologi terapan, dan kepemimpinan kesehatan.',
+                    'urutan' => 1,
+                    'aktif' => true,
                 ],
                 [
-                    'icon'        => 'bi-shield-plus',
-                    'judul'       => 'Program Sarjana (S1) Kesehatan dan Keselamatan Kerja',
+                    'icon' => 'bi-shield-plus',
+                    'judul' => 'Program Sarjana (S1) Kesehatan dan Keselamatan Kerja',
                     'dasar_hukum' => 'SK LAM-PTKes & Kemendikbudristek',
-                    'link'        => '',
-                    'deskripsi'   => 'Menghasilkan sarjana K3 yang kompeten dalam manajemen risiko, higiene industri, ergonomi, dan SMK3.',
-                    'urutan'      => 2,
-                    'aktif'       => true,
+                    'link' => '',
+                    'deskripsi' => 'Menghasilkan sarjana K3 yang kompeten dalam manajemen risiko, higiene industri, ergonomi, dan SMK3.',
+                    'urutan' => 2,
+                    'aktif' => true,
                 ],
                 [
-                    'icon'        => 'bi-tree-fill',
-                    'judul'       => 'Program Sarjana (S1) Kesehatan Lingkungan',
+                    'icon' => 'bi-tree-fill',
+                    'judul' => 'Program Sarjana (S1) Kesehatan Lingkungan',
                     'dasar_hukum' => 'SK LAM-PTKes & Kemendikbudristek',
-                    'link'        => '',
-                    'deskripsi'   => 'Mendidik sarjana kesehatan lingkungan yang ahli dalam AMDAL, pengelolaan limbah B3 industri, dan sanitasi rumah sakit.',
-                    'urutan'      => 3,
-                    'aktif'       => true,
+                    'link' => '',
+                    'deskripsi' => 'Mendidik sarjana kesehatan lingkungan yang ahli dalam AMDAL, pengelolaan limbah B3 industri, dan sanitasi rumah sakit.',
+                    'urutan' => 3,
+                    'aktif' => true,
                 ],
                 [
-                    'icon'        => 'bi-hospital',
-                    'judul'       => 'Laboratorium Terpadu & Layanan Pengujian',
+                    'icon' => 'bi-hospital',
+                    'judul' => 'Laboratorium Terpadu & Layanan Pengujian',
                     'dasar_hukum' => 'Standar Sarpras Dikti',
-                    'link'        => '',
-                    'deskripsi'   => 'Fasilitas laboratorium terpadu untuk praktikum, riset dosen, dan layanan pengujian lingkungan kerja.',
-                    'urutan'      => 4,
-                    'aktif'       => true,
+                    'link' => '',
+                    'deskripsi' => 'Fasilitas laboratorium terpadu untuk praktikum, riset dosen, dan layanan pengujian lingkungan kerja.',
+                    'urutan' => 4,
+                    'aktif' => true,
                 ],
             ];
 
@@ -66,10 +66,10 @@ class LayananController extends Controller
     public function updateAll(Request $request): RedirectResponse
     {
         $request->validate([
-            'prodis'         => ['required', 'array', 'min:1'],
+            'prodis' => ['required', 'array', 'min:1'],
             'prodis.*.judul' => ['required', 'string', 'max:255'],
-            'prodis.*.icon'  => ['nullable', 'string', 'max:100'],
-            'prodis.*.link'  => ['nullable', 'string', 'max:500'],
+            'prodis.*.icon' => ['nullable', 'string', 'max:100'],
+            'prodis.*.link' => ['nullable', 'string', 'max:500'],
         ], [
             'prodis.*.judul.required' => 'Nama Program Studi tidak boleh kosong.',
         ]);
@@ -78,21 +78,21 @@ class LayananController extends Controller
         $prodisInput = $request->input('prodis', []);
 
         foreach ($prodisInput as $index => $data) {
-            $id = !empty($data['id']) ? $data['id'] : null;
-            $linkValue = !empty(trim($data['link'] ?? '')) ? trim($data['link']) : null;
-            if ($linkValue && !str_starts_with($linkValue, 'http://') && !str_starts_with($linkValue, 'https://') && !str_starts_with($linkValue, '/') && !str_starts_with($linkValue, '#')) {
-                $linkValue = 'https://' . $linkValue;
+            $id = ! empty($data['id']) ? $data['id'] : null;
+            $linkValue = ! empty(trim($data['link'] ?? '')) ? trim($data['link']) : null;
+            if ($linkValue && ! str_starts_with($linkValue, 'http://') && ! str_starts_with($linkValue, 'https://') && ! str_starts_with($linkValue, '/') && ! str_starts_with($linkValue, '#')) {
+                $linkValue = 'https://'.$linkValue;
             }
 
             $payload = [
-                'icon'        => $data['icon'] ?? 'bi-mortarboard-fill',
-                'judul'       => $data['judul'],
+                'icon' => $data['icon'] ?? 'bi-mortarboard-fill',
+                'judul' => $data['judul'],
                 'dasar_hukum' => $data['dasar_hukum'] ?? null,
-                'link'        => $linkValue,
-                'deskripsi'   => !empty($data['deskripsi']) ? $data['deskripsi'] : $data['judul'],
-                'rincian'     => !empty($data['rincian']) ? $data['rincian'] : null,
-                'urutan'      => $index + 1,
-                'aktif'       => isset($data['aktif']) && $data['aktif'] == '1',
+                'link' => $linkValue,
+                'deskripsi' => ! empty($data['deskripsi']) ? $data['deskripsi'] : $data['judul'],
+                'rincian' => ! empty($data['rincian']) ? $data['rincian'] : null,
+                'urutan' => $index + 1,
+                'aktif' => isset($data['aktif']) && $data['aktif'] == '1',
             ];
 
             if ($id && ($existing = Layanan::find($id))) {
@@ -104,7 +104,7 @@ class LayananController extends Controller
             }
         }
 
-        if (!empty($submittedIds)) {
+        if (! empty($submittedIds)) {
             Layanan::whereNotIn('id', $submittedIds)->delete();
         }
 

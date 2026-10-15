@@ -29,7 +29,7 @@ class AboutController extends Controller
             $data['video_file'] = $request->file('video_file')->store('about-videos', 'public');
         }
 
-        if (!empty($data['video_url'])) {
+        if (! empty($data['video_url'])) {
             $raw = trim($data['video_url']);
             if (preg_match('/<iframe.*?src=["\']([^"\']+)["\']/i', $raw, $frameMatch)) {
                 $raw = $frameMatch[1];
@@ -68,7 +68,7 @@ class AboutController extends Controller
             $data['video_file'] = $request->file('video_file')->store('about-videos', 'public');
         }
 
-        if (!empty($data['video_url'])) {
+        if (! empty($data['video_url'])) {
             $raw = trim($data['video_url']);
             if (preg_match('/<iframe.*?src=["\']([^"\']+)["\']/i', $raw, $frameMatch)) {
                 $raw = $frameMatch[1];

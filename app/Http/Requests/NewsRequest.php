@@ -14,15 +14,15 @@ class NewsRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'title'       => ['required', 'string', 'max:255'],
+            'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:1000'],
-            'content'     => ['required', 'string'],
-            'status'      => ['required', 'in:draft,published'],
-            'category'     => ['required', 'string', 'max:100'],
-            'is_featured'  => ['nullable', 'boolean'],
+            'content' => ['required', 'string'],
+            'status' => ['required', 'in:draft,published'],
+            'category' => ['required', 'string', 'max:100'],
+            'is_featured' => ['nullable', 'boolean'],
             'published_at' => ['nullable', 'date'],
-            'gallery'      => ['nullable', 'array'],
-            'gallery.*'   => ['image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'],
+            'gallery' => ['nullable', 'array'],
+            'gallery.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'],
         ];
 
         $rules['thumbnail'] = ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'];
@@ -33,20 +33,20 @@ class NewsRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required'       => 'Judul wajib diisi.',
-            'title.max'            => 'Judul maksimal 255 karakter.',
+            'title.required' => 'Judul wajib diisi.',
+            'title.max' => 'Judul maksimal 255 karakter.',
             'description.required' => 'Deskripsi singkat wajib diisi.',
-            'description.max'      => 'Deskripsi singkat maksimal 1000 karakter.',
-            'content.required'     => 'Konten berita wajib diisi.',
-            'status.required'      => 'Status wajib dipilih.',
-            'status.in'            => 'Status tidak valid.',
-            'thumbnail.required'   => 'Thumbnail utama wajib diunggah.',
-            'thumbnail.image'      => 'File thumbnail harus berupa gambar.',
-            'thumbnail.mimes'      => 'Format gambar harus jpeg, png, jpg, gif, svg, atau webp.',
-            'thumbnail.max'        => 'Ukuran thumbnail maksimal 2 MB.',
-            'gallery.*.image'      => 'Setiap file galeri harus berupa gambar.',
-            'gallery.*.mimes'      => 'Format gambar galeri harus jpeg, png, jpg, gif, svg, atau webp.',
-            'gallery.*.max'        => 'Ukuran setiap gambar galeri maksimal 2 MB.',
+            'description.max' => 'Deskripsi singkat maksimal 1000 karakter.',
+            'content.required' => 'Konten berita wajib diisi.',
+            'status.required' => 'Status wajib dipilih.',
+            'status.in' => 'Status tidak valid.',
+            'thumbnail.required' => 'Thumbnail utama wajib diunggah.',
+            'thumbnail.image' => 'File thumbnail harus berupa gambar.',
+            'thumbnail.mimes' => 'Format gambar harus jpeg, png, jpg, gif, svg, atau webp.',
+            'thumbnail.max' => 'Ukuran thumbnail maksimal 2 MB.',
+            'gallery.*.image' => 'Setiap file galeri harus berupa gambar.',
+            'gallery.*.mimes' => 'Format gambar galeri harus jpeg, png, jpg, gif, svg, atau webp.',
+            'gallery.*.max' => 'Ukuran setiap gambar galeri maksimal 2 MB.',
         ];
     }
 }

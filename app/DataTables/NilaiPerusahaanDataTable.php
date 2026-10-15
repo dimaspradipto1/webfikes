@@ -14,30 +14,30 @@ use Yajra\DataTables\Services\DataTable;
 class NilaiPerusahaanDataTable extends DataTable
 {
     /**
-     * @param QueryBuilder<NilaiPerusahaan> $query
+     * @param  QueryBuilder<NilaiPerusahaan>  $query
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('DT_RowIndex', '')
-            ->addColumn('icon', fn ($n) => '<i class="bi ' . e($n->icon) . '" style="font-size:20px"></i>')
+            ->addColumn('icon', fn ($n) => '<i class="bi '.e($n->icon).'" style="font-size:20px"></i>')
             ->addColumn('judul', fn ($n) => e($n->judul))
             ->addColumn('deskripsi', fn ($n) => e(Str::limit(trim(html_entity_decode(strip_tags($n->deskripsi ?? ''), ENT_QUOTES, 'UTF-8')), 90)))
-            ->addColumn('urutan', fn ($n) => '<span class="badge bg-secondary">' . $n->urutan . '</span>')
+            ->addColumn('urutan', fn ($n) => '<span class="badge bg-secondary">'.$n->urutan.'</span>')
             ->addColumn('action', function ($nilaiPerusahaan) {
-                $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
-                $btn .= '<a href="' . route('nilaiperusahaan.edit', $nilaiPerusahaan->id) . '"
+                $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
+                $btn .= '<a href="'.route('nilaiperusahaan.edit', $nilaiPerusahaan->id).'"
                             class="btn btn-sm btn-warning text-white"
                             style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                             title="Edit">
                             <i class="bi bi-pencil-fill" style="font-size:12px"></i>
                          </a>';
-                $btn .= '<form action="' . route('nilaiperusahaan.destroy', $nilaiPerusahaan->id) . '"
+                $btn .= '<form action="'.route('nilaiperusahaan.destroy', $nilaiPerusahaan->id).'"
                               method="POST" class="m-0"
                               onsubmit="return confirm(\'Yakin ingin menghapus nilai ini?\')">'
-                        . csrf_field() . method_field('DELETE')
-                        . '<button type="submit"
+                        .csrf_field().method_field('DELETE')
+                        .'<button type="submit"
                                    class="btn btn-sm btn-danger"
                                    style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                                    title="Hapus">
@@ -45,6 +45,7 @@ class NilaiPerusahaanDataTable extends DataTable
                           </button>
                          </form>';
                 $btn .= '</div>';
+
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
@@ -92,6 +93,6 @@ class NilaiPerusahaanDataTable extends DataTable
 
     protected function filename(): string
     {
-        return 'NilaiPerusahaan_' . date('YmdHis');
+        return 'NilaiPerusahaan_'.date('YmdHis');
     }
 }

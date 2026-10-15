@@ -25,8 +25,8 @@ class News extends Model
     ];
 
     protected $casts = [
-        'is_featured'  => 'boolean',
-        'gallery'      => 'array',
+        'is_featured' => 'boolean',
+        'gallery' => 'array',
         'published_at' => 'datetime',
     ];
 
@@ -39,13 +39,13 @@ class News extends Model
             }
 
             // Selaraskan created_at dengan published_at agar kompatibel dengan seluruh view frontend
-            if (!empty($news->published_at)) {
+            if (! empty($news->published_at)) {
                 $news->created_at = $news->published_at;
             }
             if (empty($news->slug) || $news->isDirty('title')) {
                 $baseSlug = Str::slug($news->title ?? '');
                 if (empty($baseSlug)) {
-                    $baseSlug = 'berita-' . ($news->id ?? time());
+                    $baseSlug = 'berita-'.($news->id ?? time());
                 }
                 $slug = $baseSlug;
                 $counter = 1;

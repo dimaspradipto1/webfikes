@@ -27,7 +27,7 @@ class TenagaPendidik extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'urutan'    => 'integer',
+        'urutan' => 'integer',
     ];
 
     /**

@@ -28,18 +28,18 @@ class SocialMedia extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'urutan'    => 'integer',
+        'urutan' => 'integer',
     ];
 
     protected static function booted()
     {
         static::saving(function ($model) {
-            if (!empty($model->video_url)) {
+            if (! empty($model->video_url)) {
                 if (empty($model->direct_video_url) || $model->isDirty('video_url')) {
                     $resolved = static::resolveDirectVideo($model->video_url);
-                    if ($resolved && !empty($resolved['play'])) {
+                    if ($resolved && ! empty($resolved['play'])) {
                         $model->direct_video_url = $resolved['play'];
-                        if (empty($model->video_judul) && !empty($resolved['title'])) {
+                        if (empty($model->video_judul) && ! empty($resolved['title'])) {
                             $model->video_judul = mb_strimwidth($resolved['title'], 0, 100, '...');
                         }
                     }
@@ -71,7 +71,9 @@ class SocialMedia extends Model
      */
     public static function resolveDirectVideo(?string $url): ?array
     {
-        if (empty($url)) return null;
+        if (empty($url)) {
+            return null;
+        }
 
         $cleanUrl = trim($url);
 
@@ -83,7 +85,7 @@ class SocialMedia extends Model
         // TikTok direct mp4 resolver
         if (str_contains(strtolower($cleanUrl), 'tiktok.com')) {
             try {
-                $apiUrl = 'https://www.tikwm.com/api/?url=' . urlencode($cleanUrl);
+                $apiUrl = 'https://www.tikwm.com/api/?url='.urlencode($cleanUrl);
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $apiUrl);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -96,7 +98,7 @@ class SocialMedia extends Model
                     $json = json_decode($res, true);
                     if (isset($json['data']['play'])) {
                         return [
-                            'play'  => $json['data']['play'],
+                            'play' => $json['data']['play'],
                             'cover' => $json['data']['cover'] ?? null,
                             'title' => $json['data']['title'] ?? null,
                         ];
@@ -122,8 +124,10 @@ class SocialMedia extends Model
             if (str_starts_with($this->logo, 'assets/')) {
                 return asset($this->logo);
             }
-            return asset('storage/' . $this->logo);
+
+            return asset('storage/'.$this->logo);
         }
+
         return null;
     }
 
@@ -139,8 +143,10 @@ class SocialMedia extends Model
             if (str_starts_with($this->thumbnail_video, 'assets/') || str_starts_with($this->thumbnail_video, 'frontend/')) {
                 return asset($this->thumbnail_video);
             }
-            return asset('storage/' . $this->thumbnail_video);
+
+            return asset('storage/'.$this->thumbnail_video);
         }
+
         return null;
     }
 
@@ -149,10 +155,11 @@ class SocialMedia extends Model
      */
     public function isVideoFile(): bool
     {
-        if (!$this->thumbnail_video) {
+        if (! $this->thumbnail_video) {
             return false;
         }
         $ext = strtolower(pathinfo($this->thumbnail_video, PATHINFO_EXTENSION));
+
         return in_array($ext, ['mp4', 'webm', 'ogg', 'mov']);
     }
 
@@ -165,10 +172,19 @@ class SocialMedia extends Model
             return null;
         }
         $url = strtolower($this->video_url);
-        if (str_contains($url, 'tiktok.com')) return 'tiktok';
-        if (str_contains($url, 'youtube.com') || str_contains($url, 'youtu.be')) return 'youtube';
-        if (str_contains($url, 'instagram.com')) return 'instagram';
-        if (str_contains($url, 'facebook.com') || str_contains($url, 'fb.watch')) return 'facebook';
+        if (str_contains($url, 'tiktok.com')) {
+            return 'tiktok';
+        }
+        if (str_contains($url, 'youtube.com') || str_contains($url, 'youtu.be')) {
+            return 'youtube';
+        }
+        if (str_contains($url, 'instagram.com')) {
+            return 'instagram';
+        }
+        if (str_contains($url, 'facebook.com') || str_contains($url, 'fb.watch')) {
+            return 'facebook';
+        }
+
         return 'other';
     }
 
@@ -190,28 +206,29 @@ class SocialMedia extends Model
 
         // YouTube: watch?v=, youtu.be/, shorts/, embed/
         if (preg_match('/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i', $url, $matches)) {
-            return 'https://www.youtube.com/embed/' . $matches[1] . '?autoplay=1&mute=1&loop=1&playlist=' . $matches[1] . '&rel=0';
+            return 'https://www.youtube.com/embed/'.$matches[1].'?autoplay=1&mute=1&loop=1&playlist='.$matches[1].'&rel=0';
         }
 
         // TikTok: matches /video/, /photo/, /embed/v2/, /embed/, /v/, or numeric ID (15-25 digits)
         if (str_contains(strtolower($url), 'tiktok.com')) {
             if (preg_match('/(?:\/(?:video|photo|embed\/v2|embed|v|player\/v1)\/)?(\d{15,25})/i', $url, $matches)) {
-                return 'https://www.tiktok.com/player/v1/' . $matches[1];
+                return 'https://www.tiktok.com/player/v1/'.$matches[1];
             }
         }
 
         // Instagram: instagram.com/reel/CODE or instagram.com/p/CODE
         if (preg_match('/instagram\.com\/(?:reel|p)\/([a-zA-Z0-9_-]+)/i', $url, $matches)) {
-            return 'https://www.instagram.com/reel/' . $matches[1] . '/embed/';
+            return 'https://www.instagram.com/reel/'.$matches[1].'/embed/';
         }
 
         // Facebook: video, reel, watch, or post/photo
         if (str_contains(strtolower($url), 'facebook.com') || str_contains(strtolower($url), 'fb.watch')) {
             $isFbVideo = str_contains(strtolower($url), 'watch') || str_contains(strtolower($url), 'reel') || str_contains(strtolower($url), '/videos/');
             if ($isFbVideo) {
-                return 'https://www.facebook.com/plugins/video.php?href=' . urlencode($url) . '&show_text=false&autoplay=true&mute=1&width=500';
+                return 'https://www.facebook.com/plugins/video.php?href='.urlencode($url).'&show_text=false&autoplay=true&mute=1&width=500';
             }
-            return 'https://www.facebook.com/plugins/post.php?href=' . urlencode($url) . '&show_text=false&width=500';
+
+            return 'https://www.facebook.com/plugins/post.php?href='.urlencode($url).'&show_text=false&width=500';
         }
 
         // Direct video
