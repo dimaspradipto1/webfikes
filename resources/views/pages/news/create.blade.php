@@ -85,27 +85,10 @@
                         @enderror
                     </div>
 
-                    {{-- Baris: Status + Kategori + Artikel Unggulan --}}
-                    <div class="row mb-4">
-                        {{-- Status --}}
-                        <div class="col-md-4 mb-3 mb-md-0">
-                            <label for="status" class="form-label fw-semibold">
-                                Status <span class="text-danger">*</span>
-                            </label>
-                            <select id="status"
-                                    name="status"
-                                    class="form-select @error('status') is-invalid @enderror"
-                                    required>
-                                <option value="draft"      {{ old('status') == 'draft'      ? 'selected' : '' }}>Draft</option>
-                                <option value="published"  {{ old('status', 'published') == 'published'  ? 'selected' : '' }}>Published (Terbit)</option>
-                            </select>
-                            @error('status')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
+                    {{-- Baris Pengaturan: Kategori & Tanggal Publish --}}
+                    <div class="row mb-3">
                         {{-- Kategori --}}
-                        <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="col-md-6 mb-3 mb-md-0">
                             <label for="category" class="form-label fw-semibold">
                                 Kategori Berita <span class="text-danger">*</span>
                             </label>
@@ -130,8 +113,46 @@
                             @enderror
                         </div>
 
+                        {{-- Tanggal Publish --}}
+                        <div class="col-md-6">
+                            <label for="published_at" class="form-label fw-semibold">
+                                <i class="bi bi-calendar-event me-1 text-primary"></i> Tanggal & Waktu Publish
+                            </label>
+                            <input type="datetime-local"
+                                   id="published_at"
+                                   name="published_at"
+                                   class="form-control @error('published_at') is-invalid @enderror"
+                                   value="{{ old('published_at') }}">
+                            <div class="form-text text-muted small">
+                                <i class="bi bi-info-circle me-1"></i> Boleh dikosongkan. Jika tidak diisi otomatis menggunakan waktu saat ini (<code>now()</code>).
+                            </div>
+                            @error('published_at')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    {{-- Baris: Status + Artikel Unggulan --}}
+                    <div class="row mb-4">
+                        {{-- Status --}}
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <label for="status" class="form-label fw-semibold">
+                                Status <span class="text-danger">*</span>
+                            </label>
+                            <select id="status"
+                                    name="status"
+                                    class="form-select @error('status') is-invalid @enderror"
+                                    required>
+                                <option value="published"  {{ old('status', 'published') == 'published'  ? 'selected' : '' }}>Published (Terbit)</option>
+                                <option value="draft"      {{ old('status') == 'draft'      ? 'selected' : '' }}>Draft</option>
+                            </select>
+                            @error('status')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         {{-- Artikel Unggulan --}}
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label fw-semibold d-block">Artikel Unggulan</label>
                             <div class="form-check form-switch mt-2">
                                 <input class="form-check-input"
@@ -154,16 +175,15 @@
                     {{-- Gambar Thumbnail Utama --}}
                     <div class="mb-4 p-3 rounded bg-light border">
                         <label for="thumbnail" class="form-label fw-semibold">
-                            <i class="bi bi-image me-1 text-primary"></i> Gambar Thumbnail Utama <span class="text-danger">*</span>
+                            <i class="bi bi-image me-1 text-primary"></i> Gambar Thumbnail Utama <span class="text-muted small fw-normal">(Opsional - Boleh dikosongkan)</span>
                         </label>
                         <input type="file"
                                id="thumbnail"
                                name="thumbnail"
                                class="form-control @error('thumbnail') is-invalid @enderror"
                                accept="image/*"
-                               onchange="previewThumbnail(this)"
-                               required>
-                        <div class="form-text text-muted">Format: JPG, JPEG, PNG, WebP. Maks: 2 MB.</div>
+                               onchange="previewThumbnail(this)">
+                        <div class="form-text text-muted">Format: JPG, JPEG, PNG, WebP. Maks: 2 MB. Boleh dikosongkan jika belum memiliki gambar.</div>
                         @error('thumbnail')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

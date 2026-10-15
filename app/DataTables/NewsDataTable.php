@@ -37,6 +37,10 @@ class NewsDataTable extends DataTable
             ->addColumn('author', function ($news) {
                 return $news->user ? e($news->user->name) : '<span class="text-muted fst-italic">Anonim</span>';
             })
+            ->addColumn('published_at', function ($news) {
+                $date = $news->published_at ?? $news->created_at;
+                return $date ? '<span class="small text-nowrap"><i class="bi bi-clock me-1 text-muted"></i>' . $date->format('d/m/Y H:i') . '</span>' : '-';
+            })
             ->addColumn('status', function ($news) {
                 if ($news->status === 'published') {
                     return '<span class="badge bg-success">Published</span>';
@@ -54,15 +58,16 @@ class NewsDataTable extends DataTable
                             <i class="bi bi-pencil-fill" style="font-size:12px"></i>
                          </a>';
 
-                // Tombol Hapus
+                // Tombol Hapus (SweetAlert2)
                 $btn .= '<form action="' . route('news.destroy', $news->id) . '"
-                              method="POST" class="m-0"
-                              onsubmit="return confirm(\'Yakin ingin menghapus berita ini?\')">'
+                              method="POST" class="m-0 form-delete-news">'
                         . csrf_field() . method_field('DELETE')
-                        . '<button type="submit"
+                        . '<button type="button"
                                    class="btn btn-sm btn-danger"
                                    style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
-                                   title="Hapus">
+                                   title="Hapus"
+                                   data-title="' . htmlspecialchars($news->title, ENT_QUOTES, 'UTF-8') . '"
+                                   onclick="confirmDeleteNews(event, this)">
                             <i class="bi bi-trash-fill" style="font-size:12px"></i>
                            </button>
                          </form>';
@@ -71,7 +76,7 @@ class NewsDataTable extends DataTable
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
-            ->rawColumns(['thumbnail', 'status', 'action']);
+            ->rawColumns(['thumbnail', 'published_at', 'status', 'action']);
     }
 
     /**
@@ -83,7 +88,7 @@ class NewsDataTable extends DataTable
     {
         $query = $model->newQuery()
             ->with('user')
-            ->select(['id', 'user_id', 'thumbnail', 'title', 'status', 'created_at']);
+            ->select(['id', 'user_id', 'thumbnail', 'title', 'status', 'published_at', 'created_at']);
 
         // Jika role penulis (dan bukan admin), hanya tampilkan berita miliknya sendiri. Admin menampilkan semua.
         if (\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->hasExactRole('penulis') && !\Illuminate\Support\Facades\Auth::user()->isAdmin()) {
@@ -138,6 +143,11 @@ class NewsDataTable extends DataTable
 
             Column::computed('author')
                 ->title('Penulis'),
+
+            Column::make('published_at')
+                ->title('Tanggal Publish')
+                ->width('14%')
+                ->addClass('text-center'),
 
             Column::make('status')
                 ->title('Status')

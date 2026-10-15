@@ -21,16 +21,27 @@ class News extends Model
         'status',
         'category',
         'is_featured',
+        'published_at',
     ];
 
     protected $casts = [
-        'is_featured' => 'boolean',
-        'gallery'     => 'array',
+        'is_featured'  => 'boolean',
+        'gallery'      => 'array',
+        'published_at' => 'datetime',
     ];
 
     protected static function booted()
     {
         static::saving(function ($news) {
+            // Default tanggal publish ke now() jika tidak diisi
+            if (empty($news->published_at)) {
+                $news->published_at = now();
+            }
+
+            // Selaraskan created_at dengan published_at agar kompatibel dengan seluruh view frontend
+            if (!empty($news->published_at)) {
+                $news->created_at = $news->published_at;
+            }
             if (empty($news->slug) || $news->isDirty('title')) {
                 $baseSlug = Str::slug($news->title ?? '');
                 if (empty($baseSlug)) {

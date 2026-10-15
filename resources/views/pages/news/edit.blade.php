@@ -86,27 +86,10 @@
                         @enderror
                     </div>
 
-                    {{-- Baris: Status + Kategori + Unggulan --}}
-                    <div class="row mb-4">
-                        {{-- Status --}}
-                        <div class="col-md-4 mb-3 mb-md-0">
-                            <label for="status" class="form-label fw-semibold">
-                                Status <span class="text-danger">*</span>
-                            </label>
-                            <select id="status"
-                                    name="status"
-                                    class="form-select @error('status') is-invalid @enderror"
-                                    required>
-                                <option value="draft"     {{ old('status', $news->status) == 'draft'     ? 'selected' : '' }}>Draft</option>
-                                <option value="published" {{ old('status', $news->status) == 'published' ? 'selected' : '' }}>Published (Terbit)</option>
-                            </select>
-                            @error('status')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
+                    {{-- Baris Pengaturan: Kategori & Tanggal Publish --}}
+                    <div class="row mb-3">
                         {{-- Kategori --}}
-                        <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="col-md-6 mb-3 mb-md-0">
                             <label for="category" class="form-label fw-semibold">
                                 Kategori Berita <span class="text-danger">*</span>
                             </label>
@@ -131,8 +114,52 @@
                             @enderror
                         </div>
 
+                        {{-- Tanggal Publish --}}
+                        <div class="col-md-6">
+                            <label for="published_at" class="form-label fw-semibold">
+                                <i class="bi bi-calendar-event me-1 text-primary"></i> Tanggal & Waktu Publish
+                            </label>
+                            @php
+                                $currentPublishDate = old('published_at');
+                                if (!$currentPublishDate && ($news->published_at || $news->created_at)) {
+                                    $currentPublishDate = ($news->published_at ?? $news->created_at)->format('Y-m-d\TH:i');
+                                }
+                            @endphp
+                            <input type="datetime-local"
+                                   id="published_at"
+                                   name="published_at"
+                                   class="form-control @error('published_at') is-invalid @enderror"
+                                   value="{{ $currentPublishDate }}">
+                            <div class="form-text text-muted small">
+                                <i class="bi bi-info-circle me-1"></i> Boleh dikosongkan. Jika tidak diisi otomatis menggunakan waktu saat ini (<code>now()</code>).
+                            </div>
+                            @error('published_at')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    {{-- Baris: Status + Artikel Unggulan --}}
+                    <div class="row mb-4">
+                        {{-- Status --}}
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <label for="status" class="form-label fw-semibold">
+                                Status <span class="text-danger">*</span>
+                            </label>
+                            <select id="status"
+                                    name="status"
+                                    class="form-select @error('status') is-invalid @enderror"
+                                    required>
+                                <option value="published" {{ old('status', $news->status) == 'published' ? 'selected' : '' }}>Published (Terbit)</option>
+                                <option value="draft"     {{ old('status', $news->status) == 'draft'     ? 'selected' : '' }}>Draft</option>
+                            </select>
+                            @error('status')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         {{-- Artikel Unggulan --}}
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label fw-semibold d-block">Artikel Unggulan</label>
                             <div class="form-check form-switch mt-2">
                                 <input class="form-check-input"

@@ -18,17 +18,14 @@ class NewsRequest extends FormRequest
             'description' => ['required', 'string', 'max:1000'],
             'content'     => ['required', 'string'],
             'status'      => ['required', 'in:draft,published'],
-            'category'    => ['required', 'string', 'max:100'],
-            'is_featured' => ['nullable', 'boolean'],
-            'gallery'     => ['nullable', 'array'],
+            'category'     => ['required', 'string', 'max:100'],
+            'is_featured'  => ['nullable', 'boolean'],
+            'published_at' => ['nullable', 'date'],
+            'gallery'      => ['nullable', 'array'],
             'gallery.*'   => ['image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'],
         ];
 
-        if ($this->isMethod('POST')) {
-            $rules['thumbnail'] = ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'];
-        } else {
-            $rules['thumbnail'] = ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'];
-        }
+        $rules['thumbnail'] = ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'];
 
         return $rules;
     }

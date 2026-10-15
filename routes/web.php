@@ -123,6 +123,8 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('profil', ProfilController::class);
     Route::resource('contact', ContactController::class);
     Route::post('news/upload-image', [NewsController::class, 'uploadImage'])->name('news.upload-image');
+    Route::get('news/download-template', [NewsController::class, 'downloadTemplate'])->name('news.download-template');
+    Route::post('news/import-excel', [NewsController::class, 'importExcel'])->name('news.import-excel');
     Route::resource('news', NewsController::class);
     Route::resource('admin-faq', FaqController::class)
         ->parameters(['admin-faq' => 'faq'])
