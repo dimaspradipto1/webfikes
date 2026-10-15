@@ -45,113 +45,190 @@
                 <form action="{{ route('faculty-stat.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    {{-- Judul Section --}}
+                    {{-- 1. Judul Section --}}
                     <div class="mb-4">
-                        <label for="title" class="form-label fw-semibold">
-                            Judul Section <span class="text-danger">*</span>
+                        <label for="title" class="form-label fw-bold">
+                            Judul Section / Heading <span class="text-danger">*</span>
                         </label>
                         <input type="text"
                                id="title"
                                name="title"
                                class="form-control @error('title') is-invalid @enderror"
-                               value="{{ old('title', 'UIS Dalam Angka') }}"
-                               placeholder="Contoh: UIS Dalam Angka">
-                        <div class="form-text">Teks judul yang tampil di atas angka statistik.</div>
+                               value="{{ old('title', 'Universitas Ibnu Sina') }}"
+                               placeholder="Contoh: Universitas Ibnu Sina">
+                        <div class="form-text">Teks judul putih di tengah banner statistik.</div>
                         @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    {{-- Angka Statistik --}}
-                    <div class="mb-4">
-                        <label class="form-label fw-semibold d-block mb-3">
-                            <i class="bi bi-hash me-1 text-primary"></i>Angka Statistik <span class="text-danger">*</span>
+                    {{-- 2. Background Image Banner --}}
+                    <div class="card border border-success-subtle bg-light p-3 mb-4 rounded-3">
+                        <label for="background_image" class="form-label fw-bold text-dark mb-1">
+                            <i class="bi bi-image text-success me-1"></i> Background Banner Gedung / Kampus UIS
                         </label>
-                        <div class="row g-3">
-                            {{-- Jumlah Prodi --}}
-                            <div class="col-md-4">
-                                <div class="card border-0 bg-primary bg-opacity-10 h-100">
-                                    <div class="card-body text-center py-3">
-                                        <i class="bi bi-mortarboard fs-3 text-primary mb-2 d-block"></i>
-                                        <label for="jumlah_prodi" class="form-label fw-semibold small">Program Studi</label>
-                                        <input type="number"
-                                               id="jumlah_prodi"
-                                               name="jumlah_prodi"
-                                               class="form-control text-center fw-bold fs-5 @error('jumlah_prodi') is-invalid @enderror"
-                                               value="{{ old('jumlah_prodi', 0) }}"
-                                               min="0" placeholder="0">
-                                        @error('jumlah_prodi')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- Total Mahasiswa --}}
-                            <div class="col-md-4">
-                                <div class="card border-0 bg-success bg-opacity-10 h-100">
-                                    <div class="card-body text-center py-3">
-                                        <i class="bi bi-people fs-3 text-success mb-2 d-block"></i>
-                                        <label for="total_mahasiswa" class="form-label fw-semibold small">Total Mahasiswa Aktif</label>
-                                        <input type="number"
-                                               id="total_mahasiswa"
-                                               name="total_mahasiswa"
-                                               class="form-control text-center fw-bold fs-5 @error('total_mahasiswa') is-invalid @enderror"
-                                               value="{{ old('total_mahasiswa', 0) }}"
-                                               min="0" placeholder="0">
-                                        @error('total_mahasiswa')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- Total Alumni --}}
-                            <div class="col-md-4">
-                                <div class="card border-0 bg-info bg-opacity-10 h-100">
-                                    <div class="card-body text-center py-3">
-                                        <i class="bi bi-award fs-3 text-info mb-2 d-block"></i>
-                                        <label for="total_alumni" class="form-label fw-semibold small">Total Alumni</label>
-                                        <input type="number"
-                                               id="total_alumni"
-                                               name="total_alumni"
-                                               class="form-control text-center fw-bold fs-5 @error('total_alumni') is-invalid @enderror"
-                                               value="{{ old('total_alumni', 0) }}"
-                                               min="0" placeholder="0">
-                                        @error('total_alumni')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="hidden" name="total_dosen" value="{{ old('total_dosen', 0) }}">
-                        </div>
-                    </div>
+                        <p class="text-muted small mb-2">Foto latar belakang gedung kampus UIS yang menjadi background utama statistik (Foto panoramic kampus UIS). Jika dikosongkan akan memakai gambar default.</p>
 
-                    {{-- Upload Gambar (Opsional) --}}
-                    <div class="mb-4">
-                        <label for="image" class="form-label fw-semibold">
-                            Gambar Pendukung
-                            <span class="badge bg-secondary fw-normal ms-1" style="font-size:10px">Opsional</span>
-                        </label>
                         <input type="file"
-                               id="image"
-                               name="image"
-                               class="form-control @error('image') is-invalid @enderror"
-                               accept="image/jpg,image/jpeg,image/png,image/webp"
-                               onchange="previewImage(this)">
-                        <div class="form-text">
-                            <i class="bi bi-info-circle me-1"></i>
-                            Foto gedung/kampus untuk tampil di sisi kanan section. Format: JPG, PNG, WebP. Maks 2MB.
-                            Resolusi disarankan: 600 × 400 px.
-                        </div>
-                        @error('image')
+                               id="background_image"
+                               name="background_image"
+                               class="form-control @error('background_image') is-invalid @enderror"
+                               accept="image/jpg,image/jpeg,image/png,image/webp">
+                        <div class="form-text">Format: JPG, PNG, WEBP (Rekomendasi Landscape 1920x600 px / Maks 5MB).</div>
+                        @error('background_image')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                    </div>
 
-                        {{-- Preview --}}
-                        <div id="previewWrap" class="mt-3 d-none">
-                            <p class="small text-muted mb-1">Preview:</p>
-                            <img id="previewImg" src="" alt="Preview"
-                                 style="max-width:100%;max-height:220px;object-fit:cover;border-radius:10px;border:1px solid #dee2e6">
+                    {{-- 3. Tab Pengaturan Angka Statistik: Mahasiswa, Prestasi, Kerjasama --}}
+                    <div class="card border shadow-sm mb-4">
+                        <div class="card-header bg-white py-3 border-bottom">
+                            <ul class="nav nav-pills card-header-pills" id="statTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active fw-bold px-4" id="mhs-tab" data-bs-toggle="pill" data-bs-target="#mhs-content" type="button" role="tab">
+                                        <i class="bi bi-people-fill me-1"></i> Tab 1: Mahasiswa
+                                    </button>
+                                </li>
+                                <li class="nav-item ms-2" role="presentation">
+                                    <button class="nav-link fw-bold px-4" id="prestasi-tab" data-bs-toggle="pill" data-bs-target="#prestasi-content" type="button" role="tab">
+                                        <i class="bi bi-trophy-fill me-1"></i> Tab 2: Prestasi
+                                    </button>
+                                </li>
+                                <li class="nav-item ms-2" role="presentation">
+                                    <button class="nav-link fw-bold px-4" id="kerjasama-tab" data-bs-toggle="pill" data-bs-target="#kerjasama-content" type="button" role="tab">
+                                        <i class="bi bi-briefcase-fill me-1"></i> Tab 3: Kerjasama
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="card-body p-4">
+                            <div class="tab-content" id="statTabsContent">
+
+                                {{-- TAB 1: MAHASISWA --}}
+                                <div class="tab-pane fade show active" id="mhs-content" role="tabpanel">
+                                    <div class="mb-3">
+                                        <label for="tab_1_label" class="form-label fw-bold small">Nama Tab</label>
+                                        <input type="text" id="tab_1_label" name="tab_1_label" class="form-control"
+                                               value="{{ old('tab_1_label', 'Mahasiswa') }}" required>
+                                    </div>
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <div class="p-3 border rounded bg-light">
+                                                <label class="form-label small fw-semibold text-dark">Angka 1 (Total Mahasiswa)</label>
+                                                <input type="number" name="mhs_total" class="form-control text-center fw-bold fs-4 mb-2"
+                                                       value="{{ old('mhs_total', 5273) }}" required>
+                                                <input type="text" name="mhs_total_label" class="form-control form-control-sm text-center"
+                                                       value="{{ old('mhs_total_label', 'Total Mahasiswa') }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="p-3 border rounded bg-light">
+                                                <label class="form-label small fw-semibold text-dark">Angka 2 (Mahasiswa Baru)</label>
+                                                <input type="number" name="mhs_baru" class="form-control text-center fw-bold fs-4 mb-2"
+                                                       value="{{ old('mhs_baru', 1520) }}" required>
+                                                <input type="text" name="mhs_baru_label" class="form-control form-control-sm text-center"
+                                                       value="{{ old('mhs_baru_label', 'Jumlah Mahasiswa Baru 2026') }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="p-3 border rounded bg-light">
+                                                <label class="form-label small fw-semibold text-dark">Angka 3 (Alumni)</label>
+                                                <input type="number" name="mhs_alumni" class="form-control text-center fw-bold fs-4 mb-2"
+                                                       value="{{ old('mhs_alumni', 7968) }}" required>
+                                                <input type="text" name="mhs_alumni_label" class="form-control form-control-sm text-center"
+                                                       value="{{ old('mhs_alumni_label', 'Alumni') }}" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- TAB 2: PRESTASI --}}
+                                <div class="tab-pane fade" id="prestasi-content" role="tabpanel">
+                                    <div class="mb-3">
+                                        <label for="tab_2_label" class="form-label fw-bold small">Nama Tab</label>
+                                        <input type="text" id="tab_2_label" name="tab_2_label" class="form-control"
+                                               value="{{ old('tab_2_label', 'Prestasi') }}" required>
+                                    </div>
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <div class="p-3 border rounded bg-light">
+                                                <label class="form-label small fw-semibold text-dark">Angka 1 (Nasional)</label>
+                                                <input type="number" name="prestasi_nasional" class="form-control text-center fw-bold fs-4 mb-2"
+                                                       value="{{ old('prestasi_nasional', 37) }}" required>
+                                                <input type="text" name="prestasi_nasional_label" class="form-control form-control-sm text-center"
+                                                       value="{{ old('prestasi_nasional_label', 'Nasional') }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="p-3 border rounded bg-light">
+                                                <label class="form-label small fw-semibold text-dark">Angka 2 (Provinsi)</label>
+                                                <input type="number" name="prestasi_provinsi" class="form-control text-center fw-bold fs-4 mb-2"
+                                                       value="{{ old('prestasi_provinsi', 39) }}" required>
+                                                <input type="text" name="prestasi_provinsi_label" class="form-control form-control-sm text-center"
+                                                       value="{{ old('prestasi_provinsi_label', 'Provinsi') }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="p-3 border rounded bg-light">
+                                                <label class="form-label small fw-semibold text-dark">Angka 3 (International)</label>
+                                                <input type="number" name="prestasi_internasional" class="form-control text-center fw-bold fs-4 mb-2"
+                                                       value="{{ old('prestasi_internasional', 10) }}" required>
+                                                <input type="text" name="prestasi_internasional_label" class="form-control form-control-sm text-center"
+                                                       value="{{ old('prestasi_internasional_label', 'International') }}" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- TAB 3: KERJASAMA --}}
+                                <div class="tab-pane fade" id="kerjasama-content" role="tabpanel">
+                                    <div class="mb-3">
+                                        <label for="tab_3_label" class="form-label fw-bold small">Nama Tab</label>
+                                        <input type="text" id="tab_3_label" name="tab_3_label" class="form-control"
+                                               value="{{ old('tab_3_label', 'Kerjasama') }}" required>
+                                    </div>
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <div class="p-3 border rounded bg-light">
+                                                <label class="form-label small fw-semibold text-dark">Angka 1 (Total)</label>
+                                                <input type="number" name="kerjasama_total" class="form-control text-center fw-bold fs-4 mb-2"
+                                                       value="{{ old('kerjasama_total', 50) }}" required>
+                                                <input type="text" name="kerjasama_total_label" class="form-control form-control-sm text-center"
+                                                       value="{{ old('kerjasama_total_label', 'Jumlah Kerjasama') }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="p-3 border rounded bg-light">
+                                                <label class="form-label small fw-semibold text-dark">Angka 2 (Perusahaan)</label>
+                                                <input type="number" name="kerjasama_perusahaan" class="form-control text-center fw-bold fs-4 mb-2"
+                                                       value="{{ old('kerjasama_perusahaan', 8) }}" required>
+                                                <input type="text" name="kerjasama_perusahaan_label" class="form-control form-control-sm text-center"
+                                                       value="{{ old('kerjasama_perusahaan_label', 'Perusahaan') }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="p-3 border rounded bg-light">
+                                                <label class="form-label small fw-semibold text-dark">Angka 3 (Pemerintahan)</label>
+                                                <input type="number" name="kerjasama_pemerintahan" class="form-control text-center fw-bold fs-4 mb-2"
+                                                       value="{{ old('kerjasama_pemerintahan', 19) }}" required>
+                                                <input type="text" name="kerjasama_pemerintahan_label" class="form-control form-control-sm text-center"
+                                                       value="{{ old('kerjasama_pemerintahan_label', 'Pemerintahan') }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="p-3 border rounded bg-light">
+                                                <label class="form-label small fw-semibold text-dark">Angka 4 (Sekolah)</label>
+                                                <input type="number" name="kerjasama_sekolah" class="form-control text-center fw-bold fs-4 mb-2"
+                                                       value="{{ old('kerjasama_sekolah', 5) }}" required>
+                                                <input type="text" name="kerjasama_sekolah_label" class="form-control form-control-sm text-center"
+                                                       value="{{ old('kerjasama_sekolah_label', 'Sekolah') }}" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
 
@@ -172,7 +249,7 @@
                         <a href="{{ route('faculty-stat.index') }}" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-1"></i> Batal
                         </a>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-success fw-bold px-4" style="background:#046B26;border-color:#046B26;">
                             <i class="bi bi-save me-1"></i> Simpan Data
                         </button>
                     </div>

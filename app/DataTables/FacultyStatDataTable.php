@@ -23,25 +23,21 @@ class FacultyStatDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('DT_RowIndex', '')
             ->addColumn('preview', function ($stat) {
-                if ($stat->image) {
-                    return '<img src="' . asset('storage/' . $stat->image) . '"
-                                 alt="Statistik Fakultas"
-                                 style="width:140px;height:70px;object-fit:cover;border-radius:8px;border:1px solid #dee2e6"
-                                 loading="lazy">';
-                }
-                return '<span class="text-muted small fst-italic">Tanpa gambar</span>';
+                return '<img src="' . e($stat->bg_image_url) . '"
+                             alt="Background UIS"
+                             style="width:140px;height:70px;object-fit:cover;border-radius:8px;border:1px solid #dee2e6"
+                             loading="lazy">';
             })
             ->addColumn('title', function ($stat) {
                 return '<div>
-                            <div class="fw-semibold">' . e($stat->title) . '</div>
+                            <div class="fw-semibold">' . e($stat->title ?? 'Universitas Ibnu Sina') . '</div>
                         </div>';
             })
             ->addColumn('stats_summary', function ($stat) {
-                return '<div class="d-flex flex-column gap-1" style="font-size:13px;">
-                            <span><i class="bi bi-mortarboard text-primary me-1"></i><strong>' . number_format($stat->jumlah_prodi) . '</strong> Program Studi</span>
-                            <span><i class="bi bi-people text-success me-1"></i><strong>' . number_format($stat->total_mahasiswa) . '</strong> Mahasiswa Aktif</span>
-                            <span><i class="bi bi-person-workspace text-warning me-1"></i><strong>' . number_format($stat->total_dosen) . '</strong> Dosen</span>
-                            <span><i class="bi bi-award text-info me-1"></i><strong>' . number_format($stat->total_alumni) . '</strong> Alumni</span>
+                return '<div class="d-flex flex-column gap-1" style="font-size:12.5px;">
+                            <span><span class="badge bg-success me-1">Mahasiswa</span> ' . number_format($stat->mhs_total ?? 0) . ' Total | ' . number_format($stat->mhs_baru ?? 0) . ' Baru | ' . number_format($stat->mhs_alumni ?? 0) . ' Alumni</span>
+                            <span><span class="badge bg-primary me-1">Prestasi</span> ' . number_format($stat->prestasi_nasional ?? 0) . ' Nas | ' . number_format($stat->prestasi_provinsi ?? 0) . ' Prov | ' . number_format($stat->prestasi_internasional ?? 0) . ' Int</span>
+                            <span><span class="badge bg-info text-dark me-1">Kerjasama</span> ' . number_format($stat->kerjasama_total ?? 0) . ' Total (' . number_format($stat->kerjasama_perusahaan ?? 0) . ' Perusahaan, ' . number_format($stat->kerjasama_pemerintahan ?? 0) . ' Pem, ' . number_format($stat->kerjasama_sekolah ?? 0) . ' Sek)</span>
                         </div>';
             })
             ->addColumn('is_active', function ($stat) {
@@ -89,7 +85,6 @@ class FacultyStatDataTable extends DataTable
     public function query(FacultyStat $model): QueryBuilder
     {
         return $model->newQuery()
-            ->select(['id', 'title', 'image', 'jumlah_prodi', 'total_mahasiswa', 'total_dosen', 'total_alumni', 'is_active'])
             ->latest('id');
     }
 
