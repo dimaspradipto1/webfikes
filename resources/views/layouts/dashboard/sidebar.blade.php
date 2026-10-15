@@ -204,10 +204,10 @@
           @if($isAdmin)
           <li class="nav-heading">Layanan Humas</li>
           <li class="nav-item">
-              <a class="nav-link {{ Route::is('hero-humas.*') || (Route::is('social-media.*') && request('kategori') === 'humas') || Route::is('pusat-informasi.*') ? '' : 'collapsed' }}" data-bs-target="#humas-nav" data-bs-toggle="collapse" href="#">
+              <a class="nav-link {{ Route::is('hero-humas.*') || (Route::is('social-media.*') && request('kategori') === 'humas') || Route::is('pusat-informasi.*') || Route::is('emagazine-humas.*') ? '' : 'collapsed' }}" data-bs-target="#humas-nav" data-bs-toggle="collapse" href="#">
                   <i class="bi bi-newspaper"></i><span>Beranda Humas</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
-              <ul id="humas-nav" class="nav-content collapse {{ Route::is('hero-humas.*') || (Route::is('social-media.*') && request('kategori') === 'humas') || Route::is('pusat-informasi.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+              <ul id="humas-nav" class="nav-content collapse {{ Route::is('hero-humas.*') || (Route::is('social-media.*') && request('kategori') === 'humas') || Route::is('pusat-informasi.*') || Route::is('emagazine-humas.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                   <li>
                       <a href="{{ route('hero-humas.index') }}" class="{{ Route::is('hero-humas.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Hero Humas</span>
@@ -221,6 +221,11 @@
                   <li>
                       <a href="{{ route('pusat-informasi.index') }}" class="{{ Route::is('pusat-informasi.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Hubungi Kami & Pusat Informasi</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('emagazine-humas.index') }}" class="{{ Route::is('emagazine-humas.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>E-Magazine & Buku Saku</span>
                       </a>
                   </li>
               </ul>

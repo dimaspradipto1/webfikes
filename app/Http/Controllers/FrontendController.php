@@ -377,12 +377,13 @@ class FrontendController extends Controller
         $heroHumas    = \App\Models\HeroHumas::first();
         $pusatInformasis = \App\Models\PusatInformasiHumas::active()->get();
         $pusatInformasiSetting = \App\Models\PusatInformasiHumasSetting::first();
+        $emagazine    = \App\Models\EmagazineHumas::first();
         $layananHumasItems = \App\Models\LayananHumasItem::active()->get()->keyBy('kode');
         
         return view('layouts.frontend.humas', compact(
             'contact', 'about', 'pmbSetting', 'latestNews', 'faqs', 
             'socialMedias', 'banners', 'galleries', 'heroHumas',
-            'pusatInformasis', 'pusatInformasiSetting', 'layananHumasItems'
+            'pusatInformasis', 'pusatInformasiSetting', 'emagazine', 'layananHumasItems'
         ));
     }
 

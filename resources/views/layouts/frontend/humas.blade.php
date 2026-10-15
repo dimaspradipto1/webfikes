@@ -1097,45 +1097,76 @@
 <!-- ══════════════════════════════════════════════════════
      8. E-MAGAZINE PROFIL UNIVERSITAS
 ══════════════════════════════════════════════════════ -->
+@if(!isset($emagazine) || $emagazine->is_active)
 <section class="humas-emagz-section" id="emagazine-section">
   <div class="container">
     <div class="humas-emagz-container" data-aos="fade-up">
-      <h2 class="fw-bold mb-3" style="color: #0f172a; font-size: 28px;">E-Magazine Profil Universitas</h2>
+      <h2 class="fw-bold mb-3" style="color: #0f172a; font-size: 28px;">
+        {{ $emagazine->judul_seksi ?? 'E-Magazine Profil Universitas' }}
+      </h2>
       
       <div class="d-flex align-items-center justify-content-center gap-2 mb-4">
         <button class="humas-emagz-btn-tab active" id="tabEmagzBtn" onclick="switchMagTab('emagz')">
-          <i class="bi bi-book-half me-1"></i> E-Magazine
+          <i class="bi bi-book-half me-1"></i> {{ $emagazine->tab_1_label ?? 'E-Magazine' }}
         </button>
         <button class="humas-emagz-btn-tab" id="tabBukuSakuBtn" onclick="switchMagTab('buku-saku')">
-          <i class="bi bi-journal-bookmark me-1"></i> Buku Saku
+          <i class="bi bi-journal-bookmark me-1"></i> {{ $emagazine->tab_2_label ?? 'Buku Saku' }}
         </button>
       </div>
 
       <!-- Flipbook / Interactive Preview Container -->
       <div class="card border-0 shadow-sm mx-auto overflow-hidden" style="max-width: 780px; border-radius: 20px; background: #ffffff;">
         <div class="p-4 p-md-5 text-center">
+          
+          {{-- Miniatur Sampul --}}
           <div class="mb-4">
-            <div class="d-inline-flex align-items-center justify-content-center shadow-lg" style="width: 140px; height: 180px; background: linear-gradient(135deg, #044b1c 0%, #032e12 100%); border-radius: 12px; color: #ffd600; border: 4px solid #fff;">
-              <div class="text-center p-2">
+            <div id="emagzCoverWrapper" class="d-inline-flex align-items-center justify-content-center shadow-lg" 
+                 style="width: 140px; height: 180px; background: linear-gradient(135deg, #044b1c 0%, #032e12 100%); border-radius: 12px; color: #ffd600; border: 4px solid #fff; overflow: hidden; position: relative;">
+              
+              {{-- Cover default styling --}}
+              <div id="emagzCoverDefault" class="text-center p-2 {{ !empty($emagazine?->tab_1_cover_image) ? 'd-none' : '' }}">
                 <i class="bi bi-journal-richtext fs-1 d-block mb-1"></i>
-                <span style="font-size: 11px; font-weight: 800; color: #fff; line-height: 1.2; display: block;">PROFIL 2026</span>
+                <span id="emagzBadgeText" style="font-size: 11px; font-weight: 800; color: #fff; line-height: 1.2; display: block;">
+                  {{ $emagazine->tab_1_badge_text ?? 'PROFIL 2026' }}
+                </span>
               </div>
+
+              {{-- Cover Image Custom jika ada --}}
+              <img id="emagzCoverImg" 
+                   src="{{ !empty($emagazine?->tab_1_cover_image) ? asset('storage/' . $emagazine->tab_1_cover_image) : '' }}" 
+                   alt="Cover" 
+                   style="width: 100%; height: 100%; object-fit: cover; {{ empty($emagazine?->tab_1_cover_image) ? 'display: none;' : '' }}">
             </div>
           </div>
 
-          <h4 class="fw-bold mb-2 text-dark" id="emagzTitle">E-Magazine Edisi Eksklusif Profil Kampus</h4>
-          <p class="text-muted small mx-auto mb-4" style="max-width: 500px;">
-            Jelajahi informasi lengkap mengenai fasilitas laboratorium, profil fakultas, program beasiswa, dan prestasi mahasiswa.
+          {{-- Judul & Deskripsi --}}
+          <h4 class="fw-bold mb-2 text-dark" id="emagzTitle">
+            {{ $emagazine->tab_1_judul ?? 'E-Magazine Edisi Eksklusif Profil Kampus' }}
+          </h4>
+          <p class="text-muted small mx-auto mb-4" id="emagzDesc" style="max-width: 500px;">
+            {{ $emagazine->tab_1_deskripsi ?? 'Jelajahi informasi lengkap mengenai fasilitas laboratorium, profil fakultas, program beasiswa, dan prestasi mahasiswa.' }}
           </p>
 
+          {{-- Action Buttons --}}
           <div class="d-flex align-items-center justify-content-center gap-2 flex-wrap">
-            <a href="{{ asset('frontend/img/gedung-uis.jpg') }}" target="_blank" class="btn btn-outline-success rounded-pill px-4 fw-semibold">
-              <i class="bi bi-eye me-1"></i> Pratinjau Interaktif
+            <a id="emagzPreviewBtn" 
+               href="{{ $emagazine->tab_1_btn_preview_url ?: asset('frontend/img/gedung-uis.jpg') }}" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn btn-outline-success rounded-pill px-4 fw-semibold">
+              <i class="bi bi-eye me-1"></i> <span id="emagzPreviewText">{{ $emagazine->tab_1_btn_preview_text ?? 'Pratinjau Interaktif' }}</span>
             </a>
-            <a href="{{ route('homepage.tentang') }}" class="btn btn-success rounded-pill px-4 fw-semibold" style="background: #044b1c; border-color: #044b1c;">
-              <i class="bi bi-download me-1"></i> Unduh Dokumen
+            
+            <a id="emagzDownloadBtn" 
+               href="{{ $emagazine?->tab_1_download_link ?: route('homepage.tentang') }}" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn btn-success rounded-pill px-4 fw-semibold" 
+               style="background: #044b1c; border-color: #044b1c;">
+              <i class="bi bi-download me-1"></i> <span id="emagzDownloadText">{{ $emagazine->tab_1_btn_download_text ?? 'Unduh Dokumen' }}</span>
             </a>
           </div>
+
         </div>
       </div>
     </div>
@@ -1143,21 +1174,74 @@
 </section>
 
 <script>
+  const emagzData = {
+    'emagz': {
+      'title': {!! json_encode($emagazine->tab_1_judul ?? 'E-Magazine Edisi Eksklusif Profil Kampus') !!},
+      'desc': {!! json_encode($emagazine->tab_1_deskripsi ?? 'Jelajahi informasi lengkap mengenai fasilitas laboratorium, profil fakultas, program beasiswa, dan prestasi mahasiswa.') !!},
+      'badge': {!! json_encode($emagazine->tab_1_badge_text ?? 'PROFIL 2026') !!},
+      'cover': {!! json_encode(!empty($emagazine?->tab_1_cover_image) ? asset('storage/' . $emagazine->tab_1_cover_image) : '') !!},
+      'previewUrl': {!! json_encode($emagazine->tab_1_btn_preview_url ?: asset('frontend/img/gedung-uis.jpg')) !!},
+      'previewText': {!! json_encode($emagazine->tab_1_btn_preview_text ?? 'Pratinjau Interaktif') !!},
+      'downloadUrl': {!! json_encode($emagazine?->tab_1_download_link ?: route('homepage.tentang')) !!},
+      'downloadText': {!! json_encode($emagazine->tab_1_btn_download_text ?? 'Unduh Dokumen') !!}
+    },
+    'buku-saku': {
+      'title': {!! json_encode($emagazine->tab_2_judul ?? 'Buku Saku Panduan Mahasiswa & Akademik') !!},
+      'desc': {!! json_encode($emagazine->tab_2_deskripsi ?? 'Panduan ringkas dan praktis mengenai kehidupan kampus, tata tertib, hak & kewajiban, serta informasi penting perkuliahan di UIS.') !!},
+      'badge': {!! json_encode($emagazine->tab_2_badge_text ?? 'BUKU SAKU') !!},
+      'cover': {!! json_encode(!empty($emagazine?->tab_2_cover_image) ? asset('storage/' . $emagazine->tab_2_cover_image) : '') !!},
+      'previewUrl': {!! json_encode($emagazine->tab_2_btn_preview_url ?: asset('frontend/img/gedung-uis.jpg')) !!},
+      'previewText': {!! json_encode($emagazine->tab_2_btn_preview_text ?? 'Pratinjau Interaktif') !!},
+      'downloadUrl': {!! json_encode($emagazine?->tab_2_download_link ?: route('homepage.tentang')) !!},
+      'downloadText': {!! json_encode($emagazine->tab_2_btn_download_text ?? 'Unduh Dokumen') !!}
+    }
+  };
+
   function switchMagTab(tab) {
     const btn1 = document.getElementById('tabEmagzBtn');
     const btn2 = document.getElementById('tabBukuSakuBtn');
-    const title = document.getElementById('emagzTitle');
+    const titleEl = document.getElementById('emagzTitle');
+    const descEl = document.getElementById('emagzDesc');
+    const badgeEl = document.getElementById('emagzBadgeText');
+    const defaultCoverEl = document.getElementById('emagzCoverDefault');
+    const coverImgEl = document.getElementById('emagzCoverImg');
+    const previewBtnEl = document.getElementById('emagzPreviewBtn');
+    const previewTextEl = document.getElementById('emagzPreviewText');
+    const downloadBtnEl = document.getElementById('emagzDownloadBtn');
+    const downloadTextEl = document.getElementById('emagzDownloadText');
+
+    const d = emagzData[tab] || emagzData['emagz'];
 
     if (tab === 'emagz') {
       btn1.classList.add('active');
       btn2.classList.remove('active');
-      title.innerText = 'E-Magazine Edisi Eksklusif Profil Kampus';
     } else {
       btn2.classList.add('active');
       btn1.classList.remove('active');
-      title.innerText = 'Buku Saku Panduan Mahasiswa & Akademik';
     }
+
+    if (titleEl) titleEl.innerText = d.title;
+    if (descEl) descEl.innerText = d.desc;
+    if (badgeEl) badgeEl.innerText = d.badge;
+
+    if (d.cover) {
+      if (coverImgEl) {
+        coverImgEl.src = d.cover;
+        coverImgEl.style.display = 'block';
+      }
+      if (defaultCoverEl) defaultCoverEl.classList.add('d-none');
+    } else {
+      if (coverImgEl) coverImgEl.style.display = 'none';
+      if (defaultCoverEl) defaultCoverEl.classList.remove('d-none');
+    }
+
+    if (previewBtnEl) previewBtnEl.href = d.previewUrl;
+    if (previewTextEl) previewTextEl.innerText = d.previewText;
+    if (downloadBtnEl) downloadBtnEl.href = d.downloadUrl;
+    if (downloadTextEl) downloadTextEl.innerText = d.downloadText;
   }
+</script>
+@endif
 
   // Ensure all video tags inside humas-phone-screen autoplay immediately
   document.addEventListener('DOMContentLoaded', function() {

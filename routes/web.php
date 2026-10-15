@@ -150,6 +150,8 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('admin-pusat-informasi', PusatInformasiHumasController::class)
         ->parameters(['admin-pusat-informasi' => 'pusatInformasi'])
         ->names('pusat-informasi');
+    Route::get('admin-emagazine-humas', [\App\Http\Controllers\EmagazineHumasController::class, 'index'])->name('emagazine-humas.index');
+    Route::put('admin-emagazine-humas', [\App\Http\Controllers\EmagazineHumasController::class, 'update'])->name('emagazine-humas.update');
     Route::get('admin-layanan-humas', [LayananHumasController::class, 'index'])->name('layanan-humas.index');
     Route::get('admin-layanan-humas/{kode}', [LayananHumasController::class, 'editItem'])->name('layanan-humas.edit-item');
     Route::put('admin-layanan-humas/{kode}', [LayananHumasController::class, 'updateItem'])->name('layanan-humas.update-item');
