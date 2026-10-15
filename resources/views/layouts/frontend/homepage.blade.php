@@ -1165,51 +1165,182 @@
     </div>
   </div>
 
-  {{-- Full Width 3D U-Curve Mirror Swiper Stage --}}
-  <div class="mirror-hall-stage-full position-relative" data-aos="zoom-in" data-aos-delay="100">
-    <div class="swiper mirror-swiper-container" id="mirrorHallSwiper">
-      <div class="swiper-wrapper">
-        @php
-          $totalCount = $layananTerkaits->count();
-          // Minimal 24 slide agar perputaran kontinu (marquee flow) bergerak mulus tanpa putus
-          $repeatFactor = $totalCount > 0 ? (int) max(3, ceil(24 / $totalCount)) : 3;
-        @endphp
-        @for($r = 0; $r < $repeatFactor; $r++)
-          @foreach($layananTerkaits as $idx => $item)
-            @php
-              $itemDesc = trim(strip_tags($item->deskripsi ?? 'Akses layanan digital terpadu Universitas Ibnu Sina'));
-              $itemNum = $idx + 1;
-            @endphp
-            <div class="swiper-slide mirror-slide-item" 
-                 data-index="{{ sprintf('%02d', $itemNum) }}" 
-                 data-total="{{ sprintf('%02d', $totalCount) }}" 
-                 data-name="{{ $item->nama }}" 
-                 data-desc="{{ $itemDesc }}" 
-                 data-url="{{ $item->url }}"
-                 role="button"
-                 tabindex="0"
-                 aria-label="Kunjungi Layanan {{ $item->nama }}">
-              
-              {{-- Floating Title Label Above Card (Mirror Hall Reference Style) --}}
-              <div class="mirror-slide-label">{{ $item->nama }}</div>
+<style>
+  .uis-cylinder-viewport {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+    position: relative;
+    perspective: 1200px;
+    perspective-origin: 50% 50%;
+    padding: 30px 0 170px 0;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+  }
+  .uis-cylinder-viewport:active {
+    cursor: grabbing;
+  }
+  .uis-cylinder-track {
+    position: relative;
+    width: 100%;
+    height: 290px;
+    transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .uis-cylinder-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 195px;
+    height: 270px;
+    transform-style: preserve-3d;
+    transform-origin: center bottom;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    will-change: transform, opacity;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  @media (max-width: 768px) {
+    .uis-cylinder-card {
+      width: 145px;
+      height: 215px;
+    }
+    .uis-cylinder-track {
+      height: 235px;
+    }
+    .uis-cylinder-viewport {
+      padding-bottom: 130px;
+    }
+  }
+  .uis-card-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 8px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    transition: color 0.3s ease;
+  }
+  .uis-cylinder-card.is-active .uis-card-label {
+    color: #fed802;
+    text-shadow: 0 0 10px rgba(254, 216, 2, 0.6);
+  }
+  .uis-card-body {
+    width: 100%;
+    height: 230px;
+    background: linear-gradient(165deg, rgba(6, 94, 33, 0.95) 0%, rgba(3, 56, 20, 0.96) 60%, rgba(2, 32, 11, 0.98) 100%);
+    border: 1.5px solid rgba(254, 216, 2, 0.35);
+    border-radius: 14px;
+    padding: 8px;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    box-sizing: border-box;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    -webkit-box-reflect: below 2px linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.45) 50%, transparent 100%);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  @media (max-width: 768px) {
+    .uis-card-body {
+      height: 180px;
+    }
+  }
+  .uis-cylinder-card.is-active .uis-card-body,
+  .uis-cylinder-card:hover .uis-card-body {
+    border-color: rgba(254, 216, 2, 0.9);
+    box-shadow: 0 0 30px rgba(254, 216, 2, 0.45), 0 16px 36px rgba(0, 0, 0, 0.7);
+  }
+  .uis-card-media {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    box-sizing: border-box;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04), 0 4px 14px rgba(0, 0, 0, 0.16);
+    overflow: hidden;
+    position: relative;
+  }
+  .uis-card-logo {
+    max-width: 88%;
+    max-height: 95px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    transition: transform 0.35s ease;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+  }
+  @media (max-width: 768px) {
+    .uis-card-logo {
+      max-height: 70px;
+    }
+  }
+  .uis-cylinder-card:hover .uis-card-logo {
+    transform: scale(1.06);
+  }
+</style>
 
-              {{-- Interactive Full-Logo Mirror Card (Entire Card is Clickable) --}}
-              <div class="mirror-card">
-                <div class="mirror-card-media-wrap">
-                  @if($item->logo_url)
-                    <img src="{{ $item->logo_url }}" alt="{{ $item->nama }}" class="mirror-card-full-logo" loading="lazy">
-                  @else
-                    <div class="mirror-card-fallback-icon">
-                      <i class="bi {{ $item->icon ?: 'bi-globe' }}"></i>
-                      <span class="mirror-fallback-title">{{ $item->nama }}</span>
-                    </div>
-                  @endif
-                </div>
+  {{-- Full Width Continuous 3D Cylinder Arc Stage --}}
+  <div class="uis-cylinder-viewport position-relative" id="uisCylinderViewport">
+    <div class="uis-cylinder-track" id="uisCylinderTrack">
+      @php
+        $totalCount = $layananTerkaits->count();
+        // 4x duplikasi memastikan pita berjalan kontinu tanpa henti (seamless infinite loop)
+        $repeats = 4;
+      @endphp
+      @for($r = 0; $r < $repeats; $r++)
+        @foreach($layananTerkaits as $idx => $item)
+          @php
+            $itemDesc = trim(strip_tags($item->deskripsi ?? 'Akses layanan digital terpadu Universitas Ibnu Sina'));
+            $itemNum = $idx + 1;
+          @endphp
+          <div class="uis-cylinder-card"
+               data-index="{{ sprintf('%02d', $itemNum) }}"
+               data-total="{{ sprintf('%02d', $totalCount) }}"
+               data-name="{{ $item->nama }}"
+               data-desc="{{ $itemDesc }}"
+               data-url="{{ $item->url }}"
+               role="button"
+               tabindex="0"
+               aria-label="Kunjungi Layanan {{ $item->nama }}">
+            
+            <div class="uis-card-label">{{ $item->nama }}</div>
+            <div class="uis-card-body">
+              <div class="uis-card-media">
+                @if($item->logo_url)
+                  <img src="{{ $item->logo_url }}" alt="{{ $item->nama }}" class="uis-card-logo" loading="lazy">
+                @else
+                  <div class="mirror-card-fallback-icon">
+                    <i class="bi {{ $item->icon ?: 'bi-globe' }}"></i>
+                    <span class="mirror-fallback-title">{{ $item->nama }}</span>
+                  </div>
+                @endif
               </div>
             </div>
-          @endforeach
-        @endfor
-      </div>
+          </div>
+        @endforeach
+      @endfor
     </div>
     {{-- Interactive Water Ripple Canvas on Reflective Floor --}}
     <canvas id="mirrorWaterCanvas" class="mirror-water-canvas"></canvas>
@@ -2126,150 +2257,208 @@
 
       // ═══════════════════════════════════════════════
       // 3D CONCAVE MIRROR HALL (PERSIS REFERENSI MIRROR HALL)
-      // ═══════════════════════════════════════════════
-      function applyBowArchTransforms(swiper) {
-        if (!swiper || !swiper.slides || swiper.slides.length === 0) return;
-        const slides = swiper.slides;
-        const slidesLength = slides.length;
+    // ═══════════════════════════════════════════════
+    // CONTINUOUS 3D CYLINDER MOTION ENGINE (LAYANAN TERKAIT)
+    // Persis referensi "Bespoke Architecture" Curved Horizon & Transisi Terus Berjalan
+    // ═══════════════════════════════════════════════
+    const cylinderViewport = document.getElementById('uisCylinderViewport');
+    const cylinderTrack = document.getElementById('uisCylinderTrack');
 
-        for (let i = 0; i < slidesLength; i++) {
-          const slide = slides[i];
-          const progress = slide.progress !== undefined ? slide.progress : 0;
-          const absP = Math.abs(progress);
+    if (cylinderViewport && cylinderTrack) {
+      const cards = Array.from(cylinderTrack.querySelectorAll('.uis-cylinder-card'));
+      const totalCards = cards.length;
+      const uniqueCount = {{ $layananTerkaits->count() }};
 
-          // 1. Rotasi 3D Silinder Cermin (Concave Theater Arc):
-          // Kartu samping menghadap ke arah pusat/pengguna
-          const rotateY = -progress * 13.5; 
-          const clampedRotateY = Math.max(Math.min(rotateY, 52), -52);
+      if (totalCards > 0) {
+        const counterEl = document.getElementById('mirrorCounter');
+        const titleEl = document.getElementById('mirrorActiveTitle');
+        const descEl = document.getElementById('mirrorActiveDesc');
+        const btnEl = document.getElementById('mirrorActiveBtn');
 
-          // 2. Kedalaman 3D Arc: Puncak tengah di depan, samping melengkung halus ke belakang
-          const rad = Math.min(absP, 5) * 0.22;
-          const translateZ = -(1 - Math.cos(rad)) * 260;
+        let cardWidth = cards[0].offsetWidth || (window.innerWidth < 768 ? 145 : 195);
+        let gap = window.innerWidth < 768 ? 12 : 18;
+        let itemStep = cardWidth + gap;
+        let singleCycleWidth = uniqueCount * itemStep;
 
-          // 3. Garis Lantai Air Datar: Seluruh kartu berdiri sejajar di atas lantai cermin
-          const translateY = 0;
+        // Fisika posisi & transisi terus berjalan
+        let scrollPos = 0;
+        let baseSpeed = 0.85; // Kecepatan gerak kontinu otomatis
+        let currentSpeed = baseSpeed;
+        let targetSpeed = baseSpeed;
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartPos = 0;
+        let lastDragX = 0;
+        let dragVel = 0;
+        let activeCardRef = null;
 
-          // 4. Kompensasi Jarak Horizontal (Presisi Spacing Antar Kartu)
-          const translateX = progress * -2;
-
-          // 5. Skala Natural: Pusat tegas (1.0), samping seimbang (0.96 - 0.90)
-          const scale = Math.max(0.90, 1.0 - absP * 0.02);
-
-          // 6. Susunan lapis Z-Index: Pusat selalu di depan
-          const zIndex = Math.round(100 - absP * 10);
-
-          slide.style.transform = `translate3d(${translateX}px, ${translateY}px, ${translateZ}px) rotateY(${clampedRotateY}deg) scale(${scale})`;
-          slide.style.zIndex = zIndex;
-          slide.style.opacity = '1';
+        function updateDimensions() {
+          cardWidth = cards[0].offsetWidth || (window.innerWidth < 768 ? 145 : 195);
+          gap = window.innerWidth < 768 ? 12 : 18;
+          itemStep = cardWidth + gap;
+          singleCycleWidth = uniqueCount * itemStep;
         }
-      }
+        window.addEventListener('resize', updateDimensions);
+        updateDimensions();
 
-      const mirrorSwiper = new Swiper('#mirrorHallSwiper', {
-        watchSlidesProgress: true,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        spaceBetween: 14, // Jarak presisi kompak agar seluruh 8 kartu tampil serentak
-        loop: true,
-        loopAdditionalSlides: 8,
-        speed: 700, // Durasi transisi geser yang halus
-        grabCursor: true,
-        allowTouchMove: true,
-        autoplay: {
-          delay: 1600, // Berjalan otomatis terus-menerus
-          disableOnInteraction: false,
-          pauseOnMouseEnter: false,
-        },
-        pagination: {
-          el: '.mirror-hall-pagination',
-          clickable: true,
-        },
-        on: {
-          init: function () {
-            applyBowArchTransforms(this);
-            updateMirrorDetails(this);
-            if (this.autoplay && typeof this.autoplay.start === 'function') {
-              this.autoplay.start();
+        function renderCylinder() {
+          // Transisi terus berjalan tanpa henti
+          if (!isDragging) {
+            currentSpeed += (targetSpeed - currentSpeed) * 0.08;
+            scrollPos += currentSpeed;
+
+            if (Math.abs(dragVel) > 0.05) {
+              scrollPos += dragVel;
+              dragVel *= 0.92;
             }
-          },
-          progress: function () {
-            applyBowArchTransforms(this);
-          },
-          setTranslate: function () {
-            applyBowArchTransforms(this);
-          },
-          setTransition: function (swiper, duration) {
-            swiper.slides.forEach((slide) => {
-              slide.style.transitionDuration = `${duration}ms`;
-            });
-          },
-          slideChange: function () {
-            updateMirrorDetails(this);
+          }
+
+          // Loop tak berujung (seamless infinite wrap)
+          if (scrollPos >= singleCycleWidth) {
+            scrollPos -= singleCycleWidth;
+            if (isDragging) dragStartPos -= singleCycleWidth;
+          } else if (scrollPos < 0) {
+            scrollPos += singleCycleWidth;
+            if (isDragging) dragStartPos += singleCycleWidth;
+          }
+
+          const viewWidth = cylinderViewport.offsetWidth || window.innerWidth;
+          const centerX = viewWidth / 2;
+          const radius = Math.min(2400, Math.max(900, viewWidth * 1.05));
+          const totalWidth = totalCards * itemStep;
+
+          let closestCard = null;
+          let minDistance = Infinity;
+
+          for (let i = 0; i < totalCards; i++) {
+            const card = cards[i];
+            let cardBaseX = (i * itemStep) - scrollPos;
+
+            // Sirkulasi posisi relatif terhadap titik tengah
+            while (cardBaseX - centerX < -totalWidth / 2) cardBaseX += totalWidth;
+            while (cardBaseX - centerX > totalWidth / 2) cardBaseX -= totalWidth;
+
+            const cardCenter = cardBaseX + cardWidth / 2;
+            const distFromCenter = cardCenter - centerX;
+            const absDist = Math.abs(distFromCenter);
+
+            // Proyeksi 3D Silinder (Lengkung U-Arch Horizon Cembung/Cekung)
+            const angleRad = distFromCenter / radius;
+            const angleDeg = angleRad * (180 / Math.PI);
+
+            const transX = Math.sin(angleRad) * radius + centerX - cardWidth / 2;
+            const transZ = -(1 - Math.cos(angleRad)) * radius * 0.95;
+            const transY = Math.pow(Math.abs(angleRad), 1.8) * 32; // Lengkung busur atas dan bawah persis referensi
+
+            const scale = Math.max(0.85, 1.0 - Math.abs(angleRad) * 0.14);
+            const zIndex = Math.round(1000 - absDist);
+
+            card.style.transform = `translate3d(${transX}px, ${transY}px, ${transZ}px) rotateY(${-angleDeg * 1.1}deg) scale(${scale})`;
+            card.style.zIndex = zIndex;
+
+            if (absDist < minDistance) {
+              minDistance = absDist;
+              closestCard = card;
+            }
+          }
+
+          // Sinkronisasi data kartu aktif di tengah
+          if (closestCard && closestCard !== activeCardRef) {
+            activeCardRef = closestCard;
+            cards.forEach(c => c.classList.remove('is-active'));
+            closestCard.classList.add('is-active');
+
+            const name = closestCard.getAttribute('data-name');
+            const desc = closestCard.getAttribute('data-desc');
+            const url = closestCard.getAttribute('data-url');
+            const idx = closestCard.getAttribute('data-index');
+            const total = closestCard.getAttribute('data-total');
+
+            if (counterEl && idx && total) counterEl.textContent = `${idx} / ${total}`;
+            if (titleEl && name && titleEl.textContent.trim() !== name.trim()) {
+              titleEl.textContent = name;
+            }
+            if (descEl && desc && descEl.textContent.trim() !== desc.trim()) {
+              descEl.textContent = desc;
+            }
+            if (btnEl && url) btnEl.setAttribute('href', url);
+
             if (typeof spawnCenterRipple === 'function') {
               spawnCenterRipple();
             }
-          },
-        },
-      });
-
-      // Timer otomatis terus berjalan tanpa henti
-      setInterval(function () {
-        if (mirrorSwiper && typeof mirrorSwiper.slideNext === 'function') {
-          mirrorSwiper.slideNext(700);
-        }
-      }, 1600);
-
-      // Interaksi Card seperti Button:
-      // 1. Klik card aktif (di tengah) -> langsung buka link portal di tab baru
-      // 2. Klik card samping -> bergeser secara mulus ke posisi tengah (Bow Arch transition)
-      mirrorSwiperEl.addEventListener('click', function(e) {
-        const slide = e.target.closest('.swiper-slide');
-        if (!slide) return;
-
-        const slideUrl = slide.getAttribute('data-url');
-        const isCenter = slide.classList.contains('swiper-slide-active');
-
-        if (isCenter) {
-          if (slideUrl && slideUrl !== '#' && slideUrl.trim() !== '') {
-            window.open(slideUrl, '_blank', 'noopener,noreferrer');
           }
-        } else {
-          const allSlides = Array.from(mirrorSwiper.slides);
-          const clickedIdx = allSlides.indexOf(slide);
-          if (clickedIdx !== -1) {
-            mirrorSwiper.slideTo(clickedIdx);
-          }
-        }
-      });
 
-      // Aksesibilitas keyboard (Enter / Spasi) untuk navigasi card
-      mirrorSwiperEl.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          const slide = document.activeElement ? document.activeElement.closest('.swiper-slide') : null;
-          if (slide) {
-            e.preventDefault();
-            const slideUrl = slide.getAttribute('data-url');
-            if (slide.classList.contains('swiper-slide-active')) {
-              if (slideUrl && slideUrl !== '#' && slideUrl.trim() !== '') {
-                window.open(slideUrl, '_blank', 'noopener,noreferrer');
-              }
-            } else {
-              const allSlides = Array.from(mirrorSwiper.slides);
-              const clickedIdx = allSlides.indexOf(slide);
-              if (clickedIdx !== -1) {
-                mirrorSwiper.slideTo(clickedIdx);
-              }
+          requestAnimationFrame(renderCylinder);
+        }
+
+        requestAnimationFrame(renderCylinder);
+
+        // Hover: perlambat halus agar nyaman dibaca dan diklik
+        cylinderViewport.addEventListener('mouseenter', () => {
+          targetSpeed = 0.2;
+        });
+        cylinderViewport.addEventListener('mouseleave', () => {
+          if (!isDragging) targetSpeed = baseSpeed;
+        });
+
+        // Geser / Drag sentuhan responsif dengan inersia
+        cylinderViewport.addEventListener('pointerdown', (e) => {
+          isDragging = true;
+          dragStartX = e.clientX;
+          dragStartPos = scrollPos;
+          lastDragX = e.clientX;
+          dragVel = 0;
+          cylinderViewport.setPointerCapture(e.pointerId);
+        });
+
+        cylinderViewport.addEventListener('pointermove', (e) => {
+          if (!isDragging) return;
+          const delta = e.clientX - lastDragX;
+          dragVel = -delta;
+          lastDragX = e.clientX;
+          scrollPos = dragStartPos - (e.clientX - dragStartX);
+        });
+
+        function endDrag() {
+          if (!isDragging) return;
+          isDragging = false;
+          targetSpeed = baseSpeed;
+        }
+
+        cylinderViewport.addEventListener('pointerup', endDrag);
+        cylinderViewport.addEventListener('pointercancel', endDrag);
+
+        // Klik Card
+        cylinderTrack.addEventListener('click', (e) => {
+          const card = e.target.closest('.uis-cylinder-card');
+          if (!card) return;
+          const url = card.getAttribute('data-url');
+
+          if (card.classList.contains('is-active')) {
+            if (url && url !== '#' && url.trim() !== '') {
+              window.open(url, '_blank', 'noopener,noreferrer');
             }
+          } else {
+            // Bergulir mulus ke posisi tengah jika kartu samping diklik
+            const viewWidth = cylinderViewport.offsetWidth || window.innerWidth;
+            const centerX = viewWidth / 2;
+            const rect = card.getBoundingClientRect();
+            const vRect = cylinderViewport.getBoundingClientRect();
+            const cardScreenCenter = rect.left - vRect.left + rect.width / 2;
+            const diff = cardScreenCenter - centerX;
+            scrollPos += diff;
           }
-        }
-      });
+        });
+      }
+    }
 
-      // ═══════════════════════════════════════════════
-      // EFEK CERMIN ELEGAN (WATER RIPPLE ON SLIDE / CLICK)
-      // ═══════════════════════════════════════════════
-      const waterCanvas = document.getElementById('mirrorWaterCanvas');
-      let spawnCenterRipple = null;
+    // ═══════════════════════════════════════════════
+    // EFEK CERMIN ELEGAN (WATER RIPPLE ON SLIDE / CLICK)
+    // ═══════════════════════════════════════════════
+    const waterCanvas = document.getElementById('mirrorWaterCanvas');
+    let spawnCenterRipple = null;
 
-      if (waterCanvas && mirrorSwiperEl) {
+    if (waterCanvas && cylinderViewport) {
         const ctx = waterCanvas.getContext('2d');
         let ripples = [];
         let animId = null;
