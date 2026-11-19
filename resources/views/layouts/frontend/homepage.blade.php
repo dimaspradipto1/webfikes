@@ -1,921 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'FIKES UIS — Fakultas Ilmu Kesehatan Universitas Ibnu Sina | Unggul, Profesional & Berkarakter')
-@section('meta_description', 'Portal Resmi Fakultas Ilmu Kesehatan Universitas Ibnu Sina (FIKES UIS) — Program Studi Unggulan S1 Kesehatan & Keselamatan Kerja (K3) dan S1 Kesehatan Lingkungan.')
-
-@push('styles')
-<style>
-  /* ═══════════════════════════════════════════════
-     HERO BANNER (FULLWIDTH & NATURAL ASPECT RATIO)
-  ═══════════════════════════════════════════════ */
-  .hero-slider-section {
-    position: relative;
-    background: transparent;
-    overflow: hidden;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  #heroCarousel,
-  #heroCarousel .carousel-inner,
-  #heroCarousel .carousel-item {
-    width: 100%;
-    height: auto;
-  }
-  .hero-banner-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-  }
-  .hero-slider-section .carousel-control-prev,
-  .hero-slider-section .carousel-control-next {
-    width: 48px;
-    height: 48px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(25, 10, 36, 0.6);
-    border-radius: 50%;
-    opacity: 0.75;
-    margin: 0 20px;
-    transition: all 0.25s ease;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-  @media (max-width: 768px) {
-    .hero-slider-section .carousel-control-prev,
-    .hero-slider-section .carousel-control-next {
-      width: 32px;
-      height: 32px;
-      margin: 0 8px;
-      font-size: 12px;
-      opacity: 0.6;
-    }
-  }
-  .hero-slider-section .carousel-control-prev:hover,
-  .hero-slider-section .carousel-control-next:hover {
-    background: var(--fikes-purple);
-    opacity: 1;
-    transform: translateY(-50%) scale(1.08);
-  }
-  .hero-slider-section .carousel-indicators [data-bs-target] {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin: 0 5px;
-    background-color: var(--white);
-    opacity: 0.5;
-    border: none;
-    transition: all 0.3s ease;
-  }
-  .hero-slider-section .carousel-indicators .active {
-    width: 28px;
-    border-radius: 20px;
-    background-color: var(--fikes-orange);
-    opacity: 1;
-  }
-
-  /* ═══════════════════════════════════════════════
-     LAYANAN TERKAIT (DIGITAL SERVICES CARDS)
-  ═══════════════════════════════════════════════ */
-  .layanan-terkait-section {
-    background-color: #ffffff;
-    position: relative;
-    padding: 50px 0 35px 0;
-  }
-  .layanan-terkait-title {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 26px;
-    font-weight: 800;
-    color: var(--fikes-purple, #823ca2);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 12px;
-  }
-  .layanan-terkait-desc {
-    font-size: 15px;
-    color: #444444;
-    line-height: 1.65;
-    max-width: 820px;
-    margin: 0 auto;
-  }
-  .layanan-terkait-card {
-    background: #823ca2;
-    border: 1.5px solid rgba(255, 255, 255, 0.18);
-    border-radius: 14px;
-    padding: 18px 20px;
-    min-height: 110px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    text-decoration: none !important;
-    box-shadow: 0 6px 18px rgba(130, 60, 162, 0.35);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-  }
-  .layanan-terkait-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 0%;
-    background: var(--fikes-orange, #ff9c00);
-    transition: height 0.3s ease;
-  }
-  .layanan-terkait-card:hover {
-    transform: translateY(-5px);
-    background: #682985;
-    border-color: #ff9c00;
-    box-shadow: 0 14px 30px -4px rgba(130, 60, 162, 0.5), 0 0 0 2px #ff9c00;
-  }
-  .layanan-terkait-card:hover::before {
-    height: 100%;
-  }
-  .layanan-terkait-logo-wrap {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    height: 38px;
-    margin-bottom: 14px;
-  }
-  .layanan-terkait-logo {
-    max-height: 36px;
-    max-width: 65px;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-  }
-  .layanan-terkait-card:hover .layanan-terkait-logo {
-    transform: scale(1.1);
-  }
-  .layanan-terkait-icon {
-    font-size: 26px;
-    color: var(--fikes-orange, #ff9c00);
-    transition: transform 0.3s ease;
-  }
-  .layanan-terkait-card:hover .layanan-terkait-icon {
-    transform: scale(1.15);
-  }
-  .layanan-terkait-name {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #ffffff;
-    font-size: 13.5px;
-    font-weight: 800;
-    letter-spacing: 0.4px;
-    text-transform: uppercase;
-    margin: 0;
-    line-height: 1.35;
-    transition: color 0.25s ease;
-  }
-  .layanan-terkait-card:hover .layanan-terkait-name {
-    color: var(--fikes-orange, #ff9c00);
-  }
-
-  /* ═══════════════════════════════════════════════
-     2. STATISTIK STRIP
-  ═══════════════════════════════════════════════ */
-  .stats-strip {
-    background: var(--white);
-    border-bottom: 1px solid var(--border-light);
-    box-shadow: var(--shadow-sm);
-  }
-  .stat-col-box {
-    padding: 26px 16px;
-    text-align: center;
-    border-right: 1px solid var(--border-light);
-    transition: all 0.25s ease;
-  }
-  .stat-col-box:last-child { border-right: none; }
-  .stat-col-box:hover {
-    background: var(--fikes-purple-light);
-  }
-  .stat-num-val {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 30px;
-    font-weight: 800;
-    color: var(--fikes-purple);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .stat-num-val sup {
-    color: var(--fikes-orange);
-    font-size: 18px;
-  }
-  .stat-num-label {
-    font-size: 12.5px;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  /* ═══════════════════════════════════════════════
-     CARDS & SECTIONS
-  ═══════════════════════════════════════════════ */
-  .prodi-card {
-    background: var(--white);
-    border: 1px solid var(--border-light);
-    border-radius: 24px;
-    padding: 36px 32px;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
-  }
-  .prodi-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 6px;
-    background: var(--fikes-purple);
-  }
-  .prodi-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--border-purple);
-  }
-  .prodi-badge {
-    display: inline-block;
-    background: var(--fikes-orange-light);
-    color: var(--fikes-orange-dark);
-    font-size: 11px;
-    font-weight: 700;
-    padding: 4px 12px;
-    border-radius: 50px;
-    border: 1px solid var(--border-orange);
-    margin-bottom: 14px;
-  }
-  .prodi-title {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--text-main);
-    margin-bottom: 12px;
-  }
-  .prodi-subhead {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 13.5px;
-    font-weight: 700;
-    color: var(--fikes-purple);
-    margin-top: 16px;
-    margin-bottom: 8px;
-  }
-  .prodi-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 16px 0;
-  }
-  .prodi-list li {
-    font-size: 13px;
-    color: var(--text-main);
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 6px;
-  }
-  .prodi-list li i {
-    color: var(--fikes-purple);
-    font-size: 14px;
-    margin-top: 2px;
-    flex-shrink: 0;
-  }
-
-  /* Facility Card */
-  .fasilitas-box {
-    background: var(--white);
-    border: 1px solid var(--border-light);
-    border-radius: 20px;
-    padding: 28px 24px;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.25s ease;
-    height: 100%;
-  }
-  .fasilitas-box:hover {
-    transform: translateY(-6px);
-    border-color: var(--border-purple);
-    box-shadow: var(--shadow-md);
-  }
-  .fasilitas-icon {
-    width: 56px;
-    height: 56px;
-    background: var(--fikes-purple-light);
-    color: var(--fikes-purple);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    margin-bottom: 18px;
-  }
-
-  /* Dosen Card */
-  .dosen-card {
-    background: var(--white);
-    border: 1px solid var(--border-light);
-    border-radius: 20px;
-    padding: 24px;
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.25s ease;
-    height: 100%;
-  }
-  .dosen-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--border-purple);
-  }
-  .dosen-avatar {
-    width: 84px;
-    height: 84px;
-    border-radius: 50%;
-    background: var(--fikes-purple-light);
-    color: var(--fikes-purple);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    margin: 0 auto 16px;
-    border: 2px solid var(--border-purple);
-  }
-  .dosen-name {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 15.5px;
-    font-weight: 700;
-    color: var(--text-main);
-    margin-bottom: 4px;
-  }
-  .dosen-bidang {
-    font-size: 12.5px;
-    color: var(--fikes-orange-dark);
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  .dosen-pub {
-    font-size: 11.5px;
-    color: var(--text-muted);
-    line-height: 1.5;
-  }
-
-  /* ═══════════════════════════════════════════════
-     BERITA, PENGUMUMAN & AGENDA (SPLIT LAYOUT)
-  ═══════════════════════════════════════════════ */
-  .section-heading-fikes {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 27px;
-    font-weight: 800;
-    color: var(--fikes-purple, #823ca2);
-    letter-spacing: -0.5px;
-    line-height: 1.2;
-  }
-  
-  /* Search Pill */
-  .news-search-pill {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background: #ffffff;
-    border: 1.5px solid var(--border-light, #e2e5e9);
-    border-radius: 50px;
-    padding: 6px 18px;
-    width: 270px;
-    max-width: 100%;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.25s ease;
-  }
-  .news-search-pill:focus-within {
-    border-color: var(--fikes-purple, #823ca2);
-    box-shadow: 0 0 0 3px rgba(130, 60, 162, 0.14);
-  }
-  .news-search-pill input {
-    border: none;
-    outline: none;
-    background: transparent;
-    font-size: 13px;
-    color: #374151;
-    width: 100%;
-    padding-right: 6px;
-  }
-  .news-search-pill input::placeholder {
-    color: #9ca3af;
-  }
-  .news-search-pill .news-search-clear {
-    border: none;
-    background: transparent;
-    color: #9ca3af;
-    font-size: 14px;
-    cursor: pointer;
-    padding: 0 6px 0 0;
-    display: flex;
-    align-items: center;
-    transition: color 0.2s ease;
-  }
-  .news-search-pill .news-search-clear:hover {
-    color: #ef4444;
-  }
-  .news-search-pill button {
-    border: none;
-    background: transparent;
-    color: var(--fikes-purple, #823ca2);
-    font-size: 15px;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .news-grid-container {
-    transition: opacity 0.25s ease;
-    min-height: 200px;
-  }
-  .news-grid-container.is-loading {
-    opacity: 0.55;
-    pointer-events: none;
-  }
-
-  /* News Mini Item Grid */
-  .news-mini-item {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    text-decoration: none !important;
-    padding: 8px;
-    border-radius: 12px;
-    transition: all 0.2s ease;
-    height: 100%;
-  }
-  .news-mini-item:hover {
-    background: var(--fikes-purple-light, #f5eefb);
-    transform: translateY(-2px);
-  }
-  .news-mini-item:hover .news-mini-title {
-    color: var(--fikes-purple, #823ca2);
-  }
-  .news-mini-img-wrap {
-    width: 112px;
-    height: 72px;
-    flex-shrink: 0;
-    border-radius: 10px;
-    overflow: hidden;
-    background: #f3f4f6;
-    border: 1px solid rgba(0,0,0,0.06);
-  }
-  .news-mini-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-  .news-mini-item:hover .news-mini-img {
-    transform: scale(1.06);
-  }
-  .news-mini-fallback {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--fikes-purple-light, #f5eefb);
-    color: var(--fikes-purple, #823ca2);
-    font-size: 24px;
-  }
-  .news-mini-content {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  }
-  .news-mini-title {
-    font-size: 13.5px;
-    font-weight: 700;
-    color: #1f2937;
-    line-height: 1.35;
-    margin-bottom: 4px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    transition: color 0.2s ease;
-  }
-  .news-mini-meta {
-    font-size: 11px;
-    color: #8c93a0;
-    font-weight: 500;
-  }
-
-  /* Button FIKES Pill */
-  .btn-fikes-pill {
-    display: inline-block;
-    background: var(--fikes-purple, #823ca2);
-    color: #ffffff !important;
-    font-size: 13.5px;
-    font-weight: 700;
-    padding: 10px 26px;
-    border-radius: 50px;
-    text-decoration: none !important;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 14px rgba(130, 60, 162, 0.25);
-  }
-  .btn-fikes-pill:hover {
-    background: var(--fikes-purple-dark, #682985);
-    color: var(--fikes-orange, #ff9c00) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(130, 60, 162, 0.35);
-  }
-
-  /* Announcement Card */
-  .announcement-card-box {
-    display: block;
-    background: #fbf9fd;
-    border-radius: 10px;
-    padding: 13px 16px;
-    margin-bottom: 10px;
-    text-decoration: none !important;
-    transition: all 0.2s ease;
-    border: 1px solid #eedef8;
-  }
-  .announcement-card-box:hover {
-    background: var(--fikes-purple-light, #f5eefb);
-    border-color: var(--fikes-purple, #823ca2);
-    transform: translateX(4px);
-  }
-  .announcement-card-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: #1f2937;
-    line-height: 1.35;
-    margin-bottom: 4px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .announcement-card-date {
-    font-size: 11.5px;
-    color: #8c739e;
-    font-weight: 600;
-  }
-
-  /* Agenda Card */
-  .agenda-time-text {
-    font-size: 14.5px;
-    font-weight: 800;
-    color: #111827;
-    margin-bottom: 5px;
-  }
-  .agenda-badge-card {
-    background: var(--fikes-orange, #ff9c00);
-    color: #190a24;
-    font-size: 13.5px;
-    font-weight: 800;
-    border-radius: 10px;
-    padding: 10px 16px;
-    box-shadow: 0 2px 6px rgba(255, 156, 0, 0.25);
-    line-height: 1.35;
-  }
-  .btn-agenda-pill {
-    display: block;
-    width: 100%;
-    text-align: center;
-    background: var(--fikes-purple-light, #f5eefb);
-    border: 1px solid var(--fikes-purple-subtle, #ecdcf7);
-    color: var(--fikes-purple, #823ca2) !important;
-    font-size: 13px;
-    font-weight: 700;
-    padding: 9px 16px;
-    border-radius: 50px;
-    text-decoration: none !important;
-    transition: all 0.2s ease;
-  }
-  .btn-agenda-pill:hover {
-    background: var(--fikes-purple, #823ca2);
-    color: #ffffff !important;
-  }
-
-  /* PMB Banner Box */
-  .pmb-cta-box {
-    background: #823ca2;
-    background: linear-gradient(135deg, #823ca2 0%, #60237c 100%);
-    border-radius: 28px;
-    padding: 56px 44px;
-    color: var(--white);
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 20px 45px -12px rgba(130, 60, 162, 0.5);
-  }
-
-  /* BuildWithAngga Style 2-Row Infinite Marquee */
-  .marquee-wrapper {
-    position: relative;
-    overflow: hidden;
-    padding: 15px 0;
-    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  }
-  .marquee-track-container {
-    overflow: hidden;
-    display: flex;
-    width: 100%;
-  }
-  .marquee-track {
-    display: flex;
-    gap: 20px;
-    width: max-content;
-    will-change: transform;
-  }
-  .marquee-left {
-    animation: scrollMarqueeLeft 40s linear infinite;
-  }
-  .marquee-right {
-    animation: scrollMarqueeRight 40s linear infinite;
-  }
-  .marquee-wrapper:hover .marquee-track {
-    animation-play-state: paused;
-  }
-  @keyframes scrollMarqueeLeft {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  @keyframes scrollMarqueeRight {
-    0% { transform: translateX(-50%); }
-    100% { transform: translateX(0); }
-  }
-
-  .partner-marquee-card {
-    background: var(--white);
-    border: 1.5px solid var(--border-light);
-    border-radius: 18px;
-    padding: 14px 26px;
-    height: 84px;
-    min-width: 220px;
-    max-width: 260px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    flex-shrink: 0;
-  }
-  .partner-marquee-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--fikes-purple, #823ca2);
-    box-shadow: 0 12px 25px -8px rgba(130, 60, 162, 0.25);
-  }
-  .partner-marquee-img {
-    max-height: 48px;
-    max-width: 170px;
-    object-fit: contain;
-    filter: grayscale(15%);
-    transition: all 0.3s ease;
-  }
-  .partner-marquee-card:hover .partner-marquee-img {
-    filter: grayscale(0%);
-    transform: scale(1.06);
-  }
-  .partner-marquee-text {
-    font-weight: 700;
-    color: var(--obsidian-dark, #190a24);
-    font-size: 13.5px;
-    text-align: center;
-    line-height: 1.35;
-  }
-
-  /* Prestasi Cards */
-  .prestasi-card {
-    background: var(--white);
-    border: 1px solid var(--border-light);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-  .prestasi-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 35px -10px rgba(130, 60, 162, 0.15);
-    border-color: rgba(130, 60, 162, 0.3);
-  }
-  .prestasi-img-wrap {
-    width: 100%;
-    height: 240px;
-    position: relative;
-    background: #190a24;
-    overflow: hidden;
-    display: block;
-  }
-  @media (max-width: 575.98px) {
-    .prestasi-img-wrap {
-      height: 210px;
-    }
-  }
-  .prestasi-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    display: block;
-    transition: transform 0.4s ease;
-  }
-  .prestasi-card:hover .prestasi-img {
-    transform: scale(1.05);
-  }
-  .prestasi-tingkat-badge {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    padding: 4px 10px;
-    font-size: 11px;
-    font-weight: 700;
-    border-radius: 20px;
-    letter-spacing: 0.5px;
-    backdrop-filter: blur(6px);
-  }
-  .prestasi-rank-badge {
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
-    background: #e5a823;
-    color: #190a24;
-    padding: 4px 10px;
-    font-size: 11px;
-    font-weight: 800;
-    border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-
-  /* Gallery Showcase Cards */
-  .gallery-card-item {
-    border-radius: 20px;
-    overflow: hidden;
-    background: var(--white);
-    border: 1px solid var(--border-light);
-    box-shadow: var(--shadow-sm);
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    position: relative;
-    height: 100%;
-  }
-  .gallery-card-item:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 35px -10px rgba(130, 60, 162, 0.25);
-    border-color: rgba(130, 60, 162, 0.35);
-  }
-  .gallery-img-container {
-    height: 240px;
-    position: relative;
-    overflow: hidden;
-    background: #190a24;
-  }
-  .gallery-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-  .gallery-card-item:hover .gallery-card-img {
-    transform: scale(1.08);
-  }
-  .gallery-fallback-box {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #823ca2 0%, #190a24 100%);
-  }
-  .gallery-card-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 24px 20px 18px;
-    background: linear-gradient(180deg, rgba(19, 10, 36, 0) 0%, rgba(19, 10, 36, 0.92) 55%, #130a24 100%);
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-  .gallery-tag {
-    align-self: flex-start;
-    background: rgba(229, 168, 35, 0.95);
-    color: #190a24;
-    font-weight: 800;
-    font-size: 10px;
-    letter-spacing: 0.5px;
-    padding: 3px 8px;
-    border-radius: 20px;
-    margin-bottom: 6px;
-    text-transform: uppercase;
-  }
-  .gallery-card-title {
-    font-size: 15.5px;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 4px;
-    line-height: 1.35;
-  }
-  .gallery-card-desc {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.5;
-  }
-
-  /* Custom Pagination */
-  .pagination {
-    gap: 5px;
-    margin-bottom: 0;
-  }
-  .page-item .page-link {
-    border-radius: 10px !important;
-    border: 1px solid var(--border-light);
-    color: var(--text-dark);
-    font-size: 13px;
-    font-weight: 600;
-    padding: 6px 14px;
-    transition: all 0.2s ease;
-  }
-  .page-item.active .page-link {
-    background-color: var(--fikes-purple, #823ca2) !important;
-    border-color: var(--fikes-purple, #823ca2) !important;
-    color: #ffffff !important;
-    box-shadow: 0 4px 12px rgba(130, 60, 162, 0.35);
-  }
-  .page-item .page-link:hover {
-    background-color: #f3e8f8;
-    color: var(--fikes-purple, #823ca2);
-    border-color: var(--fikes-purple, #823ca2);
-  }
-
-  /* PMB WhatsApp Outline Button */
-  .btn-pmb-wa {
-    background: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    padding: 14px 28px;
-    border-radius: 12px;
-    border: 1.5px solid rgba(255, 255, 255, 0.45);
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    transition: all 0.25s ease;
-    text-decoration: none;
-  }
-  .btn-pmb-wa i {
-    color: #25D366; /* WhatsApp Green */
-    font-size: 18px;
-    transition: transform 0.25s ease;
-  }
-  .btn-pmb-wa:hover {
-    background: #ffffff !important;
-    color: #823ca2 !important;
-    border-color: #ffffff !important;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  }
-  .btn-pmb-wa:hover i {
-    color: #25D366 !important;
-    transform: scale(1.15);
-  }
-
-  /* Mobile Fullwidth Buttons & Overflow Fix */
-  @media (max-width: 767.98px) {
-    .pmb-btn-group,
-    .cta-btn-group {
-      flex-direction: column !important;
-      width: 100% !important;
-    }
-    .pmb-btn-group .btn-primary-hero,
-    .pmb-btn-group .btn-pmb-wa,
-    .cta-btn-group .btn-primary-hero,
-    .cta-btn-group .btn-outline-hero,
-    .cta-btn-group a {
-      width: 100% !important;
-      justify-content: center !important;
-      text-align: center !important;
-    }
-    .pmb-cta-box {
-      padding: 30px 18px !important;
-      border-radius: 20px !important;
-    }
-    .pmb-badge-wrap {
-      white-space: normal !important;
-      word-break: break-word !important;
-      line-height: 1.4 !important;
-      display: inline-block !important;
-      max-width: 100% !important;
-    }
-  }
-</style>
-@endpush
+@section('title', 'Universitas Ibnu Sina (UIS) — Unggul, Profesional & Berintegritas')
+@section('meta_description', 'Portal Resmi Universitas Ibnu Sina (UIS) Batam — Mewujudkan Perguruan Tinggi Terkemuka Berdaya Saing Global, Inovatif, dan Berakhlak Mulia.')
 
 @section('content')
 @php
@@ -932,7 +18,7 @@
      1. HERO BANNER (FULL IMAGE PROMOTION)
 ═══════════════════════════════════════════════ -->
 <section class="hero-slider-section p-0">
-  <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+  <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4500" data-bs-pause="false" data-bs-wrap="true" data-bs-touch="true">
     
     @php
       $activeBanners = isset($banners) ? $banners->filter(fn($b) => !empty($b->url) || !empty($b->gambar)) : collect();
@@ -951,19 +37,19 @@
         @foreach($activeBanners as $index => $banner)
           @php $imgPath = $banner->url ?? $banner->gambar; @endphp
           <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-            <img src="{{ asset('storage/' . $imgPath) }}" alt="{{ $banner->judul ?? 'Banner Promosi FIKES UIS' }}" class="hero-banner-img">
+            <img src="{{ asset('storage/' . $imgPath) }}" alt="{{ $banner->judul ?? 'Banner Promosi Universitas Ibnu Sina' }}" class="hero-banner-img">
           </div>
         @endforeach
       @else
         <div class="carousel-item active">
-          <div class="hero-banner-img d-flex align-items-center justify-content-center" style="background: linear-gradient(135deg, #190a24 0%, #47175d 100%); min-height: 360px; color: #ffffff;">
+          <div class="hero-banner-img d-flex align-items-center justify-content-center" style="background: #032e12; min-height: 360px; color: #ffffff;">
             <div class="text-center p-4">
               <div class="mb-3">
-                <i class="bi bi-megaphone fs-1" style="color: var(--fikes-orange);"></i>
+                <i class="bi bi-megaphone fs-1" style="color: var(--uis-orange);"></i>
               </div>
-              <h2 class="fw-bold mb-2" style="color: #ffffff; letter-spacing: -0.5px;">FAKULTAS ILMU KESEHATAN — FIKES UIS</h2>
+              <h2 class="fw-bold mb-2" style="color: #ffffff; letter-spacing: -0.5px;">UNIVERSITAS IBNU SINA (UIS)</h2>
               <p class="text-white-50 small mb-0" style="max-width: 540px; margin: 0 auto;">
-                Banner Promosi & Iklan Fakultas dapat diunggah melalui menu Admin (<strong>Profil & Konten FIKES ➔ Banner Hero</strong>).
+                Banner Promosi & Iklan Fakultas dapat diunggah melalui menu Admin (<strong>Profil & Konten UIS ➔ Banner Hero</strong>).
               </p>
             </div>
           </div>
@@ -986,220 +72,369 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     2. LAYANAN TERKAIT (PORTAL & DIGITAL SERVICES)
-═══════════════════════════════════════════════ -->
-@if(isset($layananTerkaits) && $layananTerkaits->count() > 0)
-<section class="layanan-terkait-section" id="layanan-terkait">
-  <div class="container">
-    {{-- Header Title & Subtitle --}}
-    <div class="text-center mb-4" data-aos="fade-up">
-      <h2 class="layanan-terkait-title">
-        {{ $layananTerkaitSetting->judul_seksi ?? 'LAYANAN TERKAIT' }}
-      </h2>
-      @if(!empty($layananTerkaitSetting?->subjudul_seksi))
-        <p class="layanan-terkait-desc">
-          “{{ strip_tags(html_entity_decode($layananTerkaitSetting->subjudul_seksi)) }}”
-        </p>
-      @endif
-    </div>
-
-    {{-- Grid 4 Columns of Dark Cards --}}
-    <div class="row g-3 g-lg-4 justify-content-center">
-      @foreach($layananTerkaits as $item)
-        <div class="col-xl-3 col-lg-3 col-md-6 col-12" data-aos="fade-up" data-aos-delay="{{ min(400, 50 * ($loop->index + 1)) }}">
-          <a href="{{ $item->url }}" target="_blank" rel="noopener noreferrer" class="layanan-terkait-card" title="{{ strip_tags(html_entity_decode($item->deskripsi ?? $item->nama ?? '')) }}">
-            {{-- Top Right Logo / Icon --}}
-            <div class="layanan-terkait-logo-wrap">
-              @if($item->logo_url)
-                <img src="{{ $item->logo_url }}" alt="{{ $item->nama }}" class="layanan-terkait-logo">
-              @else
-                <i class="bi {{ $item->icon ?: 'bi-box-arrow-up-right' }} layanan-terkait-icon"></i>
-              @endif
-            </div>
-
-            {{-- Bottom Left Service Name --}}
-            <h3 class="layanan-terkait-name">
-              {{ $item->nama }}
-            </h3>
-          </a>
-        </div>
-      @endforeach
-    </div>
-  </div>
-</section>
-@endif
-
-
-
-<!-- ═══════════════════════════════════════════════
-     3. PROFIL SINGKAT FIKES UIS & SAMBUTAN DEKAN
+     3. PROFIL SINGKAT Universitas Ibnu Sina & SAMBUTAN REKTOR
 ═══════════════════════════════════════════════ -->
 <section class="section-bg-white py-5" id="profil-singkat">
   <div class="container py-2">
-    <div class="row g-5 align-items-center">
-      <div class="col-lg-6" data-aos="fade-right">
-        <div class="section-label">Profil Fakultas</div>
+    <!-- Header Section Full -->
+    <div class="row justify-content-center text-center mb-4" data-aos="fade-up">
+      <div class="col-12">
+        <div class="section-label mx-auto">Profil Universitas</div>
         <h2 class="section-title">
-          {{ strip_tags(html_entity_decode($about->judul_profil ?? 'Dedikasi Mencetak Pemimpin di Bidang Kesehatan')) }}
+          {{ strip_tags(html_entity_decode($about->judul_profil ?? 'Universitas Ibnu Sina')) }}
         </h2>
-        <div class="divider-line"></div>
-        <div class="section-desc mb-4" style="text-align: justify; line-height: 1.8;">
-          {!! $about->deskripsi_profil_1 ?? 'Fakultas Ilmu Kesehatan Universitas Ibnu Sina (FIKES UIS) merupakan pelopor pendidikan tinggi di bidang Magister Kesehatan Masyarakat (S2), Keselamatan & Kesehatan Kerja (S1 K3), serta Kesehatan Lingkungan (S1 Kesling) di kawasan Kepulauan Riau dan nasional.' !!}
-        </div>
-
-        @if(!empty($about?->deskripsi_profil_2))
-          <div class="section-desc mb-4" style="text-align: justify; line-height: 1.8;">
-            {!! $about->deskripsi_profil_2 !!}
-          </div>
-        @endif
-
-        <ul class="check-list mb-4">
-          <li>
-            <div class="check-icon"><i class="bi bi-check2"></i></div>
-            <span>Kurikulum terintegrasi dengan standar sertifikasi kompetensi industri dan Kemnaker</span>
-          </li>
-          <li>
-            <div class="check-icon"><i class="bi bi-check2"></i></div>
-            <span>Fasilitas laboratorium pengujian lingkungan & higiene industri terakreditasi</span>
-          </li>
-          <li>
-            <div class="check-icon"><i class="bi bi-check2"></i></div>
-            <span>Dosen bergelar Magister dan Doktor dengan pengalaman praktisi industri & rumah sakit</span>
-          </li>
-        </ul>
-
-        <a href="{{ route('homepage.tentang') }}" class="btn-primary-hero">
-          <i class="bi bi-info-circle"></i>
-          Profil Lengkap FIKES UIS
-        </a>
-      </div>
-
-      <!-- Sambutan Dekan Card -->
-      <div class="col-lg-6" data-aos="fade-left">
-        <div class="p-4 p-md-5 rounded-4 shadow-sm" style="background: var(--surface-light); border: 1.5px solid var(--border-light);">
-          <div class="d-flex align-items-center gap-3 mb-4">
-            @if(!empty($sambutanDekan?->foto_dekan))
-              <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="{{ $sambutanDekan->nama_dekan ?? 'Dekan FIKES UIS' }}" class="rounded-circle shadow-sm" style="width: 72px; height: 72px; object-fit: cover; border: 3px solid var(--fikes-purple); flex-shrink:0;">
-            @else
-              <div style="width: 68px; height: 68px; border-radius: 50%; background: linear-gradient(135deg, var(--fikes-purple) 0%, #47175d 100%); color: white; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0; border: 3px solid var(--fikes-orange);">
-                <i class="bi bi-person-badge-fill"></i>
-              </div>
-            @endif
-            <div>
-              <h5 class="fw-bold mb-1 text-dark">{{ $sambutanDekan->nama_dekan ?? 'Sambutan Dekan' }}</h5>
-              <span class="text-muted small fw-semibold">{{ $sambutanDekan->jabatan_dekan ?? 'Dekan Fakultas Ilmu Kesehatan UIS' }}</span>
-            </div>
-          </div>
-
-          <blockquote class="text-muted mb-4" style="font-style: italic; line-height: 1.8; text-align: justify; font-size: 14.5px;">
-            "{{ strip_tags($sambutanDekan->kutipan_singkat ?? ($sambutanDekan->sambutan_dekan ?? 'Selamat datang di Fakultas Ilmu Kesehatan Universitas Ibnu Sina. Kami bertekad membentuk generasi tenaga kesehatan yang tidak hanya unggul secara akademis dan terampil dalam praktik industri, namun juga memiliki integritas moral dan etika luhur dalam mengabdi kepada bangsa.')) }}"
-          </blockquote>
-
-          <div class="d-flex align-items-center justify-content-between pt-3 border-top">
-            <span class="fw-bold" style="color: var(--fikes-purple);">{{ $sambutanDekan->nama_dekan ?? 'Dekanat FIKES UIS' }}</span>
-            <a href="{{ route('homepage.sambutan-dekan') }}" class="badge text-decoration-none" style="background: var(--fikes-orange); color: #190a24; font-weight: 800; padding: 6px 12px;">
-              Baca Sambutan <i class="bi bi-arrow-right ms-1"></i>
-            </a>
-          </div>
-        </div>
+        <div class="divider-line centered"></div>
       </div>
     </div>
+
+    <!-- VIDEO KIRI & CONTENT KANAN (SIDE-BY-SIDE) -->
+    @if($about?->hasVideo())
+      <div class="row g-4 align-items-center mb-5" data-aos="fade-up" data-aos-delay="150">
+        {{-- Video Profil Kiri --}}
+        <div class="col-lg-6">
+          <div class="position-relative rounded-4 overflow-hidden shadow-sm border w-100" style="border-color: #e2e8f0; background: #000;">
+            @if($about->video_file)
+              <video controls class="w-100 d-block" style="max-height: 440px; object-fit: contain;">
+                <source src="{{ asset('storage/' . $about->video_file) }}">
+                Browser Anda tidak mendukung tag video.
+              </video>
+            @elseif($about->youtube_embed_url)
+              <div class="ratio ratio-16x9">
+                <iframe 
+                  src="{{ $about->youtube_embed_url }}" 
+                  title="Video Profil Universitas Ibnu Sina" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  referrerpolicy="strict-origin-when-cross-origin" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            @endif
+          </div>
+          @if($about->youtube_watch_url)
+            <div class="d-flex justify-content-between align-items-center gap-2 mt-2 px-1">
+              <span class="text-muted small" style="font-size: 12px;">Video bermasalah saat diputar?</span>
+              <a href="{{ $about->youtube_watch_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm text-white fw-semibold d-inline-flex align-items-center gap-1" style="background-color: #046B26; font-size: 12px; border-radius: 6px; padding: 4px 12px;">
+                <i class="bi bi-youtube text-warning"></i> Buka Langsung di YouTube <i class="bi bi-box-arrow-up-right ms-1" style="font-size: 10px;"></i>
+              </a>
+            </div>
+          @endif
+        </div>
+
+        {{-- Content / Deskripsi Kanan --}}
+        <div class="col-lg-6">
+          <div class="h-100 p-4 p-md-4 rounded-4 shadow-sm" style="font-size: 15.5px; line-height: 1.85; color: #2d3748; background: #f8faf9; border-left: 5px solid var(--uis-green, #046B26); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
+            <div class="about-desc-content" style="text-align: justify;">
+              {!! $about->deskripsi_profil_1 ?? 'Universitas Ibnu Sina (UIS) Batam merupakan perguruan tinggi swasta terkemuka di Provinsi Kepulauan Riau yang lahir dari perpaduan keunggulan akademik Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES) di bawah naungan Yayasan Pendidikan Ibnu Sina Batam (YAPISNA). Berlokasi strategis di kawasan industri dan perdagangan internasional Kota Batam, UIS mengelola tiga fakultas unggulan: Fakultas Teknik (Sains & Teknologi), Fakultas Ekonomi dan Bisnis (FEB), serta Fakultas Ilmu Kesehatan (FIKES), beserta Program Pascasarjana (Magister). UIS bertekad mencetak lulusan profesional muda yang inovatif, berdaya saing global, berjiwa entrepreneur, dan berakhlak mulia berlandaskan Iman dan Taqwa (Imtaq).' !!}
+            </div>
+          </div>
+        </div>
+      </div>
+    @else
+      {{-- Fallback jika belum ada video --}}
+      <div class="row mb-5" data-aos="fade-up" data-aos-delay="150">
+        <div class="col-12">
+          <div class="w-100 p-4 p-md-5 rounded-4 shadow-sm" style="text-align: justify; font-size: 16.5px; line-height: 1.9; color: #2d3748; background: #f8faf9; border-left: 6px solid var(--uis-green, #046B26); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
+            <div class="about-desc-content">
+              {!! $about->deskripsi_profil_1 ?? 'Universitas Ibnu Sina (UIS) Batam merupakan perguruan tinggi swasta terkemuka di Provinsi Kepulauan Riau yang lahir dari perpaduan keunggulan akademik Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES) di bawah naungan Yayasan Pendidikan Ibnu Sina Batam (YAPISNA). Berlokasi strategis di kawasan industri dan perdagangan internasional Kota Batam, UIS mengelola tiga fakultas unggulan: Fakultas Teknik (Sains & Teknologi), Fakultas Ekonomi dan Bisnis (FEB), serta Fakultas Ilmu Kesehatan (FIKES), beserta Program Pascasarjana (Magister). UIS bertekad mencetak lulusan profesional muda yang inovatif, berdaya saing global, berjiwa entrepreneur, dan berakhlak mulia berlandaskan Iman dan Taqwa (Imtaq).' !!}
+            </div>
+          </div>
+        </div>
+      </div>
+    @endif
+
+    <!-- 3. PILAR KEUNGGULAN (3 CARD HORIZONTAL & TOMBOL CTA) -->
+    <div class="row g-3 justify-content-center mb-5" data-aos="fade-up" data-aos-delay="250">
+      <div class="col-md-4">
+        <div class="p-3 rounded-3 h-100 shadow-sm" style="background: #fffbeb; border: 1px solid #fde68a; transition: transform 0.25s ease;">
+          <div class="d-flex align-items-center gap-2 mb-2 fw-bold" style="color: #b45309;">
+            <i class="bi bi-award-fill fs-5" style="color: #d97706;"></i>
+            <span>Kurikulum OBE</span>
+          </div>
+          <p class="small mb-0" style="color: #334155; line-height: 1.6;">Terintegrasi sertifikasi kompetensi industri dan pembinaan jiwa wirausaha muda.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 rounded-3 h-100 shadow-sm" style="background: #fff7ed; border: 1px solid #fed7aa; transition: transform 0.25s ease;">
+          <div class="d-flex align-items-center gap-2 mb-2 fw-bold" style="color: #c2410c;">
+            <i class="bi bi-cpu-fill fs-5" style="color: #ea580c;"></i>
+            <span>Lab Terpadu & AI</span>
+          </div>
+          <p class="small mb-0" style="color: #334155; line-height: 1.6;">Laboratorium komputasi cerdas, studio logistik industri, dan pengujian K3 modern.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 rounded-3 h-100 shadow-sm" style="background: #f0fdf4; border: 1px solid #bbf7d0; transition: transform 0.25s ease;">
+          <div class="d-flex align-items-center gap-2 mb-2 fw-bold" style="color: #046B26;">
+            <i class="bi bi-people-fill fs-5" style="color: #046B26;"></i>
+            <span>Dosen Doktor & Praktisi</span>
+          </div>
+          <p class="small mb-0" style="color: #334155; line-height: 1.6;">Dibimbing pakar berkualifikasi S3 serta praktisi industri multinasional kawasan Batam.</p>
+        </div>
+      </div>
+      <div class="col-12 text-center mt-3">
+        <a href="{{ route('homepage.tentang') }}" class="btn-primary-hero">
+          <i class="bi bi-info-circle"></i>
+          Profil Lengkap Universitas Ibnu Sina
+        </a>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     3b. STATISTIK FAKULTAS — "FIKES DALAM ANGKA"
+     3b. STATISTIK UNIVERSITAS — "UIS DALAM ANGKA"
 ═══════════════════════════════════════════════ -->
-@if(isset($facultyStat) && $facultyStat)
-<section id="statistik-fakultas" style="background: linear-gradient(135deg, #5a2870 0%, #823ca2 40%, #47175d 100%); padding: 40px 0; overflow: hidden; position: relative;">
+@if(isset($facultyStat) && $facultyStat && $facultyStat->is_active)
+<style>
+  .uis-stat-banner {
+    position: relative;
+    padding: 90px 0 85px 0;
+    overflow: hidden;
+    perspective: 1200px;
+    transform-style: preserve-3d;
+  }
+  .uis-stat-3d-scene {
+    position: absolute;
+    inset: -30px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .uis-stat-3d-bg {
+    position: absolute;
+    inset: -60px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transform-origin: center center;
+    will-change: transform;
+    transform-style: preserve-3d;
+    transform: scale(1.12) translate3d(0, 0, 0);
+  }
+  .uis-stat-3d-bg.ambient-float {
+    animation: uis3dAmbient 18s ease-in-out infinite alternate;
+  }
+  @keyframes uis3dAmbient {
+    0% {
+      transform: scale(1.12) translate3d(-12px, -8px, 0) rotateX(1.5deg) rotateY(-2deg);
+    }
+    50% {
+      transform: scale(1.16) translate3d(10px, 8px, 12px) rotateX(-1.5deg) rotateY(2deg);
+    }
+    100% {
+      transform: scale(1.12) translate3d(-8px, -5px, 0) rotateX(2deg) rotateY(-1.2deg);
+    }
+  }
+  .uis-stat-banner-content {
+    position: relative;
+    z-index: 2;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  .uis-stat-heading {
+    color: #ffffff;
+    font-size: clamp(1.8rem, 3.6vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 4px 18px rgba(0,0,0,0.7), 0 0 30px rgba(0,0,0,0.4);
+  }
+  .uis-stat-tab-btn {
+    background: #edf2f7;
+    color: #334155;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 32px;
+    border: none;
+    border-radius: 3px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  }
+  .uis-stat-tab-btn:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+    transform: translateY(-2px);
+  }
+  .uis-stat-tab-btn.active {
+    background: #00875a;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(0, 135, 90, 0.55);
+    transform: translateY(-1px);
+  }
+  .uis-stat-number {
+    font-size: clamp(2.8rem, 5.5vw, 4.4rem);
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    font-family: 'Poppins', 'Plus Jakarta Sans', sans-serif;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 6px 20px rgba(0,0,0,0.7), 0 0 35px rgba(0,0,0,0.5);
+    margin-bottom: 8px;
+  }
+  .uis-stat-label {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.9), 0 4px 14px rgba(0,0,0,0.7);
+  }
+</style>
 
-  {{-- Decorative blur shapes --}}
-  <div style="position:absolute;top:-60px;left:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,0.05);pointer-events:none;"></div>
-  <div style="position:absolute;bottom:-80px;right:5%;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,0.04);pointer-events:none;"></div>
+<section id="statistik-fakultas" class="uis-stat-banner">
+  {{-- 3D Motion Background Scene (Tanpa background hitam/overlay gelap) --}}
+  <div class="uis-stat-3d-scene">
+    <div class="uis-stat-3d-bg ambient-float" id="uis3dStatBg" style="background-image: url('{{ $facultyStat->bg_image_url }}');"></div>
+  </div>
 
-  <div class="container" style="position:relative;z-index:1;">
-    <div class="row align-items-center g-4">
-
-      {{-- Kiri: Teks + Angka --}}
-      <div class="col-lg-7" data-aos="fade-right">
-        <h2 style="color:#fff;font-size:clamp(1.35rem,3vw,1.95rem);font-weight:700;margin-bottom:22px;line-height:1.25;text-shadow:0 2px 6px rgba(0,0,0,0.3);">
-          {{ $facultyStat->title }}
-        </h2>
-
-        <div class="row g-2 g-sm-3">
-          {{-- Program Studi --}}
-          <div class="col-6 col-sm-3">
-            <div style="text-align:center;padding:14px 8px;background:rgba(255,255,255,0.1);border-radius:16px;border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(8px);height:100%;display:flex;flex-direction:column;justify-content:center;">
-              <div class="stat-count" data-target="{{ $facultyStat->jumlah_prodi }}"
-                   style="font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;color:#ff9c00;line-height:1;font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:-0.5px;">
-                {{ $facultyStat->jumlah_prodi }}
-              </div>
-              <div style="color:rgba(255,255,255,0.9);font-size:0.75rem;margin-top:6px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase;">
-                Program Studi
-              </div>
-            </div>
-          </div>
-
-          {{-- Total Mahasiswa --}}
-          <div class="col-6 col-sm-3">
-            <div style="text-align:center;padding:14px 8px;background:rgba(255,255,255,0.1);border-radius:16px;border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(8px);height:100%;display:flex;flex-direction:column;justify-content:center;">
-              <div class="stat-count" data-target="{{ $facultyStat->total_mahasiswa }}"
-                   style="font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;color:#ff9c00;line-height:1;font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:-0.5px;">
-                {{ number_format($facultyStat->total_mahasiswa, 0, ',', '.') }}
-              </div>
-              <div style="color:rgba(255,255,255,0.9);font-size:0.75rem;margin-top:6px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase;">
-                Total Mahasiswa
-              </div>
-            </div>
-          </div>
-
-          {{-- Dosen --}}
-          <div class="col-6 col-sm-3">
-            <div style="text-align:center;padding:14px 8px;background:rgba(255,255,255,0.1);border-radius:16px;border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(8px);height:100%;display:flex;flex-direction:column;justify-content:center;">
-              <div class="stat-count" data-target="{{ $facultyStat->total_dosen }}"
-                   style="font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;color:#ff9c00;line-height:1;font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:-0.5px;">
-                {{ $facultyStat->total_dosen }}
-              </div>
-              <div style="color:rgba(255,255,255,0.9);font-size:0.75rem;margin-top:6px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase;">
-                Dosen
-              </div>
-            </div>
-          </div>
-
-          {{-- Alumni --}}
-          <div class="col-6 col-sm-3">
-            <div style="text-align:center;padding:14px 8px;background:rgba(255,255,255,0.1);border-radius:16px;border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(8px);height:100%;display:flex;flex-direction:column;justify-content:center;">
-              <div class="stat-count" data-target="{{ $facultyStat->total_alumni }}"
-                   style="font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;color:#ff9c00;line-height:1;font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:-0.5px;">
-                {{ number_format($facultyStat->total_alumni, 0, ',', '.') }}
-              </div>
-              <div style="color:rgba(255,255,255,0.9);font-size:0.75rem;margin-top:6px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase;">
-                Alumni
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {{-- Kanan: Gambar --}}
-      @if($facultyStat->image)
-      <div class="col-lg-5 d-flex justify-content-center justify-content-lg-end" data-aos="fade-left">
-        <div class="w-100 position-relative" style="max-width:440px;border-radius:18px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,0.35);border:2.5px solid rgba(255,255,255,0.25);">
-          <img src="{{ asset('storage/' . $facultyStat->image) }}"
-               alt="{{ $facultyStat->title }}"
-               loading="lazy"
-               style="width:100%;height:210px;object-fit:cover;display:block;">
-          {{-- Overlay label --}}
-          <div style="position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,0.65);color:#fff;padding:4px 12px;border-radius:20px;font-size:0.72rem;font-weight:600;backdrop-filter:blur(6px);letter-spacing:0.3px;">
-            📍 FIKES — Universitas Ibnu Sina
-          </div>
-        </div>
-      </div>
-      @endif
-
+  <div class="container uis-stat-banner-content" id="uis3dStatContent">
+    
+    {{-- Heading --}}
+    <div class="text-center mb-4" data-aos="fade-up">
+      <h2 class="uis-stat-heading">
+        {{ $facultyStat->title ?? 'Universitas Ibnu Sina' }}
+      </h2>
     </div>
+
+    {{-- Tab Buttons --}}
+    <div class="d-flex align-items-center justify-content-center gap-2 mb-5 flex-wrap" data-aos="fade-up" data-aos-delay="100">
+      <button type="button" class="uis-stat-tab-btn active" id="btnTabMahasiswa" onclick="switchStatTab('mahasiswa')">
+        {{ $facultyStat->tab_1_label ?? 'Mahasiswa' }}
+      </button>
+      <button type="button" class="uis-stat-tab-btn" id="btnTabPrestasi" onclick="switchStatTab('prestasi')">
+        {{ $facultyStat->tab_2_label ?? 'Prestasi' }}
+      </button>
+      <button type="button" class="uis-stat-tab-btn" id="btnTabKerjasama" onclick="switchStatTab('kerjasama')">
+        {{ $facultyStat->tab_3_label ?? 'Kerjasama' }}
+      </button>
+    </div>
+
+    {{-- Tab 1: Mahasiswa --}}
+    <div id="statPanelMahasiswa" class="stat-panel" data-aos="zoom-in" data-aos-delay="200">
+      <div class="row g-4 justify-content-center text-center">
+        <div class="col-6 col-md-4">
+          <div class="uis-stat-number stat-count" data-target="{{ $facultyStat->mhs_total ?? 5273 }}">
+            {{ number_format($facultyStat->mhs_total ?? 5273, 0, ',', '.') }}
+          </div>
+          <div class="uis-stat-label">
+            {{ $facultyStat->mhs_total_label ?? 'Total Mahasiswa' }}
+          </div>
+        </div>
+        <div class="col-6 col-md-4">
+          <div class="uis-stat-number stat-count" data-target="{{ $facultyStat->mhs_baru ?? 1520 }}">
+            {{ number_format($facultyStat->mhs_baru ?? 1520, 0, ',', '.') }}
+          </div>
+          <div class="uis-stat-label">
+            {{ $facultyStat->mhs_baru_label ?? 'Jumlah Mahasiswa Baru 2026' }}
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="uis-stat-number stat-count" data-target="{{ $facultyStat->mhs_alumni ?? 7968 }}">
+            {{ number_format($facultyStat->mhs_alumni ?? 7968, 0, ',', '.') }}
+          </div>
+          <div class="uis-stat-label">
+            {{ $facultyStat->mhs_alumni_label ?? 'Alumni' }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{-- Tab 2: Prestasi --}}
+    <div id="statPanelPrestasi" class="stat-panel d-none">
+      <div class="row g-4 justify-content-center text-center">
+        <div class="col-4 col-md-4">
+          <div class="uis-stat-number stat-count" data-target="{{ $facultyStat->prestasi_nasional ?? 37 }}">
+            {{ number_format($facultyStat->prestasi_nasional ?? 37, 0, ',', '.') }}
+          </div>
+          <div class="uis-stat-label">
+            {{ $facultyStat->prestasi_nasional_label ?? 'Nasional' }}
+          </div>
+        </div>
+        <div class="col-4 col-md-4">
+          <div class="uis-stat-number stat-count" data-target="{{ $facultyStat->prestasi_provinsi ?? 39 }}">
+            {{ number_format($facultyStat->prestasi_provinsi ?? 39, 0, ',', '.') }}
+          </div>
+          <div class="uis-stat-label">
+            {{ $facultyStat->prestasi_provinsi_label ?? 'Provinsi' }}
+          </div>
+        </div>
+        <div class="col-4 col-md-4">
+          <div class="uis-stat-number stat-count" data-target="{{ $facultyStat->prestasi_internasional ?? 10 }}">
+            {{ number_format($facultyStat->prestasi_internasional ?? 10, 0, ',', '.') }}
+          </div>
+          <div class="uis-stat-label">
+            {{ $facultyStat->prestasi_internasional_label ?? 'International' }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{-- Tab 3: Kerjasama --}}
+    <div id="statPanelKerjasama" class="stat-panel d-none">
+      <div class="row g-4 justify-content-center text-center">
+        <div class="col-6 col-md-3">
+          <div class="uis-stat-number stat-count" data-target="{{ $facultyStat->kerjasama_total ?? 50 }}">
+            {{ number_format($facultyStat->kerjasama_total ?? 50, 0, ',', '.') }}
+          </div>
+          <div class="uis-stat-label">
+            {{ $facultyStat->kerjasama_total_label ?? 'Jumlah Kerjasama' }}
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="uis-stat-number stat-count" data-target="{{ $facultyStat->kerjasama_perusahaan ?? 8 }}">
+            {{ number_format($facultyStat->kerjasama_perusahaan ?? 8, 0, ',', '.') }}
+          </div>
+          <div class="uis-stat-label">
+            {{ $facultyStat->kerjasama_perusahaan_label ?? 'Perusahaan' }}
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="uis-stat-number stat-count" data-target="{{ $facultyStat->kerjasama_pemerintahan ?? 19 }}">
+            {{ number_format($facultyStat->kerjasama_pemerintahan ?? 19, 0, ',', '.') }}
+          </div>
+          <div class="uis-stat-label">
+            {{ $facultyStat->kerjasama_pemerintahan_label ?? 'Pemerintahan' }}
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="uis-stat-number stat-count" data-target="{{ $facultyStat->kerjasama_sekolah ?? 5 }}">
+            {{ number_format($facultyStat->kerjasama_sekolah ?? 5, 0, ',', '.') }}
+          </div>
+          <div class="uis-stat-label">
+            {{ $facultyStat->kerjasama_sekolah_label ?? 'Sekolah' }}
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
+
+<script>
+  function switchStatTab(tab) {
+    const btnMhs = document.getElementById('btnTabMahasiswa');
+    const btnPrestasi = document.getElementById('btnTabPrestasi');
+    const btnKerjasama = document.getElementById('btnTabKerjasama');
+
+    const panelMhs = document.getElementById('statPanelMahasiswa');
+    const panelPrestasi = document.getElementById('statPanelPrestasi');
+    const panelKerjasama = document.getElementById('statPanelKerjasama');
+
+    [btnMhs, btnPrestasi, btnKerjasama].forEach(b => b.classList.remove('active'));
+    [panelMhs, panelPrestasi, panelKerjasama].forEach(p => p.classList.add('d-none'));
+
+    if (tab === 'mahasiswa') {
+      btnMhs.classList.add('active');
+      panelMhs.classList.remove('d-none');
+    } else if (tab === 'prestasi') {
+      btnPrestasi.classList.add('active');
+      panelPrestasi.classList.remove('d-none');
+    } else if (tab === 'kerjasama') {
+      btnKerjasama.classList.add('active');
+      panelKerjasama.classList.remove('d-none');
+    }
+  }
+</script>
 
 {{-- Counter animation script --}}
 @push('scripts')
@@ -1245,82 +480,109 @@
   } else if (section) {
     animateCounters();
   }
+
+  // ═══════════════════════════════════════════════
+  // 3D MOTION BACKGROUND ENGINE (Mouse & Gyroscope)
+  // ═══════════════════════════════════════════════
+  const bg3d = document.getElementById('uis3dStatBg');
+  const content3d = document.getElementById('uis3dStatContent');
+
+  if (section && bg3d) {
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let isHovering = false;
+    let animFrameId = null;
+
+    function render3D() {
+      // Lerp smoothing (0.08 for smooth buttery inertia)
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
+
+      if (isHovering) {
+        // 3D background tilt & translation
+        const bgRotX = -currentY * 7;
+        const bgRotY = currentX * 9;
+        const bgTransX = -currentX * 28;
+        const bgTransY = -currentY * 18;
+        bg3d.style.transform = `scale(1.15) translate3d(${bgTransX}px, ${bgTransY}px, 0) rotateX(${bgRotX}deg) rotateY(${bgRotY}deg)`;
+
+        // Foreground content slight opposite depth parallax
+        if (content3d) {
+          const fgRotX = -currentY * 2.5;
+          const fgRotY = currentX * 3.5;
+          const fgTransX = currentX * 10;
+          const fgTransY = currentY * 8;
+          content3d.style.transform = `translate3d(${fgTransX}px, ${fgTransY}px, 20px) rotateX(${fgRotX}deg) rotateY(${fgRotY}deg)`;
+        }
+      }
+
+      animFrameId = requestAnimationFrame(render3D);
+    }
+
+    // Start 3D loop
+    render3D();
+
+    // Mouse Move event
+    section.addEventListener('mouseenter', function () {
+      isHovering = true;
+      bg3d.classList.remove('ambient-float');
+    });
+
+    section.addEventListener('mousemove', function (e) {
+      const rect = section.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;   // 0 to 1
+      const y = (e.clientY - rect.top) / rect.height;  // 0 to 1
+      targetX = (x - 0.5) * 2; // -1 to 1
+      targetY = (y - 0.5) * 2; // -1 to 1
+    });
+
+    section.addEventListener('mouseleave', function () {
+      isHovering = false;
+      targetX = 0;
+      targetY = 0;
+      // Reset smoothly
+      bg3d.style.transform = 'scale(1.12) translate3d(0, 0, 0)';
+      if (content3d) {
+        content3d.style.transform = 'translate3d(0, 0, 0)';
+      }
+      setTimeout(function () {
+        if (!isHovering) {
+          bg3d.classList.add('ambient-float');
+        }
+      }, 300);
+    });
+
+    // Mobile Gyroscope 3D motion
+    if (window.DeviceOrientationEvent && 'ontouchstart' in window) {
+      window.addEventListener('deviceorientation', function (e) {
+        if (e.gamma !== null && e.beta !== null) {
+          const gamma = Math.min(Math.max(e.gamma, -30), 30); // -30 to 30
+          const beta = Math.min(Math.max(e.beta - 45, -30), 30); // normalized reading angle
+          targetX = gamma / 30;
+          targetY = beta / 30;
+          isHovering = true;
+          bg3d.classList.remove('ambient-float');
+        }
+      });
+    }
+  }
 })();
 </script>
 @endpush
 
 @endif
 
-<!-- ═══════════════════════════════════════════════
-     4. PROGRAM STUDI UNGGULAN
-═══════════════════════════════════════════════ -->
-<section class="section-bg-sand" id="prodi">
-  <div class="container">
-    <div class="text-center mb-5" data-aos="fade-up">
-      <div class="section-label mx-auto">Program Studi</div>
-      <h2 class="section-title">Program Studi <em>Unggulan</em> FIKES UIS</h2>
-      <div class="divider-line centered"></div>
-      <p class="section-desc mx-auto">
-        Program pascasarjana dan sarjana yang dirancang khusus untuk menjawab kebutuhan dunia industri modern, perminyakan, manufaktur, dan sistem pelayanan kesehatan publik.
-      </p>
-    </div>
-
-    <div class="row g-4">
-      @if(isset($layanans) && $layanans->count() > 0)
-        @foreach($layanans as $index => $l)
-          @php
-            $rincianItems = $l->rincian ? array_filter(array_map('trim', explode("\n", $l->rincian))) : [];
-            $prodiUrl = !empty($l->link) ? $l->link : route('homepage.layanan.detail', $l->id);
-            $isExternal = !empty($l->link) && (str_starts_with($l->link, 'http://') || str_starts_with($l->link, 'https://'));
-          @endphp
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
-            <div class="prodi-card h-100 d-flex flex-column justify-content-between">
-              <div>
-                @if($l->dasar_hukum)
-                  <span class="prodi-badge">{{ $l->dasar_hukum }}</span>
-                @endif
-                <h3 class="prodi-title" style="font-size:20px;">{{ $l->judul }}</h3>
-                <div class="text-muted small mb-3 prodi-desc" style="line-height: 1.65; text-align: justify;">
-                  {!! $l->deskripsi !!}
-                </div>
-
-                @if(!empty($l->rincian))
-                  <div class="prodi-subhead mb-2"><i class="bi bi-award-fill me-1"></i> Kompetensi / Keunggulan:</div>
-                  @if(str_contains($l->rincian, '<') && str_contains($l->rincian, '>'))
-                    <div class="prodi-rich-rincian small mb-0">
-                      {!! $l->rincian !!}
-                    </div>
-                  @else
-                    <ul class="prodi-list">
-                      @foreach(array_slice($rincianItems, 0, 4) as $point)
-                        <li><i class="bi bi-check-circle-fill"></i> {{ $point }}</li>
-                      @endforeach
-                    </ul>
-                  @endif
-                @endif
-              </div>
-
-              <div class="mt-4 pt-3 border-top">
-                <a href="{{ $prodiUrl }}" @if($isExternal) target="_blank" rel="noopener noreferrer" @endif class="btn-primary-hero w-100 justify-content-center" style="font-size:13px; padding:10px 16px;">
-                  Detail {{ $l->judul }} @if($isExternal)<i class="bi bi-box-arrow-up-right ms-1"></i>@else<i class="bi bi-arrow-right"></i>@endif
-                </a>
-              </div>
-            </div>
-          </div>
-        @endforeach
-      @endif
-    </div>
-  </div>
-</section>
 
 <!-- ═══════════════════════════════════════════════
-     5. MENGAPA MEMILIH FIKES UIS
+     5. MENGAPA MEMILIH Universitas Ibnu Sina
 ═══════════════════════════════════════════════ -->
-<section class="section-bg-white">
+<section class="section-bg-white" id="keunggulan">
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label mx-auto">Keunggulan Kami</div>
-      <h2 class="section-title">Mengapa Memilih <em>FIKES UIS</em>?</h2>
+      <h2 class="section-title">Mengapa Memilih <em>Universitas Ibnu Sina</em>?</h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
         Kami memberikan ekosistem belajar yang menyeluruh antara pemahaman teoritis berstandar mutakhir dan pelatihan praktikal di lapangan.
@@ -1332,7 +594,7 @@
         <div class="value-card">
           <div class="value-icon-wrap"><i class="bi bi-book-half"></i></div>
           <div class="value-title">Kurikulum Berbasis Industri</div>
-          <p class="value-desc">Materi kuliah diselaraskan dengan kebutuhan kompetensi industri modern, Permenaker, dan standar sertifikasi internasional.</p>
+          <p class="value-desc">Materi kuliah diselaraskan dengan kebutuhan kompetensi industri, Permenaker, dan standar sertifikasi internasional.</p>
         </div>
       </div>
 
@@ -1340,44 +602,106 @@
         <div class="value-card">
           <div class="value-icon-wrap"><i class="bi bi-person-video3"></i></div>
           <div class="value-title">Dosen Ahli & Praktisi</div>
-          <p class="value-desc">Diajar langsung oleh akademisi bergelar doktor dan praktisi berpengalaman di industri migas, manufaktur, dan RS.</p>
+          <p class="value-desc">Diajar langsung oleh akademisi bergelar doktor (S3) dan praktisi industri berpengalaman di bidang IT, manufaktur, bisnis, dan K3.</p>
         </div>
       </div>
 
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
         <div class="value-card">
-          <div class="value-icon-wrap"><i class="bi bi-clipboard2-pulse-fill"></i></div>
-          <div class="value-title">Laboratorium Terpadu</div>
-          <p class="value-desc">Peralatan pengujian kualitas udara, kebisingan, ergonomi, mikrobiologi air, dan sanitasi yang lengkap.</p>
+          <div class="value-icon-wrap"><i class="bi bi-cpu-fill"></i></div>
+          <div class="value-title">Laboratorium Mutakhir</div>
+          <p class="value-desc">Peralatan komputasi AI, laboratorium jaringan Cisco, studio teknik industri, perancangan logistik, dan pengujian K3 lingkungan.</p>
         </div>
       </div>
 
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
         <div class="value-card">
           <div class="value-icon-wrap"><i class="bi bi-buildings-fill"></i></div>
-          <div class="value-title">50+ Mitra Industri & RS</div>
-          <p class="value-desc">Kerjasama magang dan penempatan kerja luas di galangan kapal, kawasan industri Batam, RSUD, dan dinas pemerintah.</p>
+          <div class="value-title">100+ Mitra Industri & Korporasi</div>
+          <p class="value-desc">Kerjasama magang dan penempatan kerja luas di kawasan industri Batamindo, Panbil, BUMN, galangan kapal, dan instansi perbankan.</p>
         </div>
       </div>
 
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
         <div class="value-card">
           <div class="value-icon-wrap"><i class="bi bi-stars"></i></div>
-          <div class="value-title">Karakter Islami & Humanis</div>
-          <p class="value-desc">Pembinaan karakter tenaga kesehatan yang jujur, amanah, beretika profesional, dan berdedikasi tinggi bagi masyarakat.</p>
+          <div class="value-title">Karakter Imtaq & Entrepreneur</div>
+          <p class="value-desc">Pembinaan karakter profesional muda yang jujur, amanah, berjiwa wirausaha mandiri, dan berlandaskan keimanan dan ketaqwaan.</p>
         </div>
       </div>
 
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
         <div class="value-card">
           <div class="value-icon-wrap"><i class="bi bi-award-fill"></i></div>
-          <div class="value-title">Sertifikasi Pendamping</div>
-          <p class="value-desc">Kesempatan memperoleh Surat Keterangan Pendamping Ijazah (SKPI) dan sertifikasi kompetensi K3 BNSP/Kemnaker.</p>
+          <div class="value-title">Sertifikasi Kompetensi SKPI</div>
+          <p class="value-desc">Kesempatan memperoleh Surat Keterangan Pendamping Ijazah (SKPI) dan sertifikasi kompetensi keahlian BNSP berstandar internasional.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════════════
+     PMB BANNER (PENERIMAAN MAHASISWA BARU)
+═══════════════════════════════════════════════ -->
+@if(!isset($pmbSetting) || $pmbSetting->is_active)
+<section class="section-bg-sand" id="pmb">
+  <div class="container" data-aos="fade-up">
+    <div class="pmb-cta-box">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <div class="badge pmb-badge-wrap px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange); color: #032e12; font-weight: 800; font-size: 12px; letter-spacing: 1px;">
+            {{ $pmbSetting->badge_text ?? 'PENERIMAAN MAHASISWA BARU (PMB) T.A. 2026/2027' }}
+          </div>
+          <h2 class="text-white fw-bold mb-3" style="font-size: clamp(1.5rem, 3.5vw, 2.1rem); line-height: 1.3;">
+            {{ $pmbSetting->judul ?? 'Daftar Sekarang & Raih Masa Depan Cerah Bersama Universitas Ibnu Sina!' }}
+          </h2>
+          <div class="text-white mb-4 pmb-desc-content" style="line-height: 1.7; max-width: 620px; opacity: 0.92; font-size: 14.5px;">
+            {!! $pmbSetting->deskripsi ?? 'Tersedia berbagai jalur seleksi: Jalur Bebas Tes / Prestasi, Jalur Reguler, Jalur KIP-Kuliah, dan Jalur Alih Jenjang Karyawan.' !!}
+          </div>
+          <div class="d-flex flex-wrap gap-3 pmb-btn-group">
+            @php
+              $link1 = $pmbSetting->tombol_link_1 ?? route('homepage.kontak');
+              if (!str_starts_with($link1, 'http') && !str_starts_with($link1, '/')) {
+                  $link1 = '/' . $link1;
+              }
+            @endphp
+            <a href="{{ $link1 }}" target="{{ str_starts_with($link1, 'http') ? '_blank' : '_self' }}" class="btn-primary-hero">
+              <i class="bi bi-pencil-square"></i> {{ $pmbSetting->tombol_text_1 ?? 'Daftar PMB Sekarang' }}
+            </a>
+
+            @php
+              $link2 = $pmbSetting->tombol_link_2 ?? '';
+              if (empty($link2) && !empty($cleanWa)) {
+                  $link2 = "https://wa.me/{$cleanWa}?text=" . urlencode("Halo Admin PMB Universitas Ibnu Sina, saya ingin konsultasi pendaftaran mahasiswa baru");
+              }
+            @endphp
+            @if(!empty($link2))
+              <a href="{{ $link2 }}" target="_blank" class="btn-pmb-wa">
+                <i class="bi bi-whatsapp"></i> {{ $pmbSetting->tombol_text_2 ?? 'Konsultasi WhatsApp PMB' }}
+              </a>
+            @endif
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="p-4 rounded-4" style="background: rgba(0, 0, 0, 0.22); border: 1px solid rgba(255, 255, 255, 0.22); backdrop-filter: blur(8px);">
+            <h5 class="text-white fw-bold mb-3"><i class="bi bi-calendar-event text-warning me-2"></i>Jadwal Gelombang:</h5>
+            <ul class="text-white small list-unstyled mb-0" style="line-height: 2; opacity: 0.95;">
+              @php
+                $waveList = $pmbSetting->waves ?? ['Gelombang 1: Jan - Apr', 'Gelombang 2: Mei - Jul', 'Gelombang 3: Agu - Sep'];
+              @endphp
+              @foreach($waveList as $waveItem)
+                <li><i class="bi bi-check2 text-warning me-1"></i> {{ $waveItem }}</li>
+              @endforeach
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+@endif
 
 <!-- ═══════════════════════════════════════════════
      6. FASILITAS & LABORATORIUM
@@ -1386,7 +710,7 @@
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label mx-auto">Sarana Kampus</div>
-      <h2 class="section-title">Fasilitas & <em>Laboratorium Modern</em></h2>
+      <h2 class="section-title">Fasilitas & <em>Laboratorium</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
         Menunjang proses riset dan praktikum mahasiswa dengan sarana pengujian berteknologi mutakhir.
@@ -1399,8 +723,8 @@
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ 100 + ($index * 100) }}">
             <div class="fasilitas-box">
               <div class="fasilitas-icon"><i class="bi {{ $sarana->icon ?? 'bi-building' }}"></i></div>
-              <h4 class="fw-bold mb-2">{{ $sarana->nama }}</h4>
-              <p class="text-muted small mb-0">{{ strip_tags(html_entity_decode($sarana->deskripsi ?: 'Fasilitas yang mendukung kegiatan akademik dan riset mahasiswa.')) }}</p>
+              <h4 class="fasilitas-title">{{ $sarana->nama }}</h4>
+              <p class="fasilitas-desc">{{ strip_tags(html_entity_decode($sarana->deskripsi ?: 'Fasilitas yang mendukung kegiatan akademik dan riset mahasiswa.')) }}</p>
             </div>
           </div>
         @endforeach
@@ -1414,192 +738,16 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     7. AKADEMIK, PENELITIAN & PENGABDIAN
-═══════════════════════════════════════════════ -->
-<section class="section-bg-white">
-  <div class="container">
-    <div class="row g-5 align-items-center">
-      <div class="col-lg-6" data-aos="fade-right">
-        <div class="section-label">Tri Dharma Perguruan Tinggi</div>
-        <h2 class="section-title">Inovasi Riset & <em>Pengabdian Masyarakat</em></h2>
-        <div class="divider-line"></div>
-        <p class="section-desc mb-4" style="text-align: justify;">
-          Dosen dan mahasiswa FIKES UIS aktif menghasilkan riset terapan yang dipublikasikan pada jurnal ilmiah bereputasi, serta melaksanakan program pengabdian masyarakat untuk memecahkan persoalan sanitasi dan keselamatan kerja.
-        </p>
-
-        <div class="row g-3">
-          @forelse($triDharmas as $td)
-            <div class="col-sm-6">
-              <div class="p-3 rounded-3 bg-light border h-100">
-                <div class="fw-bold text-dark mb-1">
-                  <i class="bi {{ $td->icon }} me-2" style="color: {{ $td->warna ?: 'var(--fikes-purple)' }} !important;"></i>{{ $td->judul }}
-                </div>
-                @if($td->deskripsi)
-                  <p class="text-muted small mb-0">{{ strip_tags(html_entity_decode($td->deskripsi)) }}</p>
-                @endif
-              </div>
-            </div>
-          @empty
-            <div class="col-sm-6">
-              <div class="p-3 rounded-3 bg-light border">
-                <div class="fw-bold text-dark mb-1"><i class="bi bi-journal-check text-primary me-2" style="color:var(--fikes-purple) !important;"></i>Riset Terapan</div>
-                <p class="text-muted small mb-0">Fokus riset ergonomi industri maritim dan sanitasi pesisir.</p>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="p-3 rounded-3 bg-light border">
-                <div class="fw-bold text-dark mb-1"><i class="bi bi-globe-americas text-warning me-2" style="color:var(--fikes-orange) !important;"></i>Publikasi SINTA</div>
-                <p class="text-muted small mb-0">Publikasi rutin di jurnal nasional terakreditasi dan prosiding.</p>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="p-3 rounded-3 bg-light border">
-                <div class="fw-bold text-dark mb-1"><i class="bi bi-heart-pulse-fill text-danger me-2"></i>Pengmas Berkelanjutan</div>
-                <p class="text-muted small mb-0">Edukasi K3 bagi pekerja UMKM dan pemeriksaan sanitasi warga.</p>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="p-3 rounded-3 bg-light border">
-                <div class="fw-bold text-dark mb-1"><i class="bi bi-briefcase-fill text-success me-2"></i>Kerja Sama Riset</div>
-                <p class="text-muted small mb-0">Kolaborasi penelitian bersama instansi pemerintah & swasta.</p>
-              </div>
-            </div>
-          @endforelse
-        </div>
-      </div>
-
-      <div class="col-lg-6" data-aos="fade-left">
-        <div class="p-4 p-md-5 rounded-4 shadow-sm" style="background: var(--obsidian-dark); color: white;">
-          <h4 class="fw-bold text-white mb-3"><i class="bi bi-lightbulb-fill text-warning me-2"></i>Agenda Ilmiah & Seminar</h4>
-          <p class="text-white-50 small mb-4" style="line-height: 1.7;">
-            FIKES UIS secara berkala menyelenggarakan Konferensi Nasional K3 dan Lingkungan Hidup, mengundang narasumber pakar dari Kemnaker, Kementerian Kesehatan, dan praktisi industri global.
-          </p>
-          <div class="d-flex flex-wrap gap-2 cta-btn-group">
-            <a href="{{ route('homepage.news') }}" class="btn-primary-hero btn-mobile-full" style="font-size: 13px; padding: 10px 20px;">
-              <i class="bi bi-newspaper"></i> Lihat Publikasi & Berita
-            </a>
-            <a href="{{ route('homepage.galeri') }}" class="btn-outline-hero btn-mobile-full" style="font-size: 13px; padding: 10px 20px;">
-              <i class="bi bi-images"></i> Galeri Kegiatan
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════
-     8. DOSEN & TENAGA PENGAJAR
-═══════════════════════════════════════════════ -->
-<section class="section-bg-sand" id="dosen">
-  <div class="container">
-    <div class="text-center mb-5" data-aos="fade-up">
-      <div class="section-label mx-auto">Tenaga Pendidik</div>
-      <h2 class="section-title">Dosen & <em>Pakar Akademik</em> FIKES UIS</h2>
-      <div class="divider-line centered"></div>
-      <p class="section-desc mx-auto">
-        Dibimbing langsung oleh para pakar berpengalaman yang memiliki sertifikasi keahlian nasional dan publikasi ilmiah terkemuka.
-      </p>
-    </div>
-
-    <div class="row g-4 justify-content-center">
-      @forelse($tenagaPendidiks as $tp)
-        @php
-          $prodiUrl = $tp->link ?: ($tp->layanan_id ? route('homepage.dosen', ['prodi' => $tp->layanan_id]) : route('homepage.dosen'));
-          $btnText  = $tp->tombol_teks ?: ($tp->layanan ? 'Lihat Dosen ' . Str::limit($tp->layanan->judul, 20) : 'Lihat Dosen');
-        @endphp
-        <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
-          <div class="dosen-card d-flex flex-column justify-content-between">
-            <div>
-              <div class="dosen-avatar">
-                @if($tp->foto)
-                  <img src="{{ asset('storage/' . $tp->foto) }}" alt="{{ $tp->nama }}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
-                @else
-                  <i class="bi {{ $tp->icon ?: 'bi-person-fill' }}"></i>
-                @endif
-              </div>
-              <div class="dosen-name">{{ $tp->nama }}</div>
-              @if($tp->bidang)
-                <div class="dosen-bidang">{{ $tp->bidang }}</div>
-              @endif
-              @if($tp->keterangan)
-                <p class="dosen-pub mb-3">{{ strip_tags(html_entity_decode($tp->keterangan)) }}</p>
-              @endif
-            </div>
-            <div class="pt-3 mt-auto border-top">
-              <a href="{{ $prodiUrl }}" class="btn btn-sm w-100 rounded-pill fw-bold text-decoration-none d-inline-flex align-items-center justify-content-center gap-1"
-                 style="background: var(--fikes-purple-light, #f3ebf8); color: var(--fikes-purple, #823ca2); border: 1.5px solid var(--border-purple, #e1c9ee); padding: 8px 16px; font-size: 13px; transition: all 0.25s ease;"
-                 onmouseover="this.style.background='var(--fikes-purple, #823ca2)'; this.style.color='#ffffff';"
-                 onmouseout="this.style.background='var(--fikes-purple-light, #f3ebf8)'; this.style.color='var(--fikes-purple, #823ca2)';">
-                <i class="bi bi-people-fill"></i> {{ $btnText }}
-              </a>
-            </div>
-          </div>
-        </div>
-      @empty
-        <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="dosen-card d-flex flex-column justify-content-between">
-            <div>
-              <div class="dosen-avatar"><i class="bi bi-person-fill"></i></div>
-              <div class="dosen-name">Dosen Bidang K3</div>
-              <div class="dosen-bidang">Spesialis Ergonomi & SMK3</div>
-              <p class="dosen-pub mb-3">Ahli K3 Umum & Auditor ISO 45001 Kemnaker RI.</p>
-            </div>
-            <div class="pt-3 mt-auto border-top">
-              <a href="{{ route('homepage.dosen') }}" class="btn btn-sm btn-outline-primary w-100 rounded-pill fw-bold" style="font-size: 13px;">
-                <i class="bi bi-people-fill me-1"></i> Lihat Dosen K3
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200">
-          <div class="dosen-card d-flex flex-column justify-content-between">
-            <div>
-              <div class="dosen-avatar"><i class="bi bi-person-fill"></i></div>
-              <div class="dosen-name">Dosen Higiene Industri</div>
-              <div class="dosen-bidang">Toksikologi & Bahaya Fisik</div>
-              <p class="dosen-pub mb-3">Pengalaman 15+ tahun di industri manufaktur & galangan.</p>
-            </div>
-            <div class="pt-3 mt-auto border-top">
-              <a href="{{ route('homepage.dosen') }}" class="btn btn-sm btn-outline-primary w-100 rounded-pill fw-bold" style="font-size: 13px;">
-                <i class="bi bi-people-fill me-1"></i> Lihat Dosen Kesmas
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="300">
-          <div class="dosen-card d-flex flex-column justify-content-between">
-            <div>
-              <div class="dosen-avatar"><i class="bi bi-person-fill"></i></div>
-              <div class="dosen-name">Dosen Kesehatan Lingkungan</div>
-              <div class="dosen-bidang">AMDAL & Pengolahan Limbah B3</div>
-              <p class="dosen-pub mb-3">Konsultan AMDAL bersertifikasi & Penilai KLHK.</p>
-            </div>
-            <div class="pt-3 mt-auto border-top">
-              <a href="{{ route('homepage.dosen') }}" class="btn btn-sm btn-outline-primary w-100 rounded-pill fw-bold" style="font-size: 13px;">
-                <i class="bi bi-people-fill me-1"></i> Lihat Dosen Kesling
-              </a>
-            </div>
-          </div>
-        </div>
-      @endforelse
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════
-     9. PRESTASI MAHASISWA & STUDENT LIFE
+     8. PRESTASI MAHASISWA & STUDENT LIFE
 ═══════════════════════════════════════════════ -->
 <section class="section-bg-white" id="prestasi">
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label mx-auto">Kebanggaan Kampus</div>
-      <h2 class="section-title">Prestasi Gemilang <em>Mahasiswa FIKES</em></h2>
+      <h2 class="section-title">Prestasi Gemilang <em>Mahasiswa UIS</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Bukti dedikasi, keunggulan riset, dan daya saing mahasiswa Fakultas Ilmu Kesehatan di berbagai kompetisi ilmiah dan kejuaraan.
+        Bukti dedikasi, keunggulan riset, dan daya saing mahasiswa Universitas Ibnu Sina di berbagai kompetisi ilmiah dan kejuaraan.
       </p>
     </div>
 
@@ -1610,7 +758,7 @@
             $tingkatBadge = match($prestasi->tingkat) {
                 'Internasional' => 'bg-danger text-white',
                 'Nasional'      => 'bg-success text-white',
-                'Provinsi / Wilayah' => 'bg-primary text-white',
+                'Provinsi / Wilayah' => 'bg-warning text-dark',
                 default         => 'bg-secondary text-white',
             };
           @endphp
@@ -1620,9 +768,9 @@
                 @if(!empty($prestasi->foto))
                   <img src="{{ asset('storage/' . $prestasi->foto) }}" alt="{{ $prestasi->judul_prestasi }}" class="prestasi-img">
                 @else
-                  <div class="d-flex align-items-center justify-content-center h-100 text-white flex-column gap-2" style="background: linear-gradient(135deg, #823ca2 0%, #4a1563 100%);">
-                    <i class="bi bi-trophy-fill" style="font-size: 44px; color: #ffd166;"></i>
-                    <span class="small fw-semibold text-white-50">FIKES UIS Achievement</span>
+                  <div class="d-flex align-items-center justify-content-center h-100 text-white flex-column gap-2" style="background: #046B26;">
+                    <i class="bi bi-trophy-fill" style="font-size: 44px; color: #FED802;"></i>
+                    <span class="small fw-semibold text-white-50">Universitas Ibnu Sina Achievement</span>
                   </div>
                 @endif
                 <span class="prestasi-tingkat-badge badge {{ $tingkatBadge }}">
@@ -1644,7 +792,7 @@
                   </h4>
 
                   <div class="d-flex align-items-center gap-2 mb-3 mt-3">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white flex-shrink-0" style="width: 32px; height: 32px; background: #823ca2; font-size: 13px;">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white flex-shrink-0" style="width: 32px; height: 32px; background: #046B26; font-size: 13px;">
                       <i class="bi bi-person-fill"></i>
                     </div>
                     <div>
@@ -1657,7 +805,7 @@
 
                   @if(!empty($prestasi->penyelenggara) || !empty($prestasi->tahun))
                     <div class="d-flex align-items-center justify-content-between text-muted small py-2 px-3 rounded-3 mb-3" style="background: #f8f9fa; font-size: 11.5px;">
-                      <span class="text-truncate me-2"><i class="bi bi-building me-1 text-primary"></i>{{ $prestasi->penyelenggara ?? 'Penyelenggara Nasional' }}</span>
+                      <span class="text-truncate me-2"><i class="bi bi-building me-1 text-warning"></i>{{ $prestasi->penyelenggara ?? 'Penyelenggara Nasional' }}</span>
                       <span class="fw-bold text-dark flex-shrink-0">{{ $prestasi->tahun ?? '' }}</span>
                     </div>
                   @endif
@@ -1670,7 +818,7 @@
                 </div>
 
                 <div class="pt-3 border-top mt-3">
-                  <a href="{{ route('homepage.prestasi.detail', $prestasi->slug ?? $prestasi->id) }}" class="fw-bold text-decoration-none d-flex align-items-center justify-content-between" style="color: var(--fikes-purple); font-size: 13px;">
+                  <a href="{{ route('homepage.prestasi.detail', $prestasi->slug ?? $prestasi->id) }}" class="fw-bold text-decoration-none d-flex align-items-center justify-content-between" style="color: var(--uis-purple); font-size: 13px;">
                     <span>Lihat Selengkapnya</span>
                     <i class="bi bi-arrow-right"></i>
                   </a>
@@ -1683,7 +831,7 @@
 
       {{-- Tombol Lihat Semua Prestasi --}}
       <div class="text-center mt-2 mb-5">
-        <a href="{{ route('homepage.prestasi') }}" class="btn-fikes-pill">
+        <a href="{{ route('homepage.prestasi') }}" class="btn-uis-pill">
           <i class="bi bi-trophy-fill me-1 text-warning"></i> Lihat Semua Prestasi Mahasiswa
         </a>
       </div>
@@ -1694,65 +842,180 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     9.3 ORGANISASI & KEGIATAN MAHASISWA (ORMAWA)
+     9.3 ORGANISASI & KEGIATAN MAHASISWA (ORMAWA DECK SHOWCASE)
 ═══════════════════════════════════════════════ -->
-<section class="section-bg-white py-5" id="organisasi-mahasiswa" style="border-top: 1px solid var(--border-light);">
-  <div class="container py-3">
-    <div class="d-flex align-items-end justify-content-between mb-5 flex-wrap gap-3" data-aos="fade-up">
-      <div>
-        <div class="section-label mb-2">Lembaga Kemahasiswaan</div>
-        <h2 class="section-title mb-0">Organisasi & <em>Kegiatan Mahasiswa</em></h2>
-      </div>
-      <a href="{{ route('homepage.organisasi') }}" class="btn-outline-hero" style="color: var(--fikes-purple); border-color: var(--fikes-purple); font-size: 13.5px; padding: 10px 22px;">
-        <i class="bi bi-people-fill me-1"></i> Lihat Semua Organisasi
-      </a>
-    </div>
+<section class="ormawa-deck-section" id="organisasi-mahasiswa">
+  <div class="container position-relative">
+    <div class="row align-items-center g-5">
+      
+      <!-- LEFT COLUMN: Editorial & Controls -->
+      <div class="col-lg-5" data-aos="fade-right">
+        <div class="ormawa-deck-intro">
+          
+          <div class="ormawa-eyebrow-pill mb-3">
+            <span class="eyebrow-dot"></span>
+            <span class="eyebrow-text">{{ $organisasiSetting?->badge_teks ?: 'LEMBAGA KEMAHASISWAAN · UIS' }}</span>
+          </div>
 
-    @if(isset($organisasis) && $organisasis->count() > 0)
-      <div class="row g-4">
-        @foreach($organisasis->take(4) as $index => $ormawa)
-          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
-            <div class="p-4 rounded-4 bg-white border text-center h-100 shadow-sm d-flex flex-column justify-content-between" style="transition: all 0.3s ease; border-color: #ede4f2 !important;">
-              <div>
-                <div style="width: 70px; height: 70px; border-radius: 50%; background: #ffffff; border: 2px solid #ecd8f5; box-shadow: 0 4px 12px rgba(0,0,0,0.06); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 14px; padding: 5px;">
-                  @if(!empty($ormawa->logo))
-                    <img src="{{ asset('storage/' . $ormawa->logo) }}" alt="{{ $ormawa->nama_organisasi }}" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 50%;">
-                  @else
-                    <span class="fw-bold" style="color: #823ca2; font-size: 16px;">{{ strtoupper(substr($ormawa->singkatan ?: $ormawa->nama_organisasi, 0, 2)) }}</span>
-                  @endif
-                </div>
+          <h2 class="ormawa-deck-headline mb-3">
+            @if(!empty($organisasiSetting?->judul))
+              @php
+                $rawJudul = $organisasiSetting->judul;
+                $highlight = $organisasiSetting->judul_highlight;
+                if (!empty($highlight) && str_contains($rawJudul, $highlight)) {
+                    $escapedHighlight = e($highlight);
+                    $renderedJudul = str_replace($highlight, '<span class="gradient-text">' . $escapedHighlight . '</span>', e($rawJudul));
+                } else {
+                    $renderedJudul = e($rawJudul);
+                }
+              @endphp
+              {!! nl2br($renderedJudul) !!}
+            @else
+              Kiprah & <span class="gradient-text">Kepemimpinan</span><br>
+              Mahasiswa UIS
+            @endif
+          </h2>
 
-                <div class="mb-2">
-                  <span class="badge" style="background: rgba(130, 60, 162, 0.1); color: #823ca2; font-size: 11px; font-weight: 700; border-radius: 20px; padding: 4px 10px;">
-                    {{ $ormawa->kategori }}
-                  </span>
-                </div>
+          <p class="ormawa-deck-lead mb-4">
+            {{ strip_tags($organisasiSetting?->deskripsi ?: 'Eksplorasi ragam organisasi kemahasiswaan, himpunan program studi, dan unit kegiatan minat bakat di Universitas Ibnu Sina Batam. Ruang kolaborasi untuk mengasah karakter, kepemimpinan, dan inovasi civitas kampus.') }}
+          </p>
 
-                <h5 class="fw-bold text-dark mb-1" style="font-size: 16px; line-height: 1.35;">
-                  <a href="{{ route('homepage.organisasi.detail', $ormawa->slug) }}" class="text-dark text-decoration-none">
-                    {{ $ormawa->singkatan ?: $ormawa->nama_organisasi }}
-                  </a>
-                </h5>
-                @if(!empty($ormawa->singkatan) && $ormawa->singkatan !== $ormawa->nama_organisasi)
-                  <div class="text-muted small mb-2 text-truncate" style="font-size: 12px;">{{ $ormawa->nama_organisasi }}</div>
-                @endif
+          <div class="d-flex align-items-center gap-3 flex-wrap mb-4">
+            <a href="{{ !empty($organisasiSetting?->tombol_url) ? $organisasiSetting->tombol_url : route('homepage.organisasi') }}" class="btn-deck-main">
+              <span>{{ $organisasiSetting?->tombol_teks ?: 'Jelajahi Semua Organisasi' }}</span>
+              <span class="btn-deck-icon"><i class="bi bi-arrow-right"></i></span>
+            </a>
 
-                <p class="text-muted small mb-3" style="font-size: 12.5px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
-                  {{ strip_tags($ormawa->deskripsi ?: ($ormawa->visi ?: 'Lembaga kemahasiswaan aktif di lingkungan Fakultas Ilmu Kesehatan Universitas Ibnu Sina.')) }}
-                </p>
-              </div>
-
-              <div class="pt-3 border-top mt-auto d-flex align-items-center justify-content-between">
-                <small class="text-muted"><i class="bi bi-person-fill text-primary me-1"></i>{{ Str::limit($ormawa->nama_ketua ?: 'Ketua Ormawa', 14) }}</small>
-                <a href="{{ route('homepage.organisasi.detail', $ormawa->slug) }}" class="fw-bold text-decoration-none" style="color: var(--fikes-purple); font-size: 12.5px;">
-                  Detail <i class="bi bi-arrow-right"></i>
-                </a>
-              </div>
+            <!-- Deck Navigation Buttons -->
+            <div class="deck-arrows-wrap">
+              <button type="button" class="btn-deck-arrow" id="deckPrevBtn" aria-label="Organisasi Sebelumnya" title="Sebelumnya">
+                <i class="bi bi-arrow-up"></i>
+              </button>
+              <button type="button" class="btn-deck-arrow" id="deckNextBtn" aria-label="Organisasi Selanjutnya" title="Selanjutnya">
+                <i class="bi bi-arrow-down"></i>
+              </button>
             </div>
           </div>
-        @endforeach
+
+          <!-- Micro Hint -->
+          <div class="deck-scroll-hint d-flex align-items-center gap-2 text-muted">
+            <span class="hint-wheel-icon"><i class="bi bi-mouse"></i></span>
+            <span class="hint-text">{{ $organisasiSetting?->hint_teks ?: 'Scroll mouse atau geser kartu untuk menggulir ormawa' }}</span>
+          </div>
+
+        </div>
       </div>
-    @endif
+
+      <!-- RIGHT COLUMN: 3D Cascading Stacked Cards + Vertical Tracker -->
+      <div class="col-lg-7" data-aos="fade-left">
+        <div class="ormawa-showcase-stage" id="ormawaStageArea">
+          
+          <!-- Stack Container -->
+          <div class="ormawa-deck-viewport">
+            <div class="ormawa-deck-stack" id="ormawaDeckStack">
+              @if(isset($organisasis) && $organisasis->count() > 0)
+                @php
+                  $themes = [
+                    'radial-gradient(circle at 85% 15%, rgba(254, 216, 2, 0.32) 0%, transparent 45%), linear-gradient(155deg, #022c0f 0%, #046B26 48%, #011d0a 100%)', // Emerald Gold (UIS)
+                    'radial-gradient(circle at 85% 15%, rgba(56, 189, 248, 0.35) 0%, transparent 45%), linear-gradient(155deg, #0a192f 0%, #1e3a5f 48%, #050d1a 100%)', // Deep Navy / Blue
+                    'radial-gradient(circle at 85% 15%, rgba(216, 180, 254, 0.35) 0%, transparent 45%), linear-gradient(155deg, #2e1065 0%, #6b21a8 48%, #170536 100%)', // Royal Purple
+                    'radial-gradient(circle at 85% 15%, rgba(251, 191, 36, 0.35) 0%, transparent 45%), linear-gradient(155deg, #451a03 0%, #b45309 48%, #1c0701 100%)', // Amber Gold
+                    'radial-gradient(circle at 85% 15%, rgba(45, 212, 191, 0.35) 0%, transparent 45%), linear-gradient(155deg, #042f2e 0%, #0f766e 48%, #021a19 100%)', // Teal Lagoon
+                  ];
+                @endphp
+                @foreach($organisasis as $index => $ormawa)
+                  @php
+                    $singkat = $ormawa->singkatan ?: $ormawa->nama_organisasi;
+                    $cardTheme = $themes[$index % count($themes)];
+                    $initial = strtoupper(substr($ormawa->singkatan ?: $ormawa->nama_organisasi, 0, 2));
+                  @endphp
+                  <div class="ormawa-deck-card" 
+                       data-index="{{ $index }}"
+                       data-label="{{ $singkat }}"
+                       data-num="{{ sprintf('%02d', $index + 1) }}">
+                    
+                    <!-- Artistic Card Background (Logo image as full-bleed background) -->
+                    <div class="card-artistic-bg" style="background: {{ $cardTheme }};">
+                      @if(!empty($ormawa->logo))
+                        <img src="{{ asset('storage/' . $ormawa->logo) }}" alt="{{ $ormawa->nama_organisasi }}" class="card-bg-logo-img">
+                        <div class="card-bg-logo-overlay"></div>
+                      @else
+                        <div class="card-mesh-glow"></div>
+                        <div class="card-mesh-pattern"></div>
+                        <div class="card-organic-wave"></div>
+                        <div class="card-bg-watermark">{{ $initial }}</div>
+                      @endif
+                    </div>
+
+                    <!-- Card Header (Top Bar) -->
+                    <div class="card-top-bar">
+                      <div class="card-counter-badge">
+                        <span>{{ sprintf('%02d', $index + 1) }}</span>
+                        <span class="mx-1">/</span>
+                        <span>{{ sprintf('%02d', $organisasis->count()) }}</span>
+                      </div>
+                      <div class="card-cat-badge">
+                        {{ strtoupper($ormawa->kategori) }}
+                      </div>
+                    </div>
+
+                    <!-- Card Body & Footer (Bottom) -->
+                    <div class="card-content-bottom">
+                      <div class="card-kicker">CHAPTER {{ sprintf('%02d', $index + 1) }} · ORMAWA UIS</div>
+                      <h3 class="card-title-text">{{ $singkat }}</h3>
+                      <div class="card-subtitle-text">
+                        {{ $ormawa->nama_organisasi }}
+                        @if(!empty($ormawa->periode))
+                          · Periode {{ $ormawa->periode }}
+                        @endif
+                      </div>
+                      <p class="card-desc-snippet">
+                        {{ Str::limit(strip_tags($ormawa->deskripsi ?: ($ormawa->visi ?: 'Lembaga kemahasiswaan aktif di lingkungan Universitas Ibnu Sina.')), 105) }}
+                      </p>
+
+                      <div class="card-meta-row">
+                        <div class="card-meta-ketua">
+                          <i class="bi bi-person-fill"></i>
+                          <span>Ketua: {{ $ormawa->nama_ketua ?: 'Pengurus Ormawa' }}</span>
+                        </div>
+                        <a href="{{ route('homepage.organisasi.detail', $ormawa->slug) }}" class="card-link-action">
+                          <span>Profil Lengkap</span>
+                          <i class="bi bi-arrow-up-right"></i>
+                        </a>
+                      </div>
+                    </div>
+
+                  </div>
+                @endforeach
+              @endif
+            </div>
+          </div>
+
+          <!-- Vertical Tracker / Progress Timeline (Right side of stack) -->
+          @if(isset($organisasis) && $organisasis->count() > 0)
+            <div class="ormawa-deck-tracker" id="ormawaTracker">
+              <div class="tracker-counter-box">
+                <span class="tracker-current-num" id="deckTrackerNum">01</span>
+                <span class="tracker-slash">/</span>
+                <span class="tracker-total-num">{{ sprintf('%02d', $organisasis->count()) }}</span>
+              </div>
+              
+              <div class="tracker-rail-container" id="deckTrackerRail" title="Klik untuk berpindah">
+                <div class="tracker-rail-track">
+                  <div class="tracker-rail-thumb" id="deckTrackerThumb"></div>
+                </div>
+              </div>
+
+              <div class="tracker-active-label" id="deckTrackerLabel">
+                {{ $organisasis->first()->singkatan ?: $organisasis->first()->nama_organisasi }}
+              </div>
+            </div>
+          @endif
+
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -1764,9 +1027,9 @@
     <div class="d-flex align-items-end justify-content-between mb-5 flex-wrap gap-3" data-aos="fade-up">
       <div>
         <div class="section-label mb-2">Dokumentasi Visual</div>
-        <h2 class="section-title mb-0">Galeri & <em>Kegiatan FIKES UIS</em></h2>
+        <h2 class="section-title mb-0">Galeri & <em>Kegiatan Universitas Ibnu Sina</em></h2>
       </div>
-      <a href="{{ route('homepage.galeri') }}" class="btn-outline-hero" style="color: var(--fikes-purple); border-color: var(--fikes-purple); font-size: 13.5px; padding: 10px 22px;">
+      <a href="{{ route('homepage.galeri.universitas') }}" class="btn-outline-hero" style="color: var(--uis-purple); border-color: var(--uis-purple); font-size: 13.5px; padding: 10px 22px;">
         <i class="bi bi-images me-1"></i> Lihat Semua Galeri
       </a>
     </div>
@@ -1812,10 +1075,10 @@
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label mx-auto">Kisah Sukses Alumni</div>
-      <h2 class="section-title">Jejak Karir <em>Alumni FIKES UIS</em></h2>
+      <h2 class="section-title">Jejak Karir <em>Alumni Universitas Ibnu Sina</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Lulusan FIKES UIS telah berkarier di berbagai rumah sakit ternama, industri farmasi, laboratorium klinis, BUMN, dan institusi kesehatan terkemuka.
+        Lulusan Universitas Ibnu Sina telah berkarier di berbagai perusahaan multinasional, industri manufaktur, sektor logistik maritim, perbankan, instansi BUMN, pemerintahan, serta sukses menjadi wirausahawan mandiri.
       </p>
     </div>
 
@@ -1837,22 +1100,22 @@
                 <div class="testi-card h-100 shadow-sm" style="background: #ffffff; border: 1.5px solid #f0e6f5; border-radius: 20px; padding: 28px 24px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s ease;">
                   <div>
                     <div class="d-flex align-items-center justify-content-between mb-3">
-                      <div class="testi-stars m-0" style="color: #ff9c00; font-size: 15px; display: flex; gap: 3px;">
+                      <div class="testi-stars m-0" style="color: #FED802; font-size: 15px; display: flex; gap: 3px;">
                         @for($s = 1; $s <= 5; $s++)
                           <i class="bi bi-star{{ $s <= $testi->bintang ? '-fill' : '' }}"></i>
                         @endfor
                       </div>
-                      <span class="badge" style="background: #f5edf8; color: #823ca2; font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 8px;">
+                      <span class="badge" style="background: #f5edf8; color: #046B26; font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 8px;">
                         {{ $testi->kategori ?? 'Alumni' }}
                       </span>
                     </div>
                     <p class="testi-text mb-4" style="font-size: 14px; line-height: 1.6; color: #333333; font-style: italic;">"{{ strip_tags(html_entity_decode($testi->pesan ?? '')) }}"</p>
                   </div>
                   <div class="testi-author pt-3 border-top d-flex align-items-center gap-3" style="border-color: #f7effa !important;">
-                    <div class="testi-avatar flex-shrink-0" style="width: 44px; height: 44px; border-radius: 50%; background: #823ca2; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">{{ $initials ?: 'AL' }}</div>
+                    <div class="testi-avatar flex-shrink-0" style="width: 44px; height: 44px; border-radius: 50%; background: #046B26; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">{{ $initials ?: 'AL' }}</div>
                     <div>
                       <div class="testi-name text-dark fw-bold" style="font-size: 14px; line-height: 1.3;">{{ $testi->nama }}</div>
-                      <div class="testi-role text-muted small" style="font-size: 12px;">{{ $testi->pekerjaan ?? 'Alumni FIKES UIS' }}</div>
+                      <div class="testi-role text-muted small" style="font-size: 12px;">{{ $testi->pekerjaan ?? 'Alumni Universitas Ibnu Sina' }}</div>
                     </div>
                   </div>
                 </div>
@@ -1866,17 +1129,296 @@
       </div>
 
       <!-- Navigation Arrows -->
-      <div class="swiper-button-prev alumni-prev" style="color: #823ca2;"></div>
-      <div class="swiper-button-next alumni-next" style="color: #823ca2;"></div>
+      <div class="swiper-button-prev alumni-prev" style="color: #046B26;"></div>
+      <div class="swiper-button-next alumni-next" style="color: #046B26;"></div>
     </div>
 
     <div class="text-center mt-3" data-aos="fade-up">
-      <a href="{{ route('homepage.testimoni') }}" class="btn-outline-hero px-4 py-2" style="color: var(--fikes-purple); border-color: var(--fikes-purple); border-radius: 25px; font-weight: 600;">
+      <a href="{{ route('homepage.testimoni') }}" class="btn-outline-hero px-4 py-2" style="color: var(--uis-purple); border-color: var(--uis-purple); border-radius: 25px; font-weight: 600;">
         <i class="bi bi-chat-heart me-1"></i> Lihat Semua Ulasan Alumni
       </a>
     </div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════════════
+     LAYANAN TERKAIT (MIRROR MOTION / 3D U-CURVE CAROUSEL)
+═══════════════════════════════════════════════ -->
+@if(isset($layananTerkaits) && $layananTerkaits->count() > 0)
+<section class="layanan-terkait-section" id="layanan-terkait">
+  {{-- Header inside Container --}}
+  <div class="container position-relative">
+    <div class="mirror-hall-badge" data-aos="fade-down">
+      <span><i class="bi bi-grid-3x3-gap-fill me-1"></i> PORTAL DIGITAL & SISTEM INFORMASI</span>
+    </div>
+    
+    <div class="text-center mb-4" data-aos="fade-up">
+      <h2 class="layanan-terkait-title">
+        {{ $layananTerkaitSetting->judul_seksi ?? 'LAYANAN TERKAIT' }}
+      </h2>
+      @if(!empty($layananTerkaitSetting?->subjudul_seksi))
+        <p class="layanan-terkait-desc">
+          “{{ $layananTerkaitSetting->subjudul_seksi }}”
+        </p>
+      @endif
+    </div>
+  </div>
+
+<style>
+  .uis-cylinder-viewport {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+    position: relative;
+    perspective: 1200px;
+    perspective-origin: 50% 50%;
+    padding: 20px 0 40px 0;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  }
+  .uis-cylinder-viewport:active {
+    cursor: grabbing;
+  }
+  .uis-cylinder-track {
+    position: relative;
+    width: 100%;
+    height: 335px;
+    transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .uis-cylinder-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 230px;
+    height: 310px;
+    transform-style: preserve-3d;
+    transform-origin: center bottom;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    will-change: transform, opacity;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  @media (max-width: 768px) {
+    .uis-cylinder-card {
+      width: 165px;
+      height: 235px;
+    }
+    .uis-cylinder-track {
+      height: 255px;
+    }
+    .uis-cylinder-viewport {
+      padding-bottom: 25px;
+    }
+  }
+  .uis-card-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    transition: color 0.3s ease;
+  }
+  .uis-cylinder-card.is-active .uis-card-label {
+    color: #fed802;
+    text-shadow: 0 0 10px rgba(254, 216, 2, 0.6);
+  }
+  .uis-card-body {
+    width: 100%;
+    height: 270px;
+    background: linear-gradient(165deg, rgba(6, 94, 33, 0.95) 0%, rgba(3, 56, 20, 0.96) 60%, rgba(2, 32, 11, 0.98) 100%);
+    border: 1.5px solid rgba(254, 216, 2, 0.35);
+    border-radius: 16px;
+    padding: 10px;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    box-sizing: border-box;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  @media (max-width: 768px) {
+    .uis-card-body {
+      height: 200px;
+      padding: 7px;
+    }
+  }
+  .uis-cylinder-card.is-active .uis-card-body,
+  .uis-cylinder-card:hover .uis-card-body {
+    border-color: rgba(254, 216, 2, 0.9);
+    box-shadow: 0 0 32px rgba(254, 216, 2, 0.5), 0 18px 40px rgba(0, 0, 0, 0.75);
+  }
+  .uis-card-media {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    box-sizing: border-box;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04), 0 4px 14px rgba(0, 0, 0, 0.14);
+    overflow: hidden;
+    position: relative;
+  }
+  .uis-card-logo {
+    width: 90%;
+    height: 90%;
+    max-width: 92%;
+    max-height: 195px;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    transition: transform 0.35s ease;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+  }
+  @media (max-width: 768px) {
+    .uis-card-media {
+      padding: 6px;
+    }
+    .uis-card-logo {
+      width: 92%;
+      height: 92%;
+      max-height: 145px;
+      max-width: 94%;
+    }
+  }
+  .uis-cylinder-card:hover .uis-card-logo {
+    transform: scale(1.06);
+  }
+</style>
+
+  {{-- Full Width Continuous 3D Cylinder Arc Stage --}}
+  <div class="uis-cylinder-viewport position-relative" id="uisCylinderViewport">
+    <div class="uis-cylinder-track" id="uisCylinderTrack">
+      @php
+        $totalCount = $layananTerkaits->count();
+        // 4x duplikasi memastikan pita berjalan kontinu tanpa henti (seamless infinite loop)
+        $repeats = 4;
+      @endphp
+      @for($r = 0; $r < $repeats; $r++)
+        @foreach($layananTerkaits as $idx => $item)
+          @php
+            $itemDesc = trim(strip_tags($item->deskripsi ?? 'Akses layanan digital terpadu Universitas Ibnu Sina'));
+            $itemNum = $idx + 1;
+          @endphp
+          <div class="uis-cylinder-card"
+               data-index="{{ sprintf('%02d', $itemNum) }}"
+               data-total="{{ sprintf('%02d', $totalCount) }}"
+               data-name="{{ $item->nama }}"
+               data-desc="{{ $itemDesc }}"
+               data-url="{{ $item->url }}"
+               role="button"
+               tabindex="0"
+               aria-label="Kunjungi Layanan {{ $item->nama }}">
+            
+            <div class="uis-card-label">{{ $item->nama }}</div>
+            <div class="uis-card-body">
+              <div class="uis-card-media">
+                @if($item->logo_url)
+                  <img src="{{ $item->logo_url }}" alt="{{ $item->nama }}" class="uis-card-logo" loading="lazy">
+                @else
+                  <div class="mirror-card-fallback-icon">
+                    <i class="bi {{ $item->icon ?: 'bi-globe' }}"></i>
+                    <span class="mirror-fallback-title">{{ $item->nama }}</span>
+                  </div>
+                @endif
+              </div>
+            </div>
+          </div>
+        @endforeach
+      @endfor
+    </div>
+    {{-- Interactive Water Ripple Canvas on Reflective Floor --}}
+    <canvas id="mirrorWaterCanvas" class="mirror-water-canvas"></canvas>
+  </div>
+
+  {{-- Floor Info & Active Details (Mirror Hall Footer) inside Container --}}
+  <div class="container position-relative">
+    <div class="mirror-hall-floor" data-aos="fade-up" data-aos-delay="200">
+      <div class="mirror-counter-badge" id="mirrorCounter">
+        01 / {{ sprintf('%02d', $layananTerkaits->count()) }}
+      </div>
+      <h3 class="mirror-active-title" id="mirrorActiveTitle">
+        {{ $layananTerkaits->first()->nama ?? 'Layanan Digital' }}
+      </h3>
+      <p class="mirror-active-desc" id="mirrorActiveDesc">
+        {{ trim(strip_tags($layananTerkaits->first()->deskripsi ?? 'Akses layanan digital terpadu Universitas Ibnu Sina')) }}
+      </p>
+      <a href="{{ $layananTerkaits->first()->url ?? '#' }}" target="_blank" rel="noopener noreferrer" class="mirror-active-cta" id="mirrorActiveBtn">
+        <span>Kunjungi Layanan</span>
+        <i class="bi bi-arrow-right-circle-fill"></i>
+      </a>
+    </div>
+  </div>
+</section>
+@endif
+
+<!-- ═══════════════════════════════════════════════
+     MEDIA SOSIAL (IKUTI UIS DI MEDIA SOSIAL)
+═══════════════════════════════════════════════ -->
+@if(isset($socialMedias) && $socialMedias->count() > 0)
+<section class="social-media-section" id="media-sosial">
+  <div class="container">
+    {{-- Header Judul Seksi --}}
+    <h2 class="social-media-title" data-aos="fade-up">
+      {{ $socialMediaSetting->judul_seksi ?? 'IKUTI UIS DI MEDIA SOSIAL' }}
+    </h2>
+
+    {{-- Divider Garis Ikon Share --}}
+    <div class="social-divider-wrap" data-aos="fade-up" data-aos-delay="50">
+      <span class="social-divider-line"></span>
+      <span class="social-divider-icon"><i class="bi bi-share"></i></span>
+      <span class="social-divider-line"></span>
+    </div>
+
+    {{-- Deskripsi Kutipan Ajakan --}}
+    @if(!empty($socialMediaSetting?->subjudul_seksi))
+      <p class="social-media-quote" data-aos="fade-up" data-aos-delay="100">
+        {{ $socialMediaSetting->subjudul_seksi }}
+      </p>
+    @endif
+
+    {{-- Tombol Baris Ikon Media Sosial --}}
+    <div class="social-media-grid" data-aos="fade-up" data-aos-delay="150">
+      @foreach($socialMedias as $sm)
+        <a href="{{ $sm->url }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="social-media-btn"
+           title="{{ $sm->nama }}"
+           aria-label="{{ $sm->nama }}">
+          @if($sm->logo_url)
+            <img src="{{ $sm->logo_url }}" alt="{{ $sm->nama }}" class="social-media-img-logo">
+          @else
+            <i class="bi {{ $sm->icon ?: 'bi-globe' }} social-media-icon-fallback"></i>
+          @endif
+        </a>
+      @endforeach
+    </div>
+  </div>
+</section>
+@endif
 
 <!-- ═══════════════════════════════════════════════
      11. BERITA, PENGUMUMAN & AGENDA (LAYOUT BARU)
@@ -1890,8 +1432,8 @@
         {{-- Header Berita + Search Bar --}}
         <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-3">
           <div class="d-flex align-items-center gap-2">
-            <i class="bi bi-newspaper fs-2" style="color: var(--fikes-purple, #823ca2);"></i>
-            <h2 class="section-heading-fikes mb-0">Berita</h2>
+            <i class="bi bi-newspaper fs-2" style="color: var(--uis-purple, #046B26);"></i>
+            <h2 class="section-heading-uis mb-0">Berita</h2>
           </div>
           <form action="{{ route('homepage') }}#berita" method="GET" class="news-search-pill" id="homepageNewsSearchForm">
             <input type="text"
@@ -1921,7 +1463,7 @@
 
         {{-- Tombol Lihat Berita Lainnya --}}
         <div class="text-center mt-3 pt-2">
-          <a href="{{ route('homepage.news') }}{{ !empty($search) ? '?q=' . urlencode($search) : '' }}" class="btn-fikes-pill" id="btnSeeAllNews">
+          <a href="{{ route('homepage.news') }}{{ !empty($search) ? '?q=' . urlencode($search) : '' }}" class="btn-uis-pill" id="btnSeeAllNews">
             Lihat Berita Lainnya
           </a>
         </div>
@@ -1933,8 +1475,8 @@
         {{-- SECTION PENGUMUMAN --}}
         <div class="mb-4">
           <div class="d-flex align-items-center gap-2 mb-3">
-            <i class="bi bi-megaphone-fill fs-3" style="color: var(--fikes-purple, #823ca2);"></i>
-            <h3 class="section-heading-fikes mb-0" style="font-size: 24px;">Pengumuman</h3>
+            <i class="bi bi-megaphone-fill fs-3" style="color: var(--uis-purple, #046B26);"></i>
+            <h3 class="section-heading-uis mb-0" style="font-size: 24px;">Pengumuman</h3>
           </div>
 
           <div class="announcement-list">
@@ -1962,8 +1504,8 @@
         {{-- SECTION AGENDA --}}
         <div class="mt-4 pt-3 border-top">
           <div class="d-flex align-items-center gap-2 mb-3">
-            <i class="bi bi-calendar4-week fs-3" style="color: var(--fikes-purple, #823ca2);"></i>
-            <h3 class="section-heading-fikes mb-0" style="font-size: 24px;">Agenda</h3>
+            <i class="bi bi-calendar4-week fs-3" style="color: var(--uis-purple, #046B26);"></i>
+            <h3 class="section-heading-uis mb-0" style="font-size: 24px;">Agenda</h3>
           </div>
 
           <div class="agenda-list">
@@ -2003,68 +1545,6 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     12. PMB BANNER (PENERIMAAN MAHASISWA BARU)
-═══════════════════════════════════════════════ -->
-@if(!isset($pmbSetting) || $pmbSetting->is_active)
-<section class="section-bg-sand" id="pmb">
-  <div class="container" data-aos="fade-up">
-    <div class="pmb-cta-box">
-      <div class="row align-items-center g-4">
-        <div class="col-lg-8">
-          <div class="badge pmb-badge-wrap px-3 py-2 rounded-pill mb-3" style="background: var(--fikes-orange); color: #190a24; font-weight: 800; font-size: 12px; letter-spacing: 1px;">
-            {{ $pmbSetting->badge_text ?? 'PENERIMAAN MAHASISWA BARU (PMB) T.A. 2026/2027' }}
-          </div>
-          <h2 class="text-white fw-bold mb-3" style="font-size: clamp(1.5rem, 3.5vw, 2.1rem); line-height: 1.3;">
-            {{ $pmbSetting->judul ?? 'Daftar Sekarang & Raih Masa Depan Cerah Bersama FIKES UIS!' }}
-          </h2>
-          <p class="text-white mb-4" style="line-height: 1.7; max-width: 620px; opacity: 0.92; font-size: 14.5px;">
-            {{ strip_tags(html_entity_decode($pmbSetting->deskripsi ?? 'Tersedia berbagai jalur seleksi: Jalur Bebas Tes / Prestasi, Jalur Reguler, Jalur KIP-Kuliah, dan Jalur Alih Jenjang Karyawan.')) }}
-          </p>
-          <div class="d-flex flex-wrap gap-3 pmb-btn-group">
-            @php
-              $link1 = $pmbSetting->tombol_link_1 ?? route('homepage.kontak');
-              if (!str_starts_with($link1, 'http') && !str_starts_with($link1, '/')) {
-                  $link1 = '/' . $link1;
-              }
-            @endphp
-            <a href="{{ $link1 }}" target="{{ str_starts_with($link1, 'http') ? '_blank' : '_self' }}" class="btn-primary-hero">
-              <i class="bi bi-pencil-square"></i> {{ $pmbSetting->tombol_text_1 ?? 'Daftar PMB Sekarang' }}
-            </a>
-
-            @php
-              $link2 = $pmbSetting->tombol_link_2 ?? '';
-              if (empty($link2) && !empty($cleanWa)) {
-                  $link2 = "https://wa.me/{$cleanWa}?text=" . urlencode("Halo Admin PMB FIKES UIS, saya ingin konsultasi pendaftaran mahasiswa baru");
-              }
-            @endphp
-            @if(!empty($link2))
-              <a href="{{ $link2 }}" target="_blank" class="btn-pmb-wa">
-                <i class="bi bi-whatsapp"></i> {{ $pmbSetting->tombol_text_2 ?? 'Konsultasi WhatsApp PMB' }}
-              </a>
-            @endif
-          </div>
-        </div>
-
-        <div class="col-lg-4">
-          <div class="p-4 rounded-4" style="background: rgba(0, 0, 0, 0.22); border: 1px solid rgba(255, 255, 255, 0.22); backdrop-filter: blur(8px);">
-            <h5 class="text-white fw-bold mb-3"><i class="bi bi-calendar-event text-warning me-2"></i>Jadwal Gelombang:</h5>
-            <ul class="text-white small list-unstyled mb-0" style="line-height: 2; opacity: 0.95;">
-              @php
-                $waveList = $pmbSetting->waves ?? ['Gelombang 1: Jan - Apr', 'Gelombang 2: Mei - Jul', 'Gelombang 3: Agu - Sep'];
-              @endphp
-              @foreach($waveList as $waveItem)
-                <li><i class="bi bi-check2 text-warning me-1"></i> {{ $waveItem }}</li>
-              @endforeach
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-@endif
-
-<!-- ═══════════════════════════════════════════════
      13. PARTNER & KERJA SAMA (2-ROW INFINITE SLIDER)
 ═══════════════════════════════════════════════ -->
 @if(isset($partners) && $partners->count() > 0)
@@ -2075,7 +1555,7 @@
       <h2 class="section-title">Mitra Kerjasama <em>Industri & Rumah Sakit</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        FIKES UIS bermitra dengan berbagai sektor industri terkemuka dalam penempatan magang klinis, riset, dan rekrutmen lulusan.
+        Universitas Ibnu Sina bermitra dengan berbagai sektor industri terkemuka dalam penempatan magang klinis, riset, dan rekrutmen lulusan.
       </p>
     </div>
   </div>
@@ -2165,7 +1645,7 @@
       <h2 class="section-title">Pertanyaan yang Sering <em>Diajukan</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Jawaban seputar program studi, biaya perkuliahan, fasilitas laboratorium, dan prospek karir di FIKES UIS.
+        Jawaban seputar program studi, biaya perkuliahan, fasilitas laboratorium, dan prospek karir di Universitas Ibnu Sina.
       </p>
     </div>
 
@@ -2177,7 +1657,7 @@
               <div class="accordion-item shadow-sm">
                 <h2 class="accordion-header" id="headingH{{ $faq->id ?? $index }}">
                   <button class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseH{{ $faq->id ?? $index }}" aria-expanded="{{ $index === 0 ? 'true' : 'false' }}">
-                    <i class="bi bi-question-circle-fill me-2" style="color: var(--fikes-purple);"></i>
+                    <i class="bi bi-question-circle-fill me-2" style="color: var(--uis-purple);"></i>
                     {{ strip_tags(html_entity_decode($faq->question ?? $faq->pertanyaan ?? '')) }}
                   </button>
                 </h2>
@@ -2192,7 +1672,7 @@
         </div>
 
         <div class="text-center mt-4">
-          <a href="{{ route('homepage.faq') }}" class="btn-outline-hero" style="color: var(--fikes-purple); border-color: var(--fikes-purple);">
+          <a href="{{ route('homepage.faq') }}" class="btn-outline-hero" style="color: var(--uis-purple); border-color: var(--uis-purple);">
             <i class="bi bi-question-circle"></i> Lihat Semua FAQ & Bantuan
           </a>
         </div>
@@ -2206,6 +1686,94 @@
 @push('scripts')
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    // ── Hero Banner Carousel Auto Slide & Click / Swipe Interaction ───────────
+    const heroCarouselEl = document.getElementById('heroCarousel');
+    if (heroCarouselEl && typeof bootstrap !== 'undefined' && bootstrap.Carousel) {
+      const carouselInstance = bootstrap.Carousel.getOrCreateInstance(heroCarouselEl, {
+        interval: 4500,
+        ride: 'carousel',
+        pause: false,
+        wrap: true,
+        touch: true
+      });
+
+      // Mulai auto slide langsung saat DOM selesai dimuat
+      carouselInstance.cycle();
+
+      // Tombol Navigasi Prev / Next (Manual Click Fallback)
+      const prevBtn = heroCarouselEl.querySelector('.carousel-control-prev');
+      const nextBtn = heroCarouselEl.querySelector('.carousel-control-next');
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          carouselInstance.prev();
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          carouselInstance.next();
+        });
+      }
+
+      // Indikator Titik / Kapsul
+      const indicatorBtns = heroCarouselEl.querySelectorAll('.carousel-indicators [data-bs-slide-to]');
+      indicatorBtns.forEach((btn) => {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetIndex = parseInt(this.getAttribute('data-bs-slide-to'), 10);
+          if (!isNaN(targetIndex)) {
+            carouselInstance.to(targetIndex);
+          }
+        });
+      });
+
+      // Geser / Swipe Banner (Touch & Mouse Drag)
+      let touchStartX = 0;
+      let touchEndX = 0;
+      let mouseStartX = 0;
+      let isMouseDown = false;
+
+      heroCarouselEl.addEventListener('touchstart', function (e) {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+
+      heroCarouselEl.addEventListener('touchend', function (e) {
+        touchEndX = e.changedTouches[0].clientX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) {
+            carouselInstance.next();
+          } else {
+            carouselInstance.prev();
+          }
+        }
+      }, { passive: true });
+
+      heroCarouselEl.addEventListener('mousedown', function (e) {
+        if (e.target.closest('.carousel-control-prev') || e.target.closest('.carousel-control-next') || e.target.closest('.carousel-indicators')) {
+          return;
+        }
+        isMouseDown = true;
+        mouseStartX = e.clientX;
+        heroCarouselEl.classList.add('is-dragging');
+      });
+
+      window.addEventListener('mouseup', function (e) {
+        if (!isMouseDown) return;
+        isMouseDown = false;
+        heroCarouselEl.classList.remove('is-dragging');
+        const diff = mouseStartX - e.clientX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) {
+            carouselInstance.next();
+          } else {
+            carouselInstance.prev();
+          }
+        }
+      });
+    }
+
     if (document.querySelector('.alumniSwiper')) {
       new Swiper('.alumniSwiper', {
         slidesPerView: 1,
@@ -2373,6 +1941,561 @@
         }
       }
     });
+    // ── 3D Stacked Card Deck Showcase (Ormawa & Kegiatan Mahasiswa) ────────
+    const deckStack = document.getElementById('ormawaDeckStack');
+    if (deckStack) {
+      const cards = Array.from(deckStack.querySelectorAll('.ormawa-deck-card'));
+      const totalCards = cards.length;
+
+      if (totalCards > 0) {
+        let activeIdx = 0;
+        let isTransitioning = false;
+        let autoDeckTimer = null;
+
+        const numEl = document.getElementById('deckTrackerNum');
+        const thumbEl = document.getElementById('deckTrackerThumb');
+        const labelEl = document.getElementById('deckTrackerLabel');
+        const railEl = document.getElementById('deckTrackerRail');
+        const prevBtn = document.getElementById('deckPrevBtn');
+        const nextBtn = document.getElementById('deckNextBtn');
+        const stageArea = document.getElementById('ormawaStageArea');
+
+        // Slot tumpukan: 0 = kartu aktif di depan (bawah), 1..3 = kartu di belakang bertingkat ke atas
+        const SLOT_STYLE = [
+          { s: 1.00, y: 135, op: 1.00, br: 1.00, sh: '0 28px 55px -12px rgba(0, 35, 12, 0.50), 0 0 0 1px rgba(255,255,255,0.22) inset' },
+          { s: 0.94, y: 85,  op: 0.95, br: 0.92, sh: '0 20px 40px rgba(0, 0, 0, 0.28)' },
+          { s: 0.88, y: 40,  op: 0.82, br: 0.85, sh: '0 16px 32px rgba(0, 0, 0, 0.22)' },
+          { s: 0.82, y: 0,   op: 0.65, br: 0.75, sh: '0 12px 24px rgba(0, 0, 0, 0.16)' }
+        ];
+
+        // Spring-like easing (crisp organic settling)
+        const TRANSITION_ON = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), filter 0.55s ease, box-shadow 0.55s ease';
+
+        function getDeckPositions() {
+          const w = window.innerWidth;
+          const k = w <= 576 ? 0.75 : (w <= 991 ? 0.85 : 1);
+          return {
+            slotY: SLOT_STYLE.map(st => st.y * k),
+            yHidden: -60 * k,
+            yDrop: 560 * k
+          };
+        }
+
+        function applyState(card, state, pos) {
+          if (state === 'dropped') {
+            card.style.transform = `translate3d(0, ${pos.yDrop}px, 0) scale(1.04)`;
+            card.style.zIndex = '25';
+            card.style.opacity = '0';
+            card.style.pointerEvents = 'none';
+          } else if (state === 'hidden') {
+            card.style.transform = `translate3d(0, ${pos.yHidden}px, 0) scale(0.76)`;
+            card.style.zIndex = '15';
+            card.style.opacity = '0';
+            card.style.pointerEvents = 'none';
+          } else {
+            const st = SLOT_STYLE[state];
+            card.style.transform = `translate3d(0, ${pos.slotY[state]}px, 0) scale(${st.s})`;
+            card.style.zIndex = String(20 - state);
+            card.style.opacity = String(st.op);
+            card.style.filter = `brightness(${st.br})`;
+            card.style.pointerEvents = 'auto';
+            card.style.boxShadow = st.sh;
+          }
+        }
+
+        function renderDeck(targetIdx, smooth = true) {
+          if (targetIdx < 0) targetIdx = totalCards - 1;
+          if (targetIdx >= totalCards) targetIdx = 0;
+          activeIdx = targetIdx;
+
+          const pos = getDeckPositions();
+          const visibleSlots = Math.min(SLOT_STYLE.length, Math.max(1, totalCards - 1));
+
+          cards.forEach((card, idx) => {
+            const diff = ((idx - activeIdx) % totalCards + totalCards) % totalCards;
+            let state;
+            if (diff < visibleSlots) state = diff;
+            else if (totalCards > 1 && diff === totalCards - 1) state = 'dropped';
+            else state = 'hidden';
+
+            const prev = card.dataset.state;
+            clearTimeout(card._deckTimer);
+
+            if (!smooth || prev === undefined) {
+              card.style.transition = 'none';
+              applyState(card, state, pos);
+            } else if (prev === 'dropped' && state !== 0) {
+              // Kartu yang sudah jatuh disiapkan di hidden lalu meluncur ke slot belakang
+              card.style.transition = 'none';
+              applyState(card, 'hidden', pos);
+              void card.offsetHeight;
+              card.style.transition = TRANSITION_ON;
+              applyState(card, state, pos);
+            } else if (state === 'dropped' && prev !== '0') {
+              card.style.transition = TRANSITION_ON;
+              applyState(card, 'hidden', pos);
+              card._deckTimer = setTimeout(() => {
+                card.style.transition = 'none';
+                applyState(card, 'dropped', getDeckPositions());
+              }, 600);
+            } else {
+              card.style.transition = TRANSITION_ON;
+              applyState(card, state, pos);
+            }
+            card.dataset.state = String(state);
+          });
+
+          // Update Tracker UI
+          const currentCard = cards[activeIdx];
+          const formattedNum = (activeIdx + 1).toString().padStart(2, '0');
+          if (numEl) numEl.textContent = formattedNum;
+          if (labelEl) labelEl.textContent = currentCard.getAttribute('data-label') || '';
+
+          if (thumbEl && totalCards > 1) {
+            const pct = (activeIdx / (totalCards - 1)) * 100;
+            thumbEl.style.top = `calc(${pct}% - ${(pct / 100) * 28}px)`;
+          }
+        }
+
+        function nextCard() {
+          if (isTransitioning) return;
+          isTransitioning = true;
+          let next = activeIdx + 1;
+          if (next >= totalCards) next = 0;
+          renderDeck(next);
+          setTimeout(() => { isTransitioning = false; }, 550);
+        }
+
+        function prevCard() {
+          if (isTransitioning) return;
+          isTransitioning = true;
+          let prev = activeIdx - 1;
+          if (prev < 0) prev = totalCards - 1;
+          renderDeck(prev);
+          setTimeout(() => { isTransitioning = false; }, 550);
+        }
+
+        // Mouse Wheel Scroll Listener
+        if (stageArea) {
+          let lastWheelTime = 0;
+          const wheelCooldown = 550;
+
+          stageArea.addEventListener('wheel', function (e) {
+            e.preventDefault();
+            const now = Date.now();
+            if (now - lastWheelTime < wheelCooldown) return;
+            if (Math.abs(e.deltaY) < 15) return;
+
+            lastWheelTime = now;
+            if (e.deltaY > 0) nextCard();
+            else prevCard();
+          }, { passive: false });
+        }
+
+        // Interactive Pointer Drag (Mouse & Touch Drag with Spring Toss)
+        let isDragging = false;
+        let dragStartY = 0;
+        let dragCurrentDelta = 0;
+
+        function startDrag(clientY) {
+          if (isTransitioning) return;
+          isDragging = true;
+          dragStartY = clientY;
+          dragCurrentDelta = 0;
+          stopAutoDeck();
+        }
+
+        function moveDrag(clientY) {
+          if (!isDragging) return;
+          dragCurrentDelta = clientY - dragStartY;
+          const activeCard = cards[activeIdx];
+          if (activeCard) {
+            const pos = getDeckPositions();
+            const baseSlotY = pos.slotY[0];
+            const currentY = baseSlotY + dragCurrentDelta;
+            activeCard.style.transition = 'none';
+            activeCard.style.transform = `translate3d(0, ${currentY}px, 0) scale(1.0)`;
+          }
+        }
+
+        function endDrag() {
+          if (!isDragging) return;
+          isDragging = false;
+          const activeCard = cards[activeIdx];
+          if (activeCard) {
+            activeCard.style.transition = TRANSITION_ON;
+          }
+
+          if (dragCurrentDelta > 60) {
+            nextCard();
+          } else if (dragCurrentDelta < -60) {
+            prevCard();
+          } else {
+            renderDeck(activeIdx, true);
+          }
+          startAutoDeck();
+        }
+
+        // Touch Listeners
+        if (stageArea) {
+          stageArea.addEventListener('touchstart', (e) => startDrag(e.touches[0].clientY), { passive: true });
+          stageArea.addEventListener('touchmove', (e) => moveDrag(e.touches[0].clientY), { passive: true });
+          stageArea.addEventListener('touchend', endDrag, { passive: true });
+
+          // Mouse Drag Listeners
+          stageArea.addEventListener('mousedown', (e) => {
+            if (e.target.closest('a') || e.target.closest('button')) return;
+            startDrag(e.clientY);
+          });
+          window.addEventListener('mousemove', (e) => moveDrag(e.clientY));
+          window.addEventListener('mouseup', endDrag);
+        }
+
+        // Klik kartu belakang untuk langsung menjadikannya aktif
+        cards.forEach((card, idx) => {
+          card.addEventListener('click', function (e) {
+            if (e.target.closest('a')) return;
+            if (idx !== activeIdx && !isTransitioning) {
+              isTransitioning = true;
+              renderDeck(idx);
+              setTimeout(() => { isTransitioning = false; }, 550);
+            }
+          });
+        });
+
+        // Tombol Navigasi Panah
+        if (prevBtn) prevBtn.addEventListener('click', prevCard);
+        if (nextBtn) nextBtn.addEventListener('click', nextCard);
+
+        // Tracker Rail Klik Langsung
+        if (railEl) {
+          railEl.addEventListener('click', function (e) {
+            const rect = railEl.getBoundingClientRect();
+            const clickPos = e.clientY - rect.top;
+            const ratio = Math.max(0, Math.min(1, clickPos / rect.height));
+            const target = Math.round(ratio * (totalCards - 1));
+            renderDeck(target);
+          });
+        }
+
+        // Window resize re-render
+        let resizeTimer = null;
+        window.addEventListener('resize', function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            renderDeck(activeIdx, false);
+          }, 100);
+        });
+
+        // Auto Advance halus setiap 6 detik dengan Pause on Hover
+        function startAutoDeck() {
+          stopAutoDeck();
+          autoDeckTimer = setInterval(nextCard, 6000);
+        }
+        function stopAutoDeck() {
+          if (autoDeckTimer) clearInterval(autoDeckTimer);
+        }
+
+        if (stageArea) {
+          stageArea.addEventListener('mouseenter', stopAutoDeck);
+          stageArea.addEventListener('mouseleave', startAutoDeck);
+        }
+
+        // Render Awal
+        renderDeck(0, false);
+        startAutoDeck();
+      }
+    }
+
+    // ═══════════════════════════════════════════════
+    // CONTINUOUS 3D CYLINDER HORIZON MOTION ENGINE (LAYANAN TERKAIT)
+    // Transisi Berjalan Terus Menerus (Infinite Cylinder Arch)
+    // ═══════════════════════════════════════════════
+    const cylinderViewport = document.getElementById('uisCylinderViewport');
+    const cylinderTrack = document.getElementById('uisCylinderTrack');
+
+    if (cylinderViewport && cylinderTrack) {
+      const cards = Array.from(cylinderTrack.querySelectorAll('.uis-cylinder-card'));
+      const totalCards = cards.length;
+      const uniqueCount = {{ $layananTerkaits->count() }};
+
+      if (totalCards > 0) {
+        const counterEl = document.getElementById('mirrorCounter');
+        const titleEl = document.getElementById('mirrorActiveTitle');
+        const descEl = document.getElementById('mirrorActiveDesc');
+        const btnEl = document.getElementById('mirrorActiveBtn');
+
+        let cardWidth = cards[0].offsetWidth || (window.innerWidth < 768 ? 165 : 230);
+        let gap = window.innerWidth < 768 ? 14 : 22;
+        let itemStep = cardWidth + gap;
+        let singleCycleWidth = uniqueCount * itemStep;
+
+        // Fisika posisi & transisi terus berjalan
+        let scrollPos = 0;
+        let baseSpeed = 0.85; // Kecepatan gerak kontinu otomatis
+        let currentSpeed = baseSpeed;
+        let targetSpeed = baseSpeed;
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartPos = 0;
+        let lastDragX = 0;
+        let dragVel = 0;
+        let activeCardRef = null;
+
+        function updateDimensions() {
+          cardWidth = cards[0].offsetWidth || (window.innerWidth < 768 ? 165 : 230);
+          gap = window.innerWidth < 768 ? 14 : 22;
+          itemStep = cardWidth + gap;
+          singleCycleWidth = uniqueCount * itemStep;
+        }
+        window.addEventListener('resize', updateDimensions);
+        updateDimensions();
+
+        function renderCylinder() {
+          // Transisi terus berjalan tanpa henti
+          if (!isDragging) {
+            currentSpeed += (targetSpeed - currentSpeed) * 0.08;
+            scrollPos += currentSpeed;
+
+            if (Math.abs(dragVel) > 0.05) {
+              scrollPos += dragVel;
+              dragVel *= 0.92;
+            }
+          }
+
+          // Loop tak berujung (seamless infinite wrap)
+          if (scrollPos >= singleCycleWidth) {
+            scrollPos -= singleCycleWidth;
+            if (isDragging) dragStartPos -= singleCycleWidth;
+          } else if (scrollPos < 0) {
+            scrollPos += singleCycleWidth;
+            if (isDragging) dragStartPos += singleCycleWidth;
+          }
+
+          const viewWidth = cylinderViewport.offsetWidth || window.innerWidth;
+          const centerX = viewWidth / 2;
+          const radius = Math.min(2400, Math.max(900, viewWidth * 1.05));
+          const totalWidth = totalCards * itemStep;
+
+          let closestCard = null;
+          let minDistance = Infinity;
+
+          for (let i = 0; i < totalCards; i++) {
+            const card = cards[i];
+            let cardBaseX = (i * itemStep) - scrollPos;
+
+            // Sirkulasi posisi relatif terhadap titik tengah
+            while (cardBaseX - centerX < -totalWidth / 2) cardBaseX += totalWidth;
+            while (cardBaseX - centerX > totalWidth / 2) cardBaseX -= totalWidth;
+
+            const cardCenter = cardBaseX + cardWidth / 2;
+            const distFromCenter = cardCenter - centerX;
+            const absDist = Math.abs(distFromCenter);
+
+            // Proyeksi 3D Silinder (Lengkung U-Arch Horizon Cembung/Cekung)
+            const angleRad = distFromCenter / radius;
+            const angleDeg = angleRad * (180 / Math.PI);
+
+            const transX = Math.sin(angleRad) * radius + centerX - cardWidth / 2;
+            const transZ = -(1 - Math.cos(angleRad)) * radius * 0.95;
+            const transY = Math.pow(Math.abs(angleRad), 1.8) * 32; // Lengkung busur atas dan bawah persis referensi
+
+            const scale = Math.max(0.82, 1.0 - Math.abs(angleRad) * 0.16);
+            const zIndex = Math.round(1000 - absDist);
+            const maxVisibleDist = viewWidth * 0.58;
+            const isVisible = absDist < maxVisibleDist;
+            const opacity = isVisible ? Math.max(0, Math.min(1, (maxVisibleDist - absDist) / (viewWidth * 0.22))) : 0;
+
+            card.style.transform = `translate3d(${transX}px, ${transY}px, ${transZ}px) rotateY(${-angleDeg * 1.1}deg) scale(${scale})`;
+            card.style.zIndex = zIndex;
+            card.style.opacity = isVisible ? opacity : 0;
+            card.style.visibility = isVisible && opacity > 0.02 ? 'visible' : 'hidden';
+            card.style.pointerEvents = isVisible && opacity > 0.5 ? 'auto' : 'none';
+
+            if (absDist < minDistance) {
+              minDistance = absDist;
+              closestCard = card;
+            }
+          }
+
+          // Sinkronisasi data kartu aktif di tengah
+          if (closestCard && closestCard !== activeCardRef) {
+            activeCardRef = closestCard;
+            cards.forEach(c => c.classList.remove('is-active'));
+            closestCard.classList.add('is-active');
+
+            const name = closestCard.getAttribute('data-name');
+            const desc = closestCard.getAttribute('data-desc');
+            const url = closestCard.getAttribute('data-url');
+            const idx = closestCard.getAttribute('data-index');
+            const total = closestCard.getAttribute('data-total');
+
+            if (counterEl && idx && total) counterEl.textContent = `${idx} / ${total}`;
+            if (titleEl && name && titleEl.textContent.trim() !== name.trim()) {
+              titleEl.textContent = name;
+            }
+            if (descEl && desc && descEl.textContent.trim() !== desc.trim()) {
+              descEl.textContent = desc;
+            }
+            if (btnEl && url) btnEl.setAttribute('href', url);
+
+            if (typeof spawnCenterRipple === 'function') {
+              spawnCenterRipple();
+            }
+          }
+
+          requestAnimationFrame(renderCylinder);
+        }
+
+        requestAnimationFrame(renderCylinder);
+
+        // Hover: perlambat halus agar nyaman dibaca dan diklik
+        cylinderViewport.addEventListener('mouseenter', () => {
+          targetSpeed = 0.2;
+        });
+        cylinderViewport.addEventListener('mouseleave', () => {
+          if (!isDragging) targetSpeed = baseSpeed;
+        });
+
+        let hasMovedSignificantly = false;
+
+        cylinderViewport.addEventListener('pointerdown', (e) => {
+          isDragging = true;
+          hasMovedSignificantly = false;
+          dragStartX = e.clientX;
+          dragStartPos = scrollPos;
+          lastDragX = e.clientX;
+          dragVel = 0;
+          cylinderViewport.setPointerCapture(e.pointerId);
+        });
+
+        cylinderViewport.addEventListener('pointermove', (e) => {
+          if (!isDragging) return;
+          const delta = e.clientX - lastDragX;
+          if (Math.abs(e.clientX - dragStartX) > 6) {
+            hasMovedSignificantly = true;
+          }
+          dragVel = -delta;
+          lastDragX = e.clientX;
+          scrollPos = dragStartPos - (e.clientX - dragStartX);
+        });
+
+        function endDrag() {
+          if (!isDragging) return;
+          isDragging = false;
+          targetSpeed = baseSpeed;
+        }
+
+        cylinderViewport.addEventListener('pointerup', endDrag);
+        cylinderViewport.addEventListener('pointercancel', endDrag);
+
+        // Klik Card
+        cylinderTrack.addEventListener('click', (e) => {
+          if (hasMovedSignificantly) return; // Cegah trigger klik saat pengguna sedang drag / geser
+          const card = e.target.closest('.uis-cylinder-card');
+          if (!card) return;
+          const url = card.getAttribute('data-url');
+
+          if (card.classList.contains('is-active')) {
+            if (url && url !== '#' && url.trim() !== '') {
+              window.open(url, '_blank', 'noopener,noreferrer');
+            }
+          } else {
+            // Bergulir mulus ke posisi tengah jika kartu samping diklik
+            const viewWidth = cylinderViewport.offsetWidth || window.innerWidth;
+            const centerX = viewWidth / 2;
+            const rect = card.getBoundingClientRect();
+            const vRect = cylinderViewport.getBoundingClientRect();
+            const cardScreenCenter = rect.left - vRect.left + rect.width / 2;
+            const diff = cardScreenCenter - centerX;
+            dragVel = diff * 0.18; // Dorong inersia halus ke tengah
+          }
+        });
+      }
+    }
+
+    // ═══════════════════════════════════════════════
+    // EFEK CERMIN ELEGAN (WATER RIPPLE ON SLIDE / CLICK)
+    // ═══════════════════════════════════════════════
+    const waterCanvas = document.getElementById('mirrorWaterCanvas');
+    let spawnCenterRipple = null;
+
+    if (waterCanvas && cylinderViewport) {
+        const ctx = waterCanvas.getContext('2d');
+        let ripples = [];
+        let animId = null;
+
+        function resizeWaterCanvas() {
+          waterCanvas.width = waterCanvas.offsetWidth || window.innerWidth;
+          waterCanvas.height = waterCanvas.offsetHeight || 260;
+        }
+        resizeWaterCanvas();
+        window.addEventListener('resize', resizeWaterCanvas);
+
+        function spawnRipple(x, y, intensity = 1.0) {
+          ripples.push({
+            x: x,
+            y: y,
+            radius: 5,
+            maxRadius: 100 * intensity,
+            opacity: 0.6 * intensity,
+            speed: 2.0,
+            width: 1.8
+          });
+          if (!animId) {
+            animId = requestAnimationFrame(animateRipples);
+          }
+        }
+
+        spawnCenterRipple = function() {
+          const rect = waterCanvas.getBoundingClientRect();
+          spawnRipple(rect.width / 2, rect.height * 0.45, 1.2);
+        };
+
+        function animateRipples() {
+          ctx.clearRect(0, 0, waterCanvas.width, waterCanvas.height);
+
+          for (let i = ripples.length - 1; i >= 0; i--) {
+            const r = ripples[i];
+            r.radius += r.speed;
+            r.opacity -= 0.016;
+
+            if (r.opacity <= 0 || r.radius >= r.maxRadius) {
+              ripples.splice(i, 1);
+              continue;
+            }
+
+            // Lingkaran gelombang elips lembut di lantai cermin
+            ctx.save();
+            ctx.beginPath();
+            ctx.ellipse(r.x, r.y, r.radius, r.radius * 0.3, 0, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${r.opacity * 0.6})`;
+            ctx.lineWidth = r.width;
+            ctx.stroke();
+
+            // Cincin emas lembut
+            if (r.radius > 14) {
+              ctx.beginPath();
+              ctx.ellipse(r.x, r.y, r.radius * 0.65, (r.radius * 0.65) * 0.3, 0, 0, Math.PI * 2);
+              ctx.strokeStyle = `rgba(254, 216, 2, ${r.opacity * 0.35})`;
+              ctx.lineWidth = r.width * 0.7;
+              ctx.stroke();
+            }
+            ctx.restore();
+          }
+
+          if (ripples.length > 0) {
+            animId = requestAnimationFrame(animateRipples);
+          } else {
+            animId = null;
+          }
+        }
+
+        waterCanvas.addEventListener('click', function(e) {
+          const rect = waterCanvas.getBoundingClientRect();
+          spawnRipple(e.clientX - rect.left, Math.max(20, Math.min(e.clientY - rect.top, rect.height - 20)), 1.2);
+        });
+      }
   });
 </script>
 @endpush

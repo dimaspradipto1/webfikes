@@ -22,11 +22,11 @@ return new class extends Migration
             $table->text('misi')->nullable();
             $table->string('misi_judul')->nullable();
             $table->string('misi_icon')->nullable();
-            
+
             // Nilai Utama Kami Section
             $table->string('judul_nilai')->nullable();
             $table->text('deskripsi_nilai')->nullable();
-            
+
             // Value Card 1
             $table->string('nilai_1_judul')->nullable();
             $table->text('nilai_1_deskripsi')->nullable();

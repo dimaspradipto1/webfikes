@@ -1,55 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Tanya Jawab (FAQ) — Fakultas Ilmu Kesehatan (FIKES)')
-@section('meta_description', 'Temukan jawaban cepat atas pertanyaan seputar program studi, penerimaan mahasiswa baru, fasilitas laboratorium, dan akreditasi FIKES.')
-@section('meta_keywords', 'faq fikes, tanya jawab fakultas ilmu kesehatan, pendaftaran mahasiswa kesehatan, akreditasi fikes')
-
-@push('styles')
-<style>
-  .faq-hero {
-    position: relative;
-    background: var(--obsidian-dark);
-    padding: 70px 0 50px;
-    border-bottom: 2px solid var(--fikes-purple);
-  }
-  .faq-hero-title {
-    font-size: 38px;
-    font-weight: 800;
-    color: var(--white);
-    margin-bottom: 8px;
-  }
-  .faq-hero-title em {
-    font-style: normal;
-    color: var(--fikes-orange);
-  }
-  .accordion-item {
-    border: 1px solid var(--border-light) !important;
-    border-radius: 16px !important;
-    margin-bottom: 12px;
-    overflow: hidden;
-    background: var(--white);
-  }
-  .accordion-button {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 700;
-    font-size: 15.5px;
-    color: var(--text-main);
-    padding: 18px 24px;
-    background: var(--white);
-  }
-  .accordion-button:not(.collapsed) {
-    background: var(--fikes-purple-light);
-    color: var(--fikes-purple);
-    box-shadow: none;
-  }
-  .accordion-body {
-    font-size: 14.5px;
-    color: var(--text-muted);
-    line-height: 1.75;
-    padding: 20px 24px;
-  }
-</style>
-@endpush
+@section('title', 'Tanya Jawab (FAQ) — Universitas Ibnu Sina (UIS)')
+@section('meta_description', 'Temukan jawaban cepat atas pertanyaan seputar fakultas, program studi, PMB, fasilitas kampus, dan akreditasi UIS Batam.')
+@section('meta_keywords', 'faq uis, tanya jawab universitas ibnu sina, pmb uis batam, pendaftaran mahasiswa baru, akreditasi uis batam')
 
 @section('content')
 @php
@@ -72,9 +25,9 @@
         Tanya Jawab <em>(FAQ)</em>
       </h1>
       <div class="breadcrumb-custom">
-        <a href="{{ route('homepage') }}" class="text-white-50"><i class="bi bi-house-fill me-1"></i>Beranda</a>
-        <span class="mx-2 text-white-50">/</span>
-        <span style="color: var(--fikes-orange); font-weight: 600;">FAQ</span>
+        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+        <span>/</span>
+        <span class="active">Tanya Jawab (FAQ)</span>
       </div>
     </div>
   </div>
@@ -91,7 +44,7 @@
       <h2 class="section-title">Pertanyaan yang Sering <em>Diajukan</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Kumpulan jawaban informatif seputar proses akademik, persyaratan seleksi masuk, fasilitas, dan kemitraan di FIKES.
+        Kumpulan jawaban informatif seputar proses akademik, persyaratan seleksi masuk, fasilitas, dan kemitraan di UIS.
       </p>
     </div>
 
@@ -103,8 +56,8 @@
               <div class="accordion-item shadow-sm">
                 <h2 class="accordion-header" id="heading{{ $faq->id ?? $index }}">
                   <button class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $faq->id ?? $index }}" aria-expanded="{{ $index === 0 ? 'true' : 'false' }}">
-                    <i class="bi bi-question-circle-fill me-2" style="color: var(--fikes-purple);"></i>
-                    {{ strip_tags($faq->question ?? $faq->pertanyaan ?? '') }}
+                    <i class="bi bi-question-circle-fill me-2" style="color: var(--uis-purple);"></i>
+                    {{ strip_tags(html_entity_decode($faq->question ?? $faq->pertanyaan ?? '')) }}
                   </button>
                 </h2>
                 <div id="collapse{{ $faq->id ?? $index }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}" data-bs-parent="#faqAccordion">

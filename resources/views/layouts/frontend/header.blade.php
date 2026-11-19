@@ -1,11 +1,12 @@
 <!-- ═══════════════════════════════════════════════
-     NAVBAR HEADER UTAMA — FIKES UIS
+     NAVBAR HEADER UTAMA — UNIVERSITAS IBNU SINA (UIS)
 ═══════════════════════════════════════════════ -->
-<nav class="navbar navbar-expand-xl navbar-main">
+<nav class="navbar navbar-expand-xl navbar-main sticky-top">
   <div class="container-fluid px-lg-4 px-xl-5">
-    <!-- Logo FIKES UIS -->
-    <a class="navbar-brand navbar-brand-custom me-2 me-xl-4" href="{{ route('homepage') }}">
-      <img src="{{ asset('frontend/img/logofikes.png') }}" alt="Logo FIKES UIS" class="brand-logo-img">
+    <!-- Logo UIS -->
+    <a class="navbar-brand navbar-brand-custom me-2 me-xl-3" href="{{ route('homepage') }}">
+      <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo Universitas Ibnu Sina" class="brand-logo-img">
+      <span class="brand-title-main ms-2">UNIVERSITAS IBNU SINA</span>
     </a>
 
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,55 +22,23 @@
 
         <!-- Profil Dropdown -->
         <li class="nav-item dropdown">
-          <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.tentang') || request()->routeIs('homepage.sambutan-dekan') || request()->routeIs('homepage.visi-misi') || request()->routeIs('homepage.struktur-organisasi') || request()->routeIs('homepage.sejarah') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.tentang') || request()->routeIs('homepage.sambutan*') || request()->routeIs('homepage.visi-misi') || request()->routeIs('homepage.struktur-organisasi') || request()->routeIs('homepage.sejarah') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Profil <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.tentang') ? 'active' : '' }}" href="{{ route('homepage.tentang') }}"><i class="bi bi-building"></i> Tentang FIKES</a></li>
+            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.tentang') ? 'active' : '' }}" href="{{ route('homepage.tentang') }}"><i class="bi bi-building"></i> Tentang Universitas</a></li>
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.visi-misi') ? 'active' : '' }}" href="{{ route('homepage.visi-misi') }}"><i class="bi bi-bullseye"></i> Visi & Misi</a></li>
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.sambutan-dekan') ? 'active' : '' }}" href="{{ route('homepage.sambutan-dekan') }}"><i class="bi bi-person-badge"></i> Sambutan Dekan</a></li>
+            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.sambutan*') ? 'active' : '' }}" href="{{ route('homepage.sambutan-rektor') }}"><i class="bi bi-person-badge"></i> Sambutan Rektor</a></li>
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.struktur-organisasi') ? 'active' : '' }}" href="{{ route('homepage.struktur-organisasi') }}"><i class="bi bi-diagram-3"></i> Struktur Organisasi</a></li>
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.sejarah') ? 'active' : '' }}" href="{{ route('homepage.sejarah') }}"><i class="bi bi-hourglass-split"></i> Sejarah Fakultas</a></li>
+            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.sejarah') ? 'active' : '' }}" href="{{ route('homepage.sejarah') }}"><i class="bi bi-hourglass-split"></i> Sejarah Universitas</a></li>
           </ul>
         </li>
 
-        <!-- Akademik Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.kurikulum*') || request()->routeIs('homepage.kalender-akademik') || request()->routeIs('homepage.pedoman-akademik') || request()->routeIs('homepage.sistem-akademik') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Akademik <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-custom">
-            <!-- Kurikulum FIKES with Submenu -->
-            <li class="dropdown-submenu">
-              <a class="dropdown-item dropdown-item-custom d-flex justify-content-between align-items-center {{ request()->routeIs('homepage.kurikulum*') ? 'active' : '' }}" href="{{ route('homepage.kurikulum') }}">
-                <span><i class="bi bi-journal-text me-1"></i> Kurikulum FIKES</span>
-                <i class="bi bi-chevron-right ms-2 d-none d-xl-inline" style="font-size: 10px;"></i>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-custom" style="min-width: 270px;">
-                @if(isset($navProdis) && $navProdis->count() > 0)
-                  @foreach($navProdis as $np)
-                    <li>
-                      <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.kurikulum', ['prodi' => $np->id]) }}">
-                        <i class="bi bi-mortarboard-fill text-warning"></i> {{ $np->judul }}
-                      </a>
-                    </li>
-                  @endforeach
-                @else
-                  <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.kurikulum') }}"><i class="bi bi-mortarboard"></i> Semua Kurikulum Prodi</a></li>
-                @endif
-              </ul>
-            </li>
-
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.kalender-akademik') ? 'active' : '' }}" href="{{ route('homepage.kalender-akademik') }}"><i class="bi bi-calendar-check"></i> Kalender Akademik</a></li>
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.pedoman-akademik') ? 'active' : '' }}" href="{{ route('homepage.pedoman-akademik') }}"><i class="bi bi-book"></i> Pedoman Akademik</a></li>
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.sistem-akademik') ? 'active' : '' }}" href="{{ route('homepage.sistem-akademik') }}"><i class="bi bi-laptop"></i> Sistem Akademik</a></li>
-          </ul>
-        </li>
 
         <!-- Program Studi Dropdown -->
         <li class="nav-item dropdown">
-          <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.layanan*') || request()->routeIs('homepage.dosen*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Program Studi <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+          <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.layanan*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Fakultas <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
             @if(isset($navProdis) && $navProdis->count() > 0)
@@ -80,14 +49,14 @@
                       $rawLink = 'https://' . $rawLink;
                   }
                   $hasLink = !empty($rawLink);
-                  $prodiHref = $hasLink ? $rawLink : route('homepage.layanan.detail', $navProdi->id);
+                  $prodiHref = $hasLink ? $rawLink : '#';
                   $isExternal = $hasLink && (str_starts_with($rawLink, 'http://') || str_starts_with($rawLink, 'https://'));
                 @endphp
                 <li>
                   <a class="dropdown-item dropdown-item-custom"
                      href="{{ $prodiHref }}"
                      @if($isExternal) target="_blank" rel="noopener noreferrer" @endif>
-                    <i class="bi {{ $navProdi->icon ?: 'bi-mortarboard-fill' }}"></i>
+                    <i class="bi {{ $navProdi->icon ?: 'bi-mortarboard-fill' }}" style="color: var(--uis-green);"></i>
                     <span>{{ $navProdi->judul }}</span>
                     @if($isExternal)
                       <i class="bi bi-box-arrow-up-right ms-auto text-muted" style="font-size: 10px;" title="Buka website prodi"></i>
@@ -95,37 +64,8 @@
                   </a>
                 </li>
               @endforeach
-
-              {{-- Dosen Submenu --}}
-              <li class="dropdown-submenu">
-                <a class="dropdown-item dropdown-item-custom d-flex justify-content-between align-items-center {{ request()->routeIs('homepage.dosen*') ? 'active' : '' }}" href="{{ route('homepage.dosen') }}">
-                  <span><i class="bi bi-person-workspace me-1"></i> Dosen</span>
-                  <i class="bi bi-chevron-right ms-2 d-none d-xl-inline" style="font-size: 10px;"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-custom" style="min-width: 280px;">
-                  @foreach($navProdis as $np)
-                    <li>
-                      <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.dosen', ['prodi' => $np->id]) }}">
-                        <i class="bi bi-person-badge-fill text-warning"></i> Dosen {{ $np->judul }}
-                      </a>
-                    </li>
-                  @endforeach
-                </ul>
-              </li>
-
-              <li><hr class="dropdown-divider my-1"></li>
-              <li>
-                <a class="dropdown-item dropdown-item-custom fw-semibold" href="{{ route('homepage.layanan') }}" style="color: var(--fikes-purple);">
-                  <i class="bi bi-grid-fill" style="color: var(--fikes-purple);"></i>
-                  <span>Semua Program & Fasilitas</span>
-                  <i class="bi bi-arrow-right ms-auto" style="font-size: 11px;"></i>
-                </a>
-              </li>
             @else
-              <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.layanan') }}"><i class="bi bi-mortarboard-fill"></i> S2 Kesehatan Masyarakat</a></li>
-              <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.layanan') }}"><i class="bi bi-shield-plus"></i> S1 Kesehatan dan Keselamatan Kerja</a></li>
-              <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.layanan') }}"><i class="bi bi-tree-fill"></i> S1 Kesehatan Lingkungan</a></li>
-              <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.dosen') }}"><i class="bi bi-person-workspace"></i> Dosen FIKES</a></li>
+              <li><a class="dropdown-item dropdown-item-custom" href="#"><i class="bi bi-mortarboard-fill"></i> Fakultas & Program Studi</a></li>
             @endif
           </ul>
         </li>
@@ -137,22 +77,45 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.prestasi*') ? 'active' : '' }}" href="{{ route('homepage.prestasi') }}"><i class="bi bi-trophy-fill text-warning"></i> Prestasi Mahasiswa</a></li>
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.organisasi*') ? 'active' : '' }}" href="{{ route('homepage.organisasi') }}"><i class="bi bi-people-fill text-primary"></i> Organisasi & Kegiatan</a></li>
+            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.organisasi*') ? 'active' : '' }}" href="{{ route('homepage.organisasi') }}"><i class="bi bi-people-fill text-success"></i> Organisasi & Ormawa</a></li>
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.galeri*') ? 'active' : '' }}" href="{{ route('homepage.galeri') }}"><i class="bi bi-camera"></i> Galeri Dokumentasi</a></li>
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.testimoni*') ? 'active' : '' }}" href="{{ route('homepage.testimoni') }}"><i class="bi bi-mortarboard"></i> Alumni & Testimoni</a></li>
           </ul>
         </li>
 
-        <!-- Penelitian & Pengabdian Dropdown -->
+        <!-- Publikasi Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link nav-link-custom dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Penelitian & Pengabdian <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+            Publikasi <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news') }}"><i class="bi bi-file-earmark-medical"></i> Penelitian Dosen</a></li>
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news') }}"><i class="bi bi-journal-richtext"></i> Publikasi Ilmiah</a></li>
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.galeri') }}"><i class="bi bi-heart-pulse"></i> Pengabdian Masyarakat</a></li>
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.layanan') }}"><i class="bi bi-briefcase"></i> Kerja Sama Riset</a></li>
+            @if(isset($navPublikasis) && $navPublikasis->count() > 0)
+              @foreach($navPublikasis as $navPub)
+                @php
+                  $rawLink = trim($navPub->link ?? '');
+                  if (!empty($rawLink) && !str_starts_with($rawLink, 'http://') && !str_starts_with($rawLink, 'https://') && !str_starts_with($rawLink, '/') && !str_starts_with($rawLink, '#')) {
+                      $rawLink = 'https://' . $rawLink;
+                  }
+                  $hasLink = !empty($rawLink);
+                  $pubHref = $hasLink ? $rawLink : '#';
+                  $isExternal = $hasLink && (str_starts_with($rawLink, 'http://') || str_starts_with($rawLink, 'https://'));
+                @endphp
+                <li>
+                  <a class="dropdown-item dropdown-item-custom"
+                     href="{{ $pubHref }}"
+                     @if($isExternal) target="_blank" rel="noopener noreferrer" @endif
+                     title="{{ $navPub->deskripsi ?: $navPub->judul }}">
+                    <i class="bi {{ $navPub->icon ?: 'bi-journal-richtext' }}" style="color: var(--uis-green);"></i>
+                    <span>{{ $navPub->judul }}</span>
+                    @if($isExternal)
+                      <i class="bi bi-box-arrow-up-right ms-auto text-muted" style="font-size: 10px;" title="Buka website"></i>
+                    @endif
+                  </a>
+                </li>
+              @endforeach
+            @else
+              <li><a class="dropdown-item dropdown-item-custom" href="https://journal.uis.ac.id/" target="_blank"><i class="bi bi-journal-richtext" style="color: var(--uis-green);"></i> <span>E-Journal UIS</span></a></li>
+            @endif
           </ul>
         </li>
 
@@ -162,18 +125,73 @@
             Informasi <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news', ['category' => 'Berita Fakultas']) }}"><i class="bi bi-newspaper"></i> Berita</a></li>
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news', ['category' => 'Pengumuman & Agenda']) }}"><i class="bi bi-megaphone"></i> Pengumuman</a></li>
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news', ['category' => 'Pengumuman & Agenda']) }}"><i class="bi bi-calendar-event"></i> Agenda</a></li>
+            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'berita-universitas') }}"><i class="bi bi-newspaper"></i> Berita Kampus</a></li>
+            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'pengumuman-agenda') }}"><i class="bi bi-megaphone"></i> Pengumuman</a></li>
+            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'agenda') }}"><i class="bi bi-calendar-event"></i> Agenda</a></li>
             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news') }}"><i class="bi bi-card-text"></i> Artikel</a></li>
             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.faq') }}"><i class="bi bi-question-circle"></i> FAQ Informasi</a></li>
           </ul>
+        </li>
+
+        <!-- Humas -->
+        <li class="nav-item">
+          <a href="{{ route('homepage.humas') }}" class="nav-link nav-link-custom {{ request()->routeIs('homepage.humas*') ? 'active' : '' }}">Humas</a>
         </li>
 
         <!-- Kontak -->
         <li class="nav-item">
           <a href="{{ route('homepage.kontak') }}" class="nav-link nav-link-custom {{ request()->routeIs('homepage.kontak') ? 'active' : '' }}">Kontak</a>
         </li>
+
+        <!-- Pilih Bahasa Dropdown (Di Samping Menu Kontak) -->
+        @if(isset($bahasaList) && $bahasaList->count() > 0)
+        <li class="nav-item dropdown uis-lang-nav-item">
+          <a class="nav-link nav-link-custom dropdown-toggle uis-lang-toggle" 
+             href="#" 
+             role="button" 
+             data-bs-toggle="dropdown" 
+             aria-expanded="false" 
+             id="dropdownLangSelect" 
+             title="Pilih Bahasa / Select Language">
+            <img src="{{ $defaultBahasa?->flag_url ?? asset('assets/img/flags/id.png') }}" 
+                 id="uisCurrentFlagImg" 
+                 alt="Bendera" 
+                 class="uis-flag-img-main" 
+                 width="22" 
+                 height="15"
+                 onerror="this.onerror=null; this.src='{{ asset('assets/img/flags/id.png') }}';">
+            <span class="uis-lang-name d-none d-xxl-inline" id="uisCurrentName">{{ $defaultBahasa->nama ?? 'Bahasa Indonesia' }}</span>
+            <span class="uis-lang-name d-inline d-xxl-none" id="uisCurrentShort">{{ $defaultBahasa ? (str_contains($defaultBahasa->nama, ' ') ? explode(' ', $defaultBahasa->nama)[1] ?? $defaultBahasa->nama : $defaultBahasa->nama) : 'Indonesia' }}</span>
+            <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-custom dropdown-menu-end uis-lang-menu shadow-lg" aria-labelledby="dropdownLangSelect">
+            <li class="px-3 py-1 dropdown-header text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">
+              <i class="bi bi-translate me-1"></i> Select Language
+            </li>
+            @foreach($bahasaList as $lang)
+              <li>
+                <a class="dropdown-item dropdown-item-custom uis-lang-item justify-content-between" 
+                   href="javascript:void(0)" 
+                   onclick="uisChangeLanguage('{{ $lang->kode }}', '{{ addslashes($lang->nama) }}', '{{ $lang->flag_url }}')"
+                   data-code="{{ $lang->kode }}"
+                   data-name="{{ $lang->nama }}"
+                   data-flag="{{ $lang->flag_url }}">
+                  <span class="d-flex align-items-center gap-2">
+                    <img src="{{ $lang->flag_url }}" 
+                         alt="{{ $lang->nama }}" 
+                         class="uis-flag-img" 
+                         width="22" 
+                         height="15"
+                         onerror="this.onerror=null; this.src='{{ asset('assets/img/flags/id.png') }}';">
+                    <span class="uis-lang-text">{{ $lang->nama }}</span>
+                  </span>
+                  <i class="bi bi-check2 text-success fw-bold uis-check-icon {{ ($lang->is_default) ? '' : 'd-none' }}" id="check-lang-{{ $lang->kode }}"></i>
+                </a>
+              </li>
+            @endforeach
+          </ul>
+        </li>
+        @endif
       </ul>
 
       <!-- CTA Buttons -->

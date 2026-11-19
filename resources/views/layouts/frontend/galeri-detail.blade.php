@@ -1,106 +1,45 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($gallery->judul ?? 'Dokumentasi Visual') . ' — Galeri FIKES UIS')
-@section('meta_description', Str::limit(strip_tags($gallery->deskripsi ?? $gallery->judul), 160))
+@php
+  $isHumas = ($gallery->kategori ?? '') === 'humas';
+@endphp
 
-@push('styles')
-<style>
-  .detail-hero {
-    background: var(--obsidian-dark);
-    padding: 60px 0 40px;
-    border-bottom: 2px solid var(--fikes-purple);
-  }
-  .galeri-img-main {
-    width: 100%;
-    max-height: 520px;
-    object-fit: cover;
-    display: block;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    border: 1px solid var(--border-light);
-  }
-  .info-badge-card {
-    background: #ffffff;
-    border: 1px solid var(--border-light);
-    border-radius: 18px;
-    padding: 24px;
-    box-shadow: var(--shadow-sm);
-  }
-  .info-meta-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px dashed var(--border-light);
-    font-size: 14px;
-  }
-  .info-meta-row:last-child {
-    border-bottom: none;
-  }
-  .info-meta-label {
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-  .info-meta-val {
-    font-weight: 700;
-    color: var(--obsidian-dark);
-    text-align: right;
-  }
-  .other-galeri-item {
-    display: flex;
-    gap: 14px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--border-light);
-    text-decoration: none !important;
-    transition: all 0.2s ease;
-  }
-  .other-galeri-item:hover {
-    transform: translateX(4px);
-  }
-  .other-galeri-item:last-child {
-    border-bottom: none;
-  }
-  .other-galeri-img {
-    width: 85px;
-    height: 65px;
-    border-radius: 10px;
-    object-fit: cover;
-    flex-shrink: 0;
-  }
-  .other-galeri-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--obsidian-dark);
-    line-height: 1.4;
-    transition: color 0.2s;
-  }
-  .other-galeri-item:hover .other-galeri-title {
-    color: var(--fikes-purple);
-  }
-</style>
-@endpush
+@section('title', ($gallery->judul ?? 'Dokumentasi Visual') . ($isHumas ? ' — Galeri Humas UIS' : ' — Galeri Universitas Ibnu Sina'))
+@section('meta_description', Str::limit(strip_tags($gallery->deskripsi ?? $gallery->judul), 160))
 
 @section('content')
 <!-- Header Hero -->
-<div class="detail-hero text-white">
+<div class="detail-hero text-white" style="{{ $isHumas ? 'background: linear-gradient(135deg, #022e11 0%, #034b1c 55%, #046B26 100%); border-bottom: 2px solid #FED802;' : '' }}">
   <div class="container">
-    <nav aria-label="breadcrumb" class="mb-3">
-      <ol class="breadcrumb mb-0">
-        <li class="breadcrumb-item"><a href="{{ route('homepage') }}" class="text-white-50 text-decoration-none">Beranda</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('homepage.galeri') }}" class="text-white-50 text-decoration-none">Galeri & Dokumentasi</a></li>
-        <li class="breadcrumb-item active text-white" aria-current="page">{{ Str::limit($gallery->judul ?? 'Detail Dokumentasi', 35) }}</li>
-      </ol>
-    </nav>
+    <div class="breadcrumb-custom mb-3">
+      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+      <span>/</span>
+      @if($isHumas)
+        <a href="{{ route('homepage.humas') }}">Humas</a>
+        <span>/</span>
+        <a href="{{ route('homepage.galeri.humas') }}">Galeri Humas</a>
+      @else
+        <a href="{{ route('homepage.galeri') }}">Galeri Dokumentasi</a>
+      @endif
+      <span>/</span>
+      <span class="active">{{ Str::limit($gallery->judul ?? 'Detail Dokumentasi', 40) }}</span>
+    </div>
     <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
-      <span class="badge px-3 py-2 rounded-pill font-weight-bold" style="background: var(--fikes-purple); color: white; font-size: 12px;">
-        <i class="bi bi-camera-fill me-1"></i>Dokumentasi Visual
-      </span>
-      <span class="badge bg-light text-dark px-3 py-2 rounded-pill fw-bold" style="font-size: 12px;">
-        <i class="bi bi-calendar3 me-1"></i>{{ $gallery->created_at->translatedFormat('d F Y') }}
+      @if($isHumas)
+        <span class="badge px-3 py-2 rounded-pill font-weight-bold" style="background: rgba(254, 216, 2, 0.2); border: 1.5px solid #FED802; color: #FED802; font-size: 12.5px;">
+          <i class="bi bi-megaphone-fill me-1"></i> Dokumentasi Humas
+        </span>
+      @else
+        <span class="badge px-3 py-2 rounded-pill font-weight-bold" style="background: var(--uis-purple); color: white; font-size: 12.5px;">
+          <i class="bi bi-camera-fill me-1"></i> Dokumentasi Visual
+        </span>
+      @endif
+      <span class="badge px-3 py-2 rounded-pill fw-semibold" style="background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); color: #ffffff; font-size: 12px;">
+        <i class="bi bi-calendar3 me-1"></i> {{ $gallery->created_at->translatedFormat('d F Y') }}
       </span>
     </div>
-    <h1 class="fw-bold mb-0 text-white" style="font-size: 32px; line-height: 1.4;">
-      {{ $gallery->judul ?? 'Dokumentasi Kegiatan FIKES UIS' }}
+    <h1 class="fw-bold mb-0 text-white" style="font-size: 32px; line-height: 1.35; letter-spacing: -0.5px;">
+      {{ $gallery->judul ?? ($isHumas ? 'Dokumentasi Kegiatan Humas UIS' : 'Dokumentasi Kegiatan Universitas Ibnu Sina') }}
     </h1>
   </div>
 </div>
@@ -109,103 +48,127 @@
   <div class="container py-3">
     <div class="row g-4 g-lg-5">
 
-      <!-- Kolom Kiri: Foto Utama & Deskripsi Rinci -->
+      <!-- Kolom Kiri: Foto Utama & Deskripsi Rinci (col-lg-8) -->
       <div class="col-lg-8" data-aos="fade-up">
         
         <!-- Foto Dokumentasi Utama -->
         @if(!empty($gallery->url))
-          <div class="mb-4 text-center position-relative">
-            <img src="{{ asset('storage/' . $gallery->url) }}" alt="{{ $gallery->judul ?? 'Dokumentasi FIKES' }}" class="galeri-img-main img-fluid">
-            <a href="{{ asset('storage/' . $gallery->url) }}" target="_blank" class="btn btn-sm btn-dark position-absolute bottom-0 end-0 m-3 opacity-75 hover-opacity-100 rounded-pill px-3 shadow" style="font-size: 12px;">
+          <div class="mb-4 text-center position-relative rounded-4 overflow-hidden shadow-sm border bg-white" style="background: #000;">
+            <img src="{{ asset('storage/' . $gallery->url) }}" alt="{{ $gallery->judul ?? 'Dokumentasi UIS' }}" class="galeri-img-main img-fluid">
+            <a href="{{ asset('storage/' . $gallery->url) }}" target="_blank" class="btn btn-sm btn-dark position-absolute bottom-0 end-0 m-3 rounded-pill px-3 shadow" style="font-size: 12px; background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2);">
               <i class="bi bi-arrows-fullscreen me-1"></i> Buka Ukuran Penuh
             </a>
           </div>
         @else
-          <div class="p-5 rounded-4 text-center text-white mb-4" style="background: linear-gradient(135deg, #823ca2 0%, #4a1563 100%);">
-            <i class="bi bi-camera-fill" style="font-size: 64px; color: #ffd166;"></i>
-            <h4 class="fw-bold mt-2 mb-0">Dokumentasi FIKES UIS</h4>
+          <div class="p-5 rounded-4 text-center text-white mb-4 shadow-sm" style="background: #046B26;">
+            <i class="bi bi-camera-fill" style="font-size: 64px; color: #FED802;"></i>
+            <h4 class="fw-bold mt-2 mb-0">{{ $isHumas ? 'Dokumentasi Humas UIS' : 'Dokumentasi Universitas Ibnu Sina' }}</h4>
           </div>
         @endif
 
         <!-- Card Deskripsi Lengkap -->
         <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm border mb-4">
-          <h3 class="fw-bold mb-3 text-dark" style="font-size: 22px;">
-            <i class="bi bi-info-circle-fill text-primary me-2" style="color: var(--fikes-purple) !important;"></i>Keterangan & Informasi Kegiatan
-          </h3>
-          <div class="divider-line mb-4"></div>
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div style="width: 38px; height: 38px; border-radius: 10px; background: {{ $isHumas ? '#eaf7ee' : '#f3e8ff' }}; color: {{ $isHumas ? '#046B26' : 'var(--uis-purple)' }}; display: flex; align-items: center; justify-content: center; font-size: 18px;">
+              <i class="bi bi-info-circle-fill"></i>
+            </div>
+            <h3 class="fw-bold mb-0 text-dark" style="font-size: 21px;">Keterangan & Informasi Kegiatan</h3>
+          </div>
+          <div class="divider-line mb-4" style="{{ $isHumas ? 'background: #046B26;' : '' }}"></div>
 
           @if(!empty($gallery->deskripsi))
             <div class="article-content" style="line-height: 1.85; font-size: 15.5px; color: #334155;">
               {!! nl2br(e(strip_tags(html_entity_decode($gallery->deskripsi)))) !!}
             </div>
           @else
-            <p class="text-muted">
-              Dokumentasi visual kegiatan dan aktivitas sivitas akademika Fakultas Ilmu Kesehatan Universitas Ibnu Sina (FIKES UIS).
+            <p class="text-muted mb-0">
+              Dokumentasi visual kegiatan dan publikasi resmi {{ $isHumas ? 'kehumasan' : 'sivitas akademika' }} Universitas Ibnu Sina (UIS).
             </p>
           @endif
 
+          <!-- Footer Card: Back button & Share buttons -->
           <div class="mt-4 pt-3 border-top d-flex flex-wrap justify-content-between align-items-center gap-3">
-            <a href="{{ route('homepage.galeri') }}" class="btn btn-outline-secondary rounded-pill px-4" style="font-size: 13.5px;">
-              <i class="bi bi-arrow-left me-1"></i> Kembali ke Semua Galeri
-            </a>
+            @if($isHumas)
+              <a href="{{ route('homepage.galeri.humas') }}" class="btn btn-outline-success rounded-pill px-4 fw-semibold" style="font-size: 13.5px; border-width: 1.5px;">
+                <i class="bi bi-arrow-left me-1"></i> Kembali ke Galeri Humas
+              </a>
+            @else
+              <a href="{{ route('homepage.galeri') }}" class="btn btn-outline-secondary rounded-pill px-4 fw-semibold" style="font-size: 13.5px; border-width: 1.5px;">
+                <i class="bi bi-arrow-left me-1"></i> Kembali ke Semua Galeri
+              </a>
+            @endif
 
             @php
               $shareUrl  = urlencode(url()->current());
-              $shareText = urlencode('Dokumentasi FIKES UIS: ' . ($gallery->judul ?? 'Dokumentasi Visual'));
+              $shareText = urlencode(($isHumas ? 'Dokumentasi Humas UIS: ' : 'Dokumentasi UIS: ') . ($gallery->judul ?? 'Dokumentasi Visual'));
             @endphp
             <div class="d-flex align-items-center gap-2">
               <span class="text-muted small fw-semibold">Bagikan:</span>
-              <a href="https://wa.me/?text={{ $shareText }}%20{{ $shareUrl }}" target="_blank" class="btn btn-sm btn-success rounded-circle" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;" title="Bagikan ke WhatsApp">
+              <a href="https://wa.me/?text={{ $shareText }}%20{{ $shareUrl }}" target="_blank" class="btn btn-sm btn-success rounded-circle shadow-sm" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#25D366;border-color:#25D366;" title="Bagikan ke WhatsApp">
                 <i class="bi bi-whatsapp"></i>
               </a>
-              <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareUrl }}" target="_blank" class="btn btn-sm btn-primary rounded-circle" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;" title="Bagikan ke Facebook">
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareUrl }}" target="_blank" class="btn btn-sm btn-primary rounded-circle shadow-sm" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#1877F2;border-color:#1877F2;" title="Bagikan ke Facebook">
                 <i class="bi bi-facebook"></i>
               </a>
-              <button type="button" onclick="navigator.clipboard.writeText(window.location.href); alert('Tautan dokumentasi berhasil disalin!');" class="btn btn-sm btn-secondary rounded-circle" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;" title="Salin Tautan">
+              <button type="button" onclick="navigator.clipboard.writeText(window.location.href); alert('Tautan dokumentasi berhasil disalin!');" class="btn btn-sm btn-secondary rounded-circle shadow-sm" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;" title="Salin Tautan">
                 <i class="bi bi-link-45deg"></i>
               </button>
             </div>
           </div>
         </div>
 
-      </div>
+      </div><!-- End col-lg-8 -->
 
-      <!-- Kolom Kanan: Info Metadata & Galeri Lainnya -->
+      <!-- Kolom Kanan: Info Metadata & Galeri Lainnya (col-lg-4) -->
       <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
 
         <!-- Card Informasi Metadata -->
         <div class="info-badge-card mb-4">
-          <h5 class="fw-bold mb-3 text-dark d-flex align-items-center gap-2" style="font-size: 17px;">
-            <i class="bi bi-camera-reels text-warning"></i>
-            <span>Informasi Dokumentasi</span>
-          </h5>
-
-          <div class="info-meta-row">
-            <span class="info-meta-label">Kategori</span>
-            <span class="info-meta-val text-primary" style="color: var(--fikes-purple) !important;">Dokumentasi Visual</span>
+          <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+            <div style="width: 34px; height: 34px; border-radius: 10px; background: {{ $isHumas ? '#eaf7ee' : '#f3e8ff' }}; color: {{ $isHumas ? '#046B26' : 'var(--uis-purple)' }}; display: flex; align-items: center; justify-content: center; font-size: 16px;">
+              <i class="bi bi-camera-reels-fill"></i>
+            </div>
+            <h5 class="fw-bold mb-0 text-dark" style="font-size: 16.5px;">Informasi Dokumentasi</h5>
           </div>
 
           <div class="info-meta-row">
-            <span class="info-meta-label">Fakultas</span>
-            <span class="info-meta-val">FIKES UIS</span>
+            <span class="info-meta-label">Kategori</span>
+            <span class="info-meta-val">
+              @if($isHumas)
+                <span class="badge rounded-pill px-3 py-1" style="background: #eaf7ee; color: #046B26; border: 1px solid #b7e4c7; font-size: 12px;">
+                  <i class="bi bi-megaphone-fill me-1"></i>Humas
+                </span>
+              @else
+                <span class="badge rounded-pill px-3 py-1" style="background: #f1f5f9; color: #334155; border: 1px solid #e2e8f0; font-size: 12px;">
+                  <i class="bi bi-building me-1"></i>Universitas
+                </span>
+              @endif
+            </span>
+          </div>
+
+          <div class="info-meta-row">
+            <span class="info-meta-label">Unit Penerbit</span>
+            <span class="info-meta-val text-dark">{{ $isHumas ? 'Biro Humas & Promosi' : 'Universitas Ibnu Sina' }}</span>
           </div>
 
           <div class="info-meta-row">
             <span class="info-meta-label">Tanggal Terbit</span>
-            <span class="info-meta-val">{{ $gallery->created_at->translatedFormat('d F Y') }}</span>
+            <span class="info-meta-val text-dark"><i class="bi bi-calendar-event me-1 text-muted"></i>{{ $gallery->created_at->translatedFormat('d F Y') }}</span>
           </div>
         </div>
 
         <!-- Card Galeri Lainnya -->
         @if(isset($otherGalleries) && $otherGalleries->count() > 0)
           <div class="info-badge-card">
-            <h5 class="fw-bold mb-3 text-dark d-flex align-items-center justify-content-between" style="font-size: 17px;">
-              <span class="d-flex align-items-center gap-2">
-                <i class="bi bi-images text-primary" style="color: var(--fikes-purple) !important;"></i>
-                Dokumentasi Lainnya
-              </span>
-              <a href="{{ route('homepage.galeri') }}" class="small fw-semibold text-decoration-none" style="font-size: 12.5px; color: var(--fikes-purple);">Lihat Semua</a>
-            </h5>
+            <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+              <div class="d-flex align-items-center gap-2">
+                <div style="width: 34px; height: 34px; border-radius: 10px; background: {{ $isHumas ? '#eaf7ee' : '#f3e8ff' }}; color: {{ $isHumas ? '#046B26' : 'var(--uis-purple)' }}; display: flex; align-items: center; justify-content: center; font-size: 16px;">
+                  <i class="bi bi-images"></i>
+                </div>
+                <h5 class="fw-bold mb-0 text-dark" style="font-size: 16.5px;">{{ $isHumas ? 'Dokumentasi Humas Lain' : 'Dokumentasi Lainnya' }}</h5>
+              </div>
+              <a href="{{ $isHumas ? route('homepage.galeri.humas') : route('homepage.galeri') }}" class="small fw-semibold text-decoration-none" style="font-size: 12.5px; color: {{ $isHumas ? '#046B26' : 'var(--uis-purple)' }};">Lihat Semua</a>
+            </div>
 
             <div>
               @foreach($otherGalleries as $other)
@@ -213,12 +176,12 @@
                   @if(!empty($other->url))
                     <img src="{{ asset('storage/' . $other->url) }}" alt="{{ $other->judul }}" class="other-galeri-img">
                   @else
-                    <div class="other-galeri-img d-flex align-items-center justify-content-center text-white" style="background: linear-gradient(135deg, #823ca2, #4a1563);">
+                    <div class="other-galeri-img d-flex align-items-center justify-content-center text-white" style="background: #046B26;">
                       <i class="bi bi-camera-fill small"></i>
                     </div>
                   @endif
                   <div class="d-flex flex-column justify-content-center">
-                    <span class="other-galeri-title text-truncate-2">{{ Str::limit($other->judul, 50) }}</span>
+                    <span class="other-galeri-title text-truncate-2" style="font-size: 13.5px; line-height: 1.4;">{{ Str::limit($other->judul, 48) }}</span>
                     <span class="text-muted small mt-1" style="font-size: 11.5px;">
                       <i class="bi bi-calendar3 me-1"></i>{{ $other->created_at->translatedFormat('d M Y') }}
                     </span>
@@ -229,10 +192,10 @@
           </div>
         @endif
 
-      </div>
+      </div><!-- End col-lg-4 -->
 
-    </div>
-  </div>
+    </div><!-- End row -->
+  </div><!-- End container -->
 </section>
 
 @endsection

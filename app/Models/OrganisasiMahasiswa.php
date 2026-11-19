@@ -32,7 +32,7 @@ class OrganisasiMahasiswa extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'urutan'    => 'integer',
+        'urutan' => 'integer',
     ];
 
     protected static function boot()
@@ -41,7 +41,7 @@ class OrganisasiMahasiswa extends Model
 
         static::creating(function ($model) {
             if (empty($model->slug)) {
-                $base = !empty($model->singkatan) ? $model->singkatan : $model->nama_organisasi;
+                $base = ! empty($model->singkatan) ? $model->singkatan : $model->nama_organisasi;
                 $slug = Str::slug($base);
                 $originalSlug = $slug;
                 $count = 1;

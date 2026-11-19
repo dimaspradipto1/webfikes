@@ -58,13 +58,13 @@ class KurikulumSeeder extends Seeder
             Kurikulum::create([
                 'layanan_id' => $prodiK3?->id,
                 'prodi_nama' => 'S1 Kesehatan dan Keselamatan Kerja',
-                'kode_mk'    => $c['kode_mk'],
-                'nama_mk'    => $c['nama_mk'],
-                'semester'   => $c['semester'],
-                'sks'        => $c['sks'],
-                'kategori'   => $c['kategori'],
-                'urutan'     => $idx + 1,
-                'is_active'  => true,
+                'kode_mk' => $c['kode_mk'],
+                'nama_mk' => $c['nama_mk'],
+                'semester' => $c['semester'],
+                'sks' => $c['sks'],
+                'kategori' => $c['kategori'],
+                'urutan' => $idx + 1,
+                'is_active' => true,
             ]);
         }
 
@@ -96,13 +96,13 @@ class KurikulumSeeder extends Seeder
             Kurikulum::create([
                 'layanan_id' => $prodiKesling?->id,
                 'prodi_nama' => 'S1 Kesehatan Lingkungan',
-                'kode_mk'    => $c['kode_mk'],
-                'nama_mk'    => $c['nama_mk'],
-                'semester'   => $c['semester'],
-                'sks'        => $c['sks'],
-                'kategori'   => $c['kategori'],
-                'urutan'     => $idx + 1,
-                'is_active'  => true,
+                'kode_mk' => $c['kode_mk'],
+                'nama_mk' => $c['nama_mk'],
+                'semester' => $c['semester'],
+                'sks' => $c['sks'],
+                'kategori' => $c['kategori'],
+                'urutan' => $idx + 1,
+                'is_active' => true,
             ]);
         }
 
@@ -129,13 +129,13 @@ class KurikulumSeeder extends Seeder
             Kurikulum::create([
                 'layanan_id' => $prodiKesmas?->id,
                 'prodi_nama' => 'S2 Kesehatan Masyarakat',
-                'kode_mk'    => $c['kode_mk'],
-                'nama_mk'    => $c['nama_mk'],
-                'semester'   => $c['semester'],
-                'sks'        => $c['sks'],
-                'kategori'   => $c['kategori'],
-                'urutan'     => $idx + 1,
-                'is_active'  => true,
+                'kode_mk' => $c['kode_mk'],
+                'nama_mk' => $c['nama_mk'],
+                'semester' => $c['semester'],
+                'sks' => $c['sks'],
+                'kategori' => $c['kategori'],
+                'urutan' => $idx + 1,
+                'is_active' => true,
             ]);
         }
     }

@@ -15,7 +15,7 @@ class UserDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder<User> $query
+     * @param  QueryBuilder<User>  $query
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -25,25 +25,26 @@ class UserDataTable extends DataTable
             ->addColumn('name', fn ($item) => e($item->name))
             ->addColumn('email', fn ($item) => e($item->email))
             ->addColumn('roles', function ($item) {
-                $roles = array_filter($item->roles_array, fn($r) => in_array($r, ['admin', 'penulis', 'organisasi']));
+                $roles = array_filter($item->roles_array, fn ($r) => in_array($r, ['admin', 'penulis', 'organisasi']));
                 $html = '<div class="d-flex flex-wrap gap-1 justify-content-center">';
                 foreach ($roles as $r) {
                     $badge = match ($r) {
-                        'admin'      => ['label' => 'Admin',          'class' => 'bg-primary text-white', 'style' => ''],
-                        'penulis'    => ['label' => 'Penulis Berita', 'class' => 'bg-warning text-dark',  'style' => ''],
+                        'admin' => ['label' => 'Admin',          'class' => 'bg-primary text-white', 'style' => ''],
+                        'penulis' => ['label' => 'Penulis Berita', 'class' => 'bg-warning text-dark',  'style' => ''],
                         'organisasi' => ['label' => 'Organisasi',     'class' => 'text-white',            'style' => 'background:#823ca2;'],
-                        default      => ['label' => ucfirst($r),      'class' => 'bg-secondary text-white','style' => ''],
+                        default => ['label' => ucfirst($r),      'class' => 'bg-secondary text-white', 'style' => ''],
                     };
-                    $html .= '<span class="badge rounded-pill ' . $badge['class'] . '" style="' . $badge['style'] . '">' . $badge['label'] . '</span>';
+                    $html .= '<span class="badge rounded-pill '.$badge['class'].'" style="'.$badge['style'].'">'.$badge['label'].'</span>';
                 }
                 $html .= '</div>';
+
                 return $html;
             })
             ->addColumn('action', function ($user) {
-                $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
+                $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
 
                 // Tombol Update Password
-                $btn .= '<a href="' . route('user.updatePasswordForm', $user->id) . '"
+                $btn .= '<a href="'.route('user.updatePasswordForm', $user->id).'"
                             class="btn btn-sm btn-info text-white"
                             style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                             title="Update Password">
@@ -51,7 +52,7 @@ class UserDataTable extends DataTable
                          </a>';
 
                 // Tombol Edit
-                $btn .= '<a href="' . route('user.edit', $user->id) . '"
+                $btn .= '<a href="'.route('user.edit', $user->id).'"
                             class="btn btn-sm btn-warning text-white"
                             style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                             title="Edit">
@@ -59,11 +60,11 @@ class UserDataTable extends DataTable
                          </a>';
 
                 // Tombol Hapus
-                $btn .= '<form action="' . route('user.destroy', $user->id) . '"
+                $btn .= '<form action="'.route('user.destroy', $user->id).'"
                               method="POST" class="m-0"
                               onsubmit="return confirm(\'Yakin ingin menghapus pengguna ini?\')">'
-                        . csrf_field() . method_field('DELETE')
-                        . '<button type="submit"
+                        .csrf_field().method_field('DELETE')
+                        .'<button type="submit"
                                    class="btn btn-sm btn-danger"
                                    style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                                    title="Hapus">
@@ -72,6 +73,7 @@ class UserDataTable extends DataTable
                          </form>';
 
                 $btn .= '</div>';
+
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
@@ -146,6 +148,6 @@ class UserDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'User_' . date('YmdHis');
+        return 'User_'.date('YmdHis');
     }
 }

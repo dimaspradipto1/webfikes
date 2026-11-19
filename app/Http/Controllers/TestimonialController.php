@@ -32,12 +32,12 @@ class TestimonialController extends Controller
     public function store(TestimonialRequest $request): RedirectResponse
     {
         Testimonial::create([
-            'nama'      => $request->nama,
+            'nama' => $request->nama,
             'pekerjaan' => $request->pekerjaan,
-            'kategori'  => $request->kategori,
-            'bintang'   => $request->bintang,
-            'pesan'     => $request->pesan,
-            'aktif'     => $request->has('aktif') ? true : false,
+            'kategori' => $request->kategori,
+            'bintang' => $request->bintang,
+            'pesan' => $request->pesan,
+            'aktif' => $request->has('aktif') ? true : false,
         ]);
 
         alert()->success('Berhasil!', 'Testimoni berhasil ditambahkan.');
@@ -59,12 +59,12 @@ class TestimonialController extends Controller
     public function update(TestimonialRequest $request, Testimonial $testimonial): RedirectResponse
     {
         $testimonial->update([
-            'nama'      => $request->nama,
+            'nama' => $request->nama,
             'pekerjaan' => $request->pekerjaan,
-            'kategori'  => $request->kategori,
-            'bintang'   => $request->bintang,
-            'pesan'     => $request->pesan,
-            'aktif'     => $request->has('aktif') ? true : false,
+            'kategori' => $request->kategori,
+            'bintang' => $request->bintang,
+            'pesan' => $request->pesan,
+            'aktif' => $request->has('aktif') ? true : false,
         ]);
 
         alert()->success('Berhasil!', 'Testimoni berhasil diperbarui.');

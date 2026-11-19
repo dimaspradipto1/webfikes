@@ -1,104 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($organisasi->singkatan ? $organisasi->singkatan . ' — ' : '') . $organisasi->nama_organisasi . ' | FIKES UIS')
-@section('meta_description', 'Profil lengkap ' . $organisasi->nama_organisasi . ' FIKES Universitas Ibnu Sina: Visi, Misi, Susunan Pengurus, Program Kerja dan Kegiatan Kemahasiswaan.')
-
-@push('styles')
-<style>
-  :root {
-    --fikes-purple: #823ca2;
-    --fikes-purple-dark: #591e73;
-    --fikes-orange: #ff9c00;
-  }
-
-  .detail-hero {
-    background: linear-gradient(135deg, #190a24 0%, #3b1154 50%, #823ca2 100%);
-    padding: 60px 0 40px;
-    color: #ffffff;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .detail-card {
-    background: #ffffff;
-    border-radius: 16px;
-    border: 1px solid #ede4f2;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    padding: 30px;
-    margin-bottom: 30px;
-  }
-
-  .info-badge-box {
-    background: #faf7fc;
-    border: 1px solid #eddff5;
-    border-radius: 12px;
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    height: 100%;
-  }
-  .info-badge-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #823ca2 0%, #591e73 100%);
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-
-  .section-subtitle {
-    font-size: 19px;
-    font-weight: 700;
-    color: #1e1e1e;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #f2e9f7;
-    margin-bottom: 18px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .rich-content {
-    font-size: 15px;
-    line-height: 1.8;
-    color: #444444;
-  }
-  .rich-content p {
-    margin-bottom: 1rem;
-  }
-
-  .visi-misi-card {
-    background: linear-gradient(135deg, rgba(130, 60, 162, 0.04) 0%, rgba(255, 156, 0, 0.04) 100%);
-    border: 1px solid #eddff5;
-    border-radius: 14px;
-    padding: 24px;
-    margin-bottom: 24px;
-  }
-
-  .sidebar-ormawa-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #f0e6f5;
-    background: #ffffff;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    margin-bottom: 10px;
-  }
-  .sidebar-ormawa-item:hover {
-    border-color: var(--fikes-purple);
-    background: #faf6fd;
-    transform: translateX(4px);
-  }
-</style>
-@endpush
+@section('title', ($organisasi->singkatan ? $organisasi->singkatan . ' — ' : '') . $organisasi->nama_organisasi . ' | Universitas Ibnu Sina')
+@section('meta_description', 'Profil lengkap ' . $organisasi->nama_organisasi . ' UIS Universitas Ibnu Sina: Visi, Misi, Susunan Pengurus, Program Kerja dan Kegiatan Kemahasiswaan.')
 
 @section('content')
 <!-- HERO SECTION -->
@@ -106,14 +9,14 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-8" data-aos="fade-up">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb mb-3 bg-transparent p-0">
-            <li class="breadcrumb-item"><a href="{{ route('homepage') }}" class="text-white-50 text-decoration-none">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('homepage.organisasi') }}" class="text-white-50 text-decoration-none">Organisasi Mahasiswa</a></li>
-            <li class="breadcrumb-item text-warning active fw-semibold" aria-current="page">{{ $organisasi->singkatan ?: $organisasi->nama_organisasi }}</li>
-          </ol>
-        </nav>
-        <span class="badge mb-2" style="background:#ff9c00; color:#1a0528; font-size:12px; font-weight:700; padding:6px 14px;">
+        <div class="breadcrumb-custom mb-3">
+          <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+          <span>/</span>
+          <a href="{{ route('homepage.organisasi') }}">Organisasi Mahasiswa</a>
+          <span>/</span>
+          <span class="active">{{ $organisasi->singkatan ?: $organisasi->nama_organisasi }}</span>
+        </div>
+        <span class="badge mb-2" style="background:#FED802; color:#1a0528; font-size:12px; font-weight:700; padding:6px 14px;">
           {{ $organisasi->kategori }}
         </span>
         <h1 class="fw-bold text-white mb-2" style="font-size: clamp(24px, 3vw, 36px); line-height: 1.25;">
@@ -143,11 +46,11 @@
         <div class="detail-card">
           <!-- Logo & Header info -->
           <div class="d-flex flex-wrap align-items-center gap-4 pb-4 border-bottom mb-4">
-            <div style="width: 100px; height: 100px; border-radius: 50%; padding: 6px; background: #ffffff; border: 2px solid #ecd8f5; box-shadow: 0 4px 14px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <div class="flex-shrink-0" style="display: flex; align-items: center; justify-content: center;">
               @if(!empty($organisasi->logo))
-                <img src="{{ asset('storage/' . $organisasi->logo) }}" alt="{{ $organisasi->nama_organisasi }}" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 50%;">
+                <img src="{{ asset('storage/' . $organisasi->logo) }}" alt="{{ $organisasi->nama_organisasi }}" style="width: 85px; height: 85px; object-fit: contain; display: block;">
               @else
-                <div class="w-100 h-100 rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="background: linear-gradient(135deg, #823ca2 0%, #190a24 100%); font-size: 24px;">
+                <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="width: 80px; height: 80px; background: #032e12; font-size: 24px;">
                   {{ strtoupper(substr($organisasi->singkatan ?: $organisasi->nama_organisasi, 0, 2)) }}
                 </div>
               @endif
@@ -156,7 +59,7 @@
             <div>
               <h2 class="h4 fw-bold text-dark mb-1">{{ $organisasi->nama_organisasi }}</h2>
               <div class="d-flex flex-wrap align-items-center gap-2">
-                <span class="badge" style="background: var(--fikes-purple);">{{ $organisasi->kategori }}</span>
+                <span class="badge" style="background: var(--uis-purple);">{{ $organisasi->kategori }}</span>
                 @if(!empty($organisasi->periode))
                   <span class="badge bg-light text-dark border"><i class="bi bi-calendar3 me-1 text-warning"></i>Periode {{ $organisasi->periode }}</span>
                 @endif
@@ -186,7 +89,7 @@
             @if(!empty($organisasi->nama_wakil))
               <div class="col-sm-6">
                 <div class="info-badge-box">
-                  <div class="info-badge-icon" style="background: linear-gradient(135deg, #ff9c00 0%, #e08500 100%);"><i class="bi bi-person-check"></i></div>
+                  <div class="info-badge-icon" style="background: #FED802;"><i class="bi bi-person-check"></i></div>
                   <div>
                     <small class="text-muted d-block">Wakil Ketua</small>
                     <strong class="text-dark">{{ $organisasi->nama_wakil }}</strong>
@@ -198,7 +101,7 @@
             @if(!empty($organisasi->pembina))
               <div class="col-sm-6">
                 <div class="info-badge-box">
-                  <div class="info-badge-icon" style="background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);"><i class="bi bi-mortarboard-fill"></i></div>
+                  <div class="info-badge-icon" style="background: #046B26; color: #ffffff;"><i class="bi bi-mortarboard-fill"></i></div>
                   <div>
                     <small class="text-muted d-block">Dosen Pembina</small>
                     <strong class="text-dark">{{ $organisasi->pembina }}</strong>
@@ -210,7 +113,7 @@
             @if(!empty($organisasi->periode))
               <div class="col-sm-6">
                 <div class="info-badge-box">
-                  <div class="info-badge-icon" style="background: linear-gradient(135deg, #198754 0%, #146c43 100%);"><i class="bi bi-calendar-check"></i></div>
+                  <div class="info-badge-icon" style="background: #FED802; color: #046B26;"><i class="bi bi-calendar-check"></i></div>
                   <div>
                     <small class="text-muted d-block">Masa Bakti</small>
                     <strong class="text-dark">Tahun {{ $organisasi->periode }}</strong>
@@ -304,7 +207,7 @@
 
           <div class="small text-muted p-2 rounded-3 bg-light border">
             <i class="bi bi-geo-alt-fill text-warning me-1"></i>
-            Sekretariat Bersama Gedung FIKES UIS Batam
+            Sekretariat Bersama Gedung Universitas Ibnu Sina Batam
           </div>
         </div>
 
@@ -317,7 +220,7 @@
 
             @foreach($otherOrganisasis as $other)
               <a href="{{ route('homepage.organisasi.detail', $other->slug) }}" class="sidebar-ormawa-item">
-                <div style="width: 40px; height: 40px; border-radius: 50%; background: #faf7fc; border: 1px solid #ecd8f5; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: #faf7fc; border: 1px solid #d4edd9; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                   @if(!empty($other->logo))
                     <img src="{{ asset('storage/' . $other->logo) }}" alt="{{ $other->nama_organisasi }}" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 50%;">
                   @else

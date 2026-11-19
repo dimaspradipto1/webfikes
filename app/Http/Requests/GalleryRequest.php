@@ -15,6 +15,7 @@ class GalleryRequest extends FormRequest
     {
         $rules = [
             'judul' => ['nullable', 'string', 'max:255'],
+            'kategori' => ['required', 'string', 'in:universitas,humas'],
             'deskripsi' => ['nullable', 'string'],
         ];
 
@@ -35,6 +36,8 @@ class GalleryRequest extends FormRequest
             'foto.mimes' => 'Format gambar harus jpeg, png, jpg, gif, svg, atau webp.',
             'foto.max' => 'Ukuran gambar maksimal 2MB.',
             'judul.max' => 'Judul maksimal 255 karakter.',
+            'kategori.required' => 'Kategori galeri wajib dipilih.',
+            'kategori.in' => 'Kategori harus bernilai universitas atau humas.',
         ];
     }
 }

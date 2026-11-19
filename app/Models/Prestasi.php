@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Prestasi extends Model
 {
@@ -26,14 +27,14 @@ class Prestasi extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'urutan'    => 'integer',
+        'urutan' => 'integer',
     ];
 
     protected static function booted()
     {
         static::saving(function ($prestasi) {
             if (empty($prestasi->slug) || $prestasi->isDirty('judul_prestasi')) {
-                $baseSlug = \Illuminate\Support\Str::slug($prestasi->judul_prestasi);
+                $baseSlug = Str::slug($prestasi->judul_prestasi);
                 $slug = $baseSlug;
                 $counter = 1;
 

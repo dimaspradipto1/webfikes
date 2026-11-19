@@ -1,54 +1,12 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Galeri & Dokumentasi — Fakultas Ilmu Kesehatan (FIKES)')
-@section('meta_description', 'Galeri foto kegiatan akademik, praktikum laboratorium, pengabdian masyarakat, dan wisuda Fakultas Ilmu Kesehatan (FIKES).')
-@section('meta_keywords', 'galeri fikes, dokumentasi fikes, foto praktikum kesehatan, kegiatan mahasiswa fikes')
+@php
+  $isHumas = ($kategori ?? '') === 'humas';
+@endphp
 
-@push('styles')
-<style>
-  .galeri-hero {
-    position: relative;
-    background: var(--obsidian-dark);
-    padding: 70px 0 50px;
-    border-bottom: 2px solid var(--fikes-purple);
-  }
-  .galeri-hero-title {
-    font-size: 38px;
-    font-weight: 800;
-    color: var(--white);
-    margin-bottom: 8px;
-  }
-  .galeri-hero-title em {
-    font-style: normal;
-    color: var(--fikes-orange);
-  }
-  .galeri-item-card {
-    background: var(--white);
-    border: 1px solid var(--border-light);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .galeri-item-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--border-purple);
-  }
-  .galeri-img-wrap {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-  }
-  .galeri-caption {
-    padding: 16px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 600;
-    font-size: 14.5px;
-    color: var(--text-main);
-  }
-</style>
-@endpush
+@section('title', ($isHumas ? 'Galeri & Kegiatan Humas' : 'Galeri & Dokumentasi') . ' — Universitas Ibnu Sina (UIS)')
+@section('meta_description', $isHumas ? 'Galeri foto liputan, publikasi, dan dokumentasi kegiatan Humas Universitas Ibnu Sina (UIS).' : 'Galeri foto kegiatan akademik, praktikum laboratorium, pengabdian masyarakat, dan wisuda Universitas Ibnu Sina (UIS).')
+@section('meta_keywords', 'galeri uis, dokumentasi uis, foto kampus uis, humas uis, universitas ibnu sina batam')
 
 @section('content')
 
@@ -59,12 +17,22 @@
   <div class="container">
     <div class="galeri-hero-content" data-aos="fade-up" data-aos-duration="800">
       <h1 class="galeri-hero-title">
-        Galeri & <em>Dokumentasi</em>
+        @if($isHumas)
+          Galeri & <em>Kegiatan Humas</em>
+        @else
+          Galeri & <em>Dokumentasi</em>
+        @endif
       </h1>
       <div class="breadcrumb-custom">
-        <a href="{{ route('homepage') }}" class="text-white-50"><i class="bi bi-house-fill me-1"></i>Beranda</a>
-        <span class="mx-2 text-white-50">/</span>
-        <span style="color: var(--fikes-orange); font-weight: 600;">Galeri Kegiatan</span>
+        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+        <span>/</span>
+        @if($isHumas)
+          <a href="{{ route('homepage.humas') }}">Humas</a>
+          <span>/</span>
+          <span class="active">Galeri Humas</span>
+        @else
+          <span class="active">Galeri & Dokumentasi</span>
+        @endif
       </div>
     </div>
   </div>
@@ -76,13 +44,37 @@
 <section class="section-bg-white">
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
-      <div class="section-label mx-auto">Dokumentasi Kampus</div>
-      <h2 class="section-title">Aktivitas & <em>Kegiatan Mahasiswa</em></h2>
-      <div class="divider-line centered"></div>
-      <p class="section-desc mx-auto">
-        Kumpulan dokumentasi praktikum laboratorium, pengabdian masyarakat, seminar kesehatan, dan momen prestasi civitas akademika FIKES.
-      </p>
+      @if($isHumas)
+        <div class="section-label mx-auto">Dokumentasi Humas</div>
+        <h2 class="section-title">Galeri & <em>Kegiatan Humas</em></h2>
+        <div class="divider-line centered"></div>
+        <p class="section-desc mx-auto">
+          Kumpulan dokumentasi publikasi, liputan media, siaran pers, dan seluruh kegiatan kehumasan Universitas Ibnu Sina.
+        </p>
+      @else
+        <div class="section-label mx-auto">Dokumentasi Kampus</div>
+        <h2 class="section-title">Aktivitas & <em>Kegiatan Mahasiswa</em></h2>
+        <div class="divider-line centered"></div>
+        <p class="section-desc mx-auto">
+          Kumpulan dokumentasi praktikum laboratorium, pengabdian masyarakat, seminar nasional, dan momen prestasi civitas akademika UIS.
+        </p>
+      @endif
     </div>
+
+    @if($isHumas)
+      {{-- Dedicated Humas Action Bar (Tanpa Univ) --}}
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 p-3 rounded-4" style="background: #eaf7ee; border: 1.5px solid #b7e4c7;" data-aos="fade-up">
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge rounded-pill px-3 py-2" style="background: #046B26; color: #ffffff; font-size: 13.5px;">
+            <i class="bi bi-megaphone-fill me-1"></i> Dokumentasi Humas
+          </span>
+          <span class="text-muted small fw-semibold">Menampilkan seluruh foto kegiatan Humas ({{ $galleries->total() ?? $galleries->count() }} foto)</span>
+        </div>
+        <a href="{{ route('homepage.humas') }}" class="btn btn-sm btn-outline-success rounded-pill px-3 fw-semibold">
+          <i class="bi bi-arrow-left me-1"></i> Kembali ke Home Humas
+        </a>
+      </div>
+    @endif
 
     @if($galleries->isEmpty())
       <div class="col-12 text-center py-5">
@@ -99,9 +91,9 @@
             <a href="{{ route('homepage.galeri.detail', $item->slug ?? $item->id) }}" class="text-decoration-none d-block">
               <div class="galeri-item-card">
                 @if(!empty($item->url))
-                  <img src="{{ asset('storage/' . $item->url) }}" alt="{{ $item->judul ?? 'Dokumentasi FIKES' }}" class="galeri-img-wrap">
+                  <img src="{{ asset('storage/' . $item->url) }}" alt="{{ $item->judul ?? 'Dokumentasi UIS' }}" class="galeri-img-wrap">
                 @else
-                  <div class="d-flex align-items-center justify-content-center text-white" style="height: 220px; background: linear-gradient(135deg, #823ca2 0%, #190a24 100%);">
+                  <div class="d-flex align-items-center justify-content-center text-white" style="height: 220px; background: #032e12;">
                     <i class="bi bi-camera-fill fs-1 text-white-50"></i>
                   </div>
                 @endif
@@ -111,7 +103,7 @@
                     @if(!empty($item->deskripsi))
                       <small class="text-muted d-block" style="font-size: 13px; line-height: 1.5; color: #64748b !important;">{!! Str::limit(strip_tags($item->deskripsi), 90) !!}</small>
                     @endif
-                    <div class="mt-2 text-primary fw-bold small d-flex align-items-center gap-1" style="font-size: 12.5px; color: var(--fikes-purple) !important;">
+                    <div class="mt-2 text-primary fw-bold small d-flex align-items-center gap-1" style="font-size: 12.5px; color: var(--uis-purple) !important;">
                       <span>Lihat Detail</span>
                       <i class="bi bi-arrow-right"></i>
                     </div>

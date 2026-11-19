@@ -1,76 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', $item->judul . ' — Fakultas Ilmu Kesehatan Universitas Ibnu Sina')
+@section('title', $item->judul . ' — Universitas Ibnu Sina')
 @section('meta_description', Str::limit(strip_tags($item->subjudul ?? $item->deskripsi), 160))
-
-@push('styles')
-<style>
-  .akademik-hero {
-    background: linear-gradient(135deg, #190a24 0%, #3b124d 100%);
-    padding: 70px 0 60px;
-    color: #ffffff;
-    position: relative;
-    overflow: hidden;
-  }
-  .akademik-hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 14px;
-    background: linear-gradient(90deg, var(--fikes-orange) 0%, #ffd000 100%);
-  }
-  .akademik-card {
-    background: #ffffff;
-    border-radius: 20px;
-    border: 1px solid var(--border-light);
-    box-shadow: var(--shadow-sm);
-    padding: 40px;
-    margin-bottom: 30px;
-  }
-  .doc-download-box {
-    background: linear-gradient(135deg, #faf6fd 0%, #f3ebf9 100%);
-    border: 1.5px solid #e1c7f4;
-    border-radius: 16px;
-    padding: 24px 28px;
-    margin-bottom: 32px;
-  }
-  .nav-akademik-sidebar {
-    background: #ffffff;
-    border: 1px solid var(--border-light);
-    border-radius: 18px;
-    padding: 20px;
-    box-shadow: var(--shadow-sm);
-  }
-  .nav-akademik-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 14px;
-    color: var(--text-main);
-    text-decoration: none;
-    transition: all 0.2s ease;
-    margin-bottom: 6px;
-    background: #f8fafc;
-  }
-  .nav-akademik-link:hover,
-  .nav-akademik-link.active {
-    background: var(--fikes-purple);
-    color: #ffffff;
-    transform: translateX(4px);
-  }
-  .nav-akademik-link i {
-    font-size: 18px;
-    color: var(--fikes-orange);
-  }
-  .nav-akademik-link.active i,
-  .nav-akademik-link:hover i {
-    color: #ffffff;
-  }
-</style>
-@endpush
 
 @section('content')
 <!-- ═══════════════════════════════════════════════
@@ -78,15 +9,8 @@
 ═══════════════════════════════════════════════ -->
 <section class="akademik-hero">
   <div class="container position-relative" data-aos="fade-up">
-    <nav aria-label="breadcrumb" class="mb-3">
-      <ol class="breadcrumb mb-0" style="font-size: 13px;">
-        <li class="breadcrumb-item"><a href="{{ route('homepage') }}" class="text-white-50 text-decoration-none">Beranda</a></li>
-        <li class="breadcrumb-item text-white-50">Akademik</li>
-        <li class="breadcrumb-item text-white active" aria-current="page">{{ $pageTitle }}</li>
-      </ol>
-    </nav>
-    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--fikes-orange); color: #190a24; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
-      LAYANAN AKADEMIK FIKES UIS
+    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange); color: #032e12; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
+      LAYANAN AKADEMIK Universitas Ibnu Sina
     </div>
     <h1 class="display-6 fw-bold text-white mb-2">{{ $item->judul }}</h1>
     @if($item->subjudul)
@@ -94,6 +18,11 @@
         {{ $item->subjudul }}
       </p>
     @endif
+    <div class="breadcrumb-custom mt-3">
+      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+      <span>/</span>
+      <span class="active">{{ $pageTitle }}</span>
+    </div>
   </div>
 </section>
 
@@ -135,10 +64,10 @@
 
           {{-- Portal Link Eksternal (SIAKAD dll) --}}
           @if(!empty($item->link_url))
-            <div class="p-4 rounded-4 mb-4 text-white d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3" style="background: linear-gradient(135deg, #190a24 0%, #521c6b 100%);">
+            <div class="p-4 rounded-4 mb-4 text-white d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3" style="background: #032e12; border: 1px solid #046B26;">
               <div>
-                <h5 class="fw-bold text-white mb-1"><i class="bi bi-laptop text-warning me-2"></i>Akses Langsung Sistem Online</h5>
-                <p class="text-white-50 small mb-0">Klik tombol untuk masuk ke portal sistem resmi FIKES UIS.</p>
+                <h5 class="fw-bold text-white mb-1"><i class="bi bi-laptop me-2" style="color: #FED802;"></i>Akses Langsung Sistem Online</h5>
+                <p class="text-white-50 small mb-0">Klik tombol untuk masuk ke portal sistem resmi Universitas Ibnu Sina.</p>
               </div>
               <a href="{{ $item->link_url }}" target="_blank" class="btn-primary-hero" style="font-size: 13.5px; padding: 10px 24px; white-space: nowrap;">
                 Buka Portal <i class="bi bi-box-arrow-up-right ms-1"></i>
@@ -179,13 +108,13 @@
         </div>
 
         {{-- Widget Kontak / PMB --}}
-        <div class="p-4 rounded-4 text-white" style="background: linear-gradient(135deg, #2d0f3d 0%, #190a24 100%); border: 1px solid rgba(255, 255, 255, 0.1);">
-          <div class="badge px-3 py-1 rounded-pill mb-2" style="background: var(--fikes-orange); color: #190a24; font-weight: 800; font-size: 11px;">
+        <div class="p-4 rounded-4 text-white" style="background: #032e12; border: 1px solid #046B26;">
+          <div class="badge px-3 py-1 rounded-pill mb-2" style="background: #FED802; color: #046B26; font-weight: 800; font-size: 11px;">
             INFORMASI PMB
           </div>
           <h5 class="fw-bold text-white mb-2">Butuh Bantuan Akademik?</h5>
           <p class="text-white-50 small mb-3">
-            Hubungi Bagian Tata Usaha & Layanan Akademik FIKES UIS untuk informasi lebih lanjut.
+            Hubungi Bagian Tata Usaha & Layanan Akademik Universitas Ibnu Sina untuk informasi lebih lanjut.
           </p>
           <a href="{{ route('homepage.kontak') }}" class="btn btn-outline-light w-100 rounded-3 fw-bold py-2" style="font-size: 13.5px;">
             <i class="bi bi-telephone me-1"></i> Hubungi Kami

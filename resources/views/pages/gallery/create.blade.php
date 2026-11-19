@@ -57,6 +57,28 @@
                         @enderror
                     </div>
 
+                    {{-- Kategori Galeri --}}
+                    <div class="mb-3">
+                        <label for="kategori" class="form-label fw-semibold">
+                            Kategori Galeri <span class="text-danger">*</span>
+                        </label>
+                        <select id="kategori"
+                                name="kategori"
+                                class="form-select @error('kategori') is-invalid @enderror"
+                                required>
+                            <option value="universitas" {{ old('kategori', 'universitas') === 'universitas' ? 'selected' : '' }}>
+                                Universitas (Galeri & Dokumentasi Universitas)
+                            </option>
+                            <option value="humas" {{ old('kategori') === 'humas' ? 'selected' : '' }}>
+                                Humas (Galeri & Kegiatan Humas)
+                            </option>
+                        </select>
+                        <div class="form-text">Foto dengan kategori <strong>Humas</strong> akan otomatis tampil pada halaman Home Humas.</div>
+                        @error('kategori')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     {{-- Deskripsi (nullable) --}}
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label fw-semibold">

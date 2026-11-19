@@ -18,25 +18,26 @@ class KurikulumDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('DT_RowIndex', '')
             ->addColumn('prodi', function ($k) {
-                return '<span class="badge bg-light text-dark border fw-bold">' . e($k->prodi?->judul ?? $k->prodi_nama ?? 'Semua Prodi') . '</span>';
+                return '<span class="badge bg-light text-dark border fw-bold">'.e($k->prodi?->judul ?? $k->prodi_nama ?? 'Semua Prodi').'</span>';
             })
             ->addColumn('semester_badge', function ($k) {
-                return '<span class="badge" style="background:#823ca2; color:#fff;">Semester ' . $k->semester_romawi . '</span>';
+                return '<span class="badge" style="background:#823ca2; color:#fff;">Semester '.$k->semester_romawi.'</span>';
             })
             ->addColumn('sks_badge', function ($k) {
-                return '<span class="badge bg-warning text-dark fw-bold">' . $k->sks . ' SKS</span>';
+                return '<span class="badge bg-warning text-dark fw-bold">'.$k->sks.' SKS</span>';
             })
             ->addColumn('rps_action', function ($k) {
-                if (!empty($k->file_rps)) {
-                    return '<a href="' . asset('storage/' . $k->file_rps) . '" target="_blank" class="btn btn-sm btn-outline-danger py-0 px-2" style="font-size:11.5px;" title="Download File RPS">
+                if (! empty($k->file_rps)) {
+                    return '<a href="'.asset('storage/'.$k->file_rps).'" target="_blank" class="btn btn-sm btn-outline-danger py-0 px-2" style="font-size:11.5px;" title="Download File RPS">
                                 <i class="bi bi-file-earmark-pdf-fill me-1"></i> File RPS
                             </a>';
                 }
-                if (!empty($k->link_rps)) {
-                    return '<a href="' . e($k->link_rps) . '" target="_blank" class="btn btn-sm btn-outline-primary py-0 px-2" style="font-size:11.5px;" title="Buka Link RPS">
+                if (! empty($k->link_rps)) {
+                    return '<a href="'.e($k->link_rps).'" target="_blank" class="btn btn-sm btn-outline-primary py-0 px-2" style="font-size:11.5px;" title="Buka Link RPS">
                                 <i class="bi bi-box-arrow-up-right me-1"></i> Link RPS
                             </a>';
                 }
+
                 return '<span class="text-muted small italic">-</span>';
             })
             ->addColumn('status', function ($k) {
@@ -47,18 +48,18 @@ class KurikulumDataTable extends DataTable
             ->addColumn('action', function ($k) {
                 $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
 
-                $btn .= '<a href="' . route('kurikulum.edit', $k->id) . '"
+                $btn .= '<a href="'.route('kurikulum.edit', $k->id).'"
                             class="btn btn-sm btn-warning text-white"
                             style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                             title="Edit">
                             <i class="bi bi-pencil-fill" style="font-size:12px"></i>
                          </a>';
 
-                $btn .= '<form action="' . route('kurikulum.destroy', $k->id) . '"
+                $btn .= '<form action="'.route('kurikulum.destroy', $k->id).'"
                               method="POST" class="m-0"
                               onsubmit="return confirm(\'Yakin ingin menghapus matakuliah ini?\')">'
-                        . csrf_field() . method_field('DELETE')
-                        . '<button type="submit"
+                        .csrf_field().method_field('DELETE')
+                        .'<button type="submit"
                                    class="btn btn-sm btn-danger"
                                    style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                                    title="Hapus">
@@ -67,6 +68,7 @@ class KurikulumDataTable extends DataTable
                          </form>';
 
                 $btn .= '</div>';
+
                 return $btn;
             })
             ->filterColumn('prodi', function ($query, $keyword) {
@@ -102,7 +104,7 @@ class KurikulumDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->parameters([
-                'scrollX'   => true,
+                'scrollX' => true,
                 'autoWidth' => false,
             ])
             ->orderBy(1)
@@ -134,6 +136,6 @@ class KurikulumDataTable extends DataTable
 
     protected function filename(): string
     {
-        return 'Kurikulum_' . date('YmdHis');
+        return 'Kurikulum_'.date('YmdHis');
     }
 }

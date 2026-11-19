@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 return new class extends Migration
@@ -22,7 +22,7 @@ return new class extends Migration
         foreach ($items as $item) {
             $baseSlug = Str::slug($item->title ?? '');
             if (empty($baseSlug)) {
-                $baseSlug = 'berita-' . $item->id;
+                $baseSlug = 'berita-'.$item->id;
             }
             $slug = $baseSlug;
             $counter = 1;
@@ -44,4 +44,3 @@ return new class extends Migration
         });
     }
 };
-

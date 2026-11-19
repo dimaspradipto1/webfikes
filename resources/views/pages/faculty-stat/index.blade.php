@@ -14,7 +14,7 @@
 <div class="card shadow-sm">
     <div class="card-header d-flex align-items-center justify-content-between py-3">
         <h5 class="mb-0 fw-semibold">
-            <i class="bi bi-bar-chart-fill me-2 text-primary"></i>Data Statistik "FIKES Dalam Angka"
+            <i class="bi bi-bar-chart-fill me-2 text-primary"></i>Data Statistik "UIS Dalam Angka"
         </h5>
         <a href="{{ route('faculty-stat.create') }}" class="btn btn-primary btn-sm">
             <i class="bi bi-plus-lg me-1"></i> Tambah Data
@@ -23,7 +23,7 @@
     <div class="card-body pt-3">
         <div class="alert alert-info alert-dismissible fade show mb-3" role="alert">
             <i class="bi bi-info-circle-fill me-2"></i>
-            <strong>Info:</strong> Section ini menampilkan angka statistik FIKES (Jumlah Prodi, Mahasiswa, Dosen, Alumni)
+            <strong>Info:</strong> Section ini menampilkan angka statistik UIS (Jumlah Prodi, Mahasiswa, Dosen, Alumni)
             di atas section <strong>Program Studi</strong> pada halaman beranda. Hanya satu data dengan status
             <span class="badge bg-success">Aktif</span> yang akan tampil di frontend.
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>

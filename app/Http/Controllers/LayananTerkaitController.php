@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\LayananTerkaitDataTable;
+use App\Http\Requests\LayananTerkaitRequest;
+use App\Http\Requests\LayananTerkaitSettingRequest;
 use App\Models\LayananTerkait;
 use App\Models\LayananTerkaitSetting;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -20,7 +21,7 @@ class LayananTerkaitController extends Controller
         $setting = LayananTerkaitSetting::firstOrCreate(
             ['id' => 1],
             [
-                'judul_seksi'    => 'LAYANAN TERKAIT',
+                'judul_seksi' => 'LAYANAN TERKAIT',
                 'subjudul_seksi' => 'Akses cepat ke berbagai sistem dan layanan digital Fakultas Ilmu Kesehatan Universitas Ibnu Sina untuk mendukung kegiatan akademik, administrasi, dan kemahasiswaan.',
             ]
         );
@@ -31,15 +32,9 @@ class LayananTerkaitController extends Controller
     /**
      * Update pengaturan Judul & Deskripsi Header Seksi Layanan Terkait.
      */
-    public function updateSetting(Request $request): RedirectResponse
+    public function updateSetting(LayananTerkaitSettingRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'judul_seksi'    => ['required', 'string', 'max:255'],
-            'subjudul_seksi' => ['required', 'string'],
-        ], [
-            'judul_seksi.required'    => 'Judul Seksi wajib diisi.',
-            'subjudul_seksi.required' => 'Subjudul / Kalimat Deskripsi wajib diisi.',
-        ]);
+        $validated = $request->validated();
 
         $setting = LayananTerkaitSetting::firstOrCreate(['id' => 1]);
         $setting->update($validated);
@@ -55,40 +50,28 @@ class LayananTerkaitController extends Controller
     public function create(): View
     {
         $nextUrutan = (LayananTerkait::max('urutan') ?? 0) + 1;
+
         return view('pages.layanan-terkait.create', compact('nextUrutan'));
     }
 
     /**
      * Simpan data layanan terkait baru.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(LayananTerkaitRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'nama'      => ['required', 'string', 'max:255'],
-            'deskripsi' => ['nullable', 'string', 'max:1000'],
-            'url'       => ['required', 'string', 'max:500'],
-            'logo'      => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp,svg', 'max:2048'],
-            'icon'      => ['nullable', 'string', 'max:100'],
-            'urutan'    => ['nullable', 'integer', 'min:0'],
-            'is_active' => ['nullable', 'boolean'],
-        ], [
-            'nama.required' => 'Nama Layanan wajib diisi.',
-            'url.required'  => 'Tautan / URL wajib diisi.',
-            'logo.mimes'    => 'Logo harus berupa file bertipe: jpg, jpeg, png, webp, atau svg.',
-            'logo.max'      => 'Ukuran file logo maksimal 2MB.',
-        ]);
+        $validated = $request->validated();
 
         $url = trim($validated['url']);
-        if (!str_starts_with($url, 'http://') && !str_starts_with($url, 'https://') && !str_starts_with($url, '/') && !str_starts_with($url, '#')) {
-            $url = 'https://' . $url;
+        if (! str_starts_with($url, 'http://') && ! str_starts_with($url, 'https://') && ! str_starts_with($url, '/') && ! str_starts_with($url, '#')) {
+            $url = 'https://'.$url;
         }
 
         $data = [
-            'nama'      => $validated['nama'],
+            'nama' => $validated['nama'],
             'deskripsi' => $validated['deskripsi'] ?? null,
-            'url'       => $url,
-            'icon'      => $validated['icon'] ?? 'bi-link-45deg',
-            'urutan'    => $validated['urutan'] ?? ((LayananTerkait::max('urutan') ?? 0) + 1),
+            'url' => $url,
+            'icon' => $validated['icon'] ?? 'bi-link-45deg',
+            'urutan' => $validated['urutan'] ?? ((LayananTerkait::max('urutan') ?? 0) + 1),
             'is_active' => $request->has('is_active') ? true : false,
         ];
 
@@ -114,48 +97,35 @@ class LayananTerkaitController extends Controller
     /**
      * Update data layanan terkait.
      */
-    public function update(Request $request, LayananTerkait $layananTerkait): RedirectResponse
+    public function update(LayananTerkaitRequest $request, LayananTerkait $layananTerkait): RedirectResponse
     {
-        $validated = $request->validate([
-            'nama'      => ['required', 'string', 'max:255'],
-            'deskripsi' => ['nullable', 'string', 'max:1000'],
-            'url'       => ['required', 'string', 'max:500'],
-            'logo'      => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp,svg', 'max:2048'],
-            'icon'      => ['nullable', 'string', 'max:100'],
-            'urutan'    => ['nullable', 'integer', 'min:0'],
-            'is_active' => ['nullable', 'boolean'],
-        ], [
-            'nama.required' => 'Nama Layanan wajib diisi.',
-            'url.required'  => 'Tautan / URL wajib diisi.',
-            'logo.mimes'    => 'Logo harus berupa file bertipe: jpg, jpeg, png, webp, atau svg.',
-            'logo.max'      => 'Ukuran file logo maksimal 2MB.',
-        ]);
+        $validated = $request->validated();
 
         $url = trim($validated['url']);
-        if (!str_starts_with($url, 'http://') && !str_starts_with($url, 'https://') && !str_starts_with($url, '/') && !str_starts_with($url, '#')) {
-            $url = 'https://' . $url;
+        if (! str_starts_with($url, 'http://') && ! str_starts_with($url, 'https://') && ! str_starts_with($url, '/') && ! str_starts_with($url, '#')) {
+            $url = 'https://'.$url;
         }
 
         $data = [
-            'nama'      => $validated['nama'],
+            'nama' => $validated['nama'],
             'deskripsi' => $validated['deskripsi'] ?? null,
-            'url'       => $url,
-            'icon'      => $validated['icon'] ?? ($layananTerkait->icon ?: 'bi-link-45deg'),
-            'urutan'    => $validated['urutan'] ?? $layananTerkait->urutan,
+            'url' => $url,
+            'icon' => $validated['icon'] ?? ($layananTerkait->icon ?: 'bi-link-45deg'),
+            'urutan' => $validated['urutan'] ?? $layananTerkait->urutan,
             'is_active' => $request->has('is_active') ? true : false,
         ];
 
         if ($request->hasFile('logo')) {
             // Hapus logo lama jika disimpan di storage public
-            if ($layananTerkait->logo && !str_starts_with($layananTerkait->logo, 'assets/') && Storage::disk('public')->exists($layananTerkait->logo)) {
+            if ($layananTerkait->logo && ! str_starts_with($layananTerkait->logo, 'assets/') && Storage::disk('public')->exists($layananTerkait->logo)) {
                 Storage::disk('public')->delete($layananTerkait->logo);
             }
             $data['logo'] = $request->file('logo')->store('layanan-terkait', 'public');
         }
 
         // Hapus logo jika dicentang hapus
-        if ($request->boolean('remove_logo') && !$request->hasFile('logo')) {
-            if ($layananTerkait->logo && !str_starts_with($layananTerkait->logo, 'assets/') && Storage::disk('public')->exists($layananTerkait->logo)) {
+        if ($request->boolean('remove_logo') && ! $request->hasFile('logo')) {
+            if ($layananTerkait->logo && ! str_starts_with($layananTerkait->logo, 'assets/') && Storage::disk('public')->exists($layananTerkait->logo)) {
                 Storage::disk('public')->delete($layananTerkait->logo);
             }
             $data['logo'] = null;
@@ -173,7 +143,7 @@ class LayananTerkaitController extends Controller
      */
     public function destroy(LayananTerkait $layananTerkait): RedirectResponse
     {
-        if ($layananTerkait->logo && !str_starts_with($layananTerkait->logo, 'assets/') && Storage::disk('public')->exists($layananTerkait->logo)) {
+        if ($layananTerkait->logo && ! str_starts_with($layananTerkait->logo, 'assets/') && Storage::disk('public')->exists($layananTerkait->logo)) {
             Storage::disk('public')->delete($layananTerkait->logo);
         }
 

@@ -16,7 +16,7 @@ class Checkrole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return redirect()->route('login');
         }
 
@@ -46,13 +46,14 @@ class Checkrole
             }
         }
 
-        if (!$isAllowed) {
-            if ($user->hasExactRole('organisasi') && !$user->hasExactRole('penulis')) {
+        if (! $isAllowed) {
+            if ($user->hasExactRole('organisasi') && ! $user->hasExactRole('penulis')) {
                 return redirect()->route('organisasi-mahasiswa.index')->with('error', 'Akses dibatasi. Akun Anda hanya memiliki izin untuk mengelola Organisasi Mahasiswa.');
             }
             if ($user->hasExactRole('penulis')) {
                 return redirect()->route('news.index')->with('error', 'Akses dibatasi. Akun Anda hanya memiliki izin untuk mengelola Berita & Pengumuman.');
             }
+
             return redirect()->route('dashboard')->with('error', 'Akses dibatasi untuk akun Anda.');
         }
 

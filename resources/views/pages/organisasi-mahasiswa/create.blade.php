@@ -32,7 +32,7 @@
 
                 <div class="col-md-8">
                     <label for="nama_organisasi" class="form-label fw-semibold text-dark">Nama Lengkap Organisasi <span class="text-danger">*</span></label>
-                    <input type="text" name="nama_organisasi" id="nama_organisasi" class="form-control @error('nama_organisasi') is-invalid @enderror" placeholder="Contoh: Himpunan Mahasiswa Keselamatan dan Kesehatan Kerja" value="{{ old('nama_organisasi') }}" required>
+                    <input type="text" name="nama_organisasi" id="nama_organisasi" class="form-control @error('nama_organisasi') is-invalid @enderror" placeholder="Contoh: Badan Eksekutif Mahasiswa (BEM) / HIMA Informatika" value="{{ old('nama_organisasi') }}" required>
                     @error('nama_organisasi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -40,7 +40,7 @@
 
                 <div class="col-md-4">
                     <label for="singkatan" class="form-label fw-semibold text-dark">Singkatan / Akronim</label>
-                    <input type="text" name="singkatan" id="singkatan" class="form-control @error('singkatan') is-invalid @enderror" placeholder="Contoh: HIMA K3" value="{{ old('singkatan') }}">
+                    <input type="text" name="singkatan" id="singkatan" class="form-control @error('singkatan') is-invalid @enderror" placeholder="Contoh: BEM UIS / HMTI" value="{{ old('singkatan') }}">
                     @error('singkatan')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

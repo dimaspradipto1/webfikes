@@ -23,7 +23,7 @@ class Dosen extends Model
     ];
 
     protected $casts = [
-        'urutan'    => 'integer',
+        'urutan' => 'integer',
         'is_active' => 'boolean',
     ];
 

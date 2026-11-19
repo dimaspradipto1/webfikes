@@ -1,11 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-  <!-- SINTA Tree/Circle -->
-  <circle cx="50" cy="38" r="24" fill="#ffffff"/>
-  <!-- Tree silhouette inside -->
-  <path d="M50 20 C42 20 36 26 36 34 C36 42 42 46 48 48 L48 54 L52 54 L52 48 C58 46 64 42 64 34 C64 26 58 20 50 20 Z" fill="#1e1e1e"/>
-  <circle cx="45" cy="30" r="3" fill="#ffffff"/>
-  <circle cx="55" cy="28" r="3.5" fill="#ffffff"/>
-  <circle cx="52" cy="36" r="2.5" fill="#ffffff"/>
-  <!-- Text -->
-  <text x="50" y="80" text-anchor="middle" fill="#ffffff" font-size="20" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" letter-spacing="1">sinta</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="100%" height="100%">
+  <!-- Official SINTA (Science and Technology Index) Vector -->
+  <defs>
+    <linearGradient id="sintaNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#053B6E"/>
+      <stop offset="100%" stop-color="#021E38"/>
+    </linearGradient>
+    <linearGradient id="sintaOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF7A00"/>
+      <stop offset="100%" stop-color="#E05300"/>
+    </linearGradient>
+  </defs>
+
+  <!-- SINTA Science Index Tree of Knowledge Motif -->
+  <g transform="translate(0, -6)">
+    <!-- Branch / Canopy Nodes -->
+    <circle cx="80" cy="52" r="32" fill="url(#sintaNavy)"/>
+    
+    <!-- Connected Science Network Nodes inside Canopy -->
+    <path d="M64 48 L80 34 L96 48 L80 62 Z" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
+    <circle cx="80" cy="34" r="5" fill="url(#sintaOrange)"/>
+    <circle cx="64" cy="48" r="4.5" fill="#ffffff"/>
+    <circle cx="96" cy="48" r="4.5" fill="#ffffff"/>
+    <circle cx="72" cy="62" r="4" fill="url(#sintaOrange)"/>
+    <circle cx="88" cy="62" r="4" fill="#ffffff"/>
+
+    <!-- Trunk & Digital Data Root Lines -->
+    <rect x="76" y="78" width="8" height="18" rx="3" fill="url(#sintaNavy)"/>
+    <line x1="66" y1="96" x2="94" y2="96" stroke="url(#sintaOrange)" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- SINTA Wordmark -->
+  <text x="76" y="128" text-anchor="middle" fill="#053B6E" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="28" font-weight="900" letter-spacing="-0.5">sinta</text>
+  <!-- Orange dot on the i of SINTA -->
+  <circle cx="60.5" cy="111" r="3.2" fill="url(#sintaOrange)"/>
+  
+  <!-- Subtext -->
+  <text x="80" y="144" text-anchor="middle" fill="#8896A6" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="7" font-weight="700" letter-spacing="1.2">SCIENCE &amp; TECHNOLOGY INDEX</text>
 </svg>

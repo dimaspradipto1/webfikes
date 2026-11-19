@@ -28,10 +28,11 @@ class AuthController extends Controller
     public function loginproses(UserRequest $request)
     {
         $credentials = $request->only('email', 'password');
-        $remember    = $request->boolean('remember');
+        $remember = $request->boolean('remember');
 
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
+
             return $this->redirectByRole();
         }
 

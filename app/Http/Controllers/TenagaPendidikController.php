@@ -26,6 +26,7 @@ class TenagaPendidikController extends Controller
     public function create(): View
     {
         $prodis = Layanan::where('aktif', true)->orderBy('urutan')->get();
+
         return view('pages.tenaga-pendidik.create', compact('prodis'));
     }
 
@@ -35,15 +36,15 @@ class TenagaPendidikController extends Controller
     public function store(TenagaPendidikRequest $request): RedirectResponse
     {
         $data = [
-            'layanan_id'  => $request->layanan_id ?: null,
-            'nama'        => $request->nama,
-            'bidang'      => $request->bidang,
-            'keterangan'  => $request->keterangan,
-            'icon'        => $request->icon ?: 'bi-person-fill',
-            'link'        => $request->link,
+            'layanan_id' => $request->layanan_id ?: null,
+            'nama' => $request->nama,
+            'bidang' => $request->bidang,
+            'keterangan' => $request->keterangan,
+            'icon' => $request->icon ?: 'bi-person-fill',
+            'link' => $request->link,
             'tombol_teks' => $request->tombol_teks ?: 'Lihat Dosen Prodi',
-            'urutan'      => $request->urutan ?? 0,
-            'is_active'   => $request->boolean('is_active', true),
+            'urutan' => $request->urutan ?? 0,
+            'is_active' => $request->boolean('is_active', true),
         ];
 
         if ($request->hasFile('foto')) {
@@ -63,6 +64,7 @@ class TenagaPendidikController extends Controller
     public function edit(TenagaPendidik $tenagaPendidik): View
     {
         $prodis = Layanan::where('aktif', true)->orderBy('urutan')->get();
+
         return view('pages.tenaga-pendidik.edit', compact('tenagaPendidik', 'prodis'));
     }
 
@@ -72,15 +74,15 @@ class TenagaPendidikController extends Controller
     public function update(TenagaPendidikRequest $request, TenagaPendidik $tenagaPendidik): RedirectResponse
     {
         $data = [
-            'layanan_id'  => $request->layanan_id ?: null,
-            'nama'        => $request->nama,
-            'bidang'      => $request->bidang,
-            'keterangan'  => $request->keterangan,
-            'icon'        => $request->icon ?: 'bi-person-fill',
-            'link'        => $request->link,
+            'layanan_id' => $request->layanan_id ?: null,
+            'nama' => $request->nama,
+            'bidang' => $request->bidang,
+            'keterangan' => $request->keterangan,
+            'icon' => $request->icon ?: 'bi-person-fill',
+            'link' => $request->link,
             'tombol_teks' => $request->tombol_teks ?: 'Lihat Dosen Prodi',
-            'urutan'      => $request->urutan ?? 0,
-            'is_active'   => $request->boolean('is_active', true),
+            'urutan' => $request->urutan ?? 0,
+            'is_active' => $request->boolean('is_active', true),
         ];
 
         if ($request->hasFile('foto')) {

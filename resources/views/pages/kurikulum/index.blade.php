@@ -23,7 +23,7 @@
 <div class="card shadow-sm mb-4">
     <div class="card-header d-flex align-items-center justify-content-between py-3">
         <h5 class="mb-0 fw-semibold text-dark">
-            <i class="bi bi-journal-text me-2 text-primary"></i>Daftar Kurikulum & Matakuliah FIKES
+            <i class="bi bi-journal-text me-2 text-primary"></i>Daftar Kurikulum & Matakuliah UIS
         </h5>
         <a href="{{ route('kurikulum.create') }}" class="btn btn-primary btn-sm">
             <i class="bi bi-plus-lg me-1"></i> Tambah Matakuliah

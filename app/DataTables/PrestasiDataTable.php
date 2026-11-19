@@ -15,7 +15,7 @@ class PrestasiDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder<Prestasi> $query
+     * @param  QueryBuilder<Prestasi>  $query
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -24,55 +24,60 @@ class PrestasiDataTable extends DataTable
             ->addColumn('DT_RowIndex', '')
             ->addColumn('foto', function ($prestasi) {
                 if ($prestasi->foto) {
-                    return '<img src="' . asset('storage/' . $prestasi->foto) . '"
-                                 alt="' . e($prestasi->judul_prestasi) . '"
+                    return '<img src="'.asset('storage/'.$prestasi->foto).'"
+                                 alt="'.e($prestasi->judul_prestasi).'"
                                  style="width:70px;height:50px;object-fit:cover;border-radius:6px;border:1px solid #dee2e6"
                                  loading="lazy">';
                 }
+
                 return '<span class="badge bg-light text-muted border">No Image</span>';
             })
             ->addColumn('judul_prestasi', function ($prestasi) {
-                $html = '<div class="fw-semibold text-dark">' . e($prestasi->judul_prestasi) . '</div>';
+                $html = '<div class="fw-semibold text-dark">'.e($prestasi->judul_prestasi).'</div>';
                 if ($prestasi->penyelenggara) {
-                    $html .= '<div class="text-muted small" style="font-size:11px"><i class="bi bi-building me-1"></i>' . e($prestasi->penyelenggara) . '</div>';
+                    $html .= '<div class="text-muted small" style="font-size:11px"><i class="bi bi-building me-1"></i>'.e($prestasi->penyelenggara).'</div>';
                 }
+
                 return $html;
             })
             ->addColumn('mahasiswa', function ($prestasi) {
-                $html = '<div class="fw-medium text-primary"><i class="bi bi-person-fill me-1"></i>' . e($prestasi->nama_mahasiswa) . '</div>';
+                $html = '<div class="fw-medium text-primary"><i class="bi bi-person-fill me-1"></i>'.e($prestasi->nama_mahasiswa).'</div>';
                 if ($prestasi->prodi) {
-                    $html .= '<span class="badge bg-light text-dark border" style="font-size:10.5px">' . e($prestasi->prodi) . '</span>';
+                    $html .= '<span class="badge bg-light text-dark border" style="font-size:10.5px">'.e($prestasi->prodi).'</span>';
                 }
+
                 return $html;
             })
             ->addColumn('tingkat_peringkat', function ($prestasi) {
                 $badgeClass = match ($prestasi->tingkat) {
                     'Internasional' => 'bg-danger',
-                    'Nasional'      => 'bg-success',
+                    'Nasional' => 'bg-success',
                     'Provinsi / Wilayah' => 'bg-primary',
-                    default         => 'bg-secondary',
+                    default => 'bg-secondary',
                 };
 
-                $html = '<span class="badge ' . $badgeClass . ' px-2 py-1 mb-1">' . e($prestasi->tingkat) . '</span>';
+                $html = '<span class="badge '.$badgeClass.' px-2 py-1 mb-1">'.e($prestasi->tingkat).'</span>';
                 if ($prestasi->peringkat) {
-                    $html .= '<div class="badge bg-warning text-dark fw-bold" style="font-size:10.5px"><i class="bi bi-trophy-fill me-1"></i>' . e($prestasi->peringkat) . '</div>';
+                    $html .= '<div class="badge bg-warning text-dark fw-bold" style="font-size:10.5px"><i class="bi bi-trophy-fill me-1"></i>'.e($prestasi->peringkat).'</div>';
                 }
+
                 return $html;
             })
             ->addColumn('tahun', function ($prestasi) {
-                return $prestasi->tahun ? '<span class="badge bg-light text-dark border">' . e($prestasi->tahun) . '</span>' : '-';
+                return $prestasi->tahun ? '<span class="badge bg-light text-dark border">'.e($prestasi->tahun).'</span>' : '-';
             })
             ->addColumn('status', function ($prestasi) {
                 if ($prestasi->is_active) {
                     return '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Aktif</span>';
                 }
+
                 return '<span class="badge bg-secondary">Nonaktif</span>';
             })
             ->addColumn('action', function ($prestasi) {
-                $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
+                $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
 
                 // Tombol Edit
-                $btn .= '<a href="' . route('prestasi.edit', $prestasi->id) . '"
+                $btn .= '<a href="'.route('prestasi.edit', $prestasi->id).'"
                             class="btn btn-sm btn-warning text-white"
                             style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px"
                             title="Edit">
@@ -80,11 +85,11 @@ class PrestasiDataTable extends DataTable
                          </a>';
 
                 // Tombol Hapus
-                $btn .= '<form action="' . route('prestasi.destroy', $prestasi->id) . '"
+                $btn .= '<form action="'.route('prestasi.destroy', $prestasi->id).'"
                               method="POST" class="m-0"
                               onsubmit="return confirm(\'Yakin ingin menghapus data prestasi mahasiswa ini?\')">'
-                        . csrf_field() . method_field('DELETE')
-                        . '<button type="submit"
+                        .csrf_field().method_field('DELETE')
+                        .'<button type="submit"
                                    class="btn btn-sm btn-danger"
                                    style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px"
                                    title="Hapus">
@@ -93,6 +98,7 @@ class PrestasiDataTable extends DataTable
                          </form>';
 
                 $btn .= '</div>';
+
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
@@ -199,6 +205,6 @@ class PrestasiDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'PrestasiMahasiswa_' . date('YmdHis');
+        return 'PrestasiMahasiswa_'.date('YmdHis');
     }
 }

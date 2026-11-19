@@ -14,8 +14,8 @@ class VisiMisiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tipe'   => ['required', 'in:visi,misi'],
-            'isi'    => ['required', 'string'],
+            'tipe' => ['required', 'in:visi,misi'],
+            'isi' => ['required', 'string'],
             'urutan' => ['nullable', 'integer', 'min:0'],
         ];
     }
@@ -23,9 +23,9 @@ class VisiMisiRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'tipe.required'  => 'Tipe wajib dipilih.',
-            'tipe.in'        => 'Tipe harus Visi atau Misi.',
-            'isi.required'   => 'Isi wajib diisi.',
+            'tipe.required' => 'Tipe wajib dipilih.',
+            'tipe.in' => 'Tipe harus Visi atau Misi.',
+            'isi.required' => 'Isi wajib diisi.',
             'urutan.integer' => 'Urutan harus berupa angka.',
         ];
     }

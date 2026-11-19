@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\Feature;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -15,7 +16,7 @@ class FeatureDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder<Feature> $query
+     * @param  QueryBuilder<Feature>  $query
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -23,26 +24,28 @@ class FeatureDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('DT_RowIndex', '')
             ->addColumn('icon_preview', function ($feature) {
-                return '<div style="font-size:24px;color:var(--terracotta);"><i class="bi ' . e($feature->icon) . '"></i></div>'
-                     . '<span class="text-muted small">' . e($feature->icon) . '</span>';
+                return '<div style="font-size:24px;color:var(--terracotta);"><i class="bi '.e($feature->icon).'"></i></div>'
+                     .'<span class="text-muted small">'.e($feature->icon).'</span>';
             })
             ->addColumn('judul', function ($feature) {
-                return '<span class="fw-semibold">' . e($feature->judul) . '</span>';
+                return '<span class="fw-semibold">'.e($feature->judul).'</span>';
             })
             ->addColumn('deskripsi', function ($feature) {
-                $clean = trim(strip_tags(html_entity_decode($feature->deskripsi ?? '')));
-                return $clean
-                    ? '<span title="' . e($clean) . '">' . e(\Illuminate\Support\Str::limit($clean, 60)) . '</span>'
-                    : '<span class="text-muted fst-italic">—</span>';
+                if (! $feature->deskripsi) {
+                    return '<span class="text-muted fst-italic">—</span>';
+                }
+                $clean = trim(html_entity_decode(strip_tags($feature->deskripsi), ENT_QUOTES, 'UTF-8'));
+
+                return '<span title="'.e($clean).'">'.e(Str::limit($clean, 60)).'</span>';
             })
             ->addColumn('urutan', function ($feature) {
-                return '<span class="badge bg-secondary">' . $feature->urutan . '</span>';
+                return '<span class="badge bg-secondary">'.$feature->urutan.'</span>';
             })
             ->addColumn('action', function ($feature) {
-                $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
+                $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
 
                 // Tombol Edit
-                $btn .= '<a href="' . route('feature.edit', $feature->id) . '"
+                $btn .= '<a href="'.route('feature.edit', $feature->id).'"
                             class="btn btn-sm btn-warning text-white"
                             style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                             title="Edit">
@@ -50,11 +53,11 @@ class FeatureDataTable extends DataTable
                          </a>';
 
                 // Tombol Hapus
-                $btn .= '<form action="' . route('feature.destroy', $feature->id) . '"
+                $btn .= '<form action="'.route('feature.destroy', $feature->id).'"
                               method="POST" class="m-0"
                               onsubmit="return confirm(\'Yakin ingin menghapus keunggulan ini?\')">'
-                        . csrf_field() . method_field('DELETE')
-                        . '<button type="submit"
+                        .csrf_field().method_field('DELETE')
+                        .'<button type="submit"
                                    class="btn btn-sm btn-danger"
                                    style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                                    title="Hapus">
@@ -63,6 +66,7 @@ class FeatureDataTable extends DataTable
                          </form>';
 
                 $btn .= '</div>';
+
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
@@ -146,6 +150,6 @@ class FeatureDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Feature_' . date('YmdHis');
+        return 'Feature_'.date('YmdHis');
     }
 }

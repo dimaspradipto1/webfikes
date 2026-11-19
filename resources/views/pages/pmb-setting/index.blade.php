@@ -8,7 +8,7 @@
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item">Profil & Konten FIKES</li>
+            <li class="breadcrumb-item">Profil & Konten UIS</li>
             <li class="breadcrumb-item active">Banner PMB</li>
         </ol>
     </nav>
@@ -74,7 +74,7 @@
                                 <label for="judul" class="form-label fw-bold text-dark">
                                     Judul Utama Banner PMB <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" id="judul" name="judul" class="form-control @error('judul') is-invalid @enderror" value="{{ old('judul', $pmb->judul) }}" placeholder="Daftar Sekarang & Raih Masa Depan Cerah Bersama FIKES UIS!" required>
+                                <input type="text" id="judul" name="judul" class="form-control @error('judul') is-invalid @enderror" value="{{ old('judul', $pmb->judul) }}" placeholder="Daftar Sekarang & Raih Masa Depan Cerah Bersama Universitas Ibnu Sina!" required>
                                 <div class="form-text small text-muted">Headline utama yang mencolok bagi calon pendaftar.</div>
                                 @error('judul')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -179,7 +179,7 @@
                         <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary px-4 rounded-3">
                             <i class="bi bi-arrow-left me-1"></i> Kembali
                         </a>
-                        <button type="submit" class="btn btn-primary px-4 rounded-3 fw-bold" style="background: #823ca2; border-color: #823ca2;">
+                        <button type="submit" class="btn btn-primary px-4 rounded-3 fw-bold" style="background: #046B26; border-color: #046B26;">
                             <i class="bi bi-check2-circle me-1"></i> Simpan Perubahan Banner PMB
                         </button>
                     </div>
@@ -240,7 +240,7 @@
                         icon: 'info',
                         title: 'Minimal 1 Gelombang',
                         text: 'Setidaknya harus ada 1 jadwal gelombang pendaftaran.',
-                        confirmButtonColor: '#823ca2'
+                        confirmButtonColor: '#046B26'
                     });
                     return;
                 }

@@ -20,11 +20,11 @@ class TriDharmaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'icon'      => ['required', 'string', 'max:100'],
-            'warna'     => ['nullable', 'string', 'max:50'],
-            'judul'     => ['required', 'string', 'max:255'],
+            'icon' => ['required', 'string', 'max:100'],
+            'warna' => ['nullable', 'string', 'max:50'],
+            'judul' => ['required', 'string', 'max:255'],
             'deskripsi' => ['nullable', 'string', 'max:1000'],
-            'urutan'    => ['nullable', 'integer', 'min:0', 'max:255'],
+            'urutan' => ['nullable', 'integer', 'min:0', 'max:255'],
             'is_active' => ['nullable', 'boolean'],
         ];
     }
@@ -35,7 +35,7 @@ class TriDharmaRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'icon.required'  => 'Icon Bootstrap wajib diisi.',
+            'icon.required' => 'Icon Bootstrap wajib diisi.',
             'judul.required' => 'Judul Tri Dharma wajib diisi.',
             'urutan.integer' => 'Urutan harus berupa angka.',
         ];

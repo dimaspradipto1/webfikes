@@ -17,33 +17,35 @@ class DosenDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('checkbox', function ($d) {
-                return '<input type="checkbox" name="dosen_ids[]" value="' . $d->id . '" class="form-check-input check-item-dosen" style="cursor:pointer;">';
+                return '<input type="checkbox" name="dosen_ids[]" value="'.$d->id.'" class="form-check-input check-item-dosen" style="cursor:pointer;">';
             })
             ->addColumn('DT_RowIndex', '')
             ->addColumn('prodi', function ($d) {
-                return '<span class="badge bg-light text-dark border fw-bold">' . e($d->prodi?->judul ?? $d->prodi_nama ?? '-') . '</span>';
+                return '<span class="badge bg-light text-dark border fw-bold">'.e($d->prodi?->judul ?? $d->prodi_nama ?? '-').'</span>';
             })
             ->editColumn('nama_dosen', function ($d) {
-                return '<div class="fw-bold text-dark text-nowrap" style="min-width: 220px;">' . e($d->nama_dosen) . '</div>';
+                return '<div class="fw-bold text-dark text-nowrap" style="min-width: 220px;">'.e($d->nama_dosen).'</div>';
             })
             ->editColumn('jabatan_fungsional', function ($d) {
-                if (!empty($d->jabatan_fungsional)) {
-                    return '<span class="badge text-nowrap" style="background:#823ca2; color:#fff; font-size:11.5px; padding:5px 10px;">' . e($d->jabatan_fungsional) . '</span>';
+                if (! empty($d->jabatan_fungsional)) {
+                    return '<span class="badge text-nowrap" style="background:#823ca2; color:#fff; font-size:11.5px; padding:5px 10px;">'.e($d->jabatan_fungsional).'</span>';
                 }
+
                 return '<span class="text-muted small">-</span>';
             })
             ->editColumn('nidn', function ($d) {
-                return !empty($d->nidn) ? '<span class="font-monospace fw-semibold text-nowrap">' . e($d->nidn) . '</span>' : '<span class="text-muted">-</span>';
+                return ! empty($d->nidn) ? '<span class="font-monospace fw-semibold text-nowrap">'.e($d->nidn).'</span>' : '<span class="text-muted">-</span>';
             })
             ->editColumn('nuptk', function ($d) {
-                return !empty($d->nuptk) ? '<span class="font-monospace fw-semibold text-nowrap">' . e($d->nuptk) . '</span>' : '<span class="text-muted">-</span>';
+                return ! empty($d->nuptk) ? '<span class="font-monospace fw-semibold text-nowrap">'.e($d->nuptk).'</span>' : '<span class="text-muted">-</span>';
             })
             ->addColumn('link_profile', function ($d) {
-                if (!empty($d->link)) {
-                    return '<a href="' . e($d->link) . '" target="_blank" class="btn btn-sm btn-outline-primary py-0 px-2 text-nowrap" style="font-size:11.5px;" title="Lihat Profil Online">
+                if (! empty($d->link)) {
+                    return '<a href="'.e($d->link).'" target="_blank" class="btn btn-sm btn-outline-primary py-0 px-2 text-nowrap" style="font-size:11.5px;" title="Lihat Profil Online">
                                 <i class="bi bi-box-arrow-up-right me-1"></i> Profil
                             </a>';
                 }
+
                 return '<span class="text-muted small">-</span>';
             })
             ->addColumn('status', function ($d) {
@@ -54,18 +56,18 @@ class DosenDataTable extends DataTable
             ->addColumn('action', function ($d) {
                 $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
 
-                $btn .= '<a href="' . route('dosen.edit', $d->id) . '"
+                $btn .= '<a href="'.route('dosen.edit', $d->id).'"
                             class="btn btn-sm btn-warning text-white"
                             style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                             title="Edit">
                             <i class="bi bi-pencil-fill" style="font-size:12px"></i>
                          </a>';
 
-                $btn .= '<form action="' . route('dosen.destroy', $d->id) . '"
+                $btn .= '<form action="'.route('dosen.destroy', $d->id).'"
                               method="POST" class="m-0"
                               onsubmit="return confirm(\'Yakin ingin menghapus data dosen ini?\')">'
-                        . csrf_field() . method_field('DELETE')
-                        . '<button type="submit"
+                        .csrf_field().method_field('DELETE')
+                        .'<button type="submit"
                                    class="btn btn-sm btn-danger"
                                    style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                                    title="Hapus">
@@ -74,6 +76,7 @@ class DosenDataTable extends DataTable
                          </form>';
 
                 $btn .= '</div>';
+
                 return $btn;
             })
             ->filterColumn('prodi', function ($query, $keyword) {
@@ -117,7 +120,7 @@ class DosenDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->parameters([
-                'scrollX'   => true,
+                'scrollX' => true,
                 'autoWidth' => false,
             ])
             ->orderBy(2)
@@ -156,6 +159,6 @@ class DosenDataTable extends DataTable
 
     protected function filename(): string
     {
-        return 'Dosen_' . date('YmdHis');
+        return 'Dosen_'.date('YmdHis');
     }
 }

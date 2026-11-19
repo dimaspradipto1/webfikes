@@ -1,121 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Program Studi & Fasilitas — Fakultas Ilmu Kesehatan (FIKES)')
-@section('meta_description', 'Jelajahi program studi unggulan dan fasilitas laboratorium terpadu di Fakultas Ilmu Kesehatan (FIKES).')
-@section('meta_keywords', 'program studi fikes, keperawatan, kebidanan, farmasi, gizi, kesehatan masyarakat, laboratorium fikes')
-
-@push('styles')
-<style>
-  .layanan-hero {
-    position: relative;
-    background: var(--obsidian-dark);
-    padding: 70px 0 50px;
-    border-bottom: 2px solid var(--fikes-purple);
-  }
-  .layanan-hero-title {
-    font-size: 38px;
-    font-weight: 800;
-    color: var(--white);
-    margin-bottom: 8px;
-  }
-  .layanan-hero-title em {
-    font-style: normal;
-    color: var(--fikes-orange);
-  }
-  .layanan-card-box {
-    background: var(--white);
-    border: 1px solid var(--border-light);
-    border-radius: 20px;
-    padding: 32px;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .layanan-card-box:hover {
-    transform: translateY(-6px);
-    border-color: var(--border-purple);
-    box-shadow: var(--shadow-lg);
-  }
-  .layanan-card-head {
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    margin-bottom: 18px;
-  }
-  .layanan-card-icon {
-    width: 58px;
-    height: 58px;
-    background: var(--fikes-purple-light);
-    color: var(--fikes-purple);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    flex-shrink: 0;
-  }
-  .layanan-card-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text-main);
-    margin-bottom: 4px;
-  }
-  .layanan-card-badge {
-    display: inline-block;
-    background: var(--fikes-orange-light);
-    color: var(--fikes-orange-dark);
-    font-size: 11px;
-    font-weight: 700;
-    padding: 2px 10px;
-    border-radius: 50px;
-    border: 1px solid var(--border-orange);
-  }
-  .layanan-card-desc {
-    font-size: 14.5px;
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-  .layanan-card-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 24px 0;
-  }
-  .layanan-card-list li {
-    font-size: 13.5px;
-    color: var(--text-main);
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-  .layanan-card-list li i {
-    color: var(--fikes-purple);
-    margin-top: 2px;
-  }
-  .layanan-detail-btn {
-    background: var(--fikes-purple-light);
-    color: var(--fikes-purple);
-    border: 1px solid var(--border-purple);
-    font-weight: 700;
-    font-size: 13.5px;
-    padding: 10px 20px;
-    border-radius: 10px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.2s ease;
-  }
-  .layanan-detail-btn:hover {
-    background: var(--fikes-purple);
-    color: var(--white);
-    border-color: var(--fikes-purple);
-  }
-</style>
-@endpush
+@section('title', 'Fakultas & Program Studi — Universitas Ibnu Sina (UIS)')
+@section('meta_description', 'Jelajahi fakultas dan program studi unggulan serta fasilitas akademik terpadu di Universitas Ibnu Sina (UIS) Batam.')
+@section('meta_keywords', 'program studi uis, fakultas teknik, fakultas ekonomi bisnis, fakultas ilmu kesehatan, magister manajemen, universitas ibnu sina batam')
 
 @section('content')
 
@@ -129,9 +16,9 @@
         Program Studi & <em>Fasilitas</em>
       </h1>
       <div class="breadcrumb-custom">
-        <a href="{{ route('homepage') }}" class="text-white-50"><i class="bi bi-house-fill me-1"></i>Beranda</a>
-        <span class="mx-2 text-white-50">/</span>
-        <span style="color: var(--fikes-orange); font-weight:600;">Layanan & Fasilitas</span>
+        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+        <span>/</span>
+        <span class="active">Program Studi</span>
       </div>
     </div>
   </div>
@@ -147,7 +34,7 @@
       <h2 class="section-title">Pendidikan Berkualitas & <em>Fasilitas Modern</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Menghasilkan lulusan tenaga kesehatan yang unggul, beretika, dan siap berkontribusi nyata dalam sistem pelayanan kesehatan.
+        Mencetak profesional muda yang unggul, kompeten, berjiwa entrepreneur, dan siap berkontribusi nyata bagi industri nasional maupun global.
       </p>
     </div>
 
@@ -189,11 +76,11 @@
             </div>
             <div class="d-flex gap-2 flex-wrap">
               @if($layanan->link)
-                <a href="{{ $layanan->link }}" target="_blank" rel="noopener noreferrer" class="layanan-detail-btn" style="background:var(--fikes-purple); color:#fff; border-color:var(--fikes-purple);">
+                <a href="{{ $layanan->link }}" target="_blank" rel="noopener noreferrer" class="layanan-detail-btn" style="background:var(--uis-purple); color:#fff; border-color:var(--uis-purple);">
                   Website Prodi <i class="bi bi-box-arrow-up-right ms-1"></i>
                 </a>
               @endif
-              <a href="{{ route('homepage.layanan.detail', $layanan->id) }}" class="layanan-detail-btn">
+              <a href="{{ route('homepage.layanan.detail', $layanan->slug ?: $layanan->id) }}" class="layanan-detail-btn">
                 Lihat Detail <i class="bi bi-arrow-right"></i>
               </a>
             </div>

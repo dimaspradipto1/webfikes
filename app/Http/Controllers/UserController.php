@@ -36,10 +36,10 @@ class UserController extends Controller
         $roles = is_array($request->roles) ? implode(',', array_filter($request->roles)) : $request->roles;
 
         User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
+            'name' => $request->name,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
-            'roles'    => $roles ?: 'user',
+            'roles' => $roles ?: 'user',
         ]);
 
         alert()->success('Berhasil!', 'Pengguna berhasil ditambahkan.');
@@ -63,7 +63,7 @@ class UserController extends Controller
         $roles = is_array($request->roles) ? implode(',', array_filter($request->roles)) : $request->roles;
 
         $data = [
-            'name'  => $request->name,
+            'name' => $request->name,
             'email' => $request->email,
             'roles' => $roles ?: 'user',
         ];
@@ -88,6 +88,7 @@ class UserController extends Controller
         // Cegah hapus akun sendiri
         if ($user->id === Auth::id()) {
             alert()->error('Gagal!', 'Anda tidak bisa menghapus akun Anda sendiri.');
+
             return redirect()->route('user.index');
         }
 
@@ -104,6 +105,7 @@ class UserController extends Controller
     public function myProfile(): View
     {
         $user = Auth::user();
+
         return view('pages.user.my-profile', compact('user'));
     }
 
@@ -112,11 +114,11 @@ class UserController extends Controller
      */
     public function updateMyProfile(UserRequest $request): RedirectResponse
     {
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = Auth::user();
 
         $user->update([
-            'name'  => $request->name,
+            'name' => $request->name,
             'email' => $request->email,
         ]);
 
@@ -130,7 +132,7 @@ class UserController extends Controller
      */
     public function updateMyPassword(UserRequest $request): RedirectResponse
     {
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = Auth::user();
 
         $user->update([

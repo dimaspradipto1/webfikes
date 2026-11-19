@@ -54,7 +54,7 @@
                         <label for="isi" class="form-label fw-semibold">Isi <span class="text-danger">*</span></label>
                         <textarea id="isi" name="isi" rows="4"
                                   class="form-control @error('isi') is-invalid @enderror"
-                                  placeholder="Contoh: Menjadi mitra bisnis terpercaya untuk layanan inspeksi, pengujian dan sertifikasi di bidang keselamatan dan kesehatan kerja.">{{ old('isi') }}</textarea>
+                                  placeholder="Contoh: Menjadi Universitas Unggul, Bermartabat, Bereputasi Nasional dan Internasional serta berjiwa Entrepreneur berbasis Imtaq tahun 2029.">{{ old('isi') }}</textarea>
                         <div class="form-text">Untuk Misi, isi satu poin saja per baris data (tambahkan poin lain sebagai data baru).</div>
                         @error('isi')
                             <div class="invalid-feedback">{{ $message }}</div>

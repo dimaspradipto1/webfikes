@@ -29,11 +29,11 @@ class TopbarController extends Controller
         $socialMedia = [];
         if ($request->has('social_media') && is_array($request->social_media)) {
             foreach ($request->social_media as $item) {
-                if (!empty($item['url'])) {
+                if (! empty($item['url'])) {
                     $socialMedia[] = [
                         'platform' => $item['platform'] ?? 'Link',
-                        'icon'     => !empty($item['icon']) ? $item['icon'] : 'bi-globe',
-                        'url'      => $item['url'],
+                        'icon' => ! empty($item['icon']) ? $item['icon'] : 'bi-globe',
+                        'url' => $item['url'],
                     ];
                 }
             }
@@ -66,11 +66,11 @@ class TopbarController extends Controller
         $socialMedia = [];
         if ($request->has('social_media') && is_array($request->social_media)) {
             foreach ($request->social_media as $item) {
-                if (!empty($item['url'])) {
+                if (! empty($item['url'])) {
                     $socialMedia[] = [
                         'platform' => $item['platform'] ?? 'Link',
-                        'icon'     => !empty($item['icon']) ? $item['icon'] : 'bi-globe',
-                        'url'      => $item['url'],
+                        'icon' => ! empty($item['icon']) ? $item['icon'] : 'bi-globe',
+                        'url' => $item['url'],
                     ];
                 }
             }

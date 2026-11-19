@@ -1,102 +1,28 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Kisah Sukses & Testimoni Alumni — Fakultas Ilmu Kesehatan (FIKES)')
-@section('meta_description', 'Baca ulasan, pengalaman, dan jejak karier alumni, mahasiswa, serta mitra institusi kesehatan Fakultas Ilmu Kesehatan Universitas Ibnu Sina.')
-@section('meta_keywords', 'testimoni alumni fikes, review fikes uis, jejak karir alumni kesehatan, ulasan lulusan fikes')
-
-@push('styles')
-<style>
-  .rating-score-box {
-    background: linear-gradient(135deg, #190a24 0%, #3d1257 60%, #823ca2 100%);
-    border-radius: 20px;
-    padding: 32px;
-    color: #ffffff;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(130, 60, 162, 0.2);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .rating-big-num {
-    font-size: 54px;
-    font-weight: 800;
-    line-height: 1;
-    color: #ff9c00;
-    margin-bottom: 8px;
-  }
-  .rating-bar-wrap {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 28px 32px;
-    border: 1px solid #ede4f2;
-    box-shadow: var(--shadow-sm);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .star-progress-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 10px;
-  }
-  .star-progress-row:last-child {
-    margin-bottom: 0;
-  }
-  .star-label {
-    width: 65px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #444444;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .progress-custom {
-    flex-grow: 1;
-    height: 10px;
-    border-radius: 10px;
-    background: #f0e6f5;
-    overflow: hidden;
-  }
-  .progress-bar-fikes {
-    background: linear-gradient(90deg, #ff9c00 0%, #823ca2 100%);
-    height: 100%;
-    border-radius: 10px;
-    transition: width 0.6s ease;
-  }
-  .star-pct {
-    width: 45px;
-    font-size: 12.5px;
-    color: #666666;
-    font-weight: 600;
-    text-align: right;
-  }
-</style>
-@endpush
+@section('title', 'Kisah Sukses & Testimoni Alumni — Universitas Ibnu Sina (UIS)')
+@section('meta_description', 'Baca ulasan, pengalaman, dan jejak karier alumni, mahasiswa, serta mitra industri Universitas Ibnu Sina (UIS) Batam.')
+@section('meta_keywords', 'testimoni alumni uis, review universitas ibnu sina, jejak karir alumni batam, ulasan lulusan uis, kampus profesional muda')
 
 @section('content')
 
 <!-- ═══════════════════════════════════════════════
      HERO BANNER
 ═══════════════════════════════════════════════ -->
-<div class="about-hero" style="background: var(--obsidian-dark); padding: 75px 0 55px; border-bottom: 3px solid var(--fikes-purple);">
+<div class="about-hero">
   <div class="container">
     <div class="about-hero-content" data-aos="fade-up" data-aos-duration="800">
-      <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3" style="background: rgba(255, 156, 0, 0.15); border: 1px solid rgba(255, 156, 0, 0.4);">
+      <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3" style="background: rgba(254, 216, 2, 0.15); border: 1px solid rgba(254, 216, 2, 0.4);">
         <i class="bi bi-mortarboard-fill text-warning"></i>
         <span class="text-warning small fw-bold">PORTAL ALUMNI & CIVITAS</span>
       </div>
       <h1 style="font-size: 38px; font-weight: 800; color: var(--white); margin-bottom: 10px;">
-        Kisah Sukses & <em style="font-style: normal; color: var(--fikes-orange);">Testimoni Alumni</em>
+        Kisah Sukses & <em style="font-style: normal; color: var(--uis-orange);">Testimoni Alumni</em>
       </h1>
       <div class="breadcrumb-custom">
-        <a href="{{ route('homepage') }}"><i class="bi bi-house-fill me-1"></i>Beranda</a>
-        <span class="mx-2 text-white-50">/</span>
-        <span style="color: var(--fikes-orange); font-weight: 600;">Testimoni Alumni</span>
+        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+        <span>/</span>
+        <span class="active">Testimoni Alumni</span>
       </div>
     </div>
   </div>
@@ -112,13 +38,13 @@
       <div class="col-lg-4" data-aos="fade-right">
         <div class="rating-score-box">
           <div class="rating-big-num">{{ number_format($avgScore, 1) }}</div>
-          <div class="d-flex justify-content-center gap-1 fs-5 mb-2" style="color: #ff9c00;">
+          <div class="d-flex justify-content-center gap-1 fs-5 mb-2" style="color: #FED802;">
             @for($i = 1; $i <= 5; $i++)
               <i class="bi bi-star{{ $i <= round($avgScore) ? '-fill' : '' }}"></i>
             @endfor
           </div>
           <h4 class="fw-bold text-white mb-1" style="font-size: 18px;">Penilaian Keseluruhan</h4>
-          <p class="text-white-50 small mb-0">Berdasarkan {{ $totalCount }} ulasan terverifikasi civitas & alumni FIKES UIS</p>
+          <p class="text-white-50 small mb-0">Berdasarkan {{ $totalCount }} ulasan terverifikasi civitas & alumni Universitas Ibnu Sina</p>
         </div>
       </div>
 
@@ -126,7 +52,7 @@
       <div class="col-lg-8" data-aos="fade-left">
         <div class="rating-bar-wrap">
           <h3 class="fw-bold text-dark mb-3" style="font-size: 18px;">
-            <i class="bi bi-bar-chart-line-fill me-2" style="color:#823ca2;"></i> Distribusi Penilaian Bintang
+            <i class="bi bi-bar-chart-line-fill me-2" style="color:#046B26;"></i> Distribusi Penilaian Bintang
           </h3>
 
           @foreach([5, 4, 3, 2, 1] as $star)
@@ -136,7 +62,7 @@
                 <i class="bi bi-star-fill text-warning" style="font-size: 12px;"></i>
               </div>
               <div class="progress-custom">
-                <div class="progress-bar-fikes" style="width: {{ $ratingPercentages[$star] ?? 0 }}%;"></div>
+                <div class="progress-bar-uis" style="width: {{ $ratingPercentages[$star] ?? 0 }}%;"></div>
               </div>
               <div class="star-pct">{{ $ratingCounts[$star] ?? 0 }} <small class="text-muted">({{ $ratingPercentages[$star] ?? 0 }}%)</small></div>
             </div>
@@ -144,7 +70,7 @@
 
           <div class="d-flex align-items-center justify-content-between pt-3 mt-3 border-top" style="border-color: #f2e9f7 !important;">
             <span class="text-muted small">Kategori terdaftar: <strong>{{ count($categories) }} Segmen Civitas</strong></span>
-            <span class="badge" style="background:#823ca2; color:#fff;">100% Ulasan Terverifikasi</span>
+            <span class="badge" style="background:#046B26; color:#fff;">100% Ulasan Terverifikasi</span>
           </div>
         </div>
       </div>
@@ -194,7 +120,7 @@
 
         <!-- Submit & Reset -->
         <div class="col-md-2 d-flex gap-2">
-          <button type="submit" class="btn btn-primary w-100 fw-bold" style="background:#823ca2; border-color:#823ca2;">
+          <button type="submit" class="btn btn-primary w-100 fw-bold" style="background:#046B26; border-color:#046B26;">
             Filter
           </button>
           @if(!empty($search) || !empty($selectedKategori) || !empty($selectedRating))
@@ -221,22 +147,22 @@
           <div class="testi-card h-100 shadow-sm" style="background: #ffffff; border: 1.5px solid #f0e6f5; border-radius: 20px; padding: 28px 24px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s ease;">
             <div>
               <div class="d-flex align-items-center justify-content-between mb-3">
-                <div class="testi-stars m-0" style="color: #ff9c00; font-size: 15px; display: flex; gap: 3px;">
+                <div class="testi-stars m-0" style="color: #FED802; font-size: 15px; display: flex; gap: 3px;">
                   @for($i = 1; $i <= 5; $i++)
                     <i class="bi bi-star{{ $i <= $testi->bintang ? '-fill' : '' }}"></i>
                   @endfor
                 </div>
-                <span class="badge" style="background: #f5edf8; color: #823ca2; font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 8px;">
+                <span class="badge" style="background: #f5edf8; color: #046B26; font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 8px;">
                   {{ $testi->kategori ?? 'Alumni' }}
                 </span>
               </div>
               <p class="testi-text mb-4" style="font-size: 14px; line-height: 1.6; color: #333333; font-style: italic;">"{{ strip_tags(html_entity_decode($testi->pesan ?? '')) }}"</p>
             </div>
             <div class="testi-author pt-3 border-top d-flex align-items-center gap-3" style="border-color: #f7effa !important;">
-              <div class="testi-avatar flex-shrink-0" style="width: 44px; height: 44px; border-radius: 50%; background: #823ca2; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">{{ $initials ?: 'AL' }}</div>
+              <div class="testi-avatar flex-shrink-0" style="width: 44px; height: 44px; border-radius: 50%; background: #046B26; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">{{ $initials ?: 'AL' }}</div>
               <div>
                 <div class="testi-name text-dark fw-bold" style="font-size: 14px; line-height: 1.3;">{{ $testi->nama }}</div>
-                <div class="testi-role text-muted small" style="font-size: 12px;">{{ $testi->pekerjaan ?? 'Alumni FIKES UIS' }}</div>
+                <div class="testi-role text-muted small" style="font-size: 12px;">{{ $testi->pekerjaan ?? 'Alumni Universitas Ibnu Sina' }}</div>
               </div>
             </div>
           </div>
@@ -247,7 +173,7 @@
             <i class="bi bi-chat-square-text text-muted" style="font-size: 48px;"></i>
             <h5 class="fw-bold mt-3 text-dark">Tidak Ada Testimoni yang Sesuai</h5>
             <p class="text-muted small">Coba ubah kata kunci pencarian atau reset filter untuk menampilkan semua ulasan.</p>
-            <a href="{{ route('homepage.testimoni') }}" class="btn btn-sm btn-outline-primary" style="color:#823ca2; border-color:#823ca2;">Reset Filter</a>
+            <a href="{{ route('homepage.testimoni') }}" class="btn btn-sm btn-outline-primary" style="color:#046B26; border-color:#046B26;">Reset Filter</a>
           </div>
         </div>
       @endforelse

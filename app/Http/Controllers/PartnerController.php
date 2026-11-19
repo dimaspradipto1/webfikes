@@ -26,10 +26,10 @@ class PartnerController extends Controller
         $path = $request->hasFile('logo') ? $request->file('logo')->store('partners', 'public') : null;
 
         Partner::create([
-            'nama'   => $request->nama,
-            'logo'   => $path,
+            'nama' => $request->nama,
+            'logo' => $path,
             'urutan' => $request->urutan ?? 0,
-            'aktif'  => $request->has('aktif') ? true : false,
+            'aktif' => $request->has('aktif') ? true : false,
         ]);
 
         alert()->success('Berhasil!', 'Partner berhasil ditambahkan.');
@@ -45,9 +45,9 @@ class PartnerController extends Controller
     public function update(PartnerRequest $request, Partner $partner): RedirectResponse
     {
         $data = [
-            'nama'   => $request->nama,
+            'nama' => $request->nama,
             'urutan' => $request->urutan ?? 0,
-            'aktif'  => $request->has('aktif') ? true : false,
+            'aktif' => $request->has('aktif') ? true : false,
         ];
 
         if ($request->hasFile('logo')) {

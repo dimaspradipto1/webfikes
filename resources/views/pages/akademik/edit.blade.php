@@ -155,7 +155,7 @@
                         <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary px-4 rounded-3">
                             <i class="bi bi-arrow-left me-1"></i> Kembali ke Dashboard
                         </a>
-                        <button type="submit" class="btn btn-primary px-4 rounded-3 fw-bold" style="background: #823ca2; border-color: #823ca2;">
+                        <button type="submit" class="btn btn-primary px-4 rounded-3 fw-bold" style="background: #046B26; border-color: #046B26;">
                             <i class="bi bi-check2-circle me-1"></i> Simpan Data {{ $pageTitle }}
                         </button>
                     </div>

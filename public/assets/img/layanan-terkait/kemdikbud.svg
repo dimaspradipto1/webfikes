@@ -1,10 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-  <!-- Tut Wuri Handayani emblem silhouette -->
-  <circle cx="50" cy="50" r="44" stroke="#ffffff" stroke-width="3" fill="none"/>
-  <!-- Wing / Flame -->
-  <path d="M50 20 C54 30 62 38 68 40 C64 45 56 46 50 48 C44 46 36 45 32 40 C38 38 46 30 50 20 Z" fill="#ffffff"/>
-  <path d="M50 48 L50 78" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"/>
-  <!-- Wings left & right -->
-  <path d="M30 45 C24 55 26 70 50 78 C74 70 76 55 70 45" stroke="#ffffff" stroke-width="3" fill="none"/>
-  <path d="M36 52 C32 60 38 68 50 72 C62 68 68 60 64 52" stroke="#ff9c00" stroke-width="2" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="100%" height="100%">
+  <!-- Official Kemdikbud / Tut Wuri Handayani Emblem Vector -->
+  <defs>
+    <linearGradient id="kemdikbudBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E5CAD"/>
+      <stop offset="100%" stop-color="#073B72"/>
+    </linearGradient>
+    <linearGradient id="kemdikbudGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFBE1A"/>
+      <stop offset="100%" stop-color="#E09200"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Emblem Shield / Circle -->
+  <circle cx="80" cy="80" r="70" stroke="url(#kemdikbudBlue)" stroke-width="4.5" fill="#ffffff"/>
+  <circle cx="80" cy="80" r="62" stroke="url(#kemdikbudGold)" stroke-width="1.8" fill="none"/>
+
+  <!-- Belencong / Golden Flame of Education -->
+  <path d="M80 32 C86 44 96 54 102 58 C96 64 88 66 80 68 C72 66 64 64 58 58 C64 54 74 44 80 32 Z" fill="url(#kemdikbudGold)" stroke="#B37400" stroke-width="1"/>
+  <circle cx="80" cy="48" r="4" fill="#ffffff"/>
+
+  <!-- Golden Wing Feathers Left & Right (Sayap Tut Wuri) -->
+  <path d="M50 68 C42 80 44 102 80 114 C116 102 118 80 110 68 C98 84 62 84 50 68 Z" fill="url(#kemdikbudBlue)"/>
+  <path d="M60 76 C54 88 62 98 80 105 C98 98 106 88 100 76 C92 88 68 88 60 76 Z" fill="url(#kemdikbudGold)"/>
+
+  <!-- Central Quill / Torch Axis -->
+  <line x1="80" y1="68" x2="80" y2="114" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Typography Label -->
+  <text x="80" y="134" text-anchor="middle" fill="#073B72" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="12" font-weight="900" letter-spacing="1.5">KEMDIKBUD</text>
+  <text x="80" y="146" text-anchor="middle" fill="#E09200" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="7.5" font-weight="700" letter-spacing="1">RISTEK</text>
 </svg>

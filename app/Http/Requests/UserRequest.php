@@ -16,7 +16,7 @@ class UserRequest extends FormRequest
         // 1. Validasi Login
         if ($this->routeIs('loginproses')) {
             return [
-                'email'    => ['required', 'email', 'max:100'],
+                'email' => ['required', 'email', 'max:100'],
                 'password' => ['required', 'string', 'min:6'],
             ];
         }
@@ -31,19 +31,19 @@ class UserRequest extends FormRequest
         // 3. Validasi Update My Profile Sendiri
         if ($this->routeIs('user.update-my-profile')) {
             return [
-                'name'  => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . ($this->user()?->id ?? '')],
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.($this->user()?->id ?? '')],
             ];
         }
 
         // 4. Validasi CRUD User (Store & Update)
-        $userId = $this->route('user') 
-            ? (is_object($this->route('user')) ? $this->route('user')->id : $this->route('user')) 
+        $userId = $this->route('user')
+            ? (is_object($this->route('user')) ? $this->route('user')->id : $this->route('user'))
             : null;
 
         $rules = [
-            'name'  => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $userId],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$userId],
             'roles' => ['required'],
         ];
 
@@ -60,31 +60,31 @@ class UserRequest extends FormRequest
     {
         return [
             // Login & Umum
-            'email.required'     => 'Email wajib diisi.',
-            'email.email'        => 'Format email tidak valid.',
-            'email.max'          => 'Email maksimal 255 karakter.',
-            'email.unique'       => 'Email sudah terdaftar.',
-            
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.max' => 'Email maksimal 255 karakter.',
+            'email.unique' => 'Email sudah terdaftar.',
+
             // Password
-            'password.required'  => 'Password wajib diisi.',
-            'password.min'       => 'Password minimal :min karakter.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal :min karakter.',
             'password.confirmed' => 'Konfirmasi password tidak cocok.',
 
             // Nama & Role
-            'name.required'      => 'Nama wajib diisi.',
-            'name.max'           => 'Nama maksimal 255 karakter.',
-            'roles.required'     => 'Role wajib dipilih.',
-            'roles.in'           => 'Role tidak valid.',
+            'name.required' => 'Nama wajib diisi.',
+            'name.max' => 'Nama maksimal 255 karakter.',
+            'roles.required' => 'Role wajib dipilih.',
+            'roles.in' => 'Role tidak valid.',
         ];
     }
 
     public function attributes(): array
     {
         return [
-            'name'     => 'Nama',
-            'email'    => 'Email',
+            'name' => 'Nama',
+            'email' => 'Email',
             'password' => 'Password',
-            'roles'    => 'Role',
+            'roles' => 'Role',
         ];
     }
 }

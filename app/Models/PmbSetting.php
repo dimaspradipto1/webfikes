@@ -27,7 +27,7 @@ class PmbSetting extends Model
     ];
 
     protected $casts = [
-        'is_active'      => 'boolean',
+        'is_active' => 'boolean',
         'gelombang_list' => 'array',
     ];
 
@@ -36,8 +36,8 @@ class PmbSetting extends Model
      */
     public function getWavesAttribute(): array
     {
-        if (!empty($this->gelombang_list) && is_array($this->gelombang_list)) {
-            return array_values(array_filter($this->gelombang_list, fn ($item) => !empty(trim($item ?? ''))));
+        if (! empty($this->gelombang_list) && is_array($this->gelombang_list)) {
+            return array_values(array_filter($this->gelombang_list, fn ($item) => ! empty(trim($item ?? ''))));
         }
 
         $fallback = array_filter([
@@ -46,7 +46,7 @@ class PmbSetting extends Model
             $this->gelombang_3,
         ]);
 
-        return !empty($fallback) ? array_values($fallback) : [
+        return ! empty($fallback) ? array_values($fallback) : [
             'Gelombang 1: Jan - Apr',
             'Gelombang 2: Mei - Jul',
             'Gelombang 3: Agu - Sep',

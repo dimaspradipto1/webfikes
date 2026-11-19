@@ -1,171 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Berita & Informasi Terkini — Fakultas Ilmu Kesehatan (FIKES UIS)')
-@section('meta_description', 'Ikuti berita, pengumuman akademik, riset, dan artikel kesehatan terbaru dari Fakultas Ilmu Kesehatan Universitas Ibnu Sina (FIKES UIS).')
-@section('meta_keywords', 'berita fikes, artikel kesehatan, k3 batam, kesehatan lingkungan, pengumuman uis, fikes ibnu sina')
-
-@push('styles')
-<style>
-  .news-hero {
-    position: relative;
-    background: var(--obsidian-dark);
-    padding: 75px 0 55px;
-    border-bottom: 2px solid var(--fikes-purple);
-  }
-  .news-hero-title {
-    font-size: 38px;
-    font-weight: 800;
-    color: var(--white);
-    margin-bottom: 12px;
-  }
-  .news-hero-title em {
-    font-style: normal;
-    color: var(--fikes-orange);
-  }
-  .news-card-portal {
-    background: var(--white);
-    border: 1px solid var(--border-light);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .news-card-portal:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--border-purple);
-  }
-  .news-card-thumb-wrap {
-    position: relative;
-    height: 210px;
-    overflow: hidden;
-    background: var(--fikes-purple-light);
-  }
-  .news-card-thumb {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-  .news-card-portal:hover .news-card-thumb {
-    transform: scale(1.05);
-  }
-  .news-gallery-badge {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: rgba(25, 10, 36, 0.85);
-    color: var(--fikes-orange);
-    border: 1px solid rgba(255, 156, 0, 0.4);
-    font-size: 11px;
-    font-weight: 700;
-    padding: 3px 9px;
-    border-radius: 50px;
-    backdrop-filter: blur(4px);
-  }
-  .news-cat-badge {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: var(--fikes-purple);
-    color: var(--white);
-    font-size: 11px;
-    font-weight: 700;
-    padding: 4px 12px;
-    border-radius: 50px;
-    box-shadow: var(--shadow-sm);
-  }
-  .news-card-body {
-    padding: 22px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .news-featured-box {
-    background: var(--white);
-    border: 2px solid var(--fikes-purple);
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-    margin-bottom: 35px;
-  }
-
-  /* Filter Category Bar */
-  .news-filter-bar {
-    background: var(--white);
-    border: 1px solid var(--border-light);
-    border-radius: 18px;
-    padding: 16px 20px;
-    box-shadow: var(--shadow-sm);
-    margin-bottom: 35px;
-  }
-  .cat-pill-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 16px;
-    border-radius: 50px;
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none !important;
-    background: var(--surface-light);
-    border: 1px solid var(--border-light);
-    color: #475569 !important;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-  }
-  .cat-pill-item:hover {
-    background: var(--fikes-purple-light);
-    border-color: var(--fikes-purple);
-    color: var(--fikes-purple) !important;
-    transform: translateY(-2px);
-  }
-  .cat-pill-item.active {
-    background: var(--fikes-purple);
-    border-color: var(--fikes-purple);
-    color: #ffffff !important;
-    box-shadow: 0 2px 8px rgba(130, 60, 162, 0.3);
-  }
-  .news-search-input-box {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background: var(--surface-light);
-    border: 1px solid var(--border-light);
-    border-radius: 50px;
-    padding: 6px 16px;
-    width: 260px;
-    max-width: 100%;
-  }
-  .news-search-input-box:focus-within {
-    border-color: var(--fikes-purple);
-    background: #ffffff;
-    box-shadow: 0 0 0 3px rgba(130, 60, 162, 0.12);
-  }
-  .news-search-input-box input {
-    border: none;
-    outline: none;
-    background: transparent;
-    font-size: 13px;
-    width: 100%;
-    color: #334155;
-  }
-  .news-search-input-box button {
-    border: none;
-    background: transparent;
-    color: var(--fikes-purple);
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-  }
-</style>
-@endpush
+@section('title', 'Berita & Informasi Terkini — Universitas Ibnu Sina (UIS)')
+@section('meta_description', 'Ikuti berita kampus, pengumuman akademik, riset teknologi & bisnis, dan publikasi terbaru dari Universitas Ibnu Sina (UIS) Batam.')
+@section('meta_keywords', 'berita uis, pengumuman akademik uis, riset kampus batam, kegiatan mahasiswa uis, universitas ibnu sina batam')
 
 @section('content')
 
@@ -175,17 +12,17 @@
 <div class="news-hero">
   <div class="container">
     <div data-aos="fade-up">
-      <div class="badge px-3 py-2 rounded-pill mb-3" style="background: rgba(130, 60, 162, 0.45); color: var(--fikes-orange); border: 1px solid rgba(255, 156, 0, 0.4);">
-        <i class="bi bi-newspaper me-1"></i> Warta & Informasi FIKES UIS
+      <div class="badge px-2.5 py-1 rounded-pill mb-2" style="background: rgba(4, 107, 38, 0.45); color: var(--uis-orange); border: 1px solid rgba(254, 216, 2, 0.4); font-size: 11px;">
+        <i class="bi bi-newspaper me-1"></i> Warta & Informasi Universitas Ibnu Sina
       </div>
-      <h1 class="news-hero-title">Berita & <em>Artikel</em> Kesehatan</h1>
-      <p class="text-white-50 mb-3" style="max-width: 650px;">
-        Kumpulan berita kegiatan, pengumuman akademik, artikel ilmiah, dan inovasi seputar Keselamatan & Kesehatan Kerja (K3) serta Kesehatan Lingkungan.
+      <h1 class="news-hero-title">Berita & <em>Warta Kampus</em> UIS</h1>
+      <p class="text-white-50 mb-2" style="max-width: 650px; font-size: 13px; line-height: 1.45;">
+        Kumpulan warta kegiatan universitas, pengumuman akademik, prestasi mahasiswa, riset terapan, dan inovasi civitas akademika Universitas Ibnu Sina Batam.
       </p>
-      <div class="d-flex align-items-center gap-2 text-white-50 small">
-        <a href="{{ route('homepage') }}" class="text-white text-decoration-none">Beranda</a>
+      <div class="breadcrumb-custom">
+        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
         <span>/</span>
-        <span style="color: var(--fikes-orange);">Berita & Artikel</span>
+        <span class="active">Berita & Warta Kampus</span>
       </div>
     </div>
   </div>
@@ -200,17 +37,17 @@
     {{-- Featured / Berita Utama --}}
     @if(isset($featured) && $featured)
       <div class="news-featured-box" data-aos="fade-up">
-        <div class="row g-0">
-          <div class="col-lg-6">
-            <div class="position-relative h-100" style="min-height: 280px;">
+        <div class="row g-0 h-100 align-items-stretch">
+          <div class="col-lg-5 col-md-5">
+            <div class="news-featured-img-wrap">
               @if($featured->thumbnail)
-                <img src="{{ asset('storage/' . $featured->thumbnail) }}" alt="{{ $featured->title }}" class="w-100 h-100" style="object-fit: cover;">
+                <img src="{{ asset('storage/' . $featured->thumbnail) }}" alt="{{ $featured->title }}" class="news-featured-thumb">
               @else
                 <div class="w-100 h-100 d-flex align-items-center justify-content-center bg-secondary text-white">
                   <i class="bi bi-image fs-1"></i>
                 </div>
               @endif
-              <span class="badge position-absolute top-0 start-0 m-3 px-3 py-2" style="background: var(--fikes-orange); color: #190a24; font-weight: 800;">
+              <span class="badge position-absolute top-0 start-0 m-3 px-3 py-2" style="background: #FED802; color: #046B26; font-weight: 800; font-size: 11px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.18);">
                 <i class="bi bi-star-fill me-1"></i> BERITA UTAMA
               </span>
               @if(!empty($featured->gallery) && count($featured->gallery) > 0)
@@ -220,22 +57,26 @@
               @endif
             </div>
           </div>
-          <div class="col-lg-6 p-4 p-md-5 d-flex flex-column justify-content-between">
-            <div>
-              <div class="d-flex align-items-center gap-3 text-muted small mb-2">
-                <span><i class="bi bi-calendar3 me-1"></i> {{ $featured->created_at->format('d M Y') }}</span>
+          <div class="col-lg-7 col-md-7">
+            <div class="news-featured-body">
+              <div class="d-flex align-items-center gap-2 text-muted small mb-2">
+                <span><i class="bi bi-calendar3 me-1 text-secondary"></i> {{ $featured->created_at->format('d M Y') }}</span>
                 <span>•</span>
-                <span class="badge bg-light text-dark border">{{ $featured->category ?? 'Berita Fakultas' }}</span>
+                <span class="badge bg-light text-dark border">{{ $featured->category ?? 'Berita Universitas' }}</span>
               </div>
-              <h3 class="fw-bold mb-3 text-dark">{{ $featured->title }}</h3>
-              <p class="text-muted small mb-4" style="line-height: 1.7;">
-                {{ strip_tags(html_entity_decode($featured->description ?? Str::limit(strip_tags($featured->content ?? ''), 180))) }}
+              <h3 class="news-featured-title">
+                <a href="{{ route('homepage.news.detail', $featured->slug ?? $featured->id) }}" class="text-dark text-decoration-none">
+                  {{ $featured->title }}
+                </a>
+              </h3>
+              <p class="news-featured-desc">
+                {{ strip_tags(html_entity_decode($featured->description ?? Str::limit(strip_tags($featured->content ?? ''), 170))) }}
               </p>
-            </div>
-            <div>
-              <a href="{{ route('homepage.news.detail', $featured->slug ?? $featured->id) }}" class="btn-primary-hero" style="font-size: 13.5px; padding: 10px 22px;">
-                Baca Berita Lengkap <i class="bi bi-arrow-right"></i>
-              </a>
+              <div>
+                <a href="{{ route('homepage.news.detail', $featured->slug ?? $featured->id) }}" class="btn-primary-hero" style="font-size: 13px; padding: 8px 20px;">
+                  Baca Berita Lengkap <i class="bi bi-arrow-right ms-1"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -254,7 +95,8 @@
 
           @php
             $portalCategories = [
-              'Berita Fakultas'         => 'bi-newspaper',
+              'Berita Universitas'      => 'bi-newspaper',
+              'Berita Humas'            => 'bi-megaphone-fill',
               'Akademik & Mahasiswa'    => 'bi-mortarboard',
               'K3 & Keselamatan Kerja'  => 'bi-shield-check',
               'Kesehatan Lingkungan'    => 'bi-tree',
@@ -308,7 +150,7 @@
             <div class="news-card-portal">
               <div class="news-card-thumb-wrap">
                 @if($article->thumbnail)
-                  <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="{{ $article->title }}" class="news-card-thumb">
+                  <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="{{ $article->title }}" class="news-card-thumb" loading="lazy">
                 @else
                   <div class="w-100 h-100 d-flex align-items-center justify-content-center text-muted">
                     <i class="bi bi-newspaper fs-1"></i>
@@ -324,19 +166,23 @@
 
               <div class="news-card-body">
                 <div>
-                  <div class="text-muted small mb-2">
+                  <div class="text-muted small mb-2" style="font-size: 11.5px;">
                     <i class="bi bi-calendar3 me-1"></i> {{ $article->created_at->format('d M Y') }}
                     <span class="mx-1">•</span>
-                    <i class="bi bi-person me-1"></i> {{ $article->user?->name ?? 'Admin FIKES' }}
+                    <i class="bi bi-person me-1"></i> {{ $article->user?->name ?? 'Admin UIS' }}
                   </div>
-                  <h5 class="fw-bold mb-2 text-dark">{{ Str::limit($article->title, 65) }}</h5>
-                  <p class="text-muted small mb-3">
+                  <h5 class="fw-bold mb-2 text-dark" style="font-size: 15px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                    <a href="{{ route('homepage.news.detail', $article->slug ?? $article->id) }}" class="text-dark text-decoration-none">
+                      {{ $article->title }}
+                    </a>
+                  </h5>
+                  <p class="text-muted small mb-3" style="font-size: 12.5px; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                     {{ Str::limit(strip_tags(html_entity_decode($article->description ?? strip_tags($article->content ?? ''))), 110) }}
                   </p>
                 </div>
-                <div class="pt-3 border-top d-flex justify-content-between align-items-center">
-                  <a href="{{ route('homepage.news.detail', $article->slug ?? $article->id) }}" class="fw-bold text-decoration-none" style="color: var(--fikes-purple); font-size: 13.5px;">
-                    Selengkapnya <i class="bi bi-arrow-right"></i>
+                <div class="pt-2 border-top d-flex justify-content-between align-items-center">
+                  <a href="{{ route('homepage.news.detail', $article->slug ?? $article->id) }}" class="fw-bold text-decoration-none" style="color: var(--uis-green); font-size: 12.5px;">
+                    Selengkapnya <i class="bi bi-arrow-right ms-1"></i>
                   </a>
                 </div>
               </div>
@@ -356,7 +202,7 @@
         <div class="p-5 text-center bg-white rounded-4 shadow-sm">
           <i class="bi bi-newspaper fs-1 text-muted mb-3 d-block"></i>
           <h4 class="fw-bold text-dark">Belum Ada Berita</h4>
-          <p class="text-muted small">Berita dan artikel terbaru FIKES UIS akan segera dipublikasikan di sini.</p>
+          <p class="text-muted small">Berita dan artikel terbaru Universitas Ibnu Sina akan segera dipublikasikan di sini.</p>
         </div>
       @endif
     @endif

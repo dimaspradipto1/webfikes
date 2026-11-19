@@ -35,10 +35,10 @@ class BannerController extends Controller
         $path = $request->file('foto')->store('banners', 'public');
 
         Banner::create([
-            'judul'  => $request->judul,
-            'url'    => $path,
+            'judul' => $request->judul,
+            'url' => $path,
             'urutan' => $request->urutan ?? 0,
-            'aktif'  => $request->has('aktif') ? true : false,
+            'aktif' => $request->has('aktif') ? true : false,
         ]);
 
         alert()->success('Berhasil!', 'Banner berhasil ditambahkan.');
@@ -60,9 +60,9 @@ class BannerController extends Controller
     public function update(BannerRequest $request, Banner $banner): RedirectResponse
     {
         $data = [
-            'judul'  => $request->judul,
+            'judul' => $request->judul,
             'urutan' => $request->urutan ?? 0,
-            'aktif'  => $request->has('aktif') ? true : false,
+            'aktif' => $request->has('aktif') ? true : false,
         ];
 
         if ($request->hasFile('foto')) {
