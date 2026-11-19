@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\News;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -78,7 +79,7 @@ class NewsExcelService
                 'published',
                 'Ya',
                 'Prestasi membanggakan kembali ditorehkan mahasiswa Universitas Ibnu Sina dalam kompetisi inovasi tingkat nasional.',
-                '<p>Universitas Ibnu Sina kembali menorehkan prestasi gemilang di tingkat nasional. Tim mahasiswa berhasil meraih juara pertama setelah menyisihkan puluhan kampus lainnya dalam ajang inovasi teknologi terapan...</p>',
+                'Universitas Ibnu Sina kembali menorehkan prestasi gemilang di tingkat nasional. Tim mahasiswa berhasil meraih juara pertama setelah menyisihkan puluhan kampus lainnya dalam ajang inovasi teknologi terapan...',
                 '',
             ],
             [
@@ -88,7 +89,7 @@ class NewsExcelService
                 'published',
                 'Tidak',
                 'Peningkatan standar keselamatan dan kesehatan kerja lingkungan laboratorium bagi sivitas akademika UIS.',
-                '<p>Fakultas menyelenggarakan workshop praktis mengenai keselamatan dan kesehatan kerja di lingkungan kampus untuk menjamin kenyamanan dan standar operasional laboratorium...</p>',
+                'Fakultas menyelenggarakan workshop praktis mengenai keselamatan dan kesehatan kerja di lingkungan kampus untuk menjamin kenyamanan dan standar operasional laboratorium...',
                 '',
             ],
         ];
@@ -194,6 +195,120 @@ class NewsExcelService
     }
 
     /**
+     * Export all news data to an Excel (.xlsx) file.
+     */
+    public function exportExcel(?int $onlyUserId = null): StreamedResponse
+    {
+        $query = News::with('user')->latest('id');
+        if ($onlyUserId !== null) {
+            $query->where('user_id', $onlyUserId);
+        }
+        $newsList = $query->get();
+
+        $spreadsheet = new Spreadsheet;
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setTitle('Data Berita');
+
+        $headers = [
+            'A1' => 'No',
+            'B1' => 'Judul Berita *',
+            'C1' => 'Kategori *',
+            'D1' => 'Status *',
+            'E1' => 'Artikel Unggulan',
+            'F1' => 'Deskripsi Singkat *',
+            'G1' => 'Konten Berita *',
+            'H1' => 'Thumbnail (Boleh Dikosongkan)',
+            'I1' => 'Tanggal Terbit',
+            'J1' => 'Penulis',
+        ];
+
+        foreach ($headers as $cell => $text) {
+            $sheet->setCellValue($cell, $text);
+        }
+
+        $headerStyle = [
+            'font' => [
+                'bold' => true,
+                'color' => ['rgb' => 'FFFFFF'],
+                'size' => 11,
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => '046B26'],
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+                'wrapText' => true,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color' => ['rgb' => '023814'],
+                ],
+            ],
+        ];
+        $sheet->getStyle('A1:J1')->applyFromArray($headerStyle);
+        $sheet->getRowDimension(1)->setRowHeight(32);
+
+        $rowNum = 2;
+        foreach ($newsList as $idx => $item) {
+            $pubDate = $item->published_at ?? $item->created_at;
+            $cleanDesc = trim(strip_tags((string) $item->description));
+            $cleanContent = trim(strip_tags((string) $item->content));
+
+            $sheet->setCellValue('A'.$rowNum, $idx + 1);
+            $sheet->setCellValue('B'.$rowNum, (string) $item->title);
+            $sheet->setCellValue('C'.$rowNum, (string) ($item->category ?: 'Berita Universitas'));
+            $sheet->setCellValue('D'.$rowNum, (string) ($item->status ?: 'published'));
+            $sheet->setCellValue('E'.$rowNum, $item->is_featured ? 'Ya' : 'Tidak');
+            $sheet->setCellValue('F'.$rowNum, $cleanDesc);
+            $sheet->setCellValue('G'.$rowNum, $cleanContent);
+            $sheet->setCellValue('H'.$rowNum, (string) ($item->thumbnail ?? ''));
+            $sheet->setCellValue('I'.$rowNum, $pubDate ? $pubDate->format('Y-m-d H:i:s') : '');
+            $sheet->setCellValue('J'.$rowNum, $item->user?->name ?? 'admin');
+
+            $sheet->getStyle("A{$rowNum}:J{$rowNum}")->applyFromArray([
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => Border::BORDER_THIN,
+                        'color' => ['rgb' => 'D0D5DD'],
+                    ],
+                ],
+                'alignment' => [
+                    'vertical' => Alignment::VERTICAL_CENTER,
+                ],
+            ]);
+            $sheet->getStyle("A{$rowNum}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle("C{$rowNum}:E{$rowNum}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle("I{$rowNum}:J{$rowNum}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+            $sheet->getRowDimension($rowNum)->setRowHeight(26);
+            $rowNum++;
+        }
+
+        $sheet->getColumnDimension('A')->setWidth(7);
+        $sheet->getColumnDimension('B')->setWidth(48);
+        $sheet->getColumnDimension('C')->setWidth(26);
+        $sheet->getColumnDimension('D')->setWidth(14);
+        $sheet->getColumnDimension('E')->setWidth(18);
+        $sheet->getColumnDimension('F')->setWidth(45);
+        $sheet->getColumnDimension('G')->setWidth(60);
+        $sheet->getColumnDimension('H')->setWidth(32);
+        $sheet->getColumnDimension('I')->setWidth(22);
+        $sheet->getColumnDimension('J')->setWidth(18);
+
+        $filename = 'Export_Post_Berita_UIS_'.date('Y-m-d_His').'.xlsx';
+
+        return response()->streamDownload(function () use ($spreadsheet) {
+            $writer = new Xlsx($spreadsheet);
+            $writer->save('php://output');
+        }, $filename, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'Cache-Control' => 'max-age=0',
+        ]);
+    }
+
+    /**
      * Import news data from uploaded spreadsheet file.
      *
      * @throws \Exception
@@ -278,10 +393,11 @@ class NewsExcelService
                 $status = str_contains($rawStatus, 'draft') ? 'draft' : 'published';
                 $isFeatured = in_array($rawFeatured, ['ya', 'y', '1', 'true', 'yes'], true);
 
+                $description = trim(strip_tags($description));
+                $content = trim(strip_tags($content));
+
                 if (empty($content) && ! empty($description)) {
-                    $content = '<p>'.nl2br(e($description)).'</p>';
-                } elseif (! empty($content) && ! str_starts_with($content, '<')) {
-                    $content = '<p>'.nl2br(e($content)).'</p>';
+                    $content = $description;
                 }
 
                 if (empty($description)) {
@@ -293,7 +409,7 @@ class NewsExcelService
                 }
 
                 if (empty($content)) {
-                    $content = '<p>'.e($title).'</p>';
+                    $content = $title;
                 }
 
                 $thumbnailPath = null;
@@ -301,18 +417,41 @@ class NewsExcelService
                     $thumbnailPath = $thumbnail;
                 }
 
-                News::create([
-                    'user_id' => $userId,
-                    'thumbnail' => $thumbnailPath,
-                    'gallery' => null,
-                    'title' => $title,
-                    'description' => $description,
-                    'content' => $content,
-                    'status' => $status,
-                    'category' => $category,
-                    'is_featured' => $isFeatured,
-                    'published_at' => now(),
-                ]);
+                $rawPublishedAt = trim((string) ($row['I'] ?? ''));
+                $publishedAt = now();
+                if (! empty($rawPublishedAt)) {
+                    try {
+                        $publishedAt = Carbon::parse($rawPublishedAt);
+                    } catch (\Throwable $e) {
+                        $publishedAt = now();
+                    }
+                }
+
+                $existing = News::where('title', $title)->first();
+                if ($existing) {
+                    $existing->update([
+                        'thumbnail' => $thumbnailPath ?? $existing->thumbnail,
+                        'description' => $description,
+                        'content' => $content,
+                        'status' => $status,
+                        'category' => $category,
+                        'is_featured' => $isFeatured,
+                        'published_at' => $rawPublishedAt !== '' ? $publishedAt : ($existing->published_at ?? now()),
+                    ]);
+                } else {
+                    News::create([
+                        'user_id' => $userId,
+                        'thumbnail' => $thumbnailPath,
+                        'gallery' => null,
+                        'title' => $title,
+                        'description' => $description,
+                        'content' => $content,
+                        'status' => $status,
+                        'category' => $category,
+                        'is_featured' => $isFeatured,
+                        'published_at' => $publishedAt,
+                    ]);
+                }
 
                 $importedCount++;
             }
