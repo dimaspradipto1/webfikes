@@ -242,3 +242,6 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
 
 // Endpoint API Sinkronisasi Otomatis cPanel -> Laptop (Diproteksi Token Rahasia Tanpa GDrive)
 Route::get('/api/backup-sync/download', [BackupController::class, 'syncDownload'])->name('backup.sync-download');
+
+// Endpoint Live Sync (Auto-Update Frontend Tanpa Reload Saat Ada Perubahan di Admin)
+Route::get('/api/live-state', [ThemeSettingController::class, 'liveState'])->name('api.live-state');

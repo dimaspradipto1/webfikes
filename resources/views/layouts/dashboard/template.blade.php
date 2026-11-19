@@ -38,7 +38,7 @@
 
     @stack('styles')
 
-    <style>
+    <style id="dynamic-admin-theme">
         :root {
             --uis-purple: {{ $themeSetting->admin_primary_color ?? '#046B26' }};
             --uis-purple-dark: {{ $themeSetting->admin_primary_color ?? '#03521d' }};
@@ -47,9 +47,21 @@
         }
         /* Header — Dynamic Admin Theme */
         .header {
+            height: {{ $themeSetting->admin_header_height ?? 78 }}px !important;
             background-color: {{ $themeSetting->admin_header_bg_color ?? '#046B26' }} !important;
-            border-bottom: 2.5px solid {{ $themeSetting->admin_header_border_color ?? '#FED802' }} !important;
+            border-bottom: 3px solid {{ $themeSetting->admin_header_border_color ?? '#FED802' }} !important;
             box-shadow: 0 2px 14px rgba(0, 0, 0, 0.16) !important;
+        }
+        #main {
+            margin-top: {{ $themeSetting->admin_header_height ?? 78 }}px !important;
+        }
+        .sidebar {
+            top: {{ $themeSetting->admin_header_height ?? 78 }}px !important;
+            background-color: {{ $themeSetting->admin_sidebar_bg_color ?? '#ffffff' }} !important;
+        }
+        .header .logo img {
+            max-height: 46px !important;
+            height: 46px !important;
         }
         .header .logo span {
             color: {{ $themeSetting->admin_header_brand_color ?? '#FED802' }} !important;
@@ -449,6 +461,94 @@
 
     @stack('scripts')
     @stack('styles')
+
+    <script>
+        (function() {
+            window.applyLiveAdminTheme = function(t) {
+                if (!t) return;
+                var styleEl = document.getElementById('dynamic-admin-theme');
+                if (!styleEl) return;
+                var ahHeight = parseInt(t.admin_header_height || 78, 10);
+                styleEl.textContent = `
+                    :root {
+                        --uis-purple: ${t.admin_primary_color || '#046B26'};
+                        --uis-purple-dark: ${t.admin_primary_color || '#03521d'};
+                        --uis-orange: ${t.admin_accent_color || '#FED802'};
+                        --uis-orange-dark: ${t.admin_accent_color || '#e5c302'};
+                    }
+                    .header {
+                        height: ${ahHeight}px !important;
+                        background-color: ${t.admin_header_bg_color || '#046B26'} !important;
+                        border-bottom: 3px solid ${t.admin_header_border_color || '#FED802'} !important;
+                        box-shadow: 0 2px 14px rgba(0, 0, 0, 0.16) !important;
+                    }
+                    #main { margin-top: ${ahHeight}px !important; }
+                    .sidebar {
+                        top: ${ahHeight}px !important;
+                        background-color: ${t.admin_sidebar_bg_color || '#ffffff'} !important;
+                    }
+                    .header .logo img { max-height: 46px !important; height: 46px !important; }
+                    .header .logo span { color: ${t.admin_header_brand_color || '#FED802'} !important; font-weight: 800; letter-spacing: 0.5px; }
+                    .header .toggle-sidebar-btn, .header .nav-profile, .header .nav-profile span, .header .nav-icon {
+                        color: ${t.admin_header_text_color || '#ffffff'} !important;
+                    }
+                    .header .toggle-sidebar-btn:hover, .header .nav-profile:hover span, .header .nav-icon:hover {
+                        color: ${t.admin_accent_color || '#FED802'} !important;
+                    }
+                    .sidebar-nav .nav-link.collapsed, .sidebar-nav .nav-link.collapsed i, .sidebar-nav .nav-content a {
+                        background: ${t.admin_sidebar_bg_color || '#ffffff'};
+                        color: ${t.admin_sidebar_text_color || '#046B26'};
+                    }
+                    .sidebar-nav .nav-link, .sidebar-nav .nav-link:not(.collapsed) {
+                        background: ${t.admin_sidebar_active_bg_color || '#eaf6ee'};
+                        color: ${t.admin_sidebar_active_text_color || '#046B26'};
+                        border-left: 4px solid ${t.admin_accent_color || '#FED802'};
+                    }
+                    .sidebar-nav .nav-link:not(.collapsed) i, .sidebar-nav .nav-content a.active {
+                        color: ${t.admin_sidebar_active_text_color || '#046B26'};
+                        font-weight: 700;
+                    }
+                    .sidebar-nav .nav-content a.active i {
+                        background-color: ${t.admin_accent_color || '#FED802'};
+                    }
+                    .sidebar-nav .nav-link:hover, .sidebar-nav .nav-link.collapsed:hover,
+                    .sidebar-nav .nav-link:hover i, .sidebar-nav .nav-link.collapsed:hover i {
+                        color: ${t.admin_sidebar_hover_text_color || '#FED802'};
+                        background: ${t.admin_sidebar_hover_bg_color || '#f8fcf9'};
+                    }
+                    .btn-primary {
+                        background-color: ${t.admin_primary_color || '#046B26'} !important;
+                        border-color: ${t.admin_primary_color || '#046B26'} !important;
+                    }
+                    .btn-outline-primary {
+                        color: ${t.admin_primary_color || '#046B26'} !important;
+                        border-color: ${t.admin_primary_color || '#046B26'} !important;
+                    }
+                    .btn-warning {
+                        background-color: ${t.admin_accent_color || '#FED802'} !important;
+                        border-color: ${t.admin_accent_color || '#FED802'} !important;
+                        color: #111827 !important;
+                    }
+                    .pagetitle h1, .card-title { color: ${t.admin_primary_color || '#046B26'}; }
+                    .back-to-top { background: ${t.admin_primary_color || '#046B26'}; }
+                    .back-to-top:hover { background: ${t.admin_accent_color || '#FED802'}; }
+                `;
+            };
+
+            // Broadcast current saved state to Frontend tabs on every Admin load
+            var savedTheme = @json(isset($themeSetting) ? $themeSetting->only(array_keys(\App\Models\ThemeSetting::defaultAttributes())) : null);
+            try {
+                if ('BroadcastChannel' in window) {
+                    var bc = new BroadcastChannel('webfikes_live_sync');
+                    bc.postMessage({ type: 'content_update', theme: savedTheme, ts: Date.now() });
+                }
+                if (savedTheme) {
+                    localStorage.setItem('webfikes_live_theme', JSON.stringify({ theme: savedTheme, ts: Date.now() }));
+                }
+                localStorage.setItem('webfikes_live_content_ping', String(Date.now()));
+            } catch (e) {}
+        })();
+    </script>
 
 </body>
 

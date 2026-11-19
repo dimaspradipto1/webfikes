@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ThemeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ThemeSettingController extends Controller
@@ -35,6 +37,7 @@ class ThemeSettingController extends Controller
             'header_lang_bg_color'            => 'required|string|max:20',
             'header_lang_text_color'          => 'required|string|max:20',
             'header_border_color'             => 'required|string|max:20',
+            'header_height'                   => 'nullable|integer|min:60|max:160',
             'hero_bg_color'                   => 'required|string|max:20',
             'hero_border_color'               => 'required|string|max:20',
 
@@ -53,6 +56,7 @@ class ThemeSettingController extends Controller
             'admin_header_text_color'         => 'required|string|max:20',
             'admin_header_brand_color'        => 'required|string|max:20',
             'admin_header_border_color'       => 'required|string|max:20',
+            'admin_header_height'             => 'nullable|integer|min:56|max:140',
             'admin_sidebar_bg_color'          => 'required|string|max:20',
             'admin_sidebar_text_color'        => 'required|string|max:20',
             'admin_sidebar_active_bg_color'   => 'required|string|max:20',
@@ -62,6 +66,8 @@ class ThemeSettingController extends Controller
         ]);
 
         $validated['header_is_sticky'] = $request->has('header_is_sticky');
+        $validated['header_height'] = $request->filled('header_height') ? (int) $request->header_height : 90;
+        $validated['admin_header_height'] = $request->filled('admin_header_height') ? (int) $request->admin_header_height : 78;
 
         $theme->update($validated);
 
@@ -88,5 +94,42 @@ class ThemeSettingController extends Controller
 
         Alert::success('Direset!', 'Pengaturan warna Frontend & Admin telah dikembalikan ke warna standar.');
         return redirect()->route('theme.index');
+    }
+
+    public function liveState()
+    {
+        $theme = ThemeSetting::current();
+        $themeData = $theme->only(array_keys(ThemeSetting::defaultAttributes()));
+        $themeHash = md5(json_encode($themeData));
+
+        $tables = [
+            'banners', 'abouts', 'layanans', 'publikasis', 'news', 'dosens',
+            'galleries', 'prestasis', 'organisasi_mahasiswas', 'contacts',
+            'bahasa_settings', 'pmb_settings', 'sambutan_dekans', 'visi_misis',
+            'faculty_stats', 'testimonials', 'faqs', 'partners', 'saranas',
+            'struktur_organisasis', 'milestones', 'topbars', 'hero_humas',
+            'layanan_humas', 'pusat_informasi_humas', 'unduhans', 'desain_grafis',
+            'template_dokumens',
+        ];
+
+        $parts = [];
+        foreach ($tables as $tbl) {
+            try {
+                if (Schema::hasTable($tbl)) {
+                    $row = DB::table($tbl)->selectRaw('COUNT(*) as c, MAX(updated_at) as u')->first();
+                    $parts[] = $tbl . ':' . ($row->c ?? 0) . ':' . ($row->u ?? '');
+                }
+            } catch (\Throwable $e) {
+                // ignore table if no updated_at
+            }
+        }
+
+        $contentHash = md5(implode('|', $parts));
+
+        return response()->json([
+            'theme'        => $themeData,
+            'theme_hash'   => $themeHash,
+            'content_hash' => $contentHash,
+        ])->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
     }
 }

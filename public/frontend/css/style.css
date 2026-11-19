@@ -205,7 +205,7 @@
 
 .badge-soft-green {
     background: #eaf6ee;
-    color: #046b26;
+    color: var(--uis-green);
     border: 1px solid #d4edd9;
     font-weight: 700;
 }
@@ -396,9 +396,9 @@ h6 {
 .hero-subpage,
 .page-hero-banner,
 .akademik-hero {
-    background: #046b26 !important;
+    background: var(--uis-green) !important;
 
-    border-bottom: 3px solid #fed802 !important;
+    border-bottom: 3px solid var(--uis-yellow) !important;
 
     position: relative;
 
@@ -609,7 +609,7 @@ h6 {
 }
 
 .breadcrumb-custom a:hover {
-    color: #fed802 !important;
+    color: var(--uis-yellow) !important;
 }
 
 .breadcrumb-custom a i,
@@ -633,7 +633,7 @@ h6 {
 
 .breadcrumb-custom .active,
 .breadcrumb-custom span.active {
-    color: #fed802 !important;
+    color: var(--uis-yellow) !important;
 
     font-size: 9.5px !important;
 
@@ -722,7 +722,7 @@ a {
 
 
 
-       NAVBAR — Solid UIS Green (#046B26) with Yellow (#FED802) Accents & Dropdowns
+       NAVBAR — Solid UIS Green (var(--uis-green)) with Yellow (var(--uis-yellow)) Accents & Dropdowns
 
 
 
@@ -736,7 +736,9 @@ a {
 .navbar-main {
     background: var(--uis-green, #046b26);
 
-    padding: 10px 0;
+    min-height: 90px;
+
+    padding: 18px 0;
 
     position: -webkit-sticky;
 
@@ -774,9 +776,9 @@ a {
 }
 
 .brand-logo-img {
-    height: 46px;
+    height: 54px;
 
-    max-height: 46px;
+    max-height: 54px;
 
     width: auto;
 
@@ -1454,7 +1456,7 @@ body > .skiptranslate {
 .btn-primary-hero {
     background: var(--uis-yellow);
 
-    color: #046b26;
+    color: var(--uis-green);
 
     font-family: "Plus Jakarta Sans", sans-serif;
 
@@ -1619,7 +1621,7 @@ section {
 
     height: 4px;
 
-    background: #fed802;
+    background: var(--uis-yellow);
 
     border-radius: 4px;
 
@@ -1716,8 +1718,8 @@ section {
 }
 
 .value-card:hover {
-    background: #FED802 !important;
-    border-color: #FED802 !important;
+    background: var(--uis-yellow) !important;
+    border-color: var(--uis-yellow) !important;
     transform: translateY(-8px);
     box-shadow: 0 20px 40px rgba(254, 216, 2, 0.45), 0 6px 14px rgba(0, 0, 0, 0.06);
 }
@@ -1730,7 +1732,7 @@ section {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #046B26;
+    color: var(--uis-green);
     font-size: 42px;
     margin: 0 auto 24px auto;
     border: 1.5px solid #b7e4c7;
@@ -1746,15 +1748,15 @@ section {
 }
 
 .value-card:hover .value-icon-wrap {
-    background: #046B26;
-    border-color: #046B26;
-    color: #FED802;
+    background: var(--uis-green);
+    border-color: var(--uis-green);
+    color: var(--uis-yellow);
     transform: scale(1.08);
     box-shadow: 0 10px 24px rgba(4, 107, 38, 0.32);
 }
 
 .value-card:hover .value-icon-wrap i {
-    color: #FED802;
+    color: var(--uis-yellow);
 }
 
 .value-title {
@@ -2009,7 +2011,7 @@ section {
 
 
 
-       FOOTER — Solid Deep UIS Green (#023814) with Yellow (#FED802) Accent
+       FOOTER — Solid Deep UIS Green (#023814) with Yellow (var(--uis-yellow)) Accent
 
 
 
@@ -2099,7 +2101,7 @@ section {
 
     border-color: var(--uis-yellow, #fed802);
 
-    color: #046b26;
+    color: var(--uis-green);
 
     transform: translateY(-2px);
 }
@@ -2143,7 +2145,7 @@ section {
 }
 
 .footer-links a:hover {
-    color: #fed802;
+    color: var(--uis-yellow);
     transform: translateX(3px);
 }
 
@@ -2160,7 +2162,7 @@ section {
 }
 
 .footer-contact-icon {
-    color: #fed802;
+    color: var(--uis-yellow);
 
     font-size: 18px;
 
@@ -2193,7 +2195,7 @@ section {
 }
 
 .footer-bottom a:hover {
-    color: #fed802;
+    color: var(--uis-yellow);
 }
 
 /* Back to Top */
@@ -2386,7 +2388,7 @@ section {
 }
 .mirror-hall-badge span {
     background: rgba(254, 216, 2, 0.12);
-    color: #fed802;
+    color: var(--uis-yellow);
     border: 1px solid rgba(254, 216, 2, 0.35);
     font-size: 11px;
     letter-spacing: 1.5px;
@@ -2485,7 +2487,7 @@ section {
         opacity 0.3s ease;
 }
 .swiper-slide-active .mirror-slide-label {
-    color: #fed802;
+    color: var(--uis-yellow);
     opacity: 1;
     text-shadow: 0 0 10px rgba(254, 216, 2, 0.6);
 }
@@ -2588,12 +2590,12 @@ section {
     align-items: center;
     justify-content: center;
     gap: 6px;
-    color: #046b26;
+    color: var(--uis-green);
     text-align: center;
 }
 .mirror-card-fallback-icon i {
     font-size: 30px;
-    color: #046b26;
+    color: var(--uis-green);
     line-height: 1;
 }
 .mirror-fallback-title {
@@ -2626,7 +2628,7 @@ section {
 
 /* Active Slide Highlight */
 .swiper-slide-active .mirror-card {
-    border-color: #fed802;
+    border-color: var(--uis-yellow);
     box-shadow:
         0 0 35px rgba(254, 216, 2, 0.7),
         0 20px 42px rgba(0, 0, 0, 0.75);
@@ -2692,7 +2694,7 @@ section {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #fed802;
+    background: var(--uis-yellow);
     color: #02240e;
     font-weight: 800;
     font-size: 13.5px;
@@ -2737,7 +2739,7 @@ section {
     width: 22px;
     height: 7px;
     border-radius: 10px;
-    background: #fed802;
+    background: var(--uis-yellow);
     box-shadow: 0 0 10px rgba(254, 216, 2, 0.8);
 }
 
@@ -2924,7 +2926,7 @@ section {
 }
 
 .social-media-btn:hover .social-media-icon-fallback {
-    color: #046b26;
+    color: var(--uis-green);
 }
 
 @media (max-width: 575.98px) {
@@ -3100,7 +3102,7 @@ section {
 
     background: var(--uis-yellow-light);
 
-    color: #046b26;
+    color: var(--uis-green);
 
     font-size: 11px;
 
@@ -3192,8 +3194,8 @@ section {
 }
 
 .fasilitas-box:hover {
-    background: #FED802 !important;
-    border-color: #FED802 !important;
+    background: var(--uis-yellow) !important;
+    border-color: var(--uis-yellow) !important;
     transform: translateY(-8px);
     box-shadow: 0 20px 40px rgba(254, 216, 2, 0.45), 0 6px 14px rgba(0, 0, 0, 0.06);
 }
@@ -3206,7 +3208,7 @@ section {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #046B26;
+    color: var(--uis-green);
     font-size: 42px;
     margin: 0 auto 24px auto;
     border: 1.5px solid #b7e4c7;
@@ -3222,15 +3224,15 @@ section {
 }
 
 .fasilitas-box:hover .fasilitas-icon {
-    background: #046B26;
-    border-color: #046B26;
-    color: #FED802;
+    background: var(--uis-green);
+    border-color: var(--uis-green);
+    color: var(--uis-yellow);
     transform: scale(1.08);
     box-shadow: 0 10px 24px rgba(4, 107, 38, 0.32);
 }
 
 .fasilitas-box:hover .fasilitas-icon i {
-    color: #FED802;
+    color: var(--uis-yellow);
 }
 
 .fasilitas-box h4,
@@ -3377,7 +3379,7 @@ section {
 
     font-weight: 800;
 
-    color: var(--uis-purple, #046b26);
+    color: var(--uis-purple, var(--uis-green));
 
     letter-spacing: -0.5px;
 
@@ -3411,7 +3413,7 @@ section {
 }
 
 .news-search-pill:focus-within {
-    border-color: var(--uis-purple, #046b26);
+    border-color: var(--uis-purple, var(--uis-green));
 
     box-shadow: 0 0 0 3px rgba(4, 107, 38, 0.14);
 }
@@ -3465,7 +3467,7 @@ section {
 
     background: transparent;
 
-    color: var(--uis-purple, #046b26);
+    color: var(--uis-purple, var(--uis-green));
 
     font-size: 15px;
 
@@ -3519,7 +3521,7 @@ section {
 }
 
 .news-mini-item:hover .news-mini-title {
-    color: var(--uis-purple, #046b26);
+    color: var(--uis-purple, var(--uis-green));
 }
 
 .news-mini-img-wrap {
@@ -3573,7 +3575,7 @@ section {
 
     background: var(--uis-purple-light, #eaf6ee);
 
-    color: var(--uis-purple, #046b26);
+    color: var(--uis-purple, var(--uis-green));
 
     font-size: 24px;
 }
@@ -3627,7 +3629,7 @@ section {
 .btn-uis-pill {
     display: inline-block;
 
-    background: var(--uis-purple, #046b26);
+    background: var(--uis-purple, var(--uis-green));
 
     color: #ffffff !important;
 
@@ -3647,9 +3649,9 @@ section {
 }
 
 .btn-uis-pill:hover {
-    background: var(--uis-purple-dark, #03521d);
+    background: var(--uis-purple-dark, var(--uis-green-dark));
 
-    color: var(--uis-orange, #fed802) !important;
+    color: var(--uis-orange, var(--uis-yellow)) !important;
 
     transform: translateY(-2px);
 
@@ -3679,7 +3681,7 @@ section {
 .announcement-card-box:hover {
     background: var(--uis-purple-light, #eaf6ee);
 
-    border-color: var(--uis-purple, #046b26);
+    border-color: var(--uis-purple, var(--uis-green));
 
     transform: translateX(4px);
 }
@@ -3725,7 +3727,7 @@ section {
 }
 
 .agenda-badge-card {
-    background: var(--uis-orange, #fed802);
+    background: var(--uis-orange, var(--uis-yellow));
 
     color: #032e12;
 
@@ -3753,7 +3755,7 @@ section {
 
     border: 1px solid var(--uis-purple-subtle, #d4edd9);
 
-    color: var(--uis-purple, #046b26) !important;
+    color: var(--uis-purple, var(--uis-green)) !important;
 
     font-size: 13px;
 
@@ -3769,7 +3771,7 @@ section {
 }
 
 .btn-agenda-pill:hover {
-    background: var(--uis-purple, #046b26);
+    background: var(--uis-purple, var(--uis-green));
 
     color: #ffffff !important;
 }
@@ -3777,7 +3779,7 @@ section {
 /* PMB Banner Box */
 
 .pmb-cta-box {
-    background: #046b26;
+    background: var(--uis-green);
 
     border-radius: 28px;
 
@@ -3885,7 +3887,7 @@ section {
 .partner-marquee-card:hover {
     transform: translateY(-4px);
 
-    border-color: var(--uis-purple, #046b26);
+    border-color: var(--uis-purple, var(--uis-green));
 
     box-shadow: 0 12px 25px -8px rgba(4, 107, 38, 0.25);
 }
@@ -4185,9 +4187,9 @@ section {
 }
 
 .page-item.active .page-link {
-    background-color: var(--uis-purple, #046b26) !important;
+    background-color: var(--uis-purple, var(--uis-green)) !important;
 
-    border-color: var(--uis-purple, #046b26) !important;
+    border-color: var(--uis-purple, var(--uis-green)) !important;
 
     color: #ffffff !important;
 
@@ -4197,9 +4199,9 @@ section {
 .page-item .page-link:hover {
     background-color: #eaf6ee;
 
-    color: var(--uis-purple, #046b26);
+    color: var(--uis-purple, var(--uis-green));
 
-    border-color: var(--uis-purple, #046b26);
+    border-color: var(--uis-purple, var(--uis-green));
 }
 
 /* PMB WhatsApp Outline Button */
@@ -4243,7 +4245,7 @@ section {
 .btn-pmb-wa:hover {
     background: #ffffff !important;
 
-    color: #046b26 !important;
+    color: var(--uis-green) !important;
 
     border-color: #ffffff !important;
 
@@ -4411,7 +4413,7 @@ section {
 
     border-radius: 50%;
 
-    background: #046b26;
+    background: var(--uis-green);
 
     box-shadow: 0 0 8px rgba(4, 107, 38, 0.6);
 }
@@ -4423,7 +4425,7 @@ section {
 
     letter-spacing: 1.2px;
 
-    color: #046b26;
+    color: var(--uis-green);
 
     text-transform: uppercase;
 }
@@ -4441,7 +4443,7 @@ section {
 }
 
 .ormawa-deck-headline .gradient-text {
-    background: linear-gradient(135deg, #046b26 0%, #15803d 45%, #d97706 100%);
+    background: linear-gradient(135deg, var(--uis-green) 0%, #15803d 45%, #d97706 100%);
 
     -webkit-background-clip: text;
 
@@ -4487,7 +4489,7 @@ section {
 }
 
 .btn-deck-main:hover {
-    background: #046b26;
+    background: var(--uis-green);
 
     color: #ffffff !important;
 
@@ -4519,9 +4521,9 @@ section {
 .btn-deck-main:hover .btn-deck-icon {
     transform: translateX(4px);
 
-    background: #fed802;
+    background: var(--uis-yellow);
 
-    color: #046b26;
+    color: var(--uis-green);
 }
 
 .deck-arrows-wrap {
@@ -4559,11 +4561,11 @@ section {
 }
 
 .btn-deck-arrow:hover {
-    background: #046b26;
+    background: var(--uis-green);
 
-    border-color: #046b26;
+    border-color: var(--uis-green);
 
-    color: #fed802;
+    color: var(--uis-yellow);
 
     transform: scale(1.08);
 
@@ -4591,7 +4593,7 @@ section {
 
     background: #f1f5f9;
 
-    color: #046b26;
+    color: var(--uis-green);
 
     font-size: 13px;
 
@@ -4883,7 +4885,7 @@ section {
 
     border: 1px solid rgba(254, 216, 2, 0.5);
 
-    color: #fed802;
+    color: var(--uis-yellow);
 
     padding: 4px 10px;
 
@@ -4913,7 +4915,7 @@ section {
 
     text-transform: uppercase;
 
-    color: #fed802;
+    color: var(--uis-yellow);
 
     margin-bottom: 3px;
 }
@@ -4991,7 +4993,7 @@ section {
 }
 
 .card-meta-ketua i {
-    color: #fed802;
+    color: var(--uis-yellow);
 }
 
 .card-link-action {
@@ -5025,11 +5027,11 @@ section {
 }
 
 .card-link-action:hover {
-    background: #fed802;
+    background: var(--uis-yellow);
 
-    border-color: #fed802;
+    border-color: var(--uis-yellow);
 
-    color: #046b26 !important;
+    color: var(--uis-green) !important;
 
     transform: translateY(-1px);
 }
@@ -5127,7 +5129,7 @@ section {
 
     height: 28px;
 
-    background: #046b26;
+    background: var(--uis-green);
 
     border-radius: 50px;
 
@@ -5359,7 +5361,7 @@ section {
 
     height: 5px;
 
-    background: #fed802;
+    background: var(--uis-yellow);
 }
 
 .akademik-card {
@@ -5569,11 +5571,11 @@ section {
 /* ── Styles: dosen.blade.php ── */
 
 .dosen-hero {
-    background: #046b26;
+    background: var(--uis-green);
 
     padding: 68px 0 48px;
 
-    border-bottom: 3px solid #fed802;
+    border-bottom: 3px solid var(--uis-yellow);
 }
 
 .dosen-hero h1 {
@@ -5587,7 +5589,7 @@ section {
 .prodi-header-pill {
     background: #ffc107;
 
-    background: #fed802;
+    background: var(--uis-yellow);
 
     color: #032e12;
 
@@ -5658,11 +5660,11 @@ section {
 
 .prodi-tab-btn:hover,
 .prodi-tab-btn.active {
-    background: var(--uis-purple, #046b26) !important;
+    background: var(--uis-purple, var(--uis-green)) !important;
 
     color: #ffffff !important;
 
-    border-color: var(--uis-purple, #046b26);
+    border-color: var(--uis-purple, var(--uis-green));
 
     box-shadow: 0 6px 18px rgba(4, 107, 38, 0.3);
 }
@@ -5762,9 +5764,9 @@ section {
 /* Custom Pagination Theme */
 
 .pagination .page-item.active .page-link {
-    background-color: var(--uis-purple, #046b26) !important;
+    background-color: var(--uis-purple, var(--uis-green)) !important;
 
-    border-color: var(--uis-purple, #046b26) !important;
+    border-color: var(--uis-purple, var(--uis-green)) !important;
 
     color: #ffffff !important;
 
@@ -5772,7 +5774,7 @@ section {
 }
 
 .pagination .page-link {
-    color: var(--uis-purple, #046b26);
+    color: var(--uis-purple, var(--uis-green));
 
     border-radius: 8px;
 
@@ -5784,7 +5786,7 @@ section {
 .pagination .page-link:hover {
     background-color: #eaf6ee;
 
-    color: #03521d;
+    color: var(--uis-green-dark);
 }
 
 /* ── Styles: faq.blade.php ── */
@@ -6062,7 +6064,7 @@ section {
 .prodi-header-pill {
     background: #ffc107;
 
-    background: #fed802;
+    background: var(--uis-yellow);
 
     color: #032e12;
 
@@ -6133,11 +6135,11 @@ section {
 
 .prodi-tab-btn:hover,
 .prodi-tab-btn.active {
-    background: var(--uis-purple, #046b26) !important;
+    background: var(--uis-purple, var(--uis-green)) !important;
 
     color: #ffffff !important;
 
-    border-color: var(--uis-purple, #046b26);
+    border-color: var(--uis-purple, var(--uis-green));
 
     box-shadow: 0 6px 18px rgba(4, 107, 38, 0.3);
 }
@@ -6570,11 +6572,11 @@ section {
 .article-hero {
     position: relative;
 
-    background: #046b26;
+    background: var(--uis-green);
 
     padding: 65px 0 45px;
 
-    border-bottom: 3px solid #fed802;
+    border-bottom: 3px solid var(--uis-yellow);
 }
 
 .article-meta-badge {
@@ -7028,11 +7030,11 @@ section {
 .news-hero {
     position: relative;
 
-    background: #046b26;
+    background: var(--uis-green);
 
     padding: 26px 0 20px;
 
-    border-bottom: 3px solid #fed802;
+    border-bottom: 3px solid var(--uis-yellow);
 }
 
 .news-hero-title {
@@ -7142,7 +7144,7 @@ section {
 
     background: rgba(15, 23, 42, 0.85);
 
-    color: #fed802;
+    color: var(--uis-yellow);
 
     border: 1px solid rgba(254, 216, 2, 0.4);
 
@@ -7473,11 +7475,11 @@ section {
 /* ── Styles: organisasi-detail.blade.php ── */
 
 :root {
-    --uis-purple: #046b26;
+    --uis-purple: var(--uis-green);
 
     --uis-purple-dark: #023814;
 
-    --uis-orange: #fed802;
+    --uis-orange: var(--uis-yellow);
 }
 
 .detail-hero {
@@ -7531,7 +7533,7 @@ section {
 
     border-radius: 10px;
 
-    background: #046b26;
+    background: var(--uis-green);
 
     color: #ffffff;
 
@@ -7636,11 +7638,11 @@ section {
 /* ── Styles: organisasi.blade.php ── */
 
 :root {
-    --uis-purple: #046b26;
+    --uis-purple: var(--uis-green);
 
     --uis-purple-dark: #023814;
 
-    --uis-orange: #fed802;
+    --uis-orange: var(--uis-yellow);
 }
 
 .ormawa-hero {
@@ -7841,7 +7843,7 @@ section {
 
     font-weight: 700;
 
-    background: #046b26;
+    background: var(--uis-green);
 
     color: #ffffff;
 
@@ -7931,7 +7933,7 @@ section {
 }
 
 .btn-ormawa-detail {
-    background: #046b26;
+    background: var(--uis-green);
 
     color: #ffffff;
 
@@ -7957,7 +7959,7 @@ section {
 }
 
 .btn-ormawa-detail:hover {
-    background: #fed802;
+    background: var(--uis-yellow);
 
     color: #ffffff;
 
@@ -8083,11 +8085,11 @@ section {
 /* ── Styles: prestasi.blade.php ── */
 
 .prestasi-hero {
-    background: #046b26;
+    background: var(--uis-green);
 
     padding: 72px 0 54px;
 
-    border-bottom: 3px solid #fed802;
+    border-bottom: 3px solid var(--uis-yellow);
 
     position: relative;
 }
@@ -8228,11 +8230,11 @@ section {
 
 .cat-pill-item:hover,
 .cat-pill-item.active {
-    background: var(--uis-purple, #046b26) !important;
+    background: var(--uis-purple, var(--uis-green)) !important;
 
     color: #ffffff !important;
 
-    border-color: var(--uis-purple, #046b26);
+    border-color: var(--uis-purple, var(--uis-green));
 }
 
 /* Custom Pagination */
@@ -8260,9 +8262,9 @@ section {
 }
 
 .page-item.active .page-link {
-    background-color: var(--uis-purple, #046b26) !important;
+    background-color: var(--uis-purple, var(--uis-green)) !important;
 
-    border-color: var(--uis-purple, #046b26) !important;
+    border-color: var(--uis-purple, var(--uis-green)) !important;
 
     color: #ffffff !important;
 
@@ -8272,9 +8274,9 @@ section {
 .page-item .page-link:hover {
     background-color: #eaf6ee;
 
-    color: var(--uis-purple, #046b26);
+    color: var(--uis-purple, var(--uis-green));
 
-    border-color: var(--uis-purple, #046b26);
+    border-color: var(--uis-purple, var(--uis-green));
 }
 
 /* ── Styles: sambutan-dekan.blade.php ── */
@@ -8282,11 +8284,11 @@ section {
 .rektor-hero {
     position: relative;
 
-    background: #046b26;
+    background: var(--uis-green);
 
     padding: 70px 0 50px;
 
-    border-bottom: 3px solid #fed802;
+    border-bottom: 3px solid var(--uis-yellow);
 }
 
 .rektor-hero-title {
@@ -8302,7 +8304,7 @@ section {
 .rektor-hero-title em {
     font-style: normal;
 
-    color: #fed802;
+    color: var(--uis-yellow);
 }
 
 /* Rektor Card */
@@ -8342,7 +8344,7 @@ section {
 
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 
-    border: 3px solid #046b26;
+    border: 3px solid var(--uis-green);
 
     background: #f8faf9;
 
@@ -8358,7 +8360,7 @@ section {
 
     margin: 0 auto 20px;
 
-    background: #046b26;
+    background: var(--uis-green);
 
     color: #ffffff;
 
@@ -8374,7 +8376,7 @@ section {
 
     font-size: 80px;
 
-    border: 3px solid #fed802;
+    border: 3px solid var(--uis-yellow);
 }
 
 .rektor-name-title {
@@ -8394,7 +8396,7 @@ section {
 
     background: #eef8f1;
 
-    color: #046b26;
+    color: var(--uis-green);
 
     border: 1px solid #cce8d5;
 
@@ -8412,7 +8414,7 @@ section {
 .rektor-quote-callout {
     background: #f8faf9;
 
-    border-left: 5px solid #046b26;
+    border-left: 5px solid var(--uis-green);
 
     border-radius: 0 16px 16px 0;
 
@@ -8454,11 +8456,11 @@ section {
 .sejarah-hero {
     position: relative;
 
-    background: #046b26;
+    background: var(--uis-green);
 
     padding: 70px 0 50px;
 
-    border-bottom: 3px solid #fed802;
+    border-bottom: 3px solid var(--uis-yellow);
 }
 
 .sejarah-hero-title {
@@ -8498,7 +8500,7 @@ section {
 
     width: 3px;
 
-    background: #046b26;
+    background: var(--uis-green);
 
     transform: translateX(-50%);
 
@@ -8701,7 +8703,7 @@ section {
 
     line-height: 1;
 
-    color: #fed802;
+    color: var(--uis-yellow);
 
     margin-bottom: 8px;
 }
@@ -8769,7 +8771,7 @@ section {
 }
 
 .progress-bar-uis {
-    background: #046b26;
+    background: var(--uis-green);
 
     height: 100%;
 

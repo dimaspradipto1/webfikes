@@ -3,10 +3,10 @@
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center">
-                <img src="{{ asset('frontend/img/logouis.png') }}" alt="Logo Universitas Ibnu Sina" style="height: 38px; max-height: 38px;">
-                <span class="d-none d-lg-block ms-2 fw-bold" style="font-size: 16px; color: {{ $themeSetting->admin_header_brand_color ?? '#FED802' }}; letter-spacing: 0.5px;">Portal UIS</span>
+                <img src="{{ asset('frontend/img/logouis.png') }}" alt="Logo Universitas Ibnu Sina" style="height: 46px; max-height: 46px;">
+                <span class="d-none d-lg-block ms-2 fw-bold" style="font-size: 17px; color: {{ $themeSetting->admin_header_brand_color ?? '#FED802' }}; letter-spacing: 0.5px;">Portal UIS</span>
             </a>
-            <i class="bi bi-list toggle-sidebar-btn ms-2" style="color: {{ $themeSetting->admin_header_text_color ?? '#ffffff' }}; font-size: 26px; cursor: pointer;"></i>
+            <i class="bi bi-list toggle-sidebar-btn ms-2" style="color: {{ $themeSetting->admin_header_text_color ?? '#ffffff' }}; font-size: 28px; cursor: pointer;"></i>
         </div><!-- End Logo -->
 
         <nav class="header-nav ms-auto">

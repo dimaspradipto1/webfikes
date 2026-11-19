@@ -85,6 +85,14 @@
     .navbar-main {
       background: {{ $themeSetting->header_bg_color ?? '#046B26' }} !important;
       border-bottom: 3px solid {{ $themeSetting->header_border_color ?? '#FED802' }} !important;
+      min-height: {{ $themeSetting->header_height ?? 90 }}px !important;
+      padding-top: 16px !important;
+      padding-bottom: 16px !important;
+    }
+
+    .navbar-main .brand-logo-img {
+      height: 54px !important;
+      max-height: 54px !important;
     }
 
     .navbar-main .brand-title-main,
@@ -93,7 +101,10 @@
     }
 
     .navbar-main .nav-link-custom:hover,
+    .navbar-main .nav-link-custom:focus,
     .navbar-main .nav-link-custom.active,
+    .navbar-main .nav-link-custom.show,
+    .navbar-main .show > .nav-link-custom,
     .navbar-main .nav-item.dropdown:hover > .nav-link-custom {
       background: {{ $themeSetting->header_active_bg_color ?? '#FED802' }} !important;
       color: {{ $themeSetting->header_active_text_color ?? '#046B26' }} !important;
@@ -115,21 +126,12 @@
     }
 
     /* Subpage Hero Banner Dynamic Overrides */
-    .about-hero,
-    .layanan-hero,
-    .dosen-hero,
-    .news-hero,
-    .galeri-hero,
-    .kontak-hero,
-    .prestasi-hero,
-    .organisasi-hero,
-    .faq-hero,
-    .sambutan-hero,
-    .visimisi-hero,
-    .struktur-hero,
-    .sejarah-hero,
-    .testimoni-hero,
-    .humas-hero {
+    .prestasi-hero, .dosen-hero, .news-hero, .article-hero, .about-hero,
+    .sejarah-hero, .visimisi-hero, .rektor-hero, .detail-hero, .ormawa-hero,
+    .layanan-hero, .galeri-hero, .fasilitas-hero, .kontak-hero, .faq-hero,
+    .kerjasama-hero, .tracer-hero, .download-hero, .kurikulum-hero, .hero-subpage,
+    .page-hero-banner, .akademik-hero, .sambutan-hero, .struktur-hero,
+    .testimoni-hero, .humas-hero, .organisasi-hero {
       background: {{ $themeSetting->hero_bg_color ?? '#046B26' }} !important;
       border-bottom-color: {{ $themeSetting->hero_border_color ?? '#FED802' }} !important;
     }
@@ -181,7 +183,9 @@
 <!-- ═══════════════════════════════════════════════
      MAIN CONTENT
 ═══════════════════════════════════════════════ -->
+<div id="frontend-live-content">
 @yield('content')
+</div>
 
 <!-- ═══════════════════════════════════════════════
      FOOTER
@@ -367,6 +371,217 @@
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
 
 @stack('scripts')
+
+<!-- ═══════════════════════════════════════════════
+     LIVE AUTO-SYNC ENGINE (UPDATE OTOMATIS DARI ADMIN TANPA RELOAD)
+═══════════════════════════════════════════════ -->
+<script>
+(function() {
+  var currentThemeHash = null;
+  var currentContentHash = null;
+  var isRefreshingDom = false;
+
+  window.applyLiveFrontendTheme = function(t) {
+    if (!t) return;
+    var styleEl = document.getElementById('dynamic-frontend-theme');
+    if (!styleEl) {
+      styleEl = document.createElement('style');
+      styleEl.id = 'dynamic-frontend-theme';
+      document.head.appendChild(styleEl);
+    }
+
+    var hHeight = parseInt(t.header_height || 90, 10);
+    styleEl.textContent = `
+      :root {
+        --uis-green: ${t.primary_color || '#046B26'} !important;
+        --uis-green-dark: ${t.primary_dark_color || '#03521d'} !important;
+        --uis-yellow: ${t.secondary_color || '#FED802'} !important;
+        --uis-yellow-hover: ${t.secondary_dark_color || '#e5c302'} !important;
+        --uis-purple: ${t.primary_color || '#046B26'} !important;
+        --uis-purple-dark: ${t.primary_dark_color || '#03521d'} !important;
+        --uis-orange: ${t.secondary_color || '#FED802'} !important;
+        --uis-orange-hover: ${t.secondary_dark_color || '#e5c302'} !important;
+        --obsidian-dark: ${t.primary_dark_color || '#03521d'} !important;
+        --obsidian-card: ${t.primary_color || '#046B26'} !important;
+      }
+      .navbar-main {
+        background: ${t.header_bg_color || '#046B26'} !important;
+        border-bottom: 3px solid ${t.header_border_color || '#FED802'} !important;
+        min-height: ${hHeight}px !important;
+        padding-top: 16px !important;
+        padding-bottom: 16px !important;
+      }
+      .navbar-main .brand-logo-img {
+        height: 54px !important;
+        max-height: 54px !important;
+      }
+      .navbar-main .brand-title-main,
+      .navbar-main .nav-link-custom {
+        color: ${t.header_text_color || '#ffffff'} !important;
+      }
+      .navbar-main .nav-link-custom:hover,
+      .navbar-main .nav-link-custom:focus,
+      .navbar-main .nav-link-custom.active,
+      .navbar-main .nav-link-custom.show,
+      .navbar-main .show > .nav-link-custom,
+      .navbar-main .nav-item.dropdown:hover > .nav-link-custom {
+        background: ${t.header_active_bg_color || '#FED802'} !important;
+        color: ${t.header_active_text_color || '#046B26'} !important;
+      }
+      .navbar-main .btn-pmb-nav {
+        background: ${t.header_pmb_bg_color || '#FED802'} !important;
+        color: ${t.header_pmb_text_color || '#046B26'} !important;
+      }
+      .navbar-main .btn-portal-nav {
+        background: ${t.header_login_bg_color || '#ffffff'} !important;
+        color: ${t.header_login_text_color || '#046B26'} !important;
+      }
+      .navbar-main .uis-lang-toggle {
+        background: ${t.header_lang_bg_color || '#03521d'} !important;
+        color: ${t.header_lang_text_color || '#ffffff'} !important;
+      }
+      .prestasi-hero, .dosen-hero, .news-hero, .article-hero, .about-hero,
+      .sejarah-hero, .visimisi-hero, .rektor-hero, .detail-hero, .ormawa-hero,
+      .layanan-hero, .galeri-hero, .fasilitas-hero, .kontak-hero, .faq-hero,
+      .kerjasama-hero, .tracer-hero, .download-hero, .kurikulum-hero, .hero-subpage,
+      .page-hero-banner, .akademik-hero, .sambutan-hero, .struktur-hero,
+      .testimoni-hero, .humas-hero, .organisasi-hero {
+        background: ${t.hero_bg_color || '#046B26'} !important;
+        border-bottom-color: ${t.hero_border_color || '#FED802'} !important;
+      }
+      .footer-main {
+        background: ${t.footer_bg_color || '#03521d'} !important;
+        color: ${t.footer_text_color || '#ffffff'} !important;
+        border-top: 4px solid ${t.footer_border_top_color || '#FED802'} !important;
+      }
+      .footer-main .footer-heading,
+      .footer-main .footer-logo-text strong {
+        color: ${t.footer_heading_color || '#FED802'} !important;
+      }
+      .footer-main .footer-desc,
+      .footer-main .footer-contact-item,
+      .footer-main .footer-contact-item span,
+      .footer-main .footer-bottom {
+        color: ${t.footer_text_color || '#ffffff'} !important;
+      }
+      .footer-main .footer-links a {
+        color: ${t.footer_link_color || '#ffffff'} !important;
+      }
+      .footer-main .footer-links a:hover {
+        color: ${t.footer_link_hover_color || '#FED802'} !important;
+      }
+      .footer-main .footer-social a {
+        background: ${t.footer_social_bg_color || '#FED802'} !important;
+        color: ${t.footer_social_text_color || '#046B26'} !important;
+      }
+    `;
+
+    var navEl = document.querySelector('.navbar-main');
+    if (navEl) {
+      var sticky = (t.header_is_sticky === undefined || t.header_is_sticky === null) ? true : Boolean(t.header_is_sticky);
+      navEl.classList.toggle('sticky-top', sticky);
+    }
+  };
+
+  window.hotSwapFrontendContent = function() {
+    if (isRefreshingDom) return;
+    isRefreshingDom = true;
+
+    fetch(window.location.href, {
+      headers: { 'X-Requested-With': 'LiveSync', 'Cache-Control': 'no-cache' },
+      cache: 'no-store'
+    })
+    .then(function(res) { return res.text(); })
+    .then(function(html) {
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(html, 'text/html');
+
+      var newNav = doc.querySelector('.navbar-main');
+      var curNav = document.querySelector('.navbar-main');
+      if (newNav && curNav) {
+        curNav.innerHTML = newNav.innerHTML;
+      }
+
+      var newContent = doc.getElementById('frontend-live-content');
+      var curContent = document.getElementById('frontend-live-content');
+      if (newContent && curContent) {
+        curContent.innerHTML = newContent.innerHTML;
+      }
+
+      var newFooter = doc.querySelector('.footer-main');
+      var curFooter = document.querySelector('.footer-main');
+      if (newFooter && curFooter) {
+        curFooter.innerHTML = newFooter.innerHTML;
+      }
+
+      if (window.AOS && typeof window.AOS.refreshHard === 'function') {
+        window.AOS.refreshHard();
+      }
+    })
+    .catch(function() {})
+    .finally(function() {
+      isRefreshingDom = false;
+    });
+  };
+
+  // 1. Instant Cross-Tab Sync via BroadcastChannel & localStorage
+  if ('BroadcastChannel' in window) {
+    var bc = new BroadcastChannel('webfikes_live_sync');
+    bc.onmessage = function(ev) {
+      if (!ev.data) return;
+      if (ev.data.type === 'theme_update' && ev.data.theme) {
+        window.applyLiveFrontendTheme(ev.data.theme);
+      } else if (ev.data.type === 'content_update') {
+        if (ev.data.theme) window.applyLiveFrontendTheme(ev.data.theme);
+        window.hotSwapFrontendContent();
+      }
+    };
+  }
+
+  window.addEventListener('storage', function(ev) {
+    if (ev.key === 'webfikes_live_theme' && ev.newValue) {
+      try {
+        var payload = JSON.parse(ev.newValue);
+        if (payload && payload.theme) {
+          window.applyLiveFrontendTheme(payload.theme);
+        }
+      } catch (e) {}
+    } else if (ev.key === 'webfikes_live_content_ping' && ev.newValue) {
+      window.hotSwapFrontendContent();
+    }
+  });
+
+  // 2. Background Polling (/api/live-state) Every 2.5 Seconds
+  function checkLiveState() {
+    if (document.hidden) return;
+    fetch('{{ route("api.live-state") }}?t=' + Date.now(), { cache: 'no-store' })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data) return;
+        if (currentThemeHash === null) {
+          currentThemeHash = data.theme_hash;
+          currentContentHash = data.content_hash;
+          return;
+        }
+        if (data.theme_hash && data.theme_hash !== currentThemeHash) {
+          currentThemeHash = data.theme_hash;
+          window.applyLiveFrontendTheme(data.theme);
+        }
+        if (data.content_hash && data.content_hash !== currentContentHash) {
+          currentContentHash = data.content_hash;
+          window.hotSwapFrontendContent();
+        }
+      })
+      .catch(function() {});
+  }
+
+  setInterval(checkLiveState, 2500);
+  document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) checkLiveState();
+  });
+  checkLiveState();
+})();
+</script>
 
 </body>
 </html>

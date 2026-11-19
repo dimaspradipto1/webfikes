@@ -387,6 +387,13 @@
                                     <input type="text" name="header_lang_text_color" id="header_lang_text_color" value="{{ $theme->header_lang_text_color }}">
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold small">Tinggi Header Frontend (px)</label>
+                                <div class="input-group">
+                                    <input type="number" name="header_height" id="header_height" class="form-control fw-bold" min="60" max="160" value="{{ $theme->header_height ?? 90 }}" style="height: 54px; border-radius: 12px 0 0 12px; border: 1.5px solid #e2e8f0;">
+                                    <span class="input-group-text fw-bold bg-light" style="border-radius: 0 12px 12px 0; border: 1.5px solid #e2e8f0; border-left: 0;">px</span>
+                                </div>
+                            </div>
                             <div class="col-md-3 d-flex align-items-end">
                                 <div class="form-check form-switch p-3 bg-light rounded-3 border w-100">
                                     <input class="form-check-input ms-0 me-2" type="checkbox" name="header_is_sticky" id="header_is_sticky" {{ $theme->header_is_sticky ? 'checked' : '' }}>
@@ -630,6 +637,13 @@
                                     <input type="text" name="admin_header_border_color" id="admin_header_border_color" value="{{ $theme->admin_header_border_color }}">
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold small">Tinggi Header Admin (px)</label>
+                                <div class="input-group">
+                                    <input type="number" name="admin_header_height" id="admin_header_height" class="form-control fw-bold" min="56" max="140" value="{{ $theme->admin_header_height ?? 78 }}" style="height: 54px; border-radius: 12px 0 0 12px; border: 1.5px solid #e2e8f0;">
+                                    <span class="input-group-text fw-bold bg-light" style="border-radius: 0 12px 12px 0; border: 1.5px solid #e2e8f0; border-left: 0;">px</span>
+                                </div>
+                            </div>
 
                             <div class="col-12 mt-4">
                                 <div class="section-divider-title"><i class="bi bi-layout-sidebar-inset text-success"></i> B. Warna Sidebar Menu Admin</div>
@@ -832,7 +846,73 @@
         document.getElementById('pvAdminCardTitle').style.color = aPrimary;
         document.getElementById('pvAdminBtnPrimary').style.background = aPrimary;
         document.getElementById('pvAdminBtnAccent').style.background = aAccent;
+
+        // Live broadcast to Frontend & Admin Panel without page reload
+        const liveTheme = {
+            primary_color: primary,
+            primary_dark_color: document.getElementById('primary_dark_color').value,
+            secondary_color: secondary,
+            secondary_dark_color: document.getElementById('secondary_dark_color').value,
+            header_bg_color: hBg,
+            header_text_color: hText,
+            header_active_bg_color: hActBg,
+            header_active_text_color: hActText,
+            header_pmb_bg_color: hPmbBg,
+            header_pmb_text_color: hPmbText,
+            header_login_bg_color: hLoginBg,
+            header_login_text_color: hLoginText,
+            header_lang_bg_color: hLangBg,
+            header_lang_text_color: hLangText,
+            header_border_color: hBorder,
+            header_height: document.getElementById('header_height') ? document.getElementById('header_height').value : 90,
+            header_is_sticky: document.getElementById('header_is_sticky') ? document.getElementById('header_is_sticky').checked : true,
+            hero_bg_color: heroBg,
+            hero_border_color: heroBorder,
+            footer_bg_color: fBg,
+            footer_text_color: fText,
+            footer_heading_color: fHead,
+            footer_border_top_color: fBorder,
+            footer_link_color: fLink,
+            footer_link_hover_color: fLinkHover,
+            footer_social_bg_color: fSocBg,
+            footer_social_text_color: fSocText,
+            admin_primary_color: aPrimary,
+            admin_accent_color: aAccent,
+            admin_header_bg_color: aHeaderBg,
+            admin_header_text_color: aHeaderText,
+            admin_header_brand_color: aHeaderBrand,
+            admin_header_border_color: aHeaderBorder,
+            admin_header_height: document.getElementById('admin_header_height') ? document.getElementById('admin_header_height').value : 78,
+            admin_sidebar_bg_color: aSideBg,
+            admin_sidebar_text_color: aSideText,
+            admin_sidebar_active_bg_color: aSideActBg,
+            admin_sidebar_active_text_color: aSideActText,
+            admin_sidebar_hover_bg_color: aSideHovBg,
+            admin_sidebar_hover_text_color: aSideHovText
+        };
+
+        if (typeof window.applyLiveAdminTheme === 'function') {
+            window.applyLiveAdminTheme(liveTheme);
+        }
+
+        try {
+            if ('BroadcastChannel' in window) {
+                if (!window._webfikesThemeBc) {
+                    window._webfikesThemeBc = new BroadcastChannel('webfikes_live_sync');
+                }
+                window._webfikesThemeBc.postMessage({ type: 'theme_update', theme: liveTheme, ts: Date.now() });
+            }
+            localStorage.setItem('webfikes_live_theme', JSON.stringify({ theme: liveTheme, ts: Date.now() }));
+        } catch (e) {}
     }
+
+    ['header_height', 'admin_header_height', 'header_is_sticky'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', updateLivePreview);
+            el.addEventListener('change', updateLivePreview);
+        }
+    });
 
     document.querySelectorAll('input[type="color"][data-sync]').forEach(picker => {
         picker.addEventListener('input', function () {
