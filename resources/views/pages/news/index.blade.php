@@ -35,18 +35,13 @@
         <div class="d-flex flex-wrap align-items-center gap-2">
             {{-- Tombol Export Excel --}}
             <a href="{{ route('news.export-excel') }}" class="btn btn-outline-success btn-sm fw-semibold" title="Export Seluruh Data Berita ke Excel (.xlsx)">
-                <i class="bi bi-file-earmark-arrow-down-fill me-1"></i> Export Excel
+                <i class="bi bi-file-earmark-arrow-down me-1"></i> Export Excel
             </a>
 
-            {{-- Tombol Import Excel --}}
+            {{-- Tombol Import Excel (Di dalam modal sudah tersedia unduh template) --}}
             <button type="button" class="btn btn-success btn-sm text-white fw-semibold" data-bs-toggle="modal" data-bs-target="#importExcelModal">
-                <i class="bi bi-file-earmark-arrow-up-fill me-1"></i> Import Excel
+                <i class="bi bi-file-earmark-arrow-up me-1"></i> Import Excel
             </button>
-
-            {{-- Tombol Download Template Excel --}}
-            <a href="{{ route('news.download-template') }}" class="btn btn-outline-secondary btn-sm fw-semibold" title="Download Template Format Excel Berita">
-                <i class="bi bi-file-earmark-excel me-1 text-success"></i> Template Excel
-            </a>
 
             {{-- Tombol Tambah Post / Berita --}}
             <a href="{{ route('news.create') }}" class="btn btn-primary btn-sm fw-semibold" style="background: var(--uis-purple); border-color: var(--uis-purple);">
@@ -55,25 +50,6 @@
         </div>
     </div>
     <div class="card-body pt-3">
-        {{-- Baris Tombol Cepat Export & Import Excel di Atas Tabel --}}
-        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3 p-2 px-3 bg-light rounded-3 border">
-            <div class="small text-muted fw-semibold">
-                <i class="bi bi-file-earmark-spreadsheet text-success me-1"></i>
-                Kelola Data Berita Massal via Microsoft Excel (<code>.xlsx</code> / <code>.csv</code>):
-            </div>
-            <div class="d-flex flex-wrap align-items-center gap-2">
-                <a href="{{ route('news.export-excel') }}" class="btn btn-sm btn-outline-success fw-semibold">
-                    <i class="bi bi-download me-1"></i> Export Excel
-                </a>
-                <button type="button" class="btn btn-sm btn-success text-white fw-semibold" data-bs-toggle="modal" data-bs-target="#importExcelModal">
-                    <i class="bi bi-upload me-1"></i> Import Excel
-                </button>
-                <a href="{{ route('news.download-template') }}" class="btn btn-sm btn-outline-secondary fw-semibold">
-                    <i class="bi bi-file-earmark-excel me-1 text-success"></i> Unduh Template
-                </a>
-            </div>
-        </div>
-
         <div class="table-responsive">
             {{ $dataTable->table([
                 'class' => 'table table-striped table-bordered align-middle',

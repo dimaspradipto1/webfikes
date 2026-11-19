@@ -427,7 +427,11 @@ class NewsExcelService
                     }
                 }
 
-                $existing = News::where('title', $title)->first();
+                $baseSlug = Str::slug($title);
+                $existing = News::whereRaw('LOWER(TRIM(title)) = ?', [mb_strtolower($title)])
+                    ->when(!empty($baseSlug), fn ($q) => $q->orWhere('slug', $baseSlug))
+                    ->first();
+
                 if ($existing) {
                     $existing->update([
                         'thumbnail' => $thumbnailPath ?? $existing->thumbnail,
