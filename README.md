@@ -257,5 +257,5 @@ php artisan test
 ---
 
 <div align="center">
-  <sub>Hak Cipta © {{ date('Y') }} <strong>Fakultas Ilmu Kesehatan — Universitas Ibnu Sina (UIS) Batam</strong>. Seluruh hak cipta dilindungi.</sub>
+  <sub>Hak Cipta © 2026 <strong>Fakultas Ilmu Kesehatan — Universitas Ibnu Sina (UIS) Batam</strong>. Seluruh hak cipta dilindungi.</sub>
 </div>
