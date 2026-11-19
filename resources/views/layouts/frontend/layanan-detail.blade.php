@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
 @section('title', $layanan->judul . ' — Fakultas Ilmu Kesehatan (FIKES)')
-@section('meta_description', Str::limit($layanan->deskripsi, 160))
+@section('meta_description', Str::limit(strip_tags(html_entity_decode($layanan->deskripsi ?? '')), 160))
 @section('meta_keywords', 'fikes, ' . strtolower($layanan->judul) . ', fakultas ilmu kesehatan')
 
 @push('styles')

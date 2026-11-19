@@ -20,7 +20,7 @@ class MilestoneDataTable extends DataTable
             ->addColumn('DT_RowIndex', '')
             ->addColumn('tahun', fn ($m) => e($m->tahun))
             ->addColumn('judul', fn ($m) => e($m->judul))
-            ->addColumn('deskripsi', fn ($m) => e(Str::limit($m->deskripsi, 80)))
+            ->addColumn('deskripsi', fn ($m) => e(Str::limit(strip_tags(html_entity_decode($m->deskripsi ?? '')), 80)))
             ->addColumn('action', function ($milestone) {
                 $btn  = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
 

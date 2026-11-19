@@ -33,6 +33,7 @@ use App\Http\Controllers\FacultyStatController;
 use App\Http\Controllers\TriDharmaController;
 use App\Http\Controllers\TenagaPendidikController;
 use App\Http\Controllers\LayananTerkaitController;
+use App\Http\Controllers\BackupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -157,4 +158,18 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('visimisi', VisiMisiController::class);
     Route::resource('nilaiperusahaan', NilaiPerusahaanController::class);
     Route::resource('faculty-stat', FacultyStatController::class);
+
+    // Backup Database & Storage (Drive D: / C: & Otomatis Harian)
+    Route::prefix('admin-backup')->name('backup.')->group(function () {
+        Route::get('/', [BackupController::class, 'index'])->name('index');
+        Route::post('/database', [BackupController::class, 'backupDatabase'])->name('database');
+        Route::post('/storage', [BackupController::class, 'backupStorage'])->name('storage');
+        Route::post('/all', [BackupController::class, 'backupAll'])->name('all');
+        Route::get('/download/{filename}', [BackupController::class, 'download'])->name('download');
+        Route::get('/download-sync-script', [BackupController::class, 'downloadSyncScript'])->name('download-sync-script');
+        Route::delete('/{filename}', [BackupController::class, 'destroy'])->name('destroy');
+    });
 });
+
+// Endpoint API Sinkronisasi Otomatis cPanel -> Laptop (Diproteksi Token Rahasia Tanpa GDrive)
+Route::get('/api/backup-sync/download', [BackupController::class, 'syncDownload'])->name('backup.sync-download');

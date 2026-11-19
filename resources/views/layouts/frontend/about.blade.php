@@ -140,7 +140,7 @@
               <i class="bi {{ $feature->icon ?? 'bi-check-circle' }}"></i>
             </div>
             <div class="value-title">{{ $feature->judul }}</div>
-            <p class="value-desc">{{ $feature->deskripsi }}</p>
+            <p class="value-desc">{{ strip_tags(html_entity_decode($feature->deskripsi ?? '')) }}</p>
           </div>
         </div>
       @endforeach

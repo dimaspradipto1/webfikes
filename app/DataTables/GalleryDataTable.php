@@ -37,8 +37,9 @@ class GalleryDataTable extends DataTable
                     : '<span class="text-muted fst-italic">—</span>';
             })
             ->addColumn('deskripsi', function ($gallery) {
-                return $gallery->deskripsi
-                    ? '<span title="' . e($gallery->deskripsi) . '">' . e(\Illuminate\Support\Str::limit($gallery->deskripsi, 60)) . '</span>'
+                $clean = trim(strip_tags(html_entity_decode($gallery->deskripsi ?? '')));
+                return $clean
+                    ? '<span title="' . e($clean) . '">' . e(\Illuminate\Support\Str::limit($clean, 60)) . '</span>'
                     : '<span class="text-muted fst-italic">—</span>';
             })
             ->addColumn('action', function ($gallery) {

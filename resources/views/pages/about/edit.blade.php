@@ -85,7 +85,7 @@
 
                         <div class="mb-3">
                             <label for="visi" class="form-label fw-semibold">Deskripsi Visi</label>
-                            <textarea id="visi" name="visi" rows="3" class="form-control @error('visi') is-invalid @enderror" placeholder="Pernyataan Visi Perusahaan">{{ old('visi', $about->visi) }}</textarea>
+                            <textarea id="visi" name="visi" rows="3" class="form-control @error('visi') is-invalid @enderror" placeholder="Pernyataan Visi Perusahaan">{{ old('visi', strip_tags(html_entity_decode($about->visi ?? ''))) }}</textarea>
                             @error('visi')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -104,7 +104,7 @@
 
                         <div class="mb-3">
                             <label for="misi" class="form-label fw-semibold">Poin-Poin Misi <small class="text-muted">(Gunakan tombol Enter untuk memisahkan setiap poin misi)</small></label>
-                            <textarea id="misi" name="misi" rows="5" class="form-control @error('misi') is-invalid @enderror" placeholder="Contoh:&#10;Menyediakan produk berkualitas tinggi.&#10;Memberikan layanan terbaik.">{{ old('misi', $about->misi) }}</textarea>
+                            <textarea id="misi" name="misi" rows="5" class="form-control @error('misi') is-invalid @enderror" placeholder="Contoh:&#10;Menyediakan produk berkualitas tinggi.&#10;Memberikan layanan terbaik.">{{ old('misi', strip_tags(html_entity_decode($about->misi ?? ''))) }}</textarea>
                             @error('misi')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

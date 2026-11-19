@@ -87,7 +87,7 @@
                                   name="deskripsi"
                                   class="form-control @error('deskripsi') is-invalid @enderror"
                                   rows="2"
-                                  placeholder="Contoh: Sistem Informasi Akademik Terpadu Mahasiswa dan Dosen UIS">{{ old('deskripsi', $layananTerkait->deskripsi) }}</textarea>
+                                  placeholder="Contoh: Sistem Informasi Akademik Terpadu Mahasiswa dan Dosen UIS">{{ old('deskripsi', strip_tags(html_entity_decode($layananTerkait->deskripsi ?? ''))) }}</textarea>
                         <div class="form-text">Deskripsi singkat sistem (opsional, tampil pada tabel admin dan tooltip).</div>
                         @error('deskripsi')
                             <div class="invalid-feedback">{{ $message }}</div>

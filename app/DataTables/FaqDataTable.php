@@ -24,10 +24,10 @@ class FaqDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('DT_RowIndex', '')
             ->addColumn('question', function ($faq) {
-                return e($faq->question);
+                return e(strip_tags(html_entity_decode($faq->question ?? '')));
             })
             ->addColumn('answer', function ($faq) {
-                return e(Str::limit($faq->answer, 100));
+                return e(Str::limit(strip_tags(html_entity_decode($faq->answer ?? '')), 100));
             })
             ->addColumn('category', function ($faq) {
                 $categories = [

@@ -424,7 +424,7 @@
         <div class="sidebar-box">
           <h5 class="fw-bold mb-3 text-dark"><i class="bi bi-info-circle me-2" style="color:var(--fikes-purple);"></i>Sekilas Berita</h5>
           <p class="text-muted small mb-0" style="line-height:1.7;">
-            {{ $news->description ?? Str::limit(strip_tags($news->content), 180) }}
+            {{ strip_tags(html_entity_decode($news->description ?? Str::limit(strip_tags($news->content ?? ''), 180))) }}
           </p>
         </div>
 

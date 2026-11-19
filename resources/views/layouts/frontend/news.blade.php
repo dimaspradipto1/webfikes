@@ -229,7 +229,7 @@
               </div>
               <h3 class="fw-bold mb-3 text-dark">{{ $featured->title }}</h3>
               <p class="text-muted small mb-4" style="line-height: 1.7;">
-                {{ $featured->description ?? Str::limit(strip_tags($featured->content), 180) }}
+                {{ strip_tags(html_entity_decode($featured->description ?? Str::limit(strip_tags($featured->content ?? ''), 180))) }}
               </p>
             </div>
             <div>
@@ -331,7 +331,7 @@
                   </div>
                   <h5 class="fw-bold mb-2 text-dark">{{ Str::limit($article->title, 65) }}</h5>
                   <p class="text-muted small mb-3">
-                    {{ Str::limit($article->description ?? strip_tags($article->content), 110) }}
+                    {{ Str::limit(strip_tags(html_entity_decode($article->description ?? strip_tags($article->content ?? ''))), 110) }}
                   </p>
                 </div>
                 <div class="pt-3 border-top d-flex justify-content-between align-items-center">

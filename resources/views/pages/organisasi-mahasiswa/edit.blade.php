@@ -120,7 +120,7 @@
 
                 <div class="col-md-6">
                     <label for="visi" class="form-label fw-semibold text-dark">Visi Organisasi</label>
-                    <textarea name="visi" id="visi" rows="3" class="form-control @error('visi') is-invalid @enderror">{{ old('visi', $organisasiMahasiswa->visi) }}</textarea>
+                    <textarea name="visi" id="visi" rows="3" class="form-control @error('visi') is-invalid @enderror">{{ old('visi', strip_tags(html_entity_decode($organisasiMahasiswa->visi ?? ''))) }}</textarea>
                     @error('visi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -128,7 +128,7 @@
 
                 <div class="col-md-6">
                     <label for="misi" class="form-label fw-semibold text-dark">Misi Organisasi</label>
-                    <textarea name="misi" id="misi" rows="3" class="form-control @error('misi') is-invalid @enderror">{{ old('misi', $organisasiMahasiswa->misi) }}</textarea>
+                    <textarea name="misi" id="misi" rows="3" class="form-control @error('misi') is-invalid @enderror">{{ old('misi', strip_tags(html_entity_decode($organisasiMahasiswa->misi ?? ''))) }}</textarea>
                     @error('misi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

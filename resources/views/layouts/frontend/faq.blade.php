@@ -104,12 +104,12 @@
                 <h2 class="accordion-header" id="heading{{ $faq->id ?? $index }}">
                   <button class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $faq->id ?? $index }}" aria-expanded="{{ $index === 0 ? 'true' : 'false' }}">
                     <i class="bi bi-question-circle-fill me-2" style="color: var(--fikes-purple);"></i>
-                    {{ $faq->question ?? $faq->pertanyaan }}
+                    {{ strip_tags($faq->question ?? $faq->pertanyaan ?? '') }}
                   </button>
                 </h2>
                 <div id="collapse{{ $faq->id ?? $index }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}" data-bs-parent="#faqAccordion">
                   <div class="accordion-body">
-                    {{ $faq->answer ?? $faq->jawaban }}
+                    {{ strip_tags(html_entity_decode($faq->answer ?? $faq->jawaban ?? '')) }}
                   </div>
                 </div>
               </div>

@@ -260,9 +260,16 @@
 
           @if($isAdmin)
           <li class="nav-item">
-              <a class="nav-link {{ Route::is('user.*') ? '' : 'collapsed' }}" href="{{ route('user.index') }}">
+              <a class="nav-link {{ Route::is('user.*') && !Route::is('user.my-profile') ? '' : 'collapsed' }}" href="{{ route('user.index') }}">
                   <i class="bi bi-people"></i>
                   <span>Manajemen Pengguna</span>
+              </a>
+          </li>
+
+          <li class="nav-item">
+              <a class="nav-link {{ Route::is('backup.*') ? '' : 'collapsed' }}" href="{{ route('backup.index') }}">
+                  <i class="bi bi-database-check"></i>
+                  <span>Backup Database & Storage</span>
               </a>
           </li>
           @endif

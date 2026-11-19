@@ -66,7 +66,7 @@
                                   rows="5"
                                   class="form-control @error('answer') is-invalid @enderror"
                                   placeholder="Masukkan jawaban"
-                                  required>{{ old('answer', $faq->answer) }}</textarea>
+                                  required>{{ old('answer', strip_tags(html_entity_decode($faq->answer ?? ''))) }}</textarea>
                         @error('answer')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

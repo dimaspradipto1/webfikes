@@ -37,7 +37,8 @@ class LayananTerkaitDataTable extends DataTable
                 $html = '<div class="text-start">';
                 $html .= '<div class="fw-bold text-dark" style="font-size:14px; letter-spacing:0.3px;">' . e($item->nama) . '</div>';
                 if ($item->deskripsi) {
-                    $shortDesc = mb_strimwidth($item->deskripsi, 0, 75, '...');
+                    $cleanDesc = trim(strip_tags(html_entity_decode($item->deskripsi)));
+                    $shortDesc = mb_strimwidth($cleanDesc, 0, 75, '...');
                     $html .= '<small class="text-muted d-block mt-1" style="font-size:12px; line-height:1.35;">' . e($shortDesc) . '</small>';
                 }
                 $html .= '</div>';

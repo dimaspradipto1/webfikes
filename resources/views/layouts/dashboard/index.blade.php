@@ -327,7 +327,7 @@ body,.main{ background:var(--bg)!important; font-family:'Plus Jakarta Sans',sans
           <tbody>
           @forelse($latestTestimonials as $t)
             <tr>
-              <td><div class="fw-bold" style="font-size:13.5px;">{{ $t->nama }}</div><small class="text-muted text-truncate d-block" style="max-width:180px;">{{ $t->pesan }}</small></td>
+              <td><div class="fw-bold" style="font-size:13.5px;">{{ $t->nama }}</div><small class="text-muted text-truncate d-block" style="max-width:180px;">{{ strip_tags(html_entity_decode($t->pesan ?? '')) }}</small></td>
               <td class="text-center">
                 <div style="color:#f59e0b;font-size:14px;letter-spacing:1px;">
                   @for($s=1;$s<=5;$s++)

@@ -221,7 +221,7 @@
               <span class="timeline-year-tag"><i class="bi bi-calendar-event me-1"></i> {{ $m->tahun }}</span>
               <h4 class="fw-bold text-dark mb-2">{{ $m->judul }}</h4>
               <p class="text-muted small mb-0" style="line-height: 1.7; text-align: justify;">
-                {{ $m->deskripsi }}
+                {{ strip_tags(html_entity_decode($m->deskripsi ?? '')) }}
               </p>
             </div>
           </div>

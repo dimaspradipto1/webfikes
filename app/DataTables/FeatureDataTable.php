@@ -30,8 +30,9 @@ class FeatureDataTable extends DataTable
                 return '<span class="fw-semibold">' . e($feature->judul) . '</span>';
             })
             ->addColumn('deskripsi', function ($feature) {
-                return $feature->deskripsi
-                    ? '<span title="' . e($feature->deskripsi) . '">' . e(\Illuminate\Support\Str::limit($feature->deskripsi, 60)) . '</span>'
+                $clean = trim(strip_tags(html_entity_decode($feature->deskripsi ?? '')));
+                return $clean
+                    ? '<span title="' . e($clean) . '">' . e(\Illuminate\Support\Str::limit($clean, 60)) . '</span>'
                     : '<span class="text-muted fst-italic">—</span>';
             })
             ->addColumn('urutan', function ($feature) {

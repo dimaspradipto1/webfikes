@@ -67,7 +67,7 @@
                                   name="deskripsi"
                                   class="form-control @error('deskripsi') is-invalid @enderror"
                                   rows="3"
-                                  placeholder="Deskripsi singkat foto (opsional)">{{ old('deskripsi', $gallery->deskripsi) }}</textarea>
+                                  placeholder="Deskripsi singkat foto (opsional)">{{ old('deskripsi', strip_tags(html_entity_decode($gallery->deskripsi ?? ''))) }}</textarea>
                         @error('deskripsi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

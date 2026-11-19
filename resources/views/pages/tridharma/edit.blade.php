@@ -111,7 +111,7 @@
                                   name="deskripsi"
                                   class="form-control @error('deskripsi') is-invalid @enderror"
                                   rows="3"
-                                  placeholder="Contoh: Fokus riset ergonomi industri maritim dan sanitasi pesisir...">{{ old('deskripsi', $tridharma->deskripsi) }}</textarea>
+                                  placeholder="Contoh: Fokus riset ergonomi industri maritim dan sanitasi pesisir...">{{ old('deskripsi', strip_tags(html_entity_decode($tridharma->deskripsi ?? ''))) }}</textarea>
                         @error('deskripsi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

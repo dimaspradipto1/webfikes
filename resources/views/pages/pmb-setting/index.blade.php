@@ -85,7 +85,7 @@
                                 <label for="deskripsi" class="form-label fw-bold text-dark">
                                     Deskripsi Jalur Penerimaan / Keterangan Tambahan
                                 </label>
-                                <textarea id="deskripsi" name="deskripsi" rows="3" class="form-control @error('deskripsi') is-invalid @enderror" placeholder="Tersedia berbagai jalur seleksi: Jalur Bebas Tes / Prestasi, Jalur Reguler, Jalur KIP-Kuliah, dan Jalur Alih Jenjang Karyawan.">{{ old('deskripsi', $pmb->deskripsi) }}</textarea>
+                                <textarea id="deskripsi" name="deskripsi" rows="3" class="form-control @error('deskripsi') is-invalid @enderror" placeholder="Tersedia berbagai jalur seleksi: Jalur Bebas Tes / Prestasi, Jalur Reguler, Jalur KIP-Kuliah, dan Jalur Alih Jenjang Karyawan.">{{ old('deskripsi', strip_tags(html_entity_decode($pmb->deskripsi ?? ''))) }}</textarea>
                                 <div class="form-text small text-muted">Penjelasan jalur masuk atau syarat singkat.</div>
                                 @error('deskripsi')
                                     <div class="invalid-feedback">{{ $message }}</div>

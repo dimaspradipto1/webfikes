@@ -238,7 +238,7 @@
                   <h4 class="h6 fw-bold text-dark d-flex align-items-center gap-2">
                     <i class="bi bi-bullseye text-danger"></i> Visi
                   </h4>
-                  <p class="mb-0 text-secondary" style="font-size: 14.5px;">{{ $organisasi->visi }}</p>
+                  <p class="mb-0 text-secondary" style="font-size: 14.5px;">{{ strip_tags(html_entity_decode($organisasi->visi)) }}</p>
                 </div>
               @endif
 
@@ -247,7 +247,7 @@
                   <h4 class="h6 fw-bold text-dark d-flex align-items-center gap-2">
                     <i class="bi bi-list-check text-success"></i> Misi
                   </h4>
-                  <div class="text-secondary" style="font-size: 14.5px; white-space: pre-line;">{{ $organisasi->misi }}</div>
+                  <div class="text-secondary" style="font-size: 14.5px; white-space: pre-line;">{{ strip_tags(html_entity_decode($organisasi->misi)) }}</div>
                 </div>
               @endif
             </div>

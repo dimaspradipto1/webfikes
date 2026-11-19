@@ -90,7 +90,7 @@
                                   name="deskripsi"
                                   class="form-control @error('deskripsi') is-invalid @enderror"
                                   rows="4"
-                                  placeholder="Tuliskan keterangan detail keunggulan kami...">{{ old('deskripsi', $feature->deskripsi) }}</textarea>
+                                  placeholder="Tuliskan keterangan detail keunggulan kami...">{{ old('deskripsi', strip_tags(html_entity_decode($feature->deskripsi ?? ''))) }}</textarea>
                         @error('deskripsi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

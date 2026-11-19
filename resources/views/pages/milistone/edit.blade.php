@@ -66,7 +66,7 @@
                         <label for="deskripsi" class="form-label fw-semibold">Deskripsi</label>
                         <textarea id="deskripsi" name="deskripsi" rows="4"
                                   class="form-control @error('deskripsi') is-invalid @enderror"
-                                  placeholder="Ceritakan pencapaian pada tahun tersebut...">{{ old('deskripsi', $milestone->deskripsi) }}</textarea>
+                                  placeholder="Ceritakan pencapaian pada tahun tersebut...">{{ old('deskripsi', strip_tags(html_entity_decode($milestone->deskripsi ?? ''))) }}</textarea>
                         @error('deskripsi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

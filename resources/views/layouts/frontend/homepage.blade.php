@@ -998,7 +998,7 @@
       </h2>
       @if(!empty($layananTerkaitSetting?->subjudul_seksi))
         <p class="layanan-terkait-desc">
-          “{{ $layananTerkaitSetting->subjudul_seksi }}”
+          “{{ strip_tags(html_entity_decode($layananTerkaitSetting->subjudul_seksi)) }}”
         </p>
       @endif
     </div>
@@ -1007,7 +1007,7 @@
     <div class="row g-3 g-lg-4 justify-content-center">
       @foreach($layananTerkaits as $item)
         <div class="col-xl-3 col-lg-3 col-md-6 col-12" data-aos="fade-up" data-aos-delay="{{ min(400, 50 * ($loop->index + 1)) }}">
-          <a href="{{ $item->url }}" target="_blank" rel="noopener noreferrer" class="layanan-terkait-card" title="{{ $item->deskripsi ?? $item->nama }}">
+          <a href="{{ $item->url }}" target="_blank" rel="noopener noreferrer" class="layanan-terkait-card" title="{{ strip_tags(html_entity_decode($item->deskripsi ?? $item->nama ?? '')) }}">
             {{-- Top Right Logo / Icon --}}
             <div class="layanan-terkait-logo-wrap">
               @if($item->logo_url)
@@ -1040,7 +1040,7 @@
       <div class="col-lg-6" data-aos="fade-right">
         <div class="section-label">Profil Fakultas</div>
         <h2 class="section-title">
-          {{ $about->judul_profil ?? 'Dedikasi Mencetak Pemimpin di Bidang Kesehatan' }}
+          {{ strip_tags(html_entity_decode($about->judul_profil ?? 'Dedikasi Mencetak Pemimpin di Bidang Kesehatan')) }}
         </h2>
         <div class="divider-line"></div>
         <div class="section-desc mb-4" style="text-align: justify; line-height: 1.8;">
@@ -1400,7 +1400,7 @@
             <div class="fasilitas-box">
               <div class="fasilitas-icon"><i class="bi {{ $sarana->icon ?? 'bi-building' }}"></i></div>
               <h4 class="fw-bold mb-2">{{ $sarana->nama }}</h4>
-              <p class="text-muted small mb-0">{{ $sarana->deskripsi ?: 'Fasilitas yang mendukung kegiatan akademik dan riset mahasiswa.' }}</p>
+              <p class="text-muted small mb-0">{{ strip_tags(html_entity_decode($sarana->deskripsi ?: 'Fasilitas yang mendukung kegiatan akademik dan riset mahasiswa.')) }}</p>
             </div>
           </div>
         @endforeach
@@ -1435,7 +1435,7 @@
                   <i class="bi {{ $td->icon }} me-2" style="color: {{ $td->warna ?: 'var(--fikes-purple)' }} !important;"></i>{{ $td->judul }}
                 </div>
                 @if($td->deskripsi)
-                  <p class="text-muted small mb-0">{{ $td->deskripsi }}</p>
+                  <p class="text-muted small mb-0">{{ strip_tags(html_entity_decode($td->deskripsi)) }}</p>
                 @endif
               </div>
             </div>
@@ -1523,7 +1523,7 @@
                 <div class="dosen-bidang">{{ $tp->bidang }}</div>
               @endif
               @if($tp->keterangan)
-                <p class="dosen-pub mb-3">{{ $tp->keterangan }}</p>
+                <p class="dosen-pub mb-3">{{ strip_tags(html_entity_decode($tp->keterangan)) }}</p>
               @endif
             </div>
             <div class="pt-3 mt-auto border-top">
@@ -1846,7 +1846,7 @@
                         {{ $testi->kategori ?? 'Alumni' }}
                       </span>
                     </div>
-                    <p class="testi-text mb-4" style="font-size: 14px; line-height: 1.6; color: #333333; font-style: italic;">"{{ $testi->pesan }}"</p>
+                    <p class="testi-text mb-4" style="font-size: 14px; line-height: 1.6; color: #333333; font-style: italic;">"{{ strip_tags(html_entity_decode($testi->pesan ?? '')) }}"</p>
                   </div>
                   <div class="testi-author pt-3 border-top d-flex align-items-center gap-3" style="border-color: #f7effa !important;">
                     <div class="testi-avatar flex-shrink-0" style="width: 44px; height: 44px; border-radius: 50%; background: #823ca2; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">{{ $initials ?: 'AL' }}</div>
@@ -2018,7 +2018,7 @@
             {{ $pmbSetting->judul ?? 'Daftar Sekarang & Raih Masa Depan Cerah Bersama FIKES UIS!' }}
           </h2>
           <p class="text-white mb-4" style="line-height: 1.7; max-width: 620px; opacity: 0.92; font-size: 14.5px;">
-            {{ $pmbSetting->deskripsi ?? 'Tersedia berbagai jalur seleksi: Jalur Bebas Tes / Prestasi, Jalur Reguler, Jalur KIP-Kuliah, dan Jalur Alih Jenjang Karyawan.' }}
+            {{ strip_tags(html_entity_decode($pmbSetting->deskripsi ?? 'Tersedia berbagai jalur seleksi: Jalur Bebas Tes / Prestasi, Jalur Reguler, Jalur KIP-Kuliah, dan Jalur Alih Jenjang Karyawan.')) }}
           </p>
           <div class="d-flex flex-wrap gap-3 pmb-btn-group">
             @php
@@ -2178,12 +2178,12 @@
                 <h2 class="accordion-header" id="headingH{{ $faq->id ?? $index }}">
                   <button class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseH{{ $faq->id ?? $index }}" aria-expanded="{{ $index === 0 ? 'true' : 'false' }}">
                     <i class="bi bi-question-circle-fill me-2" style="color: var(--fikes-purple);"></i>
-                    {{ $faq->question ?? $faq->pertanyaan }}
+                    {{ strip_tags(html_entity_decode($faq->question ?? $faq->pertanyaan ?? '')) }}
                   </button>
                 </h2>
                 <div id="collapseH{{ $faq->id ?? $index }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}" data-bs-parent="#homeFaqAccordion">
                   <div class="accordion-body">
-                    {{ $faq->answer ?? $faq->jawaban }}
+                    {{ strip_tags(html_entity_decode($faq->answer ?? $faq->jawaban ?? '')) }}
                   </div>
                 </div>
               </div>
