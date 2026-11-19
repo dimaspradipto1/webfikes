@@ -1,7 +1,7 @@
 <!-- ═══════════════════════════════════════════════
      NAVBAR HEADER UTAMA — UNIVERSITAS IBNU SINA (UIS)
 ═══════════════════════════════════════════════ -->
-<nav class="navbar navbar-expand-xl navbar-main sticky-top">
+<nav class="navbar navbar-expand-xl navbar-main {{ ($themeSetting->header_is_sticky ?? true) ? 'sticky-top' : '' }}">
   <div class="container-fluid px-lg-4 px-xl-5">
     <!-- Logo UIS -->
     <a class="navbar-brand navbar-brand-custom me-2 me-xl-3" href="{{ route('homepage') }}">

@@ -40,106 +40,124 @@
 
     <style>
         :root {
-            --uis-purple: #046B26;
-            --uis-purple-dark: #03521d;
-            --uis-orange: #FED802;
-            --uis-orange-dark: #e5c302;
+            --uis-purple: {{ $themeSetting->admin_primary_color ?? '#046B26' }};
+            --uis-purple-dark: {{ $themeSetting->admin_primary_color ?? '#03521d' }};
+            --uis-orange: {{ $themeSetting->admin_accent_color ?? '#FED802' }};
+            --uis-orange-dark: {{ $themeSetting->admin_accent_color ?? '#e5c302' }};
         }
-        /* Header — Solid Purple #046B26 */
+        /* Header — Dynamic Admin Theme */
         .header {
-            background-color: #046B26 !important;
-            border-bottom: 2.5px solid #FED802 !important;
+            background-color: {{ $themeSetting->admin_header_bg_color ?? '#046B26' }} !important;
+            border-bottom: 2.5px solid {{ $themeSetting->admin_header_border_color ?? '#FED802' }} !important;
             box-shadow: 0 2px 14px rgba(0, 0, 0, 0.16) !important;
         }
         .header .logo span {
-            color: #FED802 !important;
+            color: {{ $themeSetting->admin_header_brand_color ?? '#FED802' }} !important;
             font-weight: 800;
             letter-spacing: 0.5px;
         }
         .header .toggle-sidebar-btn {
-            color: #ffffff !important;
+            color: {{ $themeSetting->admin_header_text_color ?? '#ffffff' }} !important;
         }
         .header .toggle-sidebar-btn:hover {
-            color: #FED802 !important;
+            color: {{ $themeSetting->admin_accent_color ?? '#FED802' }} !important;
         }
         .header .nav-profile {
-            color: #ffffff !important;
+            color: {{ $themeSetting->admin_header_text_color ?? '#ffffff' }} !important;
         }
         .header .nav-profile span {
-            color: #ffffff !important;
+            color: {{ $themeSetting->admin_header_text_color ?? '#ffffff' }} !important;
             font-weight: 700;
         }
         .header .nav-profile:hover span {
-            color: #FED802 !important;
+            color: {{ $themeSetting->admin_accent_color ?? '#FED802' }} !important;
         }
         .header .nav-icon {
-            color: #ffffff !important;
+            color: {{ $themeSetting->admin_header_text_color ?? '#ffffff' }} !important;
         }
         .header .nav-icon:hover {
-            color: #FED802 !important;
+            color: {{ $themeSetting->admin_accent_color ?? '#FED802' }} !important;
+        }
+        .sidebar {
+            background-color: {{ $themeSetting->admin_sidebar_bg_color ?? '#ffffff' }} !important;
+        }
+        .sidebar-nav .nav-link.collapsed {
+            background: {{ $themeSetting->admin_sidebar_bg_color ?? '#ffffff' }};
+            color: {{ $themeSetting->admin_sidebar_text_color ?? '#046B26' }};
+        }
+        .sidebar-nav .nav-link.collapsed i {
+            color: {{ $themeSetting->admin_sidebar_text_color ?? '#046B26' }};
         }
         .sidebar-nav .nav-link {
-            background: #f8fcf9;
-            color: #046B26;
+            background: {{ $themeSetting->admin_sidebar_active_bg_color ?? '#eaf6ee' }};
+            color: {{ $themeSetting->admin_sidebar_active_text_color ?? '#046B26' }};
         }
         .sidebar-nav .nav-link:not(.collapsed) {
-            background: #eaf6ee;
-            color: #046B26;
+            background: {{ $themeSetting->admin_sidebar_active_bg_color ?? '#eaf6ee' }};
+            color: {{ $themeSetting->admin_sidebar_active_text_color ?? '#046B26' }};
+            border-left: 4px solid {{ $themeSetting->admin_accent_color ?? '#FED802' }};
         }
         .sidebar-nav .nav-link:not(.collapsed) i {
-            color: #046B26;
+            color: {{ $themeSetting->admin_sidebar_active_text_color ?? '#046B26' }};
+        }
+        .sidebar-nav .nav-content a {
+            color: {{ $themeSetting->admin_sidebar_text_color ?? '#046B26' }};
         }
         .sidebar-nav .nav-content a.active {
-            color: #046B26;
+            color: {{ $themeSetting->admin_sidebar_active_text_color ?? '#046B26' }};
             font-weight: 700;
         }
         .sidebar-nav .nav-content a.active i {
-            background-color: #FED802;
+            background-color: {{ $themeSetting->admin_accent_color ?? '#FED802' }};
         }
-        .sidebar-nav .nav-link:hover {
-            color: #FED802;
-            background: #f8fcf9;
+        .sidebar-nav .nav-link:hover,
+        .sidebar-nav .nav-link.collapsed:hover {
+            color: {{ $themeSetting->admin_sidebar_hover_text_color ?? '#FED802' }};
+            background: {{ $themeSetting->admin_sidebar_hover_bg_color ?? '#f8fcf9' }};
         }
-        .sidebar-nav .nav-link:hover i {
-            color: #FED802;
+        .sidebar-nav .nav-link:hover i,
+        .sidebar-nav .nav-link.collapsed:hover i {
+            color: {{ $themeSetting->admin_sidebar_hover_text_color ?? '#FED802' }};
         }
         .btn-primary {
-            background-color: #046B26 !important;
-            border-color: #046B26 !important;
+            background-color: {{ $themeSetting->admin_primary_color ?? '#046B26' }} !important;
+            border-color: {{ $themeSetting->admin_primary_color ?? '#046B26' }} !important;
         }
         .btn-primary:hover, .btn-primary:focus {
-            background-color: #03521d !important;
-            border-color: #03521d !important;
+            background-color: {{ $themeSetting->admin_primary_color ?? '#03521d' }} !important;
+            border-color: {{ $themeSetting->admin_primary_color ?? '#03521d' }} !important;
+            filter: brightness(0.92);
         }
         .btn-outline-primary {
-            color: #046B26 !important;
-            border-color: #046B26 !important;
+            color: {{ $themeSetting->admin_primary_color ?? '#046B26' }} !important;
+            border-color: {{ $themeSetting->admin_primary_color ?? '#046B26' }} !important;
         }
         .btn-outline-primary:hover {
-            background-color: #046B26 !important;
+            background-color: {{ $themeSetting->admin_primary_color ?? '#046B26' }} !important;
             color: #fff !important;
         }
         .btn-warning {
-            background-color: #FED802 !important;
-            border-color: #FED802 !important;
-            color: #fff !important;
+            background-color: {{ $themeSetting->admin_accent_color ?? '#FED802' }} !important;
+            border-color: {{ $themeSetting->admin_accent_color ?? '#FED802' }} !important;
+            color: #111827 !important;
         }
         .btn-warning:hover {
-            background-color: #e5c302 !important;
-            border-color: #e5c302 !important;
-            color: #fff !important;
+            background-color: {{ $themeSetting->admin_accent_color ?? '#e5c302' }} !important;
+            border-color: {{ $themeSetting->admin_accent_color ?? '#e5c302' }} !important;
+            color: #111827 !important;
+            filter: brightness(0.94);
         }
         .pagetitle h1 {
-            color: #046B26;
+            color: {{ $themeSetting->admin_primary_color ?? '#046B26' }};
         }
         .card-title {
-            color: #046B26;
+            color: {{ $themeSetting->admin_primary_color ?? '#046B26' }};
         }
         .back-to-top {
-            background: #046B26;
+            background: {{ $themeSetting->admin_primary_color ?? '#046B26' }};
         }
         .back-to-top:hover {
-            background: #FED802;
+            background: {{ $themeSetting->admin_accent_color ?? '#FED802' }};
         }
     </style>
 </head>

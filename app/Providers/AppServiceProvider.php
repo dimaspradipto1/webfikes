@@ -7,6 +7,7 @@ use App\Models\Contact;
 use App\Models\Layanan;
 use App\Models\PmbSetting;
 use App\Models\Publikasi;
+use App\Models\ThemeSetting;
 use App\Models\Topbar;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\URL;
@@ -57,6 +58,12 @@ class AppServiceProvider extends ServiceProvider
                 $defaultBahasa = null;
             }
 
+            try {
+                $themeSetting = ThemeSetting::current();
+            } catch (\Throwable $e) {
+                $themeSetting = new ThemeSetting(ThemeSetting::defaultAttributes());
+            }
+
             $view->with([
                 'contact' => $contact,
                 'cleanWa' => $cleanWa,
@@ -66,6 +73,7 @@ class AppServiceProvider extends ServiceProvider
                 'topbarSetting' => $topbarSetting,
                 'bahasaList' => $bahasaList,
                 'defaultBahasa' => $defaultBahasa,
+                'themeSetting' => $themeSetting,
             ]);
         });
     }

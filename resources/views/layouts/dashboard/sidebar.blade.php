@@ -315,6 +315,13 @@
           </li>
 
           <li class="nav-item">
+              <a class="nav-link {{ Route::is('theme.*') ? '' : 'collapsed' }}" href="{{ route('theme.index') }}">
+                  <i class="bi bi-palette-fill"></i>
+                  <span>Warna Frontend & Admin</span>
+              </a>
+          </li>
+
+          <li class="nav-item">
               <a class="nav-link {{ Route::is('backup.*') ? '' : 'collapsed' }}" href="{{ route('backup.index') }}">
                   <i class="bi bi-database-check"></i>
                   <span>Backup Database & Storage</span>

@@ -38,6 +38,7 @@ use App\Http\Controllers\StrukturOrganisasiController;
 use App\Http\Controllers\TemplateDokumenController;
 use App\Http\Controllers\TenagaPendidikController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\ThemeSettingController;
 use App\Http\Controllers\TopbarController;
 use App\Http\Controllers\TriDharmaController;
 use App\Http\Controllers\UnduhanController;
@@ -221,6 +222,11 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::post('admin-bahasa/{id}/toggle', [BahasaSettingController::class, 'toggle'])->name('bahasa.toggle');
     Route::post('admin-bahasa/{id}/set-default', [BahasaSettingController::class, 'setDefault'])->name('bahasa.set-default');
     Route::delete('admin-bahasa/{id}', [BahasaSettingController::class, 'destroy'])->name('bahasa.destroy');
+
+    // Pengaturan Warna Frontend & Admin
+    Route::get('admin-theme', [ThemeSettingController::class, 'index'])->name('theme.index');
+    Route::post('admin-theme', [ThemeSettingController::class, 'update'])->name('theme.update');
+    Route::post('admin-theme/reset', [ThemeSettingController::class, 'reset'])->name('theme.reset');
 
     // Backup Database & Storage (Drive D: / C: & Otomatis Harian)
     Route::prefix('admin-backup')->name('backup.')->group(function () {

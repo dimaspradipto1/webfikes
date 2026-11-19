@@ -66,6 +66,108 @@
   <!-- Master Unified Frontend CSS -->
   <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}?v={{ file_exists(public_path('frontend/css/style.css')) ? filemtime(public_path('frontend/css/style.css')) : time() }}">
 
+  @if(isset($themeSetting))
+  <style id="dynamic-frontend-theme">
+    :root {
+      --uis-green: {{ $themeSetting->primary_color ?? '#046B26' }} !important;
+      --uis-green-dark: {{ $themeSetting->primary_dark_color ?? '#03521d' }} !important;
+      --uis-yellow: {{ $themeSetting->secondary_color ?? '#FED802' }} !important;
+      --uis-yellow-hover: {{ $themeSetting->secondary_dark_color ?? '#e5c302' }} !important;
+      --uis-purple: {{ $themeSetting->primary_color ?? '#046B26' }} !important;
+      --uis-purple-dark: {{ $themeSetting->primary_dark_color ?? '#03521d' }} !important;
+      --uis-orange: {{ $themeSetting->secondary_color ?? '#FED802' }} !important;
+      --uis-orange-hover: {{ $themeSetting->secondary_dark_color ?? '#e5c302' }} !important;
+      --obsidian-dark: {{ $themeSetting->primary_dark_color ?? '#03521d' }} !important;
+      --obsidian-card: {{ $themeSetting->primary_color ?? '#046B26' }} !important;
+    }
+
+    /* Navbar Header Dynamic Overrides */
+    .navbar-main {
+      background: {{ $themeSetting->header_bg_color ?? '#046B26' }} !important;
+      border-bottom: 3px solid {{ $themeSetting->header_border_color ?? '#FED802' }} !important;
+    }
+
+    .navbar-main .brand-title-main,
+    .navbar-main .nav-link-custom {
+      color: {{ $themeSetting->header_text_color ?? '#ffffff' }} !important;
+    }
+
+    .navbar-main .nav-link-custom:hover,
+    .navbar-main .nav-link-custom.active,
+    .navbar-main .nav-item.dropdown:hover > .nav-link-custom {
+      background: {{ $themeSetting->header_active_bg_color ?? '#FED802' }} !important;
+      color: {{ $themeSetting->header_active_text_color ?? '#046B26' }} !important;
+    }
+
+    .navbar-main .btn-pmb-nav {
+      background: {{ $themeSetting->header_pmb_bg_color ?? '#FED802' }} !important;
+      color: {{ $themeSetting->header_pmb_text_color ?? '#046B26' }} !important;
+    }
+
+    .navbar-main .btn-portal-nav {
+      background: {{ $themeSetting->header_login_bg_color ?? '#ffffff' }} !important;
+      color: {{ $themeSetting->header_login_text_color ?? '#046B26' }} !important;
+    }
+
+    .navbar-main .uis-lang-toggle {
+      background: {{ $themeSetting->header_lang_bg_color ?? '#03521d' }} !important;
+      color: {{ $themeSetting->header_lang_text_color ?? '#ffffff' }} !important;
+    }
+
+    /* Subpage Hero Banner Dynamic Overrides */
+    .about-hero,
+    .layanan-hero,
+    .dosen-hero,
+    .news-hero,
+    .galeri-hero,
+    .kontak-hero,
+    .prestasi-hero,
+    .organisasi-hero,
+    .faq-hero,
+    .sambutan-hero,
+    .visimisi-hero,
+    .struktur-hero,
+    .sejarah-hero,
+    .testimoni-hero,
+    .humas-hero {
+      background: {{ $themeSetting->hero_bg_color ?? '#046B26' }} !important;
+      border-bottom-color: {{ $themeSetting->hero_border_color ?? '#FED802' }} !important;
+    }
+
+    /* Footer Dynamic Overrides */
+    .footer-main {
+      background: {{ $themeSetting->footer_bg_color ?? '#03521d' }} !important;
+      color: {{ $themeSetting->footer_text_color ?? '#ffffff' }} !important;
+      border-top: 4px solid {{ $themeSetting->footer_border_top_color ?? '#FED802' }} !important;
+    }
+
+    .footer-main .footer-heading,
+    .footer-main .footer-logo-text strong {
+      color: {{ $themeSetting->footer_heading_color ?? '#FED802' }} !important;
+    }
+
+    .footer-main .footer-desc,
+    .footer-main .footer-contact-item,
+    .footer-main .footer-contact-item span,
+    .footer-main .footer-bottom {
+      color: {{ $themeSetting->footer_text_color ?? '#ffffff' }} !important;
+    }
+
+    .footer-main .footer-links a {
+      color: {{ $themeSetting->footer_link_color ?? '#ffffff' }} !important;
+    }
+
+    .footer-main .footer-links a:hover {
+      color: {{ $themeSetting->footer_link_hover_color ?? '#FED802' }} !important;
+    }
+
+    .footer-main .footer-social a {
+      background: {{ $themeSetting->footer_social_bg_color ?? '#FED802' }} !important;
+      color: {{ $themeSetting->footer_social_text_color ?? '#046B26' }} !important;
+    }
+  </style>
+  @endif
+
   @stack('styles')
 </head>
 
