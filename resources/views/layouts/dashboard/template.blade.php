@@ -536,7 +536,7 @@
             };
 
             // Broadcast current saved state to Frontend tabs on every Admin load
-            var savedTheme = @json(isset($themeSetting) ? $themeSetting->only(array_keys(\App\Models\ThemeSetting::defaultAttributes())) : null);
+            var savedTheme = @json(isset($themeSetting) ? array_merge($themeSetting->only(array_keys(\App\Models\ThemeSetting::defaultAttributes())), ['layout' => $themeSetting->getLayoutSections()]) : null);
             try {
                 if ('BroadcastChannel' in window) {
                     var bc = new BroadcastChannel('webfikes_live_sync');

@@ -317,7 +317,7 @@
           <li class="nav-item">
               <a class="nav-link {{ Route::is('theme.*') ? '' : 'collapsed' }}" href="{{ route('theme.index') }}">
                   <i class="bi bi-palette-fill"></i>
-                  <span>Warna Frontend & Admin</span>
+                  <span>Warna & Tata Letak</span>
               </a>
           </li>
 

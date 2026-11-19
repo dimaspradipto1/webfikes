@@ -56,11 +56,76 @@ class ThemeSetting extends Model
         'admin_sidebar_active_text_color',
         'admin_sidebar_hover_bg_color',
         'admin_sidebar_hover_text_color',
+        'sections_order',
     ];
 
     protected $casts = [
         'header_is_sticky' => 'boolean',
+        'sections_order' => 'array',
     ];
+
+    public static function sectionCatalog(): array
+    {
+        return [
+            'hero-banner'          => ['label' => 'Banner Hero (Slider)', 'icon' => 'bi-images'],
+            'keunggulan-beranda'   => ['label' => 'Keunggulan Beranda', 'icon' => 'bi-layers'],
+            'profil-singkat'       => ['label' => 'Profil Universitas & Video', 'icon' => 'bi-building'],
+            'statistik-fakultas'   => ['label' => 'Statistik Universitas', 'icon' => 'bi-bar-chart-line'],
+            'keunggulan'           => ['label' => 'Keunggulan Universitas', 'icon' => 'bi-patch-check'],
+            'pmb'                  => ['label' => 'Banner PMB & Pendaftaran', 'icon' => 'bi-pencil-square'],
+            'fasilitas'            => ['label' => 'Sarana & Fasilitas Kampus', 'icon' => 'bi-cpu'],
+            'prestasi'             => ['label' => 'Prestasi Mahasiswa', 'icon' => 'bi-trophy'],
+            'organisasi-mahasiswa' => ['label' => 'Organisasi Mahasiswa', 'icon' => 'bi-people'],
+            'galeri'               => ['label' => 'Galeri Kegiatan', 'icon' => 'bi-camera'],
+            'media-sosial'         => ['label' => 'Media Sosial', 'icon' => 'bi-instagram'],
+            'berita'               => ['label' => 'Berita Terkini', 'icon' => 'bi-newspaper'],
+            'alumni'               => ['label' => 'Alumni & Testimoni', 'icon' => 'bi-mortarboard'],
+            'layanan-terkait'      => ['label' => 'Layanan Terkait', 'icon' => 'bi-grid'],
+            'mitra'                => ['label' => 'Mitra Kerjasama', 'icon' => 'bi-diagram-3'],
+            'faq'                  => ['label' => 'Tanya Jawab (FAQ)', 'icon' => 'bi-question-circle'],
+        ];
+    }
+
+    public static function defaultSections(): array
+    {
+        $sections = [];
+        $i = 1;
+        foreach (array_keys(self::sectionCatalog()) as $key) {
+            $sections[$key] = [
+                'order' => $i++,
+                'visible' => true,
+            ];
+        }
+        return $sections;
+    }
+
+    public function getLayoutSections(): array
+    {
+        $catalog = self::sectionCatalog();
+        $defaults = self::defaultSections();
+        $saved = is_array($this->sections_order) ? $this->sections_order : [];
+
+        foreach ($saved as $key => $row) {
+            if (isset($defaults[$key])) {
+                $defaults[$key] = [
+                    'order' => (int) ($row['order'] ?? $defaults[$key]['order']),
+                    'visible' => (bool) ($row['visible'] ?? true),
+                ];
+            }
+        }
+
+        uasort($defaults, fn ($a, $b) => $a['order'] <=> $b['order']);
+
+        $i = 1;
+        foreach ($defaults as $k => &$item) {
+            $item['order'] = $i++;
+            $item['label'] = $catalog[$k]['label'] ?? $k;
+            $item['icon'] = $catalog[$k]['icon'] ?? 'bi-square';
+        }
+        unset($item);
+
+        return $defaults;
+    }
 
     public static function defaultAttributes(): array
     {
@@ -107,6 +172,7 @@ class ThemeSetting extends Model
             'admin_sidebar_active_text_color'=> '#046B26',
             'admin_sidebar_hover_bg_color'   => '#f8fcf9',
             'admin_sidebar_hover_text_color' => '#FED802',
+            'sections_order'                 => self::defaultSections(),
         ];
     }
 

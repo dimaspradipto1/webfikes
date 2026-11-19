@@ -481,6 +481,23 @@
       var sticky = (t.header_is_sticky === undefined || t.header_is_sticky === null) ? true : Boolean(t.header_is_sticky);
       navEl.classList.toggle('sticky-top', sticky);
     }
+
+    if (t.layout && typeof t.layout === 'object') {
+      var layoutStyle = document.getElementById('uis-home-layout-style');
+      if (layoutStyle) {
+        var cssLines = [
+          '#uisHomeLayout { display: flex; flex-direction: column; }',
+          '#uisHomeLayout > section { width: 100%; }'
+        ];
+        Object.keys(t.layout).forEach(function(key) {
+          var row = t.layout[key];
+          var ord = parseInt(row.order || 1, 10);
+          var vis = Boolean(row.visible);
+          cssLines.push('#uisHomeLayout > section#' + key + ' { order: ' + ord + ';' + (!vis ? ' display: none !important;' : '') + ' }');
+        });
+        layoutStyle.textContent = cssLines.join('\n');
+      }
+    }
   };
 
   window.hotSwapFrontendContent = function() {

@@ -224,9 +224,11 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::post('admin-bahasa/{id}/set-default', [BahasaSettingController::class, 'setDefault'])->name('bahasa.set-default');
     Route::delete('admin-bahasa/{id}', [BahasaSettingController::class, 'destroy'])->name('bahasa.destroy');
 
-    // Pengaturan Warna Frontend & Admin
+    // Pengaturan Warna Frontend, Admin & Tata Letak Beranda
     Route::get('admin-theme', [ThemeSettingController::class, 'index'])->name('theme.index');
     Route::post('admin-theme', [ThemeSettingController::class, 'update'])->name('theme.update');
+    Route::post('admin-theme/layout', [ThemeSettingController::class, 'updateLayout'])->name('theme.update-layout');
+    Route::post('admin-theme/reset-layout', [ThemeSettingController::class, 'resetLayout'])->name('theme.reset-layout');
     Route::post('admin-theme/reset', [ThemeSettingController::class, 'reset'])->name('theme.reset');
 
     // Backup Database & Storage (Drive D: / C: & Otomatis Harian)

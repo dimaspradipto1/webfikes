@@ -5,6 +5,17 @@
 
 @section('content')
 @php
+  $homeLayoutSections = isset($themeSetting) ? $themeSetting->getLayoutSections() : \App\Models\ThemeSetting::defaultSections();
+@endphp
+<style id="uis-home-layout-style">
+  #uisHomeLayout { display: flex; flex-direction: column; }
+  #uisHomeLayout > section { width: 100%; }
+@foreach($homeLayoutSections as $sectionKey => $sectionRow)
+  #uisHomeLayout > section#{{ $sectionKey }} { order: {{ (int) ($sectionRow['order'] ?? 1) }};{{ empty($sectionRow['visible']) ? ' display: none !important;' : '' }} }
+@endforeach
+</style>
+<div id="uisHomeLayout">
+@php
   $cleanWa = $cleanWa ?? '';
   if (empty($cleanWa) && !empty($contact?->no_wa)) {
       $cleanWa = preg_replace('/[^0-9]/', '', $contact->no_wa);
@@ -17,7 +28,7 @@
 <!-- ═══════════════════════════════════════════════
      1. HERO BANNER (FULL IMAGE PROMOTION)
 ═══════════════════════════════════════════════ -->
-<section class="hero-slider-section p-0">
+<section class="hero-slider-section p-0" id="hero-banner">
   <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4500" data-bs-pause="false" data-bs-wrap="true" data-bs-touch="true">
     
     @php
@@ -142,8 +153,15 @@
       </div>
     @endif
 
-    <!-- 3. PILAR KEUNGGULAN (3 CARD HORIZONTAL & TOMBOL CTA) -->
-    <div class="row g-3 justify-content-center mb-5" data-aos="fade-up" data-aos-delay="250">
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     2. KEUNGGULAN BERANDA (3 CARD HORIZONTAL & TOMBOL CTA)
+═══════════════════════════════════════════════ -->
+<section class="section-bg-white pb-5" id="keunggulan-beranda">
+  <div class="container">
+    <div class="row g-3 justify-content-center" data-aos="fade-up" data-aos-delay="250">
       <div class="col-md-4">
         <div class="p-3 rounded-3 h-100 shadow-sm" style="background: #fffbeb; border: 1px solid #fde68a; transition: transform 0.25s ease;">
           <div class="d-flex align-items-center gap-2 mb-2 fw-bold" style="color: #b45309;">
@@ -178,7 +196,6 @@
         </a>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -1681,6 +1698,7 @@
   </div>
 </section>
 
+</div>{{-- /#uisHomeLayout --}}
 @endsection
 
 @push('scripts')

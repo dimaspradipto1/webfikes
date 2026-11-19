@@ -11,10 +11,48 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ThemeSettingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $theme = ThemeSetting::current();
-        return view('pages.theme-setting.index', compact('theme'));
+        $catalog = ThemeSetting::sectionCatalog();
+        $layoutSections = $theme->getLayoutSections();
+        $activeTab = $request->query('tab', 'header');
+
+        return view('pages.theme-setting.index', compact('theme', 'catalog', 'layoutSections', 'activeTab'));
+    }
+
+    protected function extractLayoutFromRequest(Request $request): ?array
+    {
+        if (!$request->filled('urutan')) {
+            return null;
+        }
+
+        $catalogKeys = array_keys(ThemeSetting::sectionCatalog());
+        $orderList = array_filter(array_map('trim', explode(',', (string) $request->input('urutan'))));
+        $visibleMap = (array) $request->input('visible', []);
+
+        $newLayout = [];
+        $order = 1;
+
+        foreach ($orderList as $key) {
+            if (in_array($key, $catalogKeys, true)) {
+                $newLayout[$key] = [
+                    'order' => $order++,
+                    'visible' => !empty($visibleMap[$key]),
+                ];
+            }
+        }
+
+        foreach ($catalogKeys as $key) {
+            if (!isset($newLayout[$key])) {
+                $newLayout[$key] = [
+                    'order' => $order++,
+                    'visible' => !empty($visibleMap[$key]),
+                ];
+            }
+        }
+
+        return $newLayout;
     }
 
     public function update(Request $request)
@@ -69,6 +107,11 @@ class ThemeSettingController extends Controller
         $validated['header_height'] = $request->filled('header_height') ? (int) $request->header_height : 90;
         $validated['admin_header_height'] = $request->filled('admin_header_height') ? (int) $request->admin_header_height : 78;
 
+        $layout = $this->extractLayoutFromRequest($request);
+        if ($layout !== null) {
+            $validated['sections_order'] = $layout;
+        }
+
         $theme->update($validated);
 
         try {
@@ -77,8 +120,42 @@ class ThemeSettingController extends Controller
             // ignore
         }
 
-        Alert::success('Berhasil!', 'Pengaturan warna Frontend & Admin berhasil disimpan.');
-        return redirect()->route('theme.index');
+        Alert::success('Berhasil!', 'Pengaturan warna & tata letak berhasil disimpan.');
+        return redirect()->route('theme.index', ['tab' => $request->input('active_tab', 'header')]);
+    }
+
+    public function updateLayout(Request $request)
+    {
+        $theme = ThemeSetting::current();
+        $layout = $this->extractLayoutFromRequest($request);
+
+        if ($layout !== null) {
+            $theme->update(['sections_order' => $layout]);
+        }
+
+        try {
+            Artisan::call('view:clear');
+        } catch (\Throwable $e) {
+            // ignore
+        }
+
+        Alert::success('Berhasil!', 'Tata letak & visibilitas section beranda berhasil disimpan.');
+        return redirect()->route('theme.index', ['tab' => 'layout']);
+    }
+
+    public function resetLayout()
+    {
+        $theme = ThemeSetting::current();
+        $theme->update(['sections_order' => ThemeSetting::defaultSections()]);
+
+        try {
+            Artisan::call('view:clear');
+        } catch (\Throwable $e) {
+            // ignore
+        }
+
+        Alert::success('Direset!', 'Urutan & visibilitas section beranda telah dikembalikan ke urutan standar.');
+        return redirect()->route('theme.index', ['tab' => 'layout']);
     }
 
     public function reset()
@@ -100,6 +177,7 @@ class ThemeSettingController extends Controller
     {
         $theme = ThemeSetting::current();
         $themeData = $theme->only(array_keys(ThemeSetting::defaultAttributes()));
+        $themeData['layout'] = $theme->getLayoutSections();
         $themeHash = md5(json_encode($themeData));
 
         $tables = [

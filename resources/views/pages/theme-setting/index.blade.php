@@ -1,13 +1,19 @@
 @extends('layouts.dashboard.template')
 
 @section('content')
+@php
+    $catalog = $catalog ?? \App\Models\ThemeSetting::sectionCatalog();
+    $layoutSections = $layoutSections ?? $theme->getLayoutSections();
+    $activeTab = $activeTab ?? request('tab', 'header');
+    $hiddenCount = collect($layoutSections)->filter(fn ($r) => empty($r['visible']))->count();
+@endphp
 <div class="pagetitle">
-    <h1>Pengaturan Warna Frontend & Admin</h1>
+    <h1>Warna Header, Footer, Admin & Tata Letak Beranda</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
             <li class="breadcrumb-item">Pengaturan & Administrator</li>
-            <li class="breadcrumb-item active">Warna Frontend & Admin</li>
+            <li class="breadcrumb-item active">Warna & Tata Letak Beranda</li>
         </ol>
     </nav>
 </div>
@@ -155,6 +161,61 @@
         align-items: center;
         gap: 8px;
     }
+
+    /* Tata Letak Beranda Sortable List */
+    .tp-layout-list { list-style: none; padding: 0; margin: 0; }
+    .tp-layout-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 11px 15px;
+        margin-bottom: 9px;
+        transition: border-color .2s ease, opacity .2s ease, box-shadow .2s ease;
+    }
+    .tp-layout-item:hover {
+        border-color: #cbd5e1;
+        box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
+    }
+    .tp-layout-item.is-hidden { opacity: .55; background: #f8fafc; }
+    .tp-layout-item.dragging { box-shadow: 0 10px 24px rgba(15,23,42,.15); border-color: #046b26; }
+    .tp-handle { cursor: grab; color: #94a3b8; font-size: 18px; }
+    .tp-num {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        background: #f1f5f9;
+        color: #334155;
+        font-weight: 700;
+        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    .tp-sec-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        background: #ecf8f0;
+        color: #046b26;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 16px;
+    }
+    .tp-move {
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 7px;
+    }
 </style>
 
 <section class="section">
@@ -201,31 +262,39 @@
             <!-- Navigation Tabs -->
             <ul class="nav nav-tabs nav-tabs-theme mb-4" id="themeTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="frontend-header-tab" data-bs-toggle="tab" data-bs-target="#frontend-header-pane" type="button" role="tab">
-                        <i class="bi bi-window-dock me-1"></i> 1. Warna Frontend (Brand, Header & Hero)
+                    <button class="nav-link {{ $activeTab === 'header' ? 'active' : '' }}" id="frontend-header-tab" data-bs-toggle="tab" data-bs-target="#frontend-header-pane" data-tab-name="header" type="button" role="tab">
+                        <i class="bi bi-window-dock me-1"></i> 1. Header & Brand Frontend
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="frontend-footer-tab" data-bs-toggle="tab" data-bs-target="#frontend-footer-pane" type="button" role="tab">
-                        <i class="bi bi-layout-text-window-reverse me-1"></i> 2. Warna Footer Frontend
+                    <button class="nav-link {{ $activeTab === 'footer' ? 'active' : '' }}" id="frontend-footer-tab" data-bs-toggle="tab" data-bs-target="#frontend-footer-pane" data-tab-name="footer" type="button" role="tab">
+                        <i class="bi bi-layout-text-window-reverse me-1"></i> 2. Footer Website
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="admin-panel-tab" data-bs-toggle="tab" data-bs-target="#admin-panel-pane" type="button" role="tab">
-                        <i class="bi bi-speedometer2 me-1"></i> 3. Warna Panel Admin (Dashboard)
+                    <button class="nav-link {{ $activeTab === 'admin' ? 'active' : '' }}" id="admin-panel-tab" data-bs-toggle="tab" data-bs-target="#admin-panel-pane" data-tab-name="admin" type="button" role="tab">
+                        <i class="bi bi-speedometer2 me-1"></i> 3. Warna Panel Admin
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link {{ $activeTab === 'layout' ? 'active' : '' }}" id="homepage-layout-tab" data-bs-toggle="tab" data-bs-target="#homepage-layout-pane" data-tab-name="layout" type="button" role="tab">
+                        <i class="bi bi-arrow-down-up me-1"></i> 4. Tata Letak Beranda
+                        <span class="badge bg-warning text-dark ms-1 rounded-pill" style="font-size: 10.5px;">{{ count($catalog) }} Section</span>
                     </button>
                 </li>
             </ul>
 
             <form action="{{ route('theme.update') }}" method="POST" id="themeSettingForm">
                 @csrf
+                <input type="hidden" name="active_tab" id="active_tab_input" value="{{ $activeTab }}">
+                <input type="hidden" name="urutan" id="layoutOrder" value="{{ implode(',', array_keys($layoutSections)) }}">
 
                 <div class="tab-content" id="themeTabContent">
 
                     <!-- ========================================================= -->
                     <!-- TAB 1: WARNA FRONTEND (BRAND, HEADER & HERO SUBPAGE)       -->
                     <!-- ========================================================= -->
-                    <div class="tab-pane fade show active" id="frontend-header-pane" role="tabpanel">
+                    <div class="tab-pane fade {{ $activeTab === 'header' ? 'show active' : '' }}" id="frontend-header-pane" role="tabpanel">
 
                         <!-- Live Preview Frontend Header & Hero -->
                         <div class="preview-browser mb-4">
@@ -427,7 +496,7 @@
                     <!-- ========================================================= -->
                     <!-- TAB 2: WARNA FOOTER FRONTEND                              -->
                     <!-- ========================================================= -->
-                    <div class="tab-pane fade" id="frontend-footer-pane" role="tabpanel">
+                    <div class="tab-pane fade {{ $activeTab === 'footer' ? 'show active' : '' }}" id="frontend-footer-pane" role="tabpanel">
 
                         <!-- Live Preview Footer -->
                         <div class="preview-browser mb-4">
@@ -533,7 +602,7 @@
                     <!-- ========================================================= -->
                     <!-- TAB 3: WARNA PANEL ADMIN (DASHBOARD)                      -->
                     <!-- ========================================================= -->
-                    <div class="tab-pane fade" id="admin-panel-pane" role="tabpanel">
+                    <div class="tab-pane fade {{ $activeTab === 'admin' ? 'show active' : '' }}" id="admin-panel-pane" role="tabpanel">
 
                         <!-- Live Preview Admin Dashboard -->
                         <div class="preview-browser mb-4">
@@ -694,13 +763,84 @@
                         </div>
                     </div>
 
+                    <!-- ========================================================= -->
+                    <!-- TAB 4: TATA LETAK BERANDA (URUTAN & VISIBILITAS 16 SECTION) -->
+                    <!-- ========================================================= -->
+                    <div class="tab-pane fade {{ $activeTab === 'layout' ? 'show active' : '' }}" id="homepage-layout-pane" role="tabpanel">
+                        <div class="row g-4">
+                            <div class="col-lg-8">
+                                <div class="p-3 p-md-4 bg-white rounded-4 border">
+                                    <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+                                        <div>
+                                            <h6 class="fw-bold text-dark mb-1" style="font-size: 15px;">
+                                                <i class="bi bi-arrow-down-up text-primary me-2"></i>Urutan Section Halaman Beranda
+                                            </h6>
+                                            <div class="text-muted" style="font-size: 12.5px;">
+                                                Seret ikon <i class="bi bi-grip-vertical"></i> atau gunakan tombol panah untuk mengubah urutan. Matikan sakelar untuk menyembunyikan section.
+                                            </div>
+                                        </div>
+                                        <span class="badge bg-light text-dark border px-3 py-2" id="layoutCounter" style="font-size: 12px; border-radius: 8px;">
+                                            {{ count($catalog) - $hiddenCount }} tampil · {{ $hiddenCount }} disembunyikan
+                                        </span>
+                                    </div>
+
+                                    <ul class="tp-layout-list" id="layoutList">
+                                        @foreach($layoutSections as $key => $row)
+                                            @php
+                                                $meta = $catalog[$key] ?? ['label' => $key, 'icon' => 'bi-square'];
+                                            @endphp
+                                            <li class="tp-layout-item {{ empty($row['visible']) ? 'is-hidden' : '' }}" data-key="{{ $key }}" draggable="true">
+                                                <i class="bi bi-grip-vertical tp-handle" title="Tahan & geser untuk mengubah urutan"></i>
+                                                <span class="tp-num">{{ $loop->iteration }}</span>
+                                                <span class="tp-sec-icon"><i class="bi {{ $meta['icon'] }}"></i></span>
+                                                <div class="flex-grow-1 min-w-0">
+                                                    <div class="fw-bold text-dark" style="font-size: 13.5px;">{{ $meta['label'] }}</div>
+                                                    <div class="text-muted" style="font-size: 11px;">#{{ $key }}</div>
+                                                </div>
+                                                <button type="button" class="btn btn-sm btn-light border tp-move" data-move="up" title="Naikkan"><i class="bi bi-chevron-up"></i></button>
+                                                <button type="button" class="btn btn-sm btn-light border tp-move" data-move="down" title="Turunkan"><i class="bi bi-chevron-down"></i></button>
+                                                <div class="form-check form-switch mb-0 ms-1" title="Tampilkan / sembunyikan">
+                                                    <input class="form-check-input tp-visible" type="checkbox" role="switch" name="visible[{{ $key }}]" value="1" {{ !empty($row['visible']) ? 'checked' : '' }}>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="p-3 p-md-4 bg-white rounded-4 border">
+                                    <h6 class="fw-bold text-dark mb-2" style="font-size: 15px;">
+                                        <i class="bi bi-info-circle text-success me-2"></i>Catatan
+                                    </h6>
+                                    <ul class="small text-secondary ps-3 mb-3" style="line-height: 1.65;">
+                                        <li class="mb-2">Perubahan langsung diterapkan ke halaman beranda setelah disimpan, tanpa perlu memuat ulang.</li>
+                                        <li class="mb-2">Section yang disembunyikan tidak dihapus — isi kontennya tetap tersimpan dan dapat ditampilkan kembali kapan saja.</li>
+                                        <li>Isi tiap section tetap dikelola melalui menu <strong>Konten Beranda</strong> masing-masing.</li>
+                                    </ul>
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-success fw-bold py-2" style="background-color: #3b7a57; border-color: #3b7a57;">
+                                            <i class="bi bi-box-arrow-in-down me-1"></i> Simpan Tata Letak
+                                        </button>
+                                        <a href="{{ route('homepage') }}" target="_blank" class="btn btn-outline-success fw-semibold py-2">
+                                            <i class="bi bi-box-arrow-up-right me-1"></i> Lihat Beranda
+                                        </a>
+                                        <button type="button" class="btn btn-outline-secondary fw-semibold py-2" onclick="if(confirm('Kembalikan urutan & visibilitas section ke bawaan?')) document.getElementById('resetLayoutForm').submit();">
+                                            <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Urutan Default
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <hr class="my-4">
 
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
-                    <button type="button" class="btn btn-outline-danger rounded-pill px-4 fw-bold" onclick="if(confirm('Kembalikan seluruh warna Frontend & Admin ke warna standar awal?')) document.getElementById('resetThemeForm').submit();">
-                        <i class="bi bi-arrow-counterclockwise me-1"></i> Reset ke Standar Awal
+                    <button type="button" class="btn btn-outline-danger rounded-pill px-4 fw-bold" onclick="if(confirm('Kembalikan seluruh warna & tata letak ke standar awal?')) document.getElementById('resetThemeForm').submit();">
+                        <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Semua ke Standar Awal
                     </button>
 
                     <div class="d-flex gap-2">
@@ -708,13 +848,16 @@
                             <i class="bi bi-box-arrow-up-right me-1"></i> Lihat Frontend
                         </a>
                         <button type="submit" class="btn btn-primary rounded-pill px-4 fw-bold">
-                            <i class="bi bi-check2-circle me-1"></i> Simpan Perubahan Warna
+                            <i class="bi bi-check2-circle me-1"></i> Simpan Semua Perubahan
                         </button>
                     </div>
                 </div>
             </form>
 
             <form action="{{ route('theme.reset') }}" method="POST" id="resetThemeForm" class="d-none">
+                @csrf
+            </form>
+            <form action="{{ route('theme.reset-layout') }}" method="POST" id="resetLayoutForm" class="d-none">
                 @csrf
             </form>
 
@@ -847,6 +990,18 @@
         document.getElementById('pvAdminBtnPrimary').style.background = aPrimary;
         document.getElementById('pvAdminBtnAccent').style.background = aAccent;
 
+        const currentLayout = {};
+        document.querySelectorAll('#layoutList .tp-layout-item').forEach((li, idx) => {
+            const key = li.dataset.key;
+            const cb = li.querySelector('.tp-visible');
+            if (key) {
+                currentLayout[key] = {
+                    order: idx + 1,
+                    visible: cb ? cb.checked : true
+                };
+            }
+        });
+
         // Live broadcast to Frontend & Admin Panel without page reload
         const liveTheme = {
             primary_color: primary,
@@ -888,7 +1043,8 @@
             admin_sidebar_active_bg_color: aSideActBg,
             admin_sidebar_active_text_color: aSideActText,
             admin_sidebar_hover_bg_color: aSideHovBg,
-            admin_sidebar_hover_text_color: aSideHovText
+            admin_sidebar_hover_text_color: aSideHovText,
+            layout: currentLayout
         };
 
         if (typeof window.applyLiveAdminTheme === 'function') {
@@ -1001,5 +1157,90 @@
         Object.keys(preset).forEach(field => setColorVal(field, preset[field]));
         updateLivePreview();
     }
+
+    // ── Tab State Sync (?tab=header|footer|admin|layout)
+    document.querySelectorAll('#themeTab button[data-tab-name]').forEach(btn => {
+        btn.addEventListener('shown.bs.tab', () => {
+            const tabName = btn.getAttribute('data-tab-name') || 'header';
+            const activeTabInput = document.getElementById('active_tab_input');
+            if (activeTabInput) activeTabInput.value = tabName;
+            const url = new URL(window.location.href);
+            url.searchParams.set('tab', tabName);
+            history.replaceState(null, '', url);
+        });
+    });
+
+    // ── Tata Letak Beranda: Drag & Drop + Tombol Naik/Turun + Toggle Visibilitas
+    (function () {
+        const list = document.getElementById('layoutList');
+        const orderInput = document.getElementById('layoutOrder');
+        const counter = document.getElementById('layoutCounter');
+        if (!list) return;
+
+        function refreshLayout(broadcast = true) {
+            const items = [...list.querySelectorAll('.tp-layout-item')];
+            items.forEach((li, i) => {
+                const numEl = li.querySelector('.tp-num');
+                const cb = li.querySelector('.tp-visible');
+                if (numEl) numEl.textContent = i + 1;
+                if (cb) li.classList.toggle('is-hidden', !cb.checked);
+            });
+            if (orderInput) {
+                orderInput.value = items.map(li => li.dataset.key).join(',');
+            }
+            if (counter) {
+                const shown = items.filter(li => li.querySelector('.tp-visible')?.checked).length;
+                counter.textContent = shown + ' tampil · ' + (items.length - shown) + ' disembunyikan';
+            }
+            if (broadcast) {
+                updateLivePreview();
+            }
+        }
+
+        list.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-move]');
+            if (!btn) return;
+            const li = btn.closest('.tp-layout-item');
+            if (btn.dataset.move === 'up' && li.previousElementSibling) {
+                list.insertBefore(li, li.previousElementSibling);
+            } else if (btn.dataset.move === 'down' && li.nextElementSibling) {
+                list.insertBefore(li.nextElementSibling, li);
+            }
+            refreshLayout(true);
+        });
+
+        list.addEventListener('change', (e) => {
+            if (e.target.classList.contains('tp-visible')) {
+                refreshLayout(true);
+            }
+        });
+
+        let dragged = null;
+        list.addEventListener('dragstart', (e) => {
+            dragged = e.target.closest('.tp-layout-item');
+            if (!dragged) return;
+            dragged.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        });
+
+        list.addEventListener('dragend', () => {
+            if (dragged) dragged.classList.remove('dragging');
+            dragged = null;
+            refreshLayout(true);
+        });
+
+        list.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            if (!dragged) return;
+            const after = [...list.querySelectorAll('.tp-layout-item:not(.dragging)')].find(li => {
+                const box = li.getBoundingClientRect();
+                return e.clientY < box.top + box.height / 2;
+            });
+            if (after) list.insertBefore(dragged, after);
+            else list.appendChild(dragged);
+        });
+
+        refreshLayout(false);
+    })();
 </script>
 @endsection
