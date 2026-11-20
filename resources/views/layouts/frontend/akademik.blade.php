@@ -107,20 +107,6 @@
           </nav>
         </div>
 
-        {{-- Widget Kontak / PMB --}}
-        <div class="p-4 rounded-4 text-white" style="background: #032e12; border: 1px solid #046B26;">
-          <div class="badge px-3 py-1 rounded-pill mb-2" style="background: #FED802; color: #046B26; font-weight: 800; font-size: 11px;">
-            INFORMASI PMB
-          </div>
-          <h5 class="fw-bold text-white mb-2">Butuh Bantuan Akademik?</h5>
-          <p class="text-white-50 small mb-3">
-            Hubungi Bagian Tata Usaha & Layanan Akademik Universitas Ibnu Sina untuk informasi lebih lanjut.
-          </p>
-          <a href="{{ route('homepage.kontak') }}" class="btn btn-outline-light w-100 rounded-3 fw-bold py-2" style="font-size: 13.5px;">
-            <i class="bi bi-telephone me-1"></i> Hubungi Kami
-          </a>
-        </div>
-
       </div>
 
     </div>
