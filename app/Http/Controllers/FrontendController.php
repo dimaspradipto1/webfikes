@@ -171,20 +171,44 @@ class FrontendController extends Controller
             $currentProdi = $prodis->first();
         }
 
-        $query = Kurikulum::where('is_active', true);
-        if ($currentProdi) {
-            $query->where('layanan_id', $currentProdi->id);
+        $allCourses = Kurikulum::where('is_active', true)
+            ->orderBy('semester')
+            ->orderBy('urutan')
+            ->orderBy('id')
+            ->get();
+
+        $kurikulumByProdi = [];
+        foreach ($prodis as $prodi) {
+            $prodiCourses = $allCourses->where('layanan_id', $prodi->id)->values();
+            $kurikulumByProdi[$prodi->id] = [
+                'prodi' => $prodi,
+                'coursesBySemester' => $prodiCourses->groupBy('semester'),
+                'totalSks' => $prodiCourses->sum('sks'),
+                'totalMatakuliah' => $prodiCourses->count(),
+            ];
         }
 
-        $courses = $query->orderBy('semester')->orderBy('urutan')->orderBy('id')->get();
-        $coursesBySemester = $courses->groupBy('semester');
-
-        $totalSks = $courses->sum('sks');
-        $totalMatakuliah = $courses->count();
+        if ($currentProdi && isset($kurikulumByProdi[$currentProdi->id])) {
+            $coursesBySemester = $kurikulumByProdi[$currentProdi->id]['coursesBySemester'];
+            $totalSks = $kurikulumByProdi[$currentProdi->id]['totalSks'];
+            $totalMatakuliah = $kurikulumByProdi[$currentProdi->id]['totalMatakuliah'];
+        } else {
+            $coursesBySemester = $allCourses->groupBy('semester');
+            $totalSks = $allCourses->sum('sks');
+            $totalMatakuliah = $allCourses->count();
+        }
 
         $pageTitle = 'Kurikulum '.($currentProdi?->judul ?? 'Program Studi FIKES');
 
-        return view('layouts.frontend.kurikulum', compact('prodis', 'currentProdi', 'coursesBySemester', 'totalSks', 'totalMatakuliah', 'pageTitle'));
+        return view('layouts.frontend.kurikulum', compact(
+            'prodis',
+            'currentProdi',
+            'kurikulumByProdi',
+            'coursesBySemester',
+            'totalSks',
+            'totalMatakuliah',
+            'pageTitle'
+        ));
     }
 
     public function kalenderAkademik()
