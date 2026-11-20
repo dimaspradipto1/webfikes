@@ -88,7 +88,7 @@
               </li>
               <li>
                 <a href="{{ route('sambutan-rektor.index') }}" class="{{ Route::is('sambutan-dekan.*') || Route::is('sambutan-rektor.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Sambutan Rektor</span>
+                  <i class="bi bi-circle"></i><span>Sambutan Dekan</span>
                 </a>
               </li>
               <li>
@@ -98,7 +98,7 @@
               </li>
               <li>
                 <a href="{{ route('milestone.index') }}" class="{{ Route::is('milestone.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Sejarah Universitas</span>
+                  <i class="bi bi-circle"></i><span>Sejarah FIKES</span>
                 </a>
               </li>
             </ul>

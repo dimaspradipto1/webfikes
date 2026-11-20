@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Sambutan Rektor — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Sambutan resmi Rektor Universitas Ibnu Sina (UIS) Batam — Kampusnya Profesional Muda.')
-@section('meta_keywords', 'sambutan rektor uis, rektor universitas ibnu sina, pimpinan universitas ibnu sina, uis batam')
+@section('title', 'Sambutan Dekan — Fakultas Ilmu Kesehatan (FIKES) UIS')
+@section('meta_description', 'Sambutan resmi Dekan Fakultas Ilmu Kesehatan (FIKES) Universitas Ibnu Sina (UIS) Batam.')
+@section('meta_keywords', 'sambutan dekan fikes, dekan fikes uis, pimpinan fakultas ilmu kesehatan, uis batam')
 
 @section('content')
 
@@ -13,41 +13,41 @@
   <div class="container">
     <div data-aos="fade-up">
       <h1 class="rektor-hero-title">
-        Sambutan <em>Rektor</em>
+        Sambutan <em>Dekan</em>
       </h1>
       <div class="breadcrumb-custom">
         <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
         <span>/</span>
         <a href="{{ route('homepage.tentang') }}">Profil</a>
         <span>/</span>
-        <span class="active">Sambutan Rektor</span>
+        <span class="active">Sambutan Dekan</span>
       </div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════
-     SAMBUTAN REKTOR CONTENT
+     SAMBUTAN DEKAN CONTENT
 ═══════════════════════════════════════════════ -->
 <section class="section-bg-white py-5">
   <div class="container py-3">
     <div class="row g-5">
 
-      {{-- Left Column: Rektor Portrait --}}
+      {{-- Left Column: Dekan Portrait --}}
       <div class="col-lg-4" data-aos="fade-right">
         <div class="rektor-portrait-box">
           @if(!empty($sambutanDekan?->foto_dekan))
-            <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="{{ $sambutanDekan->nama_dekan ?? 'Rektor Universitas Ibnu Sina' }}" class="rektor-portrait-img">
+            <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="{{ $sambutanDekan->nama_dekan ?? 'Dekan Fakultas Ilmu Kesehatan' }}" class="rektor-portrait-img">
           @else
             <div class="rektor-avatar-fallback">
               <i class="bi bi-person-badge"></i>
-              <span style="font-size: 14px; font-weight: 600; margin-top: 10px;">Foto Rektor</span>
+              <span style="font-size: 14px; font-weight: 600; margin-top: 10px;">Foto Dekan</span>
             </div>
           @endif
 
-          <h3 class="rektor-name-title">{{ $sambutanDekan->nama_dekan ?? 'Assoc. Prof. Dr. Ir. Larisang, S.T., M.T., IPU., ASEAN Eng.' }}</h3>
+          <h3 class="rektor-name-title">{{ $sambutanDekan->nama_dekan ?? 'Dekan Fakultas Ilmu Kesehatan' }}</h3>
           <span class="rektor-role-badge">
-            <i class="bi bi-award-fill me-1"></i> {{ $sambutanDekan->jabatan_dekan ?? 'Rektor Universitas Ibnu Sina (UIS) Batam' }}
+            <i class="bi bi-award-fill me-1"></i> {{ $sambutanDekan->jabatan_dekan ?? 'Dekan Fakultas Ilmu Kesehatan (FIKES)' }}
           </span>
 
           <div class="pt-3 border-top mt-3 text-muted small text-start">

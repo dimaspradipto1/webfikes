@@ -39,6 +39,6 @@ class SambutanDekanController extends Controller
 
         return redirect()
             ->route('sambutan-rektor.index')
-            ->with('success', 'Data Sambutan Rektor & Foto berhasil diperbarui.');
+            ->with('success', 'Data Sambutan Dekan & Foto berhasil diperbarui.');
     }
 }

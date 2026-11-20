@@ -20,7 +20,7 @@
         <span>/</span>
         <a href="{{ route('homepage.tentang') }}">Profil</a>
         <span>/</span>
-        <span class="active">Sejarah Universitas</span>
+        <span class="active">Sejarah FIKES</span>
       </div>
     </div>
   </div>
