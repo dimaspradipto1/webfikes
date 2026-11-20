@@ -56,6 +56,7 @@ class NewsCategory extends Model
     {
         return [
             ['name' => 'Berita Universitas', 'icon' => 'bi-mortarboard-fill', 'color' => '#046B26', 'description' => 'Berita resmi kegiatan dan informasi utama kampus'],
+            ['name' => 'Prestasi Mahasiswa', 'icon' => 'bi-trophy-fill', 'color' => '#f59e0b', 'description' => 'Berita capaian prestasi, kejuaraan, dan penghargaan mahasiswa (otomatis tampil di halaman Prestasi Mahasiswa)'],
             ['name' => 'Berita Humas', 'icon' => 'bi-megaphone-fill', 'color' => '#198754', 'description' => 'Rilis berita dan liputan kehumasan'],
             ['name' => 'Akademik & Kemahasiswaan', 'icon' => 'bi-book-fill', 'color' => '#0284c7', 'description' => 'Informasi perkuliahan, akademik, dan kegiatan mahasiswa'],
             ['name' => 'Teknologi & Rekayasa', 'icon' => 'bi-cpu-fill', 'color' => '#6610f2', 'description' => 'Inovasi teknologi dan rekayasa terapan'],
@@ -88,6 +89,16 @@ class NewsCategory extends Model
                         'is_active' => true,
                     ]);
                 }
+            } elseif (! self::where('name', 'Prestasi Mahasiswa')->exists()) {
+                self::create([
+                    'name' => 'Prestasi Mahasiswa',
+                    'slug' => self::generateUniqueSlug('Prestasi Mahasiswa'),
+                    'description' => 'Berita capaian prestasi, kejuaraan, dan penghargaan mahasiswa (otomatis tampil di halaman Prestasi Mahasiswa)',
+                    'icon' => 'bi-trophy-fill',
+                    'color' => '#f59e0b',
+                    'urutan' => (self::max('urutan') ?? 0) + 1,
+                    'is_active' => true,
+                ]);
             }
         } catch (\Throwable $e) {
             // ignore

@@ -36,7 +36,7 @@ class DashboardController extends Controller
 
         $totalDosen = Dosen::count();
         $totalLayanan = Layanan::count();
-        $totalPrestasi = Prestasi::count();
+        $totalPrestasi = News::where('status', 'published')->where('category', 'like', '%Prestasi%')->count();
         $totalGalleries = Gallery::count();
         $totalTestimonials = Testimonial::count();
         $totalFaqs = Faq::count();
@@ -84,7 +84,7 @@ class DashboardController extends Controller
 
         $latestTestimonials = Testimonial::latest('id')->take(5)->get();
         $latestOrganisasis = OrganisasiMahasiswa::orderBy('urutan')->latest('id')->take(5)->get();
-        $latestPrestasis = Prestasi::latest('id')->take(5)->get();
+        $latestPrestasis = News::where('status', 'published')->where('category', 'like', '%Prestasi%')->latest('published_at')->latest('id')->take(5)->get();
 
         return view('layouts.dashboard.index', compact(
             'isAdmin',

@@ -100,7 +100,13 @@ class FrontendController extends Controller
         $galleries = Gallery::where(function ($q) {
             $q->where('kategori', 'universitas')->orWhereNull('kategori');
         })->latest()->take(6)->get();
-        $prestasis = Prestasi::where('is_active', true)->orderBy('urutan')->latest('id')->take(6)->get();
+        $prestasis = News::with('user')
+            ->where('status', 'published')
+            ->where('category', 'like', '%Prestasi%')
+            ->latest('published_at')
+            ->latest('id')
+            ->take(6)
+            ->get();
         $organisasis = OrganisasiMahasiswa::where('is_active', true)->orderBy('urutan')->get();
         $organisasiSetting = OrganisasiMahasiswaSetting::first();
         $about = About::first();
@@ -791,53 +797,53 @@ class FrontendController extends Controller
     public function prestasi(Request $request)
     {
         $search = $request->query('q');
-        $selectedTingkat = $request->query('tingkat');
-        $selectedProdi = $request->query('prodi');
+        $selectedTahun = $request->query('tahun');
 
-        $query = Prestasi::where('is_active', true);
+        $baseQuery = News::with('user')
+            ->where('status', 'published')
+            ->where('category', 'like', '%Prestasi%');
+
+        $tahunList = (clone $baseQuery)
+            ->selectRaw('YEAR(COALESCE(published_at, created_at)) as tahun')
+            ->distinct()
+            ->orderByDesc('tahun')
+            ->pluck('tahun')
+            ->filter()
+            ->values();
+
+        $query = clone $baseQuery;
 
         if (! empty($search)) {
             $query->where(function ($q) use ($search) {
-                $q->where('judul_prestasi', 'like', "%{$search}%")
-                    ->orWhere('nama_mahasiswa', 'like', "%{$search}%")
-                    ->orWhere('penyelenggara', 'like', "%{$search}%")
-                    ->orWhere('peringkat', 'like', "%{$search}%")
-                    ->orWhere('deskripsi', 'like', "%{$search}%");
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('content', 'like', "%{$search}%");
             });
         }
 
-        if (! empty($selectedTingkat)) {
-            $query->where('tingkat', $selectedTingkat);
+        if (! empty($selectedTahun)) {
+            $query->whereRaw('YEAR(COALESCE(published_at, created_at)) = ?', [$selectedTahun]);
         }
 
-        if (! empty($selectedProdi)) {
-            $query->where('prodi', $selectedProdi);
-        }
+        $prestasiList = $query->latest('published_at')->latest('id')->paginate(9)->withQueryString();
 
-        $prestasiList = $query->orderBy('urutan')->latest('id')->paginate(9)->withQueryString();
-
-        $tingkatList = ['Internasional', 'Nasional', 'Provinsi / Wilayah', 'Universitas'];
-
-        return view('layouts.frontend.prestasi', compact('prestasiList', 'search', 'selectedTingkat', 'selectedProdi', 'tingkatList'));
+        return view('layouts.frontend.prestasi', compact('prestasiList', 'search', 'selectedTahun', 'tahunList'));
     }
 
     public function prestasiDetail($slug)
     {
-        $prestasi = Prestasi::where('is_active', true)
+        $news = News::where('status', 'published')
             ->where(function ($q) use ($slug) {
                 $q->where('slug', $slug)
                     ->orWhere('id', $slug);
             })
-            ->firstOrFail();
+            ->first();
 
-        $otherPrestasis = Prestasi::where('is_active', true)
-            ->where('id', '!=', $prestasi->id)
-            ->orderBy('urutan')
-            ->latest('id')
-            ->take(5)
-            ->get();
+        if ($news) {
+            return redirect()->route('homepage.news.detail', $news->slug);
+        }
 
-        return view('layouts.frontend.prestasi-detail', compact('prestasi', 'otherPrestasis'));
+        abort(404);
     }
 
     public function organisasiMahasiswa(Request $request)

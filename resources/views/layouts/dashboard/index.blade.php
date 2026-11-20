@@ -244,7 +244,7 @@ body,.main{ background:var(--bg)!important; font-family:'Plus Jakarta Sans',sans
   <div class="kpi kpi-emerald"><div class="kpi-icon"><i class="bi bi-building"></i></div><div class="kpi-num">{{ $totalOrganisasi }}</div><div class="kpi-label">Organisasi Mahasiswa</div><div class="kpi-sub">{{ $totalOrganisasiActive }} aktif saat ini</div></div>
 </div>
 <div class="kpi-grid mb-4">
-  <div class="kpi kpi-teal"><div class="kpi-icon"><i class="bi bi-trophy-fill"></i></div><div class="kpi-num">{{ $totalPrestasi }}</div><div class="kpi-label">Prestasi Mahasiswa</div><div class="kpi-sub">Pencapaian tercatat</div></div>
+  <div class="kpi kpi-teal"><div class="kpi-icon"><i class="bi bi-trophy-fill"></i></div><div class="kpi-num">{{ $totalPrestasi }}</div><div class="kpi-label">Prestasi Mahasiswa</div><div class="kpi-sub">Dari berita kategori Prestasi</div></div>
   <div class="kpi kpi-amber"><div class="kpi-icon"><i class="bi bi-chat-heart-fill"></i></div><div class="kpi-num">{{ $totalTestimonials }}</div><div class="kpi-label">Testimoni Civitas</div><div class="kpi-sub">Ulasan masuk</div></div>
   <div class="kpi kpi-rose"><div class="kpi-icon"><i class="bi bi-images"></i></div><div class="kpi-num">{{ $totalGalleries }}</div><div class="kpi-label">Dokumentasi Galeri</div><div class="kpi-sub">Foto & media</div></div>
   <div class="kpi kpi-navy"><div class="kpi-icon"><i class="bi bi-person-gear"></i></div><div class="kpi-num">{{ $totalUsers }}</div><div class="kpi-label">Pengguna Sistem</div><div class="kpi-sub">Admin, penulis, ormawa</div></div>
@@ -363,7 +363,7 @@ body,.main{ background:var(--bg)!important; font-family:'Plus Jakarta Sans',sans
     <a href="{{ route('testimonial.index') }}"           class="sc"><div class="sc-ic"><i class="bi bi-chat-heart-fill"></i></div>Testimoni</a>
     <a href="{{ route('banner.index') }}"                class="sc"><div class="sc-ic"><i class="bi bi-image-fill"></i></div>Banner Hero</a>
     <a href="{{ route('gallery.index') }}"               class="sc"><div class="sc-ic"><i class="bi bi-images"></i></div>Galeri</a>
-    <a href="{{ route('prestasi.index') }}"              class="sc"><div class="sc-ic"><i class="bi bi-trophy-fill"></i></div>Prestasi</a>
+    <a href="{{ route('news.index') }}"                  class="sc"><div class="sc-ic"><i class="bi bi-trophy-fill"></i></div>Berita Prestasi</a>
     <a href="{{ route('faculty-stat.index') }}"          class="sc"><div class="sc-ic"><i class="bi bi-bar-chart-fill"></i></div>Statistik UIS</a>
     <a href="{{ route('topbar.index') }}"                class="sc"><div class="sc-ic"><i class="bi bi-sliders"></i></div>Topbar</a>
     <a href="{{ route('user.index') }}"                  class="sc"><div class="sc-ic"><i class="bi bi-person-gear"></i></div>Pengguna</a>

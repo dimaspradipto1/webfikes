@@ -142,60 +142,26 @@
       </div>
     @else
       {{-- Fallback jika belum ada video --}}
-      <div class="row mb-5" data-aos="fade-up" data-aos-delay="150">
+      <div class="row mb-4" data-aos="fade-up" data-aos-delay="150">
         <div class="col-12">
           <div class="w-100 p-4 p-md-5 rounded-4 shadow-sm" style="text-align: justify; font-size: 16.5px; line-height: 1.9; color: #2d3748; background: #f8faf9; border-left: 6px solid var(--uis-green, #046B26); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
             <div class="about-desc-content">
-              {!! $about->deskripsi_profil_1 ?? 'Universitas Ibnu Sina (UIS) Batam merupakan perguruan tinggi swasta terkemuka di Provinsi Kepulauan Riau yang lahir dari perpaduan keunggulan akademik Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES) di bawah naungan Yayasan Pendidikan Ibnu Sina Batam (YAPISNA). Berlokasi strategis di kawasan industri dan perdagangan internasional Kota Batam, UIS mengelola tiga fakultas unggulan: Fakultas Teknik (Sains & Teknologi), Fakultas Ekonomi dan Bisnis (FEB), serta Fakultas Ilmu Kesehatan (FIKES), beserta Program Pascasarjana (Magister). UIS bertekad mencetak lulusan profesional muda yang inovatif, berdaya saing global, berjiwa entrepreneur, dan berakhlak mulia berlandaskan Iman dan Taqwa (Imtaq).' !!}
+              {!! $about->deskripsi_profil_1 ?? 'Fakultas Ilmu Kesehatan (FIKES) Universitas Ibnu Sina berdedikasi menyelenggarakan pendidikan tinggi berkualitas di bidang kesehatan dengan kurikulum modern yang berorientasi pada capaian kompetensi, riset inovatif, dan pelayanan masyarakat.' !!}
             </div>
           </div>
         </div>
       </div>
     @endif
 
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════
-     2. KEUNGGULAN BERANDA (3 CARD HORIZONTAL & TOMBOL CTA)
-═══════════════════════════════════════════════ -->
-<section class="section-bg-white pb-5" id="keunggulan-beranda">
-  <div class="container">
-    <div class="row g-3 justify-content-center" data-aos="fade-up" data-aos-delay="250">
-      <div class="col-md-4">
-        <div class="p-3 rounded-3 h-100 shadow-sm" style="background: #fffbeb; border: 1px solid #fde68a; transition: transform 0.25s ease;">
-          <div class="d-flex align-items-center gap-2 mb-2 fw-bold" style="color: #b45309;">
-            <i class="bi bi-award-fill fs-5" style="color: #d97706;"></i>
-            <span>Kurikulum OBE</span>
-          </div>
-          <p class="small mb-0" style="color: #334155; line-height: 1.6;">Terintegrasi sertifikasi kompetensi industri dan pembinaan jiwa wirausaha muda.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="p-3 rounded-3 h-100 shadow-sm" style="background: #fff7ed; border: 1px solid #fed7aa; transition: transform 0.25s ease;">
-          <div class="d-flex align-items-center gap-2 mb-2 fw-bold" style="color: #c2410c;">
-            <i class="bi bi-cpu-fill fs-5" style="color: #ea580c;"></i>
-            <span>Lab Terpadu & AI</span>
-          </div>
-          <p class="small mb-0" style="color: #334155; line-height: 1.6;">Laboratorium komputasi cerdas, studio logistik industri, dan pengujian K3 modern.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="p-3 rounded-3 h-100 shadow-sm" style="background: #f0fdf4; border: 1px solid #bbf7d0; transition: transform 0.25s ease;">
-          <div class="d-flex align-items-center gap-2 mb-2 fw-bold" style="color: #046B26;">
-            <i class="bi bi-people-fill fs-5" style="color: #046B26;"></i>
-            <span>Dosen Doktor & Praktisi</span>
-          </div>
-          <p class="small mb-0" style="color: #334155; line-height: 1.6;">Dibimbing pakar berkualifikasi S3 serta praktisi industri multinasional kawasan Batam.</p>
-        </div>
-      </div>
-      <div class="col-12 text-center mt-3">
+    <div class="row mt-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="col-12 text-center">
         <a href="{{ route('homepage.tentang') }}" class="btn-primary-hero">
           <i class="bi bi-info-circle"></i>
-          Profil Lengkap Universitas Ibnu Sina
+          Profil Lengkap FIKES
         </a>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -761,10 +727,10 @@
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label mx-auto">Kebanggaan Kampus</div>
-      <h2 class="section-title">Prestasi Gemilang <em>Mahasiswa UIS</em></h2>
+      <h2 class="section-title">Prestasi Gemilang <em>Mahasiswa FIKES</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Bukti dedikasi, keunggulan riset, dan daya saing mahasiswa Universitas Ibnu Sina di berbagai kompetisi ilmiah dan kejuaraan.
+        Bukti dedikasi, keunggulan riset, dan daya saing mahasiswa Fakultas Ilmu Kesehatan (FIKES) di berbagai kompetisi ilmiah dan kejuaraan.
       </p>
     </div>
 
@@ -772,30 +738,26 @@
       <div class="row g-4 mb-5">
         @foreach($prestasis as $index => $prestasi)
           @php
-            $tingkatBadge = match($prestasi->tingkat) {
-                'Internasional' => 'bg-danger text-white',
-                'Nasional'      => 'bg-success text-white',
-                'Provinsi / Wilayah' => 'bg-warning text-dark',
-                default         => 'bg-secondary text-white',
-            };
+            $prestasiDate = $prestasi->published_at ?? $prestasi->created_at;
+            $excerptSource = !empty($prestasi->description) ? $prestasi->description : ($prestasi->content ?? '');
           @endphp
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
             <div class="prestasi-card">
               <div class="prestasi-img-wrap">
-                @if(!empty($prestasi->foto))
-                  <img src="{{ asset('storage/' . $prestasi->foto) }}" alt="{{ $prestasi->judul_prestasi }}" class="prestasi-img">
+                @if(!empty($prestasi->thumbnail))
+                  <img src="{{ asset('storage/' . $prestasi->thumbnail) }}" alt="{{ $prestasi->title }}" class="prestasi-img">
                 @else
-                  <div class="d-flex align-items-center justify-content-center h-100 text-white flex-column gap-2" style="background: #046B26;">
+                  <div class="d-flex align-items-center justify-content-center h-100 text-white flex-column gap-2" style="background: var(--uis-green, #046B26);">
                     <i class="bi bi-trophy-fill" style="font-size: 44px; color: #FED802;"></i>
-                    <span class="small fw-semibold text-white-50">Universitas Ibnu Sina Achievement</span>
+                    <span class="small fw-semibold text-white-50">Prestasi Mahasiswa FIKES</span>
                   </div>
                 @endif
-                <span class="prestasi-tingkat-badge badge {{ $tingkatBadge }}">
-                  <i class="bi bi-globe me-1"></i>{{ $prestasi->tingkat }}
+                <span class="prestasi-tingkat-badge badge bg-warning text-dark">
+                  <i class="bi bi-trophy-fill me-1"></i>{{ $prestasi->category ?? 'Prestasi Mahasiswa' }}
                 </span>
-                @if(!empty($prestasi->peringkat))
+                @if($prestasiDate)
                   <span class="prestasi-rank-badge">
-                    <i class="bi bi-award-fill me-1"></i>{{ $prestasi->peringkat }}
+                    <i class="bi bi-calendar3 me-1"></i>{{ $prestasiDate->translatedFormat('d M Y') }}
                   </span>
                 @endif
               </div>
@@ -803,40 +765,26 @@
               <div class="p-4 d-flex flex-column justify-content-between flex-grow-1">
                 <div>
                   <h4 class="fw-bold mb-2 text-dark" style="font-size: 16.5px; line-height: 1.45;">
-                    <a href="{{ route('homepage.prestasi.detail', $prestasi->slug ?? $prestasi->id) }}" class="text-dark text-decoration-none">
-                      {{ $prestasi->judul_prestasi }}
+                    <a href="{{ route('homepage.news.detail', $prestasi->slug) }}" class="text-dark text-decoration-none">
+                      {{ $prestasi->title }}
                     </a>
                   </h4>
 
-                  <div class="d-flex align-items-center gap-2 mb-3 mt-3">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white flex-shrink-0" style="width: 32px; height: 32px; background: #046B26; font-size: 13px;">
-                      <i class="bi bi-person-fill"></i>
-                    </div>
-                    <div>
-                      <div class="fw-semibold text-dark small" style="font-size: 13px;">{{ $prestasi->nama_mahasiswa }}</div>
-                      @if($prestasi->prodi)
-                        <div class="text-muted" style="font-size: 11px;">{{ $prestasi->prodi }}</div>
-                      @endif
-                    </div>
+                  <div class="d-flex align-items-center justify-content-between text-muted small py-2 px-3 rounded-3 mb-3 mt-3" style="background: #f8f9fa; font-size: 11.5px;">
+                    <span class="text-truncate me-2"><i class="bi bi-person-fill me-1 text-warning"></i>{{ $prestasi->user->name ?? 'Admin FIKES' }}</span>
+                    <span class="fw-bold text-dark flex-shrink-0">{{ $prestasiDate ? $prestasiDate->format('Y') : '' }}</span>
                   </div>
 
-                  @if(!empty($prestasi->penyelenggara) || !empty($prestasi->tahun))
-                    <div class="d-flex align-items-center justify-content-between text-muted small py-2 px-3 rounded-3 mb-3" style="background: #f8f9fa; font-size: 11.5px;">
-                      <span class="text-truncate me-2"><i class="bi bi-building me-1 text-warning"></i>{{ $prestasi->penyelenggara ?? 'Penyelenggara Nasional' }}</span>
-                      <span class="fw-bold text-dark flex-shrink-0">{{ $prestasi->tahun ?? '' }}</span>
-                    </div>
-                  @endif
-
-                  @if(!empty($prestasi->deskripsi))
+                  @if(!empty($excerptSource))
                     <div class="text-muted small" style="font-size: 12.5px; line-height: 1.6;">
-                      {!! Str::limit(strip_tags($prestasi->deskripsi), 110) !!}
+                      {{ Str::limit(strip_tags(html_entity_decode($excerptSource)), 115) }}
                     </div>
                   @endif
                 </div>
 
                 <div class="pt-3 border-top mt-3">
-                  <a href="{{ route('homepage.prestasi.detail', $prestasi->slug ?? $prestasi->id) }}" class="fw-bold text-decoration-none d-flex align-items-center justify-content-between" style="color: var(--uis-purple); font-size: 13px;">
-                    <span>Lihat Selengkapnya</span>
+                  <a href="{{ route('homepage.news.detail', $prestasi->slug) }}" class="fw-bold text-decoration-none d-flex align-items-center justify-content-between" style="color: var(--uis-purple); font-size: 13px;">
+                    <span>Baca Selengkapnya</span>
                     <i class="bi bi-arrow-right"></i>
                   </a>
                 </div>
