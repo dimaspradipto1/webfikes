@@ -187,7 +187,7 @@ class ThemeSettingController extends Controller
             'faculty_stats', 'testimonials', 'faqs', 'partners', 'saranas',
             'struktur_organisasis', 'milestones', 'topbars', 'hero_humas',
             'layanan_humas', 'pusat_informasi_humas', 'unduhans', 'desain_grafis',
-            'template_dokumens',
+            'template_dokumens', 'navbar_settings', 'login_settings',
         ];
 
         $parts = [];

@@ -6,6 +6,7 @@ use App\Models\BahasaSetting;
 use App\Models\Contact;
 use App\Models\Layanan;
 use App\Models\LoginSetting;
+use App\Models\NavbarSetting;
 use App\Models\PmbSetting;
 use App\Models\Publikasi;
 use App\Models\ThemeSetting;
@@ -71,6 +72,12 @@ class AppServiceProvider extends ServiceProvider
                 $loginSetting = new LoginSetting(LoginSetting::defaultAttributes());
             }
 
+            try {
+                $navbarSetting = NavbarSetting::current();
+            } catch (\Throwable $e) {
+                $navbarSetting = new NavbarSetting(NavbarSetting::defaultAttributes());
+            }
+
             $view->with([
                 'contact' => $contact,
                 'cleanWa' => $cleanWa,
@@ -82,6 +89,7 @@ class AppServiceProvider extends ServiceProvider
                 'defaultBahasa' => $defaultBahasa,
                 'themeSetting' => $themeSetting,
                 'loginSetting' => $loginSetting,
+                'navbarSetting' => $navbarSetting,
             ]);
         });
     }

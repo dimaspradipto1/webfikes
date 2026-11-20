@@ -1,10 +1,13 @@
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
 
+        @php
+            $ns = $navbarSetting ?? \App\Models\NavbarSetting::current();
+        @endphp
         <div class="d-flex align-items-center justify-content-between">
             <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center">
-                <img src="{{ asset('frontend/img/logouis.png') }}" alt="Logo Universitas Ibnu Sina" style="height: 46px; max-height: 46px;">
-                <span class="d-none d-lg-block ms-2 fw-bold" style="font-size: 17px; color: {{ $themeSetting->admin_header_brand_color ?? '#FED802' }}; letter-spacing: 0.5px;">Portal UIS</span>
+                <img src="{{ $ns->admin_logo_url }}" alt="{{ $ns->admin_title }}" style="height: 46px; max-height: 46px;">
+                <span class="d-none d-lg-block ms-2 fw-bold" style="font-size: 17px; color: {{ $themeSetting->admin_header_brand_color ?? '#FED802' }}; letter-spacing: 0.5px;">{{ $ns->admin_title }}</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn ms-2" style="color: {{ $themeSetting->admin_header_text_color ?? '#ffffff' }}; font-size: 28px; cursor: pointer;"></i>
         </div><!-- End Logo -->
@@ -12,11 +15,13 @@
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
+                @if($ns->show_admin_website_btn)
                 <li class="nav-item me-3 d-none d-md-block">
                     <a href="{{ route('homepage') }}" target="_blank" class="btn btn-sm rounded-pill px-3 py-1" style="font-size: 12.5px; background: {{ $themeSetting->admin_accent_color ?? '#FED802' }}; color: {{ $themeSetting->admin_primary_color ?? '#046B26' }}; font-weight: 700; border: none; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
-                        <i class="bi bi-globe2 me-1"></i> Website Utama
+                        <i class="bi bi-globe2 me-1"></i> {{ $ns->admin_website_btn_text }}
                     </a>
                 </li>
+                @endif
 
                 <li class="nav-item dropdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">

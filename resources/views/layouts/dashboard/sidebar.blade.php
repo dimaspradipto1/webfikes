@@ -285,6 +285,13 @@
           </li>
 
           <li class="nav-item">
+              <a class="nav-link {{ Route::is('navbar-setting.*') ? '' : 'collapsed' }}" href="{{ route('navbar-setting.index') }}">
+                  <i class="bi bi-menu-button-wide-fill"></i>
+                  <span>Pengaturan Navbar</span>
+              </a>
+          </li>
+
+          <li class="nav-item">
               <a class="nav-link {{ Route::is('backup.*') ? '' : 'collapsed' }}" href="{{ route('backup.index') }}">
                   <i class="bi bi-database-check"></i>
                   <span>Backup Database & Storage</span>

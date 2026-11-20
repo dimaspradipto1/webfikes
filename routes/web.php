@@ -21,6 +21,7 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\LayananHumasController;
 use App\Http\Controllers\LayananTerkaitController;
 use App\Http\Controllers\LoginSettingController;
+use App\Http\Controllers\NavbarSettingController;
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\NewsCategoryController;
@@ -245,6 +246,11 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::get('admin-login-setting', [LoginSettingController::class, 'index'])->name('login-setting.index');
     Route::post('admin-login-setting', [LoginSettingController::class, 'update'])->name('login-setting.update');
     Route::post('admin-login-setting/reset', [LoginSettingController::class, 'reset'])->name('login-setting.reset');
+
+    // Pengaturan Navbar Frontend & Admin
+    Route::get('admin-navbar-setting', [NavbarSettingController::class, 'index'])->name('navbar-setting.index');
+    Route::post('admin-navbar-setting', [NavbarSettingController::class, 'update'])->name('navbar-setting.update');
+    Route::post('admin-navbar-setting/reset', [NavbarSettingController::class, 'reset'])->name('navbar-setting.reset');
 
     // Backup Database & Storage (Drive D: / C: & Otomatis Harian)
     Route::prefix('admin-backup')->name('backup.')->group(function () {

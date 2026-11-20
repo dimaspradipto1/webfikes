@@ -1,12 +1,20 @@
+@php
+  $ns = $navbarSetting ?? \App\Models\NavbarSetting::current();
+@endphp
 <!-- ═══════════════════════════════════════════════
-     NAVBAR HEADER UTAMA — UNIVERSITAS IBNU SINA (UIS)
+     NAVBAR HEADER UTAMA
 ═══════════════════════════════════════════════ -->
 <nav class="navbar navbar-expand-xl navbar-main {{ ($themeSetting->header_is_sticky ?? true) ? 'sticky-top' : '' }}">
   <div class="container-fluid px-lg-4 px-xl-5">
-    <!-- Logo UIS -->
+    <!-- Logo & Brand -->
     <a class="navbar-brand navbar-brand-custom me-2 me-xl-3" href="{{ route('homepage') }}">
-      <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo Universitas Ibnu Sina" class="brand-logo-img">
-      <span class="brand-title-main ms-2">UNIVERSITAS IBNU SINA</span>
+      <img src="{{ $ns->frontend_logo_url }}" alt="{{ $ns->frontend_title }}" class="brand-logo-img">
+      <div class="ms-2 d-flex flex-column justify-content-center" style="line-height: 1.15;">
+        <span class="brand-title-main">{{ $ns->frontend_title }}</span>
+        @if(!empty($ns->frontend_subtitle))
+          <span class="brand-subtitle" style="font-size: 11px; font-weight: 600; opacity: 0.88; color: {{ $themeSetting->header_text_color ?? '#ffffff' }};">{{ $ns->frontend_subtitle }}</span>
+        @endif
+      </div>
     </a>
 
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,14 +24,17 @@
     <div class="collapse navbar-collapse" id="navMain">
       <ul class="navbar-nav mx-auto gap-1 align-items-center">
         <!-- Beranda -->
+        @if($ns->show_beranda)
         <li class="nav-item">
-          <a href="{{ route('homepage') }}" class="nav-link nav-link-custom {{ request()->routeIs('homepage') ? 'active' : '' }}">Beranda</a>
+          <a href="{{ route('homepage') }}" class="nav-link nav-link-custom {{ request()->routeIs('homepage') ? 'active' : '' }}">{{ $ns->menu_beranda_label }}</a>
         </li>
+        @endif
 
         <!-- Profil Dropdown -->
+        @if($ns->show_profil)
         <li class="nav-item dropdown">
           <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.tentang') || request()->routeIs('homepage.sambutan*') || request()->routeIs('homepage.visi-misi') || request()->routeIs('homepage.struktur-organisasi') || request()->routeIs('homepage.sejarah') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Profil <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+            {{ $ns->menu_profil_label }} <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.tentang') ? 'active' : '' }}" href="{{ route('homepage.tentang') }}"><i class="bi bi-building"></i> Tentang Universitas</a></li>
@@ -33,11 +44,13 @@
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.sejarah') ? 'active' : '' }}" href="{{ route('homepage.sejarah') }}"><i class="bi bi-hourglass-split"></i> Sejarah Universitas</a></li>
           </ul>
         </li>
+        @endif
 
         <!-- Akademik Dropdown (Di Samping Profil) -->
+        @if($ns->show_akademik)
         <li class="nav-item dropdown">
           <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.kurikulum*') || request()->routeIs('homepage.kalender-akademik') || request()->routeIs('homepage.pedoman-akademik') || request()->routeIs('homepage.sistem-akademik') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Akademik <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+            {{ $ns->menu_akademik_label }} <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
             <li class="dropdown-submenu">
@@ -86,12 +99,13 @@
             </li>
           </ul>
         </li>
+        @endif
 
-
-        <!-- Program Studi Dropdown -->
+        <!-- Program Studi / Fakultas Dropdown -->
+        @if($ns->show_fakultas)
         <li class="nav-item dropdown">
           <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.layanan*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Fakultas <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+            {{ $ns->menu_fakultas_label }} <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
             @if(isset($navProdis) && $navProdis->count() > 0)
@@ -122,11 +136,13 @@
             @endif
           </ul>
         </li>
+        @endif
 
         <!-- Kemahasiswaan Dropdown -->
+        @if($ns->show_kemahasiswaan)
         <li class="nav-item dropdown">
           <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.prestasi*') || request()->routeIs('homepage.organisasi*') || request()->routeIs('homepage.galeri*') || request()->routeIs('homepage.testimoni*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Kemahasiswaan <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+            {{ $ns->menu_kemahasiswaan_label }} <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.prestasi*') ? 'active' : '' }}" href="{{ route('homepage.prestasi') }}"><i class="bi bi-trophy-fill text-warning"></i> Prestasi Mahasiswa</a></li>
@@ -135,11 +151,13 @@
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.testimoni*') ? 'active' : '' }}" href="{{ route('homepage.testimoni') }}"><i class="bi bi-mortarboard"></i> Alumni & Testimoni</a></li>
           </ul>
         </li>
+        @endif
 
         <!-- Publikasi Dropdown -->
+        @if($ns->show_publikasi)
         <li class="nav-item dropdown">
           <a class="nav-link nav-link-custom dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Publikasi <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+            {{ $ns->menu_publikasi_label }} <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
             @if(isset($navPublikasis) && $navPublikasis->count() > 0)
@@ -171,11 +189,13 @@
             @endif
           </ul>
         </li>
+        @endif
 
         <!-- Informasi Dropdown -->
+        @if($ns->show_informasi)
         <li class="nav-item dropdown">
           <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.news*') || request()->routeIs('homepage.faq') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Informasi <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+            {{ $ns->menu_informasi_label }} <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'berita-universitas') }}"><i class="bi bi-newspaper"></i> Berita Kampus</a></li>
@@ -185,14 +205,17 @@
             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.faq') }}"><i class="bi bi-question-circle"></i> FAQ Informasi</a></li>
           </ul>
         </li>
+        @endif
 
         <!-- Kontak -->
+        @if($ns->show_kontak)
         <li class="nav-item">
-          <a href="{{ route('homepage.kontak') }}" class="nav-link nav-link-custom {{ request()->routeIs('homepage.kontak') ? 'active' : '' }}">Kontak</a>
+          <a href="{{ route('homepage.kontak') }}" class="nav-link nav-link-custom {{ request()->routeIs('homepage.kontak') ? 'active' : '' }}">{{ $ns->menu_kontak_label }}</a>
         </li>
+        @endif
 
-        <!-- Pilih Bahasa Dropdown (Di Samping Menu Kontak) -->
-        @if(isset($bahasaList) && $bahasaList->count() > 0)
+        <!-- Pilih Bahasa Dropdown -->
+        @if($ns->show_lang_btn && isset($bahasaList) && $bahasaList->count() > 0)
         <li class="nav-item dropdown uis-lang-nav-item">
           <a class="nav-link nav-link-custom dropdown-toggle uis-lang-toggle" 
              href="#" 
@@ -243,23 +266,31 @@
       </ul>
 
       <!-- CTA Buttons -->
+      @if($ns->show_pmb_btn || $ns->show_login_btn)
       <div class="d-flex align-items-center gap-2 mt-3 mt-xl-0">
-        @php
-          $pmbNavUrl = $pmbSetting->tombol_link_1 ?? route('homepage.kontak');
-          if (!str_starts_with($pmbNavUrl, 'http') && !str_starts_with($pmbNavUrl, '/')) {
-              $pmbNavUrl = '/' . $pmbNavUrl;
-          }
-          $pmbNavTarget = str_starts_with($pmbNavUrl, 'http') ? '_blank' : '_self';
-        @endphp
-        <a href="{{ $pmbNavUrl }}" target="{{ $pmbNavTarget }}" class="btn-pmb-nav" title="Penerimaan Mahasiswa Baru">
-          <i class="bi bi-pencil-square"></i>
-          <span>PMB</span>
-        </a>
-        <a href="{{ route('login') }}" class="btn-portal-nav" title="Login">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>Login</span>
-        </a>
+        @if($ns->show_pmb_btn)
+          @php
+            $pmbNavUrl = !empty($ns->pmb_btn_url)
+                ? trim($ns->pmb_btn_url)
+                : ($pmbSetting->tombol_link_1 ?? route('homepage.kontak'));
+            if (!str_starts_with($pmbNavUrl, 'http') && !str_starts_with($pmbNavUrl, '/')) {
+                $pmbNavUrl = '/' . $pmbNavUrl;
+            }
+            $pmbNavTarget = str_starts_with($pmbNavUrl, 'http') ? '_blank' : '_self';
+          @endphp
+          <a href="{{ $pmbNavUrl }}" target="{{ $pmbNavTarget }}" class="btn-pmb-nav" title="Penerimaan Mahasiswa Baru">
+            <i class="bi bi-pencil-square"></i>
+            <span>{{ $ns->pmb_btn_label }}</span>
+          </a>
+        @endif
+        @if($ns->show_login_btn)
+          <a href="{{ route('login') }}" class="btn-portal-nav" title="Login">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>{{ $ns->login_btn_label }}</span>
+          </a>
+        @endif
       </div>
+      @endif
     </div>
   </div>
 </nav>
