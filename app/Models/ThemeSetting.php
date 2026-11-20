@@ -69,7 +69,7 @@ class ThemeSetting extends Model
         return [
             'hero-banner'          => ['label' => 'Banner Hero (Slider)', 'icon' => 'bi-images'],
             'keunggulan-beranda'   => ['label' => 'Keunggulan Beranda', 'icon' => 'bi-layers'],
-            'profil-singkat'       => ['label' => 'Profil Universitas & Video', 'icon' => 'bi-building'],
+            'profil-singkat'       => ['label' => 'Profil FIKES & Video', 'icon' => 'bi-building'],
             'statistik-fakultas'   => ['label' => 'Statistik Universitas', 'icon' => 'bi-bar-chart-line'],
             'keunggulan'           => ['label' => 'Keunggulan Universitas', 'icon' => 'bi-patch-check'],
             'pmb'                  => ['label' => 'Banner PMB & Pendaftaran', 'icon' => 'bi-pencil-square'],

@@ -90,7 +90,7 @@
     <!-- Header Section Full -->
     <div class="row justify-content-center text-center mb-4" data-aos="fade-up">
       <div class="col-12">
-        <div class="section-label mx-auto">Profil Universitas</div>
+        <div class="section-label mx-auto">Profil FIKES</div>
         <h2 class="section-title">
           {{ strip_tags(html_entity_decode($about->judul_profil ?? 'Universitas Ibnu Sina')) }}
         </h2>

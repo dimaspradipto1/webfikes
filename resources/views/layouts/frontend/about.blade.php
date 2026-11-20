@@ -42,7 +42,7 @@
       <div class="col-12" data-aos="fade-up" data-aos-duration="800">
         <!-- Header Profil -->
         <div class="text-center mb-4">
-          <div class="section-label mx-auto">Profil Universitas</div>
+          <div class="section-label mx-auto">Profil FIKES</div>
           <h2 class="section-title">{!! $about->judul_profil ?? 'Kampusnya Profesional Muda — <em>Universitas Ibnu Sina</em>' !!}</h2>
           <div class="divider-line centered"></div>
         </div>
