@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($setting->judul_hero ?? 'Pendampingan Acara') . ' — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Layanan pendampingan acara, protokoler resmi, dan konsultasi kegiatan kampus Universitas Ibnu Sina (UIS) Batam. Panduan SOP, perizinan, dan suksesi event.')
+@section('title', ($setting->judul_hero ?? 'Pendampingan Acara') . ' — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Layanan pendampingan acara, protokoler resmi, dan konsultasi kegiatan kampus Fakultas Ilmu Kesehatan. Panduan SOP, perizinan, dan suksesi event.')
 @section('meta_keywords', 'pendampingan acara uis, protokoler uis, sop acara uis batam, humas uis event, konsultasi protokol uis')
 
 @section('content')
@@ -349,7 +349,7 @@
       <div class="divider-line-gold"></div>
 
       <p class="text-muted mx-auto mb-0" style="max-width: 760px; font-size: 14.5px; line-height: 1.65;">
-        {!! !empty($item->deskripsi) ? strip_tags($item->deskripsi) : 'Layanan konsultasi protokoler, perancangan tata letak acara, penyusunan rundown, serta pendampingan langsung oleh Tim Humas & Protokoler Universitas Ibnu Sina (UIS).' !!}
+        {!! !empty($item->deskripsi) ? strip_tags($item->deskripsi) : 'Layanan konsultasi protokoler, perancangan tata letak acara, penyusunan rundown, serta pendampingan langsung oleh Tim Humas & Protokoler Fakultas Ilmu Kesehatan.' !!}
       </p>
     </div>
 
@@ -366,7 +366,7 @@
           </div>
 
           <h3 class="event-salutation-title">
-            {{ $setting->sapaan ?? 'Halo, Civitas Akademika Universitas Ibnu Sina dan Mitra Eksternal!' }}
+            {{ $setting->sapaan ?? 'Halo, Civitas Akademika Fakultas Ilmu Kesehatan dan Mitra Eksternal!' }}
           </h3>
 
           @if(!empty($setting->konten))
@@ -375,7 +375,7 @@
             </div>
           @else
             <p class="event-desc-lead">
-              {!! nl2br(e($setting->paragraf_1 ?? 'Kami hadir untuk mendukung kesuksesan acara dan kegiatan Anda melalui layanan konsultasi yang profesional, terstruktur, dan sesuai dengan Standar Operasional Prosedur (SOP) Universitas Ibnu Sina.')) !!}
+              {!! nl2br(e($setting->paragraf_1 ?? 'Kami hadir untuk mendukung kesuksesan acara dan kegiatan Anda melalui layanan konsultasi yang profesional, terstruktur, dan sesuai dengan Standar Operasional Prosedur (SOP) Fakultas Ilmu Kesehatan.')) !!}
             </p>
 
             <p class="fw-bold text-dark mb-3" style="font-size: 15px;">

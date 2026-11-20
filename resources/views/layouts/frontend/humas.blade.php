@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Biro Humas & Protokoler — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Portal Resmi Biro Hubungan Masyarakat dan Protokoler Universitas Ibnu Sina (UIS) Batam — Informasi publik, rilis pers, majalah profil, media sosial, dan layanan aduan.')
-@section('meta_keywords', 'humas uis, biro humas universitas ibnu sina, ppid uis, siaran pers uis, berita kampus uis')
+@section('title', 'Biro Humas & Protokoler — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Portal Resmi Biro Hubungan Masyarakat dan Protokoler Fakultas Ilmu Kesehatan — Informasi publik, rilis pers, majalah profil, media sosial, dan layanan aduan.')
+@section('meta_keywords', 'humas uis, biro humas fakultas ilmu kesehatan ibnu sina, ppid uis, siaran pers uis, berita kampus uis')
 
 @section('content')
 @php
@@ -627,7 +627,7 @@
 @php
   $heroBgUrl = $heroHumas?->background_image_url;
   $heroJudul = $heroHumas?->judul ?: 'Selamat Datang';
-  $heroSubjudul = $heroHumas?->subjudul ?: 'di Biro Hubungan Masyarakat dan Protokoler Universitas Islam Riau';
+  $heroSubjudul = $heroHumas?->subjudul ?: 'di Biro Hubungan Masyarakat dan Protokoler Fakultas Ilmu Kesehatan Islam Riau';
   $heroBadge = $heroHumas?->badge_text ?: 'Layanan';
   $pillText1 = $heroHumas?->pill_text_1 ?: 'Twibbon & Logo PKKMB UIR 2026';
   $pillUrl1 = $heroHumas?->pill_url_1 ?: route('homepage.unduhan', ['kategori' => 'image']);
@@ -808,7 +808,7 @@
                 $btnText      = 'Kunjungi';
                 $btnIcon      = 'bi-facebook';
                 $defaultLabel = 'Facebook & YouTube Humas';
-                $defaultHandle= 'Universitas Ibnu Sina';
+                $defaultHandle= 'Fakultas Ilmu Kesehatan';
             } elseif (str_contains($lowerName, 'youtube')) {
                 $brandIcon    = 'bi-youtube';
                 $brandColor   = '#ff0000';
@@ -818,7 +818,7 @@
                 $btnText      = 'Kunjungi';
                 $btnIcon      = 'bi-youtube';
                 $defaultLabel = 'YouTube Resmi UIS';
-                $defaultHandle= 'Universitas Ibnu Sina Channel';
+                $defaultHandle= 'Fakultas Ilmu Kesehatan Channel';
             } elseif (str_contains($lowerName, 'whatsapp') || str_contains($lowerName, 'wa')) {
                 $brandIcon    = 'bi-whatsapp';
                 $brandColor   = '#25D366';
@@ -838,7 +838,7 @@
                 $btnText      = 'Terhubung';
                 $btnIcon      = 'bi-linkedin';
                 $defaultLabel = 'Jejaring Profesional UIS';
-                $defaultHandle= 'Universitas Ibnu Sina';
+                $defaultHandle= 'Fakultas Ilmu Kesehatan';
             } else {
                 $brandIcon    = !empty($sm->icon) ? $sm->icon : 'bi-globe2';
                 $brandColor   = '#046B26';
@@ -1095,14 +1095,14 @@
 
 
 <!-- ══════════════════════════════════════════════════════
-     8. E-MAGAZINE PROFIL UNIVERSITAS
+     8. E-MAGAZINE PROFIL FAKULTAS ILMU KESEHATAN
 ══════════════════════════════════════════════════════ -->
 @if(!isset($emagazine) || $emagazine->is_active)
 <section class="humas-emagz-section" id="emagazine-section">
   <div class="container">
     <div class="humas-emagz-container" data-aos="fade-up">
       <h2 class="fw-bold mb-3" style="color: #0f172a; font-size: 28px;">
-        {{ $emagazine->judul_seksi ?? 'E-Magazine Profil Universitas' }}
+        {{ $emagazine->judul_seksi ?? 'E-Magazine Profil Fakultas Ilmu Kesehatan' }}
       </h2>
       
       <div class="d-flex align-items-center justify-content-center gap-2 mb-4">

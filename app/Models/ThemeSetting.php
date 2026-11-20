@@ -69,8 +69,8 @@ class ThemeSetting extends Model
         return [
             'hero-banner'          => ['label' => 'Banner Hero (Slider)', 'icon' => 'bi-images'],
             'profil-singkat'       => ['label' => 'Profil FIKES & Video', 'icon' => 'bi-building'],
-            'statistik-fakultas'   => ['label' => 'Statistik Universitas', 'icon' => 'bi-bar-chart-line'],
-            'keunggulan'           => ['label' => 'Keunggulan Universitas', 'icon' => 'bi-patch-check'],
+            'statistik-fakultas'   => ['label' => 'Statistik FIKES', 'icon' => 'bi-bar-chart-line'],
+            'keunggulan'           => ['label' => 'Keunggulan FIKES', 'icon' => 'bi-patch-check'],
             'pmb'                  => ['label' => 'Banner PMB & Pendaftaran', 'icon' => 'bi-pencil-square'],
             'fasilitas'            => ['label' => 'Sarana & Fasilitas Kampus', 'icon' => 'bi-cpu'],
             'prestasi'             => ['label' => 'Prestasi Mahasiswa', 'icon' => 'bi-trophy'],

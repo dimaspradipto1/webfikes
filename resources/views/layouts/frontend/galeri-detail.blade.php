@@ -4,7 +4,7 @@
   $isHumas = ($gallery->kategori ?? '') === 'humas';
 @endphp
 
-@section('title', ($gallery->judul ?? 'Dokumentasi Visual') . ($isHumas ? ' — Galeri Humas UIS' : ' — Galeri Universitas Ibnu Sina'))
+@section('title', ($gallery->judul ?? 'Dokumentasi Visual') . ($isHumas ? ' — Galeri Humas UIS' : ' — Galeri Fakultas Ilmu Kesehatan'))
 @section('meta_description', Str::limit(strip_tags($gallery->deskripsi ?? $gallery->judul), 160))
 
 @section('content')
@@ -39,7 +39,7 @@
       </span>
     </div>
     <h1 class="fw-bold mb-0 text-white" style="font-size: 32px; line-height: 1.35; letter-spacing: -0.5px;">
-      {{ $gallery->judul ?? ($isHumas ? 'Dokumentasi Kegiatan Humas UIS' : 'Dokumentasi Kegiatan Universitas Ibnu Sina') }}
+      {{ $gallery->judul ?? ($isHumas ? 'Dokumentasi Kegiatan Humas UIS' : 'Dokumentasi Kegiatan Fakultas Ilmu Kesehatan') }}
     </h1>
   </div>
 </div>
@@ -62,7 +62,7 @@
         @else
           <div class="p-5 rounded-4 text-center text-white mb-4 shadow-sm" style="background: #046B26;">
             <i class="bi bi-camera-fill" style="font-size: 64px; color: #FED802;"></i>
-            <h4 class="fw-bold mt-2 mb-0">{{ $isHumas ? 'Dokumentasi Humas UIS' : 'Dokumentasi Universitas Ibnu Sina' }}</h4>
+            <h4 class="fw-bold mt-2 mb-0">{{ $isHumas ? 'Dokumentasi Humas UIS' : 'Dokumentasi Fakultas Ilmu Kesehatan' }}</h4>
           </div>
         @endif
 
@@ -82,7 +82,7 @@
             </div>
           @else
             <p class="text-muted mb-0">
-              Dokumentasi visual kegiatan dan publikasi resmi {{ $isHumas ? 'kehumasan' : 'sivitas akademika' }} Universitas Ibnu Sina (UIS).
+              Dokumentasi visual kegiatan dan publikasi resmi {{ $isHumas ? 'kehumasan' : 'sivitas akademika' }} Fakultas Ilmu Kesehatan.
             </p>
           @endif
 
@@ -140,7 +140,7 @@
                 </span>
               @else
                 <span class="badge rounded-pill px-3 py-1" style="background: #f1f5f9; color: #334155; border: 1px solid #e2e8f0; font-size: 12px;">
-                  <i class="bi bi-building me-1"></i>Universitas
+                  <i class="bi bi-building me-1"></i>Fakultas Ilmu Kesehatan
                 </span>
               @endif
             </span>
@@ -148,7 +148,7 @@
 
           <div class="info-meta-row">
             <span class="info-meta-label">Unit Penerbit</span>
-            <span class="info-meta-val text-dark">{{ $isHumas ? 'Biro Humas & Promosi' : 'Universitas Ibnu Sina' }}</span>
+            <span class="info-meta-val text-dark">{{ $isHumas ? 'Biro Humas & Promosi' : 'Fakultas Ilmu Kesehatan' }}</span>
           </div>
 
           <div class="info-meta-row">

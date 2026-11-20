@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Organisasi & Kegiatan Mahasiswa — Universitas Ibnu Sina')
-@section('meta_description', 'Daftar Lembaga, Organisasi Mahasiswa (BEM, HIMA, UKM, Komunitas), serta wadah kreativitas dan kegiatan mahasiswa UIS Universitas Ibnu Sina.')
+@section('title', 'Organisasi & Kegiatan Mahasiswa — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Daftar Lembaga, Organisasi Mahasiswa (BEM, HIMA, UKM, Komunitas), serta wadah kreativitas dan kegiatan mahasiswa UIS Fakultas Ilmu Kesehatan.')
 
 @section('content')
 <!-- HERO SECTION -->
@@ -11,13 +11,13 @@
       <div class="col-lg-8" data-aos="fade-up">
         <div class="ormawa-hero-badge">
           <i class="bi bi-people-fill"></i>
-          <span>Kemahasiswaan Universitas Ibnu Sina</span>
+          <span>Kemahasiswaan Fakultas Ilmu Kesehatan</span>
         </div>
         <h1 class="fw-bold mb-3 text-white" style="font-size: clamp(26px, 3.5vw, 42px); line-height: 1.2;">
           Organisasi & Kegiatan Mahasiswa
         </h1>
         <p class="text-white-50 mb-0" style="font-size: 16px; max-width: 650px;">
-          Wadah pengembangan potensi, kepemimpinan, riset keilmuan, kreativitas, serta kepedulian sosial mahasiswa Universitas Ibnu Sina.
+          Wadah pengembangan potensi, kepemimpinan, riset keilmuan, kreativitas, serta kepedulian sosial mahasiswa Fakultas Ilmu Kesehatan.
         </p>
       </div>
       <div class="col-lg-4 text-lg-end mt-4 mt-lg-0" data-aos="fade-left">
@@ -132,7 +132,7 @@
                 </div>
 
                 <div class="ormawa-desc">
-                  {{ strip_tags($item->deskripsi ?: ($item->visi ?: 'Lembaga kemahasiswaan Universitas Ibnu Sina.')) }}
+                  {{ strip_tags($item->deskripsi ?: ($item->visi ?: 'Lembaga kemahasiswaan Fakultas Ilmu Kesehatan.')) }}
                 </div>
               </div>
 

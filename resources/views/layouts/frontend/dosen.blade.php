@@ -1,14 +1,14 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($pageTitle ?? 'Dosen Pengajar') . ' — Universitas Ibnu Sina')
-@section('meta_description', 'Direktori staf pengajar dan dosen tetap program studi Universitas Ibnu Sina (UIS) Universitas Ibnu Sina.')
+@section('title', ($pageTitle ?? 'Dosen Pengajar') . ' — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Direktori staf pengajar dan dosen tetap program studi Fakultas Ilmu Kesehatan.')
 
 @section('content')
 <!-- Header Hero -->
 <div class="dosen-hero text-white">
   <div class="container text-center">
     <div class="badge px-3 py-2 rounded-pill mb-2" style="background: rgba(254, 216, 2, 0.18); color: #FED802; border: 1px solid rgba(254, 216, 2, 0.45); font-weight: 700; font-size: 13px;">
-      <i class="bi bi-person-workspace me-1"></i> Tenaga Pendidik & Dosen Universitas Ibnu Sina
+      <i class="bi bi-person-workspace me-1"></i> Tenaga Pendidik & Dosen Fakultas Ilmu Kesehatan
     </div>
     <h1 class="fw-bold mb-2 text-white" style="font-size: 34px; color: #ffffff !important; text-shadow: 0 2px 10px rgba(0,0,0,0.35);">Daftar Dosen Pengajar</h1>
     <p class="mx-auto mb-0 text-white" style="max-width: 650px; font-size: 15px; color: rgba(255, 255, 255, 0.92) !important; line-height: 1.65;">
@@ -39,7 +39,7 @@
     <!-- Header Banner Kuning / Gold Sesuai Permintaan -->
     <div class="mb-4" data-aos="fade-up">
       <div class="prodi-header-pill">
-        Dosen {{ $currentProdi->judul ?? 'Program Studi Universitas Ibnu Sina' }}
+        Dosen {{ $currentProdi->judul ?? 'Program Studi Fakultas Ilmu Kesehatan' }}
       </div>
     </div>
 
@@ -179,8 +179,8 @@
     <!-- Info Bantuan Box -->
     <div class="mt-5 p-4 rounded-4 text-white d-flex flex-wrap align-items-center justify-content-between gap-3 shadow-sm" style="background: #032e12; border: 1px solid rgba(255,255,255,0.2);" data-aos="fade-up">
       <div>
-        <h5 class="fw-bold text-white mb-1"><i class="bi bi-mortarboard-fill me-2" style="color: #FED802;"></i>Tertarik Menjadi Mahasiswa Bimbingan Dosen Universitas Ibnu Sina?</h5>
-        <p class="text-white-50 small mb-0">Daftarkan diri Anda pada program sarjana & magister melalui jalur PMB Online Universitas Ibnu Sina Batam.</p>
+        <h5 class="fw-bold text-white mb-1"><i class="bi bi-mortarboard-fill me-2" style="color: #FED802;"></i>Tertarik Menjadi Mahasiswa Bimbingan Dosen Fakultas Ilmu Kesehatan?</h5>
+        <p class="text-white-50 small mb-0">Daftarkan diri Anda pada program sarjana & magister melalui jalur PMB Online Fakultas Ilmu Kesehatan Batam.</p>
       </div>
       <a href="{{ route('homepage.kontak') }}" class="btn btn-warning rounded-pill px-4 fw-bold" style="color: #032e12;">
         <i class="bi bi-arrow-right-circle me-1"></i> Informasi PMB

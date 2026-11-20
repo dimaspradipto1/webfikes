@@ -50,7 +50,7 @@ class LoginSetting extends Model
         return [
             'background_image'     => null,
             'brand_logo'           => null,
-            'brand_title'          => 'Universitas Ibnu Sina',
+            'brand_title'          => 'Fakultas Ilmu Kesehatan',
             'brand_subtitle'       => 'Portal Akademik & Administrasi Terpadu',
             'back_button_text'     => 'Kembali ke Beranda',
             'status_badge_text'    => 'Sistem Aktif',
@@ -69,7 +69,7 @@ class LoginSetting extends Model
             'alumni_card_title'    => 'Alumni atau Mitra UIS?',
             'alumni_card_subtitle' => 'Kirimkan ulasan & testimoni tanpa perlu login',
             'security_badge_text'  => 'Koneksi aman SSL 256-bit • Portal Resmi UIS',
-            'copyright_text'       => 'Universitas Ibnu Sina (UIS). Hak cipta dilindungi.',
+            'copyright_text'       => 'Fakultas Ilmu Kesehatan (FIKES). Hak cipta dilindungi.',
             'primary_color'        => '#046B26',
             'accent_color'         => '#FED802',
             'right_panel_bg_color' => '#eaf6ee',

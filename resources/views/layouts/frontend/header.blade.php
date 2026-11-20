@@ -37,7 +37,7 @@
             {{ $ns->menu_profil_label }} <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.tentang') ? 'active' : '' }}" href="{{ route('homepage.tentang') }}"><i class="bi bi-building"></i> Tentang Universitas</a></li>
+            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.tentang') ? 'active' : '' }}" href="{{ route('homepage.tentang') }}"><i class="bi bi-building"></i> Tentang Fakultas Ilmu Kesehatan</a></li>
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.visi-misi') ? 'active' : '' }}" href="{{ route('homepage.visi-misi') }}"><i class="bi bi-bullseye"></i> Visi & Misi</a></li>
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.sambutan*') ? 'active' : '' }}" href="{{ route('homepage.sambutan-rektor') }}"><i class="bi bi-person-badge"></i> Sambutan Dekan</a></li>
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.struktur-organisasi') ? 'active' : '' }}" href="{{ route('homepage.struktur-organisasi') }}"><i class="bi bi-diagram-3"></i> Struktur Organisasi</a></li>
@@ -198,7 +198,7 @@
             {{ $ns->menu_informasi_label }} <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'berita-universitas') }}"><i class="bi bi-newspaper"></i> Berita Kampus</a></li>
+            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'berita-fakultas ilmu kesehatan') }}"><i class="bi bi-newspaper"></i> Berita Kampus</a></li>
             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'pengumuman-agenda') }}"><i class="bi bi-megaphone"></i> Pengumuman</a></li>
             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'agenda') }}"><i class="bi bi-calendar-event"></i> Agenda</a></li>
             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news') }}"><i class="bi bi-card-text"></i> Artikel</a></li>

@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', $layanan->judul . ' — Universitas Ibnu Sina (UIS)')
+@section('title', $layanan->judul . ' — Fakultas Ilmu Kesehatan')
 @section('meta_description', Str::limit(strip_tags(html_entity_decode($layanan->deskripsi ?? '')), 160))
-@section('meta_keywords', 'uis, ' . strtolower($layanan->judul) . ', universitas ibnu sina')
+@section('meta_keywords', 'uis, ' . strtolower($layanan->judul) . ', fakultas ilmu kesehatan ibnu sina')
 
 @section('content')
 @php

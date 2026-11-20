@@ -4,9 +4,9 @@
   $isHumas = ($kategori ?? '') === 'humas';
 @endphp
 
-@section('title', ($isHumas ? 'Galeri & Kegiatan Humas' : 'Galeri & Dokumentasi') . ' — Universitas Ibnu Sina (UIS)')
-@section('meta_description', $isHumas ? 'Galeri foto liputan, publikasi, dan dokumentasi kegiatan Humas Universitas Ibnu Sina (UIS).' : 'Galeri foto kegiatan akademik, praktikum laboratorium, pengabdian masyarakat, dan wisuda Universitas Ibnu Sina (UIS).')
-@section('meta_keywords', 'galeri uis, dokumentasi uis, foto kampus uis, humas uis, universitas ibnu sina batam')
+@section('title', ($isHumas ? 'Galeri & Kegiatan Humas' : 'Galeri & Dokumentasi') . ' — Fakultas Ilmu Kesehatan')
+@section('meta_description', $isHumas ? 'Galeri foto liputan, publikasi, dan dokumentasi kegiatan Humas Fakultas Ilmu Kesehatan.' : 'Galeri foto kegiatan akademik, praktikum laboratorium, pengabdian masyarakat, dan wisuda Fakultas Ilmu Kesehatan.')
+@section('meta_keywords', 'galeri uis, dokumentasi uis, foto kampus uis, humas uis, fakultas ilmu kesehatan ibnu sina batam')
 
 @section('content')
 
@@ -49,7 +49,7 @@
         <h2 class="section-title">Galeri & <em>Kegiatan Humas</em></h2>
         <div class="divider-line centered"></div>
         <p class="section-desc mx-auto">
-          Kumpulan dokumentasi publikasi, liputan media, siaran pers, dan seluruh kegiatan kehumasan Universitas Ibnu Sina.
+          Kumpulan dokumentasi publikasi, liputan media, siaran pers, dan seluruh kegiatan kehumasan Fakultas Ilmu Kesehatan.
         </p>
       @else
         <div class="section-label mx-auto">Dokumentasi Kampus</div>

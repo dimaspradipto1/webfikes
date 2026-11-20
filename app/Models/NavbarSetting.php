@@ -62,10 +62,10 @@ class NavbarSetting extends Model
     {
         return [
             'frontend_logo'            => null,
-            'frontend_title'           => 'UNIVERSITAS IBNU SINA',
+            'frontend_title'           => 'FAKULTAS ILMU KESEHATAN',
             'frontend_subtitle'        => '',
             'admin_logo'               => null,
-            'admin_title'              => 'Portal UIS',
+            'admin_title'              => 'Portal FIKES',
             'admin_website_btn_text'   => 'Website Utama',
             'show_admin_website_btn'   => true,
             'menu_beranda_label'       => 'Beranda',

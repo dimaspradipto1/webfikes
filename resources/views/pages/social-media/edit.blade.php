@@ -46,13 +46,13 @@
                         </label>
                         <select name="kategori" id="kategori" class="form-select @error('kategori') is-invalid @enderror" required>
                             <option value="universitas" {{ old('kategori', $socialMedia->kategori ?? 'universitas') === 'universitas' ? 'selected' : '' }}>
-                                🏛️ Media Sosial Universitas (Tampil di Beranda Utama UIS)
+                                🏛️ Media Sosial FIKES (Tampil di Beranda Utama UIS)
                             </option>
                             <option value="humas" {{ old('kategori', $socialMedia->kategori) === 'humas' ? 'selected' : '' }}>
                                 📢 Media Sosial Humas (Tampil di Beranda Humas & Smartphone Video Mockup)
                             </option>
                         </select>
-                        <div class="form-text">Pilih apakah platform ini milik Universitas atau Humas.</div>
+                        <div class="form-text">Pilih apakah platform ini milik FIKES atau Humas.</div>
                         @error('kategori')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

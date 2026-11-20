@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Templat & Layanan Desain Grafis — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Pusat templat desain grafis resmi Universitas Ibnu Sina (UIS) Batam. Templat LED Auditorium, Ruang Sidang, Rapat Dekanat, Banner & Spanduk siap pakai di Canva.')
+@section('title', 'Templat & Layanan Desain Grafis — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Pusat templat desain grafis resmi Fakultas Ilmu Kesehatan. Templat LED Auditorium, Ruang Sidang, Rapat Dekanat, Banner & Spanduk siap pakai di Canva.')
 @section('meta_keywords', 'desain grafis uis, templat canva uis, template led auditorium uis, spanduk uis, humas uis desain')
 
 @section('content')
@@ -621,7 +621,7 @@
             <span class="highlight-yellow">{{ $setting->hero_highlight ?? 'Siap Digunakan !' }}</span>
           </h1>
           <p class="dg-hero-subtitle">
-            {{ $setting->hero_subtitle ?? 'Kami menyediakan template desain resmi untuk keperluan presentasi LED, ruang sidang, agenda rapat, dan spanduk acara di lingkungan Universitas Ibnu Sina.' }}
+            {{ $setting->hero_subtitle ?? 'Kami menyediakan template desain resmi untuk keperluan presentasi LED, ruang sidang, agenda rapat, dan spanduk acara di lingkungan Fakultas Ilmu Kesehatan.' }}
           </p>
         </div>
 

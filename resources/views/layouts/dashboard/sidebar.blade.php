@@ -37,17 +37,17 @@
                   </li>
                   <li>
                       <a href="{{ route('social-media.index', ['kategori' => 'universitas']) }}" class="{{ Route::is('social-media.*') && request('kategori') !== 'humas' ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Media Sosial Universitas</span>
+                          <i class="bi bi-circle"></i><span>Media Sosial FIKES</span>
                       </a>
                   </li>
                   <li>
                       <a href="{{ route('faculty-stat.index') }}" class="{{ Route::is('faculty-stat.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Statistik Universitas</span>
+                          <i class="bi bi-circle"></i><span>Statistik FIKES</span>
                       </a>
                   </li>
                   <li>
                       <a href="{{ route('feature.index') }}" class="{{ Route::is('feature.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Keunggulan Universitas</span>
+                          <i class="bi bi-circle"></i><span>Keunggulan FIKES</span>
                       </a>
                   </li>
                   <li>

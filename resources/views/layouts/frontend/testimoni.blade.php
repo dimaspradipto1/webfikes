@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Kisah Sukses & Testimoni Alumni — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Baca ulasan, pengalaman, dan jejak karier alumni, mahasiswa, serta mitra industri Universitas Ibnu Sina (UIS) Batam.')
-@section('meta_keywords', 'testimoni alumni uis, review universitas ibnu sina, jejak karir alumni batam, ulasan lulusan uis, kampus profesional muda')
+@section('title', 'Kisah Sukses & Testimoni Alumni — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Baca ulasan, pengalaman, dan jejak karier alumni, mahasiswa, serta mitra industri Fakultas Ilmu Kesehatan.')
+@section('meta_keywords', 'testimoni alumni uis, review fakultas ilmu kesehatan ibnu sina, jejak karir alumni batam, ulasan lulusan uis, kampus profesional muda')
 
 @section('content')
 
@@ -44,7 +44,7 @@
             @endfor
           </div>
           <h4 class="fw-bold text-white mb-1" style="font-size: 18px;">Penilaian Keseluruhan</h4>
-          <p class="text-white-50 small mb-0">Berdasarkan {{ $totalCount }} ulasan terverifikasi civitas & alumni Universitas Ibnu Sina</p>
+          <p class="text-white-50 small mb-0">Berdasarkan {{ $totalCount }} ulasan terverifikasi civitas & alumni Fakultas Ilmu Kesehatan</p>
         </div>
       </div>
 
@@ -162,7 +162,7 @@
               <div class="testi-avatar flex-shrink-0" style="width: 44px; height: 44px; border-radius: 50%; background: #046B26; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">{{ $initials ?: 'AL' }}</div>
               <div>
                 <div class="testi-name text-dark fw-bold" style="font-size: 14px; line-height: 1.3;">{{ $testi->nama }}</div>
-                <div class="testi-role text-muted small" style="font-size: 12px;">{{ $testi->pekerjaan ?? 'Alumni Universitas Ibnu Sina' }}</div>
+                <div class="testi-role text-muted small" style="font-size: 12px;">{{ $testi->pekerjaan ?? 'Alumni Fakultas Ilmu Kesehatan' }}</div>
               </div>
             </div>
           </div>

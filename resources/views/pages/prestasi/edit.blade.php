@@ -112,7 +112,7 @@
                                     <option value="S1 Kesehatan dan Keselamatan Kerja" {{ old('prodi', $prestasi->prodi) === 'S1 Kesehatan dan Keselamatan Kerja' ? 'selected' : '' }}>S1 Kesehatan dan Keselamatan Kerja (K3)</option>
                                     <option value="S1 Kesehatan Lingkungan" {{ old('prodi', $prestasi->prodi) === 'S1 Kesehatan Lingkungan' ? 'selected' : '' }}>S1 Kesehatan Lingkungan</option>
                                 </optgroup>
-                                <option value="Universitas Ibnu Sina" {{ old('prodi', $prestasi->prodi) === 'Universitas Ibnu Sina' ? 'selected' : '' }}>Universitas Ibnu Sina (Umum)</option>
+                                <option value="FIKES" {{ old('prodi', $prestasi->prodi) === 'FIKES' ? 'selected' : '' }}>FIKES (Umum)</option>
                             </select>
                             @error('prodi')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -128,7 +128,7 @@
                                 <option value="Nasional" {{ old('tingkat', $prestasi->tingkat) === 'Nasional' ? 'selected' : '' }}>Nasional</option>
                                 <option value="Internasional" {{ old('tingkat', $prestasi->tingkat) === 'Internasional' ? 'selected' : '' }}>Internasional</option>
                                 <option value="Provinsi / Wilayah" {{ old('tingkat', $prestasi->tingkat) === 'Provinsi / Wilayah' ? 'selected' : '' }}>Provinsi / Wilayah</option>
-                                <option value="Universitas" {{ old('tingkat', $prestasi->tingkat) === 'Universitas' ? 'selected' : '' }}>Universitas / Lokal</option>
+                                <option value="Universitas" {{ old('tingkat', $prestasi->tingkat) === 'Universitas' ? 'selected' : '' }}>FIKES / Lokal</option>
                             </select>
                             @error('tingkat')
                                 <div class="invalid-feedback">{{ $message }}</div>

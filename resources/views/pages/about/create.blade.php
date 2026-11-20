@@ -38,31 +38,31 @@
                 <form action="{{ route('about.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    <!-- SECTION 1: PROFIL UNIVERSITAS & VIDEO -->
+                    <!-- SECTION 1: PROFIL FIKES & VIDEO -->
                     <div class="border-bottom pb-4 mb-4">
-                        <h6 class="fw-bold text-primary mb-3"><i class="bi bi-building me-2"></i>1. Profil Universitas & Video Profil</h6>
+                        <h6 class="fw-bold text-primary mb-3"><i class="bi bi-building me-2"></i>1. Profil FIKES & Video Profil</h6>
                         
                         <div class="mb-3">
-                            <label for="judul_profil" class="form-label fw-semibold">Judul Profil Universitas</label>
-                            <input type="text" id="judul_profil" name="judul_profil" class="form-control @error('judul_profil') is-invalid @enderror" value="{{ old('judul_profil') }}" placeholder="Contoh: Kampusnya Profesional Muda — Universitas Ibnu Sina">
+                            <label for="judul_profil" class="form-label fw-semibold">Judul Profil FIKES</label>
+                            <input type="text" id="judul_profil" name="judul_profil" class="form-control @error('judul_profil') is-invalid @enderror" value="{{ old('judul_profil') }}" placeholder="Contoh: Kampusnya Profesional Muda — FIKES">
                             @error('judul_profil')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="mb-4">
-                            <label for="deskripsi_profil_1" class="form-label fw-semibold">Deskripsi Profil Universitas</label>
-                            <textarea id="deskripsi_profil_1" name="deskripsi_profil_1" rows="6" class="form-control tinymce-editor @error('deskripsi_profil_1') is-invalid @enderror" placeholder="Tuliskan deskripsi profil resmi Universitas Ibnu Sina">{{ old('deskripsi_profil_1') }}</textarea>
+                            <label for="deskripsi_profil_1" class="form-label fw-semibold">Deskripsi Profil FIKES</label>
+                            <textarea id="deskripsi_profil_1" name="deskripsi_profil_1" rows="6" class="form-control tinymce-editor @error('deskripsi_profil_1') is-invalid @enderror" placeholder="Tuliskan deskripsi profil resmi FIKES">{{ old('deskripsi_profil_1') }}</textarea>
                             @error('deskripsi_profil_1')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                            <div class="form-text text-muted">Deskripsi profil universitas dalam satu narasi utuh yang ditampilkan di beranda dan halaman tentang.</div>
+                            <div class="form-text text-muted">Deskripsi profil FIKES dalam satu narasi utuh yang ditampilkan di beranda dan halaman tentang.</div>
                         </div>
 
                         <!-- VIDEO PROFIL SECTION -->
                         <div class="card bg-light border-0 p-3 rounded-3 mt-3">
                             <h6 class="fw-bold text-dark mb-3">
-                                <i class="bi bi-camera-video-fill me-2 text-danger"></i>Video Profil Universitas
+                                <i class="bi bi-camera-video-fill me-2 text-danger"></i>Video Profil FIKES
                             </h6>
                             <div class="row g-3">
                                 <div class="col-md-7">

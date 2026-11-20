@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Visi & Misi — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Visi, Misi, dan Nilai-nilai Budaya Civitas Akademika Universitas Ibnu Sina.')
-@section('meta_keywords', 'visi misi uis, visi universitas ibnu sina, misi universitas ibnu sina batam')
+@section('title', 'Visi & Misi — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Visi, Misi, dan Nilai-nilai Budaya Civitas Akademika Fakultas Ilmu Kesehatan.')
+@section('meta_keywords', 'visi misi uis, visi fakultas ilmu kesehatan ibnu sina, misi fakultas ilmu kesehatan ibnu sina batam')
 
 @section('content')
 
@@ -33,9 +33,9 @@
   <div class="container py-3">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label">Arah & Landasan Institusi</div>
-      <h2 class="section-title">Visi & Misi <em>Universitas Ibnu Sina</em></h2>
+      <h2 class="section-title">Visi & Misi <em>Fakultas Ilmu Kesehatan</em></h2>
       <p class="section-desc mx-auto" style="max-width: 650px;">
-        Komitmen fundamental yang mengarahkan setiap langkah Tri Dharma Perguruan Tinggi di Universitas Ibnu Sina.
+        Komitmen fundamental yang mengarahkan setiap langkah Tri Dharma Perguruan Tinggi di Fakultas Ilmu Kesehatan.
       </p>
     </div>
 
@@ -57,7 +57,7 @@
             @endforeach
           @else
             <p class="value-desc" style="font-size:15.5px; line-height:1.9; text-align: justify;">
-              {{ strip_tags(html_entity_decode($about->visi ?? 'Menjadi Universitas Unggul, Bermartabat, Bereputasi Nasional dan Internasional serta berjiwa Entrepreneur berbasis Imtaq tahun 2029.')) }}
+              {{ strip_tags(html_entity_decode($about->visi ?? 'Menjadi Fakultas Ilmu Kesehatan Unggul, Bermartabat, Bereputasi Nasional dan Internasional serta berjiwa Entrepreneur berbasis Imtaq tahun 2029.')) }}
             </p>
           @endif
         </div>
@@ -78,7 +78,7 @@
                 'Melaksanakan penelitian yang inovatif, terapan, dan bernilai guna bagi pengembangan ilmu pengetahuan, teknologi, dan industri di tingkat nasional maupun internasional.',
                 'Melaksanakan pengabdian kepada masyarakat berbasis riset yang berdaya guna dalam meningkatkan kesejahteraan masyarakat dan kemajuan bangsa.',
                 'Menjalin kerja sama yang strategis, luas, dan berkelanjutan dengan institusi dalam dan luar negeri, dunia usaha, dan industri (DUDI).',
-                'Mengembangkan tata kelola universitas yang transparan, akuntabel, kredibel, dan berintegritas berlandaskan nilai-nilai iman dan taqwa (Imtaq).',
+                'Mengembangkan tata kelola fakultas ilmu kesehatan yang transparan, akuntabel, kredibel, dan berintegritas berlandaskan nilai-nilai iman dan taqwa (Imtaq).',
               ]);
             }
           @endphp

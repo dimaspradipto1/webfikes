@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="pagetitle">
-    <h1>Edit Data Statistik Universitas Ibnu Sina</h1>
+    <h1>Edit Data Statistik FIKES</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('faculty-stat.index') }}">Statistik Universitas</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('faculty-stat.index') }}">Statistik FIKES</a></li>
             <li class="breadcrumb-item active">Edit Data</li>
         </ol>
     </nav>
@@ -47,8 +47,8 @@
                                name="title"
                                class="form-control @error('title') is-invalid @enderror"
                                value="{{ old('title', $facultyStat->title) }}"
-                               placeholder="Contoh: Universitas Ibnu Sina">
-                        <div class="form-text">Teks judul putih di tengah banner statistik (Contoh di screenshot: <strong>Universitas Ibnu Sina</strong>).</div>
+                               placeholder="Contoh: FIKES">
+                        <div class="form-text">Teks judul putih di tengah banner statistik (Contoh di screenshot: <strong>FIKES</strong>).</div>
                         @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

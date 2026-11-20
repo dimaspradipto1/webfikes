@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Sejarah & Milestone — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Sejarah perjalanan, pendirian, dan tonggak sejarah milestone Universitas Ibnu Sina.')
-@section('meta_keywords', 'sejarah uis, milestone universitas ibnu sina, pendirian universitas ibnu sina')
+@section('title', 'Sejarah & Milestone — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Sejarah perjalanan, pendirian, dan tonggak sejarah milestone Fakultas Ilmu Kesehatan.')
+@section('meta_keywords', 'sejarah uis, milestone fakultas ilmu kesehatan ibnu sina, pendirian fakultas ilmu kesehatan ibnu sina')
 
 @section('content')
 
@@ -33,15 +33,15 @@
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-lg-6" data-aos="fade-right">
-        <div class="section-label">Jejak Langkah Universitas</div>
+        <div class="section-label">Jejak Langkah Fakultas Ilmu Kesehatan</div>
         <h2 class="section-title">Perjalanan Berkelanjutan <em>Mencetak Profesional Muda</em></h2>
         <div class="divider-line"></div>
         <div class="section-desc" style="text-align: justify; line-height: 1.8; color: #4a5568;">
           <p>
-            Universitas Ibnu Sina (UIS) Batam berdiri dari tonggak sejarah panjang pengabdian Yayasan Pendidikan Ibnu Sina Batam (YAPISNA) sejak tahun 1993 dalam memajukan kualitas sumber daya manusia di kawasan strategis perbatasan Kepulauan Riau.
+            Fakultas Ilmu Kesehatan berdiri dari tonggak sejarah panjang pengabdian Yayasan Pendidikan Ibnu Sina Batam (YAPISNA) sejak tahun 1993 dalam memajukan kualitas sumber daya manusia di kawasan strategis perbatasan Kepulauan Riau.
           </p>
           <p>
-            Melalui penggabungan tiga institusi pendidikan tinggi terkemuka—Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES)—lembaga ini resmi bertransformasi menjadi <strong>Universitas Ibnu Sina</strong> berdasarkan Surat Keputusan Menristekdikti RI. Kini UIS menaungi Fakultas Teknik, Fakultas Ekonomi & Bisnis (FEB), Fakultas Ilmu Kesehatan (FIKES), dan Program Pascasarjana.
+            Melalui penggabungan tiga institusi pendidikan tinggi terkemuka—Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES)—lembaga ini resmi bertransformasi menjadi <strong>Fakultas Ilmu Kesehatan</strong> berdasarkan Surat Keputusan Menristekdikti RI. Kini UIS menaungi Fakultas Teknik, Fakultas Ekonomi & Bisnis (FEB), Fakultas Ilmu Kesehatan (FIKES), dan Program Pascasarjana.
           </p>
         </div>
       </div>
@@ -69,7 +69,7 @@
             {{-- Narasi Utama --}}
             <div class="p-3 rounded-3 mb-4" style="background: #f8faf9; border-left: 4px solid #046B26; border-top: 1px solid #eef5f0; border-right: 1px solid #eef5f0; border-bottom: 1px solid #eef5f0;">
               <p class="mb-0" style="font-size: 14.5px; line-height: 1.85; color: #2d3748; text-align: justify;">
-                Setiap fase perkembangan Universitas Ibnu Sina diarahkan untuk memperkuat mutu pembelajaran berbasis teknologi informasi, riset terapan bernilai guna bagi industri manufaktur dan maritim, serta membentuk lulusan berjiwa entrepreneur berbasis Imtaq.
+                Setiap fase perkembangan Fakultas Ilmu Kesehatan diarahkan untuk memperkuat mutu pembelajaran berbasis teknologi informasi, riset terapan bernilai guna bagi industri manufaktur dan maritim, serta membentuk lulusan berjiwa entrepreneur berbasis Imtaq.
               </p>
             </div>
 
@@ -102,7 +102,7 @@
       <h2 class="section-title">Milestone & <em>Tonggak Sejarah</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Catatan pencapaian dan peristiwa penting dalam perjalanan Universitas Ibnu Sina UIS.
+        Catatan pencapaian dan peristiwa penting dalam perjalanan Fakultas Ilmu Kesehatan UIS.
       </p>
     </div>
 

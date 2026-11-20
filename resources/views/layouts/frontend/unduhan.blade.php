@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Downloads & Unduhan Berkas Media — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Pusat unduhan berkas resmi, logo universitas, aset grafis, video promosi, jingle mars, dan dokumen template resmi UIS.')
-@section('meta_keywords', 'unduhan uis, logo uis, template uis, mars uis, audio uis, aset media universitas')
+@section('title', 'Downloads & Unduhan Berkas Media — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Pusat unduhan berkas resmi, logo fakultas ilmu kesehatan, aset grafis, video promosi, jingle mars, dan dokumen template resmi UIS.')
+@section('meta_keywords', 'unduhan uis, logo uis, template uis, mars uis, audio uis, aset media fakultas ilmu kesehatan')
 
 @section('content')
 @php

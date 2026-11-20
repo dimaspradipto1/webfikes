@@ -169,7 +169,7 @@
                         <div class="mb-3">
                             <label class="form-label fw-bold small">Judul Brand Navbar Frontend <span class="text-danger">*</span></label>
                             <input type="text" name="frontend_title" id="frontend_title" class="form-control fw-bold" value="{{ old('frontend_title', $navbarSetting->frontend_title) }}" required>
-                            <div class="form-text small">Contoh: <strong>FAKULTAS ILMU KESEHATAN</strong> atau <strong>UNIVERSITAS IBNU SINA</strong>.</div>
+                            <div class="form-text small">Contoh: <strong>FAKULTAS ILMU KESEHATAN</strong> atau <strong>FIKES</strong>.</div>
                         </div>
 
                         <div class="mb-0">

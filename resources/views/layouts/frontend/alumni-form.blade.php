@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Formulir Ulasan & Testimoni Alumni — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Portal khusus pengisian testimoni dan kisah sukses alumni serta civitas akademika Universitas Ibnu Sina.')
+@section('title', 'Formulir Ulasan & Testimoni Alumni — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Portal khusus pengisian testimoni dan kisah sukses alumni serta civitas akademika Fakultas Ilmu Kesehatan.')
 
 @section('content')
 
@@ -43,7 +43,7 @@
           <div>
             <h6 class="fw-bold text-dark mb-1">Verifikasi & Moderasi Ulasan</h6>
             <p class="small text-muted mb-0">
-              Formulir ini dikhususkan bagi alumni, mahasiswa, maupun mitra industri dan institusi Universitas Ibnu Sina. Setiap testimoni yang dikirimkan akan diverifikasi oleh admin sebelum ditampilkan di halaman website resmi demi menjaga validitas data.
+              Formulir ini dikhususkan bagi alumni, mahasiswa, maupun mitra industri dan institusi Fakultas Ilmu Kesehatan. Setiap testimoni yang dikirimkan akan diverifikasi oleh admin sebelum ditampilkan di halaman website resmi demi menjaga validitas data.
             </p>
           </div>
         </div>
@@ -54,7 +54,7 @@
             <div class="section-label mx-auto">Kisah Sukses Alumni</div>
             <h3 class="fw-bold mb-2 text-dark">Bagikan Jejak Karier & Pengalaman Anda</h3>
             <p class="text-muted small" style="max-width: 520px; margin: 0 auto;">
-              Cerita dan pengalaman Anda akan sangat menginspirasi calon mahasiswa baru serta membanggakan almamater Universitas Ibnu Sina.
+              Cerita dan pengalaman Anda akan sangat menginspirasi calon mahasiswa baru serta membanggakan almamater Fakultas Ilmu Kesehatan.
             </p>
           </div>
 
@@ -148,7 +148,7 @@
               {{-- Pesan Ulasan --}}
               <div class="col-12">
                 <label class="form-label fw-semibold text-dark">Pesan, Ulasan & Testimoni Anda <span class="text-danger">*</span></label>
-                <textarea name="pesan" rows="5" class="form-control @error('pesan') is-invalid @enderror" placeholder="Tuliskan pengalaman belajar, suasana perkuliahan di Universitas Ibnu Sina, bimbingan para dosen, laboratorium, atau kemudahan berkarir setelah lulus..." required style="border-radius: 12px; font-size: 14px;">{{ old('pesan') }}</textarea>
+                <textarea name="pesan" rows="5" class="form-control @error('pesan') is-invalid @enderror" placeholder="Tuliskan pengalaman belajar, suasana perkuliahan di Fakultas Ilmu Kesehatan, bimbingan para dosen, laboratorium, atau kemudahan berkarir setelah lulus..." required style="border-radius: 12px; font-size: 14px;">{{ old('pesan') }}</textarea>
                 @error('pesan')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

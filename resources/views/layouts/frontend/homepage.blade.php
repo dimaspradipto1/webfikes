@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Universitas Ibnu Sina (UIS) — Unggul, Profesional & Berintegritas')
-@section('meta_description', 'Portal Resmi Universitas Ibnu Sina (UIS) Batam — Mewujudkan Perguruan Tinggi Terkemuka Berdaya Saing Global, Inovatif, dan Berakhlak Mulia.')
+@section('title', 'Fakultas Ilmu Kesehatan — Unggul, Profesional & Berintegritas')
+@section('meta_description', 'Portal Resmi Fakultas Ilmu Kesehatan — Mewujudkan Perguruan Tinggi Terkemuka Berdaya Saing Global, Inovatif, dan Berakhlak Mulia.')
 
 @section('content')
 @php
@@ -48,7 +48,7 @@
         @foreach($activeBanners as $index => $banner)
           @php $imgPath = $banner->url ?? $banner->gambar; @endphp
           <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-            <img src="{{ asset('storage/' . $imgPath) }}" alt="{{ $banner->judul ?? 'Banner Promosi Universitas Ibnu Sina' }}" class="hero-banner-img">
+            <img src="{{ asset('storage/' . $imgPath) }}" alt="{{ $banner->judul ?? 'Banner Promosi Fakultas Ilmu Kesehatan' }}" class="hero-banner-img">
           </div>
         @endforeach
       @else
@@ -58,7 +58,7 @@
               <div class="mb-3">
                 <i class="bi bi-megaphone fs-1" style="color: var(--uis-orange);"></i>
               </div>
-              <h2 class="fw-bold mb-2" style="color: #ffffff; letter-spacing: -0.5px;">UNIVERSITAS IBNU SINA (UIS)</h2>
+              <h2 class="fw-bold mb-2" style="color: #ffffff; letter-spacing: -0.5px;">FAKULTAS ILMU KESEHATAN</h2>
               <p class="text-white-50 small mb-0" style="max-width: 540px; margin: 0 auto;">
                 Banner Promosi & Iklan Fakultas dapat diunggah melalui menu Admin (<strong>Profil & Konten UIS ➔ Banner Hero</strong>).
               </p>
@@ -83,7 +83,7 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     3. PROFIL SINGKAT Universitas Ibnu Sina & SAMBUTAN REKTOR
+     3. PROFIL SINGKAT Fakultas Ilmu Kesehatan & SAMBUTAN REKTOR
 ═══════════════════════════════════════════════ -->
 <section class="section-bg-white py-5" id="profil-singkat">
   <div class="container py-2">
@@ -92,7 +92,7 @@
       <div class="col-12">
         <div class="section-label mx-auto">Profil FIKES</div>
         <h2 class="section-title">
-          {{ strip_tags(html_entity_decode($about->judul_profil ?? 'Universitas Ibnu Sina')) }}
+          {{ strip_tags(html_entity_decode($about->judul_profil ?? 'Fakultas Ilmu Kesehatan')) }}
         </h2>
         <div class="divider-line centered"></div>
       </div>
@@ -113,7 +113,7 @@
               <div class="ratio ratio-16x9">
                 <iframe 
                   src="{{ $about->youtube_embed_url }}" 
-                  title="Video Profil Universitas Ibnu Sina" 
+                  title="Video Profil Fakultas Ilmu Kesehatan" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                   referrerpolicy="strict-origin-when-cross-origin" 
                   allowfullscreen>
@@ -135,7 +135,7 @@
         <div class="col-lg-6">
           <div class="h-100 p-4 p-md-4 rounded-4 shadow-sm" style="font-size: 15.5px; line-height: 1.85; color: #2d3748; background: #f8faf9; border-left: 5px solid var(--uis-green, #046B26); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
             <div class="about-desc-content" style="text-align: justify;">
-              {!! $about->deskripsi_profil_1 ?? 'Universitas Ibnu Sina (UIS) Batam merupakan perguruan tinggi swasta terkemuka di Provinsi Kepulauan Riau yang lahir dari perpaduan keunggulan akademik Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES) di bawah naungan Yayasan Pendidikan Ibnu Sina Batam (YAPISNA). Berlokasi strategis di kawasan industri dan perdagangan internasional Kota Batam, UIS mengelola tiga fakultas unggulan: Fakultas Teknik (Sains & Teknologi), Fakultas Ekonomi dan Bisnis (FEB), serta Fakultas Ilmu Kesehatan (FIKES), beserta Program Pascasarjana (Magister). UIS bertekad mencetak lulusan profesional muda yang inovatif, berdaya saing global, berjiwa entrepreneur, dan berakhlak mulia berlandaskan Iman dan Taqwa (Imtaq).' !!}
+              {!! $about->deskripsi_profil_1 ?? 'Fakultas Ilmu Kesehatan merupakan perguruan tinggi swasta terkemuka di Provinsi Kepulauan Riau yang lahir dari perpaduan keunggulan akademik Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES) di bawah naungan Yayasan Pendidikan Ibnu Sina Batam (YAPISNA). Berlokasi strategis di kawasan industri dan perdagangan internasional Kota Batam, UIS mengelola tiga fakultas unggulan: Fakultas Teknik (Sains & Teknologi), Fakultas Ekonomi dan Bisnis (FEB), serta Fakultas Ilmu Kesehatan (FIKES), beserta Program Pascasarjana (Magister). UIS bertekad mencetak lulusan profesional muda yang inovatif, berdaya saing global, berjiwa entrepreneur, dan berakhlak mulia berlandaskan Iman dan Taqwa (Imtaq).' !!}
             </div>
           </div>
         </div>
@@ -146,7 +146,7 @@
         <div class="col-12">
           <div class="w-100 p-4 p-md-5 rounded-4 shadow-sm" style="text-align: justify; font-size: 16.5px; line-height: 1.9; color: #2d3748; background: #f8faf9; border-left: 6px solid var(--uis-green, #046B26); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
             <div class="about-desc-content">
-              {!! $about->deskripsi_profil_1 ?? 'Fakultas Ilmu Kesehatan (FIKES) Universitas Ibnu Sina berdedikasi menyelenggarakan pendidikan tinggi berkualitas di bidang kesehatan dengan kurikulum modern yang berorientasi pada capaian kompetensi, riset inovatif, dan pelayanan masyarakat.' !!}
+              {!! $about->deskripsi_profil_1 ?? 'Fakultas Ilmu Kesehatan (FIKES) berdedikasi menyelenggarakan pendidikan tinggi berkualitas di bidang kesehatan dengan kurikulum modern yang berorientasi pada capaian kompetensi, riset inovatif, dan pelayanan masyarakat.' !!}
             </div>
           </div>
         </div>
@@ -166,7 +166,7 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     3b. STATISTIK UNIVERSITAS — "UIS DALAM ANGKA"
+     3b. STATISTIK FAKULTAS ILMU KESEHATAN — "UIS DALAM ANGKA"
 ═══════════════════════════════════════════════ -->
 @if(isset($facultyStat) && $facultyStat && $facultyStat->is_active)
 <style>
@@ -275,7 +275,7 @@
     {{-- Heading --}}
     <div class="text-center mb-4" data-aos="fade-up">
       <h2 class="uis-stat-heading">
-        {{ $facultyStat->title ?? 'Universitas Ibnu Sina' }}
+        {{ $facultyStat->title ?? 'Fakultas Ilmu Kesehatan' }}
       </h2>
     </div>
 
@@ -559,13 +559,13 @@
 
 
 <!-- ═══════════════════════════════════════════════
-     5. MENGAPA MEMILIH Universitas Ibnu Sina
+     5. MENGAPA MEMILIH Fakultas Ilmu Kesehatan
 ═══════════════════════════════════════════════ -->
 <section class="section-bg-white" id="keunggulan">
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label mx-auto">Keunggulan Kami</div>
-      <h2 class="section-title">Mengapa Memilih <em>Universitas Ibnu Sina</em>?</h2>
+      <h2 class="section-title">Mengapa Memilih <em>Fakultas Ilmu Kesehatan</em>?</h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
         Kami memberikan ekosistem belajar yang menyeluruh antara pemahaman teoritis berstandar mutakhir dan pelatihan praktikal di lapangan.
@@ -637,7 +637,7 @@
             {{ $pmbSetting->badge_text ?? 'PENERIMAAN MAHASISWA BARU (PMB) T.A. 2026/2027' }}
           </div>
           <h2 class="text-white fw-bold mb-3" style="font-size: clamp(1.5rem, 3.5vw, 2.1rem); line-height: 1.3;">
-            {{ $pmbSetting->judul ?? 'Daftar Sekarang & Raih Masa Depan Cerah Bersama Universitas Ibnu Sina!' }}
+            {{ $pmbSetting->judul ?? 'Daftar Sekarang & Raih Masa Depan Cerah Bersama Fakultas Ilmu Kesehatan!' }}
           </h2>
           <div class="text-white mb-4 pmb-desc-content" style="line-height: 1.7; max-width: 620px; opacity: 0.92; font-size: 14.5px;">
             {!! $pmbSetting->deskripsi ?? 'Tersedia berbagai jalur seleksi: Jalur Bebas Tes / Prestasi, Jalur Reguler, Jalur KIP-Kuliah, dan Jalur Alih Jenjang Karyawan.' !!}
@@ -656,7 +656,7 @@
             @php
               $link2 = $pmbSetting->tombol_link_2 ?? '';
               if (empty($link2) && !empty($cleanWa)) {
-                  $link2 = "https://wa.me/{$cleanWa}?text=" . urlencode("Halo Admin PMB Universitas Ibnu Sina, saya ingin konsultasi pendaftaran mahasiswa baru");
+                  $link2 = "https://wa.me/{$cleanWa}?text=" . urlencode("Halo Admin PMB Fakultas Ilmu Kesehatan, saya ingin konsultasi pendaftaran mahasiswa baru");
               }
             @endphp
             @if(!empty($link2))
@@ -842,7 +842,7 @@
           </h2>
 
           <p class="ormawa-deck-lead mb-4">
-            {{ strip_tags($organisasiSetting?->deskripsi ?: 'Eksplorasi ragam organisasi kemahasiswaan, himpunan program studi, dan unit kegiatan minat bakat di Universitas Ibnu Sina Batam. Ruang kolaborasi untuk mengasah karakter, kepemimpinan, dan inovasi civitas kampus.') }}
+            {{ strip_tags($organisasiSetting?->deskripsi ?: 'Eksplorasi ragam organisasi kemahasiswaan, himpunan program studi, dan unit kegiatan minat bakat di Fakultas Ilmu Kesehatan Batam. Ruang kolaborasi untuk mengasah karakter, kepemimpinan, dan inovasi civitas kampus.') }}
           </p>
 
           <div class="d-flex align-items-center gap-3 flex-wrap mb-4">
@@ -935,7 +935,7 @@
                         @endif
                       </div>
                       <p class="card-desc-snippet">
-                        {{ Str::limit(strip_tags($ormawa->deskripsi ?: ($ormawa->visi ?: 'Lembaga kemahasiswaan aktif di lingkungan Universitas Ibnu Sina.')), 105) }}
+                        {{ Str::limit(strip_tags($ormawa->deskripsi ?: ($ormawa->visi ?: 'Lembaga kemahasiswaan aktif di lingkungan Fakultas Ilmu Kesehatan.')), 105) }}
                       </p>
 
                       <div class="card-meta-row">
@@ -992,9 +992,9 @@
     <div class="d-flex align-items-end justify-content-between mb-5 flex-wrap gap-3" data-aos="fade-up">
       <div>
         <div class="section-label mb-2">Dokumentasi Visual</div>
-        <h2 class="section-title mb-0">Galeri & <em>Kegiatan Universitas Ibnu Sina</em></h2>
+        <h2 class="section-title mb-0">Galeri & <em>Kegiatan Fakultas Ilmu Kesehatan</em></h2>
       </div>
-      <a href="{{ route('homepage.galeri.universitas') }}" class="btn-outline-hero" style="color: var(--uis-purple); border-color: var(--uis-purple); font-size: 13.5px; padding: 10px 22px;">
+      <a href="{{ route('homepage.galeri.fakultas ilmu kesehatan') }}" class="btn-outline-hero" style="color: var(--uis-purple); border-color: var(--uis-purple); font-size: 13.5px; padding: 10px 22px;">
         <i class="bi bi-images me-1"></i> Lihat Semua Galeri
       </a>
     </div>
@@ -1040,10 +1040,10 @@
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label mx-auto">Kisah Sukses Alumni</div>
-      <h2 class="section-title">Jejak Karir <em>Alumni Universitas Ibnu Sina</em></h2>
+      <h2 class="section-title">Jejak Karir <em>Alumni Fakultas Ilmu Kesehatan</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Lulusan Universitas Ibnu Sina telah berkarier di berbagai perusahaan multinasional, industri manufaktur, sektor logistik maritim, perbankan, instansi BUMN, pemerintahan, serta sukses menjadi wirausahawan mandiri.
+        Lulusan Fakultas Ilmu Kesehatan telah berkarier di berbagai perusahaan multinasional, industri manufaktur, sektor logistik maritim, perbankan, instansi BUMN, pemerintahan, serta sukses menjadi wirausahawan mandiri.
       </p>
     </div>
 
@@ -1080,7 +1080,7 @@
                     <div class="testi-avatar flex-shrink-0" style="width: 44px; height: 44px; border-radius: 50%; background: #046B26; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">{{ $initials ?: 'AL' }}</div>
                     <div>
                       <div class="testi-name text-dark fw-bold" style="font-size: 14px; line-height: 1.3;">{{ $testi->nama }}</div>
-                      <div class="testi-role text-muted small" style="font-size: 12px;">{{ $testi->pekerjaan ?? 'Alumni Universitas Ibnu Sina' }}</div>
+                      <div class="testi-role text-muted small" style="font-size: 12px;">{{ $testi->pekerjaan ?? 'Alumni Fakultas Ilmu Kesehatan' }}</div>
                     </div>
                   </div>
                 </div>
@@ -1284,7 +1284,7 @@
       @for($r = 0; $r < $repeats; $r++)
         @foreach($layananTerkaits as $idx => $item)
           @php
-            $itemDesc = trim(strip_tags($item->deskripsi ?? 'Akses layanan digital terpadu Universitas Ibnu Sina'));
+            $itemDesc = trim(strip_tags($item->deskripsi ?? 'Akses layanan digital terpadu Fakultas Ilmu Kesehatan'));
             $itemNum = $idx + 1;
           @endphp
           <div class="uis-cylinder-card"
@@ -1328,7 +1328,7 @@
         {{ $layananTerkaits->first()->nama ?? 'Layanan Digital' }}
       </h3>
       <p class="mirror-active-desc" id="mirrorActiveDesc">
-        {{ trim(strip_tags($layananTerkaits->first()->deskripsi ?? 'Akses layanan digital terpadu Universitas Ibnu Sina')) }}
+        {{ trim(strip_tags($layananTerkaits->first()->deskripsi ?? 'Akses layanan digital terpadu Fakultas Ilmu Kesehatan')) }}
       </p>
       <a href="{{ $layananTerkaits->first()->url ?? '#' }}" target="_blank" rel="noopener noreferrer" class="mirror-active-cta" id="mirrorActiveBtn">
         <span>Kunjungi Layanan</span>
@@ -1520,7 +1520,7 @@
       <h2 class="section-title">Mitra Kerjasama <em>Industri & Rumah Sakit</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Universitas Ibnu Sina bermitra dengan berbagai sektor industri terkemuka dalam penempatan magang klinis, riset, dan rekrutmen lulusan.
+        Fakultas Ilmu Kesehatan bermitra dengan berbagai sektor industri terkemuka dalam penempatan magang klinis, riset, dan rekrutmen lulusan.
       </p>
     </div>
   </div>
@@ -1610,7 +1610,7 @@
       <h2 class="section-title">Pertanyaan yang Sering <em>Diajukan</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Jawaban seputar program studi, biaya perkuliahan, fasilitas laboratorium, dan prospek karir di Universitas Ibnu Sina.
+        Jawaban seputar program studi, biaya perkuliahan, fasilitas laboratorium, dan prospek karir di Fakultas Ilmu Kesehatan.
       </p>
     </div>
 

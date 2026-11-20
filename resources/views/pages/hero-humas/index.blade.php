@@ -154,7 +154,7 @@
                                        name="subjudul" 
                                        class="form-control @error('subjudul') is-invalid @enderror" 
                                        value="{{ old('subjudul', $hero->subjudul) }}" 
-                                       placeholder="di Biro Hubungan Masyarakat dan Protokoler Universitas Ibnu Sina">
+                                       placeholder="di Biro Hubungan Masyarakat dan Protokoler FIKES">
                                 @error('subjudul')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

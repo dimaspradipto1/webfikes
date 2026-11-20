@@ -311,7 +311,7 @@
                                     <img src="{{ asset('frontend/img/logo-uis.png') }}" alt="Logo" style="height: 36px;" onerror="this.style.display='none'">
                                     <div style="line-height: 1.15;">
                                         <div id="pvHeaderBrand" style="font-weight: 800; font-size: 0.9rem; color: {{ $theme->header_text_color }};">FAKULTAS ILMU KESEHATAN</div>
-                                        <div id="pvHeaderSubBrand" style="font-size: 0.72rem; opacity: 0.85; color: {{ $theme->header_text_color }};">Universitas Ibnu Sina</div>
+                                        <div id="pvHeaderSubBrand" style="font-size: 0.72rem; opacity: 0.85; color: {{ $theme->header_text_color }};">FIKES</div>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center gap-2 flex-wrap">

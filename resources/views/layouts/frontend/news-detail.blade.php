@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', $news->title . ' — Universitas Ibnu Sina')
+@section('title', $news->title . ' — Fakultas Ilmu Kesehatan')
 @section('meta_description', Str::limit($news->description ?? strip_tags($news->content), 160))
-@section('meta_keywords', 'berita uis, universitas ibnu sina, ' . ($news->category ?? 'artikel kesehatan'))
+@section('meta_keywords', 'berita uis, fakultas ilmu kesehatan ibnu sina, ' . ($news->category ?? 'artikel kesehatan'))
 @section('meta_author', $news->user?->name ?? 'Admin UIS')
 
 @php
@@ -42,13 +42,13 @@
     <div data-aos="fade-up">
       <div class="article-meta-badge">
         <i class="bi bi-tag-fill"></i>
-        <span>{{ $news->category ?? 'Berita Universitas' }}</span>
+        <span>{{ $news->category ?? 'Berita Fakultas Ilmu Kesehatan' }}</span>
       </div>
       <h1 class="article-title-main">{{ $news->title }}</h1>
       <div class="d-flex flex-wrap align-items-center gap-3 text-white-50 small mb-3">
         <span><i class="bi bi-calendar3 me-1" style="color:var(--uis-orange);"></i> {{ $news->created_at->translatedFormat('d F Y') }}</span>
         <span>•</span>
-        <span><i class="bi bi-person me-1" style="color:var(--uis-orange);"></i> {{ $news->user?->name ?? 'Redaksi Universitas Ibnu Sina' }}</span>
+        <span><i class="bi bi-person me-1" style="color:var(--uis-orange);"></i> {{ $news->user?->name ?? 'Redaksi Fakultas Ilmu Kesehatan' }}</span>
         <span>•</span>
         <span><i class="bi bi-clock me-1" style="color:var(--uis-orange);"></i> {{ ceil(str_word_count(strip_tags($news->content ?? '')) / 200) ?: 1 }} menit baca</span>
       </div>
@@ -117,8 +117,8 @@
             <div class="author-avatar">{{ strtoupper(substr($news->user?->name ?? 'A', 0, 1)) }}</div>
             <div>
               <div class="small text-muted">Diterbitkan oleh:</div>
-              <div class="fw-bold text-dark">{{ $news->user?->name ?? 'Redaksi Universitas Ibnu Sina' }}</div>
-              <div class="small text-muted">Universitas Ibnu Sina — Universitas Ibnu Sina</div>
+              <div class="fw-bold text-dark">{{ $news->user?->name ?? 'Redaksi Fakultas Ilmu Kesehatan' }}</div>
+              <div class="small text-muted">Fakultas Ilmu Kesehatan — Fakultas Ilmu Kesehatan</div>
             </div>
           </div>
 
@@ -184,7 +184,7 @@
           <div class="category-widget-list">
             @php
               $allCategories = [
-                'Berita Universitas'      => 'bi-newspaper',
+                'Berita Fakultas Ilmu Kesehatan'      => 'bi-newspaper',
                 'Berita Humas'            => 'bi-megaphone-fill',
                 'Akademik & Mahasiswa'    => 'bi-mortarboard',
                 'K3 & Keselamatan Kerja'  => 'bi-shield-check',
@@ -212,7 +212,7 @@
         {{-- Banner PMB Mini --}}
         <div class="sidebar-box text-white" style="background: var(--obsidian-dark); border: 2px solid var(--uis-green);">
           <span class="badge mb-2" style="background: var(--uis-yellow); color:#032e12; font-weight:800;">PMB 2026/2027</span>
-          <h5 class="fw-bold mb-2">Ingin Kuliah di Universitas Ibnu Sina?</h5>
+          <h5 class="fw-bold mb-2">Ingin Kuliah di Fakultas Ilmu Kesehatan?</h5>
           <p class="text-white-50 small mb-3">Tersedia Fakultas Teknik, Fakultas Ekonomi & Bisnis, Fakultas Ilmu Kesehatan, dan Program Pascasarjana (S2).</p>
           <a href="{{ route('homepage.kontak') }}" class="btn-primary-hero w-100 justify-content-center" style="font-size:13px; padding:9px 14px;">
             Daftar Sekarang <i class="bi bi-arrow-right"></i>

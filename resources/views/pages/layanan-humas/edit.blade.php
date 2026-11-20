@@ -105,7 +105,7 @@
                                   name="deskripsi"
                                   rows="3"
                                   class="form-control tinymce-editor @error('deskripsi') is-invalid @enderror"
-                                  placeholder="Contoh: Layanan permohonan penerbitan siaran pers dan liputan berita acara universitas...">{{ old('deskripsi', $item->deskripsi) }}</textarea>
+                                  placeholder="Contoh: Layanan permohonan penerbitan siaran pers dan liputan berita acara FIKES...">{{ old('deskripsi', $item->deskripsi) }}</textarea>
                         @error('deskripsi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -236,7 +236,7 @@
                                     <label for="sapaan" class="form-label fw-bold text-dark small">Kalimat Sapaan Utama (Heading)</label>
                                     <input type="text" id="sapaan" name="sapaan" class="form-control"
                                            value="{{ old('sapaan', $pendampinganAcaraSetting->sapaan) }}"
-                                           placeholder="Halo, Civitas Akademika Universitas Ibnu Sina dan Mitra Eksternal!">
+                                           placeholder="Halo, Civitas Akademika FIKES dan Mitra Eksternal!">
                                 </div>
                             </div>
 
@@ -378,7 +378,7 @@
                             @if($item->kode === 'permintaan-rilis')
                                 Unggah dokumen pedoman atau SOP rilis (PDF/DOCX) yang dapat diunduh langsung oleh sivitas akademika:
                             @elseif($item->kode === 'pendampingan-acara')
-                                Unggah dokumen SOP pendampingan acara universitas (PDF/DOCX) yang dapat diunduh di halaman publik:
+                                Unggah dokumen SOP pendampingan acara FIKES (PDF/DOCX) yang dapat diunduh di halaman publik:
                             @else
                                 Pilih salah satu cara pengunjung mengakses layanan ini saat ikon diklik di halaman Beranda Humas:
                             @endif

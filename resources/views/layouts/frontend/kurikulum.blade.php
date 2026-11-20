@@ -1,18 +1,18 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($pageTitle ?? 'Kurikulum Program Studi') . ' — Universitas Ibnu Sina')
-@section('meta_description', 'Struktur kurikulum lengkap per semester dan unduhan silabus RPS program studi Universitas Ibnu Sina (UIS) Universitas Ibnu Sina.')
+@section('title', ($pageTitle ?? 'Kurikulum Program Studi') . ' — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Struktur kurikulum lengkap per semester dan unduhan silabus RPS program studi Fakultas Ilmu Kesehatan.')
 
 @section('content')
 <!-- Header Hero -->
 <div class="kurikulum-hero text-white">
   <div class="container text-center">
     <div class="badge px-3 py-2 rounded-pill mb-2" style="background: rgba(229, 168, 35, 0.2); color: #FED802; border: 1px solid rgba(229, 168, 35, 0.4);">
-      <i class="bi bi-mortarboard-fill me-1"></i> Layanan Akademik Universitas Ibnu Sina
+      <i class="bi bi-mortarboard-fill me-1"></i> Layanan Akademik Fakultas Ilmu Kesehatan
     </div>
     <h1 class="fw-bold mb-2" style="font-size: 34px;">Kurikulum & Capaian Pembelajaran</h1>
     <p class="text-white-50 mx-auto mb-0" style="max-width: 620px; font-size: 14.5px;">
-      Struktur kurikulum berbasis kompetensi dan Kerangka Kualifikasi Nasional Indonesia (KKNI) untuk setiap program studi di Universitas Ibnu Sina.
+      Struktur kurikulum berbasis kompetensi dan Kerangka Kualifikasi Nasional Indonesia (KKNI) untuk setiap program studi di Fakultas Ilmu Kesehatan.
     </p>
     <div class="breadcrumb-custom justify-content-center mt-3">
       <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
@@ -55,7 +55,7 @@
           ])
         : collect([[
             'id' => 0,
-            'judul' => $currentProdi->judul ?? 'Program Studi Universitas Ibnu Sina',
+            'judul' => $currentProdi->judul ?? 'Program Studi Fakultas Ilmu Kesehatan',
             'isActive' => true,
             'coursesBySemester' => $coursesBySemester ?? collect(),
             'totalSks' => $totalSks ?? 0,
@@ -207,7 +207,7 @@
           });
 
           var judul = matchedBtn.getAttribute('data-prodi-judul') || 'Program Studi';
-          document.title = 'Kurikulum ' + judul + ' — Universitas Ibnu Sina';
+          document.title = 'Kurikulum ' + judul + ' — Fakultas Ilmu Kesehatan';
 
           if (updateHistory && window.history && window.history.pushState) {
             var href = matchedBtn.getAttribute('href');
@@ -258,7 +258,7 @@
     <div class="mt-5 p-4 rounded-4 text-white d-flex flex-wrap align-items-center justify-content-between gap-3 shadow-sm" style="background: #032e12; border: 1px solid rgba(255,255,255,0.2);" data-aos="fade-up">
       <div>
         <h5 class="fw-bold text-white mb-1"><i class="bi bi-question-circle-fill me-2 text-warning"></i>Butuh Informasi Kurikulum & Konversi SKS?</h5>
-        <p class="text-white-50 small mb-0">Hubungi Bagian Akademik & Tata Usaha Universitas Ibnu Sina untuk panduan registrasi mata kuliah dan bimbingan akademik.</p>
+        <p class="text-white-50 small mb-0">Hubungi Bagian Akademik & Tata Usaha Fakultas Ilmu Kesehatan untuk panduan registrasi mata kuliah dan bimbingan akademik.</p>
       </div>
       <a href="{{ route('homepage.kontak') }}" class="btn btn-warning rounded-pill px-4 fw-bold" style="color: #032e12;">
         <i class="bi bi-telephone-fill me-1"></i> Hubungi Kami

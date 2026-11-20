@@ -102,7 +102,7 @@
                         <label for="kutipan_singkat" class="form-label fw-semibold text-dark">
                             Kutipan Singkat Sambutan <span class="badge bg-warning text-dark ms-1">Tampil di Halaman Depan (Homepage)</span>
                         </label>
-                        <textarea id="kutipan_singkat" name="kutipan_singkat" rows="3" class="form-control @error('kutipan_singkat') is-invalid @enderror" placeholder="Contoh: Selamat datang di Fakultas Ilmu Kesehatan (FIKES) Universitas Ibnu Sina...">{{ old('kutipan_singkat', $sambutanDekan->kutipan_singkat) }}</textarea>
+                        <textarea id="kutipan_singkat" name="kutipan_singkat" rows="3" class="form-control @error('kutipan_singkat') is-invalid @enderror" placeholder="Contoh: Selamat datang di FIKES...">{{ old('kutipan_singkat', $sambutanDekan->kutipan_singkat) }}</textarea>
                         <div class="form-text small text-muted">Kutipan ringkas yang menarik perhatian pengunjung di halaman depan.</div>
                         @error('kutipan_singkat')
                             <div class="invalid-feedback">{{ $message }}</div>

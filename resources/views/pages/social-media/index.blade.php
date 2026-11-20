@@ -6,7 +6,7 @@
         @if($kategori === 'humas')
             Media Sosial Humas
         @elseif($kategori === 'universitas')
-            Media Sosial Universitas
+            Media Sosial FIKES
         @else
             Link Media Sosial
         @endif
@@ -19,7 +19,7 @@
                 <li class="breadcrumb-item active">Media Sosial Humas</li>
             @else
                 <li class="breadcrumb-item">Konten Beranda</li>
-                <li class="breadcrumb-item active">{{ $kategori === 'universitas' ? 'Media Sosial Universitas' : 'Link Media Sosial' }}</li>
+                <li class="breadcrumb-item active">{{ $kategori === 'universitas' ? 'Media Sosial FIKES' : 'Link Media Sosial' }}</li>
             @endif
         </ol>
     </nav>
@@ -43,7 +43,7 @@
                    class="nav-link py-2 px-3 fw-semibold d-flex align-items-center justify-content-center gap-2 {{ $kategori === 'universitas' ? 'active bg-primary text-white' : 'text-secondary bg-light' }}"
                    style="border-radius: 8px;">
                     <i class="bi bi-building"></i>
-                    <span>Media Sosial Universitas</span>
+                    <span>Media Sosial FIKES</span>
                     <span class="badge {{ $kategori === 'universitas' ? 'bg-white text-primary' : 'bg-secondary text-white' }} rounded-pill">{{ $countUniversitas }}</span>
                 </a>
             </li>
@@ -167,7 +167,7 @@
     <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-top: 3px solid {{ $kategori === 'humas' ? '#6366f1' : '#046B26' }}; border-radius: 12px 12px 0 0;">
         <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
             <i class="bi bi-share-fill me-2" style="color: {{ $kategori === 'humas' ? '#6366f1' : '#046B26' }};"></i>
-            Daftar Link & Logo {{ $kategori === 'humas' ? 'Media Sosial Humas' : ($kategori === 'universitas' ? 'Media Sosial Universitas' : 'Media Sosial') }}
+            Daftar Link & Logo {{ $kategori === 'humas' ? 'Media Sosial Humas' : ($kategori === 'universitas' ? 'Media Sosial FIKES' : 'Media Sosial') }}
         </h5>
         <div class="d-flex align-items-center gap-2">
             @if($kategori !== 'humas')
@@ -178,7 +178,7 @@
             <a href="{{ route('social-media.create', ['kategori' => $kategori ?? 'universitas']) }}" 
                class="btn fw-semibold shadow-sm btn-sm" 
                style="background-color: {{ $kategori === 'humas' ? '#6366f1' : '#046B26' }}; color: #ffffff; border: none; padding: 7px 18px; border-radius: 8px;">
-                <i class="bi bi-plus-lg me-1"></i> Tambah {{ $kategori === 'humas' ? 'Medsos Humas' : ($kategori === 'universitas' ? 'Medsos Universitas' : 'Media Sosial') }}
+                <i class="bi bi-plus-lg me-1"></i> Tambah {{ $kategori === 'humas' ? 'Medsos Humas' : ($kategori === 'universitas' ? 'Medsos FIKES' : 'Media Sosial') }}
             </a>
         </div>
     </div>
@@ -189,9 +189,9 @@
                 @if($kategori === 'humas')
                     <strong>Info Media Sosial Humas:</strong> Platform di bawah ini tampil di halaman <strong>/humas</strong> pada kartu smartphone interaktif. Masukkan link video TikTok atau YouTube untuk pemutaran otomatis (autoplay).
                 @elseif($kategori === 'universitas')
-                    <strong>Info Media Sosial Universitas:</strong> Logo PNG di bawah ini tampil secara horizontal di barisan seksi Media Sosial pada <strong>Beranda Utama Website</strong>.
+                    <strong>Info Media Sosial FIKES:</strong> Logo PNG di bawah ini tampil secara horizontal di barisan seksi Media Sosial pada <strong>Beranda Utama Website</strong>.
                 @else
-                    <strong>Info:</strong> Menampilkan seluruh data media sosial (Universitas & Humas). Gunakan tab di atas untuk menyaring per kategori.
+                    <strong>Info:</strong> Menampilkan seluruh data media sosial (FIKES & Humas). Gunakan tab di atas untuk menyaring per kategori.
                 @endif
             </div>
             <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>

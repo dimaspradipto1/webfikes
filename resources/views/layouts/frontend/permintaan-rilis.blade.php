@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($setting->judul_hero ?? 'Permintaan Rilis') . ' — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Panduan dan layanan pengajuan rilis berita resmi Universitas Ibnu Sina (UIS) Batam. Ketentuan 5W+1H, minimal 250 kata, foto resolusi tinggi, dan alur publikasi.')
+@section('title', ($setting->judul_hero ?? 'Permintaan Rilis') . ' — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Panduan dan layanan pengajuan rilis berita resmi Fakultas Ilmu Kesehatan. Ketentuan 5W+1H, minimal 250 kata, foto resolusi tinggi, dan alur publikasi.')
 @section('meta_keywords', 'permintaan rilis uis, siaran pers uis, berita humas uis, panduan rilis uis batam')
 
 @section('content')
@@ -173,7 +173,7 @@
       <div class="divider-line-gold"></div>
 
       <div class="text-muted mx-auto mb-0" style="max-width: 860px; font-size: 15px; line-height: 1.8;">
-        {!! $setting->deskripsi_seksi ?? 'Layanan ini disediakan oleh Biro Humas Universitas Ibnu Sina (UIS) guna memfasilitasi sivitas akademika dalam mengajukan rilis berita kegiatan atau siaran pers untuk dipublikasikan pada portal berita resmi uis.ac.id dan media massa mitra universitas.' !!}
+        {!! $setting->deskripsi_seksi ?? 'Layanan ini disediakan oleh Biro Humas Fakultas Ilmu Kesehatan guna memfasilitasi sivitas akademika dalam mengajukan rilis berita kegiatan atau siaran pers untuk dipublikasikan pada portal berita resmi uis.ac.id dan media massa mitra fakultas ilmu kesehatan.' !!}
       </div>
     </div>
 
@@ -275,7 +275,7 @@
         </div>
         <div>
           <h4 class="fw-bold text-dark mb-1">1. Ketentuan Penulisan Naskah Berita</h4>
-          <p class="text-muted small mb-0">Standar mutu jurnalisme dan tata kelola siaran pers resmi universitas.</p>
+          <p class="text-muted small mb-0">Standar mutu jurnalisme dan tata kelola siaran pers resmi fakultas ilmu kesehatan.</p>
         </div>
       </div>
 
@@ -330,7 +330,7 @@
             <div class="rule-number-badge">5</div>
             <div class="rule-title">Judul SPO & Penjelasan Singkatan</div>
             <p class="rule-desc">
-              Judul berita harus memuat unsur Subjek, Predikat, dan Objek (SPO). Setiap singkatan wajib dijelaskan kepanjangannya pada penyebutan pertama (contoh: <em>UIS dijabarkan Universitas Ibnu Sina</em>).
+              Judul berita harus memuat unsur Subjek, Predikat, dan Objek (SPO). Setiap singkatan wajib dijelaskan kepanjangannya pada penyebutan pertama (contoh: <em>UIS dijabarkan Fakultas Ilmu Kesehatan</em>).
             </p>
           </div>
         </div>
@@ -483,7 +483,7 @@
         <div class="col-lg-8 col-12">
           <h6 class="fw-bold text-dark mb-1">Butuh bantuan atau koordinasi peliputan langsung?</h6>
           <p class="text-muted small mb-0">
-            Hubungi Biro Humas & Protokoler Universitas Ibnu Sina:
+            Hubungi Biro Humas & Protokoler Fakultas Ilmu Kesehatan:
             <strong class="text-dark ms-1"><i class="bi bi-envelope me-1"></i>{{ $setting->email_tujuan ?? 'info@uis.ac.id' }}</strong>
             <span class="mx-2">•</span>
             <strong class="text-dark"><i class="bi bi-telephone me-1"></i>{{ $setting->no_wa ?? '07784083113' }}</strong>

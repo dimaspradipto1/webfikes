@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
 @section('title', 'Prestasi Mahasiswa — Fakultas Ilmu Kesehatan (FIKES) UIS')
-@section('meta_description', 'Daftar capaian prestasi, kejuaraan, dan penghargaan mahasiswa Fakultas Ilmu Kesehatan (FIKES) Universitas Ibnu Sina di tingkat regional, nasional, dan internasional.')
+@section('meta_description', 'Daftar capaian prestasi, kejuaraan, dan penghargaan mahasiswa Fakultas Ilmu Kesehatan (FIKES) di tingkat regional, nasional, dan internasional.')
 
 @section('content')
 <!-- Header Banner -->
@@ -12,7 +12,7 @@
     </div>
     <h1 class="fw-bold mb-3 text-white" style="font-size: 38px; color: #ffffff !important; text-shadow: 0 2px 10px rgba(0,0,0,0.35);">Prestasi Mahasiswa FIKES</h1>
     <p class="mx-auto text-white mb-2" style="max-width: 680px; line-height: 1.7; color: rgba(255, 255, 255, 0.92) !important; font-size: 15.5px;">
-      Koleksi prestasi gemilang, medali kejuaraan, dan publikasi ilmiah mahasiswa Fakultas Ilmu Kesehatan (FIKES) Universitas Ibnu Sina di tingkat regional, nasional, dan internasional.
+      Koleksi prestasi gemilang, medali kejuaraan, dan publikasi ilmiah mahasiswa Fakultas Ilmu Kesehatan (FIKES) di tingkat regional, nasional, dan internasional.
     </p>
     <div class="breadcrumb-custom justify-content-center mt-3">
       <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>

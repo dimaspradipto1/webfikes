@@ -54,8 +54,8 @@
                                id="title"
                                name="title"
                                class="form-control @error('title') is-invalid @enderror"
-                               value="{{ old('title', 'Universitas Ibnu Sina') }}"
-                               placeholder="Contoh: Universitas Ibnu Sina">
+                               value="{{ old('title', 'FIKES') }}"
+                               placeholder="Contoh: FIKES">
                         <div class="form-text">Teks judul putih di tengah banner statistik.</div>
                         @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>

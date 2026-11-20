@@ -1,6 +1,6 @@
 @extends('layouts.frontend.template')
 
-@section('title', $prestasi->judul_prestasi . ' — Universitas Ibnu Sina')
+@section('title', $prestasi->judul_prestasi . ' — Fakultas Ilmu Kesehatan')
 @section('meta_description', Str::limit(strip_tags($prestasi->deskripsi ?? $prestasi->judul_prestasi), 160))
 
 @section('content')
@@ -58,7 +58,7 @@
         @else
           <div class="p-5 rounded-4 text-center text-white mb-4" style="background: #046B26;">
             <i class="bi bi-trophy-fill" style="font-size: 64px; color: #FED802;"></i>
-            <h4 class="fw-bold mt-2 mb-0">Prestasi Sivitas Universitas Ibnu Sina</h4>
+            <h4 class="fw-bold mt-2 mb-0">Prestasi Sivitas Fakultas Ilmu Kesehatan</h4>
           </div>
         @endif
 
@@ -75,7 +75,7 @@
             </div>
           @else
             <p class="text-muted">
-              Selamat dan sukses atas keberhasilan mahasiswa Universitas Ibnu Sina dalam meraih <strong>{{ $prestasi->peringkat ?? 'Prestasi Membanggakan' }}</strong> pada ajang <strong>{{ $prestasi->judul_prestasi }}</strong>.
+              Selamat dan sukses atas keberhasilan mahasiswa Fakultas Ilmu Kesehatan dalam meraih <strong>{{ $prestasi->peringkat ?? 'Prestasi Membanggakan' }}</strong> pada ajang <strong>{{ $prestasi->judul_prestasi }}</strong>.
             </p>
           @endif
 
@@ -86,7 +86,7 @@
 
             @php
               $shareUrl  = urlencode(url()->current());
-              $shareText = urlencode("Prestasi Mahasiswa Universitas Ibnu Sina: " . $prestasi->judul_prestasi);
+              $shareText = urlencode("Prestasi Mahasiswa Fakultas Ilmu Kesehatan: " . $prestasi->judul_prestasi);
             @endphp
             <div class="d-flex align-items-center gap-2">
               <span class="text-muted small fw-semibold">Bagikan:</span>

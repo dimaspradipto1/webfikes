@@ -67,7 +67,7 @@
                                 class="form-select @error('kategori') is-invalid @enderror"
                                 required>
                             <option value="universitas" {{ old('kategori', $gallery->kategori ?? 'universitas') === 'universitas' ? 'selected' : '' }}>
-                                Universitas (Galeri & Dokumentasi Universitas)
+                                FIKES (Galeri & Dokumentasi FIKES)
                             </option>
                             <option value="humas" {{ old('kategori', $gallery->kategori ?? 'universitas') === 'humas' ? 'selected' : '' }}>
                                 Humas (Galeri & Kegiatan Humas)

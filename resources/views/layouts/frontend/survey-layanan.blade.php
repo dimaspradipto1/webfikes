@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($setting->judul_hero ?? 'Survey Layanan') . ' — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Kuesioner evaluasi dan survei kepuasan layanan Biro Humas & Informasi Universitas Ibnu Sina (UIS) Batam.')
+@section('title', ($setting->judul_hero ?? 'Survey Layanan') . ' — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Kuesioner evaluasi dan survei kepuasan layanan Biro Humas & Informasi Fakultas Ilmu Kesehatan.')
 @section('meta_keywords', 'survei layanan uis, survei kepuasan humas uis, kuesioner evaluasi uis batam')
 
 @section('content')
@@ -134,7 +134,7 @@
       </h1>
       <div class="divider-line-gold"></div>
       <p class="text-white-50 mx-auto mb-0" style="max-width: 680px; font-size: 14.5px; line-height: 1.6;">
-        {{ $setting->subjudul_hero ?? 'Kuesioner Evaluasi Kepuasan & Mutu Pelayanan Humas Universitas Ibnu Sina' }}
+        {{ $setting->subjudul_hero ?? 'Kuesioner Evaluasi Kepuasan & Mutu Pelayanan Humas Fakultas Ilmu Kesehatan' }}
       </p>
     </div>
   </div>

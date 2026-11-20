@@ -55,7 +55,7 @@ class NewsCategory extends Model
     public static function defaultItems(): array
     {
         return [
-            ['name' => 'Berita Universitas', 'icon' => 'bi-mortarboard-fill', 'color' => '#046B26', 'description' => 'Berita resmi kegiatan dan informasi utama kampus'],
+            ['name' => 'Berita FIKES', 'icon' => 'bi-mortarboard-fill', 'color' => '#046B26', 'description' => 'Berita resmi kegiatan dan informasi utama kampus'],
             ['name' => 'Prestasi Mahasiswa', 'icon' => 'bi-trophy-fill', 'color' => '#f59e0b', 'description' => 'Berita capaian prestasi, kejuaraan, dan penghargaan mahasiswa (otomatis tampil di halaman Prestasi Mahasiswa)'],
             ['name' => 'Berita Humas', 'icon' => 'bi-megaphone-fill', 'color' => '#198754', 'description' => 'Rilis berita dan liputan kehumasan'],
             ['name' => 'Akademik & Kemahasiswaan', 'icon' => 'bi-book-fill', 'color' => '#0284c7', 'description' => 'Informasi perkuliahan, akademik, dan kegiatan mahasiswa'],

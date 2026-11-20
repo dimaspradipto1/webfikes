@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Tentang Kami — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Kenali lebih dekat Universitas Ibnu Sina (UIS) — profil, visi misi, nilai karakter akademik, dan fasilitas unggulan kami.')
-@section('meta_keywords', 'tentang uis, profil universitas ibnu sina, visi misi uis, struktur organisasi uis, pendidikan kesehatan')
+@section('title', 'Tentang Kami — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Kenali lebih dekat Fakultas Ilmu Kesehatan — profil, visi misi, nilai karakter akademik, dan fasilitas unggulan kami.')
+@section('meta_keywords', 'tentang uis, profil fakultas ilmu kesehatan ibnu sina, visi misi uis, struktur organisasi uis, pendidikan kesehatan')
 
 @section('content')
 @php
@@ -27,14 +27,14 @@
       <div class="breadcrumb-custom">
         <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
         <span>/</span>
-        <span class="active">Tentang Universitas</span>
+        <span class="active">Tentang Fakultas Ilmu Kesehatan</span>
       </div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════
-     PROFIL UNIVERSITAS (FULL WIDTH & VIDEO)
+     PROFIL FAKULTAS ILMU KESEHATAN (FULL WIDTH & VIDEO)
 ═══════════════════════════════════════════════ -->
 <section class="section-bg-white py-5">
   <div class="container">
@@ -43,7 +43,7 @@
         <!-- Header Profil -->
         <div class="text-center mb-4">
           <div class="section-label mx-auto">Profil FIKES</div>
-          <h2 class="section-title">{!! $about->judul_profil ?? 'Kampusnya Profesional Muda — <em>Universitas Ibnu Sina</em>' !!}</h2>
+          <h2 class="section-title">{!! $about->judul_profil ?? 'Kampusnya Profesional Muda — <em>Fakultas Ilmu Kesehatan</em>' !!}</h2>
           <div class="divider-line centered"></div>
         </div>
 
@@ -62,7 +62,7 @@
                   <div class="ratio ratio-16x9">
                     <iframe 
                       src="{{ $about->youtube_embed_url }}" 
-                      title="Video Profil FIKES Universitas Ibnu Sina" 
+                      title="Video Profil FIKES Fakultas Ilmu Kesehatan" 
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                       referrerpolicy="strict-origin-when-cross-origin" 
                       allowfullscreen>
@@ -84,7 +84,7 @@
             <div class="col-lg-6">
               <div class="h-100 p-4 p-md-4 rounded-4 shadow-sm" style="text-align: justify; font-size: 15.5px; line-height: 1.85; color: #2d3748; background: #f8faf9; border-left: 5px solid var(--uis-green, #046B26); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
                 <div class="about-desc-content">
-                  {!! $about->deskripsi_profil_1 ?? 'Fakultas Ilmu Kesehatan (FIKES) Universitas Ibnu Sina berdedikasi menyelenggarakan pendidikan tinggi berkualitas di bidang kesehatan dengan kurikulum modern yang berorientasi pada capaian kompetensi, riset inovatif, dan pelayanan masyarakat.' !!}
+                  {!! $about->deskripsi_profil_1 ?? 'Fakultas Ilmu Kesehatan (FIKES) berdedikasi menyelenggarakan pendidikan tinggi berkualitas di bidang kesehatan dengan kurikulum modern yang berorientasi pada capaian kompetensi, riset inovatif, dan pelayanan masyarakat.' !!}
                 </div>
               </div>
             </div>
@@ -93,7 +93,7 @@
           {{-- Fallback jika belum ada video --}}
           <div class="w-100 p-4 p-md-5 rounded-4 shadow-sm mb-4" style="text-align: justify; font-size: 16.5px; line-height: 1.9; color: #2d3748; background: #f8faf9; border-left: 6px solid var(--uis-green, #046B26); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;" data-aos="fade-up" data-aos-delay="150">
             <div class="about-desc-content">
-              {!! $about->deskripsi_profil_1 ?? 'Fakultas Ilmu Kesehatan (FIKES) Universitas Ibnu Sina berdedikasi menyelenggarakan pendidikan tinggi berkualitas di bidang kesehatan dengan kurikulum modern yang berorientasi pada capaian kompetensi, riset inovatif, dan pelayanan masyarakat.' !!}
+              {!! $about->deskripsi_profil_1 ?? 'Fakultas Ilmu Kesehatan (FIKES) berdedikasi menyelenggarakan pendidikan tinggi berkualitas di bidang kesehatan dengan kurikulum modern yang berorientasi pada capaian kompetensi, riset inovatif, dan pelayanan masyarakat.' !!}
             </div>
           </div>
         @endif

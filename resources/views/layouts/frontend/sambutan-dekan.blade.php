@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
 @section('title', 'Sambutan Dekan — Fakultas Ilmu Kesehatan (FIKES) UIS')
-@section('meta_description', 'Sambutan resmi Dekan Fakultas Ilmu Kesehatan (FIKES) Universitas Ibnu Sina (UIS) Batam.')
+@section('meta_description', 'Sambutan resmi Dekan Fakultas Ilmu Kesehatan (FIKES).')
 @section('meta_keywords', 'sambutan dekan fikes, dekan fikes uis, pimpinan fakultas ilmu kesehatan, uis batam')
 
 @section('content')
@@ -51,8 +51,8 @@
           </span>
 
           <div class="pt-3 border-top mt-3 text-muted small text-start">
-            <div class="mb-2"><i class="bi bi-mortarboard me-2" style="color: #046B26;"></i> Universitas Ibnu Sina (UIS) Batam</div>
-            <div><i class="bi bi-geo-alt me-2 text-danger"></i> Kampus Utama Universitas Ibnu Sina</div>
+            <div class="mb-2"><i class="bi bi-mortarboard me-2" style="color: #046B26;"></i> Fakultas Ilmu Kesehatan</div>
+            <div><i class="bi bi-geo-alt me-2 text-danger"></i> Kampus Utama Fakultas Ilmu Kesehatan</div>
           </div>
         </div>
       </div>
@@ -67,7 +67,7 @@
         {{-- Kutipan Singkat --}}
         <div class="rektor-quote-callout">
           <i class="bi bi-quote fs-3 d-block mb-1" style="color: #046B26;"></i>
-          "{{ strip_tags($sambutanDekan->kutipan_singkat ?? ($sambutanDekan->sambutan_dekan ?? 'Selamat datang di Universitas Ibnu Sina (UIS) Batam — Kampusnya Profesional Muda. Kami bertekad membentuk generasi intelektual yang unggul, inovatif, berjiwa entrepreneur, dan berkarakter Imtaq yang siap memimpin industri di kancah nasional maupun global.')) }}"
+          "{{ strip_tags($sambutanDekan->kutipan_singkat ?? ($sambutanDekan->sambutan_dekan ?? 'Selamat datang di Fakultas Ilmu Kesehatan — Kampusnya Profesional Muda. Kami bertekad membentuk generasi intelektual yang unggul, inovatif, berjiwa entrepreneur, dan berkarakter Imtaq yang siap memimpin industri di kancah nasional maupun global.')) }}"
         </div>
 
         {{-- Isi Lengkap Sambutan --}}
@@ -80,20 +80,20 @@
               Salam sejahtera untuk kita semua.
             </p>
             <p>
-              Puji dan syukur senantiasa kita panjatkan ke hadirat Allah SWT, Tuhan Yang Maha Esa, atas limpahan rahmat dan karunia-Nya sehingga <strong>Universitas Ibnu Sina (UIS) Batam</strong> terus tumbuh dan berkembang menjadi institusi pendidikan tinggi terkemuka di kawasan Kepulauan Riau dan Indonesia.
+              Puji dan syukur senantiasa kita panjatkan ke hadirat Allah SWT, Tuhan Yang Maha Esa, atas limpahan rahmat dan karunia-Nya sehingga <strong>Fakultas Ilmu Kesehatan</strong> terus tumbuh dan berkembang menjadi institusi pendidikan tinggi terkemuka di kawasan Kepulauan Riau dan Indonesia.
             </p>
             <p>
-              Sebagai kampus yang berakar di jantung industri Batam dengan slogan <em>"Kampusnya Profesional Muda"</em>, Universitas Ibnu Sina mengintegrasikan keunggulan akademik di bidang <strong>Fakultas Teknik (Sains & Teknologi)</strong>, <strong>Fakultas Ekonomi dan Bisnis (FEB)</strong>, <strong>Fakultas Ilmu Kesehatan (FIKES)</strong>, dan <strong>Program Pascasarjana</strong> dengan kebutuhan nyata dunia usaha dan industri global.
+              Sebagai kampus yang berakar di jantung industri Batam dengan slogan <em>"Kampusnya Profesional Muda"</em>, Fakultas Ilmu Kesehatan mengintegrasikan keunggulan akademik di bidang <strong>Fakultas Teknik (Sains & Teknologi)</strong>, <strong>Fakultas Ekonomi dan Bisnis (FEB)</strong>, <strong>Fakultas Ilmu Kesehatan (FIKES)</strong>, dan <strong>Program Pascasarjana</strong> dengan kebutuhan nyata dunia usaha dan industri global.
             </p>
             <p>
-              Kepada seluruh civitas akademika, mahasiswa, alumni, dan masyarakat luas, mari bersama-sama melangkah maju mewujudkan visi UIS 2029 sebagai universitas unggul, bermartabat, dan bereputasi internasional berbasis Imtaq.
+              Kepada seluruh civitas akademika, mahasiswa, alumni, dan masyarakat luas, mari bersama-sama melangkah maju mewujudkan visi UIS 2029 sebagai fakultas ilmu kesehatan unggul, bermartabat, dan bereputasi internasional berbasis Imtaq.
             </p>
             <p class="fw-bold mt-4 mb-1">
               <em>Wassalamu’alaikum Warahmatullahi Wabarakatuh.</em>
             </p>
             <p class="text-muted">
               <strong>{{ $sambutanDekan->nama_dekan ?? 'Assoc. Prof. Dr. Ir. Larisang, S.T., M.T., IPU., ASEAN Eng.' }}</strong><br>
-              <small>{{ $sambutanDekan->jabatan_dekan ?? 'Rektor Universitas Ibnu Sina (UIS) Batam' }}</small>
+              <small>{{ $sambutanDekan->jabatan_dekan ?? 'Rektor Fakultas Ilmu Kesehatan' }}</small>
             </p>
           @endif
         </div>

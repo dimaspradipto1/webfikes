@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($organisasi->singkatan ? $organisasi->singkatan . ' — ' : '') . $organisasi->nama_organisasi . ' | Universitas Ibnu Sina')
-@section('meta_description', 'Profil lengkap ' . $organisasi->nama_organisasi . ' UIS Universitas Ibnu Sina: Visi, Misi, Susunan Pengurus, Program Kerja dan Kegiatan Kemahasiswaan.')
+@section('title', ($organisasi->singkatan ? $organisasi->singkatan . ' — ' : '') . $organisasi->nama_organisasi . ' | Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Profil lengkap ' . $organisasi->nama_organisasi . ' UIS Fakultas Ilmu Kesehatan: Visi, Misi, Susunan Pengurus, Program Kerja dan Kegiatan Kemahasiswaan.')
 
 @section('content')
 <!-- HERO SECTION -->
@@ -207,7 +207,7 @@
 
           <div class="small text-muted p-2 rounded-3 bg-light border">
             <i class="bi bi-geo-alt-fill text-warning me-1"></i>
-            Sekretariat Bersama Gedung Universitas Ibnu Sina Batam
+            Sekretariat Bersama Gedung Fakultas Ilmu Kesehatan Batam
           </div>
         </div>
 

@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Template Dokumen — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Pusat template dokumen resmi Universitas Ibnu Sina (UIS) Batam. Download templat PowerPoint (.pptx), Word (.docx), Desain (.psd) via Google Drive.')
+@section('title', 'Template Dokumen — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Pusat template dokumen resmi Fakultas Ilmu Kesehatan. Download templat PowerPoint (.pptx), Word (.docx), Desain (.psd) via Google Drive.')
 @section('meta_keywords', 'template dokumen uis, templat pptx uis, templat docx uis, standar komunikasi merek uis')
 
 @section('content')
@@ -132,7 +132,7 @@
       <div class="divider-line-gold"></div>
 
       <p class="text-muted mx-auto mb-0" style="max-width: 860px; font-size: 15px; line-height: 1.75;">
-        {!! nl2br(e($setting->deskripsi_seksi ?? 'Kami menyediakan Templat untuk Desain, Ms. Power Point, Ms. Word dan berbagai format lainnya. Guna menyeragamkan tampilan desain di lingkungan Universitas Ibnu Sina. Berdasarkan Peraturan Rektor tentang STANDAR KOMUNIKASI MEREK UNIVERSITAS IBNU SINA')) !!}
+        {!! nl2br(e($setting->deskripsi_seksi ?? 'Kami menyediakan Templat untuk Desain, Ms. Power Point, Ms. Word dan berbagai format lainnya. Guna menyeragamkan tampilan desain di lingkungan Fakultas Ilmu Kesehatan. Berdasarkan Peraturan Rektor tentang STANDAR KOMUNIKASI MEREK FAKULTAS ILMU KESEHATAN')) !!}
       </p>
     </div>
 

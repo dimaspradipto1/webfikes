@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Hubungi Kami — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Hubungi Universitas Ibnu Sina (UIS) untuk informasi program studi, layanan akademik, praktikum laboratorium, dan penerimaan mahasiswa baru.')
-@section('meta_keywords', 'kontak uis, alamat universitas ibnu sina, nomor wa uis, lokasi kampus uis')
+@section('title', 'Hubungi Kami — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Hubungi Fakultas Ilmu Kesehatan untuk informasi program studi, layanan akademik, praktikum laboratorium, dan penerimaan mahasiswa baru.')
+@section('meta_keywords', 'kontak uis, alamat fakultas ilmu kesehatan ibnu sina, nomor wa uis, lokasi kampus uis')
 
 @section('content')
 @php
@@ -45,7 +45,7 @@
           <div class="contact-card-icon"><i class="bi bi-geo-alt-fill"></i></div>
           <h4 class="contact-card-title">Alamat Kampus</h4>
           <p class="contact-card-text">
-            {{ $contact->alamat ?? 'Gedung Universitas Ibnu Sina (UIS), Kampus Terpadu' }}
+            {{ $contact->alamat ?? 'Gedung Fakultas Ilmu Kesehatan, Kampus Terpadu' }}
           </p>
         </div>
       </div>

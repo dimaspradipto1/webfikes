@@ -74,7 +74,7 @@
                                 <label for="judul" class="form-label fw-bold text-dark">
                                     Judul Utama Banner PMB <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" id="judul" name="judul" class="form-control @error('judul') is-invalid @enderror" value="{{ old('judul', $pmb->judul) }}" placeholder="Daftar Sekarang & Raih Masa Depan Cerah Bersama Universitas Ibnu Sina!" required>
+                                <input type="text" id="judul" name="judul" class="form-control @error('judul') is-invalid @enderror" value="{{ old('judul', $pmb->judul) }}" placeholder="Daftar Sekarang & Raih Masa Depan Cerah Bersama FIKES!" required>
                                 <div class="form-text small text-muted">Headline utama yang mencolok bagi calon pendaftar.</div>
                                 @error('judul')
                                     <div class="invalid-feedback">{{ $message }}</div>

@@ -18,9 +18,9 @@
         <i class="bi bi-book-half" style="color: #046B26;"></i>
     </div>
     <div>
-        <h6 class="fw-bold mb-1" style="color: #14532d;">Pengelolaan Seksi E-Magazine & Buku Saku Universitas</h6>
+        <h6 class="fw-bold mb-1" style="color: #14532d;">Pengelolaan Seksi E-Magazine & Buku Saku FIKES</h6>
         <p class="mb-0 text-muted small" style="line-height: 1.5;">
-            Menu ini mengatur tampilan seksi <strong>"E-Magazine Profil Universitas"</strong> pada halaman publik <strong>/humas</strong> (tepat di bawah banner Hotline Helpdesk).
+            Menu ini mengatur tampilan seksi <strong>"E-Magazine Profil FIKES"</strong> pada halaman publik <strong>/humas</strong> (tepat di bawah banner Hotline Helpdesk).
             Terdapat 2 tab interaktif: <strong>E-Magazine</strong> dan <strong>Buku Saku</strong>, lengkap dengan teks judul, deskripsi, pratinjau interaktif, dan tautan/berkas dokumen unduhan.
         </p>
     </div>
@@ -50,8 +50,8 @@
                            id="judul_seksi"
                            name="judul_seksi"
                            class="form-control @error('judul_seksi') is-invalid @enderror"
-                           value="{{ old('judul_seksi', $emagazine->judul_seksi ?? 'E-Magazine Profil Universitas') }}"
-                           placeholder="Contoh: E-Magazine Profil Universitas"
+                           value="{{ old('judul_seksi', $emagazine->judul_seksi ?? 'E-Magazine Profil FIKES') }}"
+                           placeholder="Contoh: E-Magazine Profil FIKES"
                            required>
                     @error('judul_seksi')
                         <div class="invalid-feedback">{{ $message }}</div>

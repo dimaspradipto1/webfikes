@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
-    <title>Dashboard Portal — Universitas Ibnu Sina (UIS)</title>
+    <title>Dashboard Portal — FIKES</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 

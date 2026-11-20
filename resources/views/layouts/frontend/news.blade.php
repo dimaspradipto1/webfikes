@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Berita & Informasi Terkini — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Ikuti berita kampus, pengumuman akademik, riset teknologi & bisnis, dan publikasi terbaru dari Universitas Ibnu Sina (UIS) Batam.')
-@section('meta_keywords', 'berita uis, pengumuman akademik uis, riset kampus batam, kegiatan mahasiswa uis, universitas ibnu sina batam')
+@section('title', 'Berita & Informasi Terkini — Fakultas Ilmu Kesehatan')
+@section('meta_description', 'Ikuti berita kampus, pengumuman akademik, riset teknologi & bisnis, dan publikasi terbaru dari Fakultas Ilmu Kesehatan.')
+@section('meta_keywords', 'berita uis, pengumuman akademik uis, riset kampus batam, kegiatan mahasiswa uis, fakultas ilmu kesehatan ibnu sina batam')
 
 @section('content')
 
@@ -13,11 +13,11 @@
   <div class="container">
     <div data-aos="fade-up">
       <div class="badge px-2.5 py-1 rounded-pill mb-2" style="background: rgba(4, 107, 38, 0.45); color: var(--uis-orange); border: 1px solid rgba(254, 216, 2, 0.4); font-size: 11px;">
-        <i class="bi bi-newspaper me-1"></i> Warta & Informasi Universitas Ibnu Sina
+        <i class="bi bi-newspaper me-1"></i> Warta & Informasi Fakultas Ilmu Kesehatan
       </div>
       <h1 class="news-hero-title">Berita & <em>Warta Kampus</em> UIS</h1>
       <p class="text-white-50 mb-2" style="max-width: 650px; font-size: 13px; line-height: 1.45;">
-        Kumpulan warta kegiatan universitas, pengumuman akademik, prestasi mahasiswa, riset terapan, dan inovasi civitas akademika Universitas Ibnu Sina Batam.
+        Kumpulan warta kegiatan fakultas ilmu kesehatan, pengumuman akademik, prestasi mahasiswa, riset terapan, dan inovasi civitas akademika Fakultas Ilmu Kesehatan Batam.
       </p>
       <div class="breadcrumb-custom">
         <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
@@ -62,7 +62,7 @@
               <div class="d-flex align-items-center gap-2 text-muted small mb-2">
                 <span><i class="bi bi-calendar3 me-1 text-secondary"></i> {{ $featured->created_at->format('d M Y') }}</span>
                 <span>•</span>
-                <span class="badge bg-light text-dark border">{{ $featured->category ?? 'Berita Universitas' }}</span>
+                <span class="badge bg-light text-dark border">{{ $featured->category ?? 'Berita Fakultas Ilmu Kesehatan' }}</span>
               </div>
               <h3 class="news-featured-title">
                 <a href="{{ route('homepage.news.detail', $featured->slug ?? $featured->id) }}" class="text-dark text-decoration-none">
@@ -95,7 +95,7 @@
 
           @php
             $portalCategories = [
-              'Berita Universitas'      => 'bi-newspaper',
+              'Berita Fakultas Ilmu Kesehatan'      => 'bi-newspaper',
               'Berita Humas'            => 'bi-megaphone-fill',
               'Akademik & Mahasiswa'    => 'bi-mortarboard',
               'K3 & Keselamatan Kerja'  => 'bi-shield-check',
@@ -202,7 +202,7 @@
         <div class="p-5 text-center bg-white rounded-4 shadow-sm">
           <i class="bi bi-newspaper fs-1 text-muted mb-3 d-block"></i>
           <h4 class="fw-bold text-dark">Belum Ada Berita</h4>
-          <p class="text-muted small">Berita dan artikel terbaru Universitas Ibnu Sina akan segera dipublikasikan di sini.</p>
+          <p class="text-muted small">Berita dan artikel terbaru Fakultas Ilmu Kesehatan akan segera dipublikasikan di sini.</p>
         </div>
       @endif
     @endif
