@@ -80,12 +80,6 @@
 
           <form action="{{ route('homepage.alumni.store') }}" method="POST">
             @csrf
-
-            {{-- Honeypot Anti-Bot (Disembunyikan dari pengguna asli) --}}
-            <div style="position: absolute; left: -9999px; top: -9999px;" aria-hidden="true">
-              <label for="website_url">Website</label>
-              <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off" value="">
-            </div>
             
             <div class="row g-3">
               {{-- Nama Lengkap --}}
@@ -160,34 +154,53 @@
                 @enderror
               </div>
 
-              {{-- Verifikasi Keamanan (CAPTCHA) --}}
-              <div class="col-12 mt-3">
-                <div class="p-3 rounded-4 border d-flex flex-wrap align-items-center justify-content-between gap-3" style="background: #f8fcf9; border-color: var(--uis-green, #046B26) !important;">
-                  <div class="d-flex align-items-center gap-3">
-                    <div class="rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 44px; height: 44px; background: var(--uis-green, #046B26); color: var(--uis-yellow, #FED802);">
-                      <i class="bi bi-shield-lock-fill fs-5"></i>
-                    </div>
-                    <div>
-                      <label for="captcha_answer" class="form-label fw-bold text-dark mb-0" style="font-size: 14px;">
-                        Verifikasi Keamanan (CAPTCHA) <span class="text-danger">*</span>
-                      </label>
-                      <div class="small text-muted">
-                        Berapa hasil dari <strong class="text-dark fs-6 px-2 py-0 rounded" style="background: var(--uis-yellow, #FED802);">{{ $captchaQuestion ?? session('testimonial_captcha_question', '3 + 4') }}</strong> ?
+              {{-- Honeypot Anti-Bot (Tersembunyi dari Pengguna Manusia) --}}
+              <div style="position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden;" aria-hidden="true">
+                <label for="website_hp">Website</label>
+                <input type="text" name="website_hp" id="website_hp" tabindex="-1" autocomplete="off" value="">
+              </div>
+
+              {{-- Verifikasi Keamanan Captcha --}}
+              <div class="col-12">
+                <div class="p-3 rounded-4 border" style="background: #f8faf9; border-color: #d8e8dc !important;">
+                  <label for="captcha" class="form-label fw-semibold text-dark mb-2 d-flex align-items-center gap-2">
+                    <i class="bi bi-shield-lock-fill text-success"></i>
+                    <span>Verifikasi Keamanan (Captcha) <span class="text-danger">*</span></span>
+                  </label>
+                  <div class="row g-2 align-items-center">
+                    <div class="col-sm-5">
+                      <div class="d-flex align-items-center gap-2">
+                        <div id="captchaQuestionBox"
+                             class="flex-grow-1 text-center fw-bold py-2 px-3 rounded-3 select-none"
+                             style="background: var(--uis-green, #046B26); color: var(--uis-yellow, #FED802); font-size: 18px; letter-spacing: 2px; font-family: monospace; user-select: none;">
+                          {{ $captchaQuestion ?? session('alumni_captcha_question', '5 + 3 = ?') }}
+                        </div>
+                        <button type="button"
+                                id="btnRefreshCaptcha"
+                                class="btn btn-outline-secondary rounded-3"
+                                style="height: 44px; width: 44px; display: inline-flex; align-items: center; justify-content: center;"
+                                title="Ganti soal captcha"
+                                onclick="refreshAlumniCaptcha()">
+                          <i class="bi bi-arrow-clockwise fs-5"></i>
+                        </button>
                       </div>
                     </div>
+                    <div class="col-sm-7">
+                      <input type="number"
+                             name="captcha"
+                             id="captcha"
+                             class="form-control form-control-lg @error('captcha') is-invalid @enderror"
+                             placeholder="Masukkan hasil perhitungan di samping..."
+                             required
+                             autocomplete="off"
+                             style="border-radius: 12px; font-size: 14px;">
+                      @error('captcha')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                      @enderror
+                    </div>
                   </div>
-                  <div style="min-width: 150px; flex: 0 1 180px;">
-                    <input type="number"
-                           id="captcha_answer"
-                           name="captcha_answer"
-                           class="form-control form-control-lg text-center fw-bold @error('captcha_answer') is-invalid @enderror"
-                           placeholder="Hasil angka"
-                           required
-                           autocomplete="off"
-                           style="border-radius: 12px; font-size: 15px;">
-                    @error('captcha_answer')
-                      <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                  <div class="small text-muted mt-2">
+                    <i class="bi bi-info-circle me-1"></i> Jawab pertanyaan singkat di atas untuk mencegah pengiriman spam otomatis (maksimal 3 kiriman per 10 menit).
                   </div>
                 </div>
               </div>
@@ -240,5 +253,22 @@
     const sel = document.getElementById('kategoriSelect');
     if (sel) handleKategoriChange(sel);
   });
+
+  function refreshAlumniCaptcha() {
+    const box = document.getElementById('captchaQuestionBox');
+    const input = document.getElementById('captcha');
+    fetch('{{ route("homepage.alumni.captcha-refresh") }}?t=' + Date.now(), { cache: 'no-store' })
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.question && box) {
+          box.textContent = data.question;
+          if (input) {
+            input.value = '';
+            input.focus();
+          }
+        }
+      })
+      .catch(() => {});
+  }
 </script>
 @endpush

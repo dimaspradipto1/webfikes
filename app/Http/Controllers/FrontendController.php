@@ -921,29 +921,51 @@ class FrontendController extends Controller
         ));
     }
 
+    protected function generateAlumniCaptcha(): string
+    {
+        $a = random_int(2, 15);
+        $b = random_int(1, 9);
+        $useMinus = (bool) random_int(0, 1);
+
+        if ($useMinus && $a > $b) {
+            $question = "{$a} − {$b} = ?";
+            $answer = $a - $b;
+        } else {
+            $question = "{$a} + {$b} = ?";
+            $answer = $a + $b;
+        }
+
+        session([
+            'alumni_captcha_question' => $question,
+            'alumni_captcha_answer'   => (string) $answer,
+        ]);
+
+        return $question;
+    }
+
     public function alumniCreateTestimoni()
     {
-        $a = random_int(2, 9);
-        $b = random_int(1, 9);
-        $captchaQuestion = "{$a} + {$b}";
-        session([
-            'testimonial_captcha_question' => $captchaQuestion,
-            'testimonial_captcha_answer' => $a + $b,
-        ]);
+        $captchaQuestion = $this->generateAlumniCaptcha();
 
         return view('layouts.frontend.alumni-form', compact('captchaQuestion'));
     }
 
+    public function refreshAlumniCaptcha()
+    {
+        return response()->json([
+            'question' => $this->generateAlumniCaptcha(),
+        ])->header('Cache-Control', 'no-store');
+    }
+
     public function storeTestimonial(AlumniTestimonialRequest $request)
     {
-        $validated = collect($request->validated())
-            ->only(['nama', 'pekerjaan', 'kategori', 'bintang', 'pesan'])
-            ->toArray();
+        $validated = $request->safe()->only(['nama', 'pekerjaan', 'kategori', 'bintang', 'pesan']);
         $validated['aktif'] = false; // Pending moderasi admin
 
         Testimonial::create($validated);
 
-        session()->forget(['testimonial_captcha_question', 'testimonial_captcha_answer']);
+        // Hapus captcha setelah berhasil agar tidak bisa dipakai ulang (anti-replay)
+        session()->forget(['alumni_captcha_question', 'alumni_captcha_answer']);
 
         return redirect()
             ->route('homepage.alumni.create')
