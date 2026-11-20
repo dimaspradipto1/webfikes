@@ -322,6 +322,13 @@
           </li>
 
           <li class="nav-item">
+              <a class="nav-link {{ Route::is('login-setting.*') ? '' : 'collapsed' }}" href="{{ route('login-setting.index') }}">
+                  <i class="bi bi-shield-lock-fill"></i>
+                  <span>Pengaturan Login</span>
+              </a>
+          </li>
+
+          <li class="nav-item">
               <a class="nav-link {{ Route::is('backup.*') ? '' : 'collapsed' }}" href="{{ route('backup.index') }}">
                   <i class="bi bi-database-check"></i>
                   <span>Backup Database & Storage</span>

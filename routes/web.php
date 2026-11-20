@@ -20,6 +20,7 @@ use App\Http\Controllers\KurikulumController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\LayananHumasController;
 use App\Http\Controllers\LayananTerkaitController;
+use App\Http\Controllers\LoginSettingController;
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\NewsController;
@@ -230,6 +231,11 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::post('admin-theme/layout', [ThemeSettingController::class, 'updateLayout'])->name('theme.update-layout');
     Route::post('admin-theme/reset-layout', [ThemeSettingController::class, 'resetLayout'])->name('theme.reset-layout');
     Route::post('admin-theme/reset', [ThemeSettingController::class, 'reset'])->name('theme.reset');
+
+    // Pengaturan Halaman Login
+    Route::get('admin-login-setting', [LoginSettingController::class, 'index'])->name('login-setting.index');
+    Route::post('admin-login-setting', [LoginSettingController::class, 'update'])->name('login-setting.update');
+    Route::post('admin-login-setting/reset', [LoginSettingController::class, 'reset'])->name('login-setting.reset');
 
     // Backup Database & Storage (Drive D: / C: & Otomatis Harian)
     Route::prefix('admin-backup')->name('backup.')->group(function () {

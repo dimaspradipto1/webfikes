@@ -1,15 +1,18 @@
+@php
+  $ls = $loginSetting ?? \App\Models\LoginSetting::current();
+@endphp
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login — Portal Universitas Ibnu Sina (UIS)</title>
-  <meta name="description" content="Portal Login Resmi Universitas Ibnu Sina (UIS) Batam — Sistem Informasi Terpadu Mahasiswa, Dosen, dan Tenaga Kependidikan.">
+  <title>Login — {{ $ls->brand_title }}</title>
+  <meta name="description" content="{{ $ls->card_subtitle }}">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="{{ asset('frontend/img/logouis.png') }}">
-  <link rel="apple-touch-icon" href="{{ asset('frontend/img/logouis.png') }}">
+  <link rel="icon" type="image/png" href="{{ $ls->brand_logo_url }}">
+  <link rel="apple-touch-icon" href="{{ $ls->brand_logo_url }}">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,13 +30,13 @@
     }
 
     :root {
-      --uis-green:          #046B26;
-      --uis-green-dark:     #03521d;
+      --uis-green:          {{ $ls->primary_color ?: '#046B26' }};
+      --uis-green-dark:     {{ $ls->primary_color ?: '#03521d' }};
       --uis-green-deep:     #023814;
-      --uis-green-light:    #eaf6ee;
+      --uis-green-light:    {{ $ls->right_panel_bg_color ?: '#eaf6ee' }};
       --uis-green-subtle:   #d4edd9;
-      --uis-yellow:         #FED802;
-      --uis-yellow-hover:   #e5c302;
+      --uis-yellow:         {{ $ls->accent_color ?: '#FED802' }};
+      --uis-yellow-hover:   {{ $ls->accent_color ?: '#e5c302' }};
       
       --brand-primary:      var(--uis-green);
       --brand-primary-dark: var(--uis-green-dark);
@@ -45,12 +48,12 @@
       --text-muted:         #4b6855;
       --text-light:         #769280;
 
-      --bg-page:            #edf6f0;
-      --card-bg:            #FFFFFF;
+      --bg-page:            {{ $ls->right_panel_bg_color ?: '#edf6f0' }};
+      --card-bg:            {{ $ls->card_bg_color ?: '#FFFFFF' }};
       --border-color:       #d0e7d7;
 
-      --shadow-card:        0 14px 34px -5px rgba(4, 107, 38, 0.12), 0 4px 12px rgba(4, 107, 38, 0.05);
-      --shadow-primary:     0 8px 18px -3px rgba(4, 107, 38, 0.4);
+      --shadow-card:        0 14px 34px -5px rgba(0, 0, 0, 0.10), 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-primary:     0 8px 18px -3px rgba(0, 0, 0, 0.25);
       --transition-smooth:  all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -91,7 +94,7 @@
     .showcase-bg {
       position: absolute;
       inset: 0;
-      background-image: url("{{ asset('frontend/img/gedung-uis.jpg') }}");
+      background-image: url("{{ $ls->background_image_url }}");
       background-size: cover;
       background-position: center bottom;
       transform: scale(1.02);
@@ -167,7 +170,7 @@
     /* ── RIGHT AUTH PANEL (WARNA RESMI UIS: HIJAU LEMBUT & ELEGAN) ── */
     .auth-panel {
       flex: 0.95;
-      background: linear-gradient(155deg, #eaf6ee 0%, #edf6f0 50%, #e2efe6 100%);
+      background: var(--bg-page);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -429,7 +432,7 @@
     .btn-submit-login {
       width: 100%;
       height: 44px;
-      background: linear-gradient(180deg, #057a2c 0%, #046B26 100%);
+      background: var(--brand-primary);
       color: #FFFFFF;
       border: none;
       border-radius: 10px;
@@ -445,9 +448,10 @@
       transition: var(--transition-smooth);
     }
     .btn-submit-login:hover {
-      background: linear-gradient(180deg, #046B26 0%, #024a19 100%);
+      background: var(--brand-primary-dark);
+      filter: brightness(0.92);
       transform: translateY(-1px);
-      box-shadow: 0 10px 20px -3px rgba(4, 107, 38, 0.4);
+      box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.3);
     }
     .btn-submit-login:active {
       transform: translateY(0);
@@ -556,11 +560,13 @@
       <!-- Top Branding -->
       <a href="{{ route('homepage') }}" class="showcase-brand">
         <div class="showcase-logo-wrap">
-          <img src="{{ asset('frontend/img/logouis.png') }}" alt="Lambang Resmi UIS">
+          <img src="{{ $ls->brand_logo_url }}" alt="{{ $ls->brand_title }}">
         </div>
         <div class="showcase-brand-text">
-          <h2>Universitas Ibnu Sina</h2>
-          <span>Portal Akademik & Administrasi Terpadu</span>
+          <h2>{{ $ls->brand_title }}</h2>
+          @if(!empty($ls->brand_subtitle))
+            <span>{{ $ls->brand_subtitle }}</span>
+          @endif
         </div>
       </a>
     </div>
@@ -574,13 +580,15 @@
     <div class="auth-topbar">
       <a href="{{ route('homepage') }}" class="btn-back-home">
         <i class="bi bi-arrow-left"></i>
-        <span>Kembali ke Beranda</span>
+        <span>{{ $ls->back_button_text }}</span>
       </a>
 
+      @if($ls->show_status_badge)
       <div class="auth-badge-status">
         <span></span>
-        <span>Sistem Aktif</span>
+        <span>{{ $ls->status_badge_text }}</span>
       </div>
+      @endif
     </div>
 
     <!-- Center Card Wrapper -->
@@ -588,12 +596,16 @@
       <div class="auth-card">
         <!-- Auth Header -->
         <div class="auth-header">
+          @if(!empty($ls->card_badge_text))
           <div class="auth-badge-top">
             <i class="bi bi-shield-lock-fill"></i>
-            <span>AUTENTIKASI AKUN</span>
+            <span>{{ $ls->card_badge_text }}</span>
           </div>
-          <h2>Masuk ke Akun Anda</h2>
-          <p>Gunakan kredensial resmi untuk mengakses panel kontrol sistem.</p>
+          @endif
+          <h2>{{ $ls->card_title }}</h2>
+          @if(!empty($ls->card_subtitle))
+            <p>{{ $ls->card_subtitle }}</p>
+          @endif
         </div>
 
         <!-- Flash Messages -->
@@ -618,8 +630,10 @@
           <!-- Email / Username Field -->
           <div class="form-group">
             <div class="form-label-row">
-              <label for="email" class="form-label">Email Institusi / Akun</label>
-              <span class="form-label-hint">contoh: admin@uis.ac.id</span>
+              <label for="email" class="form-label">{{ $ls->email_label }}</label>
+              @if(!empty($ls->email_hint))
+                <span class="form-label-hint">{{ $ls->email_hint }}</span>
+              @endif
             </div>
             <div class="input-box">
               <i class="bi bi-envelope input-icon-lead"></i>
@@ -628,7 +642,7 @@
                 id="email" 
                 name="email" 
                 class="custom-input {{ $errors->has('email') && !str_contains($errors->first('email'), 'salah') ? 'has-error' : '' }}" 
-                placeholder="nama@uis.ac.id" 
+                placeholder="{{ $ls->email_placeholder }}" 
                 value="{{ old('email') }}" 
                 autocomplete="email"
                 required
@@ -647,7 +661,7 @@
           <!-- Password Field -->
           <div class="form-group">
             <div class="form-label-row">
-              <label for="password" class="form-label">Kata Sandi</label>
+              <label for="password" class="form-label">{{ $ls->password_label }}</label>
             </div>
             <div class="input-box">
               <i class="bi bi-lock-fill input-icon-lead"></i>
@@ -656,7 +670,7 @@
                 id="password" 
                 name="password" 
                 class="custom-input {{ $errors->has('password') ? 'has-error' : '' }}" 
-                placeholder="Masukkan kata sandi Anda" 
+                placeholder="{{ $ls->password_placeholder }}" 
                 autocomplete="current-password"
                 required
               >
@@ -676,43 +690,49 @@
           <div class="form-options-row">
             <label class="remember-wrapper">
               <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-              <span>Ingat saya di perangkat ini</span>
+              <span>{{ $ls->remember_text }}</span>
             </label>
           </div>
 
           <!-- Submit Button -->
           <button type="submit" class="btn-submit-login" id="btnMasuk">
-            <span>Masuk ke Portal</span>
+            <span>{{ $ls->submit_button_text }}</span>
             <i class="bi bi-arrow-right"></i>
           </button>
         </form>
 
         <!-- Alumni / Mitra Public Action Card -->
+        @if($ls->show_alumni_card)
         <a href="{{ route('homepage.alumni.create') }}" class="alumni-card">
           <div class="alumni-card-icon">
             <i class="bi bi-mortarboard-fill"></i>
           </div>
           <div class="alumni-card-text">
             <div class="alumni-card-title">
-              <span>Alumni atau Mitra UIS?</span>
+              <span>{{ $ls->alumni_card_title }}</span>
             </div>
             <div class="alumni-card-sub">
-              Kirimkan ulasan & testimoni tanpa perlu login
+              {{ $ls->alumni_card_subtitle }}
             </div>
           </div>
           <i class="bi bi-chevron-right alumni-card-arrow"></i>
         </a>
+        @endif
       </div>
 
       <!-- Security & Copyright Footer -->
       <div class="auth-bottom-info">
+        @if(!empty($ls->security_badge_text))
         <div class="security-badge">
           <i class="bi bi-shield-check"></i>
-          <span>Koneksi aman SSL 256-bit • Portal Resmi UIS</span>
+          <span>{{ $ls->security_badge_text }}</span>
         </div>
+        @endif
+        @if(!empty($ls->copyright_text))
         <div class="auth-copyright">
-          &copy; {{ date('Y') }} Universitas Ibnu Sina (UIS). Hak cipta dilindungi.
+          &copy; {{ date('Y') }} {{ $ls->copyright_text }}
         </div>
+        @endif
       </div>
     </div>
 

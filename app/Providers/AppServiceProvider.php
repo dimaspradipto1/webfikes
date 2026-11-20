@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\BahasaSetting;
 use App\Models\Contact;
 use App\Models\Layanan;
+use App\Models\LoginSetting;
 use App\Models\PmbSetting;
 use App\Models\Publikasi;
 use App\Models\ThemeSetting;
@@ -64,6 +65,12 @@ class AppServiceProvider extends ServiceProvider
                 $themeSetting = new ThemeSetting(ThemeSetting::defaultAttributes());
             }
 
+            try {
+                $loginSetting = LoginSetting::current();
+            } catch (\Throwable $e) {
+                $loginSetting = new LoginSetting(LoginSetting::defaultAttributes());
+            }
+
             $view->with([
                 'contact' => $contact,
                 'cleanWa' => $cleanWa,
@@ -74,6 +81,7 @@ class AppServiceProvider extends ServiceProvider
                 'bahasaList' => $bahasaList,
                 'defaultBahasa' => $defaultBahasa,
                 'themeSetting' => $themeSetting,
+                'loginSetting' => $loginSetting,
             ]);
         });
     }
