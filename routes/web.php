@@ -23,6 +23,7 @@ use App\Http\Controllers\LayananTerkaitController;
 use App\Http\Controllers\LoginSettingController;
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\MilestoneController;
+use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NilaiPerusahaanController;
 use App\Http\Controllers\OrganisasiMahasiswaController;
@@ -132,6 +133,13 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::get('news/export-excel', [NewsController::class, 'exportExcel'])->name('news.export-excel');
     Route::post('news/import-excel', [NewsController::class, 'importExcel'])->name('news.import-excel');
     Route::resource('news', NewsController::class);
+
+    // Kategori Berita
+    Route::get('admin-news-category', [NewsCategoryController::class, 'index'])->name('news-category.index');
+    Route::post('admin-news-category', [NewsCategoryController::class, 'store'])->name('news-category.store');
+    Route::put('admin-news-category/{newsCategory}', [NewsCategoryController::class, 'update'])->name('news-category.update');
+    Route::post('admin-news-category/{newsCategory}/toggle', [NewsCategoryController::class, 'toggle'])->name('news-category.toggle');
+    Route::delete('admin-news-category/{newsCategory}', [NewsCategoryController::class, 'destroy'])->name('news-category.destroy');
     Route::resource('admin-faq', FaqController::class)
         ->parameters(['admin-faq' => 'faq'])
         ->names('faq');

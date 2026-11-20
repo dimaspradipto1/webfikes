@@ -176,10 +176,10 @@
           @if($isAdmin || $isPenulis)
           <!-- 7. Informasi (Berita & Pengumuman) -->
           <li class="nav-item">
-              <a class="nav-link {{ Route::is('news.*') || Route::is('faq.*') ? '' : 'collapsed' }}" data-bs-target="#informasi-nav" data-bs-toggle="collapse" href="#">
+              <a class="nav-link {{ Route::is('news.*') || Route::is('news-category.*') || Route::is('faq.*') ? '' : 'collapsed' }}" data-bs-target="#informasi-nav" data-bs-toggle="collapse" href="#">
                   <i class="bi bi-newspaper"></i><span>Informasi</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
-              <ul id="informasi-nav" class="nav-content collapse {{ Route::is('news.*') || Route::is('faq.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+              <ul id="informasi-nav" class="nav-content collapse {{ Route::is('news.*') || Route::is('news-category.*') || Route::is('faq.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                   <li>
                       <a href="{{ route('news.index') }}" class="{{ Route::is('news.index') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Semua Berita & Pengumuman</span>
@@ -188,6 +188,11 @@
                   <li>
                       <a href="{{ route('news.create') }}" class="{{ Route::is('news.create') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Tulis Berita / Pengumuman</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('news-category.index') }}" class="{{ Route::is('news-category.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Kategori Berita</span>
                       </a>
                   </li>
                   @if($isAdmin)

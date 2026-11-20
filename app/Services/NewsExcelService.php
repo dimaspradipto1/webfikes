@@ -323,7 +323,8 @@ class NewsExcelService
             throw new \Exception('File Excel kosong atau tidak memiliki data.');
         }
 
-        $validCategories = [
+        $dbCategories = \App\Models\NewsCategory::activeOptions()->pluck('name')->toArray();
+        $validCategories = !empty($dbCategories) ? $dbCategories : [
             'Berita Universitas',
             'Berita Humas',
             'Akademik & Kemahasiswaan',

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\NewsDataTable;
 use App\Http\Requests\NewsRequest;
 use App\Models\News;
+use App\Models\NewsCategory;
 use App\Services\FileUploadService;
 use App\Services\NewsExcelService;
 use Illuminate\Http\JsonResponse;
@@ -31,7 +32,8 @@ class NewsController extends Controller
 
     public function create(): View
     {
-        return view('pages.news.create');
+        $categories = NewsCategory::activeOptions();
+        return view('pages.news.create', compact('categories'));
     }
 
     public function store(NewsRequest $request): RedirectResponse
@@ -72,7 +74,8 @@ class NewsController extends Controller
     {
         Gate::authorize('update', $news);
 
-        return view('pages.news.edit', compact('news'));
+        $categories = NewsCategory::activeOptions();
+        return view('pages.news.edit', compact('news', 'categories'));
     }
 
     public function update(NewsRequest $request, News $news): RedirectResponse

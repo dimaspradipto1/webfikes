@@ -89,24 +89,29 @@
                     <div class="row mb-3">
                         {{-- Kategori --}}
                         <div class="col-md-6 mb-3 mb-md-0">
-                            <label for="category" class="form-label fw-semibold">
-                                Kategori Berita <span class="text-danger">*</span>
-                            </label>
-                            @php $cat = old('category'); @endphp
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <label for="category" class="form-label fw-semibold mb-0">
+                                    Kategori Berita <span class="text-danger">*</span>
+                                </label>
+                                <a href="{{ route('news-category.index') }}" class="small text-decoration-none fw-semibold" style="font-size: 12px;">
+                                    <i class="bi bi-tags me-1"></i>Kelola Kategori
+                                </a>
+                            </div>
+                            @php
+                                $cat = old('category');
+                                $categoryOptions = isset($categories) && count($categories) > 0
+                                    ? $categories
+                                    : \App\Models\NewsCategory::activeOptions();
+                            @endphp
                             <select id="category"
                                     name="category"
                                     class="form-select @error('category') is-invalid @enderror"
                                     required>
-                                <option value="Berita Universitas"          {{ $cat == 'Berita Universitas' ? 'selected' : '' }}>Berita Universitas</option>
-                                <option value="Berita Humas"                {{ $cat == 'Berita Humas' ? 'selected' : '' }}>Berita Humas</option>
-                                <option value="Akademik & Kemahasiswaan"    {{ $cat == 'Akademik & Kemahasiswaan' ? 'selected' : '' }}>Akademik & Kemahasiswaan</option>
-                                <option value="Teknologi & Rekayasa"        {{ $cat == 'Teknologi & Rekayasa' ? 'selected' : '' }}>Teknologi & Rekayasa</option>
-                                <option value="Bisnis & Manajemen"          {{ $cat == 'Bisnis & Manajemen' ? 'selected' : '' }}>Bisnis & Manajemen</option>
-                                <option value="K3 & Lingkungan Industri"    {{ $cat == 'K3 & Lingkungan Industri' ? 'selected' : '' }}>K3 & Lingkungan Industri</option>
-                                <option value="Penelitian & Riset"          {{ $cat == 'Penelitian & Riset' ? 'selected' : '' }}>Penelitian & Riset</option>
-                                <option value="Pengabdian Masyarakat"       {{ $cat == 'Pengabdian Masyarakat' ? 'selected' : '' }}>Pengabdian Masyarakat</option>
-                                <option value="Kerjasama Industri"          {{ $cat == 'Kerjasama Industri' ? 'selected' : '' }}>Kerjasama Industri</option>
-                                <option value="Pengumuman & Agenda"         {{ $cat == 'Pengumuman & Agenda' ? 'selected' : '' }}>Pengumuman & Agenda</option>
+                                @foreach($categoryOptions as $catOpt)
+                                    <option value="{{ $catOpt->name }}" {{ $cat == $catOpt->name ? 'selected' : '' }}>
+                                        {{ $catOpt->name }}
+                                    </option>
+                                @endforeach
                             </select>
                             @error('category')
                                 <div class="invalid-feedback">{{ $message }}</div>
