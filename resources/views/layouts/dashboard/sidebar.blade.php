@@ -271,24 +271,26 @@
           </li>
 
           <li class="nav-item">
-              <a class="nav-link {{ Route::is('theme.*') ? '' : 'collapsed' }}" href="{{ route('theme.index') }}">
-                  <i class="bi bi-palette-fill"></i>
-                  <span>Warna & Tata Letak</span>
+              <a class="nav-link {{ Route::is('theme.*') || Route::is('login-setting.*') || Route::is('navbar-setting.*') ? '' : 'collapsed' }}" data-bs-target="#pengaturan-tampilan-nav" data-bs-toggle="collapse" href="#">
+                  <i class="bi bi-gear-fill"></i><span>Pengaturan</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
-          </li>
-
-          <li class="nav-item">
-              <a class="nav-link {{ Route::is('login-setting.*') ? '' : 'collapsed' }}" href="{{ route('login-setting.index') }}">
-                  <i class="bi bi-shield-lock-fill"></i>
-                  <span>Pengaturan Login</span>
-              </a>
-          </li>
-
-          <li class="nav-item">
-              <a class="nav-link {{ Route::is('navbar-setting.*') ? '' : 'collapsed' }}" href="{{ route('navbar-setting.index') }}">
-                  <i class="bi bi-menu-button-wide-fill"></i>
-                  <span>Pengaturan Navbar</span>
-              </a>
+              <ul id="pengaturan-tampilan-nav" class="nav-content collapse {{ Route::is('theme.*') || Route::is('login-setting.*') || Route::is('navbar-setting.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+                  <li>
+                      <a href="{{ route('theme.index') }}" class="{{ Route::is('theme.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Warna & Tata Letak</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('login-setting.index') }}" class="{{ Route::is('login-setting.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Pengaturan Login</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('navbar-setting.index') }}" class="{{ Route::is('navbar-setting.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Pengaturan Navbar</span>
+                      </a>
+                  </li>
+              </ul>
           </li>
 
           <li class="nav-item">
