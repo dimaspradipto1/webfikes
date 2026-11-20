@@ -171,6 +171,31 @@
         .back-to-top:hover {
             background: {{ $themeSetting->admin_accent_color ?? '#FED802' }};
         }
+
+        /* Global Crisp Borders for All Admin Tables & DataTables */
+        #main .table,
+        #main table.dataTable,
+        #main .datatable-table {
+            border-collapse: collapse !important;
+            border: 1px solid #cbd5e1 !important;
+        }
+        #main .table > :not(caption) > * > *,
+        #main table.dataTable > :not(caption) > * > *,
+        #main .datatable-table > :not(caption) > * > *,
+        #main .table th,
+        #main .table td,
+        #main table.dataTable th,
+        #main table.dataTable td {
+            border: 1px solid #cbd5e1 !important;
+            vertical-align: middle;
+        }
+        #main .table thead th,
+        #main table.dataTable thead th {
+            background-color: #f1f5f9 !important;
+            border-bottom: 2px solid #94a3b8 !important;
+            color: #1e293b !important;
+            font-weight: 700;
+        }
     </style>
 </head>
 
@@ -532,6 +557,24 @@
                     .pagetitle h1, .card-title { color: ${t.admin_primary_color || '#046B26'}; }
                     .back-to-top { background: ${t.admin_primary_color || '#046B26'}; }
                     .back-to-top:hover { background: ${t.admin_accent_color || '#FED802'}; }
+                    #main .table, #main table.dataTable, #main .datatable-table {
+                        border-collapse: collapse !important;
+                        border: 1px solid #cbd5e1 !important;
+                    }
+                    #main .table > :not(caption) > * > *,
+                    #main table.dataTable > :not(caption) > * > *,
+                    #main .datatable-table > :not(caption) > * > *,
+                    #main .table th, #main .table td,
+                    #main table.dataTable th, #main table.dataTable td {
+                        border: 1px solid #cbd5e1 !important;
+                        vertical-align: middle;
+                    }
+                    #main .table thead th, #main table.dataTable thead th {
+                        background-color: #f1f5f9 !important;
+                        border-bottom: 2px solid #94a3b8 !important;
+                        color: #1e293b !important;
+                        font-weight: 700;
+                    }
                 `;
             };
 
