@@ -104,6 +104,35 @@
             </ul>
           </li>
 
+          <!-- 3b. Akademik (Di Bawah Menu Profil) -->
+          <li class="nav-item">
+            <a class="nav-link {{ Route::is('kurikulum.*') || Route::is('akademik.*') ? '' : 'collapsed' }}" data-bs-target="#akademik-nav" data-bs-toggle="collapse" href="#">
+              <i class="bi bi-book-half"></i><span>Akademik</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="akademik-nav" class="nav-content collapse {{ Route::is('kurikulum.*') || Route::is('akademik.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+              <li>
+                <a href="{{ route('kurikulum.index') }}" class="{{ Route::is('kurikulum.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Kurikulum Program Studi</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('akademik.kalender') }}" class="{{ Route::is('akademik.kalender') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Kalender Akademik</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('akademik.pedoman') }}" class="{{ Route::is('akademik.pedoman') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Pedoman Akademik</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('akademik.sistem') }}" class="{{ Route::is('akademik.sistem') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Sistem Akademik</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
 
           <!-- 4. Fakultas (Sesuai Urutan Header) -->
           <li class="nav-item">

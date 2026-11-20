@@ -34,6 +34,59 @@
           </ul>
         </li>
 
+        <!-- Akademik Dropdown (Di Samping Profil) -->
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.kurikulum*') || request()->routeIs('homepage.kalender-akademik') || request()->routeIs('homepage.pedoman-akademik') || request()->routeIs('homepage.sistem-akademik') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Akademik <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-custom">
+            <li class="dropdown-submenu">
+              <a class="dropdown-item dropdown-item-custom justify-content-between {{ request()->routeIs('homepage.kurikulum*') ? 'active' : '' }}" href="{{ route('homepage.kurikulum') }}">
+                <span class="d-flex align-items-center gap-2">
+                  <i class="bi bi-card-list" style="color: var(--uis-orange, #FED802);"></i>
+                  <span>Kurikulum FIKES</span>
+                </span>
+                <i class="bi bi-chevron-right ms-2" style="font-size: 10px; color: var(--uis-orange, #FED802);"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-custom">
+                @if(isset($navProdis) && $navProdis->count() > 0)
+                  @foreach($navProdis as $navProdi)
+                    <li>
+                      <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.kurikulum*') && request('prodi') == $navProdi->id ? 'active' : '' }}"
+                         href="{{ route('homepage.kurikulum', ['prodi' => $navProdi->id]) }}">
+                        <i class="bi bi-mortarboard-fill" style="color: var(--uis-orange, #FED802);"></i>
+                        <span>{{ strtoupper($navProdi->judul) }}</span>
+                      </a>
+                    </li>
+                  @endforeach
+                @else
+                  <li>
+                    <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.kurikulum') }}">
+                      <i class="bi bi-mortarboard-fill" style="color: var(--uis-orange, #FED802);"></i>
+                      <span>Semua Program Studi</span>
+                    </a>
+                  </li>
+                @endif
+              </ul>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.kalender-akademik') ? 'active' : '' }}" href="{{ route('homepage.kalender-akademik') }}">
+                <i class="bi bi-calendar2-check" style="color: var(--uis-orange, #FED802);"></i> Kalender Akademik
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.pedoman-akademik') ? 'active' : '' }}" href="{{ route('homepage.pedoman-akademik') }}">
+                <i class="bi bi-book" style="color: var(--uis-orange, #FED802);"></i> Pedoman Akademik
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.sistem-akademik') ? 'active' : '' }}" href="{{ route('homepage.sistem-akademik') }}">
+                <i class="bi bi-laptop" style="color: var(--uis-orange, #FED802);"></i> Sistem Akademik
+              </a>
+            </li>
+          </ul>
+        </li>
+
 
         <!-- Program Studi Dropdown -->
         <li class="nav-item dropdown">
