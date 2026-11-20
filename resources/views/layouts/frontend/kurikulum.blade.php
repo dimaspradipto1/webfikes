@@ -254,17 +254,6 @@
       });
     </script>
 
-    <!-- Info Bantuan Box -->
-    <div class="mt-5 p-4 rounded-4 text-white d-flex flex-wrap align-items-center justify-content-between gap-3 shadow-sm" style="background: #032e12; border: 1px solid rgba(255,255,255,0.2);" data-aos="fade-up">
-      <div>
-        <h5 class="fw-bold text-white mb-1"><i class="bi bi-question-circle-fill me-2 text-warning"></i>Butuh Informasi Kurikulum & Konversi SKS?</h5>
-        <p class="text-white-50 small mb-0">Hubungi Bagian Akademik & Tata Usaha Fakultas Ilmu Kesehatan untuk panduan registrasi mata kuliah dan bimbingan akademik.</p>
-      </div>
-      <a href="{{ route('homepage.kontak') }}" class="btn btn-warning rounded-pill px-4 fw-bold" style="color: #032e12;">
-        <i class="bi bi-telephone-fill me-1"></i> Hubungi Kami
-      </a>
-    </div>
-
   </div>
 </section>
 @endsection
