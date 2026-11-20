@@ -80,6 +80,12 @@
 
           <form action="{{ route('homepage.alumni.store') }}" method="POST">
             @csrf
+
+            {{-- Honeypot Anti-Bot (Disembunyikan dari pengguna asli) --}}
+            <div style="position: absolute; left: -9999px; top: -9999px;" aria-hidden="true">
+              <label for="website_url">Website</label>
+              <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off" value="">
+            </div>
             
             <div class="row g-3">
               {{-- Nama Lengkap --}}
@@ -152,6 +158,38 @@
                 @error('pesan')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
+              </div>
+
+              {{-- Verifikasi Keamanan (CAPTCHA) --}}
+              <div class="col-12 mt-3">
+                <div class="p-3 rounded-4 border d-flex flex-wrap align-items-center justify-content-between gap-3" style="background: #f8fcf9; border-color: var(--uis-green, #046B26) !important;">
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 44px; height: 44px; background: var(--uis-green, #046B26); color: var(--uis-yellow, #FED802);">
+                      <i class="bi bi-shield-lock-fill fs-5"></i>
+                    </div>
+                    <div>
+                      <label for="captcha_answer" class="form-label fw-bold text-dark mb-0" style="font-size: 14px;">
+                        Verifikasi Keamanan (CAPTCHA) <span class="text-danger">*</span>
+                      </label>
+                      <div class="small text-muted">
+                        Berapa hasil dari <strong class="text-dark fs-6 px-2 py-0 rounded" style="background: var(--uis-yellow, #FED802);">{{ $captchaQuestion ?? session('testimonial_captcha_question', '3 + 4') }}</strong> ?
+                      </div>
+                    </div>
+                  </div>
+                  <div style="min-width: 150px; flex: 0 1 180px;">
+                    <input type="number"
+                           id="captcha_answer"
+                           name="captcha_answer"
+                           class="form-control form-control-lg text-center fw-bold @error('captcha_answer') is-invalid @enderror"
+                           placeholder="Hasil angka"
+                           required
+                           autocomplete="off"
+                           style="border-radius: 12px; font-size: 15px;">
+                    @error('captcha_answer')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
+                </div>
               </div>
 
               {{-- Tombol Kirim --}}
