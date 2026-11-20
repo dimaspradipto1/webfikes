@@ -2,12 +2,11 @@
 
 @section('content')
 <div class="pagetitle">
-    <h1>Sunting Profil Tentang Kami</h1>
+    <h1>Tentang FIKES</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('about.index') }}">Tentang Kami</a></li>
-            <li class="breadcrumb-item active">Sunting</li>
+            <li class="breadcrumb-item active">Tentang FIKES</li>
         </ol>
     </nav>
 </div>
@@ -15,12 +14,22 @@
 <div class="row">
     <div class="col-lg-10">
         <div class="card shadow-sm">
-            <div class="card-header py-3">
+            <div class="card-header py-3 d-flex justify-content-between align-items-center">
                 <h5 class="mb-0 fw-semibold">
-                    <i class="bi bi-pencil-square me-2 text-primary"></i>Form Sunting Profil
+                    <i class="bi bi-pencil-square me-2 text-primary"></i>Pengaturan Profil Tentang FIKES
                 </h5>
+                <a href="{{ route('homepage.tentang') }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-box-arrow-up-right me-1"></i> Lihat Halaman
+                </a>
             </div>
             <div class="card-body pt-4">
+
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                @endif
 
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -39,31 +48,31 @@
                     @csrf
                     @method('PUT')
 
-                    <!-- SECTION 1: PROFIL UNIVERSITAS & VIDEO -->
+                    <!-- SECTION 1: PROFIL FIKES & VIDEO -->
                     <div class="border-bottom pb-4 mb-4">
-                        <h6 class="fw-bold text-primary mb-3"><i class="bi bi-building me-2"></i>1. Profil Universitas & Video Profil</h6>
+                        <h6 class="fw-bold text-primary mb-3"><i class="bi bi-building me-2"></i>1. Profil FIKES & Video Profil</h6>
                         
                         <div class="mb-3">
-                            <label for="judul_profil" class="form-label fw-semibold">Judul Profil Universitas</label>
-                            <input type="text" id="judul_profil" name="judul_profil" class="form-control @error('judul_profil') is-invalid @enderror" value="{{ old('judul_profil', $about->judul_profil) }}" placeholder="Contoh: Kampusnya Profesional Muda — Universitas Ibnu Sina">
+                            <label for="judul_profil" class="form-label fw-semibold">Judul Profil FIKES</label>
+                            <input type="text" id="judul_profil" name="judul_profil" class="form-control @error('judul_profil') is-invalid @enderror" value="{{ old('judul_profil', $about->judul_profil) }}" placeholder="Contoh: Pusat Keunggulan Pendidikan & Pelayanan Kesehatan — FIKES">
                             @error('judul_profil')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="mb-4">
-                            <label for="deskripsi_profil_1" class="form-label fw-semibold">Deskripsi Profil Universitas</label>
-                            <textarea id="deskripsi_profil_1" name="deskripsi_profil_1" rows="6" class="form-control tinymce-editor @error('deskripsi_profil_1') is-invalid @enderror" placeholder="Tuliskan deskripsi profil resmi Universitas Ibnu Sina">{{ old('deskripsi_profil_1', $about->deskripsi_profil_1) }}</textarea>
+                            <label for="deskripsi_profil_1" class="form-label fw-semibold">Deskripsi Profil FIKES</label>
+                            <textarea id="deskripsi_profil_1" name="deskripsi_profil_1" rows="6" class="form-control tinymce-editor @error('deskripsi_profil_1') is-invalid @enderror" placeholder="Tuliskan deskripsi profil resmi Fakultas Ilmu Kesehatan (FIKES)">{{ old('deskripsi_profil_1', $about->deskripsi_profil_1) }}</textarea>
                             @error('deskripsi_profil_1')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                            <div class="form-text text-muted">Deskripsi profil universitas dalam satu narasi utuh yang ditampilkan di beranda dan halaman tentang.</div>
+                            <div class="form-text text-muted">Deskripsi profil FIKES dalam satu narasi utuh yang ditampilkan di beranda dan halaman tentang.</div>
                         </div>
 
                         <!-- VIDEO PROFIL SECTION -->
                         <div class="card bg-light border-0 p-3 rounded-3 mt-3">
                             <h6 class="fw-bold text-dark mb-3">
-                                <i class="bi bi-camera-video-fill me-2 text-danger"></i>Video Profil Universitas
+                                <i class="bi bi-camera-video-fill me-2 text-danger"></i>Video Profil FIKES
                             </h6>
                             <div class="row g-3">
                                 <div class="col-md-7">
@@ -110,7 +119,7 @@
                                                 <div class="ratio ratio-16x9 rounded-3 overflow-hidden shadow-sm" style="max-height: 240px;">
                                                     <iframe 
                                                         src="{{ $about->youtube_embed_url }}" 
-                                                        title="Video Profil UIS" 
+                                                        title="Video Profil FIKES" 
                                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                                         referrerpolicy="strict-origin-when-cross-origin" 
                                                         allowfullscreen>
@@ -271,11 +280,8 @@
 
                     {{-- Buttons --}}
                     <div class="d-flex gap-2">
-                        <a href="{{ route('about.index') }}" class="btn btn-secondary">
-                            <i class="bi bi-arrow-left me-1"></i> Batal
-                        </a>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-save me-1"></i> Simpan
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="bi bi-save me-1"></i> Simpan Perubahan
                         </button>
                     </div>
 

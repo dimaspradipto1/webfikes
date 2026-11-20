@@ -78,7 +78,7 @@
             <ul id="profil-nav" class="nav-content collapse {{ Route::is('about.*') || Route::is('visimisi.*') || Route::is('sambutan-dekan.*') || Route::is('sambutan-rektor.*') || Route::is('struktur-organisasi.*') || Route::is('milestone.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
               <li>
                 <a href="{{ route('about.index') }}" class="{{ Route::is('about.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Tentang UIS</span>
+                  <i class="bi bi-circle"></i><span>Tentang FIKES</span>
                 </a>
               </li>
               <li>

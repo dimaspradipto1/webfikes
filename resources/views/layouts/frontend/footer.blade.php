@@ -29,7 +29,7 @@
           <li><a href="{{ route('homepage.layanan') }}"><i class="bi bi-chevron-right"></i> Program Studi</a></li>
           <li><a href="{{ route('homepage.galeri') }}"><i class="bi bi-chevron-right"></i> Galeri Kegiatan</a></li>
           <li><a href="{{ route('homepage.news') }}"><i class="bi bi-chevron-right"></i> Berita Kampus</a></li>
-          <li><a href="{{ route('homepage.tentang') }}"><i class="bi bi-chevron-right"></i> Tentang UIS</a></li>
+          <li><a href="{{ route('homepage.tentang') }}"><i class="bi bi-chevron-right"></i> Tentang FIKES</a></li>
           <li><a href="{{ route('homepage.humas') }}"><i class="bi bi-chevron-right"></i> Layanan Humas</a></li>
           <li><a href="{{ route('homepage.kontak') }}"><i class="bi bi-chevron-right"></i> Hubungi Kami</a></li>
         </ul>

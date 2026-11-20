@@ -11,9 +11,22 @@ use Illuminate\View\View;
 
 class AboutController extends Controller
 {
-    public function index(AboutDataTable $dataTable)
+    public function index(): View
     {
-        return $dataTable->render('pages.about.index');
+        $about = About::first();
+
+        if (! $about) {
+            $about = About::create([
+                'judul_profil' => 'Fakultas Ilmu Kesehatan (FIKES) — Universitas Ibnu Sina',
+                'deskripsi_profil_1' => 'Fakultas Ilmu Kesehatan (FIKES) Universitas Ibnu Sina berdedikasi menyelenggarakan pendidikan tinggi kesehatan yang unggul.',
+                'visi_judul' => 'Visi Kami',
+                'visi_icon' => 'bi-eye',
+                'misi_judul' => 'Misi Kami',
+                'misi_icon' => 'bi-rocket-takeoff',
+            ]);
+        }
+
+        return view('pages.about.edit', compact('about'));
     }
 
     public function create(): View
@@ -80,7 +93,7 @@ class AboutController extends Controller
 
         return redirect()
             ->route('about.index')
-            ->with('success', 'Data Profil Tentang Kami berhasil diperbarui.');
+            ->with('success', 'Data Profil Tentang FIKES berhasil diperbarui.');
     }
 
     public function destroy(About $about): RedirectResponse
