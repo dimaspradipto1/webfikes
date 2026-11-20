@@ -198,7 +198,7 @@
             {{ $ns->menu_informasi_label }} <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
-            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'berita-fakultas ilmu kesehatan') }}"><i class="bi bi-newspaper"></i> Berita Kampus</a></li>
+            <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'berita-fikes') }}"><i class="bi bi-newspaper"></i> Berita Kampus</a></li>
             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'pengumuman-agenda') }}"><i class="bi bi-megaphone"></i> Pengumuman</a></li>
             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'agenda') }}"><i class="bi bi-calendar-event"></i> Agenda</a></li>
             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news') }}"><i class="bi bi-card-text"></i> Artikel</a></li>
