@@ -188,7 +188,7 @@ class NewsExcelService
         return response()->streamDownload(function () use ($spreadsheet) {
             $writer = new Xlsx($spreadsheet);
             $writer->save('php://output');
-        }, 'Template_Import_Post_Berita_UIS.xlsx', [
+        }, 'Template_Import_Berita_UIS.xlsx', [
             'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             'Cache-Control' => 'max-age=0',
         ]);
@@ -297,7 +297,7 @@ class NewsExcelService
         $sheet->getColumnDimension('I')->setWidth(22);
         $sheet->getColumnDimension('J')->setWidth(18);
 
-        $filename = 'Export_Post_Berita_UIS_'.date('Y-m-d_His').'.xlsx';
+        $filename = 'Export_Berita_UIS_'.date('Y-m-d_His').'.xlsx';
 
         return response()->streamDownload(function () use ($spreadsheet) {
             $writer = new Xlsx($spreadsheet);

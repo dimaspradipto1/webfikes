@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="pagetitle">
-    <h1>Post / Berita</h1>
+    <h1>Berita</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Post</li>
+            <li class="breadcrumb-item active">Berita</li>
         </ol>
     </nav>
 </div>
@@ -30,7 +30,7 @@
 <div class="card shadow-sm">
     <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2 py-3">
         <h5 class="mb-0 fw-semibold">
-            <i class="bi bi-newspaper me-2 text-primary"></i>Daftar Post / Berita
+            <i class="bi bi-newspaper me-2 text-primary"></i>Daftar Berita
         </h5>
         <div class="d-flex flex-wrap align-items-center gap-2">
             {{-- Tombol Export Excel --}}
@@ -43,9 +43,9 @@
                 <i class="bi bi-file-earmark-arrow-up me-1"></i> Import Excel
             </button>
 
-            {{-- Tombol Tambah Post / Berita --}}
+            {{-- Tombol Tambah Berita --}}
             <a href="{{ route('news.create') }}" class="btn btn-primary btn-sm fw-semibold" style="background: var(--uis-purple); border-color: var(--uis-purple);">
-                <i class="bi bi-plus-lg me-1"></i> Tambah Post
+                <i class="bi bi-plus-lg me-1"></i> Tambah Berita
             </a>
         </div>
     </div>

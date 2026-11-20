@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="pagetitle">
-    <h1>Edit Post / Berita</h1>
+    <h1>Edit Berita</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('news.index') }}">Post</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('news.index') }}">Berita</a></li>
             <li class="breadcrumb-item active">Edit</li>
         </ol>
     </nav>
@@ -17,7 +17,7 @@
         <div class="card shadow-sm">
             <div class="card-header py-3">
                 <h5 class="mb-0 fw-semibold">
-                    <i class="bi bi-pencil-square me-2 text-warning"></i>Form Edit Post & Berita UIS
+                    <i class="bi bi-pencil-square me-2 text-warning"></i>Form Edit Berita
                 </h5>
             </div>
             <div class="card-body pt-4">
@@ -42,7 +42,7 @@
                     {{-- Judul --}}
                     <div class="mb-3">
                         <label for="title" class="form-label fw-semibold">
-                            Judul Post / Berita <span class="text-danger">*</span>
+                            Judul Berita <span class="text-danger">*</span>
                         </label>
                         <input type="text"
                                id="title"
