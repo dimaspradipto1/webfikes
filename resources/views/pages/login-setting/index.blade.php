@@ -253,7 +253,7 @@
                                 <img src="{{ $loginSetting->background_image_url }}" id="thumbBgImg" alt="Background" class="rounded-2 border bg-white" style="width: 90px; height: 62px; object-fit: cover;">
                                 <div class="flex-grow-1">
                                     <input type="file" name="background_image" id="background_image" class="form-control form-control-sm" accept="image/jpeg,image/png,image/webp">
-                                    <div class="form-text" style="font-size: 11px;">Format JPG, PNG, WEBP (Maks. 2 MB).</div>
+                                    <div class="form-text" style="font-size: 11px;">Format JPG, PNG, WEBP (Maks. 20 MB).</div>
                                     @if($loginSetting->hasCustomBackground())
                                         <div class="form-check mt-1">
                                             <input class="form-check-input" type="checkbox" name="remove_background_image" value="1" id="remove_background_image">
@@ -272,7 +272,7 @@
                                 <img src="{{ $loginSetting->brand_logo_url }}" id="thumbLogoImg" alt="Logo" class="rounded-2 border bg-white p-1" style="width: 56px; height: 56px; object-fit: contain;">
                                 <div class="flex-grow-1">
                                     <input type="file" name="brand_logo" id="brand_logo" class="form-control form-control-sm" accept="image/jpeg,image/png,image/webp,image/svg+xml">
-                                    <div class="form-text" style="font-size: 11px;">Format PNG, SVG, WEBP, JPG (Maks. 2 MB).</div>
+                                    <div class="form-text" style="font-size: 11px;">Format PNG, SVG, WEBP, JPG (Maks. 20 MB).</div>
                                     @if($loginSetting->hasCustomLogo())
                                         <div class="form-check mt-1">
                                             <input class="form-check-input" type="checkbox" name="remove_brand_logo" value="1" id="remove_brand_logo">

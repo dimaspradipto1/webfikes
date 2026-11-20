@@ -43,8 +43,8 @@ class LoginSettingController extends Controller
             'accent_color'         => 'required|string|max:20',
             'right_panel_bg_color' => 'required|string|max:20',
             'card_bg_color'        => 'required|string|max:20',
-            'background_image'     => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-            'brand_logo'           => 'nullable|image|mimes:jpeg,png,jpg,webp,svg|max:2048',
+            'background_image'     => 'nullable|image|mimes:jpeg,png,jpg,webp|max:20480',
+            'brand_logo'           => 'nullable|image|mimes:jpeg,png,jpg,webp,svg|max:20480',
         ]);
 
         $validated['show_status_badge'] = $request->has('show_status_badge');

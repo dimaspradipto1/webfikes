@@ -109,7 +109,7 @@
                             <input type="text" id="file_size" name="file_size"
                                    class="form-control @error('file_size') is-invalid @enderror"
                                    value="{{ old('file_size') }}"
-                                   placeholder="Otomatis terisi jika upload file (e.g. 2.4 MB)">
+                                   placeholder="Otomatis terisi jika upload file (e.g. 2.20 MB)">
                             @error('file_size')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

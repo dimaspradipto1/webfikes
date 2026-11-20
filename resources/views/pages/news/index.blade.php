@@ -78,7 +78,7 @@
                             <li>Unduh template Excel resmi terlebih dahulu agar format kolom sesuai.</li>
                             <li>Isi Judul, Kategori, Status (published/draft), Artikel Unggulan, Deskripsi Singkat, dan Konten Berita.</li>
                             <li><strong>Kolom Gambar / Thumbnail boleh dikosongkan.</strong> Gambar cover dapat diunggah kemudian melalui tombol edit berita.</li>
-                            <li>Simpan dalam format <code>.xlsx</code>, <code>.xls</code>, atau <code>.csv</code> (Maks. 10MB).</li>
+                            <li>Simpan dalam format <code>.xlsx</code>, <code>.xls</code>, atau <code>.csv</code> (Maks. 20 MB).</li>
                         </ol>
                         <a href="{{ route('news.download-template') }}" class="btn btn-sm btn-outline-success fw-semibold">
                             <i class="bi bi-download me-1"></i> Download Format Template Excel (.xlsx)
@@ -95,7 +95,7 @@
                                class="form-control"
                                accept=".xlsx,.xls,.csv"
                                required>
-                        <div class="form-text text-muted small">Mendukung file ekstensi .xlsx, .xls, atau .csv hingga ukuran 10 MB.</div>
+                        <div class="form-text text-muted small">Mendukung file ekstensi .xlsx, .xls, atau .csv hingga ukuran 20 MB.</div>
                     </div>
                 </div>
                 <div class="modal-footer bg-light">
